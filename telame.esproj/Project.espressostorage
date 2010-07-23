@@ -14,7 +14,7 @@
 			<key>ESPublishServerStateMaximumAllowedConnectionsKey</key>
 			<integer>16</integer>
 			<key>ESPublishServerStateModeKey</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>ESPublishServerStateNameKey</key>
 			<string>thinktankdesign.ca</string>
 			<key>ESPublishServerStateOptionsKey</key>
