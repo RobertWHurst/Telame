@@ -5,7 +5,9 @@
 	<title><?php echo $title_for_layout; ?></title>
 	<?php echo $html->script('jquery'); ?>
 	<?php echo $html->script('external/script'); ?>
-	<?php echo $html->css($css_for_layout) ?>
+	<?php echo $html->css($css_for_layout); ?>
+	<?php echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));?>
+	<?php echo $html->meta('description', 'Telame is a socal ');?>
 </head>
 <body>
 	<?php echo $this->element('external/header'); ?>

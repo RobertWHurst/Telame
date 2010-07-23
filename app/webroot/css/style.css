@@ -36,6 +36,12 @@ h6{
 	/* h6 - rules */
 }
 
+h1.pageHeading{
+	font-size: 3.6em;
+	line-height: 3.6em;
+	text-align: center;
+}
+
 /* DEFAULT ANCHOR STYLES */
 a:link{
 	color: #d3ef91;
@@ -151,7 +157,6 @@ optgroup{
 }
 #navigation{
 	float: right;
-	display: none;
 }
 #navigation a{
 	float: left;
@@ -170,9 +175,6 @@ optgroup{
 }
 #logo{
 	float: left;
-}
-#navigation{
-	float: right;
 }
 #wrap_content{
 	border-top: 1px solid #333;
@@ -225,6 +227,32 @@ optgroup{
 }
 #copyright a:hover{	
 	color: #fff;
+}
+#features{
+	margin-bottom: 40px;
+}
+#features div.feature{
+	text-align: center;
+}
+#features div.feature h1{
+	font-size: 2.4em;
+	line-height: 1.2em;
+	margin-top: 1.2em;
+}
+#features div.feature img{
+	border: 5px solid #333;
+	width: 600px;
+	margin: 15px;
+}
+#features div.feature p{
+	display: block;
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background: #272727;
+	border: 1px solid #222;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #000;
 }
 
 #noSignup{

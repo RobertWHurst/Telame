@@ -22,4 +22,13 @@ class SignupController extends AppController {
 		$this->layout = 'external';
 	}
 	
+	function login(){
+		
+		//set up the layout
+		$this->set('title_for_layout', 'Telame - Login');
+		$this->set('css_for_layout', 'style.css');
+		$this->layout = 'external';
+		$this->render('index');
+	}
+	
 }
