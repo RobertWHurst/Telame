@@ -4,31 +4,28 @@ class SignupController extends AppController {
 	//Controller config
 	var $name = 'Signup';
 	var $uses = null;
-	
-	function index(){
-		
+
+	function beforeRender() {
+		parent::beforeRender();
+		$this->set('css_for_layout', 'style.css');
+		$this->layout = 'external';
+	}
+
+	function index() {
 		//set up the layout
 		$this->set('title_for_layout', 'Telame');
-		$this->set('css_for_layout', 'style.css');
-		$this->layout = 'external';
-		
 	}
-	
-	function features(){
-		
+
+	function features() {
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Features');
-		$this->set('css_for_layout', 'style.css');
-		$this->layout = 'external';
 	}
-	
-	function login(){
-		
+
+	// This won't be here once the login component is used.
+	function login() {
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Login');
-		$this->set('css_for_layout', 'style.css');
-		$this->layout = 'external';
 		$this->render('index');
 	}
-	
+
 }
