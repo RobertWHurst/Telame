@@ -8,6 +8,6 @@
 		<p class="tagline">Share you media at the highest quality</p>
 		<p class="tagline">Add your own personality</p>
 		<p class="tagline">Make your own custom pages</p>
-		<p class="tagline">Tell your friends and help our comunity grow</p>
+		<p class="tagline">Tell your friends and help our community grow</p>
 	</div>
 </div>
