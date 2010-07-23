@@ -11,8 +11,15 @@ class SignupController extends AppController {
 		$this->set('title_for_layout', 'Telame');
 		$this->set('css_for_layout', 'style.css');
 		$this->layout = 'external';
-		$this->render('index');
 		
+	}
+	
+	function features(){
+		
+		//set up the layout
+		$this->set('title_for_layout', 'Telame - Features');
+		$this->set('css_for_layout', 'style.css');
+		$this->layout = 'external';
 	}
 	
 }
