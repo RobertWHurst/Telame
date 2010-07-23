@@ -76,10 +76,10 @@ class DATABASE_CONFIG {
 	var $default = array(
 		'driver' => 'postgres',
 		'persistent' => false,
-		'host' => 'internal-db.s87130.gridserver.com',
-		'login' => 'db87130',
-		'password' => '135798642',
-		'database' => 'db87130_telame',
+		'host' => '',
+		'login' => '',
+		'password' => '',
+		'database' => '',
 		'prefix' => '',
 	);
 }
