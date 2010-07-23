@@ -7,7 +7,7 @@ class SignupController extends AppController {
 
 	function beforeRender() {
 		parent::beforeRender();
-		$this->set('css_for_layout', 'style.css');
+		$this->set('css_for_layout', 'external.css');
 		$this->layout = 'external';
 	}
 
