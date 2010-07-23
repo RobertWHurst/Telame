@@ -8,7 +8,7 @@
 		<p>If you want to know when were up and ready to go, signup for our <?php echo $html->link('newsletter', 'http://automailer.thinktankdesign.ca/signup/for_list/telame'); ?>.
 	</div>
 	<div id="copyright">
-		<p>Application designed and programmed by <?php echo $html->link('ThinkTank Design, Robert Hurst', 'http://thinktankdesign.ca'); ?>.</p>
+		<p>Application designed and prograammed by <?php echo $html->link('ThinkTank Design, Robert Hurst', 'http://thinktankdesign.ca'); ?>.</p>
 		<p>Copyright &copy; <?php echo date('Y'); ?> - ThinkTank Design, Robert Hurst</p>
 	</div>
 </div>
