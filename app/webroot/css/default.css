@@ -1,0 +1,217 @@
+/* CLEARFIX */
+.clearfix:after{content:" ";display:block;clear:both;visibility:hidden;line-height:0;height:0; }html[xmlns] .clearfix{	display:block;}* html .clearfix{height:1%;}
+/* RESET */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted #000;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #cccccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+/* DEFAULT HTML & BODY STYLES */
+html{
+	font-size: 62.5%;
+	background:#252525;
+}
+body{
+	color: #efefef;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+/* DEFAULT HEADING STYLES */
+h1, h2, h3, h4, h5, h6{
+	/* h1 - h6 rules */
+}
+h1{
+	/* h1 - rules */
+}
+h2{
+	/* h2 - rules */
+}
+h3{
+	/* h3 - rules */
+}
+h4{
+	/* h4 - rules */
+}
+h5{
+	/* h5 - rules */
+}
+h6{
+	/* h6 - rules */
+}
+
+h1.pageHeading{
+	font-size: 3.6em;
+	line-height: 3.6em;
+	text-align: center;
+}
+
+/* DEFAULT ANCHOR STYLES */
+a:link{
+	color: #d3ef91;
+	text-decoration: underline;
+}
+a:hover{
+	color: #c1ef52;
+}
+a:visited{
+	color: #dfd0e7;
+}
+
+/* DEFAULT PARAGRAPH RELATED STYLES */
+p{
+	/* p - rules */
+}
+strong{
+	/* strong - rules */
+}
+em{
+	/* em - rules */
+}
+pre{
+	/* pre - rules */
+}
+code{
+	/* code - rules */
+}
+blockquote{
+	/* blockquote - rules */
+}
+del{
+	/* del - rules */
+}
+ins{
+	/* ins - rules */
+}
+
+/* DEFAULT LIST STYLES */
+ul{
+	/* ul - rules */
+}
+ol{
+	/* ol - rules */
+}
+menu{
+	/* menu - rules */
+}
+
+/* DEFAULT TABLE STYLES */
+table{
+	/* table - rules */
+}
+thead{
+	/* thead - rules */
+}
+tfoot{
+	/* tfoot - rules */
+}
+tbody{
+	/* tbody - rules */
+}
+tr{
+	/* tr - rules */
+}
+td{
+	/* td - rules */
+}
+th{
+	/* th - rules */
+}
+
+/* DEFAULT FORM STYLES */
+form{
+	/* form - rules */
+}
+input[type="text"]{
+	/* input[type="text"] - rules */
+}
+input[type="submit"]{
+	/* input[type="submit"] - rules */
+}
+input[type="radio"]{
+	/* input[type="radio"] - rules */
+}
+input[type="checkbox"]{
+	/* input[type="checkbox"] - rules */
+}
+select{
+	/* select - rules */
+}
+option{
+	/* option - rules */
+}
+optgroup{
+	/* optgroup - rules */
+}
+
+/* SELECTOR STYLES */
+#backgroundHead{
+	width: 100%;
+	height: 300px;
+	background: #400c5d url('../img/profile/header.png') no-repeat top center;
+	border-bottom: 1px solid #110019;
+}
+#backgroundBase{
+	width: 100%;
+	border-top: 1px solid #333;
+}
+#wrap_content{
+	margin-top: -201px;
+}
+#content{
+	width: 890px;
+	margin: auto;
+	height: 1000px;
+}
+#main_sidebar{
+	margin: 40px 0;
+	padding: 20px;
+	width: 170px;
+	height:800px;
+	float: left;
+	background: #333;
+}
+#profile{
+	float: left;
+	width: 680px;
+}
+#profile_head{
+	background: #333;
+}
+#profile_gallery{
+	float: left;
+	width: 425px;
+	height: 300px;
+}
+#profile_summary{
+	float: left;
+	width: 215px;
+	height: 260px;
+	padding: 20px;
+}
+#profile_body{
+	background: #5c5c5c;
+}
+#profile_wall{
+	width: 425px;
+	height: 600px;
+	float: left;
+}
+#profile_sidebar{
+	width:214px;
+	height: 560px;
+	padding: 20px;
+	float: left;
+	border-left: 1px solid #606060;
+}
+#copyright{
+	width: 890px;
+	text-align: center;
+	padding: 25px 0;
+}
+#copyright p{
+	color: #565656;
+	font-size: 1.3em;
+}
+#copyright a{	
+	color: #787878;
+}
+#copyright a:hover{	
+	color: #fff;
+}
