@@ -1,8 +1,8 @@
 <?php
-class ProfileController extends AppController {
+class ProfilesController extends AppController {
 
 	//Controller config
-	var $name = 'Profile';
+	var $name = 'Profiles';
 	var $uses = null; //TODO: '$uses=null' can be removed once the db is configured
 
 	//Before the render of all views in this controller
@@ -18,14 +18,20 @@ class ProfileController extends AppController {
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Error');
 	}
-
-	//FOR CSS MOCKUP ONLY - THIS FUCTION WILL BE DELETED AFTER PROFILES ARE INPLEMENTED
-	function mr_bolts() {
+    
+	function profile() {
 		//TODO: Replace fake user with the selected user from the database.
 		
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Mr Bolts');
-		$this->render('profile');
 	}
+
+    function login() {
+    }
+
+    /** delegate /users/logout request to Auth->logout method */
+    function logout() {
+        $this->redirect($this->Auth->logout());
+    }
 
 }

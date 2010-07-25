@@ -4,7 +4,10 @@
 	<meta charset="UTF-8">
 	<title><?php echo $title_for_layout; ?></title>
 	<?php echo $html->script('jquery'); ?>
-	<?php echo $html->css($css_for_layout); ?>
+	<?php
+		if(isset($css_for_layout))
+			echo $html->css($css_for_layout);
+	?>
 	<?php echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));?>
 </head>
 <body>

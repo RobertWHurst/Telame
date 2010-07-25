@@ -5,8 +5,17 @@ class SignupController extends AppController {
 	var $name = 'Signup';
 	var $uses = null;
 
+	function beforeFilter() {
+		parent::beforeFilter();
+		
+		//allow this entire controller to be accessed without needing to login
+		$this->Auth->allow('*');
+	}
+
 	function beforeRender() {
 		parent::beforeRender();
+		
+		//set the css and layout
 		$this->set('css_for_layout', 'external.css');
 		$this->layout = 'external';
 	}
@@ -19,13 +28,6 @@ class SignupController extends AppController {
 	function features() {
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Features');
-	}
-
-	// This won't be here once the login component is used.
-	function login() {
-		//set up the layout
-		$this->set('title_for_layout', 'Telame - Login');
-		$this->render('index');
 	}
 
 }
