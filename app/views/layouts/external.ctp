@@ -1,4 +1,10 @@
-<?php echo $html->docType('xhtml11'); ?> 
+<!-- 
+	This would be better, but doesn't contain the HTML5 Doctype below this comment
+	<php echo $html->docType('xhtml11'); ?>
+	
+	We will need html 5 for our video players and editors. (these fall back to html4).
+-->
+<!DOCTYPE HTML>
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
