@@ -3,7 +3,6 @@ class ProfilesController extends AppController {
 
 	//Controller config
 	var $name = 'Profiles';
-	var $uses = null; //TODO: '$uses=null' can be removed once the db is configured
 
 	//Before the render of all views in this controller
 	function beforeRender() {
@@ -24,6 +23,7 @@ class ProfilesController extends AppController {
 		
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Mr Bolts');
+		$this->set('debug', $this->Profile->findById(1));
 	}
 
     function login() {

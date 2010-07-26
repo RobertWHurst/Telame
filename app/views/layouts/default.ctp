@@ -3,12 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title_for_layout; ?></title>
-	<?php echo $html->script('jquery'); ?>
 	<?php
+		echo $html->script('jquery');
 		if(isset($css_for_layout))
 			echo $html->css($css_for_layout);
+		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 	?>
-	<?php echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));?>
 </head>
 <body>
 	<div id="backgroundHead"></div>
@@ -17,7 +17,9 @@
 		<?php echo $content_for_layout; ?>
 	</div>
 	<?php if(Configure::read('debug') > 0): ?>
-		<?php echo $this->element('sql_dump'); ?>
+		<div id="sql_dump">
+			<?php echo $this->element('sql_dump'); ?>
+		</div>
 	<?php endif; ?>
 </body>
 </html>

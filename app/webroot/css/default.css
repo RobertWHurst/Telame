@@ -152,19 +152,28 @@ optgroup{
 	border-top: 1px solid #333;
 }
 #wrap_content{
-	margin-top: -201px;
+	margin-top: -240px;
 }
 #content{
 	width: 890px;
 	margin: auto;
 	height: 1000px;
 }
-#main_sidebar{
+#wrap_main_sidebar{	
+	float: left;
+	width: 210px;
+}
+#logo{
 	margin: 40px 0;
+	text-align: center;
+}
+#logo img{
+	width: 160px;
+}
+#main_sidebar{
 	padding: 20px;
 	width: 170px;
-	height:800px;
-	float: left;
+	height: 100px;
 	background: #333;
 }
 #profile{
@@ -178,6 +187,7 @@ optgroup{
 	float: left;
 	width: 425px;
 	height: 300px;
+	overflow: hidden;
 }
 #profile_summary{
 	float: left;
@@ -201,7 +211,6 @@ optgroup{
 	border-left: 1px solid #606060;
 }
 #copyright{
-	width: 890px;
 	text-align: center;
 	padding: 25px 0;
 }
@@ -214,4 +223,13 @@ optgroup{
 }
 #copyright a:hover{	
 	color: #fff;
+}
+#sql_dump{
+	font-size: 1.6em;
+	width: 890px;
+	margin: 0 auto;
+	padding: 40px;
+	background: #5e5e5e;
+	color: #363636;
+	font-weight: bold; 
 }

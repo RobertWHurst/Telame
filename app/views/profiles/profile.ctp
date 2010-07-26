@@ -1,6 +1,11 @@
 <div id="content">
-	<div id="main_sidebar">
-		main sidebar
+	<div id="wrap_main_sidebar">
+		<div id="logo">
+			<?php echo $html->image('profile/logo.png', array('title' => 'Telame', 'url' => array('controller' => 'profiles', 'action' => 'profile'))); ?>
+		</div>
+		<div id="main_sidebar">
+			main sidebar
+		</div>
 	</div>
 	<div id="profile">		
 		<div id="profile_head" class="clearfix">
@@ -17,24 +22,23 @@
 					slideshow.
 					
 					if it finds a picture wrapper it will just show an avatar.
+				
+					<div class="video">
+						
+					</div>
+					<div class="gallery">
+						
+					</div>
 				-->
-				<div class="video">
-					
-				</div>
-				<div class="gallery">
-					
-				</div>
 				<div class="picture">
-					photo
+					<?php echo $html->image('1.png', array('title' => 'Mr. Bolts')); ?>
 				</div>
 			</div>
 			
 			
 			<div id="profile_summary">
+				<h1 class="name">Mr. Bolts</h1>
 				<table>
-					<tr>
-						<th class="name" colspan="2">Mr. Bolts</th>
-					</tr>
 					<tr>
 						<th class="key"><?php echo __('Location'); ?>:</th><td class="value">Telame Core</td>
 					</tr>
@@ -59,7 +63,7 @@
 		
 		
 			<div id="profile_wall">
-				wall
+				debug => <?php krumo($debug); ?>
 			</div>
 			
 			
@@ -69,6 +73,7 @@
 			
 		</div>		
 	</div>
-		
-	<?php echo $this->element('copyright'); ?>	
 </div>
+		
+
+<?php echo $this->element('copyright'); ?>	
