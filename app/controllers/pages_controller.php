@@ -3,8 +3,15 @@ class PagesController extends AppController {
 	var $name = 'Pages';
 	var $uses = array();
 
+	function beforeRender() {
+		parent::beforeRender();
+		$this->set('css_for_layout', 'external.css');
+		$this->layout = 'external';
+	}
+
+
 	function home() {
-		echo 'home';
+		// Signup php code
 	}
 
 /**
