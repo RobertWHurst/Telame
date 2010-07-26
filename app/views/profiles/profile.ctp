@@ -31,7 +31,7 @@
 					</div>
 				-->
 				<div class="picture">
-					<?php echo $html->image('1.png', array('title' => 'Mr. Bolts')); ?>
+					<?php echo $html->image($profile['Profile']['slug'] . '.png', array('title' => $profile['ProfileMeta']['first_name'] . $profile['ProfileMeta']['last_name'])); ?>
 				</div>
 			</div>
 			

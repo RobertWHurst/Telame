@@ -4,23 +4,25 @@ class RenderProfileHelper extends AppHelper {
     
     	//make a pesudo array of labels
     	$fields = array(
-    		'location' => __('Location'),
-    		'sex' => __('sex'),
-    		'born' => __('born'),
-    		'joined' => __('joined')
+    		'location' => __('Location', true),
+    		'born' => __('Born', true),
+    		'sex' => __('Sex', true),
+    		'group' => __('TelaGroup', true),
+    		'joined' => __('Joined', true),
+    		'interested_in' => __('Interested In', true)
     	);
     
 		//open the div
    		$output = '<div id="profile_summary">';
    		
    		//add the profile name
-   		$output .= "<h1 class=\"name\">{$profile_object['name']}</h1>";
+   		$output .= "<h1 class=\"name\">{$profile_object['ProfileMeta']['first_name']} {$profile_object['ProfileMeta']['last_name']}</h1>";
    		
    		//open the table
    		$output .= '<table>';
    		
    		foreach($fields as $key => $label){
-			if(isset($profile_object[$key]) && $value = __($profile_object[$key])){
+			if(isset($profile_object['ProfileMeta'][$key]) && $value = __($profile_object['ProfileMeta'][$key], true)){
 		
 				//if special formatting is needed add it within an if statement below this comment
 			
@@ -34,5 +36,7 @@ class RenderProfileHelper extends AppHelper {
 	
 		//close the table
    		$output .= '</div>';
+   		
+   		echo $output;
    	}
 }

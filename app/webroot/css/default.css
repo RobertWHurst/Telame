@@ -155,7 +155,7 @@ optgroup{
 	margin-top: -240px;
 }
 #content{
-	width: 890px;
+	width: 980px;
 	margin: auto;
 	height: 1000px;
 }
@@ -171,42 +171,61 @@ optgroup{
 	width: 160px;
 }
 #main_sidebar{
-	padding: 20px;
-	width: 170px;
+	width: 100%;
 	height: 100px;
 	background: #333;
 }
 #profile{
 	float: left;
-	width: 680px;
+	width:770px;
 }
 #profile_head{
 	background: #333;
 }
 #profile_gallery{
 	float: left;
-	width: 425px;
+	width: 480px;
 	height: 300px;
 	overflow: hidden;
 }
 #profile_summary{
 	float: left;
-	width: 215px;
+	width: 290px;
 	height: 260px;
-	padding: 20px;
+}
+#profile_summary h1.name{
+	text-align: left;
+	font-size: 2.4em;
+	line-height: 4.0em;
+	padding: 0 40px;
+}
+#profile_summary table{
+	width: 250px;
+	margin: 0 40px;
+}
+#profile_summary table th{
+	vertical-align: baseline;
+	text-align: left;
+	font-size: 1.2em;
+	line-height: 2.0em;
+}
+#profile_summary table td{
+	vertical-align: baseline;
+	text-align: left;
+	font-size: 1.2em;
+	line-height: 2.0em;
 }
 #profile_body{
 	background: #5c5c5c;
 }
 #profile_wall{
-	width: 425px;
+	width: 480px;
 	height: 600px;
 	float: left;
 }
 #profile_sidebar{
-	width:214px;
+	width: 289px;
 	height: 560px;
-	padding: 20px;
 	float: left;
 	border-left: 1px solid #606060;
 }

@@ -143,7 +143,7 @@ optgroup{
 /* SELECTOR STYLES */
 #wrap_header{
 	width: 100%;
-	background: #400c5d url('../img/external/header.png') no-repeat top center;
+	background: #400c5d url('../img/pages/header.png') no-repeat top center;
 	border-bottom: 1px solid #110019;
 }
 #header{
@@ -180,7 +180,7 @@ optgroup{
 	border-top: 1px solid #333;
 }
 #content{
-	background: url('../img/external/content.png') no-repeat top center;
+	background: url('../img/pages/content.png') no-repeat top center;
 	margin: 0 auto 0 auto;
 	width: 980px;
 }
@@ -195,7 +195,7 @@ optgroup{
 	right: 0;
 	width: 100%;
 	height: 100%;
-	background: url('../img/external/tagline.fadeout.gif') repeat-y;
+	background: url('../img/pages/tagline.fadeout.gif') repeat-y;
 	position: absolute;
 	z-index: 1;
 }

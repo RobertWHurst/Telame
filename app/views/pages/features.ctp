@@ -6,11 +6,11 @@
 		
 		<div class="feature">
 			<h1>Feature 1</h1>
-			<?php echo $html->image('external/features/feature_1.png', array('title' => 'Feature 1 img title')); ?>
+			<?php echo $html->image('pages/features/feature_1.png', array('title' => 'Feature 1 img title')); ?>
 			<p>Description of Feature 1</p>
 		</div>
 		
-		<?php echo $this->element('external/copyright'); ?>	
+		<?php echo $this->element('copyright'); ?>	
 		
 	</div>
 </div>

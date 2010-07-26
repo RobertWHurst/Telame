@@ -31,12 +31,4 @@ class ProfilesController extends AppController {
 		$this->set('profile', $profile);
 	}
 
-    function login() {
-    }
-
-    /** delegate /users/logout request to Auth->logout method */
-    function logout() {
-        $this->redirect($this->Auth->logout());
-    }
-
 }

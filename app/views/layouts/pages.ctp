@@ -16,7 +16,7 @@
 	<?php echo $html->meta('description', 'Telame is a social ');?>
 </head>
 <body>
-	<?php echo $this->element('external/header'); ?>
+	<?php echo $this->element('pages/header'); ?>
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
 	</div>

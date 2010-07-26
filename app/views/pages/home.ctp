@@ -1,6 +1,6 @@
 <div id="content">
 
-	<?php echo $this->element('external/taglines'); ?>	
+	<?php echo $this->element('pages/taglines'); ?>	
 	
 	<div id="noSignup">
 		<h1>We're not ready to sign you up just yet</h1>
@@ -8,6 +8,6 @@
 		<p>If you want to know when were up and ready to go, signup for our <?php echo $html->link('newsletter', 'http://automailer.thinktankdesign.ca/signup/for_list/telame'); ?>.
 	</div>
 	
-	<?php echo $this->element('external/copyright'); ?>	
+	<?php echo $this->element('copyright'); ?>	
 	
 </div>

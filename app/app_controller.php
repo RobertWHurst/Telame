@@ -7,8 +7,6 @@ class AppController extends Controller {
 	function beforeFilter() {
     
     	//force athenication against profiles
-    	$this->Auth->userModel = 'Profile';
-    	$this->Auth->loginAction = array('admin' => false, 'controller' => 'profiles', 'action' => 'login');
     	$this->Auth->fields = array('username' => 'email', 'password' => 'password');
     	
     	if(Configure::read('debug') > 0){
