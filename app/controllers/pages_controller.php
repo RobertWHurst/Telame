@@ -3,6 +3,13 @@ class PagesController extends AppController {
 	var $name = 'Pages';
 	var $uses = array();
 
+	function beforeFilter() {
+		parent::beforeFilter();
+		
+		//allow this entire controller to be accessed without needing to login
+		$this->Auth->allow('*');
+	}
+	
 	function beforeRender() {
 		parent::beforeRender();
 		//set the css and layout
