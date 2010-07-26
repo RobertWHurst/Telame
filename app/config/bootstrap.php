@@ -48,3 +48,7 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+ 
+ 
+Inflector::rules('plural', array('irregular' => array('profile_meta' => 'profile_meta')));
+

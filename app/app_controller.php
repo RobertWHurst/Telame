@@ -10,6 +10,11 @@ class AppController extends Controller {
     	$this->Auth->userModel = 'Profile';
     	$this->Auth->loginAction = array('admin' => false, 'controller' => 'profiles', 'action' => 'login');
     	$this->Auth->fields = array('username' => 'email', 'password' => 'password');
+    	
+    	if(Configure::read('debug') > 0){
+    		//load krumo    		
+    		App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));	
+    	}
 	
 	}
 	
