@@ -3,6 +3,7 @@ class ProfilesController extends AppController {
 
 	//Controller config
 	var $name = 'Profiles';
+	var $helpers = array('RenderProfile');
 
 	//Before the render of all views in this controller
 	function beforeRender() {
@@ -18,12 +19,16 @@ class ProfilesController extends AppController {
 		$this->set('title_for_layout', 'Telame - Error');
 	}
     
-	function profile() {
-		//TODO: Replace fake user with the selected user from the database.
+	function profile($slug = 'Robert') {
 		
 		//set up the layout
 		$this->set('title_for_layout', 'Telame - Mr Bolts');
-		$this->set('debug', $this->Profile->findById(1));
+	
+		//get the profile
+		$profile = $this->Profile->findBySlug($slug);
+		
+		//pass the profile data to the view
+		$this->set('profile', $profile);
 	}
 
     function login() {

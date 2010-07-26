@@ -22,12 +22,7 @@ class SignupController extends AppController {
 
 	function index() {
 		//set up the layout
-		$this->set('title_for_layout', 'Telame');
-	}
-
-	function features() {
-		//set up the layout
-		$this->set('title_for_layout', 'Telame - Features');
+		$this->set('title_for_layout', 'Signup');
 	}
 
 }

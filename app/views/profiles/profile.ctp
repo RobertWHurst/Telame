@@ -35,27 +35,7 @@
 				</div>
 			</div>
 			
-			
-			<div id="profile_summary">
-				<h1 class="name">Mr. Bolts</h1>
-				<table>
-					<tr>
-						<th class="key"><?php echo __('Location'); ?>:</th><td class="value">Telame Core</td>
-					</tr>
-					<tr>
-						<th class="key"><?php echo __('Tela Group'); ?>:</th><td class="value">System Bots</td>
-					</tr>
-					<tr>
-						<th class="key"><?php echo __('Sex'); ?>:</th><td class="key">None</td>
-					</tr>
-					<tr>
-						<th class="key"><?php echo __('Born'); ?>:</th><td class="key">June 23, 2010</td>
-					</tr>
-					<tr>
-						<th class="key"><?php echo __('Joined'); ?>:</th><td class="key">At Core Execution</td>
-					</tr>
-				</table>
-			</div>
+			<?php $renderProfile->summary($profile); ?>
 			
 			
 		</div>	
@@ -63,7 +43,7 @@
 		
 		
 			<div id="profile_wall">
-				debug => <?php krumo($debug); ?>
+				wall
 			</div>
 			
 			
