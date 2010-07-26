@@ -1,3 +1,6 @@
+<div id="login_logo">
+	<?php echo $html->image('pages/logo.png', array('title' => 'Telame', 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>
+</div>
 <div id="login">
 <?php
     echo $session->flash('auth');

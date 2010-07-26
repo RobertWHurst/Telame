@@ -19,16 +19,38 @@ class ProfilesController extends AppController {
 		$this->set('title_for_layout', 'Telame - Error');
 	}
     
-	function profile($slug = 'Robert') {
+	function profile($slug = false) {
 		
-		//set up the layout
-		$this->set('title_for_layout', 'Telame - Mr Bolts');
+		//if no user slug is given then get the current user's profile.
+		if(!$slug){
+			
+			//get the current user		
+    		$userId = $this->Auth->user('id');
+    		
+    		$profile = $this->Profile->findByUser_id($userId);
+    	}
+    	else{
 	
-		//get the profile
-		$profile = $this->Profile->findBySlug($slug);
+			//get the profile
+			$profile = $this->Profile->findBySlug($slug);
+			
+		}
+		
+		//page title
+		$this->set('title_for_layout', "Telame - {$profile['ProfileMeta']['first_name']} {$profile['ProfileMeta']['last_name']}");
 		
 		//pass the profile data to the view
 		$this->set('profile', $profile);
+	}
+	
+	function jx_profile_search(){
+	
+		//TODO: these results will need to be ranked by relationship, network, secondary relationships, and location, in that order.
+		
+		//get all the searchable profiles
+		$results = $this->Profile->findAllBySearchable(true);
+		
+		$this->set('results', $results);
 	}
 
 }
