@@ -5,10 +5,10 @@ class PagesController extends AppController {
 
 	function beforeRender() {
 		parent::beforeRender();
+		//set the css and layout
 		$this->set('css_for_layout', 'external.css');
 		$this->layout = 'external';
 	}
-
 
 	function home() {
 		// Signup php code
