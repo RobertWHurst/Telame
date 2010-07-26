@@ -36,19 +36,19 @@
 						<th class="name" colspan="2">Mr. Bolts</th>
 					</tr>
 					<tr>
-						<th class="key">Location:</th><td class="value">Telame Core</td>
+						<th class="key"><?php echo __('Location'); ?>:</th><td class="value">Telame Core</td>
 					</tr>
 					<tr>
-						<th class="key">Tela Group:</th><td class="value">System Bots</td>
+						<th class="key"><?php echo __('Tela Group'); ?>:</th><td class="value">System Bots</td>
 					</tr>
 					<tr>
-						<th class="key">Sex:</th><td class="key">None</td>
+						<th class="key"><?php echo __('Sex'); ?>:</th><td class="key">None</td>
 					</tr>
 					<tr>
-						<th class="key">Born:</th><td class="key">June 23, 2010</td>
+						<th class="key"><?php echo __('Born'); ?>:</th><td class="key">June 23, 2010</td>
 					</tr>
 					<tr>
-						<th class="key">Joined:</th><td class="key">At Core Execution</td>
+						<th class="key"><?php echo __('Joined'); ?>:</th><td class="key">At Core Execution</td>
 					</tr>
 				</table>
 			</div>
@@ -70,5 +70,5 @@
 		</div>		
 	</div>
 		
-	<?php echo $this->element('profile/copyright'); ?>	
+	<?php echo $this->element('copyright'); ?>	
 </div>
