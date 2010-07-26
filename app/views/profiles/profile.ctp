@@ -36,7 +36,7 @@
 						<th class="name" colspan="2">Mr. Bolts</th>
 					</tr>
 					<tr>
-						<th class="key">Location:</th><td class="value">Telame Core</td>
+						<th class="key"><?php echo __('Location'); ?>:</th><td class="value">Telame Core</td>
 					</tr>
 					<tr>
 						<th class="key">Tela Group:</th><td class="value">System Bots</td>
