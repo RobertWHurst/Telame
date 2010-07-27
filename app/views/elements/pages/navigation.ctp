@@ -7,7 +7,8 @@
 		echo $html->link('Signup', '/#signup');
 		echo $html->link('Login', '/users/login'); 
 	} else {
-		echo 'Welcome Back';
+		echo $html->link('Your Profile', '/profiles/profile');
+		echo $html->link('Logout', '/users/logout'); 
 	}
 ?>
 </div>
