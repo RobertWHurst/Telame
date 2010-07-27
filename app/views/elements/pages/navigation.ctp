@@ -1,14 +1,14 @@
 <div id="navigation">
 <?php
-	echo $html->link('Home', '/');
-	echo $html->link('Features', '/pages/features');
+	echo $html->link(__('Home'), '/');
+	echo $html->link(__('Features'), '/pages/features');
 	// If the user is not logged in, display the signup and login links
 	if (!Configure::read('LoggedIn')) {
-		echo $html->link('Signup', '/#signup');
-		echo $html->link('Login', '/users/login'); 
+		echo $html->link(__('Signup'), '/#signup');
+		echo $html->link(__('Login'), '/users/login');
 	} else {
-		echo $html->link('Your Profile', '/profiles/profile');
-		echo $html->link('Logout', '/users/logout'); 
+		echo $html->link(__('Your Profile'), '/profiles/profile');
+		echo $html->link(__('Logout'), '/users/logout');
 	}
 ?>
 </div>

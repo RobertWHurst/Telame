@@ -5,9 +5,9 @@
 <?php
     echo $session->flash('auth');
     echo $form->create('User', array('action' => 'login'));
-    echo $form->input('email');
-    echo $form->input('password');
-	echo $form->input('auto_login', array('type' => 'checkbox', 'label' => 'Log me in automatically?'));
-    echo $form->end('Login');
+    echo $form->input('email', array('label' => __('Email')));
+    echo $form->input('password', array('label' => __('Password')));
+	echo $form->input('auto_login', array('type' => 'checkbox', 'label' => __('Log me in automatically?')));
+    echo $form->end(__('Login'));
 ?>
 </div>
