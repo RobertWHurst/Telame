@@ -3,9 +3,7 @@
 		<div id="logo">
 			<?php echo $html->image('profile/logo.png', array('title' => 'Telame', 'url' => array('controller' => 'profiles', 'action' => 'profile'))); ?>
 		</div>
-		<div id="main_sidebar">
-			main sidebar
-		</div>
+		<?php echo $this->element('profile/main_sidebar'); ?>
 	</div>
 	<div id="profile">		
 		<div id="profile_head" class="clearfix">
