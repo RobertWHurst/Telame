@@ -7,6 +7,7 @@
     echo $form->create('User', array('action' => 'login'));
     echo $form->input('email');
     echo $form->input('password');
+	echo $form->input('auto_login', array('type' => 'checkbox', 'label' => 'Log me in automatically?'));
     echo $form->end('Login');
 ?>
 </div>
