@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
-			<?php echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'profiles', 'action' => 'profile'))); ?>
+			<?php echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>
 		</div>
 		<?php echo $this->element('profile/main_sidebar'); ?>
 	</div>
@@ -33,7 +33,9 @@
 				</div>
 			</div>
 			
-			<?php $renderProfile->summary($profile); ?>
+			<?php // render_profile helper
+			$renderProfile->summary($profile); 
+			?>
 			
 			
 		</div>	
@@ -41,7 +43,15 @@
 		
 		
 			<div id="profile_wall">
-				wall
+				<?php 
+				echo $form->create('WallPost');
+				echo $form->input('post', array('label' => __('What\'s on your mind?', true)));
+				echo $form->end(__('Post', true));
+				foreach ($wallPosts as $post) {
+					echo $post['WallPost']['post'];
+					echo '<br /><hr /><br />';
+				}
+				?>
 			</div>
 			
 			
