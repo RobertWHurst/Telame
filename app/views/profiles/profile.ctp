@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
-			<?php echo $html->image('profile/logo.png', array('title' => 'Telame', 'url' => array('controller' => 'profiles', 'action' => 'profile'))); ?>
+			<?php echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'profiles', 'action' => 'profile'))); ?>
 		</div>
 		<?php echo $this->element('profile/main_sidebar'); ?>
 	</div>

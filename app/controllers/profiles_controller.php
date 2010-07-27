@@ -16,7 +16,7 @@ class ProfilesController extends AppController {
 		//TODO: Replace fake user with the selected user from the database.
 
 		//set up the layout
-		$this->set('title_for_layout', __('Telame - Error'));
+		$this->set('title_for_layout', 'Telame - Error');
 	}
 
 	function profile($slug = false) {
@@ -33,7 +33,7 @@ class ProfilesController extends AppController {
 		$profile = $this->Profile->findBySlug($slug);
 
 		//page title
-		$this->set('title_for_layout', __("Telame - {$profile['ProfileMeta']['first_name']} {$profile['ProfileMeta']['last_name']}"));
+		$this->set('title_for_layout', "Telame - {$profile['ProfileMeta']['first_name']} {$profile['ProfileMeta']['last_name']}");
 
 		//pass the profile data to the view
 		$this->set('profile', $profile);
