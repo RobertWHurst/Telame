@@ -22,6 +22,7 @@ class RenderProfileHelper extends AppHelper {
    			//open the table
    			$output .= '<table>';
    			
+   			// pukes out meta data in summary
    			foreach($fields as $key => $label){
 				if(isset($profile_object['ProfileMeta'][$key]) && $value = __($profile_object['ProfileMeta'][$key], true)){
 			

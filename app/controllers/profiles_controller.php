@@ -19,6 +19,11 @@ class ProfilesController extends AppController {
 		$this->set('title_for_layout', 'Telame - Error');
 	}
 
+	function edit($id = false) {
+		$this->data = Sanitize::clean($this->data);
+		$this->Profile->save($this->data);
+	}
+
 	function profile($slug = false) {
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
@@ -31,12 +36,14 @@ class ProfilesController extends AppController {
 
 		//get the profile
 		$profile = $this->Profile->findBySlug($slug);
+		$this->Profile->User->WallPost->recursive = -1;
+		$wallPosts = $this->Profile->User->WallPost->find('all', array('conditions' => array('user_id' => Configure::read('UID'))));
 
 		//page title
 		$this->set('title_for_layout', "Telame - {$profile['ProfileMeta']['first_name']} {$profile['ProfileMeta']['last_name']}");
 
 		//pass the profile data to the view
-		$this->set('profile', $profile);
+		$this->set(compact('profile', 'wallPosts'));
 	}
 
 	function search(){
