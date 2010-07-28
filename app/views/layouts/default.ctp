@@ -5,7 +5,7 @@
 	<title><?php echo $title_for_layout; ?></title>
 <?php		
 		if(isset($js_for_layout))
-			$head_types['js'] = $js_for_layout;
+			$head_types['script'] = $js_for_layout;
 			
 		if(isset($css_for_layout))
 			$head_types['css'] = $css_for_layout;

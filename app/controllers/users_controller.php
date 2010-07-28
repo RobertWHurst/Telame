@@ -9,7 +9,7 @@ class UsersController extends AppController {
 	function beforeRender() {
 		parent::beforeRender();
 		$this->set('css_for_layout', 'default.css');
-		$this->set('js_for_layout', array('jquery', 'users'));
+		$this->set('js_for_layout', array('jquery', 'users/profile'));
 	}
 
 	// this function fetches the user's avatar

@@ -226,9 +226,6 @@ optgroup{
 	height: 70px;
 	position: relative;
 }
-#profile_wall_input.active{
-	background: url('../img/profile/profile_wall_input.png') -50px 0;
-}
 #profile_wall_input label{
 	display: none;
 	position: absolute;
@@ -262,8 +259,7 @@ optgroup{
 	border-color: #679400;
 	background: #fff;
 }
-#profile_wall_input input:hover[type="submit"],
-#profile_wall_input input:hover[type="submit"].active{
+#profile_wall_input input:hover[type="submit"]{
 	color: #679400;
 }
 #profile{
