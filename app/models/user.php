@@ -3,7 +3,9 @@ class User extends AppModel {
 	var $name = 'User';
 	var $hasMany = array('ProfileMeta' => array(
 			'dependent' => true
-		), 'WallPost'
+		), 'WallPost' => array(
+			'order' => 	'WallPost.id DESC',
+		)
 	);
 	var $helpers = array('ProfileSummary');
 	

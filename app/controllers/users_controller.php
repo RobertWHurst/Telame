@@ -43,7 +43,20 @@ class UsersController extends AppController {
     	}
 
 		//get the profile
-		$user = $this->User->find('first', array('conditions' => array('slug' => $slug)));
+		$this->User->recursive = 2;
+		$this->User->Behaviors->attach('Containable');
+		$user = $this->User->find('first', array(
+								'conditions' => array(
+									'lower(slug)' => strtolower($slug)
+								), 
+								'contain' => array(
+									'ProfileMeta', 
+									'WallPost' => array(
+										'Poster'
+									)
+								)
+							)
+						);
 		
 		//page title
 		$this->set('title_for_layout', "Telame - {$user['ProfileMeta']['first_name']} {$user['ProfileMeta']['last_name']}");

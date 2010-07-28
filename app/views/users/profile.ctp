@@ -30,7 +30,7 @@
 					</div>
 				-->
 				<div class="picture">
-<?php 				echo $html->image($user['User']['slug'] . '.png', array('title' => $user['ProfileMeta']['first_name'] . $user['ProfileMeta']['last_name']));
+<?php 				echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['ProfileMeta']['first_name'] . $user['ProfileMeta']['last_name']));
 ?>
 				</div>
 			</div>
@@ -44,12 +44,14 @@
 				<div id="profile_wall_input">
 <?php 				echo $form->create('WallPost', array('url' => '/wall_posts/add/'));
 					echo $form->input('post', array('label' => __('What\'s on your mind?', true), 'type' => 'text'));
-					echo $form->end(__('Post', true)); 
+					echo $form->hidden('user_id', array('value' => $user['User']['id']));
+					echo $form->end(__('Post', true));
 ?>
 				</div>
 <?php
 				if (!empty($user['WallPost'])) {
-				foreach ($user['WallPost'] as $post) {
+					foreach ($user['WallPost'] as $post) {
+						echo $post['Poster']['slug'] . ' says: ';
 						echo $post['post'];
 						echo '<br /><hr /><br />';
 					}

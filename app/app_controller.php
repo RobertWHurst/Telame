@@ -13,13 +13,13 @@ class AppController extends Controller {
 
 		// redirect after login to profile, and home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'home');
-		$this->Auth->loginRedirect = array('controller' => 'profiles', 'action' => 'profile');
+		$this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'profile');
 
 		// get the user's info and store it in the 'user' var
 		$user = $this->Session->read('Auth');
 
 		// Read the user id from the session and if nothing there, set it to 1
-		Configure::write('UID', (!isset($user['User']['id']) ? '1' : $user['User']['id']));
+		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
 
 		if(Configure::read('debug') > 0){

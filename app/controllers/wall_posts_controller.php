@@ -7,11 +7,14 @@ class WallPostsController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->WallPost->set('user_id', Configure::read('UID'));
+			$this->WallPost->set('user_id', $this->data['WallPost']['user_id']);
 			$this->WallPost->set('post', $this->data['WallPost']['post']);
+			$this->WallPost->set('poster_id', Configure::read('UID'));
+			
 			$this->WallPost->save();
 		}
-		$this->redirect('/p/');
+		$user = $this->WallPost->User->findById($this->data['WallPost']['user_id']);
+		$this->redirect('/p/' . $user['User']['slug']);
 		exit();
 	}
 }
