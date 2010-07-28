@@ -57,7 +57,7 @@
 							'title' => __('Delete',true), 
 							'url' => '/wall_posts/delete/' . $post['id'])
 						);
-						echo $time->nice($post['posted']);
+						echo $time->timeAgoInWords($post['posted']);
 						echo '<br /><hr /><br />';
 					}
 				} else {
