@@ -4,7 +4,7 @@ class ProfileController extends AppController {
 	//Controller config
 	var $name = 'Profile';
 	var $uses = null; //TODO: '$uses=null' can be removed once the db is configured
-
+	
 	//Before the render of all views in this controller
 	function beforeRender() {
 		parent::beforeRender();

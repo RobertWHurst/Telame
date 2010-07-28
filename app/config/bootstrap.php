@@ -50,5 +50,5 @@
  */
  
  
-Inflector::rules('plural', array('irregular' => array('profile_meta' => 'profile_meta')));
+Inflector::rules('plural', array('irregular' => array('user_meta' => 'user_meta')));
 

@@ -57,6 +57,7 @@ class AutoLoginComponent extends Object {
 	 * @return void 
 	 */
 	function initialize(&$Controller) {
+	
 		$this->Cookie->key = Configure::read('Security.salt');
 		$cookie = $this->Cookie->read($this->cookieName);   
 		

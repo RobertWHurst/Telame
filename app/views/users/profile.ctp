@@ -1,10 +1,12 @@
 <div id="content">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
-<?php		echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home')));
+<?php		
+			echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home')));
 ?>
 		</div>
-<?php 	echo $this->element('profile/main_sidebar');
+<?php 	
+		echo $this->element('profile/main_sidebar');
 ?>
 	</div>
 	<div id="profile">
@@ -30,19 +32,21 @@
 					</div>
 				-->
 				<div class="picture">
-<?php 				echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['ProfileMeta']['first_name'] . ' ' .  $user['ProfileMeta']['last_name']));
+<?php 				
+					echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
 ?>
 				</div>
 			</div>
-
-<?php		// render_profile helper
+<?php		
+			// render_profile helper
 			$renderProfile->summary($user);
 ?>
 		</div>
 		<div id="profile_body" class="clearfix">
 			<div id="profile_wall">
 				<div id="profile_wall_input">
-<?php 				echo $form->create('WallPost', array('url' => '/wall_posts/add/'));
+<?php 				
+					echo $form->create('WallPost', array('url' => '/wall_posts/add/'));
 					echo $form->input('post', array('label' => __('What\'s on your mind?', true), 'type' => 'text'));
 					echo $form->hidden('user_id', array('value' => $user['User']['id']));
 					echo $form->end(__('Post', true));
@@ -51,7 +55,7 @@
 <?php
 				if (!empty($user['WallPost'])) {
 					foreach ($user['WallPost'] as $post) {
-						echo $html->link($post['Poster']['slug'], '/p/' . $post['Poster']['slug']) . ' says: ';
+						echo $html->link($post['PostAuthor']['slug'], '/p/' . $post['PostAuthor']['slug']) . ' says: ';
 						echo $post['post'];
 						echo $html->image('icons/delete.png', array(
 							'title' => __('Delete',true), 
@@ -65,12 +69,9 @@
 				}
 ?>
 			</div>
-
-
-			<div id="profile_sidebar">
-				sidebar
-			</div>
-
+<?php 	
+			echo $this->element('profile/profile_sidebar');
+?>
 		</div>
 	</div>
 </div>
