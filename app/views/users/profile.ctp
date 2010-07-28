@@ -11,35 +11,12 @@
 	</div>
 	<div id="profile">
 		<div id="profile_head" class="clearfix">
-
-			<div id="profile_gallery">
-				<!--
-					javascript will only load one of the following items.
-
-					if javascript sees a video wrapper, it will setup an html5
-					video interface to play the video inside.
-
-					if it finds a gallery wrapper it will create a gallery
-					slideshow.
-
-					if it finds a picture wrapper it will just show an avatar.
-
-					<div class="video">
-
-					</div>
-					<div class="gallery">
-
-					</div>
-				-->
-				<div class="picture">
-<?php 				
-					echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
-?>
-				</div>
-			</div>
 <?php		
-			// render_profile helper
-			$renderProfile->summary($user);
+			//render the profile gallery
+			$renderProfile->gallery();
+			
+			//render the profile summary
+			$renderProfile->summary();
 ?>
 		</div>
 		<div id="profile_body" class="clearfix">
