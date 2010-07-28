@@ -254,13 +254,18 @@ optgroup{
 	padding: 0;
 	margin: 0;
 }
-#profile_wall_input input:hover[type="text"],
-#profile_wall_input input:focus[type="text"]{
+#profile_wall_input.active.focus{
+	background: url('../img/profile/profile_wall_input_active.png');
+}
+#profile_wall_input.active input[type="text"]{
 	border-color: #679400;
 	background: #fff;
 }
-#profile_wall_input input:hover[type="submit"]{
+#profile_wall_input.active input[type="submit"]{
 	color: #679400;
+}
+#profile_wall_input.active.focus input:hover[type="submit"]{
+	color: #8cc900;
 }
 #profile{
 	float: left;
