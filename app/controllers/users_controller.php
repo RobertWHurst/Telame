@@ -9,7 +9,7 @@ class UsersController extends AppController {
 	function beforeRender() {
 		parent::beforeRender();
 		$this->set('css_for_layout', 'default.css');
-		$this->set('js_for_layout', array('jquery', 'users'));
+		$this->set('js_for_layout', array('jquery', 'users/profile'));
 	}
 
 	// this function fetches the user's avatar
@@ -41,9 +41,17 @@ class UsersController extends AppController {
 		$this->set('title_for_layout', 'Telame - Error');
 	}
 
-	function edit($id = false) {
-		$this->data = Sanitize::clean($this->data);
-		$this->User->save($this->data);
+	function edit($slug = false) {
+		if ($slug && empty($this->data)) {
+			// call the profile function get fill all of our info for us
+			$this->profile($slug);
+		}
+		if (!empty($this->data)) {
+			pr($this->data);
+			$this->User->save($this->data);
+			$this->redirect('/p');
+			exit();
+		}
 	}
 
 	function login(){
@@ -73,7 +81,7 @@ class UsersController extends AppController {
 								),
 								'contain' => array(
 									'Friend' => array(
-										'Friend'
+										'User'
 									),
 									'UserMeta',
 									'WallPost' => array(
@@ -87,7 +95,7 @@ class UsersController extends AppController {
 		$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
 
 		//pass the profile data to the view
-		$this->set(compact('user', 'wallPosts'));
+		$this->set(compact('user'));
 	}
 
 	function search(){

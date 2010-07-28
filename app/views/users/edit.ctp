@@ -17,7 +17,7 @@
 			$renderProfile->gallery($user);
 			
 			//render the profile summary
-			$renderProfile->summary($user);
+			$renderProfile->edit($user);
 ?>
 		</div>
 		<div id="profile_body" class="clearfix">
