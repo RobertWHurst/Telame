@@ -53,6 +53,10 @@
 					foreach ($user['WallPost'] as $post) {
 						echo $post['Poster']['slug'] . ' says: ';
 						echo $post['post'];
+						echo $html->image('icons/delete.png', array(
+							'title' => __('Delete',true), 
+							'url' => '/wall_posts/delete/' . $post['id'])
+						);
 						echo '<br /><hr /><br />';
 					}
 				} else {

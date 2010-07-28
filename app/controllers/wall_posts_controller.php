@@ -17,5 +17,16 @@ class WallPostsController extends AppController {
 		$this->redirect('/p/' . $user['User']['slug']);
 		exit();
 	}
+	
+	function delete($id) {
+		if(!$id) {
+			$this->setFlash(__('Invalid Wall Post', true));
+			$this->redirect('/');
+			exit();
+		}
+		$this->WallPost->delete($id);
+		$this->redirect('/p');
+		exit();
+	}
 }
 ?>
