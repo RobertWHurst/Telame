@@ -7,8 +7,8 @@ class User extends AppModel {
 			'exclusive' => true
 		),
 		'Friend' => array(
-			'foreignKey' => 'parent_user_id'
-			
+			'ClassName' => 'User',
+			'foreignKey' => 'child_user_id'			
 		),
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
