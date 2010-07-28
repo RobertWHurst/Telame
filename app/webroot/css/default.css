@@ -116,19 +116,18 @@ th{
 
 /* DEFAULT FORM STYLES */
 form{
-	border-color: 1px solid #d3ef91;
 }
 input[type="text"]{
-	/* input[type="text"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="submit"]{
-	/* input[type="submit"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="radio"]{
-	/* input[type="radio"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="checkbox"]{
-	/* input[type="checkbox"] - rules */
+	border: 2px solid #dfd0e7;
 }
 select{
 	/* select - rules */
