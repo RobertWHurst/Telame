@@ -2,7 +2,13 @@
 class AppController extends Controller {
 
 	//add user athentication
-	var $components = array('AutoLogin', 'Auth', 'Session');
+	/*
+		WARNING: 	I disabled autologin because the intalize function was running before the beforefilter of this controller.
+					Thus before auth was configured.
+		
+		var $components = array('Auth', 'AutoLogin', 'Session');
+	*/
+	var $components = array('Auth', 'Session');
 
 	function beforeFilter() {
 
@@ -15,7 +21,7 @@ class AppController extends Controller {
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 		
 		// login/logout variables
-		$this->AutoLogin->expires = '+1 month';
+		//$this->AutoLogin->expires = '+1 month';
 
 		// redirect after login to profile, and home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'home');

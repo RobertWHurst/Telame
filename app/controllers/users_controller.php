@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $helpers = array('RenderProfile', 'Time');
-
+	
 	//Before the render of all views in this controller
 	function beforeRender() {
 		parent::beforeRender();
@@ -50,16 +50,16 @@ class UsersController extends AppController {
 									'lower(slug)' => strtolower($slug)
 								), 
 								'contain' => array(
-									'ProfileMeta', 
+									'UserMeta', 
 									'WallPost' => array(
-										'Poster'
+										'PostAuthor'
 									)
 								)
 							)
 						);
 		
 		//page title
-		$this->set('title_for_layout', "Telame - {$user['ProfileMeta']['first_name']} {$user['ProfileMeta']['last_name']}");
+		$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
 
 		//pass the profile data to the view
 		$this->set(compact('user', 'wallPosts'));
@@ -83,7 +83,7 @@ class UsersController extends AppController {
 		$results = $this->User->findAllBySearchable(true);
 
 		foreach($results as $row){
-			$users[] = array('name' => $row['ProfileMeta']['first_name']. ' ' .$profile['ProfileMeta']['last_name'], 'slug' => $profile['Profile']['slug']);
+			$users[] = array('name' => $row['UserMeta']['first_name']. ' ' .$profile['UserMeta']['last_name'], 'slug' => $profile['User']['slug']);
 		}
 		$this->set('results', $results);
 	}

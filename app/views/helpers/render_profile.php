@@ -2,7 +2,7 @@
 class RenderProfileHelper extends AppHelper {
     function summary($profile_object) {
     	
-    	if(is_array($profile_object['ProfileMeta'])){
+    	if(is_array($profile_object['UserMeta'])){
     		//make a pesudo array of labels
     		$fields = array(
     			'location' => __('Location', true),
@@ -17,14 +17,14 @@ class RenderProfileHelper extends AppHelper {
    			$output = '<div id="profile_summary">';
    			
    			//add the profile name
-   			$output .= "<h1 class=\"name\">{$profile_object['ProfileMeta']['first_name']} {$profile_object['ProfileMeta']['last_name']}</h1>";
+   			$output .= "<h1 class=\"name\">{$profile_object['UserMeta']['first_name']} {$profile_object['UserMeta']['last_name']}</h1>";
    			
    			//open the table
    			$output .= '<table>';
    			
    			// pukes out meta data in summary
    			foreach($fields as $key => $label){
-				if(isset($profile_object['ProfileMeta'][$key]) && $value = __($profile_object['ProfileMeta'][$key], true)){
+				if(isset($profile_object['UserMeta'][$key]) && $value = __($profile_object['UserMeta'][$key], true)){
 			
 					//if special formatting is needed add it within an if statement below this comment
 				

@@ -1,10 +1,19 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
-	var $hasMany = array('UserMeta' => array(
-			'dependent' => true
-		), 'WallPost' => array(
+	var $hasMany = array(
+		'UserMeta' => array(
+			'dependent' => true,
+			'exclusive' => true
+		),
+		'Friend' => array(
+			'foreignKey' => 'parent_user_id'
+			
+		),
+		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
+			'dependent' => true,
+			'exclusive' => true
 		)
 	);
 	var $helpers = array('ProfileSummary');
