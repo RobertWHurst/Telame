@@ -205,6 +205,16 @@ optgroup{
 	height: 100px;
 	background: #333;
 }
+#main_sidebar div.current_user_controls{
+	padding: 20px;
+}
+#post_to_wall{	
+	border-bottom: 1px solid #606060;
+	padding: 10px;
+}
+#post_to_wall textarea{
+	width:400px;
+}
 #profile{
 	float: left;
 	width:770px;
