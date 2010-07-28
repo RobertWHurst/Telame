@@ -5,14 +5,17 @@ class WallPostsController extends AppController {
 	var $name = 'WallPosts';
 
 	function add() {
-	
-		//make sure there is form data to proccess
-		if(empty($this->data))
-			return false;
 		
 		//save the user id and the visitor id
 		$user_id = $this->data['WallPost']['user_id'];
 		$visitor_id = Configure::read('UID');
+		
+		//get the visiting user's data
+		$visitor = $this->WallPost->User->findById($visitor_id);
+	
+		//make sure there is form data to proccess
+		if(empty($this->data))
+			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
 		
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
 		if($user_id != $visitor_id){
@@ -21,9 +24,6 @@ class WallPostsController extends AppController {
 			
 			//get the user's id that owns the wall
 			$user = $this->WallPost->User->findById($user_id);
-		
-			//get the visiting user's data
-			$visitor = $this->WallPost->User->findById($visitor_id);
 		
 			//find out if the visitor is a friend
 			$conditions = array(
@@ -35,15 +35,17 @@ class WallPostsController extends AppController {
 			);
 			
 			//if the poster is not friends with the user then return false
-			if($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1)
-				return false;
+			if($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1){
+				$this->Session->setFlash(__('No, I can\'t let you do that. Only people that are friends can post on the wall', true));
+				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
+			}
 		}
 		else{
 		
 			//IF THE POSTER IS THE THE WALL OWNER
 			
-			//get the user's id that owns the wall
-			$user = $visitor = $this->WallPost->User->findById($user_id);
+			//the visitor is the user
+			$user = $visitor;
 			
 		}
 		
@@ -66,7 +68,7 @@ class WallPostsController extends AppController {
 		exit();
 	}
 	
-	function delete($id) {
+	function delete($id = false) {
 		
 		//get the visitor's data
 		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
