@@ -21,7 +21,7 @@ class UsersController extends AppController {
 
 	function edit($id = false) {
 		$this->data = Sanitize::clean($this->data);
-		$this->Profile->save($this->data);
+		$this->User->save($this->data);
 	}
 
     function login(){
@@ -36,23 +36,20 @@ class UsersController extends AppController {
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
 		if(!$slug){
-			$user = $this->Profile->User->find('first', array('conditions' => array('slug' => $slug)));
-    		$profile = $this->Profile->findByUser_id();
+			$user = $this->User->find('first', array('conditions' => array('id' => Configure::read('UID'))));
 
-    		$this->redirect("/profiles/profile/{$profile['Profile']['slug']}");
+    		$this->redirect("/p/{$user['User']['slug']}");
     		exit(); // always exit after a redirect
     	}
 
 		//get the profile
-		$profile = $this->Profile->findBySlug($slug);
-		$this->Profile->User->WallPost->recursive = -1;
-		$wallPosts = $this->Profile->User->WallPost->find('all', array('conditions' => array('user_id' => Configure::read('UID'))));
-
+		$user = $this->User->find('first', array('conditions' => array('slug' => $slug)));
+		
 		//page title
-		$this->set('title_for_layout', "Telame - {$profile['ProfileMeta']['first_name']} {$profile['ProfileMeta']['last_name']}");
+		$this->set('title_for_layout', "Telame - {$user['ProfileMeta']['first_name']} {$user['ProfileMeta']['last_name']}");
 
 		//pass the profile data to the view
-		$this->set(compact('profile', 'wallPosts'));
+		$this->set(compact('user', 'wallPosts'));
 	}
 
 	function search(){
@@ -60,7 +57,7 @@ class UsersController extends AppController {
 		//TODO: these results will need to be ranked by relationship, network, secondary relationships, and location, in that order.
 
 		//get all the searchable profiles
-		$results = $this->Profile->findAllBySearchable(true);
+		$results = $this->User->findAllBySearchable(true);
 
 		$this->set('results', $results);
 	}
@@ -70,7 +67,7 @@ class UsersController extends AppController {
 		//TODO: these results will need to be ranked by relationship, network, secondary relationships, and location, in that order.
 
 		//get all the searchable profiles
-		$results = $this->Profile->findAllBySearchable(true);
+		$results = $this->User->findAllBySearchable(true);
 
 		foreach($results as $row){
 			$users[] = array('name' => $row['ProfileMeta']['first_name']. ' ' .$profile['ProfileMeta']['last_name'], 'slug' => $profile['Profile']['slug']);
