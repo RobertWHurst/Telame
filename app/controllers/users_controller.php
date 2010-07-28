@@ -4,11 +4,32 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $helpers = array('RenderProfile', 'Time');
-	
+
 	//Before the render of all views in this controller
 	function beforeRender() {
 		parent::beforeRender();
 		$this->set('css_for_layout', 'default.css');
+	}
+
+	// this function fetches the user's avatar
+	function avatar($uid = null) {
+		if (empty($uid)) {
+			$this->cakeError('error404');
+		}
+		// media view for files
+		$this->view = 'Media';
+		// we don't need all the associations
+		$this->User->recursive = -1;
+		$user = $this->User->findById($uid);
+		$params = array(
+			'id' => trim($user['User']['avatar']),
+			'name' => $user['User']['slug'],
+			'download' => false,
+			'extension' => 'png',
+			'path' => APP . 'users' . DS . $uid . DS . 'images' . DS . 'profile' . DS,
+			'cache' => '5 days',
+	   );
+	   $this->set($params);
 	}
 
 	//A summary of whats new for the user.
@@ -24,13 +45,13 @@ class UsersController extends AppController {
 		$this->User->save($this->data);
 	}
 
-    function login(){
-    }
+	function login(){
+	}
 
-    /** delegate /users/logout request to Auth->logout method */
-    function logout(){
-        $this->redirect($this->Auth->logout());
-    }
+	/** delegate /users/logout request to Auth->logout method */
+	function logout(){
+		$this->redirect($this->Auth->logout());
+	}
 
 	function profile($slug = false) {
 
@@ -38,9 +59,9 @@ class UsersController extends AppController {
 		if(!$slug){
 			$user = $this->User->find('first', array('conditions' => array('id' => Configure::read('UID'))));
 
-    		$this->redirect("/p/{$user['User']['slug']}");
-    		exit(); // always exit after a redirect
-    	}
+			$this->redirect("/p/{$user['User']['slug']}");
+			exit(); // always exit after a redirect
+		}
 
 		//get the profile
 		$this->User->recursive = 2;
@@ -48,16 +69,19 @@ class UsersController extends AppController {
 		$user = $this->User->find('first', array(
 								'conditions' => array(
 									'lower(slug)' => strtolower($slug)
-								), 
+								),
 								'contain' => array(
-									'UserMeta', 
+									'Friend' => array(
+										'Friend'
+									),
+									'UserMeta',
 									'WallPost' => array(
 										'PostAuthor'
 									)
 								)
 							)
 						);
-		
+
 		//page title
 		$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
 
