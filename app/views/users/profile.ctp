@@ -45,7 +45,7 @@
 			<div id="profile_wall">
 				<?php 
 				echo $form->create('WallPost');
-				echo $form->input('post', array('label' => __('What\'s on your mind?', true)));
+				echo $form->input('post', array('label' => __('What\'s on your mind?', true), 'type' => 'text'));
 				echo $form->end(__('Post', true));
 				foreach ($wallPosts as $post) {
 					echo $post['WallPost']['post'];
