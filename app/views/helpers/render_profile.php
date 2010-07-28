@@ -1,8 +1,12 @@
 <?php
 class RenderProfileHelper extends AppHelper {
+
+	var $helpers = array('Html');
+	
     function summary($user) {
     	
     	if(is_array($user['UserMeta'])){
+    	
     		//make a pesudo array of labels
     		$fields = array(
     			'location' => __('Location', true),
@@ -24,7 +28,7 @@ class RenderProfileHelper extends AppHelper {
    			
    			// pukes out meta data in summary
    			foreach($fields as $key => $label){
-				if(isset($profile_object['UserMeta'][$key]) && $value = __($profile_object['UserMeta'][$key], true)){
+				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key], true)){
 			
 					//if special formatting is needed add it within an if statement below this comment
 				
@@ -54,21 +58,21 @@ class RenderProfileHelper extends AppHelper {
 	   	//open the images div
 	   	$output .= '<div class="images">';
 	   	
-	   	//get the gallery dispaly mode (single or multi)
+	   	//get the gallery dispaly mode (single == 1 or multi == 2)
 	   	switch($user['UserMeta']['gallery_mode']){
 	   	
 	   		//if just one image is set to load
-	   		case 'single':
+	   		case 1:
 	   			
 	   			//TODO: this logic is incorrect. the line below must depend on the system eric is creating for images. For now use the mockup code
 	   			
 	   			/* MOCK CODE */
-	   			$output .= $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
+	   			$output .= $this->Html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
 	   			/* END OF MOCK CODE */
 	   		
 	   			break;
 	   			
-	   		case 'multi':
+	   		case 2:
 	   			
 	   			//TODO when the use has more than one image then loop through them here
 	   			break;
@@ -79,6 +83,6 @@ class RenderProfileHelper extends AppHelper {
 	   	$output .= '</div>';
 	   	$output .= '</div>';
 	   	
-	   	return $output;
+	   	echo $output;
    	}
 }
