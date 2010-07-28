@@ -116,19 +116,18 @@ th{
 
 /* DEFAULT FORM STYLES */
 form{
-	/* form - rules */
 }
 input[type="text"]{
-	/* input[type="text"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="submit"]{
-	/* input[type="submit"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="radio"]{
-	/* input[type="radio"] - rules */
+	border: 2px solid #dfd0e7;
 }
 input[type="checkbox"]{
-	/* input[type="checkbox"] - rules */
+	border: 2px solid #dfd0e7;
 }
 select{
 	/* select - rules */
@@ -202,11 +201,24 @@ optgroup{
 }
 #main_sidebar{
 	width: 100%;
-	height: 100px;
 	background: #333;
+}
+#main_sidebar div.avatar{
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float: left;
 }
 #main_sidebar div.current_user_controls{
 	padding: 20px;
+}
+#main_sidebar div.current_user_controls ul{
+	float: left;
+}
+#main_sidebar div.current_user_controls li{
+	list-style: none;
+	font-size: 1.3em;
+	line-height: 1.2em;
 }
 #post_to_wall{	
 	border-bottom: 1px solid #606060;
@@ -273,6 +285,7 @@ optgroup{
 	text-align: center;
 	padding: 25px 0;
 }
+
 #copyright p{
 	color: #565656;
 	font-size: 1.3em;
