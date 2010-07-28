@@ -1,4 +1,4 @@
-<div class="current_user_controls">
+<div class="current_user_controls clearfix">
 	<!-- TODO: once image management is implemented then at a user thumbnail here -->
 	<div class="avatar"></div>
 	<ul class="controls">
