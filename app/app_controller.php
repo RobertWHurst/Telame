@@ -5,9 +5,15 @@ class AppController extends Controller {
 	var $components = array('AutoLogin', 'Auth', 'Session');
 
 	function beforeFilter() {
+
+		if(Configure::read('debug') > 0){
+			//load krumo
+			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
+		}
+		
 		//force athenication against profiles
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
-
+		
 		// login/logout variables
 		$this->AutoLogin->expires = '+1 month';
 
@@ -21,11 +27,6 @@ class AppController extends Controller {
 		// Read the user id from the session and if nothing there, set it to 1
 		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
-
-		if(Configure::read('debug') > 0){
-			//load krumo
-			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
-		}
 	}
 
 	function beforeRender() {
