@@ -13,10 +13,10 @@
 		<div id="profile_head" class="clearfix">
 <?php		
 			//render the profile gallery
-			$renderProfile->gallery();
+			$renderProfile->gallery($user);
 			
 			//render the profile summary
-			$renderProfile->summary();
+			$renderProfile->summary($user);
 ?>
 		</div>
 		<div id="profile_body" class="clearfix">

@@ -1,6 +1,6 @@
 <?php
 class RenderProfileHelper extends AppHelper {
-    function summary() {
+    function summary($user) {
     	
     	if(is_array($user['UserMeta'])){
     		//make a pesudo array of labels
@@ -43,7 +43,7 @@ class RenderProfileHelper extends AppHelper {
    		}
    	}
    	
-   	function gallery(){
+   	function gallery($user){
 	   	
 	   	//open the profile gallery div
 	   	$output = '<div id="profile_gallery">';
