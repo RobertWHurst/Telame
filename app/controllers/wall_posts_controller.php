@@ -10,6 +10,7 @@ class WallPostsController extends AppController {
 			$this->WallPost->set('user_id', $this->data['WallPost']['user_id']);
 			$this->WallPost->set('post', $this->data['WallPost']['post']);
 			$this->WallPost->set('poster_id', Configure::read('UID'));
+			$this->WallPost->set('posted', date("Y-m-d H:i:s"));
 			
 			$this->WallPost->save();
 		}

@@ -30,7 +30,7 @@
 					</div>
 				-->
 				<div class="picture">
-<?php 				echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['ProfileMeta']['first_name'] . $user['ProfileMeta']['last_name']));
+<?php 				echo $html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['ProfileMeta']['first_name'] . ' ' .  $user['ProfileMeta']['last_name']));
 ?>
 				</div>
 			</div>
@@ -51,12 +51,13 @@
 <?php
 				if (!empty($user['WallPost'])) {
 					foreach ($user['WallPost'] as $post) {
-						echo $post['Poster']['slug'] . ' says: ';
+						echo $html->link($post['Poster']['slug'], '/p/' . $post['Poster']['slug']) . ' says: ';
 						echo $post['post'];
 						echo $html->image('icons/delete.png', array(
 							'title' => __('Delete',true), 
 							'url' => '/wall_posts/delete/' . $post['id'])
 						);
+						echo $time->nice($post['posted']);
 						echo '<br /><hr /><br />';
 					}
 				} else {

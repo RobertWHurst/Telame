@@ -3,7 +3,7 @@ class UsersController extends AppController {
 
 	//Controller config
 	var $name = 'Users';
-	var $helpers = array('RenderProfile');
+	var $helpers = array('RenderProfile', 'Time');
 
 	//Before the render of all views in this controller
 	function beforeRender() {
