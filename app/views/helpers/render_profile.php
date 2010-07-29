@@ -135,4 +135,63 @@ class RenderProfileHelper extends AppHelper {
 
 	   	echo $output;
    	}
+   	
+   	function wall($user){
+   	
+   		//begin the wall div and the input div
+		$output = '<div id="profile_wall"><div id="profile_wall_input">';
+		
+		//create the form
+		$output .= $this->Form->create('WallPost', array('url' => '/wall_posts/add/'));
+		$output .= $this->Form->input('post', array('label' => __('What\'s on your mind?', true), 'type' => 'text'));
+		$output .= $this->Form->hidden('user_id', array('value' => $user['User']['id']));
+		$output .= $this->Form->end(__('Post', true));
+		
+		//close the input div and open the posts div
+		$output .= '</div><div id="profile_wall_posts">';
+				
+		//if there are posts on the wall then loop through them
+		if (!empty($user['WallPost']) && is_array($user['WallPost'])) {
+			foreach ($user['WallPost'] as $post) {
+			
+				//open the post div and the author info div
+				$output .= '<div class="wall_post"><div class="author_info">';
+				
+				//add the author's avatar
+				//TODO: erics uncommited avatar code here...
+				$output .= '<div class="avatar">[avatar]</div>';
+				
+				//echo the author's name as a link
+				//TODO: this should not be a slug.
+				$output .= '<div class="name">' . $this->Html->link($post['PostAuthor']['slug'], $this->Html->url(array('controller' => 'users', 'action' => 'profile')) . $post['PostAuthor']['slug']) . ' says:</div>';
+				
+				//close author info and open the post content div				
+				$output .= '</div><div class="post_content">';
+				
+				//the content	
+				$output .= "<p>{$post['post']}</p>";
+				
+				//close the content div				
+				$output .= '</div>';
+				
+				//the delete button
+				$output .= '<div class="delete">' . $this->Html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => '/wall_posts/delete/' . $post['id'])) . '</div>';
+				
+				//the timestamp				
+				//$output .= '<div class="time">' . $time->timeAgoInWords($post['posted']) . '</div>';
+				
+				//close the post div				
+				$output .= '</div>';
+			}
+		}
+		else {
+		
+			$output .= '<p class="no_posts">' . __('You don\' have any posts; what gives?', true) . '</div>';
+		}
+
+		//close the posts div				
+		$output .= '</div>';
+		
+		echo $output;
+   	}
 }

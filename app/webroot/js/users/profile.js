@@ -7,39 +7,59 @@ $(document).ready(function(){
 		
 		//save the dom elements
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
+		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');
 		
 		//the animation speed
 		root.speed = 300;
 		
 		//input wrap hover handler
-		root.hover = function(action){
-			
-			//the background images
-			var bg = ["url('../img/profile/profile_wall_input.png')", "url('../img/profile/profile_wall_input_active.png')"]
+		root.hoverHandler = function(action){
 			
 			//check the state
 			if(action === 'in'){
 				
 				//remove the old active class and add the inactive class
-				root.wallInputWrap.removeClass('active').addClass('inactive');
-				
-				//animate in the origional state background
-				root.wallInputWrap.animate({
-					'background': bg.1
-				}, root.speed);
+				root.wallInputWrap.addClass('active').addClass('hover');
 				
 			}
 			else if(action === 'out'){
 				
 				//remove the old active class and add the inactive class
-				root.wallInputWrap.removeClass('inactive').addClass('active');
+				root.wallInputWrap.removeClass('hover');			
+				if(root.wallInputWrap.hasClass('focus') === false){			
+					root.wallInputWrap.removeClass('active');
+				}	
 				
-				//animate in the active state background
-				root.wallInputWrap.animate({
-					'background': bg.2
-				}, root.speed);				
+			}
 				
+		}
+		
+		//input focus handler
+		root.focusHandler = function(action){
+			
+			//check the state
+			if(action === 'in'){
+				
+				//remove the old active class and add the inactive class
+				root.wallInputWrap.addClass('active').addClass('focus');
+				
+				//hide the label
+				root.wallInputLabel.hide();
+				
+			}
+			else if(action === 'out'){
+				
+				//remove the old active class and add the inactive class
+				root.wallInputWrap.removeClass('focus');			
+				if(root.wallInputWrap.hasClass('hover') === false){			
+					root.wallInputWrap.removeClass('active');
+				}	
+								
+				//if the inupt or textarea is empty then hide the label
+				if(root.wallInput.val() === ''){
+					root.wallInputLabel.show();
+				}
 			}
 				
 		}
@@ -49,18 +69,29 @@ $(document).ready(function(){
 			
 			//on hover event
 			root.wallInputWrap.hover(function(){
-				root.hover('in');
+				root.hoverHandler('in');
 			},
 			function(){
-				root.hover('out');
+				root.hoverHandler('out');
 			});
+			
+			//on focus event
+			root.wallInput.focus(function(){
+				root.focusHandler('in');
+			});
+			root.wallInput.blur(function(){
+				root.focusHandler('out');
+			});
+			
+			//on submit
+			
 			
 		}
 		
 		//self execute
 		root.construct();
 		
-	}
+	};
 	
 	new wall_input_logic;
 
