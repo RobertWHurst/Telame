@@ -1,7 +1,5 @@
 <div id="profile_sidebar">
-	<div class="friends">
 <?php
-		
+		$renderProfile->friends($user);
 ?>
-	</div>
 </div>

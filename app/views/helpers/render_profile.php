@@ -117,7 +117,7 @@ class RenderProfileHelper extends AppHelper {
 	   			//TODO: this logic is incorrect. the line below must depend on the system eric is creating for images. For now use the mockup code
 
 	   			/* MOCK CODE */
-	   			$output .= $this->Html->image(strtolower($user['User']['slug']) . '.png', array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
+	   			$output .= $this->Html->image('/a/' . $user['User']['id'], array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
 	   			/* END OF MOCK CODE */
 
 	   			break;
@@ -193,5 +193,48 @@ class RenderProfileHelper extends AppHelper {
 		$output .= '</div></div>';
 		
 		echo $output;
+   	}
+   	
+   	function friends($user){
+   		//set the limit
+   		$limit = 9;
+   		
+   		//is it random?
+   		$random = true;
+   		
+   		//get the users friends
+   		$friends = $user['Friend'];  
+   		
+   		//open the friends div
+   		$output = '<div class="friends">';
+   		  
+   		//the title
+   		$output .= '<h1>Friends</h1>';  		
+   		
+   		//if the user has friends loop through them
+   		if(is_array($friends)){
+   			foreach($friends as $friend){
+   			
+   				//get the avatar url
+   				$avatar_url = $this->Html->url(array('controller' => 'users', 'action' => 'avatar', $friend['User']['id']));
+   				
+   				//get the user's profile url
+   				$profile_url = $this->Html->url(array('controller' => 'users', 'action' => 'profile', $friend['User']['slug']));
+   				
+   				//get the friend's avatar and name to insert into a link
+   				$link_content = $this->Html->image($avatar_url, array('width' => '60', 'height' => '60'));
+   				$link_content .= '[first name]';
+   				
+   				$output .= $this->Html->link($link_content, $profile_url, array('escape' => false));
+   			}   		
+   		}
+   		else{
+   			$output .= '[TelaMeet plug here...]';
+   		}
+   		
+   		//close the friends div
+   		$output .= '</div>';
+   		
+   		echo $output;
    	}
 }

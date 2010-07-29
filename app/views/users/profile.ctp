@@ -7,7 +7,6 @@
 		</div>
 <?php 	
 		echo $this->element('users/main_sidebar');
-		echo $this->element('users/friends');
 ?>
 	</div>
 	<div id="profile">
