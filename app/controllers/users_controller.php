@@ -4,15 +4,22 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $helpers = array('RenderProfile');
-
-	//Before the render of all views in this controller
-	function beforeRender() {		
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		
 		//add css and js that is common to all the actions in this controller
 		$this->Includer->add('css', array('default', 'users/wall'));
 		$this->Includer->add('script', array('jquery', 'users/profile'));
-		
-		//run the before render in the app controller
+	}
+
+	//Before the render of all views in this controller
+	function beforeRender() {
 		parent::beforeRender();	
+		
+		//set the css and script for the view
+		$this->set('css_for_layout', $this->Includer->css());
+		$this->set('script_for_layout', $this->Includer->script());
 	}
 
 	// this function fetches the user's avatar
@@ -50,7 +57,6 @@ class UsersController extends AppController {
 			$this->render('profile');
 		}
 		if (!empty($this->data)) {
-			pr($this->data);
 			$this->User->save($this->data);
 			$this->redirect('/p');
 			exit();
@@ -93,7 +99,6 @@ class UsersController extends AppController {
 		if (!$user) {
 			$this->redirect('/');
 		}
-pr($user);
 		//page title
 		//$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
 

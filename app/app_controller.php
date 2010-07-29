@@ -44,8 +44,6 @@ class AppController extends Controller {
 	}
 
 	function beforeRender() {
-		//run the set method and include all files for the head
-		$this->Includer->set();
 	}
 
 }

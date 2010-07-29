@@ -1,7 +1,7 @@
 <?php
 class IncluderComponent extends Object {
 
-	var $includes = array(
+	var $include_array = array(
 		'css' => array(),
 		'script' => array()
 	);
@@ -12,10 +12,10 @@ class IncluderComponent extends Object {
 		if($type == 'css'){
 			if(is_array($file)){
 				foreach($file as $_file)
-					$this->includes['css'][] = "{$_file}.css";
+					$this->include_array['css'][] = "{$_file}.css";
 			}
 			else
-				$this->includes['css'][] = "{$file}.css";
+				$this->include_array['css'][] = "{$file}.css";
 				
 		}
 		
@@ -23,16 +23,18 @@ class IncluderComponent extends Object {
 		else if($type == 'script'){
 			if(is_array($file)){
 				foreach($file as $_file)
-					$this->includes['script'][] = "{$_file}.js";
+					$this->include_array['script'][] = "{$_file}.js";
 			}
 			else
-				$this->includes['script'][] = "{$file}.js";			
+				$this->include_array['script'][] = "{$file}.js";			
 		}
 	}
 	
-    function set() {
-    	foreach($this->includes as $file_type => $include_type){
-			$this->set("{$file_type}_for_layout", $include_type);
-		}
+    function script() {
+    	return $this->include_array['script'];
+    }
+	
+    function css() {
+    	return $this->include_array['css'];
     }
 }

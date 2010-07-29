@@ -5,7 +5,7 @@
 	border-right: 1px solid #787878;
 }
 #profile_wall_input{
-	background: url('../img/users/profile_wall_input.png');
+	background: url('../../img/users/profile_wall_input.png');
 	width: 480px;
 	height: 70px;
 	position: relative;
@@ -40,7 +40,7 @@
 	margin: 0;
 }
 #profile_wall_input.active.focus{
-	background: url('../img/users/profile_wall_input_active.png');
+	background: url('../../img/users/profile_wall_input_active.png');
 }
 #profile_wall_input.active input[type="text"]{
 	border-color: #679400;
