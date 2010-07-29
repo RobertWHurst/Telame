@@ -45,6 +45,8 @@ class UsersController extends AppController {
 		if ($slug && empty($this->data)) {
 			// call the profile function get fill all of our info for us
 			$this->profile($slug);
+			$this->set('edit', true);
+			$this->render('profile');
 		}
 		if (!empty($this->data)) {
 			pr($this->data);

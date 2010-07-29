@@ -32,5 +32,9 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/edit/*', array('controller' => 'users', 'action' => 'edit'));
+	// Avatar
+	Router::connect('/a/*', array('controller' => 'users', 'action' => 'avatar'));
+	// Edit
+	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
+	// Profile
 	Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));

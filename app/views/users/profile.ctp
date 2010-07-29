@@ -17,7 +17,11 @@
 			$renderProfile->gallery($user);
 			
 			//render the profile summary
-			$renderProfile->summary($user);
+			if (isset($edit) && $edit) {
+				$renderProfile->edit($user);
+			} else {
+	 			$renderProfile->summary($user);
+			}
 ?>
 		</div>
 		<div id="profile_body" class="clearfix">
