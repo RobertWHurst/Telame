@@ -7,9 +7,12 @@ class UsersController extends AppController {
 
 	//Before the render of all views in this controller
 	function beforeRender() {
+		//run the before render in the app controller
 		parent::beforeRender();
-		$this->set('css_for_layout', 'default.css');
-		$this->set('js_for_layout', array('jquery', 'users/profile'));
+		
+		//add css and js that is common to all the actions in this controller
+		$this->Includer->add('css', array('default', 'users/wall'));
+		$this->Includer->add('script', array('jquery', 'users/profile'));	
 	}
 
 	// this function fetches the user's avatar
@@ -74,26 +77,24 @@ class UsersController extends AppController {
 		$this->User->recursive = 2;
 		$this->User->Behaviors->attach('Containable');
 		$user = $this->User->find('first', array(
-								'conditions' => array(
-									'lower(slug)' => strtolower($slug)
-								),
-								'contain' => array(
-									'Friend' => array(
-										'User'
-									),
-									'UserMeta',
-									'WallPost' => array(
-										'PostAuthor'
-									)
-								)
-							)
-						);
+			'conditions' => array(
+				'lower(slug)' => strtolower($slug)
+			),
+			'contain' => array(
+				'Friend' => array(
+					'User'
+				),
+				'UserMeta',
+				'WallPost' => array(
+					'PostAuthor'
+				)
+			)
+		));
 		if (!$user) {
 			$this->redirect('/');
 		}
-
 		//page title
-		$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
+		//$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
 
 		//pass the profile data to the view
 		$this->set(compact('user'));

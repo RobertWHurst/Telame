@@ -7,7 +7,7 @@
 		echo $html->link(__('Signup', true), '/#signup');
 		echo $html->link(__('Login', true), '/login');
 	} else {
-		echo $html->link(__('Your Profile', true), '/p');
+		echo $html->link(__('Your Profile', true), '/' . $currentUser['User']['slug']);
 		echo $html->link(__('Logout', true), '/logout');
 	}
 ?>

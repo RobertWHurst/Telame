@@ -10,12 +10,15 @@ class AppController extends Controller {
 	*/
 	var $components = array('Auth', 'Session');
 	var $currentUser;
+	// Not for use when developing
+//	var $persistModel = true; 
 
 	function beforeFilter() {
 
 		if(Configure::read('debug') > 0){
 			//load krumo
 			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
+			
 		}
 		
 		//force athenication against profiles
