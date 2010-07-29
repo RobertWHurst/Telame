@@ -45,5 +45,5 @@
 	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
 
 	// Profile
-	Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));
+	//Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
