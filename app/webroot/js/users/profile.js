@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var wall_input_logic = function(){		
+	var wall_input_logic = function(){
 		
 		//save this as root
 		var root = this;
@@ -83,16 +83,65 @@ $(document).ready(function(){
 				root.focusHandler('out');
 			});
 			
-			//on submit
-			
-			
 		}
 		
 		//self execute
 		root.construct();
 		
-	};
+	}
+	
+	var wall_posts_logic = function(){
+		
+		//save this as root
+		var root = this;
+		
+		//save the dom elements
+		root.wallPosts = $('div.wall_post', '#profile_wall_posts');
+		
+		//the animation speed
+		root.speed = 100;
+		
+		//hover handler
+		root.hoverHandler = function(domElement, action){
+			
+			//if fading in
+			if(action === 'in'){
+				domElement.addClass('hover').children('div.delete').fadeIn(root.speed);
+			}
+			//if fading out
+			else if(action === 'out'){
+				domElement.removeClass('hover').children('div.delete').fadeOut(root.speed);
+			}
+			
+		}
+		
+		root.construct = function(){
+		
+			//hide all of the wall post controls
+			root.wallPosts.children('div.delete').hide();
+			
+			//on hover event for each post
+			root.wallPosts.hover(function(){
+				
+				//get the target
+				domElement = $(this);
+				
+				root.hoverHandler(domElement, 'in');
+			},
+			function(){
+				
+				domElement = $(this);
+				
+				root.hoverHandler(domElement, 'out');
+			});
+		}
+		
+		//self execute
+		root.construct();
+				
+	}
 	
 	new wall_input_logic;
+	new wall_posts_logic;
 
 });

@@ -30,9 +30,9 @@
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 
 	// Signup and Login/logout
-	Router::connect('/signup', array('controller' => 'pages', 'action' => 'home'));
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+	Router::connect('/signup', array('controller' => 'pages', 'action' => 'home'));
 
 	// Informational pages
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
@@ -43,6 +43,10 @@
 
 	// Edit
 	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
+	
+	// Wall Posts
+	Router::connect('/wp/a', array('controller' => 'wall_posts', 'action' => 'add'));
+	Router::connect('/wp/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
 
 	// Profile
 	//Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));

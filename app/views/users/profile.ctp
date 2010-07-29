@@ -25,7 +25,7 @@
 		</div>
 		<div id="profile_body" class="clearfix">
 <?php 	
-			$renderProfile->wall($user);
+			echo $this->element('users/wall');
 			echo $this->element('users/profile_sidebar');
 ?>
 		</div>
