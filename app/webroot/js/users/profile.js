@@ -7,6 +7,7 @@ $(document).ready(function(){
 		
 		//save the dom elements
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
+		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');
 		
 		//the animation speed
@@ -43,6 +44,9 @@ $(document).ready(function(){
 				//remove the old active class and add the inactive class
 				root.wallInputWrap.addClass('active').addClass('focus');
 				
+				//hide the label
+				root.wallInputLabel.hide();
+				
 			}
 			else if(action === 'out'){
 				
@@ -51,7 +55,11 @@ $(document).ready(function(){
 				if(root.wallInputWrap.hasClass('hover') === false){			
 					root.wallInputWrap.removeClass('active');
 				}	
-				
+								
+				//if the inupt or textarea is empty then hide the label
+				if(root.wallInput.val() === ''){
+					root.wallInputLabel.show();
+				}
 			}
 				
 		}
@@ -74,6 +82,9 @@ $(document).ready(function(){
 			root.wallInput.blur(function(){
 				root.focusHandler('out');
 			});
+			
+			//on submit
+			
 			
 		}
 		
