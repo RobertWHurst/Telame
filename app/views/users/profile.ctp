@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
 <?php		
@@ -28,6 +28,5 @@
 		</div>
 	</div>
 </div>
-
 
 <?php echo $this->element('copyright'); ?>

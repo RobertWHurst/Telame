@@ -149,7 +149,7 @@ class RenderProfileHelper extends AppHelper {
 		
 		//close the input div and open the posts div
 		$output .= '</div><div id="profile_wall_posts">';
-				
+		
 		//if there are posts on the wall then loop through them
 		if (!empty($user['WallPost']) && is_array($user['WallPost'])) {
 			foreach ($user['WallPost'] as $post) {
@@ -186,11 +186,11 @@ class RenderProfileHelper extends AppHelper {
 		}
 		else {
 		
-			$output .= '<p class="no_posts">' . __('You don\' have any posts; what gives?', true) . '</div>';
+			$output .= '<p class="no_posts">' . __('You don\' have any posts; what gives?', true) . '</p>';
 		}
 
-		//close the posts div				
-		$output .= '</div>';
+		//close the posts div and the wall div			
+		$output .= '</div></div>';
 		
 		echo $output;
    	}
