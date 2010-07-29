@@ -8,7 +8,7 @@ class User extends AppModel {
 		),
 		'Friend' => array(
 			'ClassName' => 'User',
-			'foreignKey' => 'child_user_id'			
+			'foreignKey' => 'child_user_id'
 		),
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
@@ -17,27 +17,27 @@ class User extends AppModel {
 		)
 	);
 	var $helpers = array('ProfileSummary');
-	
-	function afterFind($results){
-		
-		if(is_array($results)){
-			foreach($results as $key => $row){
-						
-				if(isset($row['UserMeta']) && is_array($row['UserMeta'])){
+
+	function afterFind($results) {
+
+		if (is_array($results)) {
+			foreach ($results as $key => $row) {
+
+				if (isset($row['UserMeta']) && is_array($row['UserMeta'])) {
 					//extract the metadata so we can correct it's structure
 					$metadata = $row['UserMeta'];
-					
+
 					//remove the old metadata structure
 					unset($results[$key]['UserMeta']);
-					
+
 					//fix the structure
-					foreach($metadata as $meta_set)		
+					foreach ($metadata as $meta_set) {
 						$results[$key]['UserMeta'][$meta_set['meta_key']] = $meta_set['meta_value'];
-					
+					}
 				}
 			}
 		}
-		
+
 		return $results;
 	}
 }
