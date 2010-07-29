@@ -3,7 +3,7 @@ class UsersController extends AppController {
 
 	//Controller config
 	var $name = 'Users';
-	var $helpers = array('RenderProfile', 'Time');
+	var $helpers = array('RenderProfile');
 
 	//Before the render of all views in this controller
 	function beforeRender() {
@@ -35,16 +35,16 @@ class UsersController extends AppController {
 
 	//A summary of whats new for the user.
 	function index() {
-		//TODO: Replace fake user with the selected user from the database.
-
-		//set up the layout
-		$this->set('title_for_layout', 'Telame - Error');
+		$this->redirect('/p');
+		exit();
 	}
 
 	function edit($slug = false) {
 		if ($slug && empty($this->data)) {
 			// call the profile function get fill all of our info for us
 			$this->profile($slug);
+			$this->set('edit', true);
+			$this->render('profile');
 		}
 		if (!empty($this->data)) {
 			pr($this->data);
@@ -66,10 +66,8 @@ class UsersController extends AppController {
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
 		if(!$slug){
-			$user = $this->User->find('first', array('conditions' => array('id' => Configure::read('UID'))));
-
-			$this->redirect("/p/{$user['User']['slug']}");
-			exit(); // always exit after a redirect
+			$this->redirect('/' . $this->currentUser['User']['slug']);
+			exit();
 		}
 
 		//get the profile
@@ -90,6 +88,9 @@ class UsersController extends AppController {
 								)
 							)
 						);
+		if (!$user) {
+			$this->redirect('/');
+		}
 
 		//page title
 		$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");

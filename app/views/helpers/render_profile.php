@@ -1,7 +1,7 @@
 <?php
 class RenderProfileHelper extends AppHelper {
 
-	var $helpers = array('Form', 'Html');
+	var $helpers = array('Form', 'Html', 'Time');
 
     function summary($user) {
 
@@ -163,7 +163,7 @@ class RenderProfileHelper extends AppHelper {
 				
 				//echo the author's name as a link
 				//TODO: this should not be a slug.
-				$output .= '<div class="name">' . $this->Html->link($post['PostAuthor']['slug'], $this->Html->url(array('controller' => 'users', 'action' => 'profile')) . $post['PostAuthor']['slug']) . ' says:</div>';
+				$output .= '<div class="name">' . $this->Html->link($post['PostAuthor']['slug'], '/' . $post['PostAuthor']['slug']) . ' says:</div>';
 				
 				//close author info and open the post content div				
 				$output .= '</div><div class="post_content">';
@@ -178,7 +178,7 @@ class RenderProfileHelper extends AppHelper {
 				$output .= '<div class="delete">' . $this->Html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => '/wall_posts/delete/' . $post['id'])) . '</div>';
 				
 				//the timestamp				
-				//$output .= '<div class="time">' . $time->timeAgoInWords($post['posted']) . '</div>';
+				$output .= '<div class="time">' . $this->Time->timeAgoInWords($post['posted']) . '</div>';
 				
 				//close the post div				
 				$output .= '</div>';

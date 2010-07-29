@@ -9,6 +9,7 @@ class AppController extends Controller {
 		var $components = array('Auth', 'AutoLogin', 'Session');
 	*/
 	var $components = array('Auth', 'Session');
+	var $currentUser;
 
 	function beforeFilter() {
 
@@ -33,6 +34,13 @@ class AppController extends Controller {
 		// Read the user id from the session and if nothing there, set it to 1
 		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
+		
+		if (Configure::read('LoggedIn')) {
+			// The currently logged in user's infomration
+			$this->currentUser = Classregistry::init('User');
+			$this->currentUser = $this->currentUser->findById(Configure::read('UID'));
+			$this->set('currentUser', $this->currentUser);
+		}
 	}
 
 	function beforeRender() {

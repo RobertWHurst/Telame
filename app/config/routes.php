@@ -26,11 +26,24 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
+ 	// Home page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+
+	// Signup and Login/logout
 	Router::connect('/signup', array('controller' => 'pages', 'action' => 'home'));
-/**
- * ...and connect the rest of 'Pages' controller's urls.
- */
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+
+	// Informational pages
+	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/edit/*', array('controller' => 'users', 'action' => 'edit'));
+
+	// Avatar
+	Router::connect('/a/*', array('controller' => 'users', 'action' => 'avatar'));
+
+	// Edit
+	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
+
+	// Profile
 	Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));
+	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
