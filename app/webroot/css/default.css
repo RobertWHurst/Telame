@@ -151,7 +151,7 @@ optgroup{
 #backgroundHead{
 	width: 100%;
 	height: 300px;
-	background: #400c5d url('../img/profile/header.png') no-repeat top center;
+	background: #400c5d url('../img/users/header.png') no-repeat top center;
 	border-bottom: 1px solid #110019;
 }
 #backgroundBase{
@@ -208,7 +208,7 @@ optgroup{
 }
 #main_sidebar{
 	width: 100%;
-	background: url('../img/profile/main_sidebar.png');
+	background: url('../img/users/main_sidebar.png');
 }
 #main_sidebar div.avatar{
 	width: 60px;
@@ -244,13 +244,13 @@ optgroup{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: url('../img/profile/profile_gallery_frame.png') no-repeat;
+	background: url('../img/users/profile_gallery_frame.png') no-repeat;
 }
 #profile_summary{
 	float: left;
 	width: 290px;
 	height: 300px;
-	background: url('../img/profile/profile_summary.png') no-repeat;
+	background: url('../img/users/profile_summary.png') no-repeat;
 }
 #profile_summary h1.name{
 	text-align: left;
@@ -279,67 +279,6 @@ optgroup{
 	border: 1px solid #787878;
 	border-top: 1px solid #aaa;
 	border-bottom: 1px solid #333;
-}
-#profile_wall{
-	width: 478px;
-	float: left;
-	border-right: 1px solid #787878;
-}
-#profile_wall_input{
-	background: url('../img/profile/profile_wall_input.png');
-	width: 480px;
-	height: 70px;
-	position: relative;
-}
-#profile_wall_input label{
-	position: absolute;
-	top: 26px;
-	left: 26px;
-	font-size: 16px;
-	color: #949494;
-}
-#profile_wall_input input[type="text"]{
-	margin: 20px;
-	font-size: 16px;
-	padding: 3px 50px 3px 3px;
-	width: 382px;
-	border: 1px solid #949494;
-	background: #dedede;
-}
-#profile_wall_input input[type="submit"]{
-	position: absolute;
-	top: 23px;
-	right: 23px;
-	font-size: 16px;
-	border: none;
-	outline: none;
-	background: transparent;
-	color: #949494;
-	width: 50px;
-	height: auto;
-	padding: 0;
-	margin: 0;
-}
-#profile_wall_input.active.focus{
-	background: url('../img/profile/profile_wall_input_active.png');
-}
-#profile_wall_input.active input[type="text"]{
-	border-color: #679400;
-	background: #fff;
-}
-#profile_wall_input.active input[type="submit"]{
-	color: #679400;
-}
-#profile_wall_input.active.focus input:hover[type="submit"]{
-	color: #8cc900;
-}
-#profile_wall_posts{
-	padding: 0 10px;
-}
-#profile_wall_posts div.wall_post{
-	padding: 10px;
-	background: #333;
-	margin-bottom: 10px;
 }
 #profile_sidebar{
 	width: 289px;

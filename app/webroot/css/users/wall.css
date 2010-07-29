@@ -1,0 +1,66 @@
+#profile_wall{
+	width: 478px;
+	float: left;
+	border-right: 1px solid #787878;
+}
+#profile_wall_input{
+	background: url('../../img/users/profile_wall_input.png');
+	width: 480px;
+	height: 70px;
+	position: relative;
+}
+#profile_wall_input label{
+	position: absolute;
+	top: 26px;
+	left: 26px;
+	font-size: 16px;
+	color: #949494;
+}
+#profile_wall_input input[type="text"]{
+	margin: 20px;
+	font-size: 16px;
+	padding: 3px 50px 3px 3px;
+	width: 382px;
+	border: 1px solid #949494;
+	background: #dedede;
+}
+#profile_wall_input input[type="submit"]{
+	position: absolute;
+	top: 23px;
+	right: 23px;
+	font-size: 16px;
+	border: none;
+	outline: none;
+	background: transparent;
+	color: #949494;
+	width: 50px;
+	height: auto;
+	padding: 0;
+	margin: 0;
+}
+#profile_wall_input.active.focus{
+	background: url('../../img/users/profile_wall_input_active.png');
+}
+#profile_wall_input.active input[type="text"]{
+	border-color: #679400;
+	background: #fff;
+}
+#profile_wall_input.active input[type="submit"]{
+	color: #679400;
+}
+#profile_wall_input.active.focus input:hover[type="submit"]{
+	color: #8cc900;
+}
+#profile_wall_posts{
+	padding: 0 10px;
+}
+#profile_wall_posts div.wall_post{
+	padding: 10px;
+	background: #333;
+	margin-bottom: 10px;
+}
+#profile_wall p.no_posts{
+	font-size: 1.6em;
+	text-align: center;
+	margin: 60px 0;
+}

@@ -8,7 +8,7 @@ class AppController extends Controller {
 		
 		var $components = array('Auth', 'AutoLogin', 'Session');
 	*/
-	var $components = array('Auth', 'Session');
+	var $components = array('Auth', 'Session', 'Includer');
 	var $currentUser;
 	// Not for use when developing
 //	var $persistModel = true; 
@@ -47,7 +47,6 @@ class AppController extends Controller {
 	}
 
 	function beforeRender() {
-
 	}
 
 }
