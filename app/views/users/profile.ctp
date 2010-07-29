@@ -2,12 +2,12 @@
 	<div id="wrap_main_sidebar">
 		<div id="logo">
 <?php		
-			echo $html->image('profile/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home')));
+			echo $html->image('users/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home')));
 ?>
 		</div>
 <?php 	
-		echo $this->element('profile/main_sidebar');
-		echo $this->element('profile/friends');
+		echo $this->element('users/main_sidebar');
+		echo $this->element('users/friends');
 ?>
 	</div>
 	<div id="profile">
@@ -27,7 +27,7 @@
 		<div id="profile_body" class="clearfix">
 <?php 	
 			$renderProfile->wall($user);
-			echo $this->element('profile/profile_sidebar');
+			echo $this->element('users/profile_sidebar');
 ?>
 		</div>
 	</div>

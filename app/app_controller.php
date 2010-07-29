@@ -8,7 +8,7 @@ class AppController extends Controller {
 		
 		var $components = array('Auth', 'AutoLogin', 'Session');
 	*/
-	var $components = array('Auth', 'Session');
+	var $components = array('Auth', 'Session', 'Includer');
 	var $currentUser;
 
 	function beforeFilter() {
@@ -44,7 +44,8 @@ class AppController extends Controller {
 	}
 
 	function beforeRender() {
-
+		//run the set method and include all files for the head
+		$this->Includer->set();
 	}
 
 }
