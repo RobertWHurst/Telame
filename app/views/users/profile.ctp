@@ -13,7 +13,7 @@
 		<div id="profile_head" class="clearfix">
 <?php
 			//render the profile gallery
-			$renderProfile->gallery($user);
+			echo $this->element('users/gallery');
 
 			//render the profile summary
 			if (isset($edit) && $edit) {
