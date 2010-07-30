@@ -19,7 +19,7 @@
 			if (isset($edit) && $edit) {
 				$renderProfile->edit($user);
 			} else {
-	 			$renderProfile->summary($user);
+				echo $this->element('users/summary');
 			}
 ?>
 		</div>

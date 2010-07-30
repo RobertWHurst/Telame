@@ -8,8 +8,13 @@ class UsersController extends AppController {
 	function beforeFilter(){
 		parent::beforeFilter();
 		//add css and js that is common to all the actions in this controller
-		$this->Includer->add('css', array('default', 'users/wall'));
-		$this->Includer->add('script', array('jquery', 'users/profile'));
+		$this->Includer->add('css', array(
+			'default',
+			'users/wall'
+		));
+		$this->Includer->add('script', array(
+			'jquery'
+		));
 	}
 
 	//Before the render of all views in this controller
@@ -76,6 +81,11 @@ class UsersController extends AppController {
 	}
 
 	function profile($slug = false) {
+	
+		$this->Includer->add('script', array(
+			'users/wall_input',
+			'users/wall'
+		));
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
 		if(!$slug){
