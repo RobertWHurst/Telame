@@ -127,7 +127,7 @@ class RenderProfileHelper extends AppHelper {
 	   			//TODO: this logic is incorrect. the line below must depend on the system eric is creating for images. For now use the mockup code
 
 	   			/* MOCK CODE */
-	   			$output .= $this->Html->image('/a/' . $user['User']['id'], array('title' => $user['UserMeta']['first_name']['value'] . ' ' .  $user['UserMeta']['last_name']['value']));
+	   			$output .= $this->Html->image('/i/p/' . $user['User']['id'], array('title' => $user['UserMeta']['first_name']['value'] . ' ' .  $user['UserMeta']['last_name']['value']));
 	   			/* END OF MOCK CODE */
 
 	   			break;

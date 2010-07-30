@@ -39,7 +39,8 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 	// Avatar
-	Router::connect('/a/*', array('controller' => 'media', 'action' => 'avatar'));
+	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
+	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 
 	// Edit
 	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));

@@ -4,11 +4,15 @@ class MediaController extends AppController {
 	var $components = array('Thumb');
 
 	function avatar($uid) {
-		$this->resize($uid, Configure::read('AvatarSize'));
+		$this->resize($uid, Configure::read('AvatarSize'), 'profile');
+	}
+
+	function profile($uid) {
+		$this->resize($uid, Configure::read('ProfileSize'), 'profile');
 	}
 
 	// this function fetches the user's avatar
-	function resize($uid = null, $size) {
+	function resize($uid = null, $size, $dir) {
 		if (empty($uid)) {
 			$this->cakeError('error404');
 		}
