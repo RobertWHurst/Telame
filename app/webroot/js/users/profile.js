@@ -101,24 +101,45 @@ $(document).ready(function(){
 		//the animation speed
 		root.speed = 100;
 		
+		//the domain
+		root.domain = 'http://telame.com';
+		
 		//hover handler
 		root.hoverHandler = function(domElement, action){
 			
 			//if fading in
 			if(action === 'in'){
-				domElement.addClass('hover').children('div.delete').fadeIn(root.speed);
+				domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(root.speed);
 			}
 			//if fading out
 			else if(action === 'out'){
-				domElement.removeClass('hover').children('div.delete').fadeOut(root.speed);
+				domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(root.speed);
 			}
+			
+		}
+		
+		//delete handler
+		root.deleteHandler = function(domElement, ajaxUrl){
+			
+			//change the content to say deleteing
+			domElement.html('<p class="proccess">deleting post...<p>');
+			
+			//send the ajax request
+			$.get(root.domain + ajaxUrl, {}, function(){
+			
+				//slide up the post
+				domElement.fadeOut(root.speed * 3, function(){
+					this.remove();
+				});
+				
+			});
 			
 		}
 		
 		root.construct = function(){
 		
 			//hide all of the wall post controls
-			root.wallPosts.children('div.delete').hide();
+			root.wallPosts.children('div.delete, div.wall_to_wall').hide();
 			
 			//on hover event for each post
 			root.wallPosts.hover(function(){
@@ -133,6 +154,24 @@ $(document).ready(function(){
 				domElement = $(this);
 				
 				root.hoverHandler(domElement, 'out');
+			});
+			
+			//on click event for delete
+			root.wallPosts.children('div.delete').click(function(event){
+				
+				//prevent the default action
+				event.preventDefault();
+				
+				//get the button
+				var button = $(this);
+				
+				//get the ajaxUrl
+				var ajaxUrl = $('a', button).attr('href');
+				
+				//get the target post (not the button)
+				domElement = button.parent();
+				
+				root.deleteHandler(domElement, ajaxUrl);
 			});
 		}
 		
