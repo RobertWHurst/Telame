@@ -1,13 +1,20 @@
 <?php
 class MediaController extends AppController {
 
+	var $components = array('Thumb');
+
+	function avatar($uid) {
+		$this->resize($uid, Configure::read('AvatarSize'));
+	}
+
 	// this function fetches the user's avatar
-	function avatar($uid = null) {
+	function resize($uid = null, $size) {
 		if (empty($uid)) {
 			$this->cakeError('error404');
 		}
 		// media view for files
 		$this->view = 'Media';
+
 		// we don't need all the associations
 		$this->Media->User->Behaviors->attach('Containable');
 		$user = $this->Media->User->find('first', array(
@@ -18,12 +25,18 @@ class MediaController extends AppController {
 				'Media'
 			)
 		));
+		$imgPath = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;
+		$filename = trim($user['Media']['filename']);
+		if(!$this->Thumb->generateThumb($imgPath, $filename, $size)) {
+			return 'error';
+		}
+
 		$params = array(
-			'id' => trim($user['Media']['filename']),
+			'id' => $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg',
 			'name' => $user['User']['slug'],
 			'download' => false,
 			'extension' => 'png',
-			'path' => APP . 'users' . DS . $uid . DS . 'images' . DS . 'profile' . DS,
+			'path' => $imgPath . 'cache' . DS,
 			'cache' => '5 days',
 	   );
 	   $this->set($params);
