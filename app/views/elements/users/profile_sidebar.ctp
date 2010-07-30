@@ -1,5 +1,5 @@
 <div id="profile_sidebar">
-<?php
-		$renderProfile->friends($user);
+<?php 	
+	echo $this->element('users/friends');
 ?>
 </div>

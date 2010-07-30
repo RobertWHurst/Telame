@@ -36,7 +36,7 @@
 					<div class="delete">
 <?php 
 						$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $post['id']));
-						echo $html->image('icons/comment_delete.png', array('title' => __('Delete',true), 'url' => $url));
+						echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
 ?>
 					</div>
 					<div class="wall_to_wall">
