@@ -1,4 +1,14 @@
 <?php
+/**
+ * 
+ * THIS IS A DEPRICATED HELPER
+ * 
+ * Do not add logic to this file.
+ * use logic from elsewhere if
+ * possible.
+ */
+
+
 class RenderProfileHelper extends AppHelper {
 
 	var $helpers = array('Form', 'Html', 'Time');
@@ -134,48 +144,5 @@ class RenderProfileHelper extends AppHelper {
 	   	$output .= '</div>';
 
 	   	echo $output;
-   	}
-   	
-   	function friends($user){
-   		//set the limit
-   		$limit = 9;
-   		
-   		//is it random?
-   		$random = true;
-   		
-   		//get the users friends
-   		$friends = $user['Friend'];  
-   		
-   		//open the friends div
-   		$output = '<div class="friends">';
-   		  
-   		//the title
-   		$output .= '<h1>Friends</h1>';  		
-   		
-   		//if the user has friends loop through them
-   		if(is_array($friends)){
-   			foreach($friends as $friend){
-   			
-   				//get the avatar url
-   				$avatar_url = $this->Html->url(array('controller' => 'media', 'action' => 'avatar', $friend['User']['id']));
-   				
-   				//get the user's profile url
-   				$profile_url = $this->Html->url(array('controller' => 'users', 'action' => 'profile', $friend['User']['slug']));
-   				
-   				//get the friend's avatar and name to insert into a link
-   				$link_content = $this->Html->image($avatar_url, array('width' => '60', 'height' => '60'));
-   				$link_content .= '[first name]';
-   				
-   				$output .= $this->Html->link($link_content, $profile_url, array('escape' => false));
-   			}   		
-   		}
-   		else{
-   			$output .= '[TelaMeet plug here...]';
-   		}
-   		
-   		//close the friends div
-   		$output .= '</div>';
-   		
-   		echo $output;
    	}
 }
