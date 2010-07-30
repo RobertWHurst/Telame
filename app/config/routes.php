@@ -47,6 +47,9 @@
 	// Wall Posts
 	Router::connect('/wp/a', array('controller' => 'wall_posts', 'action' => 'add'));
 	Router::connect('/wp/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
+	// Wall Posts (Ajax)
+	Router::connect('/jx/wp/a', array('controller' => 'wall_posts', 'action' => 'jx_add'));
+	Router::connect('/jx/wp/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
 
 	// Profile
 	//Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));
