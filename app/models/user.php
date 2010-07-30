@@ -1,14 +1,21 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
+	var $belongsTo = array(
+		'Media' => array(
+			'ClassName' => 'Media',
+			'foreignKey' => 'avatar_id',
+		)
+	);
+	
 	var $hasMany = array(
-		'UserMeta' => array(
-			'dependent' => true,
-			'exclusive' => true
-		),
 		'Friend' => array(
 			'ClassName' => 'User',
 			'foreignKey' => 'child_user_id'
+		),
+		'UserMeta' => array(
+			'dependent' => true,
+			'exclusive' => true
 		),
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
@@ -16,7 +23,6 @@ class User extends AppModel {
 			'exclusive' => true
 		)
 	);
-	var $helpers = array('ProfileSummary');
 
 	function afterFind($results) {
 
@@ -32,7 +38,7 @@ class User extends AppModel {
 
 					//fix the structure
 					foreach ($metadata as $meta_set) {
-						$results[$key]['UserMeta'][$meta_set['meta_key']] = $meta_set['meta_value'];
+						$results[$key]['UserMeta'][$meta_set['meta_key']] = array('value' => $meta_set['meta_value'], 'id' => $meta_set['id']);
 					}
 				}
 			}
@@ -40,4 +46,25 @@ class User extends AppModel {
 
 		return $results;
 	}
+	
 }
+/*
+[UserMeta] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 9
+                    [user_id] => 2
+                    [meta_key] => location
+                    [meta_value] => Vancouver, Canada
+                )
+
+            [1] => Array
+                (
+                    [id] => 10
+                    [user_id] => 2
+                    [meta_key] => first_name
+                    [meta_value] => Eric
+                )
+
+*/

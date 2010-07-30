@@ -52,3 +52,4 @@
  
 Inflector::rules('plural', array('irregular' => array('user_meta' => 'user_meta')));
 
+include(APP . DS . 'config' . DS . 'my_config' . DS . 'config.php');

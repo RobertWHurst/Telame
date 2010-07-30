@@ -21,44 +21,48 @@ class UsersController extends AppController {
 		$this->set('script_for_layout', $this->Includer->script());
 	}
 
-	// this function fetches the user's avatar
-	function avatar($uid = null) {
-		if (empty($uid)) {
-			$this->cakeError('error404');
-		}
-		// media view for files
-		$this->view = 'Media';
-		// we don't need all the associations
-		$this->User->recursive = -1;
-		$user = $this->User->findById($uid);
-		$params = array(
-			'id' => trim($user['User']['avatar']),
-			'name' => $user['User']['slug'],
-			'download' => false,
-			'extension' => 'png',
-			'path' => APP . 'users' . DS . $uid . DS . 'images' . DS . 'profile' . DS,
-			'cache' => '5 days',
-	   );
-	   $this->set($params);
-	}
-
 	//A summary of whats new for the user.
 	function index() {
-		$this->redirect('/p');
+		$this->redirect('/' . $this->currentUser['User']['slug']);
 		exit();
 	}
 
 	function edit($slug = false) {
+		// If the user is not an admin, and they're trying to edit somebody else's profile, redirect them to their own
+		if (/*!$admin ||*/ $slug != $this->currentUser['User']['slug']) {
+			$this->redirect('/e/' . $this->currentUser['User']['slug']);
+		}
+		$this->User->recursive = -1;
+		$user = $this->User->findBySlug($slug);
+		// there is a slug and there isn't any data, so edit functionality 
 		if ($slug && empty($this->data)) {
 			// call the profile function get fill all of our info for us
 			$this->profile($slug);
 			$this->set('edit', true);
 			$this->render('profile');
 		}
+		// the data array isn't empty, so let's save it
 		if (!empty($this->data)) {
-			pr($this->data);
-			$this->User->save($this->data);
-			$this->redirect('/p');
+			$this->data = array_merge($this->data, $user);
+			// I tried putting this in the beforeSave() callback, but couldn't get it to work, shrug.
+			$i = 0;
+			// Loop over all meta data and correct the structure
+			foreach ($this->data['UserMeta'] as $id => $value) {
+				$this->data['temp'][$i] = array(
+					'id' => $id, 
+					'meta_value' => $value,
+					'user_id' => $this->data['User']['id']
+				);
+				$i++;
+			}
+			// overwrite the UserMeta with the correct info
+			$this->data['UserMeta'] = $this->data['temp'];
+			// unset the temp var we used
+			unset($this->data['temp']);
+			// saveAll will save the model and associaions
+			$this->User->saveAll($this->data);
+			// redirect back to the user's profile
+			$this->redirect('/' . $user['User']['slug']);
 			exit();
 		}
 	}
@@ -90,6 +94,7 @@ class UsersController extends AppController {
 				'Friend' => array(
 					'User'
 				),
+				'Media',
 				'UserMeta',
 				'WallPost' => array(
 					'PostAuthor'
@@ -100,7 +105,7 @@ class UsersController extends AppController {
 			$this->redirect('/');
 		}
 		//page title
-		//$this->set('title_for_layout', "Telame - {$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}");
+		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . $user['UserMeta']['first_name']['value'] . ' ' . $user['UserMeta']['last_name']['value']);
 
 		//pass the profile data to the view
 		$this->set(compact('user'));

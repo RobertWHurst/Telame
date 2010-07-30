@@ -21,14 +21,14 @@ class RenderProfileHelper extends AppHelper {
    			$output = '<div id="profile_summary">';
 
    			//add the profile name
-   			$output .= "<h1 class=\"name\">{$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}</h1>";
+   			$output .= "<h1 class=\"name\">{$user['UserMeta']['first_name']['value']} {$user['UserMeta']['last_name']['value']}</h1>";
 
    			//open the table
    			$output .= '<table>';
 
    			// pukes out meta data in summary
    			foreach($fields as $key => $label){
-				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key], true)){
+				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key]['value'], true)){
 
 					//if special formatting is needed add it within an if statement below this comment
 
@@ -65,22 +65,22 @@ class RenderProfileHelper extends AppHelper {
    			$output = '<div id="profile_summary">';
 
    			//add the profile name
-   			$output .= "<h1 class=\"name\">{$user['UserMeta']['first_name']} {$user['UserMeta']['last_name']}</h1>";
+   			$output .= "<h1 class=\"name\">{$user['UserMeta']['first_name']['value']} {$user['UserMeta']['last_name']['value']}</h1>";
 
    			//open the table
-   			$output .= $this->Form->create('User', array('action' => '/edit/' . $user['User']['slug']));
+   			$output .= $this->Form->create('UserMeta', array('url' => array('controller' => 'users', 'action' => 'edit', $user['User']['slug'])));
    			$output .= '<table>';
 
    			// pukes out meta data in summary
    			foreach($fields as $key => $label){
-				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key], true)){
+				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key]['value'], true)){
 
 					//if special formatting is needed add it within an if statement below this comment
 
 					//create the output
 					$output .= "<tr class=\"{$key}\"><th class=\"key\">{$label}:</th>
 						<td class=\"value\">";
-					$output .= $this->Form->input($label, array('value' => $value, 'label' => false));
+					$output .= $this->Form->input($user['UserMeta'][$key]['id'], array('value' => $value, 'label' => false));
 					$output .= "</td></tr>";
 				}
 			}
@@ -157,7 +157,7 @@ class RenderProfileHelper extends AppHelper {
    			foreach($friends as $friend){
    			
    				//get the avatar url
-   				$avatar_url = $this->Html->url(array('controller' => 'users', 'action' => 'avatar', $friend['User']['id']));
+   				$avatar_url = $this->Html->url(array('controller' => 'media', 'action' => 'avatar', $friend['User']['id']));
    				
    				//get the user's profile url
    				$profile_url = $this->Html->url(array('controller' => 'users', 'action' => 'profile', $friend['User']['slug']));
