@@ -50,7 +50,7 @@ class WallPostsController extends AppController {
 
 		//save the user id and poster id
 		$this->WallPost->set('user_id', $user['User']['id']);
-		$this->WallPost->set('post_author_id', $visitor['User']['id']);
+		$this->WallPost->set('author_id', $visitor['User']['id']);
 
 		//save the post content and time
 		$this->WallPost->set('post', $this->data['WallPost']['post']);
@@ -102,40 +102,39 @@ class WallPostsController extends AppController {
 	}
 
 	function jx_delete($id = false) {
-
-		pr($this->currentUser);
-		die;
 		
 		//get the visitor's data
 		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
 
 		//if the wall id is missing
-		if(!$id) {
-			$this->Session->setFlash(__('Uhh... Sorry We\'ve Looked everywhere but we can\'t find that post. Try again if you can find it.', true));
-			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit();
-		}
+		if(!$id)
+			$this->set('output', 'false');
 
-		//check to make sure the user is deleting a wall psot they actually own
-		$conditions = array(
+		//check to make sure the user is deleting a wall post they actually own or that they are the author
+		$condition_set_1 = array(
 			'wall_posts.id' => $id,
-			'wall_posts.user_id' => $visitor['User']['id']
+			'wall_posts.author_id' => $this->currentUser['User']['id']
+		);
+		$condition_set_2 = array(
+			'wall_posts.id' => $id,
+			'wall_posts.user_id' => $this->currentUser['User']['id']
 		);
 
-		//if we don't find one then deny them the action
-		if($this->WallPost->find('count', array('conditions' => $conditions)) < 1){
-
-			//set the flash message and redirect them, the metaling sods! :<
-			$this->Session->setFlash(__('Bit of a hacker are we? well sorry you can\'t delete that post. It\'s not on your wall!', true));
-			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit();
+		//if we don't count one and they are not the authors then deny them the action
+		if(
+			$this->WallPost->find('count', array(
+				'conditions' => $condition_set_1
+			)) < 1 || 
+			
+			$this->WallPost->find('count', array(
+				'conditions' => $condition_set_2
+			)) < 1
+		)
+			$this->set('output', 'false');
+		else{
+			$this->WallPost->delete($id);
+			$this->set('output', 'true');			
 		}
-
-		//if everything checks out then delete the post and exit
-		$this->WallPost->delete($id);
-		$this->Session->setFlash(__('The wall post is toast!', true));
-		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-		exit();
 	}
 }
 ?>

@@ -8,7 +8,7 @@ class WallPost extends AppModel {
         ),
         'PostAuthor' => array(
             'className' => 'User',
-            'foreignKey' => 'post_author_id'
+            'foreignKey' => 'author_id'
         )
     );
 }
