@@ -109,7 +109,7 @@ class RenderProfileHelper extends AppHelper {
 	   	$output .= '<div class="images">';
 
 	   	//get the gallery dispaly mode (single == 1 or multi == 2)
-	   	switch($user['UserMeta']['gallery_mode']){
+	   	switch($user['UserMeta']['gallery_mode']['value']){
 
 	   		//if just one image is set to load
 	   		case 1:
@@ -117,7 +117,7 @@ class RenderProfileHelper extends AppHelper {
 	   			//TODO: this logic is incorrect. the line below must depend on the system eric is creating for images. For now use the mockup code
 
 	   			/* MOCK CODE */
-	   			$output .= $this->Html->image('/a/' . $user['User']['id'], array('title' => $user['UserMeta']['first_name'] . ' ' .  $user['UserMeta']['last_name']));
+	   			$output .= $this->Html->image('/a/' . $user['User']['id'], array('title' => $user['UserMeta']['first_name']['value'] . ' ' .  $user['UserMeta']['last_name']['value']));
 	   			/* END OF MOCK CODE */
 
 	   			break;
