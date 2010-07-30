@@ -9,11 +9,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title_for_layout; ?></title>
-	<?php echo $html->script('jquery'); ?>
-	<?php echo $html->script('pages/script'); ?>
-	<?php echo $html->css($css_for_layout); ?>
-	<?php echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));?>
-	<?php echo $html->meta('description', 'Telame is a social ');?>
+<?php		
+		if(isset($script_for_layout))
+			$head_types['script'] = $script_for_layout;
+			
+		if(isset($css_for_layout))
+			$head_types['css'] = $css_for_layout;
+		
+		foreach($head_types as $method => $file){
+			if(is_array($file)){
+				foreach($file as $_file)
+					echo $html->$method($_file);					
+			}
+			else{
+				echo $html->$method($file);
+			}
+		}
+		
+		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
+?>
 </head>
 <body>
 	<?php echo $this->element('pages/header'); ?>

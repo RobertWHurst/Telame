@@ -2,23 +2,36 @@
 class PagesController extends AppController {
 	var $name = 'Pages';
 	var $uses = array();
-
+	
 	function beforeFilter() {
 		parent::beforeFilter();
 		
 		//allow this entire controller to be accessed without needing to login
 		$this->Auth->allow('*');
+				
+		//add css and js that is common to all the actions in this controller
+		$this->Includer->add('css', array('pages'));
+		$this->Includer->add('script', array(
+			'jquery',
+			'base'
+		));
 	}
 	
 	function beforeRender() {
 		parent::beforeRender();
+		
+		//set the css and script for the view
+		$this->set('css_for_layout', $this->Includer->css());
+		$this->set('script_for_layout', $this->Includer->script());
+		
 		//set the css and layout
-		$this->set('css_for_layout', 'pages.css');
 		$this->layout = 'pages';
 	}
 
 	function home() {
-		// Signup php code
+		$this->Includer->add('script', array(
+			'pages/taglines'
+		));
 	}
 
 /**

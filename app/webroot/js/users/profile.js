@@ -68,7 +68,7 @@ $(document).ready(function(){
 		root.construct = function(){
 			
 			//on hover event
-			root.wallInputWrap.hover(function(){
+			root.wallInputWrap.live('hover', function(){
 				root.hoverHandler('in');
 			},
 			function(){
@@ -121,19 +121,27 @@ $(document).ready(function(){
 		//delete handler
 		root.deleteHandler = function(domElement, ajaxUrl){
 			
-			//change the content to say deleteing
-			domElement.html('<p class="proccess">deleting post...<p>');
+			//hide the content
+			domElement.children().hide();
+			
+			//add a proccess dialog
+			domElement.append('<p class="proccess">deleting post...<p>');
 			
 			//send the ajax request
-			$.get(root.domain + ajaxUrl, {}, function(){
-			
-				//slide up the post
-				domElement.fadeOut(root.speed * 3, function(){
-					this.remove();
-				});
+			$.get(root.domain + ajaxUrl, function(data){
 				
+				if(data === 'true'){					
+					//slide up the post
+					domElement.fadeOut(root.speed * 3, function(){
+						domElement.remove();
+					});
+				}
+				else{		
+					//restore the post
+					domElement.children('p.proccess').remove();
+					domElement.children().fadeIn(root.speed * 3);					
+				}
 			});
-			
 		}
 		
 		root.construct = function(){
@@ -166,7 +174,7 @@ $(document).ready(function(){
 				var button = $(this);
 				
 				//get the ajaxUrl
-				var ajaxUrl = $('a', button).attr('href');
+				var ajaxUrl = '/jx' + $('a', button).attr('href');
 				
 				//get the target post (not the button)
 				domElement = button.parent();

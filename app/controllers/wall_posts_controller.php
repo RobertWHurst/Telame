@@ -108,7 +108,7 @@ class WallPostsController extends AppController {
 
 		//if the wall id is missing
 		if(!$id)
-			$this->set('output', 'false');
+			echo 'false';
 
 		//check to make sure the user is deleting a wall post they actually own or that they are the author
 		$condition_set_1 = array(
@@ -124,17 +124,18 @@ class WallPostsController extends AppController {
 		if(
 			$this->WallPost->find('count', array(
 				'conditions' => $condition_set_1
-			)) < 1 || 
+			)) < 1 &&
 			
 			$this->WallPost->find('count', array(
 				'conditions' => $condition_set_2
 			)) < 1
 		)
-			$this->set('output', 'false');
+			echo 'false';
 		else{
 			$this->WallPost->delete($id);
-			$this->set('output', 'true');			
+			echo 'true';
 		}
+		exit;
 	}
 }
 ?>
