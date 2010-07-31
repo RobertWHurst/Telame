@@ -12,52 +12,39 @@
 class RenderProfileHelper extends AppHelper {
 
 	var $helpers = array('Form', 'Html', 'Time');
-    function edit($user) {
+    function edit($userMeta) {
 
-    	if(is_array($user['UserMeta'])){
+		//open the div
+			$output = '<div id="profile_summary">';
 
-    		//make a pesudo array of labels
-    		$fields = array(
-    			'location' => __('Location', true),
-    			'born' => __('Born', true),
-    			'sex' => __('Sex', true),
-    			'group' => __('TelaGroup', true),
-    			'joined' => __('Joined', true),
-    			'interested_in' => __('Interested In', true)
-    		);
+			//add the profile name
+			$output .= "<h1 class=\"name\">{$userMeta['first_name']} {$userMeta['last_name']}</h1>";
 
-			//open the div
-   			$output = '<div id="profile_summary">';
+			//open the table
+			$output .= $this->Form->create('UserMeta', array('url' => array('controller' => 'users', 'action' => 'edit', $user['User']['slug'])));
+			$output .= '<table>';
 
-   			//add the profile name
-   			$output .= "<h1 class=\"name\">{$user['UserMeta']['first_name']['value']} {$user['UserMeta']['last_name']['value']}</h1>";
+			// pukes out meta data in summary
+			foreach($fields as $key => $label){
+			if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key]['value'], true)){
 
-   			//open the table
-   			$output .= $this->Form->create('UserMeta', array('url' => array('controller' => 'users', 'action' => 'edit', $user['User']['slug'])));
-   			$output .= '<table>';
+				//if special formatting is needed add it within an if statement below this comment
 
-   			// pukes out meta data in summary
-   			foreach($fields as $key => $label){
-				if(isset($user['UserMeta'][$key]) && $value = __($user['UserMeta'][$key]['value'], true)){
-
-					//if special formatting is needed add it within an if statement below this comment
-
-					//create the output
-					$output .= "<tr class=\"{$key}\"><th class=\"key\">{$label}:</th>
-						<td class=\"value\">";
-					$output .= $this->Form->input($user['UserMeta'][$key]['id'], array('value' => $value, 'label' => false));
-					$output .= "</td></tr>";
-				}
+				//create the output
+				$output .= "<tr class=\"{$key}\"><th class=\"key\">{$label}:</th>
+					<td class=\"value\">";
+				$output .= $this->Form->input($user['UserMeta'][$key]['id'], array('value' => $value, 'label' => false));
+				$output .= "</td></tr>";
 			}
+		}
 
-			//close the table
-   			$output .= '</table>';
-			$output .= $this->Form->end('Save');
+		//close the table
+			$output .= '</table>';
+		$output .= $this->Form->end('Save');
 
-			//close the table
-   			$output .= '</div>';
+		//close the table
+			$output .= '</div>';
 
-   			echo $output;
-   		}
+			echo $output;
    	}
 }

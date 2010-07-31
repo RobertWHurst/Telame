@@ -17,7 +17,7 @@
 
 			//render the profile summary
 			if (isset($edit) && $edit) {
-				$renderProfile->edit($user);
+				echo $this->element('users/edit');
 			} else {
 				echo $this->element('users/summary');
 			}
@@ -31,4 +31,5 @@
 		</div>
 	</div>
 </div>
+<?php pr($userMeta); ?>
 <?php echo $this->element('copyright'); ?>

@@ -2,14 +2,10 @@
 class AppController extends Controller {
 
 	//add user athentication
-	/*
-		WARNING: 	I disabled autologin because the intalize function was running before the beforefilter of this controller.
-					Thus before auth was configured.
-		
-		var $components = array('Auth', 'AutoLogin', 'Session');
-	*/
+//	var $components = array('Auth', 'AutoLogin', 'Session', 'Includer');
 	var $components = array('Auth', 'Session', 'Includer');
 	var $currentUser;
+
 	// Not for use when developing
 //	var $persistModel = true; 
 

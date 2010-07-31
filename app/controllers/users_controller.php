@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $helpers = array('RenderProfile');
-	
+
 	function beforeFilter(){
 		parent::beforeFilter();
 		//add css and js that is common to all the actions in this controller
@@ -17,14 +17,14 @@ class UsersController extends AppController {
 		));
 		$this->Includer->add('script', array(
 			'jquery',
-			'users/main_sidebar',			
+			'users/main_sidebar',
 		));
 	}
 
 	//Before the render of all views in this controller
 	function beforeRender() {
 		//run the before render in the app controller
-		parent::beforeRender();	
+		parent::beforeRender();
 		//set the css and script for the view
 		$this->set('css_for_layout', $this->Includer->css());
 		$this->set('script_for_layout', $this->Includer->script());
@@ -43,7 +43,7 @@ class UsersController extends AppController {
 		}
 		$this->User->recursive = -1;
 		$user = $this->User->findBySlug($slug);
-		// there is a slug and there isn't any data, so edit functionality 
+		// there is a slug and there isn't any data, so edit functionality
 		if ($slug && empty($this->data)) {
 			// call the profile function get fill all of our info for us
 			$this->profile($slug);
@@ -52,24 +52,12 @@ class UsersController extends AppController {
 		}
 		// the data array isn't empty, so let's save it
 		if (!empty($this->data)) {
-			$this->data = array_merge($this->data, $user);
-			// I tried putting this in the beforeSave() callback, but couldn't get it to work, shrug.
-			$i = 0;
-			// Loop over all meta data and correct the structure
-			foreach ($this->data['UserMeta'] as $id => $value) {
-				$this->data['temp'][$i] = array(
-					'id' => $id, 
-					'meta_value' => $value,
-					'user_id' => $this->data['User']['id']
-				);
-				$i++;
-			}
-			// overwrite the UserMeta with the correct info
-			$this->data['UserMeta'] = $this->data['temp'];
-			// unset the temp var we used
-			unset($this->data['temp']);
-			// saveAll will save the model and associaions
-			$this->User->saveAll($this->data);
+			$this->User->id = $user['User']['id'];
+
+			foreach ($this->data['UserMeta'] as $key => $val) {
+				$this->User->setMeta($key, $val);
+			} 
+
 			// redirect back to the user's profile
 			$this->redirect('/' . $user['User']['slug']);
 			exit();
@@ -85,10 +73,10 @@ class UsersController extends AppController {
 	}
 
 	function profile($slug = false) {
-	
+
 		$this->Includer->add('script', array(
 			'users/wall_input',
-			'users/wall'			
+			'users/wall'
 		));
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
@@ -106,12 +94,11 @@ class UsersController extends AppController {
 			),
 			'contain' => array(
 				'Friend' => array(
-					'limit' => 10, // 10 friends 
+					'limit' => 10, // 10 friends
 					'order' => 'random()', // keep 'em random
 					'User' // they belong to the 'User' model
 				),
 				'Media',
-				'UserMeta',
 				'WallPost' => array(
 					'PostAuthor'
 				)
@@ -120,11 +107,14 @@ class UsersController extends AppController {
 		if (!$user) {
 			$this->redirect('/');
 		}
+
+		$this->User->id = $user['User']['id'];
+		$userMeta = $this->User->getMeta();
 		//page title
-		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . $user['UserMeta']['first_name']['value'] . ' ' . $user['UserMeta']['last_name']['value']);
+		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
 
 		//pass the profile data to the view
-		$this->set(compact('user'));
+		$this->set(compact('user', 'userMeta'));
 	}
 
 	function search(){

@@ -3,10 +3,10 @@
 	<div class="images">
 <?php
 	   	//get the gallery dispaly mode (single == 1 or multi == 2)
-	   	switch($user['UserMeta']['gallery_mode']['value']):
+	   	switch($userMeta['gallery_mode']):
 	   		case 1:
 	   			$url = $html->url(array('controller' => 'media', 'action' => 'profile', $user['User']['id']));
-	   			$title = $user['UserMeta']['first_name']['value'] . ' ' .  $user['UserMeta']['last_name']['value'];
+	   			$title = $userMeta['first_name'] . ' ' .  $userMeta['last_name'];
 	   			echo $this->Html->image($url, array('title' => $title));
 	   			break;
 	   		case 2:
