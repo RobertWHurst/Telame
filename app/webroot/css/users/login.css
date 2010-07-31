@@ -1,0 +1,30 @@
+#login_logo{	
+	width:980px;
+	text-align: center;
+	margin: 40px auto 0 auto;
+}
+#login{
+	width:260px;
+	padding: 40px;
+	margin: 50px auto;
+	background: #333;
+}
+#login label{
+	display: block;
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.3em;
+}
+#login input[type="text"]{
+	margin-bottom: 20px;
+}
+#login input[type="text"],
+#login input[type="password"]{
+	display: block;
+	width: 258px;
+	line-height: 2.2em;
+	font-size: 1.6em;
+}
+#login input[type="submit"]{
+	margin-top: 20px;
+}

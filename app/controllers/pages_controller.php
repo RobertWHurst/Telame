@@ -10,7 +10,10 @@ class PagesController extends AppController {
 		$this->Auth->allow('*');
 				
 		//add css and js that is common to all the actions in this controller
-		$this->Includer->add('css', array('pages'));
+		$this->Includer->add('css', array(
+			'base',
+			'simple_header'
+		));
 		$this->Includer->add('script', array(
 			'jquery',
 			'base'

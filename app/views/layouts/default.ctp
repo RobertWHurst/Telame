@@ -32,16 +32,15 @@
 ?>
 	</div>
 <?php 
-		if(Configure::read('debug') > 0):
+	if(Configure::read('debug') > 0):
 ?>
-			<div id="sql_dump">
+		<div id="sql_dump">
 <?php
-				echo $this->element('sql_dump');
+			echo $this->element('sql_dump');
 ?>
-			</div>
+		</div>
 <?php 
-		endif; 
+	endif; 
 ?>
-	</div>
 </body>
 </html>

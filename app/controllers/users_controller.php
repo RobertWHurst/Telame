@@ -9,7 +9,10 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 		//add css and js that is common to all the actions in this controller
 		$this->Includer->add('css', array(
-			'default',
+			'base',
+			'tall_header',
+			'users/main_sidebar',
+			'users/profile_sidebar',
 			'users/wall'
 		));
 		$this->Includer->add('script', array(
@@ -84,7 +87,7 @@ class UsersController extends AppController {
 	
 		$this->Includer->add('script', array(
 			'users/wall_input',
-			'users/wall'
+			'users/wall'			
 		));
 
 		//if no user slug is given then get the current user's profile slug and redirect them to it.

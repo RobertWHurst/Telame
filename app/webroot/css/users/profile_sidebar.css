@@ -1,0 +1,24 @@
+#profile_sidebar{
+	padding: 20px 30px;
+	width: 229px;
+	float: left;
+}
+#profile_sidebar div.friends h1{
+	font-size:2.4em;
+	line-height:2em;
+	padding: 0 10px;
+}
+
+#profile_sidebar div.friends a{
+	text-align: center;
+	font-size: 1.1em;
+	display: block;
+	float: left;
+}
+#profile_sidebar div.friends img{
+	width: 60px;
+	height: 60px;
+	background: #000;
+	display: block;
+	margin: 10px;
+}
