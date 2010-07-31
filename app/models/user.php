@@ -32,5 +32,11 @@ class User extends AppModel {
 		)
 	);
 
+	function beforeFind($queryData) {
+		if (isset($queryData['conditions']['User.email'])) {
+			$queryData['conditions']['User.email'] = strtolower($queryData['conditions']['User.email']);
+		}
+		return $queryData;
+	}
 	
 }

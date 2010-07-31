@@ -72,8 +72,7 @@ class UsersController extends AppController {
 		
 		//check if the user is logged in
 		if ($this->Auth->user()) {
-		
-			//check to see if the user is to be remebered
+			//check to see if the user is to be remembered
 			if (!empty($this->data) && $this->data['User']['auto_login']) {
 				$cookie = array();
 				$cookie['email'] = $this->data['User']['email'];

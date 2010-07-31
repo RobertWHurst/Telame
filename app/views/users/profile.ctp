@@ -31,5 +31,4 @@
 		</div>
 	</div>
 </div>
-<?php pr($userMeta); ?>
 <?php echo $this->element('copyright'); ?>
