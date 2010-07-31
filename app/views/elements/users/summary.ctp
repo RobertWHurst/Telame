@@ -13,10 +13,7 @@ if(is_array($user['UserMeta'])):
 	<div id="profile_summary">
 		<h1 class="name">
 <?php	
-			echo $user['UserMeta']['first_name']['value'];
-?> <!-- <= White space char here -->
-<?php
-			echo $user['UserMeta']['last_name']['value'];
+			echo ucwords($user['UserMeta']['first_name']['value']) . ' ' . ucwords($user['UserMeta']['last_name']['value']);
 ?>
 		</h1>
 		<table>
@@ -27,9 +24,8 @@ if(is_array($user['UserMeta'])):
 					<tr class="{$key}">
 						<th class="key">
 <?php
-							echo $label
+							echo $label . ':';
 ?>
-							:
 						</th>
 						<td class="value">
 <?php

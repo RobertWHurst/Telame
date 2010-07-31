@@ -106,7 +106,9 @@ class UsersController extends AppController {
 			),
 			'contain' => array(
 				'Friend' => array(
-					'User'
+					'limit' => 10, // 10 friends 
+					'order' => 'random()', // keep 'em random
+					'User' // they belong to the 'User' model
 				),
 				'Media',
 				'UserMeta',

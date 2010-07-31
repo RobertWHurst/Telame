@@ -38,7 +38,10 @@ class User extends AppModel {
 
 					//fix the structure
 					foreach ($metadata as $meta_set) {
-						$results[$key]['UserMeta'][$meta_set['meta_key']] = array('value' => $meta_set['meta_value'], 'id' => $meta_set['id']);
+						$results[$key]['UserMeta'][$meta_set['meta_key']] = array(
+							'value' => $meta_set['meta_value'], 
+							'id' => $meta_set['id'],
+						);
 					}
 				}
 			}
