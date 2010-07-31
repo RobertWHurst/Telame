@@ -1,22 +1,26 @@
 <div id="profile_summary">
 	<h1 class="name">
 <?php	
-		echo ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']);
+		echo $name;
 ?>
 	</h1>
 	<table>
 <?php
-		foreach($userMeta as $name => $value):
+		foreach($summary as $key => $meta):
 ?>
-			<tr class="{$name}">
+			<tr class="
+<?php
+			echo $key;
+?>	
+			">
 				<th class="key">
 <?php
-					echo Inflector::humanize($name) . ':';
+					echo $meta['label'];
 ?>
 				</th>
 				<td class="value">
 <?php
-					echo $value
+					echo $meta['value'];
 ?>
 				</td>
 			</tr>

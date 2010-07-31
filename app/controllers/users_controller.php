@@ -151,14 +151,32 @@ class UsersController extends AppController {
 		if (!$user) {
 			$this->redirect('/');
 		}
-
+		
+		//get the metadata for various parts of the profile page (privacy options too)
 		$this->User->id = $user['User']['id'];
 		$userMeta = $this->User->getMeta();
+		
+		
+		//data displayed on the summary
+		$name = ucwords($userMeta['first_name'] . ' ' . $userMeta['last_name']);
+		$summary = array(
+			//'location' => array('label' => 'Location:', 'value' => $userMeta['location']),
+			'location' => array('label' => 'Location:', 'value' => '[location]'),
+			'sex' => array('label' => 'Sex:', 'value' => '[sex]'),
+			'born' => array('label' => 'Born:', 'value' => '[born]')
+		);
+		
+		//gallery data
+		$gallery = array(
+			'gallery_mode' => $userMeta['gallery_mode']
+		);
+		
+		
 		//page title
 		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
 
 		//pass the profile data to the view
-		$this->set(compact('user', 'userMeta'));
+		$this->set(compact('user', 'summary', 'gallery', 'name'));
 	}
 
 	function search(){
