@@ -14,11 +14,12 @@
 	font-size: 1.1em;
 	display: block;
 	float: left;
+	width: 76px;
 }
 #profile_sidebar div.friends img{
 	width: 60px;
 	height: 60px;
 	background: #000;
 	display: block;
-	margin: 10px;
+	margin: 8px;
 }

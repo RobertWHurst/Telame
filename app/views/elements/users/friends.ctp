@@ -27,7 +27,7 @@
    				break;
    			
    			//get the avatar url
-   			$avatar_url = $html->url(array('controller' => 'users', 'action' => 'avatar', $friend['User']['id']));
+   			$avatar_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $friend['User']['id']));
    			
    			//get the user's profile url
    			$profile_url = $html->url(array('controller' => 'users', 'action' => 'profile', $friend['User']['slug']));
