@@ -73,7 +73,7 @@
 #profile_wall_posts div.post_content p{
 	font-size: 1.6em;
 	line-height: 1.2em;
-	margin-bottom: 15px;
+	margin: 0 15px 15px 0;
 	overflow: hidden;
 }
 #profile_wall_posts div.delete{
@@ -96,7 +96,7 @@
 	right: 10px;
 }
 #profile_wall_posts div.time p{
-	color: #ccc;
+	color: #555;
 	font-size: 1.1em;
 	font-weight: bold;
 }

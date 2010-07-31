@@ -151,6 +151,20 @@ option{
 optgroup{
 	/* optgroup - rules */
 }
+#copyright{
+	text-align: center;
+	padding: 25px 0;
+}
+#copyright p{
+	color: #565656;
+	font-size: 1.3em;
+}
+#copyright a{	
+	color: #787878;
+}
+#copyright a:hover{	
+	color: #fff;
+}
 #sql_dump{
 	font-size: 1.6em;
 	width: 890px;

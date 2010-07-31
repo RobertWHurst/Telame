@@ -1,0 +1,30 @@
+#profile_summary{
+	float: left;
+	width: 290px;
+}
+#profile_summary h1.name{
+	text-align: left;
+	font-size: 2.4em;
+	line-height: 3.0em;
+	padding: 0 20px;
+}
+#profile_summary table{
+	width: 230px;
+	margin: 0 20px;
+}
+#profile_summary table th{
+	vertical-align: baseline;
+	text-align: left;
+	font-size: 1.2em;
+	line-height: 1.6em;
+}
+#profile_summary table td{
+	vertical-align: baseline;
+	text-align: left;
+	font-size: 1.2em;
+	line-height: 1.6em;
+}
+#profile_controls{
+	float: left;
+	width: 290px;
+}
