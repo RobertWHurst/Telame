@@ -4,6 +4,7 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $components = array('Cookie');
+	var $helpers = array('Time');
 	
 	function beforeFilter(){
 		parent::beforeFilter();
