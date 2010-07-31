@@ -16,7 +16,8 @@ class UsersController extends AppController {
 			'users/wall'
 		));
 		$this->Includer->add('script', array(
-			'jquery'
+			'jquery',
+			'users/main_sidebar',			
 		));
 	}
 

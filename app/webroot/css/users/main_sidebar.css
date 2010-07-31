@@ -36,18 +36,26 @@
 }
 #main_sidebar div.search{
 	padding: 10px 20px;
-}
-#main_sidebar div.search div.input{
 	position: relative;
 }
 #main_sidebar div.search div.input label{
-	position: absolute;
-	top:0;
-	left:0;
-	color: #ccc;
+	font-size:16px;
+	position:absolute;
+	left:26px;
+	top:16px;
+	color: #949494;
 }
-#main_sidebar div.search div.input input{
+#main_sidebar div.search div.input input[type="text"]{
 	font-size: 16px;
 	padding: 3px;
 	width: 162px;
+}
+#main_sidebar div.search div.submit input[type="submit"]{
+	text-indent: -9999px;
+	height: 16px;
+	width: 16px;
+	position:absolute;
+	right:26px;
+	top:16px;
+	background-image: url('../../img/icons/magnifier.png');
 }
