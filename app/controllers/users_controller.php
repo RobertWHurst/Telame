@@ -12,9 +12,7 @@ class UsersController extends AppController {
 		$this->Includer->add('css', array(
 			'base',
 			'tall_header',
-			'users/main_sidebar',
-			'users/profile_sidebar',
-			'users/wall'
+			'users/main_sidebar'
 		));
 		$this->Includer->add('script', array(
 			'jquery',
@@ -115,6 +113,14 @@ class UsersController extends AppController {
 
 		$this->Includer->add('script', array(
 			'users/wall_input',
+			'users/wall'
+		));
+		$this->Includer->add('css', array(
+			'users/profile',
+			'users/profile_sidebar',
+			'users/gallery',
+			'users/summary',
+			'users/actions',
 			'users/wall'
 		));
 

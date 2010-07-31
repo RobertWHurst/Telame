@@ -45,9 +45,11 @@
 ?>
 					</div>
 					<div class="time">
+						<p>
 <?php
-						echo $time->timeAgoInWords($post['posted']);
+							echo $time->timeAgoInWords($post['posted']);
 ?>
+						</p>
 					</div>
 				</div>
 <?php

@@ -20,6 +20,7 @@
 				echo $this->element('users/edit');
 			} else {
 				echo $this->element('users/summary');
+				echo $this->element('users/actions');
 			}
 ?>
 		</div>
