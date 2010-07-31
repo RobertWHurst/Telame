@@ -29,18 +29,29 @@ class MediaController extends AppController {
 				'Media'
 			)
 		));
-		$imgPath = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;
+		// to user's home directory
+		$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;
+		// profile or gallery, etc...
+		$dir = $dir . DS;
+		// filename
 		$filename = trim($user['Media']['filename']);
-		if(!$this->Thumb->generateThumb($imgPath, $filename, $size)) {
-			return 'error';
+		// cached version of filename
+		$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
+
+		// check for a cached version first
+		if (!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
+			// we don't have it, generate it
+			if(!$this->Thumb->generateThumb($baseDir, $dir, $filename, $size)) {
+				Debugger::log('Can\'t generate thumbnail');
+			}
 		}
 
 		$params = array(
-			'id' => $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg',
+			'id' => $cacheFilename,
 			'name' => $user['User']['slug'],
 			'download' => false,
 			'extension' => 'png',
-			'path' => $imgPath . 'cache' . DS,
+			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);
 		$this->set($params);
