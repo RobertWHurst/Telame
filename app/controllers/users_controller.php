@@ -152,8 +152,10 @@ class UsersController extends AppController {
 			$this->redirect('/');
 		}
 
+		// get current users metadata
 		$this->User->id = $user['User']['id'];
 		$userMeta = $this->User->getMeta();
+
 		//page title
 		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
 
