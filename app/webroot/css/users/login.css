@@ -5,7 +5,7 @@
 }
 #login{
 	width:260px;
-	padding: 40px;
+	padding: 30px 40px;
 	margin: 50px auto;
 	background: #333;
 }
@@ -14,17 +14,39 @@
 	font-size: 1.3em;
 	font-weight: bold;
 	line-height: 1.3em;
-}
-#login input[type="text"]{
-	margin-bottom: 20px;
+	margin-top: 10px;
 }
 #login input[type="text"],
 #login input[type="password"]{
 	display: block;
-	width: 258px;
-	line-height: 2.2em;
-	font-size: 1.6em;
+	width: 252px;
+	font-size: 16px;
+	padding: 3px;
+}
+#login div.checkbox{
+	padding: 1.3em 0;
+}
+#login input[type="checkbox"]{
+	float: left;
 }
 #login input[type="submit"]{
-	margin-top: 20px;
+	font-size: 1.3em;
+	color: #000;
+	background-color: #9e9e9e;
+	border: 1px solid #ccc;
+	font-weight: bold;
+	-moz-border-radius: 2px;
+	padding: 3px;
+}
+#login input[type="submit"]:hover{
+	background-color: #d3ef91;
+}
+#authMessage{
+	font-size: 1.6em;
+	padding: 5px;
+	color: #ff0000;
+	border: 1px solid #f00;
+	-moz-border-radius: 2px;
+	background: #fcc;
+	margin-bottom: 20px;
 }
