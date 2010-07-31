@@ -44,6 +44,7 @@
 	left:26px;
 	top:16px;
 	color: #949494;
+	cursor: text;
 }
 #main_sidebar div.search div.input input[type="text"]{
 	font-size: 16px;
