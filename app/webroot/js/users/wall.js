@@ -12,7 +12,7 @@ $(document).ready(function(){
 		root.speed = 100;
 		
 		//the domain
-		root.domain = 'http://telame.com';
+		root.domain = 'http://' + window.location.hostname;
 		
 		//hover handler
 		root.hoverHandler = function(domElement, action){
