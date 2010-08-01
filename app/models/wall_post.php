@@ -44,6 +44,7 @@ class WallPost extends AppModel {
 			'offset' => $offset,
 			'order' => 'WallPost.id DESC',
 		));
+		
 		return $wallPosts;
     }
 }

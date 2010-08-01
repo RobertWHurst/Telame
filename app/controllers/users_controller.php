@@ -52,7 +52,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			$this->User->id = $user['User']['id'];
 
-			foreach ($this->data['UserMeta'] as $key => $val) {
+			foreach ($this->data['UserMeta'] as $key => $val){
 				$this->User->setMeta($key, $val);
 			} 
 
@@ -106,10 +106,6 @@ class UsersController extends AppController {
 	function logout(){
 		$this->redirect($this->Auth->logout());
 	}
-	
-	function redirect_login(){
-		$this->redirect('/' . $this->currentUser['User']['slug']);
-	}
 
 	function profile($slug){
 
@@ -129,7 +125,7 @@ class UsersController extends AppController {
 		$user = $this->User->getProfile($slug);
 		
 		if(!$user){
-			$this->redirect('/');
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 			exit;
 		}
 		

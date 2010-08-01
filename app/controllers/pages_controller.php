@@ -31,7 +31,7 @@ class PagesController extends AppController {
 		$this->layout = 'pages';
 	}
 
-	function home() {
+	function signup() {
 		$this->Includer->add('script', array(
 			'pages/taglines'
 		));

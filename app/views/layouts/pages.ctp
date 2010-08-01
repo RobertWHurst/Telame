@@ -30,6 +30,9 @@
 ?>
 </head>
 <body>
+	<div id="flash">
+		<?php echo $this->Session->flash(); ?>
+	</div>
 	<?php echo $this->element('pages/header'); ?>
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
