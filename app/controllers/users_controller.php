@@ -107,10 +107,9 @@ class UsersController extends AppController {
 		$this->redirect($this->Auth->logout());
 	}
 
-	function profile($slug = false) {
+	function profile($slug = false){
 
 		$this->Includer->add('script', array(
-			'users/wall_input',
 			'users/wall'
 		));
 		$this->Includer->add('css', array(
@@ -125,14 +124,15 @@ class UsersController extends AppController {
 		//if no user slug is given then get the current user's profile slug and redirect them to it.
 		if(!$slug){
 			$this->redirect('/' . $this->currentUser['User']['slug']);
-			exit();
+			exit;
 		}
 
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 		
-		if (!$user) {
+		if(!$user){
 			$this->redirect('/');
+			exit;
 		}
 		
 		//get the metadata for various parts of the profile page (privacy options too)

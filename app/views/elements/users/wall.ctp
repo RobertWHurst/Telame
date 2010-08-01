@@ -38,7 +38,7 @@
 					</div>
 					<div class="wall_to_wall">
 <?php 
-						//$url = $html->url(array('controller' => 'wall_posts', 'action' => 'wall_to_wall', $post['id']));
+						$url = $html->url(array('controller' => 'wall_posts', 'action' => 'wall_to_wall', $post['id']));
 						$url = '#';
 						echo $html->image('icons/comments.png', array('title' => __('Wall to Wall',true), 'url' => $url));
 ?>
@@ -49,10 +49,14 @@
 						</p>
 					</div>
 				</div>
-<?php
-			endforeach;
-		else:
+			<?php endforeach; ?>
+			<div class="more">
+<?php 
+						$url = $html->url(array('controller' => 'wall_posts', 'action' => 'lists', $user['User']['id']));
+						echo $html->link(__('More Wall Posts', true), $url);
 ?>
+			</div>
+		<?php else: ?>
 			<p class="no_posts">
 				<?php __('Sorry, your wall is a bit empty at the moment...'); ?>
 			</p>

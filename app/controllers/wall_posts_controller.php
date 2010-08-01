@@ -2,13 +2,34 @@
 class WallPostsController extends AppController {
 
 	//Controller config
-	var $name = 'WallPosts';
+	var $name = 'WallPosts';	
+	var $helpers = array('Time');
+	
+	function lists($id = false){
+		echo 'test';
+		exit;
+	}
+	
+	function jx_lists($id = false){
+		
+		if(empty($this->data) || !$id){
+			echo 'false';
+			exit;
+		}
+		
+		$wallPosts = $this->WallPost->getWallPosts(10, $this->data['offset'], $id);
+		
+		//set the layout to none (this is ajax);
+		$this->layout = false;
+		
+		$this->set('wallPosts', $wallPosts);
+	}
 
-	function add() {
+	function add(){
 		//make sure there is form data to proccess, if not there is not use in continuing
 		if(empty($this->data)) {
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit();
+			exit;
 		}
 
 		//save the user id and the visitor id

@@ -104,3 +104,14 @@
 	text-align: center;
 	font-size: 1.6em;
 }
+#profile_wall_posts div.more{
+	padding: 10px;
+	background: #333;
+	margin-bottom: 10px;
+}
+#profile_wall_posts div.more a{
+	font-size: 1.6em;
+	text-align: center;
+	display: block;
+}
+

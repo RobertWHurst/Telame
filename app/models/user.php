@@ -47,24 +47,44 @@ class User extends AppModel {
 			$queryData['conditions']['User.email'] = strtolower($queryData['conditions']['User.email']);
 		}
 		return $queryData;
-	}
+	}	
 	
-	function getProfile($slug) {	
+	function getProfile($slug, $arguments = false){
+		
+		//default config
+		$defaults = array(
+			'wall_posts' => array(
+				'limit' => 10,
+				'offset' => 0
+			),
+			'friends' =>  array(
+				'limit' => 12,
+				'offset' => 0,
+				'order' => 'random()'
+			),
+		);
+		
+		//parse the options
+		$options = $this->parseArguments($defaults, $arguments);
+		
 		//get the profile
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
+		
 		$user = $this->find('first', array(
 			'conditions' => array(
 				'lower(slug)' => strtolower($slug)
 			),
 			'contain' => array(
 				'Friend' => array(
-					'limit' => 10, // 10 friends
-					'order' => 'random()', // keep 'em random
-					'User' // they belong to the 'User' model
+					'limit' => $options['friends']['limit'],
+					'order' => $options['friends']['order'],
+					'User'
 				),
 				'Media',
 				'WallPost' => array(
+					'limit' => $options['wall_posts']['limit'],
+					'offset' => $options['wall_posts']['offset'],
 					'PostAuthor'
 				)
 			)
