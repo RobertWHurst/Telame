@@ -24,7 +24,7 @@
 					</div>
 					<div class="post_content">
 						<p>
-							<a href="#" title="this should be the poster's first name"><?php echo $post['PostAuthor']['first_name'];?></a>
+							<a href="#" title="<?php echo $post['PostAuthor']['full_name'];?>"><?php echo $post['PostAuthor']['full_name'];?></a>
 <?php
 							echo $post['post'];
 ?>

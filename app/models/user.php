@@ -37,6 +37,7 @@ class User extends AppModel {
    			$this->id = $results['id'];
    			$results['first_name'] = ucwords($this->getMeta('first_name'));
    			$results['last_name'] = ucwords($this->getMeta('last_name'));
+   			$results['full_name'] = ucwords($this->getMeta('first_name') . ' ' . $this->getMeta('last_name'));
    		}
 		return $results;
 	}

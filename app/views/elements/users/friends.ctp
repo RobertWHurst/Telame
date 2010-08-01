@@ -20,7 +20,7 @@
 
 					//get the friend's avatar and name to insert into a link
 					$link_content = '<div class="avatar">' . $html->image($avatar_url) . '</div>';
-					$link_content .= $friend['User']['first_name'];
+					$link_content .= $friend['User']['full_name'];
 		
 					//echo the thumb link
 					echo $html->link($link_content, $profile_url, array('escape' => false));
