@@ -26,9 +26,11 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
- 	// Home page
-	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+//	App::import('Lib', 'routes/SlugRoute');
 
+ 	// Home page
+	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));	
+	
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
@@ -48,6 +50,7 @@
 	// Wall Posts
 	Router::connect('/wp/a', array('controller' => 'wall_posts', 'action' => 'add'));
 	Router::connect('/wp/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
+
 	// Wall Posts (Ajax)
 	Router::connect('/jx/wp/a', array('controller' => 'wall_posts', 'action' => 'jx_add'));
 	Router::connect('/jx/wp/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));

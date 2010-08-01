@@ -14,7 +14,6 @@ class AppController extends Controller {
 		if(Configure::read('debug') > 0){
 			//load krumo
 			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
-			
 		}
 		
 		//force athenication against profiles

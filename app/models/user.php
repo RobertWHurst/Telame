@@ -31,6 +31,15 @@ class User extends AppModel {
 			'exclusive' => true
 		)
 	);
+    
+   	function afterFind($results) {
+   		if (isset($results['id']) && isset($results['email'])) {
+   			$this->id = $results['id'];
+   			$results['first_name'] = ucwords($this->getMeta('first_name'));
+   			$results['last_name'] = ucwords($this->getMeta('last_name'));
+   		}
+		return $results;
+	}
 
 	function beforeFind($queryData) {
 		if (isset($queryData['conditions']['User.email'])) {
@@ -39,4 +48,26 @@ class User extends AppModel {
 		return $queryData;
 	}
 	
+	function getProfile($slug) {	
+		//get the profile
+		$this->recursive = 2;
+		$this->Behaviors->attach('Containable');
+		$user = $this->find('first', array(
+			'conditions' => array(
+				'lower(slug)' => strtolower($slug)
+			),
+			'contain' => array(
+				'Friend' => array(
+					'limit' => 10, // 10 friends
+					'order' => 'random()', // keep 'em random
+					'User' // they belong to the 'User' model
+				),
+				'Media',
+				'WallPost' => array(
+					'PostAuthor'
+				)
+			)
+		));
+		return $user;
+	}
 }

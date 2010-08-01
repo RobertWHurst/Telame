@@ -31,8 +31,7 @@ class UsersController extends AppController {
 
 	//A summary of whats new for the user.
 	function index() {
-		$this->redirect('/' . $this->currentUser['User']['slug']);
-		exit();
+		$wp = $this->User->WallPost->find('all');
 	}
 
 	function edit($slug = false) {
@@ -129,25 +128,9 @@ class UsersController extends AppController {
 			exit();
 		}
 
-		//get the profile
-		$this->User->recursive = 2;
-		$this->User->Behaviors->attach('Containable');
-		$user = $this->User->find('first', array(
-			'conditions' => array(
-				'lower(slug)' => strtolower($slug)
-			),
-			'contain' => array(
-				'Friend' => array(
-					'limit' => 10, // 10 friends
-					'order' => 'random()', // keep 'em random
-					'User' // they belong to the 'User' model
-				),
-				'Media',
-				'WallPost' => array(
-					'PostAuthor'
-				)
-			)
-		));
+		// get the user's info based on their slug
+		$user = $this->User->getProfile($slug);
+		
 		if (!$user) {
 			$this->redirect('/');
 		}

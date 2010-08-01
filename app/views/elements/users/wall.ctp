@@ -17,15 +17,14 @@
 ?>
 				<div class="wall_post clearfix">
 					<div class="avatar">
-<?php
-						$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['id']));
+<?php					$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['id']));
 						$url = $html->url(array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']));
    						echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
 ?>
 					</div>
 					<div class="post_content">
 						<p>
-							<a href="#" title="this should be the poster's first name">[first name]</a>
+							<a href="#" title="this should be the poster's first name"><?php echo $post['PostAuthor']['first_name'];?></a>
 <?php
 							echo $post['post'];
 ?>
