@@ -65,4 +65,5 @@
 	Router::connect('/friends', array('controller' => 'friends', 'action' => 'lists'));
 	
 	// Profile
+	Router::connect('/rl', array('controller' => 'users', 'action' => 'redirect_login'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
