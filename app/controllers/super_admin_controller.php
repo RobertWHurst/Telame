@@ -1,8 +1,9 @@
 <?php
-class FriendsController extends AppController {
+class SuperAdminController extends AppController {
 
 	//Controller config
-	var $name = 'Friends';
+	var $name = 'SuperAdmin';
+	var $uses = array();
 	
 	//Before the render of all views in this controller
 	function home(){

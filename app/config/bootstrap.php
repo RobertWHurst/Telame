@@ -48,8 +48,5 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
- 
- 
-Inflector::rules('plural', array('irregular' => array('user_meta' => 'user_meta')));
 
 include(APP . DS . 'config' . DS . 'my_config' . DS . 'config.php');
