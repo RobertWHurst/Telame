@@ -146,12 +146,14 @@ class UsersController extends AppController {
 		$gallery = array(
 			'gallery_mode' => $userMeta['gallery_mode']
 		);
+
+		$wallPosts = $this->User->WallPost->getWallPosts();
 		
 		//page title
 		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
 
 		//pass the profile data to the view
-		$this->set(compact('user', 'summary', 'gallery', 'name'));
+		$this->set(compact('user', 'summary', 'gallery', 'name', 'wallPosts'));
 	}
 
 	function search(){

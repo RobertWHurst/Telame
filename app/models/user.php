@@ -70,13 +70,14 @@ class User extends AppModel {
 					'User'
 				),
 				'Media',
-				'WallPost' => array(
-					'limit' => $options['wall_posts']['limit'],
-					'offset' => $options['wall_posts']['offset'],
-					'PostAuthor'
-				)
+//				'WallPost' => array(
+//					'limit' => $options['wall_posts']['limit'],
+//					'offset' => $options['wall_posts']['offset'],
+//					'PostAuthor'
+//				)
 			)
 		));
+//		pr($user);
 		return $user;
 	}
 }
