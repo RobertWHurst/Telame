@@ -25,10 +25,9 @@
 					</div>
 					<div class="post_content">
 						<p>
-							<a href="#" title="this should be the poster's first name">[first name]</a>
-<?php
-							echo $post['post'];
-?>
+							<a href="#" title="this should be the poster's first name"><?php echo $post['PostAuthor']['first_name']; ?></a>
+							<?php krumo($post['PostAuthor']); ?>
+							<?php echo $post['post']; ?>
 						</p>
 					</div>
 					<div class="delete">
@@ -46,9 +45,7 @@
 					</div>
 					<div class="time">
 						<p>
-<?php
-							echo $time->timeAgoInWords($post['posted']);
-?>
+							<?php echo $time->timeAgoInWords($post['posted']); ?>
 						</p>
 					</div>
 				</div>
@@ -57,12 +54,8 @@
 		else:
 ?>
 			<p class="no_posts">
-<?php
-				__('Sorry, your wall is a bit empty at the momment...');
-?>
+				<?php __('Sorry, your wall is a bit empty at the moment...'); ?>
 			</p>
-<?php
-		endif;
-?>
+		<?php endif; ?>
 	</div>
 </div>

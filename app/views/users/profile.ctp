@@ -2,12 +2,16 @@
 	<div id="wrap_main_sidebar">
 		<div id="logo">
 <?php
-			echo $html->image('users/logo.png', array('title' => __('Telame', true), 'url' => array('controller' => 'pages', 'action' => 'home')));
+			echo $html->image('users/logo.png', array(
+				'title' => __('Telame', true),
+				'url' => array(
+					'controller' => 'pages',
+					'action' => 'home'
+				)
+			));
 ?>
 		</div>
-<?php
-		echo $this->element('users/main_sidebar');
-?>
+		<?php echo $this->element('users/main_sidebar'); ?>
 	</div>
 	<div id="profile">
 		<div id="profile_head" class="clearfix">
