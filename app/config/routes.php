@@ -26,9 +26,11 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
+ 
+//	App::import('Lib', 'routes/SlugRoute');
 
  	// Home page
-	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));	
 	
 	// Super Admin
 	Router::connect('/su', array('controller' => 'super_admin', 'action' => 'home'));	
