@@ -18,7 +18,7 @@ class WallPost extends AppModel {
 		//get the profile
 		$this->recursive = 2;
 		
-		if($id){
+		if($id) {
 			$conditions = array(
 				'user_id' => $id
 			);

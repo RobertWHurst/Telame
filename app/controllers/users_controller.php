@@ -147,7 +147,7 @@ class UsersController extends AppController {
 			'gallery_mode' => $userMeta['gallery_mode']
 		);
 
-		$wallPosts = $this->User->WallPost->getWallPosts();
+		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, $user['User']['id']);
 		
 		//page title
 		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
