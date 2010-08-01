@@ -10,13 +10,15 @@
 		if(isset($css_for_layout))
 			$head_types['css'] = $css_for_layout;
 		
-		foreach($head_types as $method => $file){
-			if(is_array($file)){
-				foreach($file as $_file)
-					echo $html->$method($_file);					
-			}
-			else{
-				echo $html->$method($file);
+		if(isset($head_types)){
+			foreach($head_types as $method => $file){
+				if(is_array($file)){
+					foreach($file as $_file)
+						echo $html->$method($_file);					
+				}
+				else{
+					echo $html->$method($file);
+				}
 			}
 		}
 		

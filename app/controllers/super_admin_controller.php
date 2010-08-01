@@ -5,7 +5,7 @@ class FriendsController extends AppController {
 	var $name = 'Friends';
 	
 	//Before the render of all views in this controller
-	function lists(){
+	function home(){
 		
 	}
 

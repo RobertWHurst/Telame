@@ -28,6 +28,9 @@
  */
  	// Home page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+	
+	// Super Admin
+	Router::connect('/su', array('controller' => 'super_admin', 'action' => 'home'));
 
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
@@ -51,7 +54,9 @@
 	// Wall Posts (Ajax)
 	Router::connect('/jx/wp/a', array('controller' => 'wall_posts', 'action' => 'jx_add'));
 	Router::connect('/jx/wp/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
-
+	
+	// Friends List	
+	Router::connect('/friends', array('controller' => 'friends', 'action' => 'lists'));
+	
 	// Profile
-	//Router::connect('/p/*', array('controller' => 'users', 'action' => 'profile'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));

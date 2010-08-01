@@ -25,8 +25,7 @@
 					</div>
 					<div class="post_content">
 						<p>
-							<a href="#" title="this should be the poster's first name"><?php echo $post['PostAuthor']['first_name']; ?></a>
-							<?php krumo($post['PostAuthor']); ?>
+							<a href="#" title="this should be the poster's first name"><?php //echo $post['PostAuthor']['first_name']; ?></a>
 							<?php echo $post['post']; ?>
 						</p>
 					</div>
