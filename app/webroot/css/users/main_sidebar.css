@@ -50,6 +50,10 @@
 	font-size: 16px;
 	padding: 3px;
 	width: 162px;
+	background: #dedede;
+}
+#main_sidebar div.search.active div.input input[type="text"]{
+	background: #fff;	
 }
 #main_sidebar div.search div.submit input[type="submit"]{
 	text-indent: -9999px;

@@ -43,15 +43,12 @@ h1.pageHeading{
 }
 
 /* DEFAULT ANCHOR STYLES */
-a:link{
+a{
 	color: #d3ef91;
 	text-decoration: underline;
 }
 a:hover{
 	color: #c1ef52;
-}
-a:visited{
-	color: #dfd0e7;
 }
 
 /* DEFAULT PARAGRAPH RELATED STYLES */

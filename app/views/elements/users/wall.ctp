@@ -53,7 +53,7 @@
 			<div class="more">
 <?php 
 						$url = $html->url(array('controller' => 'wall_posts', 'action' => 'lists', $user['User']['id']));
-						echo $html->link(__('More Wall Posts', true), $url);
+						echo $html->link(__('Older Posts', true), $url);
 ?>
 			</div>
 		<?php else: ?>

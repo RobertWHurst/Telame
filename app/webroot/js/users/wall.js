@@ -164,8 +164,8 @@ $(document).ready(function(){
   				}
 			});
 			
-			//on click event for delete
-			root.wallPosts.children('div.delete').click(function(event){
+			//on click event for delete and wall to wall
+			root.wallPostsWrapper.delegate('div.delete, div.wall_to_wall', 'click', function(event){
 				
 				//prevent the default action
 				event.preventDefault();

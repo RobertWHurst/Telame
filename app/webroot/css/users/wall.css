@@ -65,13 +65,17 @@
 	background: #333;
 	margin-bottom: 10px;
 	position: relative;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 #profile_wall_posts div.avatar{
 	float: left;
 	margin-right: 10px;
 }
 #profile_wall_posts div.post_content p{
-	font-size: 1.6em;
+	font-size: 1.3em;
 	line-height: 1.2em;
 	margin: 0 15px 15px 0;
 	overflow: hidden;
@@ -106,8 +110,11 @@
 }
 #profile_wall_posts div.more{
 	padding: 10px;
-	background: #333;
-	margin-bottom: 10px;
+	background: #444;
+	margin-bottom: 10px;	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 #profile_wall_posts div.more a{
 	font-size: 1.6em;
