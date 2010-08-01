@@ -1,15 +1,8 @@
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
-<?php
-			echo $html->image('users/logo.png', array(
-				'title' => __('Telame', true),
-				'url' => array(
-					'controller' => 'pages',
-					'action' => 'home'
-				)
-			));
-?>
+			<!-- TODO: link to the news feed -->
+			<?php echo $html->image('users/logo.png', array('title' => __('Telame', true),'url' => array('controller' => 'pages', 'action' => 'signup'))); ?>
 		</div>
 		<?php echo $this->element('users/main_sidebar'); ?>
 	</div>

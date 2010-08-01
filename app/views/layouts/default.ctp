@@ -26,23 +26,19 @@
 ?>
 </head>
 <body>
+	<div id="flash">
+		<?php echo $this->Session->flash(); ?>
+	</div>
 	<div id="backgroundHead"></div>
 	<div id="backgroundBase"></div>	
 	<div id="wrap_content">
-<?php 
-		echo $content_for_layout;
-?>
+		<?php echo $content_for_layout; ?>
 	</div>
-<?php 
-	if(Configure::read('debug') > 0):
-?>
-		<div id="sql_dump">
-<?php
-			echo $this->element('sql_dump');
-?>
-		</div>
-<?php 
-	endif; 
-?>
+		<?php if(Configure::read('debug') > 0): ?>
+			<div id="sql_dump">
+				<?php echo $this->element('sql_dump'); ?>
+			</div>
+		<?php endif; ?>
+	</div>
 </body>
 </html>

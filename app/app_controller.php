@@ -37,9 +37,19 @@ class AppController extends Controller {
 			$this->set('currentUser', $this->currentUser);
 		}
 		
+		$this->Auth->allow('rootRedirect');
+		
 	}
 
 	function beforeRender() {
 	}
-
+	
+	function rootRedirect(){
+		if($this->currentUser){
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
+		}
+		else{
+			$this->redirect(array('controller' => 'pages', 'action' => 'signup'));		
+		}
+	}
 }

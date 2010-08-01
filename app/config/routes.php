@@ -30,7 +30,7 @@
 //	App::import('Lib', 'routes/SlugRoute');
 
  	// Home page
-	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));	
+	Router::connect('/', array('controller' => 'app', 'action' => 'rootRedirect'));	
 	
 	// Super Admin
 	Router::connect('/su', array('controller' => 'super_admin', 'action' => 'home'));	
@@ -65,4 +65,5 @@
 	Router::connect('/friends', array('controller' => 'friends', 'action' => 'lists'));
 	
 	// Profile
+	Router::connect('/rl', array('controller' => 'users', 'action' => 'redirect_login'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
