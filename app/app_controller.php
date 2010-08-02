@@ -21,10 +21,10 @@ class AppController extends Controller {
 		$user = $this->Session->read('Auth');
 		
 		//redirect to the user's profile.
-		$this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'redirect_login');
+		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'news');
 		
 		//redirect home after logout
-		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'home');
+		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');
 
 		// Read the user id from the session and if nothing there, set it to 1
 		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
@@ -33,6 +33,7 @@ class AppController extends Controller {
 		if (Configure::read('LoggedIn')) {
 			// The currently logged in user's infomration
 			$this->currentUser = Classregistry::init('User');
+			$this->currentUser->recursive = -1;
 			$this->currentUser = $this->currentUser->findById(Configure::read('UID'));
 			$this->set('currentUser', $this->currentUser);
 		}
@@ -46,7 +47,7 @@ class AppController extends Controller {
 	
 	function rootRedirect(){
 		if($this->currentUser){
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
+			$this->redirect(array('controller' => 'pages', 'action' => 'news'));
 		}
 		else{
 			$this->redirect(array('controller' => 'pages', 'action' => 'signup'));		

@@ -7,4 +7,15 @@ class Friend extends AppModel{
 			'foreignKey' => 'parent_user_id'
 	));
 
+	function getFriendList($uid) {
+		return $this->find('list', array(
+						'conditions' => array(
+							'parent_user_id' => $uid,
+						),
+						'fields' => array(
+							'child_user_id'
+						)
+					)
+				);
+	}
 }

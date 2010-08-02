@@ -13,14 +13,18 @@ class WallPost extends AppModel {
 	);
 	
 	//TODO: needs containable.
-	function getWallPosts($limit = 0, $offset = 0, $id = false){
+	function getWallPosts($limit = 0, $offset = 0, $uid = false, $aid = false){
 		
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
-		if($id) {
+		if($uid) {
 			$conditions = array(
-				'user_id' => $id
+				'user_id' => $uid
+			);
+		} elseif($aid) {
+			$conditions = array(
+				'author_id' => $aid
 			);
 		} else {
 			$conditions = array();

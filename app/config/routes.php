@@ -38,7 +38,7 @@
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/signup', array('controller' => 'pages', 'action' => 'home'));
+	Router::connect('/signup', array('controller' => 'pages', 'action' => 'signup'));
 
 	// Informational pages
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
@@ -62,8 +62,8 @@
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
 	
 	// Friends List	
-	Router::connect('/friends', array('controller' => 'friends', 'action' => 'lists'));
+	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'listFriends'));
 	
 	// Profile
-	Router::connect('/rl', array('controller' => 'users', 'action' => 'redirect_login'));
+	Router::connect('/news', array('controller' => 'pages', 'action' => 'news'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));

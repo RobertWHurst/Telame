@@ -2,13 +2,14 @@
 class PagesController extends AppController {
 	var $name = 'Pages';
 	var $uses = array();
-	
+	var $helpers = array('Time');
+
 	function beforeFilter() {
 		parent::beforeFilter();
-		
+
 		//allow this entire controller to be accessed without needing to login
 		$this->Auth->allow('*');
-				
+
 		//add css and js that is common to all the actions in this controller
 		$this->Includer->add('css', array(
 			'base',
@@ -19,14 +20,14 @@ class PagesController extends AppController {
 			'base'
 		));
 	}
-	
+
 	function beforeRender() {
 		parent::beforeRender();
-		
+
 		//set the css and script for the view
 		$this->set('css_for_layout', $this->Includer->css());
 		$this->set('script_for_layout', $this->Includer->script());
-		
+
 		//set the css and layout
 		$this->layout = 'pages';
 	}
@@ -36,6 +37,21 @@ class PagesController extends AppController {
 			'pages/taglines'
 		));
 	}
+
+	function news() {
+		App::Import('Model', 'Friend');
+		$this->Friend = new Friend();
+		$friends = $this->Friend->getFriendList(Configure::read('UID'));
+		
+		App::Import('Model', 'WallPost');
+		$this->WallPost = new WallPost();
+		
+		$wallPosts = $this->WallPost->getWallPosts(null, null, null, $friends);
+		$user = $this->currentUser;
+		
+		$this->set(compact('user', 'wallPosts'));
+	}
+
 
 /**
  * Displays a view
@@ -61,9 +77,9 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
-		// add this snippet before the last line 
-		if (method_exists($this, $page)) { 
-			$this->$page(); 
+		// add this snippet before the last line
+		if (method_exists($this, $page)) {
+			$this->$page();
 		}
  		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
