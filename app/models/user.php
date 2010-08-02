@@ -59,6 +59,12 @@ class User extends AppModel {
 		return $queryData;
 	}
 
+	function getIdFromSlug($slug) {
+		$this->recursive = -1;
+		$user = $this->findBySlug($slug);
+		return $user['User']['id'];
+	}
+
 	function getMetaData($id) {
 		$this->id = $id;
 		$results = array();

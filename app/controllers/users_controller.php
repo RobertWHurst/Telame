@@ -5,7 +5,7 @@ class UsersController extends AppController {
 	var $name = 'Users';
 	var $components = array('Cookie');
 	var $helpers = array('Time');
-	
+
 	function beforeFilter(){
 		parent::beforeFilter();
 		//add css and js that is common to all the actions in this controller
@@ -39,8 +39,6 @@ class UsersController extends AppController {
 		if (/*!$admin ||*/ $slug != $this->currentUser['User']['slug']) {
 			$this->redirect('/e/' . $this->currentUser['User']['slug']);
 		}
-		$this->User->recursive = -1;
-		$user = $this->User->findBySlug($slug);
 		// there is a slug and there isn't any data, so edit functionality
 		if ($slug && empty($this->data)) {
 			// call the profile function get fill all of our info for us
@@ -50,23 +48,23 @@ class UsersController extends AppController {
 		}
 		// the data array isn't empty, so let's save it
 		if (!empty($this->data)) {
-			$this->User->id = $user['User']['id'];
+			$this->User->id = $this->User->getIdFromSlug($slug);
 
 			foreach ($this->data['UserMeta'] as $key => $val){
 				$this->User->setMeta($key, $val);
-			} 
+			}
 
 			// redirect back to the user's profile
-			$this->redirect('/' . $user['User']['slug']);
+			$this->redirect('/' . $slug);
 			exit();
 		}
 	}
 
-	function login(){	
+	function login(){
 		$this->Includer->add('css', array(
 			'users/login'
 		));
-		
+
 		//check if the user is logged in
 		if ($this->Auth->user()) {
 			//check to see if the user is to be remembered
@@ -77,17 +75,17 @@ class UsersController extends AppController {
 				$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');
 				unset($this->data['User']['auto_login']);
 			}
-			
+
 			//run the login
 			$this->redirect($this->Auth->redirect());
 		}
-		
+
 		//check if the post data was sent
 		if (empty($this->data)) {
-			
+
 			//if not see if a cookie is in place to login with
 			$cookie = $this->Cookie->read('Auth.User');
-			
+
 			//check to see if the cookie has data
 			if (!is_null($cookie)) {
 				if ($this->Auth->login($cookie)) {
@@ -123,37 +121,19 @@ class UsersController extends AppController {
 
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
-		
+
 		if(!$user){
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 			exit;
 		}
-		
-		//get the metadata for various parts of the profile page (privacy options too)
-		$this->User->id = $user['User']['id'];
-		$userMeta = $this->User->getMeta();
-		
-		//data displayed on the summary
-		$name = ucwords($userMeta['first_name'] . ' ' . $userMeta['last_name']);
-		$summary = array(
-			//'location' => array('label' => 'Location:', 'value' => $userMeta['location']),
-			'location' => array('label' => 'Location:', 'value' => '[location]'),
-			'sex' => array('label' => 'Sex:', 'value' => '[sex]'),
-			'born' => array('label' => 'Born:', 'value' => '[born]')
-		);
-		
-		//gallery data
-		$gallery = array(
-			'gallery_mode' => $userMeta['gallery_mode']
-		);
 
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, $user['User']['id']);
-		
+
 		//page title
-		$this->set('title_for_layout', Configure::read('SiteName') . ' - ' . ucwords($userMeta['first_name']) . ' ' . ucwords($userMeta['last_name']));
+		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['User']['full_name']);
 
 		//pass the profile data to the view
-		$this->set(compact('user', 'summary', 'gallery', 'name', 'wallPosts'));
+		$this->set(compact('user', 'wallPosts'));
 	}
 
 	function search(){
