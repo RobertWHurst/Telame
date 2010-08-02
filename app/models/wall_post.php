@@ -16,8 +16,8 @@ class WallPost extends AppModel {
 	function getWallPosts($limit = 0, $offset = 0, $id = false){
 		
 		//get the profile
-		$this->recursive = 2;
-		
+		$this->Behaviors->attach('Containable');
+
 		if($id) {
 			$conditions = array(
 				'user_id' => $id
@@ -29,12 +29,13 @@ class WallPost extends AppModel {
 		
 		$wallPosts = $this->find('all', array(
 			'conditions' => $conditions,
+			'contain' => array(
+				'PostAuthor'
+			),
 			'limit' => $limit,
 			'offset' => $offset,
 			'order' => 'WallPost.id DESC',
 		));
-
-//pr($wallPosts);	
 		return $wallPosts;
 	}
 }

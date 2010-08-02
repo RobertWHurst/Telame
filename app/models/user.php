@@ -19,7 +19,7 @@ class User extends AppModel {
 			'foreignKey' => 'avatar_id',
 		)
 	);
-	
+
 	var $hasMany = array(
 		'Friend' => array(
 			'ClassName' => 'User',
@@ -31,15 +31,24 @@ class User extends AppModel {
 			'exclusive' => true
 		)
 	);
-    
+
    	function afterFind($results) {
-   		if (isset($results['id']) && isset($results['email'])) {
-   			$this->id = $results['id'];
-			foreach (Configure::read('UserMeta') as $meta) {
-				$results[$meta] = ucwords($this->getMeta($meta));
+   		// This is FUCKING UGLY, and WILL NEED fixing, however, it works in the mean time
+		if (is_array($results)) {
+			foreach ($results as $key => $result) {
+				if (is_array($result)) {
+					foreach ($result as $key2 => $model) {
+						if (isset($model['id']) && isset($model['email'])) {
+							$metaData = array_merge($results[$key][$key2], $this->getMetaData($model['id']));
+							$results[$key][$key2] = $metaData;
+						}
+					}
+				}
 			}
-   			$results['full_name'] = ucwords($this->getMeta('first_name') . ' ' . $this->getMeta('last_name'));
-   		}
+		}
+		if (isset($results['id']) && isset($results['email'])) {
+			$results = array_merge($results, $this->getMetaData($results['id']));
+		}
 		return $results;
 	}
 
@@ -48,17 +57,29 @@ class User extends AppModel {
 			$queryData['conditions']['User.email'] = strtolower($queryData['conditions']['User.email']);
 		}
 		return $queryData;
-	}	
-	
-	function getProfile($slug, $arguments = false){		
+	}
+
+	function getMetaData($id) {
+		$this->id = $id;
+		$results = array();
+		$metas = Configure::read('UserMeta');
+		foreach ($metas as $meta) {
+			$results[$meta] = ucwords($this->getMeta($meta));
+		}
+		if (isset($results['first_name']) && isset($results['last_name'])) {
+			$results['full_name'] = ucwords($results['first_name'] . ' ' . $results['last_name']);
+		}
+		return $results;
+	}
+
+	function getProfile($slug, $arguments = false){
 		$defaults = Configure::read('UserInfo');
 		//parse the options
 		$options = $this->parseArguments($defaults, $arguments);
-		
+
 		//get the profile
-		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
-		
+
 		$user = $this->find('first', array(
 			'conditions' => array(
 				'lower(slug)' => strtolower($slug)
@@ -70,14 +91,8 @@ class User extends AppModel {
 					'User'
 				),
 				'Media',
-//				'WallPost' => array(
-//					'limit' => $options['wall_posts']['limit'],
-//					'offset' => $options['wall_posts']['offset'],
-//					'PostAuthor'
-//				)
 			)
 		));
-//		pr($user);
 		return $user;
 	}
 }
