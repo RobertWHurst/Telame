@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	//Controller config
 	var $name = 'Users';
 	var $components = array('Cookie');
-	var $helpers = array('Time');
+	var $helpers = array('Text', 'Time');
 
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -18,6 +18,11 @@ class UsersController extends AppController {
 			'jquery',
 			'users/main_sidebar',
 		));
+	}
+
+	function addMeta($id, $meta, $value) {
+		$this->User->id = $id;
+		$this->User->setMeta('User.settings.' . $meta, $value);
 	}
 
 	//Before the render of all views in this controller
@@ -130,7 +135,7 @@ class UsersController extends AppController {
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, $user['User']['id']);
 
 		//page title
-		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['User']['full_name']);
+		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['User']['UserProfile']['full_name']);
 
 		//pass the profile data to the view
 		$this->set(compact('user', 'wallPosts'));

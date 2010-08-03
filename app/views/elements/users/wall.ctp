@@ -24,15 +24,12 @@
 					</div>
 					<div class="post_content">
 						<p>
-							<a href="#" title="<?php echo $post['PostAuthor']['full_name'];?>"><?php echo $post['PostAuthor']['full_name'];?></a>
-<?php
-							echo $post['WallPost']['post'];
-?>
+							<a href="#" title="<?php echo $post['PostAuthor']['UserProfile']['full_name'];?>"><?php echo $post['PostAuthor']['UserProfile']['full_name'];?></a>
+<?php						echo $text->autoLink($post['WallPost']['post']); ?>
 						</p>
 					</div>
 					<div class="delete">
-<?php 
-						$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']));
+<?php 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']));
 						echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
 ?>
 					</div>

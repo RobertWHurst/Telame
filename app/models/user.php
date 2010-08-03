@@ -34,20 +34,24 @@ class User extends AppModel {
 
    	function afterFind($results) {
    		// This is FUCKING UGLY, and WILL NEED fixing, however, it works in the mean time
+		// I am NOT prould of this code :( it is however functional, but not very adaptable 
+		// Possibley use Set::extract and set::combine to fix this
 		if (is_array($results)) {
 			foreach ($results as $key => $result) {
 				if (is_array($result)) {
 					foreach ($result as $key2 => $model) {
 						if (isset($model['id']) && isset($model['email'])) {
-							$metaData = array_merge($results[$key][$key2], $this->getMetaData($model['id']));
-							$results[$key][$key2] = $metaData;
+							$results[$key][$key2]['UserProfile'] = $this->getMetaData($model['id'], 'profile');
+							if ($key2 == 'User') {
+								$results[$key][$key2]['UserSettings'] = $this->getMetaData($model['id'], 'settings');
+							}
 						}
 					}
 				}
 			}
 		}
 		if (isset($results['id']) && isset($results['email'])) {
-			$results = array_merge($results, $this->getMetaData($results['id']));
+			$results['UserProfile'] = $this->getMetaData($results['id'], 'profile');
 		}
 		return $results;
 	}
@@ -65,14 +69,10 @@ class User extends AppModel {
 		return $user['User']['id'];
 	}
 
-	function getMetaData($id) {
+	function getMetaData($id, $type='profile') {
 		$this->id = $id;
-		$results = array();
-		$metas = Configure::read('UserMeta');
-		foreach ($metas as $meta) {
-			$results[$meta] = ucwords($this->getMeta($meta));
-		}
-		if (isset($results['first_name']) && isset($results['last_name'])) {
+		$results = $this->getMeta('User.' . $type);
+		if (strtolower($type) == 'profile' && isset($results['first_name']) && isset($results['last_name'])) {
 			$results['full_name'] = ucwords($results['first_name'] . ' ' . $results['last_name']);
 		}
 		return $results;
