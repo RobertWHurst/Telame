@@ -112,7 +112,7 @@ class CakeTestSuiteDispatcher {
 		if (!App::import('Vendor', 'simpletest' . DS . 'reporter')) {
 			$baseDir = $this->_baseDir;
 			include CAKE_TESTS_LIB . 'templates' . DS . 'simpletest.php';
-			exit();
+			exit;
 		}
 	}
 
@@ -126,7 +126,7 @@ class CakeTestSuiteDispatcher {
 		if (!extension_loaded('xdebug')) {
 			$baseDir = $this->_baseDir;
 			include CAKE_TESTS_LIB . 'templates' . DS . 'xdebug.php';
-			exit();
+			exit;
 		}
 	}
 

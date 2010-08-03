@@ -60,7 +60,7 @@ class WallPostsController extends AppController {
 			if ($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1) {
 				$this->Session->setFlash(__('No, I can\'t let you do that. Only people that are friends can post on the wall', true));
 				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-				exit();
+				exit;
 			}
 		} else {
 			//IF THE POSTER IS THE THE WALL OWNER
@@ -68,13 +68,21 @@ class WallPostsController extends AppController {
 			//the visitor is the user
 			$user = $visitor;
 		}
+		
+		//find urls and convert them to links
+		$post = preg_replace('/((?:http[s]*|[s]*ftp|git):\/\/[^\r\n\s]+)/', '<a href="$1" rel="" target="TELAME_LINK">$1</a>', $this->data['WallPost']['post']);
+				
 
 		//save the user id and poster id
 		$this->WallPost->set('user_id', $user['User']['id']);
 		$this->WallPost->set('author_id', $visitor['User']['id']);
+		
+		//save the post type
+		//TODO: this will change based on the content being posted.		
+		$this->WallPost->set('type', 1);
 
 		//save the post content and time
-		$this->WallPost->set('post', $this->data['WallPost']['post']);
+		$this->WallPost->set('post', $post);
 		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
 
 		//commit the data to the db
@@ -85,7 +93,7 @@ class WallPostsController extends AppController {
 
 		//redirect the visitor to the wall they posted on
 		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $user['User']['slug'])));
-		exit();
+		exit;
 	}
 
 	function delete($id = false) {
@@ -97,7 +105,7 @@ class WallPostsController extends AppController {
 		if(!$id) {
 			$this->Session->setFlash(__('Uhh... Sorry We\'ve Looked everywhere but we can\'t find that post. Try again if you can find it.', true));
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit();
+			exit;
 		}
 
 		//check to make sure the user is deleting a wall psot they actually own
@@ -112,14 +120,14 @@ class WallPostsController extends AppController {
 			//set the flash message and redirect them, the metaling sods! :<
 			$this->Session->setFlash(__('Bit of a hacker are we? well sorry you can\'t delete that post. It\'s not on your wall!', true));
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit();
+			exit;
 		}
 
 		//if everything checks out then delete the post and exit
 		$this->WallPost->delete($id);
 		$this->Session->setFlash(__('The wall post is toast!', true));
 		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-		exit();
+		exit;
 	}
 
 	function jx_delete($id = false) {

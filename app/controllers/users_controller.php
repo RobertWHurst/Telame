@@ -61,7 +61,7 @@ class UsersController extends AppController {
 
 			// redirect back to the user's profile
 			$this->redirect('/' . $slug);
-			exit();
+			exit;
 		}
 	}
 

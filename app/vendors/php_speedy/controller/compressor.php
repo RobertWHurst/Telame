@@ -756,7 +756,7 @@ class compressor {
 				// Return visit and no modifications, so do not send anything
 				header ("HTTP/1.0 304 Not Modified");
 				header (\'Content-Length: 0\');
-				exit();
+				exit;
 			} 			
 					
 ?>';
