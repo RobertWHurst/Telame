@@ -4,7 +4,7 @@
 			<!-- TODO: link to the news feed -->
 			<?php echo $html->image('users/logo.png', array('title' => __('Telame', true),'url' => array('controller' => 'pages', 'action' => 'signup'))); ?>
 		</div>
-		<?php echo $this->element('users/main_sidebar'); ?>
+		<?php echo $this->element('main_sidebar'); ?>
 	</div>
 	<div id="page">
 		<div id="page_head" class="clearfix">
@@ -22,10 +22,10 @@
 ?>
 		</div>
 		<div id="page_body" class="clearfix">
-<?php
-			echo $this->element('users/wall');
-			echo $this->element('users/page_sidebar');
-?>
+			<?php echo $this->element('users/wall'); ?>
+			<div id="wall_sidebar">
+				<?php echo $this->element('users/friends'); ?>
+			</div>
 		</div>
 	</div>
 </div>

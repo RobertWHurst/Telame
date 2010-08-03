@@ -2,7 +2,7 @@
 #backgroundHead{
 	width: 100%;
 	height: 300px;
-	background: #400c5d url('../img/users/header.png') no-repeat top center;
+	background: #400c5d url('../img/header.png') no-repeat top center;
 	border-bottom: 1px solid #110019;
 }
 #backgroundBase{
@@ -21,7 +21,13 @@
 	width:770px;
 }
 #page_head{
-	background: url('../../img/users/page_head.png') no-repeat top right;
+	background: url('../../img/page_head.png') no-repeat top right;
+}
+#page_head h1.page_title{
+	font-size: 3.6em;
+	line-height: 2.4em;
+	font-weight: normal;
+	padding: 0 20px;
 }
 #page_body{
 	background: #5c5c5c;	

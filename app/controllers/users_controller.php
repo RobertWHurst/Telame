@@ -12,17 +12,12 @@ class UsersController extends AppController {
 		$this->Includer->add('css', array(
 			'base',
 			'tall_header',
-			'users/main_sidebar'
+			'main_sidebar'
 		));
 		$this->Includer->add('script', array(
 			'jquery',
-			'users/main_sidebar',
+			'main_sidebar',
 		));
-	}
-
-	function addMeta($id, $meta, $value) {
-		$this->User->id = $id;
-		$this->User->setMeta('User.settings.' . $meta, $value);
 	}
 
 	//Before the render of all views in this controller
@@ -32,6 +27,11 @@ class UsersController extends AppController {
 		//set the css and script for the view
 		$this->set('css_for_layout', $this->Includer->css());
 		$this->set('script_for_layout', $this->Includer->script());
+	}
+
+	function addMeta($id, $meta, $value) {
+		$this->User->id = $id;
+		$this->User->setMeta('User.settings.' . $meta, $value);
 	}
 
 	//A summary of whats new for the user.
@@ -117,11 +117,11 @@ class UsersController extends AppController {
 		));
 		$this->Includer->add('css', array(
 			'users/profile',
-			'users/profile_sidebar',
 			'users/gallery',
 			'users/summary',
 			'users/actions',
-			'users/wall'
+			'users/wall',
+			'users/wall_sidebar'
 		));
 
 		// get the user's info based on their slug
