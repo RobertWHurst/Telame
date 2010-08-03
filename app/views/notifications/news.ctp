@@ -1,3 +1,4 @@
+<?php pr($wallPosts); ?>
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">

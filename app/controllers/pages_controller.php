@@ -38,20 +38,6 @@ class PagesController extends AppController {
 		));
 	}
 
-	function news() {
-		App::Import('Model', 'Friend');
-		$this->Friend = new Friend();
-		$friends = $this->Friend->getFriendList(Configure::read('UID'));
-		
-		App::Import('Model', 'WallPost');
-		$this->WallPost = new WallPost();
-		
-		$wallPosts = $this->WallPost->getWallPosts(null, null, null, $friends);
-		$user = $this->currentUser;
-		
-		$this->set(compact('user', 'wallPosts'));
-	}
-
 
 /**
  * Displays a view

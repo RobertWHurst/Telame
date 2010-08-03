@@ -21,7 +21,7 @@ class AppController extends Controller {
 		$user = $this->Session->read('Auth');
 		
 		//redirect to the user's profile.
-		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'news');
+		$this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
 		
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');

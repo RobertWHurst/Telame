@@ -16,3 +16,16 @@
 	width: 980px;
 	margin: auto;
 }
+#page{
+	float: left;
+	width:770px;
+}
+#page_head{
+	background: url('../../img/users/page_head.png') no-repeat top right;
+}
+#page_body{
+	background: #5c5c5c;	
+	border: 1px solid #787878;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #333;
+}
