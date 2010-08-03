@@ -34,6 +34,8 @@ class WallPost extends AppModel {
 		} else {
 			$conditions = array();
 		}
+		// only get parents, not replys
+		$conditions['reply_parent_id'] = null;
 		
 		$this->recursive = 2;
 		$wallPosts = $this->find('all', array(
