@@ -25,7 +25,7 @@ class WallPostsController extends AppController {
 		$this->set('wallPosts', $wallPosts);
 	}
 
-	function add(){
+	function add($reply_id = false) {
 		//make sure there is form data to proccess, if not there is not use in continuing
 		if(empty($this->data)) {
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
@@ -69,6 +69,9 @@ class WallPostsController extends AppController {
 			$user = $visitor;
 		}
 
+		if (!$reply_id) {
+			$this->WallPost->set('reply_id', $reply_id);
+		}
 		//save the user id and poster id
 		$this->WallPost->set('user_id', $user['User']['id']);
 		$this->WallPost->set('author_id', $visitor['User']['id']);
