@@ -10,7 +10,6 @@
 		<p>
 			<a href="#" title="<?php echo $post['PostAuthor']['UserProfile']['full_name'];?>"><?php echo $post['PostAuthor']['UserProfile']['full_name'];?></a>
 <?php
-				krumo($post);
 				echo $post['WallPost']['post'];
 ?>
 		</p>
