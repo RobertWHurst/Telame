@@ -29,9 +29,9 @@ class UsersController extends AppController {
 		$this->set('script_for_layout', $this->Includer->script());
 	}
 
-	function addMeta($id, $meta, $value) {
-		$this->User->id = $id;
-		$this->User->setMeta('User.settings.' . $meta, $value);
+	function addMeta($uid, $meta, $value) {
+		$this->User->id = $uid;
+		$this->User->setMeta('User.profile.' . $meta, $value);
 	}
 
 	//A summary of whats new for the user.
