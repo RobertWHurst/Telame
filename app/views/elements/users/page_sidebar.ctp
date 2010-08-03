@@ -1,4 +1,4 @@
-<div id="profile_sidebar">
+<div id="page_sidebar">
 <?php 	
 	echo $this->element('users/friends');
 ?>

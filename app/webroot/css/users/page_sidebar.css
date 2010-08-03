@@ -1,19 +1,19 @@
-#profile_sidebar{
+#page_sidebar{
 	width: 289px;
 	float: left;
 }
-#profile_sidebar div.friends h1{
+#page_sidebar div.friends h1{
 	font-size:2.4em;
 	line-height:3em;
 	padding: 0 20px;
 }
-#profile_sidebar div.thumbs{
+#page_sidebar div.thumbs{
 	padding: 0 10px;
 }
-#profile_sidebar div.thumb{
+#page_sidebar div.thumb{
 
 }
-#profile_sidebar div.thumb a{
+#page_sidebar div.thumb a{
 	text-align: center;
 	font-size: 1.1em;
 	display: block;
@@ -21,13 +21,13 @@
 	width: 76px;
 	font-weight: bold;
 }
-#profile_sidebar div.avatar{
+#page_sidebar div.avatar{
 	width: 60px;
 	height: 60px;
 	background: #000;
 	margin: 0 8px 8px 8px;
 }
-#profile_sidebar div.avatar img{
+#page_sidebar div.avatar img{
 	width: 60px;
 	height: 60px;
 }
