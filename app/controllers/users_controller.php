@@ -20,9 +20,9 @@ class UsersController extends AppController {
 		));
 	}
 
-	function addMeta($id, $meta, $value) {
-		$this->User->id = $id;
-		$this->User->setMeta('User.settings.' . $meta, $value);
+	function addMeta($uid, $meta, $value) {
+		$this->User->id = $uid;
+		$this->User->setMeta('User.profile.' . $meta, $value);
 	}
 
 	//Before the render of all views in this controller

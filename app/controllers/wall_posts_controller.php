@@ -2,26 +2,26 @@
 class WallPostsController extends AppController {
 
 	//Controller config
-	var $name = 'WallPosts';	
-	var $helpers = array('Time');
-	
+	var $name = 'WallPosts';
+	var $helpers = array('Text', 'Time');
+
 	function lists($id = false){
 		echo 'test';
 		exit;
 	}
-	
+
 	function jx_lists($id = false){
-		
+
 		if(empty($this->data) || !$id){
 			echo 'false';
 			exit;
 		}
-		
+
 		$wallPosts = $this->WallPost->getWallPosts(10, $this->data['offset'], $id);
-		
+
 		//set the layout to none (this is ajax);
 		$this->layout = false;
-		
+
 		$this->set('wallPosts', $wallPosts);
 	}
 
@@ -68,21 +68,17 @@ class WallPostsController extends AppController {
 			//the visitor is the user
 			$user = $visitor;
 		}
-		
-		//find urls and convert them to links
-		$post = preg_replace('/((?:http[s]*|[s]*ftp|git):\/\/[^\r\n\s]+)/', '<a href="$1" rel="" target="TELAME_LINK">$1</a>', $this->data['WallPost']['post']);
-				
 
 		//save the user id and poster id
 		$this->WallPost->set('user_id', $user['User']['id']);
 		$this->WallPost->set('author_id', $visitor['User']['id']);
-		
+
 		//save the post type
-		//TODO: this will change based on the content being posted.		
+		//TODO: this will change based on the content being posted.
 		$this->WallPost->set('type', 1);
 
 		//save the post content and time
-		$this->WallPost->set('post', $post);
+		$this->WallPost->set('post', $this->data['WallPost']['post']);
 		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
 
 		//commit the data to the db
@@ -99,6 +95,7 @@ class WallPostsController extends AppController {
 	function delete($id = false) {
 
 		//get the visitor's data
+		$this->WallPost->User->recursive = -1;
 		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
 
 		//if the wall id is missing
@@ -131,7 +128,7 @@ class WallPostsController extends AppController {
 	}
 
 	function jx_delete($id = false) {
-		
+
 		//get the visitor's data
 		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
 
@@ -154,7 +151,7 @@ class WallPostsController extends AppController {
 			$this->WallPost->find('count', array(
 				'conditions' => $condition_set_1
 			)) < 1 &&
-			
+
 			$this->WallPost->find('count', array(
 				'conditions' => $condition_set_2
 			)) < 1

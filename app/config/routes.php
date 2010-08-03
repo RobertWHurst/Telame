@@ -47,8 +47,9 @@
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	// Avatar
+	// Images - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
+	// Images - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 
 	// Edit

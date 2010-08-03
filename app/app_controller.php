@@ -2,7 +2,7 @@
 class AppController extends Controller {
 
 	//add user athentication
-	var $components = array('Auth', 'Session', 'Includer');
+	var $components = array('Acl', 'Auth', 'Session', 'Includer');
 	var $currentUser;
 
 	// Not for use when developing

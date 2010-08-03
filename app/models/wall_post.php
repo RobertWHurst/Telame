@@ -11,6 +11,12 @@ class WallPost extends AppModel {
 			'foreignKey' => 'author_id'
 		)
 	);
+	var $hasMany = array(
+		'Replies' => array(
+			'className' => 'WallPost',
+			'foreignKey' => 'reply_parent_id'
+		)
+	);
 	
 	//TODO: needs containable.
 	function getWallPosts($limit = 0, $offset = 0, $uid = false, $aid = false, $userMeta = array()){
@@ -29,11 +35,12 @@ class WallPost extends AppModel {
 			$conditions = array();
 		}
 		
-		
+		$this->recursive = 2;
 		$wallPosts = $this->find('all', array(
 			'conditions' => $conditions,
 			'contain' => array(
-				'PostAuthor'
+				'PostAuthor',
+				'Replies.PostAuthor'
 			),
 			'limit' => $limit,
 			'offset' => $offset,

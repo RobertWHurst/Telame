@@ -4,7 +4,7 @@
 ?>
 
 <div class="friends">
-   	<h1>Friends</h1>
+   	<h1><?php echo ($user['User']['id'] == $currentUser['User']['id'] ? 'Your' : ucfirst($user['User']['UserProfile']['first_name'] . '\'s')); ?> Friends</h1>
    	<div class="thumbs">
 <?php
 		if(is_array($friends)):
