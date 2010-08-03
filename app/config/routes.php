@@ -26,14 +26,17 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
- 
-//	App::import('Lib', 'routes/SlugRoute');
+	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
+	App::import('Lib', 'routes/HomeRoute');
+
+	// Temp
+	Router::connect('/am/*', array('controller' => 'users', 'action' => 'addMeta'));
 
  	// Home page
-	Router::connect('/', array('controller' => 'app', 'action' => 'rootRedirect'));	
-	
-	// Super Admin
-	Router::connect('/su', array('controller' => 'super_admin', 'action' => 'home'));	
+ 	// If the first one returns true (the user is logged in) then rediret to news
+	Router::connect('/', array('controller' => 'pages', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
+	// False, redirect to signup page
+	Router::connect('/', array('controller' => 'pages', 'action' => 'signup'));
 	
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));

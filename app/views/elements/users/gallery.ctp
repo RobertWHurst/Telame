@@ -3,7 +3,7 @@
 	<div class="images">
 <?php
 	   	//get the gallery dispaly mode
-	   	switch($user['User']['gallery_mode']):
+	   	switch($user['User']['UserSettings']['gallery_mode']):
 	   		default: case 'single':
 	   			$url = $html->url(array('controller' => 'media', 'action' => 'profile', $user['User']['id']));
 	   			echo $this->Html->image($url);

@@ -16,8 +16,7 @@
 			foreach ($wallPosts as $post){
 				echo $this->element('users/wall_post', array('post' => $post));
 			}
-?>
-			<?php if(true /*TODO: this needs to check the total number of wall posts a user has*/): ?>
+			if(true /*TODO: this needs to check the total number of wall posts a user has*/): ?>
 				<div class="more">
 <?php 
 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'lists', $user['User']['id']));

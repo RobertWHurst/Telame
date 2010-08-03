@@ -36,21 +36,10 @@ class AppController extends Controller {
 			$this->currentUser->recursive = -1;
 			$this->currentUser = $this->currentUser->findById(Configure::read('UID'));
 			$this->set('currentUser', $this->currentUser);
-		}
-		
-		$this->Auth->allow('rootRedirect');
-		
+		}		
 	}
 
 	function beforeRender() {
 	}
 	
-	function rootRedirect(){
-		if($this->currentUser){
-			$this->redirect(array('controller' => 'pages', 'action' => 'news'));
-		}
-		else{
-			$this->redirect(array('controller' => 'pages', 'action' => 'signup'));		
-		}
-	}
 }
