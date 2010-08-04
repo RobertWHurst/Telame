@@ -18,7 +18,8 @@ class notificationsController extends AppController {
 		));
 		$this->Includer->add('script', array(
 			'jquery',
-			'main_sidebar',
+			'base',
+			'main_sidebar'
 		));
 	}
 

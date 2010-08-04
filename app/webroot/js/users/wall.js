@@ -15,9 +15,6 @@ $(document).ready(function(){
 		
 		//the animation speed
 		root.speed = 100;
-		
-		//the domain
-		root.domain = 'http://' + window.location.hostname;
 				
 		//input wrap hover handler
 		root.inputHoverHandler = function(action){
@@ -93,7 +90,7 @@ $(document).ready(function(){
 			domElement.append('<p class="proccess">deleting post...<p>');
 			
 			//send the ajax request
-			$.post(root.domain + ajaxUrl, function(data){
+			$.post(core.domain + ajaxUrl, function(data){
 				
 				if(data === 'true'){					
 					//slide up the post

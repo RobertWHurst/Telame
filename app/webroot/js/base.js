@@ -1,7 +1,11 @@
 jQuery(document).ready(function($){
+
+	core = {
+		'domain': 'http://' + window.location.hostname
+	};
 	
 	//CONSTRUCTORS
-	var construct = {
+	construct = {
 		//LOOP
 		'loop': function(){
 			
