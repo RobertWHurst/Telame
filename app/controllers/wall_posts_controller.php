@@ -94,6 +94,80 @@ class WallPostsController extends AppController {
 		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $user['User']['slug'])));
 		exit;
 	}
+	
+	function jx_add($reply_id = false) {
+		//make sure there is form data to proccess, if not there is not use in continuing
+		if(empty($this->data)) {
+			echo 'false';
+			exit;
+		}
+
+		//save the user id and the visitor id
+		$user_id = $this->data['WallPost']['user_id'];
+		$visitor_id = Configure::read('UID');
+
+		//get the visiting user's data
+		$visitor = $this->WallPost->User->findById($visitor_id);
+
+		//findout if the current user is posting to there own wall. (will skip some un needed logic)
+		if ($user_id != $visitor_id) {
+
+			//IF THE POSTER IS NOT THE THE WALL OWNER
+
+			//get the user's id that owns the wall
+			$user = $this->WallPost->User->findById($user_id);
+
+			//find out if the visitor is a friend
+			$conditions = array(
+				//find links that belong to the user owning the wall
+				'parent_user_id' => $user['User']['id'],
+
+				//and that link to the visitor
+				'child_user_id' => $visitor['User']['id']
+			);
+
+			//if the poster is not friends with the user then return false
+			if ($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1) {
+				echo 'false';
+				exit;
+			}
+		} else {
+			//IF THE POSTER IS THE THE WALL OWNER
+
+			//the visitor is the user
+			$user = $visitor;
+		}
+
+		if (!$reply_id) {
+			$this->WallPost->set('reply_id', $reply_id);
+		}
+		//save the user id and poster id
+		$this->WallPost->set('user_id', $user['User']['id']);
+		$this->WallPost->set('author_id', $visitor['User']['id']);
+
+		//save the post type
+		//TODO: this will change based on the content being posted.
+		$this->WallPost->set('type', 1);
+
+		//save the post content and time
+		$this->WallPost->set('post', $this->data['WallPost']['post']);
+		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
+
+		//commit the data to the db
+		$this->WallPost->save();
+		
+		//get the new wall post id
+		$new_post_id = $this->WallPost->id;
+		
+		//load the view
+		$wallPost = $this->WallPost->findById($new_post_id);
+		
+		//set the layout to none (this is ajax);
+		$this->layout = false;
+		
+		//send the new post to the view
+		$this->set('wallPost', $wallPost);
+	}
 
 	function delete($id = false) {
 

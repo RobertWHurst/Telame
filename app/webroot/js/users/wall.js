@@ -162,7 +162,7 @@ $(document).ready(function(){
 			});
 			
 			//on click event for delete and wall to wall
-			root.wallPostsWrapper.delegate('div.delete, div.wall_to_wall', 'click', function(event){
+			root.wallPostsWrapper.delegate('div.delete', 'click', function(event){
 				
 				//prevent the default action
 				event.preventDefault();

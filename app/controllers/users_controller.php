@@ -84,6 +84,7 @@ class UsersController extends AppController {
 	function profile($slug){
 
 		$this->Includer->add('script', array(
+			'users/wall_input',
 			'users/wall'
 		));
 		$this->Includer->add('css', array(
