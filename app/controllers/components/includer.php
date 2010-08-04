@@ -7,16 +7,15 @@ class IncluderComponent extends Object {
 	);
 		
 	function add($type, $file){
-	
+		$type = strtolower($type);
 		//if we're adding css		
 		if($type == 'css'){
 			if(is_array($file)){
 				foreach($file as $_file)
 					$this->include_array['css'][] = "{$_file}.css";
-			}
-			else
+			} else {
 				$this->include_array['css'][] = "{$file}.css";
-				
+			}	
 		}
 		
 		//if we're adding a script
@@ -24,9 +23,9 @@ class IncluderComponent extends Object {
 			if(is_array($file)){
 				foreach($file as $_file)
 					$this->include_array['script'][] = "{$_file}.js";
-			}
-			else
+			} else {
 				$this->include_array['script'][] = "{$file}.js";			
+			}
 		}
 	}
 	
