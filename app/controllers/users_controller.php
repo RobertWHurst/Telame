@@ -74,40 +74,6 @@ class UsersController extends AppController {
 		$this->Includer->add('css', array(
 			'users/login'
 		));
-
-		//check if the user is logged in
-		if ($this->Auth->user()) {
-			//check to see if the user is to be remembered
-			if (!empty($this->data) && $this->data['User']['auto_login']) {
-				$cookie = array();
-				$cookie['email'] = $this->data['User']['email'];
-				$cookie['password'] = $this->data['User']['password'];
-				$this->Cookie->write('Auth.User', $cookie, true, '+2 weeks');
-				unset($this->data['User']['auto_login']);
-			}
-
-			//run the login
-			$this->redirect($this->Auth->redirect());
-		}
-
-		//check if the post data was sent
-		if (empty($this->data)) {
-
-			//if not see if a cookie is in place to login with
-			$cookie = $this->Cookie->read('Auth.User');
-
-			//check to see if the cookie has data
-			if (!is_null($cookie)) {
-				if ($this->Auth->login($cookie)) {
-					//  Clear auth message, just in case we use it.
-					$this->Session->del('Message.auth');
-					$this->redirect($this->Auth->redirect());
-				} else { // Delete invalid Cookie
-					$this->Cookie->del('Auth.User');
-				}
-			}
-		}
-
 	}
 
 	/** delegate /users/logout request to Auth->logout method */
