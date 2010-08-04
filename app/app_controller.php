@@ -7,7 +7,7 @@ class AppController extends Controller {
 	var $currentUser;
 
 	// Not for use when developing
-//	var $persistModel = true; 
+//	var $persistModel = true;
 
 	function beforeFilter() {
 
@@ -15,28 +15,28 @@ class AppController extends Controller {
 			//load krumo
 			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
 		}
-		
+
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 
 		// get the user's info and store it in the 'user' var
 		$user = $this->Session->read('Auth');
-		
+
 		//redirect to the user's news feed.
-		$this->Auth->loginRedirect = array('/');
-		
+        $this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
+
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');
 
 		// Read the user id from the session and if nothing there, set it to 1
 		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
-		
+
 		// This is available everywhere, be careful what you include, we don't want excessive info
 		if (Configure::read('LoggedIn')) {
 			// The currently logged in user's infomration
-			$this->currentUser = $this->getCurrentUser();				
+			$this->currentUser = $this->getCurrentUser();
 			$this->set('currentUser', $this->currentUser);
-		}		
+		}
 	}
 
 	function beforeRender() {
@@ -59,5 +59,5 @@ class AppController extends Controller {
 				)
 			);
 	}
-	
+
 }

@@ -1,1 +1,1 @@
-<?php pr($friends); ?>
+<?php ?>
