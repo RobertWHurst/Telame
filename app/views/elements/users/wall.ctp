@@ -4,7 +4,6 @@
 ?>
 	<div id="profile_wall_posts">
 <?php
-pr($wallPosts);
 		//if there are posts on the wall then loop through them
 		if (!empty($wallPosts) && is_array($wallPosts)):
 			foreach ($wallPosts as $post){

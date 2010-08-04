@@ -30,11 +30,25 @@ class AppController extends Controller {
 		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
 		
+		// This is available everywhere, be careful what you include, we don't want excessive info
 		if (Configure::read('LoggedIn')) {
 			// The currently logged in user's infomration
 			$this->currentUser = Classregistry::init('User');
-			$this->currentUser->recursive = -1;
-			$this->currentUser = $this->currentUser->findById(Configure::read('UID'));
+			$this->currentUser->Behaviors->attach('Containable');
+			$this->currentUser = $this->currentUser->find('first', array(
+						'conditions' => array(
+							'id' => Configure::read('UID'),
+						),
+						'contain' => array(
+							'Notification' => array(
+								'conditions' => array(
+									'new' => true,
+								)
+							)
+						)
+					)
+				);
+				
 			$this->set('currentUser', $this->currentUser);
 		}		
 	}
