@@ -56,7 +56,11 @@ class UsersController extends AppController {
 			$this->User->id = $this->User->getIdFromSlug($slug);
 
 			foreach ($this->data['UserMeta'] as $key => $val){
-				$this->User->setMeta($key, $val);
+				// skip the full name data
+				if ($this->data[$key == 'full_name']) {
+					continue;
+				} 
+				$this->User->setMeta('User.profile.' . $key, $val);
 			}
 
 			// redirect back to the user's profile
