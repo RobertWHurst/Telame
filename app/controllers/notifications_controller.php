@@ -1,6 +1,7 @@
 <?php
 class notificationsController extends AppController {
 	var $name = 'notifications';
+	var $helpers = array('time');
 	var $uses = array(
 		'Notification',
 		'Friend',
@@ -13,15 +14,30 @@ class notificationsController extends AppController {
 		$this->Includer->add('css', array(
 			'base',
 			'tall_header',
-			'users/main_sidebar'
+			'main_sidebar'
 		));
 		$this->Includer->add('script', array(
 			'jquery',
-			'users/main_sidebar',
+			'main_sidebar',
 		));
 	}
 
+	//Before the render of all views in this controller
+	function beforeRender() {
+		//run the before render in the app controller
+		parent::beforeRender();
+		//set the css and script for the view
+		$this->set('css_for_layout', $this->Includer->css());
+		$this->set('script_for_layout', $this->Includer->script());
+	}
+
 	function news() {
+		$this->Includer->add('css', array(
+			'notifications/news_feed'
+		));
+		$this->Includer->add('script', array(
+			//scripts
+		));
 		$this->Friend = new Friend();
 		$friends = $this->Friend->getFriendList(Configure::read('UID'));
 		

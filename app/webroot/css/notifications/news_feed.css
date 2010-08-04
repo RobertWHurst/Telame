@@ -1,0 +1,13 @@
+#news_feed{
+	padding: 20px;
+}
+#news_feed div.update{	
+	padding: 10px;
+	background: #333;
+	margin-bottom: 10px;
+	position: relative;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}

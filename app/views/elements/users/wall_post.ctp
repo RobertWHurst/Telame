@@ -1,8 +1,8 @@
 <div class="wall_post clearfix">
 	<div class="avatar">
 <?php
-		$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['id']));
-		$url = $html->url(array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']));
+		$image_url = array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['id']);
+		$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
 		echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
 ?>
 	</div>
