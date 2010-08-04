@@ -6,7 +6,7 @@
  * @author Nate Constant
  **/
 
-class ThumbComponent{
+class ThumbComponent {
 
 	/**
 	 * The mime types that are allowed for images

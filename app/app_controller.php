@@ -2,7 +2,8 @@
 class AppController extends Controller {
 
 	//add user athentication
-	var $components = array('Acl', 'Auth', 'Session', 'Includer');
+	// autologin must be before auth in array
+	var $components = array('Acl', 'AutoLogin', 'Auth', 'Session', 'Includer');
 	var $currentUser;
 
 	// Not for use when developing
@@ -20,8 +21,8 @@ class AppController extends Controller {
 		// get the user's info and store it in the 'user' var
 		$user = $this->Session->read('Auth');
 		
-		//redirect to the user's profile.
-		$this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
+		//redirect to the user's news feed.
+		$this->Auth->loginRedirect = array('/');
 		
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');
@@ -33,27 +34,30 @@ class AppController extends Controller {
 		// This is available everywhere, be careful what you include, we don't want excessive info
 		if (Configure::read('LoggedIn')) {
 			// The currently logged in user's infomration
-			$this->currentUser = Classregistry::init('User');
-			$this->currentUser->Behaviors->attach('Containable');
-			$this->currentUser = $this->currentUser->find('first', array(
-						'conditions' => array(
-							'id' => Configure::read('UID'),
-						),
-						'contain' => array(
-							'Notification' => array(
-								'conditions' => array(
-									'new' => true,
-								)
-							)
-						)
-					)
-				);
-				
+			$this->currentUser = $this->getCurrentUser();				
 			$this->set('currentUser', $this->currentUser);
 		}		
 	}
 
 	function beforeRender() {
+	}
+
+	function getCurrentUser() {
+		$currentUser = Classregistry::init('User');
+		$currentUser->Behaviors->attach('Containable');
+		return $currentUser->find('first', array(
+					'conditions' => array(
+						'id' => Configure::read('UID'),
+					),
+					'contain' => array(
+						'Notification' => array(
+							'conditions' => array(
+								'new' => true,
+							)
+						)
+					)
+				)
+			);
 	}
 	
 }

@@ -28,6 +28,16 @@ class NotificationsController extends AppController {
 		$this->set('script_for_layout', $this->Includer->script());
 	}
 
+	function markRead($id) {
+		if (!$id) {
+			$this->redirect('/');
+			exit;
+		}
+		$this->read(null, $id);
+		$this->set('new', false);
+		$this->save();
+	}
+
 	function news() {
 		App::Import('Model', 'Friend');
 		App::Import('Model', 'WallPost');
@@ -43,6 +53,8 @@ class NotificationsController extends AppController {
 		));
 		$this->Friend = new Friend();
 		$friends = $this->Friend->getFriendList(Configure::read('UID'));
+		// add ourself to the list
+		array_push($friends, Configure::read('UID'));
 		
 		$this->WallPost = new WallPost();
 		
