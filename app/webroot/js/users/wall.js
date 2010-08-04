@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var root = this;
 		
 		//save the dom elements
-		root.wallPostsWrapper = $('#profile_wall_posts', '#profile_body');
+		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
 		root.wallPosts = $('#profile_wall_posts > div.wall_post');
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
 		root.wallInputLabel = $('label', '#profile_wall_input');
