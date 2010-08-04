@@ -17,7 +17,7 @@ class User extends AppModel {
 		'Media' => array(
 			'ClassName' => 'Media',
 			'foreignKey' => 'avatar_id',
-		)
+		),
 	);
 
 	var $hasMany = array(
@@ -25,6 +25,7 @@ class User extends AppModel {
 			'ClassName' => 'User',
 			'foreignKey' => 'child_user_id'
 		),
+		'Notification',
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
 			'dependent' => true,

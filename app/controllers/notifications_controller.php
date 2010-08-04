@@ -1,12 +1,8 @@
 <?php
-class notificationsController extends AppController {
+class NotificationsController extends AppController {
 	var $name = 'notifications';
 	var $helpers = array('time');
-	var $uses = array(
-		'Notification',
-		'Friend',
-		'WallPost'
-	);
+	var $uses = array();
 
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -33,6 +29,12 @@ class notificationsController extends AppController {
 	}
 
 	function news() {
+		App::Import('Model', 'Friend');
+		App::Import('Model', 'WallPost');
+		
+		$this->Friend = new Friend();
+		$this->WallPost = new WallPost();
+
 		$this->Includer->add('css', array(
 			'notifications/news_feed'
 		));
