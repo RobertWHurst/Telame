@@ -11,8 +11,8 @@
 }
 #main_sidebar{
 	width: 100%;
-	padding: 10px 0;
-	background: url('../../img/main_sidebar.png');
+	padding-top: 10px;
+	background: url(../../img/page_head.png) no-repeat top left;
 }
 #main_sidebar div.avatar{
 	width: 60px;
@@ -32,10 +32,10 @@
 }
 #main_sidebar div.current_user_controls li a{
 	line-height: 1.5em;
-	font-size: 1.3em;	
+	font-size: 1.3em;
 }
 #main_sidebar div.search{
-	padding: 10px 20px;
+	padding: 10px 20px 20px 20px;
 	position: relative;
 }
 #main_sidebar div.search div.input label{
@@ -62,5 +62,23 @@
 	position:absolute;
 	right:26px;
 	top:16px;
-	background-image: url('../../img/icons/magnifier.png');
+	background-image: url(../../img/icons/magnifier.png);
+}
+#modules div.module div.link a{
+	display: block;
+	font-size: 1.5em;
+	text-decoration: none;
+	line-height: 16px;
+	padding: 10px 20px;
+	background: #343434;
+	border-left: 1px solid #787878;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #333;
+}
+#modules div.module div.link a:hover{
+	background: #5c5c5c;
+}
+#modules div.module div.link a img{
+	vertical-align: -3px;
+	margin-right: 4px;
 }
