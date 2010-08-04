@@ -1,18 +1,18 @@
 <div id="profile_summary">
 	<h1 class="name">
-		<?php echo $user['User']['full_name']; ?>
+		<?php echo $user['User']['UserProfile']['full_name']; ?>
 	</h1>
 <?php echo $form->create('UserMeta', array('url' => '/e/' . $user['User']['slug'])); ?>
 	<table>
-<?php	 foreach(Configure::read('UserMeta') as $meta): ?>
-			<tr class="<?php echo $meta; ?>">
+<?php	 foreach($user['User']['UserProfile'] as $key => $value): ?>
+			<tr class="<?php echo $key; ?>">
 				<td class="value">
-					<?php echo $form->input($meta, array('label' => Inflector::humanize($meta), 'value' => $user['User'][$meta]));
+					<?php echo $form->input($key, array('label' => Inflector::humanize($key), 'value' => $value));
 					//complex logic is represended between line breaks
 ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>
-	</table>	
+	</table>
 <?php echo $form->end('Save'); ?>
 </div>
