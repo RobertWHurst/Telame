@@ -9,32 +9,31 @@
 	margin: 60px 0;
 }
 #profile_wall_input{
-	width: 480px;
-	height: 70px;
 	position: relative;
-	background: #bebebe;
+	background: #9b9b9b;
 	z-index: 1;
+	margin: 15px;
 }
 #profile_wall_input label{
 	position: absolute;
-	top: 26px;
-	left: 26px;
+	top: 11px;
+	left: 11px;
 	font-size: 16px;
 	color: #949494;
 	cursor: text;
 }
-#profile_wall_input input[type="text"]{
-	margin: 20px;
+#profile_wall_input input[type="text"],
+#profile_wall_input textarea{
 	font-size: 16px;
 	padding: 3px 50px 3px 3px;
-	width: 384px;
+	width: 385px;
 	border: 1px solid #949494;
 	background: #dedede;
 }
 #profile_wall_input input[type="submit"]{
 	position: absolute;
-	top: 23px;
-	right: 23px;
+	top: 7px;
+	right: 7px;
 	font-size: 16px;
 	border: none;
 	outline: none;
@@ -45,7 +44,21 @@
 	padding: 0;
 	margin: 0;
 }
-#profile_wall_input{
+#profile_wall_input.active input[type="text"],
+#profile_wall_input.active textarea{
+	border: 1px solid #669b00;
+	background: #fff;
+}
+#profile_wall_input.active label,
+#profile_wall_input.active input[type="submit"]{
+	color: #669b00;
+}
+#profile_wall_input.focus input[type="submit"]{
+	font-weight: bold;
+	text-decoration: underline;
+}
+#profile_wall_input.focus input:hover[type="submit"]{
+	color: #86cf00;
 }
 #profile_wall_input div.box.top,
 #profile_wall_input div.box.top.left,
@@ -53,22 +66,22 @@
 #profile_wall_input div.box.bottom,
 #profile_wall_input div.box.bottom.left,
 #profile_wall_input div.box.bottom.right{
-	height: 24px;
+	height: 10px;
 }
 #profile_wall_input div.box.top,
 #profile_wall_input div.box.bottom{
 	position: absolute;
 	width: 100%;
-	background: url('../../img/box_sprites/large_input_h.png');
+	background: url('../../img/users/wall_input_h.png');
 	z-index: 2;
 }
 #profile_wall_input div.box.top{
-	top: -20px;
-	background-position: 0 -68px;
+	top: -10px;
+	background-position: 0 0;
 }
 #profile_wall_input div.box.bottom{
-	bottom: -20px;
-	background-position: 0 -111px;
+	bottom: -10px;
+	background-position: 0 -10px;
 }
 
 #profile_wall_input div.box.top.left,
@@ -77,84 +90,83 @@
 #profile_wall_input div.box.bottom.right,
 #profile_wall_input div.box.left,
 #profile_wall_input div.box.right{
-	width:16px;
+	width:10px;
 	position: absolute;
 }
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.top.right,
 #profile_wall_input div.box.bottom.left,
 #profile_wall_input div.box.bottom.right{
-	width:16px;
-	position: absolute;
 	z-index: 3;
 	top:0;
-	background: url('../../img/box_sprites/large_input_r.png');
+	background: url('../../img/users/wall_input_r.png');
 }
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.bottom.left,
 #profile_wall_input div.box.left{
-	left: -16px;
+	left: -10px;
 }
 #profile_wall_input div.box.top.right,
 #profile_wall_input div.box.bottom.right,
 #profile_wall_input div.box.right{
-	right: -16px;
+	right: -10px;
 }
 #profile_wall_input div.box.top.left{
-	background-position: -32px 0;
+	background-position: 0 0;
 }
 #profile_wall_input div.box.top.right{
-	background-position: -48px 0;
+	background-position: -10px 0;
 }
 #profile_wall_input div.box.bottom.left{
-	background-position: -32px -43px;
+	background-position: 0 -10px;
 }
 #profile_wall_input div.box.bottom.right{
-	background-position: -48px -43px;
+	background-position: -10px -10px;
 }
 #profile_wall_input div.box.left,
 #profile_wall_input div.box.right{
-	background: url('../../img/box_sprites/large_input_v.png');
+	background: url('../../img/users/wall_input_v.png');
 	height: 100%;
 	z-index: 2;
 }
 #profile_wall_input div.box.left{
-	background-position: -30px 0;
+	background-position: 0 0;
 }
 #profile_wall_input div.box.right{
-	background-position: -46px 0;
+	background-position: -10px 0;
 }
 #profile_wall_input div.box.inner{
 	position: relative;
 	z-index: 3;
+	padding:4px;
 }
 
 #profile_wall_input.focus{
-	background: #d9e1c5;
+	background: #d3ef91;
 }
 #profile_wall_input.focus div.box.top{
-	background-position: 0 0;
+	background-position: 0 -20px;
 }
 #profile_wall_input.focus div.box.bottom{
-	background-position: 0 -43px;
+	background-position: 0 -30px;
 }
 #profile_wall_input.focus div.box.top.left{
-	background-position: 0 0;
+	background-position: -20px 0;
 }
 #profile_wall_input.focus div.box.top.right{
-	background-position: -16px 0;
+	background-position: -30px 0;
 }
 #profile_wall_input.focus div.box.bottom.left{
-	background-position: 0 -43px;
+	background-position: -20px -10px;
 }
 #profile_wall_input.focus div.box.bottom.right{
-	background-position: -16px -43px;
+	background-position: -30px -10px;
 }
 #profile_wall_input.focus div.box.left{
-	background-position: 2px 0;
+	background-position: -20px 0;
 }
 #profile_wall_input.focus div.box.right{
-	background-position: -14px 0;
+	background-position: -30px 0;
 }
 #profile_wall_posts{
 	padding: 0 10px;

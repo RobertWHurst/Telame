@@ -13,9 +13,8 @@
 		<div id="page_body">
 			<div id="news_feed">
 <?php
-				foreach($wallPosts as $update){
+				foreach($wallPosts as $update)
 					echo $this->element('notifications/news_update', array('update' => $update));
-				}
 ?>
 			</div>			
 			<div id="news_sidebar">
