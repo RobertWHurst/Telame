@@ -11,6 +11,7 @@ class AlbumsController extends AppController {
 			$uid = $this->Album->User->getIdFromSlug($slug);
 		} else {
 			$uid = $this->currentUser['User']['id'];
+			$slug = $this->currentUser['User']['slug'];
 		}
 
 		// get all albums
@@ -22,7 +23,7 @@ class AlbumsController extends AppController {
 			$currentAlbum = $this->Album->getAlbumInfo($aid);
 		}
 		
-		$this->set(compact('currentAlbum', 'allAlbums', 'albumMedia'));
+		$this->set(compact('currentAlbum', 'allAlbums', 'albumMedia', 'slug'));
 	}
 
 }

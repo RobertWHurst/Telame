@@ -1,6 +1,6 @@
 <?php
 foreach($allAlbums as $a) {
-	echo $html->link($a['Album']['title'], '/albums/eric/' . $a['Album']['title']);
+	echo $html->link($a['Album']['title'], '/albums/' . $slug . '/' . $a['Album']['title']);
 }
 
 echo 'All user\'s albums';
