@@ -67,101 +67,34 @@ $(document).ready(function(){
 		}
 		
 		//post hover handler
-		root.postHoverHandler = function(domElement, action){
+		root.postHoverHandler = function(){
 			
-			//if fading in
-			if(action === 'in'){
-				domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(root.speed);
-			}
-			//if fading out
-			else if(action === 'out'){
-				domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(root.speed);
-			}
-			
-		}
-		
-		//delete handler
-		root.postDeleteHandler = function(domElement, ajaxUrl){
-			
-			//hide the content
-			domElement.children().hide();
-			
-			//add a proccess dialog
-			domElement.append('<p class="proccess">deleting post...<p>');
-			
-			//send the ajax request
-			$.post(core.domain + ajaxUrl, function(data){
-				
-				if(data === 'true'){					
-					//slide up the post
-					domElement.fadeOut(root.speed * 3, function(){
-						domElement.remove();
-					});
-				}
-				else{		
-					//restore the post
-					domElement.children('p.proccess').remove();
-					domElement.children().fadeIn(root.speed * 3);					
-				}
-			});
-		}
-		
-		root.morePostsHandler = function(domElement, ajaxUrl){
-			
-			//hide the content
-			domElement.children().hide();
-			
-			//add a proccess dialog
-			domElement.append('<p class="proccess">Loading more posts...<p>');
-			
-			//send the ajax request
-			$.post(root.domain + ajaxUrl, {
-				'data[offset]': $('div.wall_post', '#profile_wall_posts').size()
-			}, 
-			function(data){
-				
-				if(data !== 'false'){
-				
-					root.wallPostsWrapper.append(data);
-					
-					//remove and reapend the more posts button
-					domElement.remove();
-					
-					//reappend the more posts button
-					root.wallPostsWrapper.append(domElement);
-					domElement.children('p.proccess').remove();
-					domElement.children().fadeIn(root.speed * 3);	
-				}
-				else{		
-					//restore the post
-					domElement.remove();				
-				}
-			});		
-		}
-		
-		root.construct = function(){
-		
 			//hide all of the wall post controls
 			root.wallPosts.children('div.delete, div.wall_to_wall').hide();
-			
+		
 			//on hover event for each post	
 			root.wallPostsWrapper.delegate('div.wall_post', 'hover', function(event){
+			
+				//grab the dom element
+				domElement = $(this);
+			
   				if(event.type == 'mouseover'){
-				
+			
 					//get the target
 					domElement = $(this);
-				
-					root.postHoverHandler(domElement, 'in');
+			
+					domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(root.speed);
   				}
   				else{
 				
-					domElement = $(this);
-				
-					root.postHoverHandler(domElement, 'out');
+					domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(root.speed);
   				}
 			});
+		}
+		
+		//delete handler
+		root.postDeleteHandler = function(){
 			
-			//on click event for delete and wall to wall
 			root.wallPostsWrapper.delegate('div.delete', 'click', function(event){
 				
 				//prevent the default action
@@ -176,26 +109,34 @@ $(document).ready(function(){
 				//get the target post (not the button)
 				domElement = button.parent();
 				
-				root.postDeleteHandler(domElement, ajaxUrl);
-			});
+				//hide the content
+				domElement.children().hide();
+				
+				//add a proccess dialog
+				domElement.append('<p class="proccess">deleting post...<p>');
 			
-			//on input hover event
-			root.wallInputWrap.hover(function(){
-				root.inputHoverHandler('in');
-			},
-			function(){
-				root.inputHoverHandler('out');
+				//send the ajax request
+				$.post(core.domain + ajaxUrl, function(data){
+					
+					if(data === 'true'){					
+						//slide up the post
+						domElement.fadeOut(root.speed * 3, function(){
+							domElement.remove();
+						});
+					}
+					else{		
+						//restore the post
+						domElement.children('p.proccess').remove();
+						domElement.children().fadeIn(root.speed * 3);					
+					}
+				});
+				
 			});
-			
-			//on input focus event
-			root.wallInput.focus(function(){
-				root.inputFocusHandler('in');
-			});
-			root.wallInput.blur(function(){
-				root.inputFocusHandler('out');
-			});
-			
-			//on click for more posts			
+
+		}
+		
+		root.morePostsHandler = function(){
+		
 			root.morePosts.live('click', function(event){
 				
 				//prevent the default action
@@ -210,8 +151,48 @@ $(document).ready(function(){
 				//get the target post (not the button)
 				domElement = button.parent();
 				
-				root.morePostsHandler(domElement, ajaxUrl);
-			});
+				//hide the content
+				domElement.children().hide();
+				
+				//add a proccess dialog
+				domElement.append('<p class="proccess">Loading more posts...<p>');
+				
+				//send the ajax request
+				$.post(core.domain + ajaxUrl, {
+					'data[offset]': $('div.wall_post', '#profile_wall_posts').size()
+				}, 
+				function(data){
+					
+					if(data !== 'false'){
+					
+						root.wallPostsWrapper.append(data);
+						
+						//remove and reapend the more posts button
+						domElement.remove();
+						
+						//reappend the more posts button
+						root.wallPostsWrapper.append(domElement);
+						domElement.children('p.proccess').remove();
+						domElement.children().fadeIn(root.speed * 3);	
+					}
+					else{		
+						//restore the post
+						domElement.remove();				
+					}
+				});
+			});		
+		}
+		
+		root.construct = function(){
+		
+			//on hover event for each post	
+			root.postHoverHandler();
+			
+			//on click event for delete and wall to wall
+			root.postDeleteHandler();
+			
+			//on click for more posts			
+			root.morePostsHandler();
 		}
 		
 		//self execute
