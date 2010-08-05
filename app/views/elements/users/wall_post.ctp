@@ -14,13 +14,13 @@
 	</div>
 	<div class="delete">
 <?php 
-		$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']));
+		$url = array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 		echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
 ?>
 	</div>
 	<div class="wall_to_wall">
 <?php 
-		$url = $html->url(array('controller' => 'wall_posts', 'action' => 'wall_to_wall', $post['WallPost']['id']));
+		$url = array('controller' => 'wall_posts', 'action' => 'wall_to_wall', $post['WallPost']['id']);
 		$url = '#';
 		echo $html->image('icons/comments.png', array('title' => __('Wall to Wall',true), 'url' => $url));
 ?>

@@ -8,7 +8,7 @@
 	</div>
 	<div id="page">
 		<div id="page_head">
-			<h1 class="page_title">Telame News Feed</h1>
+			<h1 class="page_title"><?php echo $currentUser['User']['UserProfile']['full_name']; ?>'s News Feed</h1>
 		</div>
 		<div id="page_body">
 			<div id="news_feed">
