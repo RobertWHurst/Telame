@@ -51,7 +51,7 @@ class User extends AppModel {
 
 	function getIdFromSlug($slug) {
 		$this->recursive = -1;
-		$user = $this->findBySlug($slug);
+		$user = $this->find('first', array('conditions' => array('lower(slug)' => strtolower($slug)), 'fields' => 'id'));
 		return $user['User']['id'];
 	}
 
