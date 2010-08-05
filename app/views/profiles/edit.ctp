@@ -8,19 +8,16 @@
 	</div>
 	<div id="page">
 		<div id="page_head" class="clearfix">
-<?php
-			//render the profile gallery
-			echo $this->element('users/gallery');
-
-			//render the profile summary
-			echo $this->element('users/summary');
-			echo $this->element('users/actions');
+			<div id="profile_summary">
+				<h1 class="name">
+					<?php echo $this->data['Profile']['full_name']; ?>
+				</h1>
+<?php			echo $form->create('Profile', array('url' => '/e/' . $currentUser['User']['slug']));
+				echo $form->input('first_name');
+				echo $form->input('last_name');
+				echo $form->hidden('id', array('value' => $this->data['Profile']['id']));
+				echo $form->end('Save');
 ?>
-		</div>
-		<div id="page_body" class="clearfix">
-			<?php echo $this->element('users/wall'); ?>
-			<div id="wall_sidebar">
-				<?php echo $this->element('users/friends'); ?>
 			</div>
 		</div>
 	</div>

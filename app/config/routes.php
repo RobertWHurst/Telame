@@ -57,7 +57,7 @@
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
 	
 	// Edit
-	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
+	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));
 
 	// Friends List	
 	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'listFriends'));

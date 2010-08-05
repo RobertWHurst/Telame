@@ -1,20 +1,11 @@
 <div id="profile_summary">
 	<h1 class="name">
-		<?php echo $user['User']['UserProfile']['full_name']; ?>
+		<?php echo $user['Profile']['full_name']; ?>
 	</h1>
 	<table>
-<?php	 foreach($user['User']['UserProfile'] as $key => $value): ?>
-			<tr class="<?php echo $key; ?>">
-				<th class="key">
-					<?php echo Inflector::humanize($key); ?>
-				</th>
-				<td class="value">
-					<?php echo $value; ?>
-<?php
-					//complex logic is represended between line breaks
-?>
-				</td>
-			</tr>
-		<?php endforeach; ?>
+		<tr class="key">
+			<th class="key">Name:</th>
+			<td class="value"><?php echo $user['Profile']['full_name']; ?></td>
+		</tr>
 	</table>	
 </div>
