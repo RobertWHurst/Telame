@@ -32,12 +32,15 @@
 	// Temp
 	Router::connect('/am/*', array('controller' => 'users', 'action' => 'addMeta'));
 
- 	// Home page
+// Home page
+
  	// If the first one returns true (the user is logged in) then rediret to news
 	Router::connect('/', array('controller' => 'notifications', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
 	// False, redirect to signup page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'signup'));
 	
+// Site pages
+
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
@@ -47,13 +50,22 @@
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+
+// User info
+
+	// Albums
+	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
+	
+	// Edit
+	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
+
+	// Friends List	
+	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'listFriends'));
+
 	// Images - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
 	// Images - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
-
-	// Edit
-	Router::connect('/e/*', array('controller' => 'users', 'action' => 'edit'));
 	
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
@@ -65,9 +77,7 @@
 	Router::connect('/jx/w/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
 	
-	// Friends List	
-	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'listFriends'));
-	
+// This must be last
 	// Profile
 	Router::connect('/news', array('controller' => 'pages', 'action' => 'news'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));

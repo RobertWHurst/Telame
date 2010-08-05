@@ -11,6 +11,9 @@ class MediaController extends AppController {
 		$this->_resize($uid, Configure::read('ProfileSize'), 'profile');
 	}
 
+
+//---------------------------- Private Functions ----------------------------//
+
 	// this function fetches the user's avatar
 	function _resize($uid = null, $size, $dir) {
 		if (empty($uid)) {
