@@ -21,6 +21,7 @@ class User extends AppModel {
 	);
 
 	var $hasMany = array(
+		'Album',
 		'Friend' => array(
 			'ClassName' => 'User',
 			'foreignKey' => 'child_user_id'
