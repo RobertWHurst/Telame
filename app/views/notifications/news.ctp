@@ -8,7 +8,8 @@
 	</div>
 	<div id="page">
 		<div id="page_head">
-			<h1 class="page_title"><?php echo $currentUser['User']['UserProfile']['full_name']; ?>'s News Feed</h1>
+			<h1 class="page_title">What's New</h1>
+			<?php echo $html->link('Get your news via RSS', '#', array('title' => 'Get your news via RSS', 'class' => 'rss_link')); ?>
 		</div>
 		<div id="page_body">
 			<div id="news_feed">
@@ -18,6 +19,7 @@
 ?>
 			</div>			
 			<div id="news_sidebar">
+				sidebar
 			</div>
 		</div>
 	</div>
