@@ -40,36 +40,6 @@ class UsersController extends AppController {
 		$wp = $this->User->WallPost->find('all');
 	}
 
-	function edit($slug = false) {
-		// If the user is not an admin, and they're trying to edit somebody else's profile, redirect them to their own
-		if (/*!$admin ||*/ $slug != $this->currentUser['User']['slug']) {
-			$this->redirect('/e/' . $this->currentUser['User']['slug']);
-		}
-		// there is a slug and there isn't any data, so edit functionality
-		if ($slug && empty($this->data)) {
-			// call the profile function get fill all of our info for us
-			$this->profile($slug);
-			$this->set('edit', true);
-			$this->render('profile');
-		}
-		// the data array isn't empty, so let's save it
-		if (!empty($this->data)) {
-			$this->User->id = $this->User->getIdFromSlug($slug);
-
-			foreach ($this->data['UserMeta'] as $key => $val){
-				// skip the full name data
-				if ($this->data[$key == 'full_name']) {
-					continue;
-				} 
-				$this->User->setMeta('User.profile.' . $key, $val);
-			}
-
-			// redirect back to the user's profile
-			$this->redirect('/' . $slug);
-			exit;
-		}
-	}
-
 	function login(){
 		$this->Includer->add('css', array(
 			'users/login'
@@ -107,7 +77,7 @@ class UsersController extends AppController {
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, $user['User']['id']);
 
 		//page title
-		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['User']['UserProfile']['full_name']);
+		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['Profile']['full_name']);
 
 		//pass the profile data to the view
 		$this->set(compact('user', 'wallPosts'));

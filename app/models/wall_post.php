@@ -41,8 +41,8 @@ class WallPost extends AppModel {
 		$wallPosts = $this->find('all', array(
 			'conditions' => $conditions,
 			'contain' => array(
-				'PostAuthor',
-				'Replies.PostAuthor'
+				'PostAuthor.Profile',
+				'Replies.PostAuthor.Profile'
 			),
 			'limit' => $limit,
 			'offset' => $offset,

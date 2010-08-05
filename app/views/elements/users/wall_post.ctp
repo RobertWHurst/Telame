@@ -8,7 +8,7 @@
 	</div>
 	<div class="post_content">
 		<p>
-			<a href="#" title="<?php echo $post['PostAuthor']['UserProfile']['full_name'];?>"><?php echo $post['PostAuthor']['UserProfile']['full_name'];?></a>
+			<a href="/<?php echo $post['PostAuthor']['slug']?>" title="<?php echo $post['PostAuthor']['Profile']['full_name'];?>"><?php echo $post['PostAuthor']['Profile']['full_name'];?></a>
 <?php			echo $text->autoLink($post['WallPost']['post']); ?>
 		</p>
 	</div>
