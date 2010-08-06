@@ -35,7 +35,6 @@ class AppController extends Controller {
 		if (Configure::read('LoggedIn')) {
 			// The currently logged in user's infomration
 			$this->currentUser = $this->getCurrentUser();
-			$this->set('currentUser', $this->currentUser);
 		}
 	}
 
@@ -45,7 +44,7 @@ class AppController extends Controller {
 	function getCurrentUser() {
 		$currentUser = Classregistry::init('User');
 		$currentUser->Behaviors->attach('Containable');
-		return $currentUser->find('first', array(
+		$currentUser = $currentUser->find('first', array(
 					'conditions' => array(
 						'id' => Configure::read('UID'),
 					),
@@ -58,6 +57,8 @@ class AppController extends Controller {
 					)
 				)
 			);
+		$this->set('currentUser', $currentUser);
+		return $currentUser;
 	}
 
 }
