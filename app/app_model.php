@@ -18,14 +18,20 @@ class AppModel extends Model {
 		foreach($arguments as $key => $argument){
 
 			//if the agrument is invalid contine the loop
-			if(!isset($defaults[$key]) && !$keep_unset)
+			if(!$keep_unset || !isset($defaults[$key]))
 				continue; //the option is invalid
 
 			//if the agrument is acually an array of aguments
 			if(is_array($argument)){
 
+				//if keep_unset is true and the default is not an array add the array
+				if($keep_unset && !is_array($defaults[$key])){
+					$results[$key] = $argument;
+					continue; //advance the loop
+				}
+				
 				//if the agument is an array then make sure it is valid
-				if(!is_array($defaults[$key]) && !$keep_unset)
+				if(!is_array($defaults[$key]))
 					continue; //the option is not an array
 
 				//set the suboptions
@@ -37,6 +43,7 @@ class AppModel extends Model {
 				$results[$key] = $argument;
 			}
 		}
+		
 		return $results;
 	}
 
