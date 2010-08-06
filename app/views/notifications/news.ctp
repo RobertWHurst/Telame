@@ -18,7 +18,7 @@
 					echo $this->element('notifications/news_update', array('update' => $update));
 ?>
 			</div>
-			<?php echo $this->element('notifications/news_sidebar', array('filters' => $filters)); ?>
+			<?php echo $this->element('notifications/news_sidebar', array('friendLists' => $friendLists)); ?>
 		</div>
 	</div>
 </div>

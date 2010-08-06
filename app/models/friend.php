@@ -8,36 +8,43 @@ class Friend extends AppModel{
 		),
 		'UserFriend' => array(
 			'className' => 'User',
-			'foreignKey' => 'child_user_id'		
+			'foreignKey' => 'child_user_id'
+		),
+		'FriendList' => array(
+			'className' => 'FriendList',
+			'foreignKey' => 'list_id'		
 		)
 	);
 
-	function getFriends($limit = 0, $offset = 0, $uid){
+	function getFriends($limit = 0, $offset = 0, $arguments = false){
+					
+		$defaults = array(
+			'friendList' => false,
+			'uid' => false,
+			'list' => false
+		);
+		
+		$options = $this->parseArguments($defaults, $arguments);
 				
-		$this->Behaviors->attach('Containable');
-				
-		$friends = $this->find('all', array(
+		//set the find mode
+		if($options['list'])
+			$mode = 'list';
+		else{
+			$this->Behaviors->attach('Containable');
+			$mode = 'all';
+			$findConfig['contain'] = array('UserFriend.Profile');
+		}
+		
+		$findConfig = array(
 			'conditions' => array(
-				'parent_user_id' => $uid,
-			),
-			'contain' => array(
-				'UserFriend.Profile'
+				'parent_user_id' => $options['uid'],
 			),
 			'limit' => $limit,
 			'offset' => $offset
-		));
+		);
+		
+		$friends = $this->find($mode, $findConfig);
 		
 		return $friends;
-	}
-	
-	function getFriendList($uid) {
-		return $this->find('list', array(
-			'conditions' => array(
-				'parent_user_id' => $uid,
-			),
-			'fields' => array(
-				'child_user_id'
-			)
-		));
 	}
 }

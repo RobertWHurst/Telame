@@ -18,7 +18,7 @@ class AppModel extends Model {
 		foreach($arguments as $key => $argument){
 
 			//if the agrument is invalid contine the loop
-			if(!$keep_unset || !isset($defaults[$key]))
+			if(!$keep_unset && !isset($defaults[$key]))
 				continue; //the option is invalid
 
 			//if the agrument is acually an array of aguments
@@ -43,6 +43,14 @@ class AppModel extends Model {
 				$results[$key] = $argument;
 			}
 		}
+		
+		/*
+		krumo(array(
+			'defaults' => $defaults,
+			'aguments' => $arguments,
+			'options' => $results
+		));
+		*/
 		
 		return $results;
 	}

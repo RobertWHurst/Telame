@@ -38,37 +38,33 @@ class NotificationsController extends AppController {
 		$this->save();
 	}
 
-	function news($selectedfilter = null) {
-		
-		//FILTERS
-		//TODO: this should pull from user config
-		$user_filters = array(
-			'list1' => array('name' => 'List 1', 'uri' => '_'),
-			'list2' => array('name' => 'List 2', 'uri' => '_'),
-			'list3' => array('name' => 'List 3', 'uri' => '_')
-		);
-		
-		$default_filters = array(
-			'all' => array('name' => 'Everyone', 'uri' => null),
-			'hidden' => array('name' => 'Hidden', 'uri' => 'h')
-		);
-		
-		$filters = array_merge($default_filters, $user_filters);
-		
-		//add selected info
-		foreach($filters as $key => $filter){
-			if($filter['uri'] == $selectedfilter)
-				$filters[$key]['selected'] = true;
-			else
-				$filters[$key]['selected'] = false;				
-		}
-		
+	function news($selectedFriendList = null) {
+				
 		App::Import('Model', 'Friend');
+		App::Import('Model', 'FriendList');
 		App::Import('Model', 'WallPost');
 		
 		$this->Friend = new Friend();
+		$this->FriendList = new FriendList();
 		$this->WallPost = new WallPost();
-
+				
+		$friendLists = $this->FriendList->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
+		
+		$default_friendLists = array(
+			'all' => array('FriendList' => array('name' => 'Everyone', 'id' => null)),
+			//'hidden' => array('FriendList' => array('name' => 'Hidden', 'id' => 'h'))
+		);
+		
+		$friendLists = array_merge($default_friendLists, $friendLists);
+		
+		//add selected info
+		foreach($friendLists as $key => $filter){
+			if($filter['FriendList']['id'] == $selectedFriendList)
+				$friendLists[$key]['selected'] = true;
+			else
+				$friendLists[$key]['selected'] = false;				
+		}
+		
 		$this->Includer->add('css', array(
 			'notifications/news_feed',
 			'notifications/news_sidebar'
@@ -77,13 +73,17 @@ class NotificationsController extends AppController {
 			//scripts
 		));
 		
-		$friends = $this->Friend->getFriendList(Configure::read('UID'));
+		$friends = $this->Friend->getFriends(0, 0, array(
+			'uid' => $this->currentUser['User']['id'],
+			'list' => true,
+			'friendsList' => $selectedFriendList
+		));
 		// add ourself to the list
-		array_push($friends, Configure::read('UID'));
+		array_push($friends, $this->currentUser['User']['id']);
 		
 		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 		
-		$this->set(compact('user', 'wallPosts', 'filters'));
+		$this->set(compact('user', 'wallPosts', 'friendLists'));
 	}
 }

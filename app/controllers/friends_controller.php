@@ -6,9 +6,7 @@ class FriendsController extends AppController {
 		//get the current user id
 		$uid = $this->currentUser['User']['id'];
 		
-		$temp = $this->Friend->getFriends(0, 0, $uid);
-		
-		krumo($temp);
+		$temp = $this->Friend->getFriends(0, 0, array('uid' => $uid));
 	}
 
 }

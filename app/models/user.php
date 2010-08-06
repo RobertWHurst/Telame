@@ -2,17 +2,6 @@
 class User extends AppModel {
 	var $name = 'User';
 
-	var $actsAs = array('Metadata.metadata');
-/*	var $actsAs = array('Metadata.metadata' => array(
-			'validate' => array(
-				'fieldname' => array(
-					'rule' => 'postal',
-					'message' => 'Must be a postal code'
-				)
-			)
-		)
-	);
-*/
 	var $belongsTo = array(
 		'Media' => array(
 			'ClassName' => 'Media',

@@ -30,11 +30,6 @@ class UsersController extends AppController {
 		$this->set('script_for_layout', $this->Includer->script());
 	}
 
-	function addMeta($uid, $meta, $value) {
-		$this->User->id = $uid;
-		$this->User->setMeta('User.profile.' . $meta, $value);
-	}
-
 	//A summary of whats new for the user.
 	function index() {
 		$wp = $this->User->WallPost->find('all');
