@@ -42,7 +42,8 @@ class WallPost extends AppModel {
 			'conditions' => $conditions,
 			'contain' => array(
 				'PostAuthor.Profile',
-				'Replies.PostAuthor.Profile'
+				'Replies.PostAuthor.Profile',
+				'User.Profile',
 			),
 			'limit' => $limit,
 			'offset' => $offset,
