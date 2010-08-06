@@ -77,7 +77,7 @@ class UsersController extends AppController {
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 
 		//page title
-		$this->set('title_for_layout', Configure::read('SiteName') . ' | ' . $user['Profile']['full_name']);
+		$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name']);
 
 		//pass the profile data to the view
 		$this->set(compact('user', 'wallPosts'));

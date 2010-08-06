@@ -13,13 +13,13 @@
 				<div class="more">
 <?php 
 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'lists', $user['User']['id']));
-					echo $html->link(__('Older Posts', true), $url);
+					echo $html->link(__('older_posts', true), $url);
 ?>
 				</div>
 			<?php endif; ?>
 		<?php else: ?>
 			<p class="no_posts">
-				<?php __('Sorry, your wall is a bit empty at the moment...'); ?>
+				<?php __('wall_empty'); ?>
 			</p>
 		<?php endif; ?>
 	</div>

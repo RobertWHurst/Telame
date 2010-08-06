@@ -1,0 +1,125 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2010-08-06 21:50+0000\n"
+"PO-Revision-Date: 2010-08-06 14:55-0800\n"
+"Last-Translator: Eric <efriesen@gmail.com>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /controllers/notifications_controller.php:89
+#: /controllers/users_controller.php:80
+#: /views/elements/pages/header.ctp:4
+#: /views/notifications/news.ctp:5
+#: /views/profiles/edit.ctp:5
+#: /views/users/login.ctp:2
+#: /views/users/profile.ctp:5
+msgid "site_name"
+msgstr "Telame"
+
+#: /controllers/notifications_controller.php:89
+#: /views/notifications/news.ctp:11
+msgid "news_title"
+msgstr "What's New and Exciting"
+
+#: /controllers/wall_posts_controller.php:61
+msgid "wall_post_error"
+msgstr "Sorry, you're not allowed to do that"
+
+#: /controllers/wall_posts_controller.php:180
+msgid "wall_post_delete_error"
+msgstr "We couldn't find that post."
+
+#: /controllers/wall_posts_controller.php:195
+msgid "wall_post_bad_hacker"
+msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
+
+#: /controllers/wall_posts_controller.php:202
+msgid "wall_post_delete"
+msgstr "It's gone"
+
+#: /views/elements/notifications/news_sidebar.ctp:3
+msgid "filter_title"
+msgstr "Filter Results"
+
+#: /views/elements/notifications/news_update.ctp:26
+#: /views/elements/users/wall_post.ctp:18
+msgid "delete"
+msgstr "Delete"
+
+#: /views/elements/pages/login.ctp:4
+#: /views/users/login.ctp:8
+msgid "email"
+msgstr "Email"
+
+#: /views/elements/pages/login.ctp:5
+#: /views/users/login.ctp:9
+msgid "password"
+msgstr "Password"
+
+#: /views/elements/pages/login.ctp:6
+#: /views/users/login.ctp:10
+msgid "auto_login"
+msgstr "Log me in automatically"
+
+#: /views/elements/pages/login.ctp:7
+#: /views/elements/pages/navigation.ctp:7
+#: /views/users/login.ctp:11
+msgid "login"
+msgstr "Login"
+
+#: /views/elements/pages/navigation.ctp:3
+msgid "features"
+msgstr "Features"
+
+#: /views/elements/pages/navigation.ctp:6
+msgid "signup"
+msgstr "Signup"
+
+#: /views/elements/pages/navigation.ctp:10
+msgid "profile_title"
+msgstr "My Profile"
+
+#: /views/elements/pages/navigation.ctp:11
+#: /views/elements/users/current_user_controls.ctp:13
+msgid "logout"
+msgstr "Logout"
+
+#: /views/elements/users/current_user_controls.ctp:11
+msgid "my_profile"
+msgstr "My Profile"
+
+#: /views/elements/users/current_user_controls.ctp:12
+msgid "edit_my_profile"
+msgstr "Edit My Profile"
+
+#: /views/elements/users/search.ctp:6;7
+msgid "search"
+msgstr "Search"
+
+#: /views/elements/users/wall.ctp:16
+msgid "older_posts"
+msgstr "Older Posts"
+
+#: /views/elements/users/wall.ctp:22
+msgid "wall_empty"
+msgstr "Sorry, your wall seems a bit empty"
+
+#: /views/elements/users/wall_input.ctp:14
+msgid "wall_post_label"
+msgstr "What's on your mind?"
+
+#: /views/elements/users/wall_input.ctp:16
+msgid "wall_post_submit"
+msgstr "Post"
+
+#: /views/elements/users/wall_post.ctp:25
+msgid "wall_to_wall"
+msgstr "Wall-to-wall"
+

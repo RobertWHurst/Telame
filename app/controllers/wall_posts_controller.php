@@ -58,7 +58,7 @@ class WallPostsController extends AppController {
 
 			//if the poster is not friends with the user then return false
 			if ($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1) {
-				$this->Session->setFlash(__('No, I can\'t let you do that. Only people that are friends can post on the wall', true));
+				$this->Session->setFlash(__('wall_post_error', true));
 				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
 				exit;
 			}
@@ -177,7 +177,7 @@ class WallPostsController extends AppController {
 
 		//if the wall id is missing
 		if(!$id) {
-			$this->Session->setFlash(__('Uhh... Sorry We\'ve Looked everywhere but we can\'t find that post. Try again if you can find it.', true));
+			$this->Session->setFlash(__('wall_post_delete_error', true));
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
 			exit;
 		}
@@ -192,14 +192,14 @@ class WallPostsController extends AppController {
 		if($this->WallPost->find('count', array('conditions' => $conditions)) < 1){
 
 			//set the flash message and redirect them, the metaling sods! :<
-			$this->Session->setFlash(__('Bit of a hacker are we? well sorry you can\'t delete that post. It\'s not on your wall!', true));
+			$this->Session->setFlash(__('wall_post_bad_hacker', true));
 			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
 			exit;
 		}
 
 		//if everything checks out then delete the post and exit
 		$this->WallPost->delete($id);
-		$this->Session->setFlash(__('The wall post is toast!', true));
+		$this->Session->setFlash(__('wall_post_delete', true));
 		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
 		exit;
 	}

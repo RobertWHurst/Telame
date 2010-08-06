@@ -8,8 +8,8 @@
 ?>
 	</div>
 	<ul class="controls">
-		<li><?php echo $html->link(__('My Profile', true), '/' . $currentUser['User']['slug']); ?></li>
-		<li><?php echo $html->link(__('Edit My Profile', true), '/e/' . $currentUser['User']['slug']); ?></li>
-		<li><?php echo $html->link(__('Logout', true), '/logout'); ?></li>
+		<li><?php echo $html->link(__('my_profile', true), '/' . $currentUser['User']['slug']); ?></li>
+		<li><?php echo $html->link(__('edit_my_profile', true), '/e/' . $currentUser['User']['slug']); ?></li>
+		<li><?php echo $html->link(__('logout', true), '/logout'); ?></li>
 	</ul>
 </div>
