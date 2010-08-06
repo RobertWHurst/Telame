@@ -21,8 +21,8 @@
 	<div class="hide">
 <?php 
 		//$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $update['WallPost']['id']));
-		//$url = '#';
-		//echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
+		$url = '#';
+		echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 	</div>
 	-->

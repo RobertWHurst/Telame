@@ -17,14 +17,14 @@
 	<div class="delete">
 <?php 
 		$url = array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
-		echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
+		echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 	</div>
 	<div class="wall_to_wall">
 <?php 
 		$url = array('controller' => 'wall_posts', 'action' => 'wall_to_wall', $post['WallPost']['id']);
 		$url = '#';
-		echo $html->image('icons/comments.png', array('title' => __('Wall to Wall',true), 'url' => $url));
+		echo $html->image('icons/comments.png', array('title' => __('wall_to_wall',true), 'url' => $url));
 ?>
 	</div>
 	<div class="time">

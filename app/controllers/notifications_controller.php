@@ -83,6 +83,8 @@ class NotificationsController extends AppController {
 		
 		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
+
+		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
 		
 		$this->set(compact('user', 'wallPosts', 'friendLists'));
 	}
