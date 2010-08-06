@@ -8,8 +8,10 @@
 	</div>
 	<div class="post_content">
 		<p>
-			<a href="/<?php echo $post['PostAuthor']['slug']?>" title="<?php echo $post['PostAuthor']['Profile']['full_name'];?>"><?php echo $post['PostAuthor']['Profile']['full_name'];?></a>
-<?php			echo $text->autoLink($post['WallPost']['post']); ?>
+			<a href="/<?php echo $post['PostAuthor']['slug']?>" title="<?php echo $post['PostAuthor']['Profile']['full_name'];?>">
+				<?php echo $post['PostAuthor']['Profile']['full_name'];?>
+			</a>
+			<?php echo $text->autoLink($post['WallPost']['post']); ?>
 		</p>
 	</div>
 	<div class="delete">

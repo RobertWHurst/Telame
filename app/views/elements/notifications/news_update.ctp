@@ -8,21 +8,24 @@
 	</div>
 	<div class="update_content">
 		<p>
-			<a href="/<?php echo $update['PostAuthor']['slug']; ?>" title="<?php echo $update['PostAuthor']['Profile']['full_name']; ?>">
-				<?php echo $update['PostAuthor']['Profile']['full_name'];?>
-			</a> => <a href="/<?php echo $update['User']['slug']?>" title="<?php echo $update['User']['Profile']['full_name']; ?>">
-				<?php echo $update['User']['Profile']['full_name']; ?>
-			</a>
+			<?php if($update['PostAuthor']['id'] != $update['User']['id']): ?>
+				<a href="/<?php echo $update['PostAuthor']['slug']; ?>" title="<?php echo $update['PostAuthor']['Profile']['full_name']; ?>"><?php echo $update['PostAuthor']['Profile']['full_name']; ?></a>
+				=> <a href="/<?php echo $update['User']['slug']?>" title="<?php echo $update['User']['Profile']['full_name']; ?>"><?php echo $update['User']['Profile']['full_name']; ?></a>: <br/>
+			<?php else: ?>
+				<a href="/<?php echo $update['PostAuthor']['slug']; ?>" title="<?php echo $update['PostAuthor']['Profile']['full_name']; ?>"><?php echo $update['PostAuthor']['Profile']['full_name']; ?></a> 
+			<?php endif; ?>
 			<?php echo $update['WallPost']['post']; ?>
 		</p>
 	</div>
+	<!--
 	<div class="hide">
 <?php 
 		//$url = $html->url(array('controller' => 'wall_posts', 'action' => 'delete', $update['WallPost']['id']));
-		$url = '#';
-		echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
+		//$url = '#';
+		//echo $html->image('icons/delete.png', array('title' => __('Delete',true), 'url' => $url));
 ?>
 	</div>
+	-->
 	<div class="time">
 		<p>
 			<?php echo $time->timeAgoInWords($update['WallPost']['posted']); ?>

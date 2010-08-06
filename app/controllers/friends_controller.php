@@ -1,12 +1,14 @@
 <?php
 class FriendsController extends AppController {
-
-	//Controller config
-	var $name = 'Friends';
 	
 	//Before the render of all views in this controller
-	function listFriends($uid) {
-		$this->set('friends', $this->Friend->getFriendList($uid));
+	function listFriends() {
+		//get the current user id
+		$uid = $this->currentUser['User']['id'];
+		
+		$temp = $this->Friend->getFriends(0, 0, $uid);
+		
+		krumo($temp);
 	}
 
 }

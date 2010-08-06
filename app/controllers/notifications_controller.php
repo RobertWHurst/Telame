@@ -76,12 +76,10 @@ class NotificationsController extends AppController {
 		$this->Includer->add('script', array(
 			//scripts
 		));
-		$this->Friend = new Friend();
+		
 		$friends = $this->Friend->getFriendList(Configure::read('UID'));
 		// add ourself to the list
 		array_push($friends, Configure::read('UID'));
-		
-		$this->WallPost = new WallPost();
 		
 		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
