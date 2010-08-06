@@ -4,17 +4,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-06 21:50+0000\n"
-"PO-Revision-Date: 2010-08-06 14:55-0800\n"
-"Last-Translator: Eric <efriesen@gmail.com>\n"
+"POT-Creation-Date: 2010-08-06 23:20+0000\n"
+"PO-Revision-Date: 2010-08-06 16:22-0800\n"
+"Last-Translator: none <none@none.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /controllers/notifications_controller.php:89
-#: /controllers/users_controller.php:80
+#: /controllers/notifications_controller.php:87
+#: /controllers/users_controller.php:75
 #: /views/elements/pages/header.ctp:4
 #: /views/notifications/news.ctp:5
 #: /views/profiles/edit.ctp:5
@@ -23,7 +23,7 @@ msgstr ""
 msgid "site_name"
 msgstr "Telame"
 
-#: /controllers/notifications_controller.php:89
+#: /controllers/notifications_controller.php:87
 #: /views/notifications/news.ctp:11
 msgid "news_title"
 msgstr "What's New and Exciting"
@@ -44,12 +44,24 @@ msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 msgid "wall_post_delete"
 msgstr "It's gone"
 
+#: /views/elements/sidebar_modules.ctp:18
+msgid "inbox"
+msgstr "Inbox"
+
+#: /views/elements/sidebar_modules.ctp:26
+msgid "news_feed"
+msgstr "News Feed"
+
+#: /views/elements/sidebar_modules.ctp:34
+msgid "friend_list"
+msgstr "Friend List"
+
 #: /views/elements/notifications/news_sidebar.ctp:3
 msgid "filter_title"
 msgstr "Filter Results"
 
-#: /views/elements/notifications/news_update.ctp:26
-#: /views/elements/users/wall_post.ctp:18
+#: /views/elements/notifications/news_update.ctp:25
+#: /views/elements/users/wall_post.ctp:20
 msgid "delete"
 msgstr "Delete"
 
@@ -119,7 +131,7 @@ msgstr "What's on your mind?"
 msgid "wall_post_submit"
 msgstr "Post"
 
-#: /views/elements/users/wall_post.ctp:25
+#: /views/elements/users/wall_post.ctp:27
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
 

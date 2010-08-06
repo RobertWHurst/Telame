@@ -20,30 +20,24 @@ class Friend extends AppModel{
 					
 		$defaults = array(
 			'friendList' => false,
-			'uid' => false,
-			'list' => false
+			'uid' => false
 		);
 		
 		$options = $this->parseArguments($defaults, $arguments);
-				
-		//set the find mode
-		if($options['list'])
-			$mode = 'list';
-		else{
-			$this->Behaviors->attach('Containable');
-			$mode = 'all';
-			$findConfig['contain'] = array('UserFriend.Profile');
-		}
 		
-		$findConfig = array(
-			'conditions' => array(
-				'parent_user_id' => $options['uid'],
-			),
+		$this->Behaviors->attach('Containable');	
+			
+		$conditions['parent_user_id'] = $options['uid'];
+		
+		if($options['friendList'])
+			$conditions['list_id'] = $options['friendList'];
+		
+		$friends = $this->find('all', array(
+			'conditions' => $conditions,
 			'limit' => $limit,
-			'offset' => $offset
-		);
-		
-		$friends = $this->find($mode, $findConfig);
+			'offset' => $offset,
+			'contain' => 'UserFriend.Profile'
+		));
 		
 		return $friends;
 	}

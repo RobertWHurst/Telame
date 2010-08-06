@@ -15,7 +15,7 @@
 	<div id="module_inbox" class="module">
 		<div class="link">
 <?php 
-		$link_content = $this->Html->image('icons/email.png') . 'Inbox';
+		$link_content = $this->Html->image('icons/email.png') . __('inbox', true);
 		echo $html->link($link_content, '#', array('escape' => false));
 ?>
 		</div>
@@ -23,7 +23,7 @@
 	<div id="module_newsfeed" class="module">
 		<div class="link">
 <?php 
-		$link_content = $this->Html->image('icons/newspaper.png') . 'News Feed';
+		$link_content = $this->Html->image('icons/newspaper.png') . __('news_feed', true);
 		echo $html->link($link_content, array('controller' => 'notifications', 'action' => 'news'), array('escape' => false));
 ?>
 		</div>
@@ -31,7 +31,7 @@
 	<div id="module_lists" class="module">
 		<div class="link">
 <?php 
-		$link_content = $this->Html->image('icons/group.png') . 'Friend Lists';
+		$link_content = $this->Html->image('icons/group.png') . __('friend_list', true);
 		echo $html->link($link_content, '#', array('escape' => false));
 ?>
 		</div>

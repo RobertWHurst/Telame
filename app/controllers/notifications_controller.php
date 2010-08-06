@@ -75,9 +75,12 @@ class NotificationsController extends AppController {
 		
 		$friends = $this->Friend->getFriends(0, 0, array(
 			'uid' => $this->currentUser['User']['id'],
-			'list' => true,
-			'friendsList' => $selectedFriendList
+			'friendList' => $selectedFriendList
 		));
+		
+		foreach($friends as $key => $friend)
+			$friends[$key] = $friend['UserFriend']['id'];
+		
 		// add ourself to the list
 		array_push($friends, $this->currentUser['User']['id']);
 		
