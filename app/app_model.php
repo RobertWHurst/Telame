@@ -7,7 +7,7 @@ class AppModel extends Model {
 	//on. the function will return a merged set of options and arguments.
 	//aguments always override defaults. both the defaults array and the
 	//aguments array can be multi dementional and have any depth.
-	function parseArguments($defaults, $arguments) {
+	function parseArguments($defaults, $arguments, $keep_unset = false) {
 
 		if(!is_array($defaults) || !is_array($arguments))
 			return $defaults; //just return the defaults (something goofed)
@@ -18,20 +18,20 @@ class AppModel extends Model {
 		foreach($arguments as $key => $argument){
 
 			//if the agrument is invalid contine the loop
-			if(!isset($defaults[$key]))
+			if(!isset($defaults[$key]) && !$keep_unset)
 				continue; //the option is invalid
 
 			//if the agrument is acually an array of aguments
 			if(is_array($argument)){
 
 				//if the agument is an array then make sure it is valid
-				if(!is_array($defaults[$key]))
+				if(!is_array($defaults[$key]) && !$keep_unset)
 					continue; //the option is not an array
 
 				//set the suboptions
 				$subdefaults = $defaults[$key];
 
-				$results[$key] = $this->parseArguments($subdefaults, $argument);
+				$results[$key] = $this->parseArguments($subdefaults, $argument, $keep_unset);
 			} else {
 				//just set it
 				$results[$key] = $argument;
