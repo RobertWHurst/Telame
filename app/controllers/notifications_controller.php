@@ -83,7 +83,7 @@ class NotificationsController extends AppController {
 		
 		$this->WallPost = new WallPost();
 		
-		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends));
+		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 		
 		$this->set(compact('user', 'wallPosts', 'filters'));
