@@ -160,13 +160,13 @@ class WallPostsController extends AppController {
 		$new_post_id = $this->WallPost->id;
 		
 		//load the view
-		$wallPost = $this->WallPost->findById($new_post_id);
+		$wallPosts = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id));
 		
 		//set the layout to none (this is ajax);
 		$this->layout = false;
 		
 		//send the new post to the view
-		$this->set('wallPost', $wallPost);
+		$this->set('wallPosts', $wallPosts);
 	}
 
 	function delete($id = false) {

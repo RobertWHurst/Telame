@@ -1,6 +1,5 @@
 <?php
 class WallPost extends AppModel {
-	var $name = 'WallPost';
 	var $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
@@ -23,6 +22,7 @@ class WallPost extends AppModel {
 		
 		//set the default options
 		$defaults = array(
+			'id' => false,
 			'uid' => false,
 			'aid' => false,
 			'User' => false,
@@ -40,10 +40,12 @@ class WallPost extends AppModel {
 		// get only get parents in the top level, not replies.
 		$conditions['reply_parent_id'] = null;
 		
+		if($options['id'])
+			$conditions['WallPost.id'] = $options['id'];
 		if($options['uid'])
-			$conditions['user_id'] = $options['uid'];
+			$conditions['WallPost.user_id'] = $options['uid'];
 		if($options['aid'])
-			$conditions['author_id'] = $options['aid'];
+			$conditions['WallPost.author_id'] = $options['aid'];
 		
 		//create the contain rules
 		if($options['User'])
@@ -61,6 +63,7 @@ class WallPost extends AppModel {
 			'offset' => $offset,
 			'order' => 'WallPost.id DESC'
 		));
+		
 		return $wallPosts;
 	}
 }
