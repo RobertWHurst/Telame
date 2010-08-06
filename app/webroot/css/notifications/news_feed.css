@@ -1,7 +1,10 @@
 #news_feed{
+	width: 438px;
 	padding: 20px;
+	float: left;
+	border-right: 1px solid #787878;
 }
-#news_feed div.update{	
+#news_feed div.update{
 	padding: 10px;
 	background: #333;
 	margin-bottom: 10px;
@@ -11,6 +14,17 @@
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+#news_feed div.update div.avatar{
+	float: left;
+	margin-right: 10px;
+}
+#news_feed div.update div.update_content p{
+	font-size: 1.3em;
+	line-height: 1.2em;
+	margin: 0 15px 15px 0;
+	overflow: hidden;
+}
+
 #page_head a.rss_link{
 	top:26px;
 	right:20px;

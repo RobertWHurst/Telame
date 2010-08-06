@@ -38,7 +38,31 @@ class NotificationsController extends AppController {
 		$this->save();
 	}
 
-	function news() {
+	function news($selectedfilter = null) {
+		
+		//FILTERS
+		//TODO: this should pull from user config
+		$user_filters = array(
+			'list1' => array('name' => 'List 1', 'uri' => '_'),
+			'list2' => array('name' => 'List 2', 'uri' => '_'),
+			'list3' => array('name' => 'List 3', 'uri' => '_')
+		);
+		
+		$default_filters = array(
+			'all' => array('name' => 'Everyone', 'uri' => null),
+			'hidden' => array('name' => 'Hidden', 'uri' => 'h')
+		);
+		
+		$filters = array_merge($default_filters, $user_filters);
+		
+		//add selected info
+		foreach($filters as $key => $filter){
+			if($filter['uri'] == $selectedfilter)
+				$filters[$key]['selected'] = true;
+			else
+				$filters[$key]['selected'] = false;				
+		}
+		
 		App::Import('Model', 'Friend');
 		App::Import('Model', 'WallPost');
 		
@@ -46,7 +70,8 @@ class NotificationsController extends AppController {
 		$this->WallPost = new WallPost();
 
 		$this->Includer->add('css', array(
-			'notifications/news_feed'
+			'notifications/news_feed',
+			'notifications/news_sidebar'
 		));
 		$this->Includer->add('script', array(
 			//scripts
@@ -58,9 +83,9 @@ class NotificationsController extends AppController {
 		
 		$this->WallPost = new WallPost();
 		
-		$wallPosts = $this->WallPost->getWallPosts(null, null, null, $friends);
+		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends));
 		$user = $this->currentUser;
 		
-		$this->set(compact('user', 'wallPosts'));
+		$this->set(compact('user', 'wallPosts', 'filters'));
 	}
 }

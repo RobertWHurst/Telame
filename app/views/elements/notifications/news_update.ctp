@@ -1,4 +1,4 @@
-<div class="update">
+<div class="update clearfix">
 	<div class="avatar">
 <?php
 		$image_url = array('controller' => 'media', 'action' => 'avatar', $update['PostAuthor']['id']);
@@ -8,7 +8,7 @@
 	</div>
 	<div class="update_content">
 		<p>
-			<a href="/<?php echo $update['PostAuthor']['slug']?>" title="<?php echo $update['PostAuthor']['Profile']['full_name'];?>"><?php echo $update['PostAuthor']['Profile']['full_name'];?></a>
+			<a href="/<?php echo $update['PostAuthor']['slug']?>" title="<?php echo $update['PostAuthor']['UserProfile']['full_name'];?>"><?php echo $update['PostAuthor']['UserProfile']['full_name'];?></a> => <a href="/<?php echo $update['User']['slug']?>" title="<?php echo $update['User']['UserProfile']['full_name'];?>"><?php echo $update['PostAuthor']['UserProfile']['full_name'];?></a>
 <?php
 				echo $update['WallPost']['post'];
 ?>

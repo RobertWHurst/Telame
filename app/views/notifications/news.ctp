@@ -11,16 +11,14 @@
 			<h1 class="page_title">What's New</h1>
 			<?php echo $html->link('Get your news via RSS', '#', array('title' => 'Get your news via RSS', 'class' => 'rss_link')); ?>
 		</div>
-		<div id="page_body">
+		<div id="page_body" class="clearfix">
 			<div id="news_feed">
 <?php
 				foreach($wallPosts as $update)
 					echo $this->element('notifications/news_update', array('update' => $update));
 ?>
-			</div>			
-			<div id="news_sidebar">
-				sidebar
 			</div>
+			<?php echo $this->element('notifications/news_sidebar', array('filters' => $filters)); ?>
 		</div>
 	</div>
 </div>

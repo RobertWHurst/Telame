@@ -1,0 +1,24 @@
+#news_sidebar{
+	width: 289px;
+	float: left;
+}
+#news_sidebar div.news_filters{
+}
+#news_sidebar div.news_filters h1{
+	font-size: 2.4em;
+	padding: 20px 20px 10px 20px;
+}
+#news_sidebar div.news_filters ul{
+	list-style: none;
+	margin: 0 20px 0 -20px;
+}
+#news_sidebar div.news_filters li a{
+	font-size: 1.6em;
+	line-height: 20px;
+	background: #ccc;
+	display: block;
+	padding: 10px 20px 10px 40px;
+}
+#news_sidebar div.news_filters li.current a{
+	background: #000;
+}

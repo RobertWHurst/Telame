@@ -19,35 +19,47 @@ class WallPost extends AppModel {
 	);
 	
 	//TODO: needs containable.
-	function getWallPosts($limit = 0, $offset = 0, $uid = false, $aid = false, $userMeta = array()){
+	function getWallPosts($limit = 0, $offset = 0, $arguments = false){
+		
+		//set the default options
+		$defaults = array(
+			'uid' => false,
+			'aid' => false,
+			'User' => false,
+			'PostAuthor' => true,
+			'Replies' => true
+		);
+		
+		//parse the options
+		$options = $this->parseArguments($defaults, $arguments, true);
+				
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
-		if($uid) {
-			$conditions = array(
-				'user_id' => $uid
-			);
-		} elseif($aid) {
-			$conditions = array(
-				'author_id' => $aid
-			);
-		} else {
-			$conditions = array();
-		}
-		// only get parents, not replys
+		// create conditions
+		// get only get parents in the top level, not replies.
 		$conditions['reply_parent_id'] = null;
+		
+		if($options['uid'])
+			$conditions['user_id'] = $options['uid'];
+		if($options['aid'])
+			$conditions['author_id'] = $options['aid'];
+		
+		//create the contain rules
+		if($options['User'])
+			$contain[] = 'User.Profile';
+		if($options['PostAuthor'])
+			$contain[] = 'PostAuthor.Profile';
+		if($options['Replies'])
+			$contain[] = 'Replies.PostAuthor.Profile';
 		
 		$this->recursive = 2;
 		$wallPosts = $this->find('all', array(
 			'conditions' => $conditions,
-			'contain' => array(
-				'PostAuthor.Profile',
-				'Replies.PostAuthor.Profile',
-				'User.Profile',
-			),
+			'contain' => $contain,
 			'limit' => $limit,
 			'offset' => $offset,
-			'order' => 'WallPost.id DESC',
+			'order' => 'WallPost.id DESC'
 		));
 		return $wallPosts;
 	}
