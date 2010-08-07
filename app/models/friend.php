@@ -23,7 +23,7 @@ class Friend extends AppModel{
 			'uid' => false
 		);
 		
-		$options = $this->parseArguments($defaults, $arguments);
+		$options = $this->parse_arguments($defaults, $arguments);
 		
 		$this->Behaviors->attach('Containable');	
 			

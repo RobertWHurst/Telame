@@ -25,7 +25,16 @@
 	margin: 0 15px 15px 0;
 	overflow: hidden;
 }
-
+#news_feed div.time{
+	position: absolute;
+	bottom:10px;
+	right: 10px;
+}
+#news_feed div.time p{
+	color: #555;
+	font-size: 1.1em;
+	font-weight: bold;
+}
 #page_head a.rss_link{
 	top:26px;
 	right:20px;
