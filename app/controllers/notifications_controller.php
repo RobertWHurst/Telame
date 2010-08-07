@@ -1,8 +1,7 @@
 <?php
 class NotificationsController extends AppController {
-	var $name = 'notifications';
-	var $helpers = array('time');
-	var $uses = array();
+
+	var $helpers = array('Time');
 
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -39,32 +38,28 @@ class NotificationsController extends AppController {
 	}
 
 	function news($selectedFriendList = null) {
-				
-		App::Import('Model', 'Friend');
-		App::Import('Model', 'FriendList');
-		App::Import('Model', 'WallPost');
-		
-		$this->Friend = new Friend();
-		$this->FriendList = new FriendList();
-		$this->WallPost = new WallPost();
-				
+
+		$this->loadModel('Friend');
+		$this->loadModel('FriendList');
+		$this->loadModel('WallPost');
+
 		$friendLists = $this->FriendList->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
-		
+
 		$default_friendLists = array(
 			'all' => array('FriendList' => array('name' => 'Everyone', 'id' => null)),
 			//'hidden' => array('FriendList' => array('name' => 'Hidden', 'id' => 'h'))
 		);
-		
+
 		$friendLists = array_merge($default_friendLists, $friendLists);
-		
+
 		//add selected info
 		foreach($friendLists as $key => $filter){
 			if($filter['FriendList']['id'] == $selectedFriendList)
 				$friendLists[$key]['selected'] = true;
 			else
-				$friendLists[$key]['selected'] = false;				
+				$friendLists[$key]['selected'] = false;
 		}
-		
+
 		$this->Includer->add('css', array(
 			'notifications/news_feed',
 			'notifications/news_sidebar'
@@ -72,23 +67,23 @@ class NotificationsController extends AppController {
 		$this->Includer->add('script', array(
 			//scripts
 		));
-		
+
 		$friends = $this->Friend->getFriends(0, 0, array(
 			'uid' => $this->currentUser['User']['id'],
 			'friendList' => $selectedFriendList
 		));
-		
+
 		foreach($friends as $key => $friend)
 			$friends[$key] = $friend['UserFriend']['id'];
-		
+
 		// add ourself to the list
 		array_push($friends, $this->currentUser['User']['id']);
-		
+
 		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
-		
+
 		$this->set(compact('user', 'wallPosts', 'friendLists'));
 	}
 }

@@ -1,8 +1,6 @@
 <?php
 class WallPostsController extends AppController {
 
-	//Controller config
-	var $name = 'WallPosts';
 	var $helpers = array('Text', 'Time');
 
 	function lists($id = false){
@@ -34,7 +32,7 @@ class WallPostsController extends AppController {
 
 		//save the user id and the visitor id
 		$user_id = $this->data['WallPost']['user_id'];
-		$visitor_id = Configure::read('UID');
+		$visitor_id = $this->currentUser['User']['id'];
 
 		//get the visiting user's data
 		$visitor = $this->WallPost->User->findById($visitor_id);
@@ -104,7 +102,7 @@ class WallPostsController extends AppController {
 
 		//save the user id and the visitor id
 		$user_id = $this->data['WallPost']['user_id'];
-		$visitor_id = Configure::read('UID');
+		$visitor_id = $this->currentUser['User']['id'];
 
 		//get the visiting user's data
 		$visitor = $this->WallPost->User->findById($visitor_id);
@@ -173,7 +171,7 @@ class WallPostsController extends AppController {
 
 		//get the visitor's data
 		$this->WallPost->User->recursive = -1;
-		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
+		$visitor = $this->WallPost->User->findById($this->currentUser['User']['id']);
 
 		//if the wall id is missing
 		if(!$id) {
@@ -207,7 +205,7 @@ class WallPostsController extends AppController {
 	function jx_delete($id = false) {
 
 		//get the visitor's data
-		$visitor = $this->WallPost->User->findById(Configure::read('UID'));
+		$visitor = $this->WallPost->User->findById($this->currentUser['User']['id']);
 
 		//if the wall id is missing
 		if(!$id)

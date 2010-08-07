@@ -1,10 +1,7 @@
 <?php
 class ProfilesController extends AppController {
-
-	//Controller config
-	var $name = 'Profiles';
-
-	function beforeFilter(){
+	
+	function beforeFilter() {
 		parent::beforeFilter();
 		//add css and js that is common to all the actions in this controller
 		$this->Includer->add('css', array(
@@ -27,6 +24,7 @@ class ProfilesController extends AppController {
 		$this->set('css_for_layout', $this->Includer->css());
 		$this->set('script_for_layout', $this->Includer->script());
 	}
+
 	function edit($slug = false) {
 		// If the user is not an admin, and they're trying to edit somebody else's profile, redirect them to their own
 		if (/*!$admin ||*/ strtolower($slug) != strtolower($this->currentUser['User']['slug'])) {

@@ -7,8 +7,8 @@ class PagesController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 
-		//allow this entire controller to be accessed without needing to login
-		$this->Auth->allow('*');
+		// Allows access to certain pages
+		$this->Auth->allow('display', 'home');
 
 		//add css and js that is common to all the actions in this controller
 		$this->Includer->add('css', array(
@@ -21,6 +21,9 @@ class PagesController extends AppController {
 		));
 	}
 
+	function home() {
+	}
+
 	function beforeRender() {
 		parent::beforeRender();
 
@@ -31,13 +34,6 @@ class PagesController extends AppController {
 		//set the css and layout
 		$this->layout = 'pages';
 	}
-
-	function signup() {
-		$this->Includer->add('script', array(
-			'pages/taglines'
-		));
-	}
-
 
 /**
  * Displays a view

@@ -38,14 +38,14 @@
 	Router::connect('/', array('controller' => 'notifications', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
 	Router::connect('/f/*', array('controller' => 'notifications', 'action' => 'news'));
 	// False, redirect to signup page
-	Router::connect('/', array('controller' => 'pages', 'action' => 'signup'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 	
 // Site pages
 
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/signup', array('controller' => 'pages', 'action' => 'signup'));
+	Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
 
 	// Informational pages
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));

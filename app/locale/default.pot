@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-07 00:00+0000\n"
+"POT-Creation-Date: 2010-08-07 19:13+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,8 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /controllers/notifications_controller.php:90
-#: /controllers/users_controller.php:75
+#: /controllers/notifications_controller.php:85
+#: /controllers/users_controller.php:74
+#: /views/albums/albums.ctp:4
 #: /views/elements/pages/header.ctp:4
 #: /views/notifications/news.ctp:5
 #: /views/profiles/edit.ctp:5
@@ -24,24 +25,24 @@ msgstr ""
 msgid "site_name"
 msgstr ""
 
-#: /controllers/notifications_controller.php:90
+#: /controllers/notifications_controller.php:85
 #: /views/notifications/news.ctp:11
 msgid "news_title"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:61
+#: /controllers/wall_posts_controller.php:59
 msgid "wall_post_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:180
+#: /controllers/wall_posts_controller.php:178
 msgid "wall_post_delete_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:195
+#: /controllers/wall_posts_controller.php:193
 msgid "wall_post_bad_hacker"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:202
+#: /controllers/wall_posts_controller.php:200
 msgid "wall_post_delete"
 msgstr ""
 
@@ -138,5 +139,103 @@ msgstr ""
 
 #: /views/elements/users/wall_post.ctp:27
 msgid "wall_to_wall"
+msgstr ""
+
+#: /views/helpers/time.php:230
+msgid "Today, %s"
+msgstr ""
+
+#: /views/helpers/time.php:232
+msgid "Yesterday, %s"
+msgstr ""
+
+#: /views/helpers/time.php:579
+msgid "on %s"
+msgstr ""
+
+#: /views/helpers/time.php:613
+msgid "%s ago"
+msgstr ""
+
+#: /views/helpers/time.php:649
+msgid "days"
+msgstr ""
+
+#: /views/helpers/time.php:583
+msgid "year"
+msgid_plural "years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:584;589
+msgid "month"
+msgid_plural "months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:585;590;594
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:586;591;595;598
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:599;602
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:603;606
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:609
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /views/helpers/time.php:61
+msgid "abday"
+msgstr ""
+
+#: /views/helpers/time.php:67
+msgid "day"
+msgstr ""
+
+#: /views/helpers/time.php:73
+msgid "d_t_fmt"
+msgstr ""
+
+#: /views/helpers/time.php:86
+msgid "abmon"
+msgstr ""
+
+#: /views/helpers/time.php:92
+msgid "mon"
+msgstr ""
+
+#: /views/helpers/time.php:103
+msgid "am_pm"
+msgstr ""
+
+#: /views/helpers/time.php:110
+msgid "t_fmt_ampm"
+msgstr ""
+
+#: /views/helpers/time.php:124
+msgid "d_fmt"
+msgstr ""
+
+#: /views/helpers/time.php:130
+msgid "t_fmt"
 msgstr ""
 

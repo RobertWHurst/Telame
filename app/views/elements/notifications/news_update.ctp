@@ -10,7 +10,7 @@
 		<p>
 			<?php if($update['PostAuthor']['id'] != $update['User']['id']): ?>
 				<a href="/<?php echo $update['PostAuthor']['slug']; ?>" title="<?php echo $update['PostAuthor']['Profile']['full_name']; ?>"><?php echo $update['PostAuthor']['Profile']['full_name']; ?></a>
-				=> <a href="/<?php echo $update['User']['slug']?>" title="<?php echo $update['User']['Profile']['full_name']; ?>"><?php echo $update['User']['Profile']['full_name']; ?></a>: <br/>
+				> <a href="/<?php echo $update['User']['slug']?>" title="<?php echo $update['User']['Profile']['full_name']; ?>"><?php echo $update['User']['Profile']['full_name']; ?></a>: <br/>
 			<?php else: ?>
 				<a href="/<?php echo $update['PostAuthor']['slug']; ?>" title="<?php echo $update['PostAuthor']['Profile']['full_name']; ?>"><?php echo $update['PostAuthor']['Profile']['full_name']; ?></a> 
 			<?php endif; ?>

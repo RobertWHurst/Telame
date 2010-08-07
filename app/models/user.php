@@ -2,6 +2,9 @@
 class User extends AppModel {
 	var $name = 'User';
 
+	// Connect to the ACL table
+	var $actsAs = array('Acl' => array('type' => 'requester'));
+
 	var $belongsTo = array(
 		'Media' => array(
 			'ClassName' => 'Media',
@@ -36,6 +39,12 @@ class User extends AppModel {
 		return $queryData;
 	}
 
+
+// -------------------- ACL functions
+	function parentNode() {
+		return null;
+	}
+
 // --------------------- Custom functions
 
 	function getIdFromSlug($slug) {
@@ -68,4 +77,18 @@ class User extends AppModel {
 		));
 		return $user;
 	}
+	
+	function makeUserDir($id) {
+		$baseDir = APP . 'users' . DS;
+		$home = rand(0, 31000) . DS;
+		$sub = rand(0, 31000) . DS;
+		
+		$userHome = $baseDir . $home . $sub . $id . DS;
+		if (mkdir($userHome, 0777, true)) {
+			return array('home' => $home, 'sub' => $sub);
+		} else {
+			return false;
+		}
+	}
 }
+

@@ -3,7 +3,7 @@
 	echo $html->link(__('features', true), array('controller' => 'pages', 'action' => 'features'));
 	// If the user is not logged in, display the signup and login links
 	if (!Configure::read('LoggedIn', true)) {
-		echo $html->link(__('signup', true), array('controller' => 'pages', 'action' => 'signup'));
+		echo $html->link(__('signup', true), '/signup');
 		echo $html->link(__('login', true), array('controller' => 'users', 'action' => 'login'));
 	}
 	else{

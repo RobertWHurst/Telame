@@ -35,7 +35,7 @@ class MediaController extends AppController {
 		// to user's home directory
 		$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;
 		// profile or gallery, etc...
-		$dir = $dir . DS;
+		$dir .= DS;
 		// filename
 		$filename = trim($user['Media']['filename']);
 		// cached version of filename
@@ -49,11 +49,16 @@ class MediaController extends AppController {
 			}
 		}
 
+		// find the file extension
+		$temp = explode('.', $filename);
+		$extension = $temp[count($temp)-1];
+		unset($temp);
+
 		$params = array(
 			'id' => $cacheFilename,
 			'name' => $user['User']['slug'],
 			'download' => false,
-			'extension' => 'png',
+			'extension' => $extension,
 			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);

@@ -3,7 +3,7 @@ class AppController extends Controller {
 
 	//add user athentication
 	// autologin must be before auth in array
-	var $components = array('Acl', 'AutoLogin', 'Auth', 'Session', 'Includer');
+	var $components = array('Acl', 'AutoLogin', 'Auth', 'Includer', 'Security', 'Session');
 	var $currentUser;
 
 	// Not for use when developing
@@ -27,8 +27,7 @@ class AppController extends Controller {
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');
 
-		// Read the user id from the session and if nothing there, set it to 1
-		Configure::write('UID', (!isset($user['User']['id']) ? '0' : $user['User']['id']));
+		// Write a config for if a user is logged in
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));
 
 		// This is available everywhere, be careful what you include, we don't want excessive info
@@ -42,11 +41,11 @@ class AppController extends Controller {
 	}
 
 	function getCurrentUser() {
-		$currentUser = Classregistry::init('User');
-		$currentUser->Behaviors->attach('Containable');
-		$currentUser = $currentUser->find('first', array(
+		$this->loadModel('User');
+		$this->User->Behaviors->attach('Containable');
+		$currentUser = $this->User->find('first', array(
 					'conditions' => array(
-						'id' => Configure::read('UID'),
+						'id' => $this->Session->read('Auth.User.id'),
 					),
 					'contain' => array(
 						'Notification' => array(
