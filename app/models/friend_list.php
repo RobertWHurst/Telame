@@ -23,7 +23,7 @@ class FriendList extends AppModel {
 		$options = $this->parseArguments($defaults, $arguments);
 		
 		$conditions = array(
-			'User.id' => 1//$options['uid']
+			'User.id' => $options['uid']
 		);
 		
 		return $this->find('all', array(

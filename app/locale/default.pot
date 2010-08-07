@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-06 23:20+0000\n"
+"POT-Creation-Date: 2010-08-07 00:00+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /controllers/notifications_controller.php:87
+#: /controllers/notifications_controller.php:90
 #: /controllers/users_controller.php:75
 #: /views/elements/pages/header.ctp:4
 #: /views/notifications/news.ctp:5
@@ -24,7 +24,7 @@ msgstr ""
 msgid "site_name"
 msgstr ""
 
-#: /controllers/notifications_controller.php:87
+#: /controllers/notifications_controller.php:90
 #: /views/notifications/news.ctp:11
 msgid "news_title"
 msgstr ""
@@ -55,6 +55,10 @@ msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:34
 msgid "friend_list"
+msgstr ""
+
+#: /views/elements/sidebar_modules.ctp:42
+msgid "albums"
 msgstr ""
 
 #: /views/elements/notifications/news_sidebar.ctp:3
