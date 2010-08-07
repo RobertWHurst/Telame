@@ -1,5 +1,5 @@
 <div id="login_logo">
-	<?php echo $html->image('pages/logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>
+	<?php echo $html->image('logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>
 </div>
 <div id="login">
 <?php
