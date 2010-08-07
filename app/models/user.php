@@ -47,7 +47,7 @@ class User extends AppModel {
 	function getProfile($slug, $arguments = false){
 		$defaults = Configure::read('UserInfo');
 		//parse the options
-		$options = $this->parse_arguments($defaults, $arguments);
+		$options = $this->parseArguments($defaults, $arguments);
 
 		//get the profile
 		$this->Behaviors->attach('Containable');

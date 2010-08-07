@@ -20,7 +20,7 @@ class FriendList extends AppModel {
 			'uid' => false
 		);
 		
-		$options = $this->parse_arguments($defaults, $arguments);
+		$options = $this->parseArguments($defaults, $arguments);
 		
 		$conditions = array(
 			'User.id' => $options['uid']

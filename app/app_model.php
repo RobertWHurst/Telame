@@ -7,7 +7,7 @@ class AppModel extends Model {
 	//on. the function will return a merged set of options and arguments.
 	//aguments always override defaults. both the defaults array and the
 	//aguments array can be multi dementional and have any depth.
-	function parse_arguments($defaults, $arguments, $keep_unset = false) {
+	function parseArguments($defaults, $arguments, $keep_unset = false) {
 
 		if(!is_array($defaults) || !is_array($arguments))
 			return $defaults; //just return the defaults (something goofed)
@@ -37,7 +37,7 @@ class AppModel extends Model {
 				//set the suboptions
 				$subdefaults = $defaults[$key];
 
-				$results[$key] = $this->parse_arguments($subdefaults, $argument, $keep_unset);
+				$results[$key] = $this->parseArguments($subdefaults, $argument, $keep_unset);
 			} else {
 				//just set it
 				$results[$key] = $argument;
