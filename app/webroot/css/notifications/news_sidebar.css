@@ -18,7 +18,7 @@
 	background: url(../../img/sidebar_filters.png);
 	background-position: 0 0;
 	display: block;
-	padding: 10px 20px 10px 40px;
+	padding: 10px 20px 10px 60px;
 }
 #news_sidebar div.news_filters li:hover a{
 	background-position: 0 -40px;
