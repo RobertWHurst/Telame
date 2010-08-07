@@ -30,6 +30,32 @@ class User extends AppModel {
 		'Profile'
 	);
 	
+	var $validate = array(
+		'email' => array(
+			'uniqueEmail' => array(
+				'rule' => 'isUnique',
+				'message' => 'That email is already in use',
+			),
+			'validEmail' => array(
+				'rule' => array('email', true), // attempt to validate the host
+				'allowEmpty' => false,
+				'required' => true,
+				'message' => 'A valid email address is required',
+				// on => create or update - will only be enforced then, default is null
+			),
+		), 
+		'password' => array(
+			'rule' => array('minLength', 8),
+			'allowEmpty' => false,
+			'required' => true,
+			'message' => 'Password must be 8 characters long', // to internationalize it must be done in the view
+		),
+		'slug' => array(
+			'rule' => 'isUnique',
+			'message' => 'That slug is already in use',
+		),
+	);
+	
 // -------------------- Callback functions
 
 	function beforeFind($queryData) {
