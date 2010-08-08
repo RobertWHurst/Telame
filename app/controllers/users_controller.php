@@ -130,7 +130,6 @@ class UsersController extends AppController {
 					$this->redirect('/');
 					exit;
 				}
-				$this->Session->setFlash(__('user_saved', true));
 
 				// make their home directory structure
 				$dir = $this->User->makeUserDir($this->User->id);
@@ -142,10 +141,13 @@ class UsersController extends AppController {
 					$this->redirect('/');
 					exit;
 				}
+				// send user email
 				$this->Email->from		=  'Telame.com <admin@telame.com>';
 				$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
 				$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
 				$this->Email->send('Welcome to Telame.  You need to finish your account by validating your email. ' . $this->data['User']['hash']);
+				// tell the user it's all good
+				$this->Session->setFlash(__('user_saved', true));
 			}
 		} else {
 			// Default page to show

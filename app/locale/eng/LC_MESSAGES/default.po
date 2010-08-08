@@ -1,22 +1,23 @@
 # LANGUAGE translation of CakePHP Application
-# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Copyright 2010 Telame <admin@telame.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-07 00:00+0000\n"
-"PO-Revision-Date: 2010-08-06 17:23-0800\n"
-"Last-Translator: none <none@none.com>\n"
+"POT-Creation-Date: 2010-08-08 03:44+0000\n"
+"PO-Revision-Date: 2010-08-07 21:40-0800\n"
+"Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2;plural=n!=1;\n"
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Canada\n"
 
-#: /controllers/notifications_controller.php:90
-#: /controllers/users_controller.php:75
+#: /controllers/notifications_controller.php:85
+#: /controllers/users_controller.php:88;147
+#: /views/albums/albums.ctp:4
 #: /views/elements/pages/header.ctp:4
 #: /views/notifications/news.ctp:5
 #: /views/profiles/edit.ctp:5
@@ -25,24 +26,36 @@ msgstr ""
 msgid "site_name"
 msgstr "Telame"
 
-#: /controllers/notifications_controller.php:90
+#: /controllers/notifications_controller.php:85
 #: /views/notifications/news.ctp:11
 msgid "news_title"
-msgstr "What's Up Right Now"
+msgstr "What's New"
 
-#: /controllers/wall_posts_controller.php:61
+#: /controllers/users_controller.php:107
+msgid "password_mismatch"
+msgstr "Your passwords don't match"
+
+#: /controllers/users_controller.php:129;140
+msgid "user_create_error"
+msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
+
+#: /controllers/users_controller.php:150
+msgid "user_saved"
+msgstr "You have been successfully added"
+
+#: /controllers/wall_posts_controller.php:59
 msgid "wall_post_error"
 msgstr "Sorry, you're not allowed to do that"
 
-#: /controllers/wall_posts_controller.php:180
+#: /controllers/wall_posts_controller.php:178
 msgid "wall_post_delete_error"
 msgstr "We couldn't find that post."
 
-#: /controllers/wall_posts_controller.php:195
+#: /controllers/wall_posts_controller.php:193
 msgid "wall_post_bad_hacker"
 msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 
-#: /controllers/wall_posts_controller.php:202
+#: /controllers/wall_posts_controller.php:200
 msgid "wall_post_delete"
 msgstr "It's gone"
 
@@ -97,6 +110,7 @@ msgid "features"
 msgstr "Features"
 
 #: /views/elements/pages/navigation.ctp:6
+#: /views/users/signup.ctp:8
 msgid "signup"
 msgstr "Signup"
 
@@ -141,3 +155,37 @@ msgstr "Post"
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
 
+msgid "year"
+msgid_plural "years"
+msgstr[0] "year"
+msgstr[1] "years"
+
+msgid "month"
+msgid_plural "months"
+msgstr[0] "month"
+msgstr[1] "months"
+
+msgid "week"
+msgid_plural "weeks"
+msgstr[0] "week"
+msgstr[1] "weeks"
+
+msgid "day"
+msgid_plural "days"
+msgstr[0] "day"
+msgstr[1] "days"
+
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hour"
+msgstr[1] "hours"
+
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minute"
+msgstr[1] "minutes"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "second"
+msgstr[1] "seconds"
