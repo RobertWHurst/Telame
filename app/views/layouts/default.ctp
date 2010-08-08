@@ -48,11 +48,10 @@
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
 	</div>
-		<?php if(Configure::read('debug') > 0): ?>
-			<div id="sql_dump">
-				<?php echo $this->element('sql_dump'); ?>
-			</div>
-		<?php endif; ?>
-	</div>
+	<?php if(Configure::read('debug') > 0): ?>
+		<div id="sql_dump">
+			<?php echo $this->element('sql_dump'); ?>
+		</div>
+	<?php endif; ?>
 </body>
 </html>

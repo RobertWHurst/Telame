@@ -47,7 +47,16 @@
 	<div id="flash">
 		<?php echo $this->Session->flash(); ?>
 	</div>
-	<?php echo $this->element('pages/header'); ?>
+	<div id="wrap_header">
+		<div id="header">
+			<div id="logo">
+				<?php echo $html->image('pages/logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'signup', 'action' => 'index'))); ?>
+			</div>
+			<div class="headerRight">
+				<?php echo $this->element('pages/navigation'); ?>
+			</div>
+		</div>
+	</div>
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
 	</div>

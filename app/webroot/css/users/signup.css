@@ -1,0 +1,45 @@
+#Signup{
+	background: url(../../img/modale.png) no-repeat;
+	width: 440px;
+	padding: 20px;
+	margin: auto;
+	border-bottom: 1px solid #000;
+}
+#Signup h1.heading{
+	text-align: center;
+	font-size: 3.6em;
+	line-height: 2.8em;
+}
+#Signup label{
+	font-size: 1.8em;
+	display: block;
+	margin-top: 20px;
+}
+#Signup input[type="text"],
+#Signup input[type="password"]{
+	width: 432px;
+	font-size: 2.4em;
+	background: #ccc;
+}
+#Signup div.submit{
+	text-align: center;
+}
+#Signup input[type="submit"]{
+	font-size: 2.4em;
+	color: #000;
+	background-color: #9e9e9e;
+	border: 1px solid #ccc;
+	font-weight: bold;
+	-moz-border-radius: 2px;
+	padding: 6px;
+	margin: 40px 0;
+}
+#Signup input:hover[type="text"],
+#Signup input:hover[type="password"],
+#Signup input:focus[type="text"],
+#Signup input:focus[type="password"]{
+	background-color: #fff;
+}
+#Signup input:hover[type="submit"]{
+	background-color: #d3ef91;
+}

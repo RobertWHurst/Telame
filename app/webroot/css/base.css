@@ -114,13 +114,22 @@ th{
 /* DEFAULT FORM STYLES */
 form{
 }
+label{	
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.3em;
+}
 input[type="text"]{
 	border: 1px solid #ccc;
 	outline:none;
+	font-size: 16px;
+	padding: 3px;
 }
 input[type="password"]{
 	border: 1px solid #ccc;
 	outline:none;
+	font-size: 16px;
+	padding: 3px;
 }
 input[type="submit"]{
 	outline:none;
