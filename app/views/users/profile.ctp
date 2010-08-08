@@ -2,7 +2,7 @@
 	<div id="wrap_main_sidebar">
 		<div id="logo">
 			<!-- TODO: link to the news feed -->
-			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => '/')); ?>
+			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'notifications', 'action' => 'news'))); ?>
 		</div>
 		<?php echo $this->element('main_sidebar'); ?>
 	</div>

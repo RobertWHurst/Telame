@@ -48,7 +48,6 @@ class UsersController extends AppController {
 	}
 
 	function login(){
-		$this->layout = 'pages';
 		$this->Includer->add('css', array(
 			'users/login'
 		));

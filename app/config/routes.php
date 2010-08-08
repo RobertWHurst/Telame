@@ -80,5 +80,4 @@
 	
 // This must be last
 	// Profile
-	Router::connect('/news', array('controller' => 'pages', 'action' => 'news'));
 	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
