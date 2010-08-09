@@ -32,8 +32,13 @@ class MediaController extends AppController {
 				'Media'
 			)
 		));
-		// to user's home directory
-		$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;
+		if (!$user || $user['User']['avatar_id'] == -1) {
+			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
+		} else {
+			// to user's home directory
+			$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;		
+		}
+
 		// profile or gallery, etc...
 		$dir .= DS;
 		// filename

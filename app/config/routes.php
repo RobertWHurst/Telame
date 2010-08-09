@@ -68,6 +68,9 @@
 	// Images - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 	
+	// New user adding
+	Router::connect('/a/*', array('controller' => 'profiles', 'action' => 'add'));
+
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
 	Router::connect('/w/a', array('controller' => 'wall_posts', 'action' => 'add'));

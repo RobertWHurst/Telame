@@ -25,7 +25,7 @@ class AppController extends Controller {
         $this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
 
 		//redirect home after logout
-		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'signup');
+		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'users', 'action' => 'signup');
 
 		// Write a config for if a user is logged in
 		Configure::write('LoggedIn', $this->Session->check('Auth.User.email'));

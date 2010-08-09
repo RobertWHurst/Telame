@@ -14,6 +14,7 @@ class ProfilesController extends AppController {
 			'base',
 			'main_sidebar',
 		));
+		$this->Auth->allow('add');
 	}
 
 	//Before the render of all views in this controller
@@ -24,6 +25,37 @@ class ProfilesController extends AppController {
 		$this->set('css_for_layout', $this->Includer->css());
 		$this->set('script_for_layout', $this->Includer->script());
 	}
+
+	function add($email, $hash) {
+		// basic check for valid hash
+		if (!$hash || strlen($hash) != 40 || !$email) {
+			$this->redirect('/');
+			exit;
+		}
+		if (!empty($this->data)) {
+			$this->Profile->create();
+			$this->Profile->save($this->data);
+			$this->redirect('/');
+			exit;
+		} else {
+			$user = $this->Profile->User->find('first', array('conditions' => array('email' => $email)));
+			// check the user hash matches
+			if ($hash == $user['User']['hash']) {
+				// it matches, let's setup a basic profile
+				$this->Profile->User->id = $user['User']['id'];
+				$this->Profile->User->saveField('active', true);
+
+				// set vars and show profile
+				$this->set(compact('email', 'hash'));
+				
+			} else {
+				$this->Session->setFlash(__('user_hash_error', true));
+				$this->redirect('/');
+				exit;
+			}
+		}
+	}
+
 
 	function edit($slug = false) {
 		// If the user is not an admin, and they're trying to edit somebody else's profile, redirect them to their own
