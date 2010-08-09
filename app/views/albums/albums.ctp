@@ -1,7 +1,7 @@
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
-			<?php echo $html->image('users/logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'signup'))); ?>
+			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'signup'))); ?>
 		</div>
 		<?php echo $this->element('main_sidebar'); ?>
 	</div>

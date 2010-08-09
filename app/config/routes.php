@@ -36,7 +36,6 @@
 
  	// If the first one returns true (the user is logged in) then rediret to news
 	Router::connect('/', array('controller' => 'notifications', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
-	Router::connect('/f/*', array('controller' => 'notifications', 'action' => 'news'));
 	// False, redirect to signup page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 	
@@ -70,6 +69,9 @@
 	
 	// New user adding
 	Router::connect('/a/*', array('controller' => 'profiles', 'action' => 'add'));
+
+	// News filters
+	Router::connect('/f/*', array('controller' => 'notifications', 'action' => 'news'));
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));

@@ -10,6 +10,11 @@ class AppController extends Controller {
 //	var $persistModel = true;
 
 	function beforeFilter() {
+		$this->Security->blackHoleCallback = '_forceSSL';
+		$this->Security->requireSecure('login');
+		if (!in_array($this->action, $this->Security->requireSecure) and env('HTTPS')) {
+		 	$this->_unforceSSL();
+		}
 
 		if(Configure::read('debug') > 0){
 			//load krumo
@@ -18,11 +23,8 @@ class AppController extends Controller {
 
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 
-		// get the user's info and store it in the 'user' var
-		$user = $this->Session->read('Auth');
-
 		//redirect to the user's news feed.
-        $this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
+        $this->Auth->loginRedirect = array('/');
 
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'users', 'action' => 'signup');
@@ -58,6 +60,14 @@ class AppController extends Controller {
 			);
 		$this->set('currentUser', $currentUser);
 		return $currentUser;
+	}
+
+	function _forceSSL() {
+		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
+	}
+
+	function _unforceSSL() {
+		$this->redirect('http://' . $_SERVER['SERVER_NAME'] . $this->here);
 	}
 
 }

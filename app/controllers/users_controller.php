@@ -42,6 +42,8 @@ class UsersController extends AppController {
 		$this->set('script_for_layout', $this->Includer->script());
 	}
 
+
+
 	//A summary of whats new for the user.
 	function index() {
 		$wp = $this->User->WallPost->find('all');
