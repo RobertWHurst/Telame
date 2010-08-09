@@ -42,4 +42,17 @@ class Friend extends AppModel{
 		
 		return $friends;
 	}
+	
+	// takes two user id's and finds out if they're friends.
+	// the first user is the parent and the second is the friend
+	// returns true or false
+	function isFriend($uid, $fid) {
+		$friend = $this->find('first', array('conditions' => array('parent_user_id' => $uid, 'child_user_id' => $fid)));
+		// if we have a row, then there is at least have a connection
+		if ($friend) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -13,21 +13,25 @@ class User extends AppModel {
 	);
 
 	var $hasMany = array(
-		'Album',
+		'Album' => array(
+            'dependent'=> true,
+		),
 		'Friend' => array(
 			'ClassName' => 'User',
-			'foreignKey' => 'child_user_id'
+			'foreignKey' => 'child_user_id',
 		),
 		'Notification',
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
 			'dependent' => true,
-			'exclusive' => true
+			'exclusive' => true,
 		)
 	);
 
 	var $hasOne = array(
-		'Profile'
+		'Profile' => array(
+            'dependent' => true,
+		)
 	);
 	
 	var $validate = array(

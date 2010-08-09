@@ -8,6 +8,7 @@
 		echo $form->create();
 		echo $form->input('email');
 		echo $form->input('password');
+		echo $form->input('passwd', array('label' => 'Password again'));
 		echo $form->input('slug');
 		echo $form->end(__('signup', true));
 ?>	

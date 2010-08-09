@@ -80,7 +80,13 @@ class UsersController extends AppController {
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 			exit;
 		}
-
+		// if the people aren't friends, don't show the profile.  Also check if you're looking at your own profile
+		if (!$this->User->Friend->isFriend($this->currentUser['User']['id'], $user['User']['id']) && $this->currentUser['User']['id'] != $user['User']['id']) {
+			$this->Session->setFlash(__('not_friend', true));
+			$this->redirect($this->referer());
+			exit;
+		}
+		
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 
 		//page title
@@ -110,46 +116,55 @@ class UsersController extends AppController {
 		$this->layout = 'pages';
 		
 		if (!empty($this->data)) {
-			$slug = (!empty($this->data['User']['slug']) ? $this->data['User']['slug'] : $this->data['User']['email']);
-
-			// create a new user
-			$this->User->create();
-			// fill array with data we need in the db
-			$this->data['User']['added'] = date('Y-m-d');
-			$this->data['User']['accessed'] = date('Y-m-d');
-			$this->data['User']['level'] = '1';
-			$this->data['User']['invisible'] = false;
-			$this->data['User']['slug'] = $slug;
-			$this->data['User']['type'] = '1';
-			$this->data['User']['searchable'] = true;
-			$this->data['User']['avatar_id'] = '-1';
-			$this->data['User']['active'] = false;
-			$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
-
-			// save the user
-			if (!$this->User->save($this->data)) {
-			    $this->Session->setFlash(__('user_create_error'));
-			    $this->redirect('/');
-			    exit;
-			}
-
-			// make their home directory structure
-			$dir = $this->User->makeUserDir($this->User->id);
-			if ($dir != false) {
-			    $this->User->saveField('home_dir', $dir['home']);
-			    $this->User->saveField('sub_dir', $dir['sub']);
+			// make sure the passwords match, if not show the page again with all the current info except the password
+			if ($this->data['User']['password'] != $this->Auth->password($this->data['User']['passwd'])) {
+				$this->Session->setFlash(__('password_mismatch', true));
+				unset($this->data['User']['password']);
+				unset($this->data['User']['passwd']);
+			// passwords match
 			} else {
-			    $this->Session->setFlash(__('user_create_error'));
-			    $this->redirect('/');
-			    exit;
+				// if they provided a slug use it, otherwise use their email
+				$slug = (!empty($this->data['User']['slug']) ? $this->data['User']['slug'] : $this->data['User']['email']);
+	
+				// create a new user
+				$this->User->create();
+				// fill array with data we need in the db
+				$this->data['User']['added'] = date('Y-m-d');
+				$this->data['User']['accessed'] = date('Y-m-d');
+				$this->data['User']['level'] = '1';
+				$this->data['User']['invisible'] = false;
+				$this->data['User']['slug'] = $slug;
+				$this->data['User']['type'] = '1';
+				$this->data['User']['searchable'] = true;
+				$this->data['User']['avatar_id'] = '-1';
+				$this->data['User']['active'] = false;
+				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
+	
+				// save the user
+				if (!$this->User->save($this->data)) {
+				    $this->Session->setFlash(__('user_create_error'));
+				    $this->redirect('/');
+				    exit;
+				}
+	
+				// make their home directory structure
+				$dir = $this->User->makeUserDir($this->User->id);
+				if ($dir != false) {
+				    $this->User->saveField('home_dir', $dir['home']);
+				    $this->User->saveField('sub_dir', $dir['sub']);
+				} else {
+				    $this->Session->setFlash(__('user_create_error'));
+				    $this->redirect('/');
+				    exit;
+				}
+				// send user email
+				$this->Email->from		=  'Telame.com <admin@telame.com>';
+				$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
+				$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
+				$this->Email->send('Welcome to Telame.  You need to finish your account by validating your email. ' . $this->data['User']['hash']);
+				// tell the user it's all good
+				$this->Session->setFlash(__('user_saved', true));
 			}
-			// send user email
-			$this->Email->from		=  'Telame.com <admin@telame.com>';
-			$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
-			$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
-			$this->Email->send('Welcome to Telame.  You need to finish your account by validating your email. ' . $this->data['User']['hash']);
-			// tell the user it's all good
-			$this->Session->setFlash(__('user_saved', true));
 		}
 	}
 
