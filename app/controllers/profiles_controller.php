@@ -38,7 +38,7 @@ class ProfilesController extends AppController {
 			$this->redirect('/');
 			exit;
 		} else {
-			$user = $this->Profile->User->find('first', array('conditions' => array('email' => $email)));
+			$user = $this->Profile->User->find('first', array('conditions' => array('lower(email)' => strtolower($email))));
 			// check the user hash matches
 			if ($hash == $user['User']['hash']) {
 				// it matches, let's setup a basic profile

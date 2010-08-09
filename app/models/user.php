@@ -1,4 +1,5 @@
 <?php
+App::import('Sanitize');
 class User extends AppModel {
 	var $name = 'User';
 
@@ -79,7 +80,7 @@ class User extends AppModel {
 
 	function getIdFromSlug($slug) {
 		$this->recursive = -1;
-		$user = $this->find('first', array('conditions' => array('lower(slug)' => strtolower($slug)), 'fields' => 'id'));
+		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
 		return $user['User']['id'];
 	}
 
@@ -108,10 +109,11 @@ class User extends AppModel {
 		return $user;
 	}
 	
+	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
 	function makeUserDir($id) {
 		$baseDir = APP . 'users' . DS;
-		$home = rand(0, 31000) . DS;
-		$sub = rand(0, 31000) . DS;
+		$home = rand(0, 31500) . DS;
+		$sub = rand(0, 31500) . DS;
 		
 		$userHome = $baseDir . $home . $sub . $id . DS;
 		if (mkdir($userHome, 0777, true)) {
