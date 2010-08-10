@@ -57,6 +57,8 @@ class User extends AppModel {
 		),
 		'slug' => array(
 			'rule' => 'isUnique',
+			'allowEmpty' => false,
+			'required' => true,
 			'message' => 'That slug is already in use',
 		),
 	);

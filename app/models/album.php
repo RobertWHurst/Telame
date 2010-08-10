@@ -1,26 +1,30 @@
 <?php
 class Album extends AppModel {
 	var $name = 'Album';
-	var $belongsTo = array('User');
+	var $belongsTo = array(
+		'Cover' => array(
+			'className' => 'Media',
+			'foreignKey' => 'cover_id',
+		), 
+		'User'
+	);
 	var $hasMany = array('Media');
 
 	function getAlbums($uid) {
-		$this->recursive = -1;
 		return $this->find('all', array(
 			'conditions' => array(
-				'user_id' => $uid
+				'Album.user_id' => $uid
 			),
 		));
 	}
 
 	function getAlbumId($uid, $slug) {
-		$this->recursive = -1;
-		$album = $this->find('first', array('conditions' => array('user_id' => $uid, 'title' => $slug), 'fields' => 'id'));
+		$album = $this->find('first', array('conditions' => array('Album.user_id' => $uid, 'Album.title' => $slug), 'fields' => 'Album.id'));
 		return $album['Album']['id'];
 	}
 
 	function getAlbumInfo($aid) {
-		return $this->find('first', array('conditions' => array('id' => $aid)));
+		return $this->find('first', array('conditions' => array('Album.id' => $aid)));
 	}
 
 	function getMedia($aid) {
