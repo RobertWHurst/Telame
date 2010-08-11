@@ -4,10 +4,10 @@ $this->set('css_for_layout', array(
 	'base',
 	'simple_header',
 	'users/signup'
-);
+));
 $this->set('script_for_layout', array(
 	'users/taglines'
-);
+));
 ?>
 <div id="content">
 	

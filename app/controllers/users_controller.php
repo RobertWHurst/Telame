@@ -24,13 +24,22 @@ class UsersController extends AppController {
 	}
 
 	function profile($slug){
-
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 
 		if(!$user){
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 			exit;
+		}
+
+		// Do permission check
+		if ($this->currentUser['User']['id'] != $user['User']['id']) {
+			// FIXME: Remove the @ symbol
+			if (!@$this->Acl->check(array('model' => 'User', 'foreign_key' => $this->currentUser['User']['id']), 'User::' . $user['User']['id'] . '/profile', 'read')) {
+				$this->Session->setFlash(__('not_allowed_profile', true));
+				$this->redirect('/');
+				exit;
+			}
 		}
 
 		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));

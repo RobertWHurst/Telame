@@ -17,7 +17,7 @@ class User extends AppModel {
 
 	var $hasMany = array(
 		'Album' => array(
-            'dependent'=> true,
+			'dependent'=> true,
 		),
 		'GroupsUser',
 		'Notification',
@@ -31,7 +31,7 @@ class User extends AppModel {
 
 	var $hasOne = array(
 		'Profile' => array(
-            'dependent' => true,
+			'dependent' => true,
 		)
 	);
 	
@@ -75,7 +75,15 @@ class User extends AppModel {
 
 // -------------------- ACL functions
 	function parentNode() {
-		return null;
+		if (!$this->id) {
+			return null;
+		}
+		$data = $this->read();
+		if (!$data['User']['group_id']){
+			return null;
+		} else {
+			return array('model' => 'Group', 'foreign_key' => $data['User']['group_id']);
+		}
 	}
 
 // --------------------- Custom functions
