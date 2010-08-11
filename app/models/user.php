@@ -25,7 +25,8 @@ class User extends AppModel {
 			'order' => 	'WallPost.id DESC',
 			'dependent' => true,
 			'exclusive' => true,
-		)
+		),
+		'Message'
 	);
 
 	var $hasOne = array(

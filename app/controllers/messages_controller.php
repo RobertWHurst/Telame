@@ -14,7 +14,7 @@ class MessagesController extends AppController {
 	function view($id){
 		
 		//get the inbox from the db
-		$messages = $this->Message->getMessage($this->currentUser['User']['id'], $id);
+		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
 		
 		$this->set(compact('messages'));
 	}
