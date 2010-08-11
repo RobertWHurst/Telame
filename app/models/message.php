@@ -8,17 +8,14 @@ class Message extends AppModel {
 		'Author' => array(
 			'className' => 'User',		
 			'foreignKey' => 'author_id'
-		)
-	);
-	var $hasMany = array(
-		'ChildMessage' => array(		
+		),
+		'ParentMessage' => array(		
 			'className' => 'Message',		
-			'foreignKey' => 'parent_id',
-			'dependent' => true
+			'foreignKey' => 'parent_id'
 		)
 	);
 
-	function getMessageThread($uid, $mid){
+	function getMessageThread($uid, $pid){
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
@@ -28,8 +25,8 @@ class Message extends AppModel {
 					'OR' => array(
 						'Message.user_id' => $uid,
 						'Message.author_id' => $uid
-					),						
-					'Message.id' => $mid
+					),					
+					'Message.id' => $pid
 				),
 				'contain' => array(
 					'User' => array(
@@ -44,7 +41,7 @@ class Message extends AppModel {
 		
 		$child_messages = $this->find('all', array(
 				'conditions' => array(
-					'Message.parent_id' => $mid
+					'Message.parent_id' => $pid
 				),
 				'contain' => array(
 					'User' => array(
@@ -68,9 +65,8 @@ class Message extends AppModel {
 		
 		return $this->find('all', array(
 				'conditions' => array(
-					'Message.user_id' => $uid,
 					'Message.deleted' => false,
-					'Message.parent_id' => null
+					'Message.user_id' => $uid
 				),
 				'contain' => array(
 					'User' => array(
@@ -79,8 +75,9 @@ class Message extends AppModel {
 					'Author' => array(
 						'Profile'
 					),
-					'ChildMessage'
-				)
+					'ParentMessage'
+				),
+				
 			)
 		);
 	}

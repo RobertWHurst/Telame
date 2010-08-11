@@ -9,9 +9,9 @@
 			
 			//figure out if the message is threaded
 			if($message['Message']['subject'])
-				$title = $message['Message']['subject'];
+				$title = $thread_title = $message['Message']['subject'];
 			else
-				$title = "RE: {$message['Message']['subject']}";
+				$title = "RE: {$thread_title}";
 ?>
 			<div class="message">
 				<div class="avatar">
