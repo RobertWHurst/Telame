@@ -64,7 +64,7 @@
 	// Images - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 	// Images - Thumbnail
-	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'image'));
+	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
 	
 	// Messaging
 	Router::connect('/m/i', array('controller' => 'messages', 'action' => 'inbox'));

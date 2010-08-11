@@ -4,22 +4,22 @@ class MediaController extends AppController {
 	var $components = array('Thumb');
 
 	function avatar($id) {
-		$this->_resize($id, Configure::read('AvatarSize'), 'profile');
+		$this->_resize($id, Configure::read('AvatarSize'));
 	}
 
 	function thumb($id) {
-		$this->_resize($id, Configure::read('ThumbSize'), 'media');	
+		$this->_resize($id, Configure::read('ThumbSize'));	
 	}
 
 	function profile($id) {
-		$this->_resize($id, Configure::read('ProfileSize'), 'profile');
+		$this->_resize($id, Configure::read('ProfileSize'));
 	}
 
 
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($uid = null, $size, $dir) {
+	function _resize($uid = null, $size) {
 		if (empty($uid)) {
 			$this->cakeError('error404');
 		}
@@ -44,7 +44,7 @@ class MediaController extends AppController {
 		}
 
 		// profile or gallery, etc...
-		$dir .= DS;
+		$dir = $user['Media']['path'] . DS;
 		// filename
 		$filename = trim($user['Media']['filename']);
 		// cached version of filename
