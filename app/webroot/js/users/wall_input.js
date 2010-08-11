@@ -12,7 +12,7 @@
                 minHeight = $this.height(),
                 lineHeight = $this.css('lineHeight');
             
-            var shadow = $('<div></div>').css({
+            var shadow = $('<div class="autogrow_shadow"></div>').css({
                 position: 'absolute',
                 top: -10000,
                 left: -10000,
@@ -150,6 +150,9 @@ $(document).ready(function(){
 				
 						//convert the textarea to an input
 						root.wallInput.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+						//delete any textarea shadows
+						$('div.autogrow_shadow').remove();
 					
 						//if the element selector					
 						root.wallInput = $('#WallPostPost', '#profile_wall_input');
@@ -211,6 +214,9 @@ $(document).ready(function(){
 				
 							//convert the textarea to an input
 							root.wallInput.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+							//delete any textarea shadows
+							$('div.autogrow_shadow').remove();
 					
 							//if the element selector					
 							root.wallInput = $('#WallPostPost', '#profile_wall_input');
