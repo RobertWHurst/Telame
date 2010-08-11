@@ -13,7 +13,8 @@ class GroupsUser extends AppModel {
 
 		$defaults = array(
 			'friendList' => false,
-			'uid' => false
+			'uid' => false,
+			'gid' => false,
 		);
 
 		$options = $this->parseArguments($defaults, $arguments);
@@ -21,6 +22,10 @@ class GroupsUser extends AppModel {
 		$this->Behaviors->attach('Containable');
 
 		$conditions['user_id'] = $options['uid'];
+
+		if ($options['gid']) {
+			$conditions['group_id'] = $options['gid'];
+		}
 
 		if($options['friendList'])
 			$conditions['list_id'] = $options['friendList'];
