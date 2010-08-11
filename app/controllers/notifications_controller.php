@@ -14,21 +14,22 @@ class NotificationsController extends AppController {
 	}
 
 	function news($selectedFriendList = null) {
+		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
 
-//		$friendLists = $this->FriendList->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
+		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
 
 		$default_friendLists = array(
-			'all' => array('FriendList' => array('name' => 'Everyone', 'id' => null)),
-			//'hidden' => array('FriendList' => array('name' => 'Hidden', 'id' => 'h'))
+			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0)),
+	//		'hidden' => array('FriendList' => array('name' => 'Hidden', 'id' => 'h'))
 		);
 
 		$friendLists = array_merge($default_friendLists, $friendLists);
 
 		//add selected info
 		foreach($friendLists as $key => $filter){
-			if($filter['FriendList']['id'] == $selectedFriendList)
+			if($filter['Group']['id'] == $selectedFriendList)
 				$friendLists[$key]['selected'] = true;
 			else
 				$friendLists[$key]['selected'] = false;
@@ -40,7 +41,7 @@ class NotificationsController extends AppController {
 		));
 
 		foreach($friends as $key => $friend)
-			$friends[$key] = $friend['UserFriend']['id'];
+			$friends[$key] = $friend['Friend']['id'];
 
 		// add ourself to the list
 		array_push($friends, $this->currentUser['User']['id']);
