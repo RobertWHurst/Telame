@@ -2,12 +2,11 @@
 //INCLUDES
 $this->set('css_for_layout', array(
 	'base',
+	'gallery',
+	'summary',
 	'tall_header',
 	'main_sidebar',
 	'users/profile',
-	'users/gallery',
-	'users/summary',
-	'users/actions',
 	'users/wall',
 	'users/wall_sidebar'
 ));
@@ -31,11 +30,10 @@ $this->set('script_for_layout', array(
 		<div id="page_head" class="clearfix">
 <?php
 			//render the profile gallery
-			echo $this->element('users/gallery');
+			echo $this->element('gallery');
 
 			//render the profile summary
-			echo $this->element('users/summary');
-			echo $this->element('users/actions');
+			echo $this->element('summary');
 ?>
 		</div>
 		<div id="page_body" class="clearfix">
