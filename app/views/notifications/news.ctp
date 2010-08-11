@@ -1,3 +1,17 @@
+<?php
+//INCLUDES
+$this->set('css_for_layout', array(
+	'base',
+	'tall_header',
+	'main_sidebar',
+	'notifications/news_feed',
+	'notifications/news_sidebar'
+));
+$this->set('script_for_layout', array(
+	'jquery',
+	'base'
+));
+?>
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">

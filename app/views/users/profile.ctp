@@ -1,3 +1,24 @@
+<?php
+//INCLUDES
+$this->set('css_for_layout', array(
+	'base',
+	'tall_header',
+	'main_sidebar',
+	'users/profile',
+	'users/gallery',
+	'users/summary',
+	'users/actions',
+	'users/wall',
+	'users/wall_sidebar'
+));
+$this->set('script_for_layout', array(
+	'jquery',
+	'base',
+	'main_sidebar',
+	'users/wall_input',
+	'users/wall'
+));
+?>
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">

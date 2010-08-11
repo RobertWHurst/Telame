@@ -3,7 +3,7 @@ class AppController extends Controller {
 
 	//add user athentication
 	// autologin must be before auth in array
-	var $components = array('Acl', 'AutoLogin', 'Auth', 'Includer', 'Security', 'Session');
+	var $components = array('Acl', 'AutoLogin', 'Auth', 'Security', 'Session');
 	var $currentUser;
 
 	// Not for use when developing

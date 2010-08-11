@@ -8,51 +8,14 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 
 //		$this->Auth->allow('signup');
-
-		if (strtolower($this->params['action']) != 'signup') {
-			//add css and js that is common to all the actions in this controller
-			$this->Includer->add('css', array(
-				'base',
-				'tall_header',
-				'main_sidebar'
-			));
-			$this->Includer->add('script', array(
-				'jquery',
-				'base',
-				'main_sidebar',
-			));
-		} else {
-			$this->Includer->add('css', array(
-				'base',
-				'simple_header'
-			));
-			$this->Includer->add('script', array(
-				'jquery',
-				'base'
-			));
-		}
 	}
-
-	//Before the render of all views in this controller
-	function beforeRender() {
-		//run the before render in the app controller
-		parent::beforeRender();
-		//set the css and script for the view
-		$this->set('css_for_layout', $this->Includer->css());
-		$this->set('script_for_layout', $this->Includer->script());
-	}
-
-
-
+	
 	//A summary of whats new for the user.
 	function index() {
 		$wp = $this->User->WallPost->find('all');
 	}
 
 	function login(){
-		$this->Includer->add('css', array(
-			'users/login'
-		));
 	}
 
 	/** delegate /users/logout request to Auth->logout method */
@@ -61,19 +24,6 @@ class UsersController extends AppController {
 	}
 
 	function profile($slug){
-
-		$this->Includer->add('script', array(
-			'users/wall_input',
-			'users/wall'
-		));
-		$this->Includer->add('css', array(
-			'users/profile',
-			'users/gallery',
-			'users/summary',
-			'users/actions',
-			'users/wall',
-			'users/wall_sidebar'
-		));
 
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
@@ -109,12 +59,6 @@ class UsersController extends AppController {
 	}
 
 	function signup() {
-		$this->Includer->add('script', array(
-			'users/taglines'
-		));
-		$this->Includer->add('css', array(
-			'users/signup'
-		));
 		$this->layout = 'pages';
 		
 		if (!empty($this->data)) {
