@@ -1,7 +1,3 @@
-<?php
-	krumo($messages);
-
-?>
 <div id="content">
 	<div id="messages">
 <?php 
