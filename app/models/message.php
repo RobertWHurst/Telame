@@ -93,8 +93,6 @@ class Message extends AppModel {
 		
 		$thread_ids = $this->_get_threads($uid);
 		$thread_ids[] = -1;
-		
-		krumo($thread_ids);
 					
 			$recived = $this->find('all', array(
 				'conditions' => array(
