@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-11 07:04+0000\n"
-"PO-Revision-Date: 2010-08-11 00:11-0800\n"
+"POT-Creation-Date: 2010-08-11 08:45+0000\n"
+"PO-Revision-Date: 2010-08-11 01:46-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -73,8 +73,8 @@ msgid "my_profile"
 msgstr "My Profile"
 
 #: /views/elements/current_user_controls.ctp:12
-msgid "edit_my_profile"
-msgstr "Edit My Profile"
+msgid "account_settings"
+msgstr "Account Settings"
 
 #: /views/elements/current_user_controls.ctp:13
 #: /views/elements/pages/navigation.ctp:11
@@ -171,6 +171,9 @@ msgstr "Wall-to-wall"
 #: /views/profiles/add.ctp:15
 msgid "save"
 msgstr "Save Changes"
+
+#~ msgid "edit_my_profile"
+#~ msgstr "Edit My Profile"
 
 #~ msgid "year"
 
