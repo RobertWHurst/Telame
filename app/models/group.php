@@ -3,6 +3,7 @@ class Group extends AppModel {
 
 	var $hasAndBelongsToMany = array('User');
 
+
 	function getFriendLists($limit = 0, $offset = 0, $arguments = false){
 		$defaults = array(
 			'uid' => false
@@ -18,7 +19,8 @@ class Group extends AppModel {
 		return $this->find('all', array(
 			'limit' => $limit,
 			'offset' => $offset,
-			'conditions' => $conditions
+			'conditions' => $conditions,
+			'order' => 'lower(title)',
 		));
 	}
 
