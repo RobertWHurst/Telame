@@ -36,3 +36,22 @@
 	border-top: 1px solid #aaa;
 	border-bottom: 1px solid #333;
 }
+#page_navigation{
+	background: #363636;
+	border-top: 1px solid #000;
+	border-left: 2px solid #787878;
+	border-right: 2px solid #787878;
+}
+#page_navigation ul{
+	list-style: none;
+	padding: 0 10px;
+}
+#page_navigation li{
+	float: left;
+}
+#page_navigation a.button{
+	display: block;
+	padding: 10px;
+	font-size: 1.3em;
+	font-weight: bold;
+}

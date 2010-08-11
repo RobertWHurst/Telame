@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-11 08:45+0000\n"
+"POT-Creation-Date: 2010-08-11 23:18+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -15,9 +15,11 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: /controllers/notifications_controller.php:53
-#: /controllers/users_controller.php:45;109
+#: /controllers/users_controller.php:40;104
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
+#: /views/messages/inbox.ctp:20
+#: /views/messages/view.ctp:19
 #: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
 #: /views/users/login.ctp:13
@@ -34,19 +36,15 @@ msgstr ""
 msgid "user_hash_error"
 msgstr ""
 
-#: /controllers/users_controller.php:37
-msgid "not_friend"
-msgstr ""
-
-#: /controllers/users_controller.php:67
+#: /controllers/users_controller.php:62
 msgid "password_mismatch"
 msgstr ""
 
-#: /controllers/users_controller.php:91;102
+#: /controllers/users_controller.php:86;97
 msgid "user_create_error"
 msgstr ""
 
-#: /controllers/users_controller.php:112
+#: /controllers/users_controller.php:107
 msgid "user_saved"
 msgstr ""
 
@@ -97,6 +95,20 @@ msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:42
 msgid "albums"
+msgstr ""
+
+#: /views/elements/messages/navigation.ctp:5
+#: /views/messages/inbox.ctp:26
+#: /views/messages/view.ctp:25
+msgid "messages_inbox_title"
+msgstr ""
+
+#: /views/elements/messages/navigation.ctp:13
+msgid "messages_sent_title"
+msgstr ""
+
+#: /views/elements/messages/navigation.ctp:21
+msgid "messages_deleted_title"
 msgstr ""
 
 #: /views/elements/notifications/news_sidebar.ctp:3
@@ -164,6 +176,10 @@ msgstr ""
 
 #: /views/elements/users/wall_post.ctp:27
 msgid "wall_to_wall"
+msgstr ""
+
+#: /views/messages/view.ctp:31
+msgid "message_thread_title"
 msgstr ""
 
 #: /views/profiles/add.ctp:15

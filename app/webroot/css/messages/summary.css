@@ -1,0 +1,36 @@
+div.message{
+	padding: 10px;
+	background: #333;
+	margin-bottom: 10px;
+	position: relative;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.message div.avatar{
+	float: left;
+	margin-right: 10px;
+}
+div.message div.message_content h1{
+	font-size: 1.6em;
+	line-height: 1.2em;
+	margin: 0 15px 15px 0;
+	overflow: hidden;
+}
+div.message div.message_content p{
+	font-size: 1.3em;
+	line-height: 1.2em;
+	margin: 0 15px 15px 0;
+	overflow: hidden;
+}
+div.message div.delete{
+	position: absolute;
+	top:10px;
+	right: 10px;
+}
+div.message div.reply{
+	position: absolute;
+	top:30px;
+	right: 10px;
+}

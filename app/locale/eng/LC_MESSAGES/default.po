@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-11 08:45+0000\n"
-"PO-Revision-Date: 2010-08-11 01:46-0800\n"
+"POT-Creation-Date: 2010-08-11 23:18+0000\n"
+"PO-Revision-Date: 2010-08-11 16:19-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,11 @@ msgstr ""
 "X-Poedit-Country: Canada\n"
 
 #: /controllers/notifications_controller.php:53
-#: /controllers/users_controller.php:45;109
+#: /controllers/users_controller.php:40;104
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
+#: /views/messages/inbox.ctp:20
+#: /views/messages/view.ctp:19
 #: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
 #: /views/users/login.ctp:13
@@ -36,19 +38,15 @@ msgstr "What's New"
 msgid "user_hash_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:37
-msgid "not_friend"
-msgstr "Sorry but the user you are trying to view has their privacy options set to only allow friends to view there page. I you know this person, ask them for their slug so you can send them a friend request from your friends page."
-
-#: /controllers/users_controller.php:67
+#: /controllers/users_controller.php:62
 msgid "password_mismatch"
 msgstr "Your passwords don't match"
 
-#: /controllers/users_controller.php:91;102
+#: /controllers/users_controller.php:86;97
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:112
+#: /controllers/users_controller.php:107
 msgid "user_saved"
 msgstr "You have been successfully added"
 
@@ -100,6 +98,20 @@ msgstr "Friend List"
 #: /views/elements/sidebar_modules.ctp:42
 msgid "albums"
 msgstr "Photos and Video"
+
+#: /views/elements/messages/navigation.ctp:5
+#: /views/messages/inbox.ctp:26
+#: /views/messages/view.ctp:25
+msgid "messages_inbox_title"
+msgstr "Inbox"
+
+#: /views/elements/messages/navigation.ctp:13
+msgid "messages_sent_title"
+msgstr "Sent Messages"
+
+#: /views/elements/messages/navigation.ctp:21
+msgid "messages_deleted_title"
+msgstr "Deleted Messages"
 
 #: /views/elements/notifications/news_sidebar.ctp:3
 msgid "filter_title"
@@ -168,9 +180,24 @@ msgstr "Post"
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
 
+#: /views/messages/view.ctp:31
+msgid "message_thread_title"
+msgstr "Message Thread"
+
 #: /views/profiles/add.ctp:15
 msgid "save"
 msgstr "Save Changes"
+
+#, fuzzy
+#~ msgid "inbox_title"
+#~ msgstr "What's New"
+
+#~ msgid "not_friend"
+#~ msgstr ""
+#~ "Sorry but the user you are trying to view has their privacy options set "
+#~ "to only allow friends to view there page. I you know this person, ask "
+#~ "them for their slug so you can send them a friend request from your "
+#~ "friends page."
 
 #~ msgid "edit_my_profile"
 #~ msgstr "Edit My Profile"
