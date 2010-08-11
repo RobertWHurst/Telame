@@ -14,12 +14,10 @@ class NotificationsController extends AppController {
 	}
 
 	function news($selectedFriendList = null) {
-
-		$this->loadModel('Friend');
-		$this->loadModel('FriendList');
+		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
 
-		$friendLists = $this->FriendList->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
+//		$friendLists = $this->FriendList->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
 
 		$default_friendLists = array(
 			'all' => array('FriendList' => array('name' => 'Everyone', 'id' => null)),
@@ -36,7 +34,7 @@ class NotificationsController extends AppController {
 				$friendLists[$key]['selected'] = false;
 		}
 
-		$friends = $this->Friend->getFriends(0, 0, array(
+		$friends = $this->GroupsUser->getFriends(0, 0, array(
 			'uid' => $this->currentUser['User']['id'],
 			'friendList' => $selectedFriendList
 		));

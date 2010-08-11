@@ -1,8 +1,3 @@
-<?php
-   	//get the users friends
-   	$friends = $user['Friend'];
-?>
-
 <div class="friends">
    	<h1><?php echo ($user['User']['id'] == $currentUser['User']['id'] ? 'Your' : ucfirst($user['Profile']['first_name'] . '\'s')); ?> Friends</h1>
    	<div class="thumbs">
@@ -13,14 +8,14 @@
 				<div class="thumb">
 <?php
 					//get the avatar url
-					$avatar_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $friend['User']['id']));
+					$avatar_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $friend['Friend']['id']));
 
 					//get the user's profile url
-					$profile_url = $html->url(array('controller' => 'users', 'action' => 'profile', $friend['User']['slug']));
+					$profile_url = $html->url(array('controller' => 'users', 'action' => 'profile', $friend['Friend']['slug']));
 
 					//get the friend's avatar and name to insert into a link
 					$link_content = '<div class="avatar">' . $html->image($avatar_url) . '</div>';
-					$link_content .= $friend['User']['Profile']['full_name'];
+					$link_content .= $friend['Friend']['Profile']['full_name'];
 		
 					//echo the thumb link
 					echo $html->link($link_content, $profile_url, array('escape' => false));

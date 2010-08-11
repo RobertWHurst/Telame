@@ -13,14 +13,13 @@ class User extends AppModel {
 		),
 	);
 
+	var $hasAndBelongsToMany = array('Group');
+
 	var $hasMany = array(
 		'Album' => array(
             'dependent'=> true,
 		),
-		'Friend' => array(
-			'ClassName' => 'User',
-			'foreignKey' => 'child_user_id',
-		),
+		'GroupsUser',
 		'Notification',
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
@@ -99,11 +98,6 @@ class User extends AppModel {
 				'lower(slug)' => strtolower($slug)
 			),
 			'contain' => array(
-				'Friend' => array(
-					'limit' => $options['friends']['limit'],
-					'order' => $options['friends']['order'],
-					'User.Profile',
-				),
 				'Media',
 				'Profile',
 			)

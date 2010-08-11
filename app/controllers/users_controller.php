@@ -32,20 +32,15 @@ class UsersController extends AppController {
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 			exit;
 		}
-		// if the people aren't friends, don't show the profile.  Also check if you're looking at your own profile
-		if (!$this->User->Friend->isFriend($this->currentUser['User']['id'], $user['User']['id']) && $this->currentUser['User']['id'] != $user['User']['id']) {
-			$this->Session->setFlash(__('not_friend', true));
-			$this->redirect($this->referer());
-			exit;
-		}
-		
+
+		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 
 		//page title
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name']);
 
 		//pass the profile data to the view
-		$this->set(compact('user', 'wallPosts'));
+		$this->set(compact('friends', 'user', 'wallPosts'));
 	}
 
 	function search(){
