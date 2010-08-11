@@ -55,7 +55,35 @@ class Message extends AppModel {
 			)
 		);
 		
-		return array_reverse(array_merge($child_messages, array($parent_message)));
+		$child_messages[] = $parent_message;
+		
+		return array_reverse($child_messages);
+	}
+	
+	function _get_threads($uid){
+		
+		$this->recursive = 1;
+		$this->Behaviors->attach('Containable');
+			
+		$threads = $this->find('all', array(
+				'conditions' => array(
+					'Message.parent_id' => -1,
+					'Message.deleted' => false,
+					'OR' => array(
+						'Message.user_id' => $uid,
+						'Message.author_id' => $uid
+					)
+				),				
+				'fields' => array(
+					'id'
+				)
+			)
+		);
+		
+		foreach($threads as $thread)
+			$thread_ids[] = $thread['Message']['id'];
+			
+		return $thread_ids;
 	}
 
 	function getRecieved($uid){
@@ -63,11 +91,18 @@ class Message extends AppModel {
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
 		
-		return $this->find('all', array(
+		$thread_ids = $this->_get_threads($uid);
+		$thread_ids[] = -1;
+		
+		krumo($thread_ids);
+					
+			$recived = $this->find('all', array(
 				'conditions' => array(
 					'Message.deleted' => false,
-					'Message.user_id' => $uid
+					'Message.user_id' => $uid,
+					'Message.parent_id' => $thread_ids
 				),
+				'order' => 'Message.created DESC',
 				'contain' => array(
 					'User' => array(
 						'Profile'
@@ -76,53 +111,26 @@ class Message extends AppModel {
 						'Profile'
 					),
 					'ParentMessage'
-				),
-				
-			)
-		);
+				)				
+			));
+		
+		//}
+		
+		//foreach($_recived as $message)
+			//$recived[] = $message;
+		
+		return $recived;
 	}
 	
 	function getDeleted($uid){
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
-		
-		return $this->find('all', array(
-				'conditions' => array(
-					'Message.user_id' => $uid,
-					'Message.deleted' => true
-				),
-				'contain' => array(
-					'User' => array(
-						'Profile'
-					),
-					'Author' => array(
-						'Profile'
-					)
-				)
-			)
-		);
 	}
 	
 	function getSent($uid){
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
-		
-		return $this->find('all', array(
-				'conditions' => array(
-					'Message.author_id' => $uid,
-					'Message.deleted' => false
-				),
-				'contain' => array(
-					'User' => array(
-						'Profile'
-					),
-					'Author' => array(
-						'Profile'
-					)
-				)
-			)
-		);
 	}
 }
