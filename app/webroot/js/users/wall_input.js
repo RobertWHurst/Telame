@@ -1,3 +1,60 @@
+//EXPANDING TEXTAREA PLUGIN
+(function($) {
+
+    /*
+* Auto-growing textareas;
+*/
+    $.fn.autogrow = function(options) {
+        
+        this.filter('textarea').each(function() {
+            
+            var $this = $(this),
+                minHeight = $this.height(),
+                lineHeight = $this.css('lineHeight');
+            
+            var shadow = $('<div class="autogrow_shadow"></div>').css({
+                position: 'absolute',
+                top: -10000,
+                left: -10000,
+                width: $(this).width() - parseInt($this.css('paddingLeft')) - parseInt($this.css('paddingRight')),
+                fontSize: $this.css('fontSize'),
+                fontFamily: $this.css('fontFamily'),
+                lineHeight: $this.css('lineHeight'),
+                resize: 'none'
+            }).appendTo(document.body);
+            
+            var update = function() {
+    
+                var times = function(string, number) {
+                    for (var i = 0, r = ''; i < number; i ++) r += string;
+                    return r;
+                };
+                
+                var val = this.value.replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/&/g, '&amp;')
+                                    .replace(/\n$/, '<br/>&nbsp;')
+                                    .replace(/\n/g, '<br/>')
+                                    .replace(/ {2,}/g, function(space) { return times('&nbsp;', space.length -1) + ' ' });
+                
+                shadow.html(val);
+                $(this).css('height', Math.max(shadow.height() + 20, minHeight));
+            
+            }
+            
+            $(this).change(update).keyup(update).keydown(update);
+            
+            update.apply(this);
+            
+        });
+        
+        return this;
+        
+    }
+    
+})(jQuery);
+
+//LOGIC
 $(document).ready(function(){
 	
 	var wall_posts_logic = function(){
@@ -6,7 +63,7 @@ $(document).ready(function(){
 		var root = this;
 		
 		//save the dom elements
-		root.wallPosts = $('#profile_wall_posts', '#profile_wall')
+		root.wallPosts = $('#profile_wall_posts', '#profile_wall');
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
 		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');
@@ -40,17 +97,38 @@ $(document).ready(function(){
 		//input focus handler
 		root.inputFocusHandler = function(){
 		
-			root.wallInput.focus(function(){
+			root.wallInput.live('focus', function(){
 				
-				//remove the old active class and add the inactive class
-				root.wallInputWrap.addClass('active').addClass('focus');
+				if(!root.wallInput.hasClass('textarea')){
 				
-				//hide the label
-				root.wallInputLabel.hide();
+					//get the input id, and name.
+					var inputMeta = {
+						'id': root.wallInput.attr('id'),
+						'name': root.wallInput.attr('name')
+					}
+				
+					//convert the input to a textarea
+					root.wallInput.replaceWith('<textarea id="' + inputMeta.id + '" class="textarea" name="' + inputMeta.name + '"></textarea>');
+					
+					//if the element selector					
+					root.wallInput = $('#WallPostPost', '#profile_wall_input');
+					
+					//regain focus
+					root.wallInput.autogrow().focus();
+				}
+				else{
+				
+					//remove the old active class and add the inactive class
+					root.wallInputWrap.addClass('active').addClass('focus');
+				
+					//hide the label
+					root.wallInputLabel.hide();
+				
+				}
 				
 			});
 			
-			root.wallInput.blur(function(){
+			root.wallInput.live('blur', function(){
 				
 				//remove the old active class and add the inactive class
 				root.wallInputWrap.removeClass('focus');			
@@ -61,6 +139,24 @@ $(document).ready(function(){
 				//if the inupt or textarea is empty then hide the label
 				if(root.wallInput.val() === ''){
 					root.wallInputLabel.show();
+					
+					if(root.wallInput.hasClass('textarea')){
+				
+						//get the input id, and name.
+						var inputMeta = {
+							'id': root.wallInput.attr('id'),
+							'name': root.wallInput.attr('name')
+						}
+				
+						//convert the textarea to an input
+						root.wallInput.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+						//delete any textarea shadows
+						$('div.autogrow_shadow').remove();
+					
+						//if the element selector					
+						root.wallInput = $('#WallPostPost', '#profile_wall_input');
+					}
 				}
 				
 			});
@@ -107,6 +203,24 @@ $(document).ready(function(){
 						
 						//take the data and add it to the top of the wall
 						root.wallPosts.prepend(data);
+						
+						if(root.wallInput.hasClass('textarea')){
+				
+							//get the input id, and name.
+							var inputMeta = {
+								'id': root.wallInput.attr('id'),
+								'name': root.wallInput.attr('name')
+							}
+				
+							//convert the textarea to an input
+							root.wallInput.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+							//delete any textarea shadows
+							$('div.autogrow_shadow').remove();
+					
+							//if the element selector					
+							root.wallInput = $('#WallPostPost', '#profile_wall_input');
+						}
 						
 					}
 					else{

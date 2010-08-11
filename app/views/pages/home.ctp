@@ -1,3 +1,15 @@
+<?php
+//INCLUDES
+$this->set('css_for_layout', array(
+	'base',
+	'simple_header'
+));
+$this->set('script_for_layout', array(
+	'jquery',
+	'base',
+	'users/taglines'
+));
+?>
 <div id="content">
 
 	<?php echo $this->element('pages/taglines'); ?>	

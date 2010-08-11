@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-08 03:44+0000\n"
+"POT-Creation-Date: 2010-08-11 08:45+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,31 +14,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /controllers/notifications_controller.php:85
-#: /controllers/users_controller.php:88;147
-#: /views/albums/albums.ctp:4
-#: /views/elements/pages/header.ctp:4
-#: /views/notifications/news.ctp:5
+#: /controllers/notifications_controller.php:53
+#: /controllers/users_controller.php:45;109
+#: /views/albums/albums.ctp:22
+#: /views/layouts/pages.ctp:39
+#: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
-#: /views/users/login.ctp:2
-#: /views/users/profile.ctp:5
+#: /views/users/login.ctp:13
+#: /views/users/profile.ctp:25
 msgid "site_name"
 msgstr ""
 
-#: /controllers/notifications_controller.php:85
-#: /views/notifications/news.ctp:11
+#: /controllers/notifications_controller.php:53
+#: /views/notifications/news.ctp:25
 msgid "news_title"
 msgstr ""
 
-#: /controllers/users_controller.php:107
+#: /controllers/profiles_controller.php:32
+msgid "user_hash_error"
+msgstr ""
+
+#: /controllers/users_controller.php:37
+msgid "not_friend"
+msgstr ""
+
+#: /controllers/users_controller.php:67
 msgid "password_mismatch"
 msgstr ""
 
-#: /controllers/users_controller.php:129;140
+#: /controllers/users_controller.php:91;102
 msgid "user_create_error"
 msgstr ""
 
-#: /controllers/users_controller.php:150
+#: /controllers/users_controller.php:112
 msgid "user_saved"
 msgstr ""
 
@@ -56,6 +64,23 @@ msgstr ""
 
 #: /controllers/wall_posts_controller.php:200
 msgid "wall_post_delete"
+msgstr ""
+
+#: /views/elements/current_user_controls.ctp:11
+msgid "my_profile"
+msgstr ""
+
+#: /views/elements/current_user_controls.ctp:12
+msgid "account_settings"
+msgstr ""
+
+#: /views/elements/current_user_controls.ctp:13
+#: /views/elements/pages/navigation.ctp:11
+msgid "logout"
+msgstr ""
+
+#: /views/elements/search.ctp:6;7
+msgid "search"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:18
@@ -84,23 +109,23 @@ msgid "delete"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:4
-#: /views/users/login.ctp:8
+#: /views/users/login.ctp:19
 msgid "email"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:5
-#: /views/users/login.ctp:9
+#: /views/users/login.ctp:20
 msgid "password"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:6
-#: /views/users/login.ctp:10
+#: /views/users/login.ctp:21
 msgid "auto_login"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:7
 #: /views/elements/pages/navigation.ctp:7
-#: /views/users/login.ctp:11
+#: /views/users/login.ctp:22
 msgid "login"
 msgstr ""
 
@@ -109,29 +134,12 @@ msgid "features"
 msgstr ""
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:8
+#: /views/users/signup.ctp:24
 msgid "signup"
 msgstr ""
 
 #: /views/elements/pages/navigation.ctp:10
 msgid "profile_title"
-msgstr ""
-
-#: /views/elements/pages/navigation.ctp:11
-#: /views/elements/users/current_user_controls.ctp:13
-msgid "logout"
-msgstr ""
-
-#: /views/elements/users/current_user_controls.ctp:11
-msgid "my_profile"
-msgstr ""
-
-#: /views/elements/users/current_user_controls.ctp:12
-msgid "edit_my_profile"
-msgstr ""
-
-#: /views/elements/users/search.ctp:6;7
-msgid "search"
 msgstr ""
 
 #: /views/elements/users/wall.ctp:16
@@ -142,15 +150,23 @@ msgstr ""
 msgid "wall_empty"
 msgstr ""
 
-#: /views/elements/users/wall_input.ctp:14
+#: /views/elements/users/wall_input.ctp:15
+msgid "wall_post_label_personal"
+msgstr ""
+
+#: /views/elements/users/wall_input.ctp:17
 msgid "wall_post_label"
 msgstr ""
 
-#: /views/elements/users/wall_input.ctp:16
+#: /views/elements/users/wall_input.ctp:20
 msgid "wall_post_submit"
 msgstr ""
 
 #: /views/elements/users/wall_post.ctp:27
 msgid "wall_to_wall"
+msgstr ""
+
+#: /views/profiles/add.ctp:15
+msgid "save"
 msgstr ""
 

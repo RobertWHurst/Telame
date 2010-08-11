@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-08 03:44+0000\n"
-"PO-Revision-Date: 2010-08-07 21:40-0800\n"
-"Last-Translator: Eric <efriesen@gmail.com>\n"
+"POT-Creation-Date: 2010-08-11 08:45+0000\n"
+"PO-Revision-Date: 2010-08-11 01:46-0800\n"
+"Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,31 +15,40 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Canada\n"
 
-#: /controllers/notifications_controller.php:85
-#: /controllers/users_controller.php:88;147
-#: /views/albums/albums.ctp:4
-#: /views/elements/pages/header.ctp:4
-#: /views/notifications/news.ctp:5
+#: /controllers/notifications_controller.php:53
+#: /controllers/users_controller.php:45;109
+#: /views/albums/albums.ctp:22
+#: /views/layouts/pages.ctp:39
+#: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
-#: /views/users/login.ctp:2
-#: /views/users/profile.ctp:5
+#: /views/users/login.ctp:13
+#: /views/users/profile.ctp:25
 msgid "site_name"
 msgstr "Telame"
 
-#: /controllers/notifications_controller.php:85
-#: /views/notifications/news.ctp:11
+#: /controllers/notifications_controller.php:53
+#: /views/notifications/news.ctp:25
 msgid "news_title"
 msgstr "What's New"
 
-#: /controllers/users_controller.php:107
+#: /controllers/profiles_controller.php:32
+#, fuzzy
+msgid "user_hash_error"
+msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
+
+#: /controllers/users_controller.php:37
+msgid "not_friend"
+msgstr "Sorry but the user you are trying to view has their privacy options set to only allow friends to view there page. I you know this person, ask them for their slug so you can send them a friend request from your friends page."
+
+#: /controllers/users_controller.php:67
 msgid "password_mismatch"
 msgstr "Your passwords don't match"
 
-#: /controllers/users_controller.php:129;140
+#: /controllers/users_controller.php:91;102
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:150
+#: /controllers/users_controller.php:112
 msgid "user_saved"
 msgstr "You have been successfully added"
 
@@ -58,6 +67,23 @@ msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 #: /controllers/wall_posts_controller.php:200
 msgid "wall_post_delete"
 msgstr "It's gone"
+
+#: /views/elements/current_user_controls.ctp:11
+msgid "my_profile"
+msgstr "My Profile"
+
+#: /views/elements/current_user_controls.ctp:12
+msgid "account_settings"
+msgstr "Account Settings"
+
+#: /views/elements/current_user_controls.ctp:13
+#: /views/elements/pages/navigation.ctp:11
+msgid "logout"
+msgstr "Logout"
+
+#: /views/elements/search.ctp:6;7
+msgid "search"
+msgstr "Search"
 
 #: /views/elements/sidebar_modules.ctp:18
 msgid "inbox"
@@ -85,23 +111,23 @@ msgid "delete"
 msgstr "Delete"
 
 #: /views/elements/pages/login.ctp:4
-#: /views/users/login.ctp:8
+#: /views/users/login.ctp:19
 msgid "email"
 msgstr "Email"
 
 #: /views/elements/pages/login.ctp:5
-#: /views/users/login.ctp:9
+#: /views/users/login.ctp:20
 msgid "password"
 msgstr "Password"
 
 #: /views/elements/pages/login.ctp:6
-#: /views/users/login.ctp:10
+#: /views/users/login.ctp:21
 msgid "auto_login"
 msgstr "Log me in automatically"
 
 #: /views/elements/pages/login.ctp:7
 #: /views/elements/pages/navigation.ctp:7
-#: /views/users/login.ctp:11
+#: /views/users/login.ctp:22
 msgid "login"
 msgstr "Login"
 
@@ -110,30 +136,13 @@ msgid "features"
 msgstr "Features"
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:8
+#: /views/users/signup.ctp:24
 msgid "signup"
 msgstr "Signup"
 
 #: /views/elements/pages/navigation.ctp:10
 msgid "profile_title"
 msgstr "My Profile"
-
-#: /views/elements/pages/navigation.ctp:11
-#: /views/elements/users/current_user_controls.ctp:13
-msgid "logout"
-msgstr "Logout"
-
-#: /views/elements/users/current_user_controls.ctp:11
-msgid "my_profile"
-msgstr "My Profile"
-
-#: /views/elements/users/current_user_controls.ctp:12
-msgid "edit_my_profile"
-msgstr "Edit My Profile"
-
-#: /views/elements/users/search.ctp:6;7
-msgid "search"
-msgstr "Search"
 
 #: /views/elements/users/wall.ctp:16
 msgid "older_posts"
@@ -143,11 +152,15 @@ msgstr "Older Posts"
 msgid "wall_empty"
 msgstr "Sorry, your wall seems a bit empty"
 
-#: /views/elements/users/wall_input.ctp:14
-msgid "wall_post_label"
+#: /views/elements/users/wall_input.ctp:15
+msgid "wall_post_label_personal"
 msgstr "What's on your mind?"
 
-#: /views/elements/users/wall_input.ctp:16
+#: /views/elements/users/wall_input.ctp:17
+msgid "wall_post_label"
+msgstr "Share something cool."
+
+#: /views/elements/users/wall_input.ctp:20
 msgid "wall_post_submit"
 msgstr "Post"
 
@@ -155,37 +168,51 @@ msgstr "Post"
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
 
-msgid "year"
-msgid_plural "years"
-msgstr[0] "year"
-msgstr[1] "years"
+#: /views/profiles/add.ctp:15
+msgid "save"
+msgstr "Save Changes"
 
-msgid "month"
-msgid_plural "months"
-msgstr[0] "month"
-msgstr[1] "months"
+#~ msgid "edit_my_profile"
+#~ msgstr "Edit My Profile"
 
-msgid "week"
-msgid_plural "weeks"
-msgstr[0] "week"
-msgstr[1] "weeks"
+#~ msgid "year"
 
-msgid "day"
-msgid_plural "days"
-msgstr[0] "day"
-msgstr[1] "days"
+#~ msgid_plural "years"
+#~ msgstr[0] "year"
+#~ msgstr[1] "years"
 
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "hour"
-msgstr[1] "hours"
+#~ msgid "month"
 
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minute"
-msgstr[1] "minutes"
+#~ msgid_plural "months"
+#~ msgstr[0] "month"
+#~ msgstr[1] "months"
 
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "second"
-msgstr[1] "seconds"
+#~ msgid "week"
+
+#~ msgid_plural "weeks"
+#~ msgstr[0] "week"
+#~ msgstr[1] "weeks"
+
+#~ msgid "day"
+
+#~ msgid_plural "days"
+#~ msgstr[0] "day"
+#~ msgstr[1] "days"
+
+#~ msgid "hour"
+
+#~ msgid_plural "hours"
+#~ msgstr[0] "hour"
+#~ msgstr[1] "hours"
+
+#~ msgid "minute"
+
+#~ msgid_plural "minutes"
+#~ msgstr[0] "minute"
+#~ msgstr[1] "minutes"
+
+#~ msgid "second"
+
+#~ msgid_plural "seconds"
+#~ msgstr[0] "second"
+#~ msgstr[1] "seconds"

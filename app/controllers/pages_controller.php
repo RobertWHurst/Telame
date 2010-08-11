@@ -9,16 +9,6 @@ class PagesController extends AppController {
 
 		// Allows access to certain pages
 		$this->Auth->allow('display', 'home');
-
-		//add css and js that is common to all the actions in this controller
-		$this->Includer->add('css', array(
-			'base',
-			'simple_header'
-		));
-		$this->Includer->add('script', array(
-			'jquery',
-			'base'
-		));
 	}
 
 	function home() {
@@ -26,11 +16,7 @@ class PagesController extends AppController {
 
 	function beforeRender() {
 		parent::beforeRender();
-
-		//set the css and script for the view
-		$this->set('css_for_layout', $this->Includer->css());
-		$this->set('script_for_layout', $this->Includer->script());
-
+		
 		//set the css and layout
 		$this->layout = 'pages';
 	}

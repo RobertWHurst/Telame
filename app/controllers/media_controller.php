@@ -71,4 +71,3 @@ class MediaController extends AppController {
 	}
 
 }
-?>
