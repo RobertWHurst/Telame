@@ -85,18 +85,28 @@ class User extends AppModel {
 		return $user['User']['id'];
 	}
 
-	function getProfile($slug, $arguments = false){
-		$defaults = Configure::read('UserInfo');
-		//parse the options
-		$options = $this->parseArguments($defaults, $arguments);
+	function getProfile($slug_or_id){
+		
+		//findout if we are searching for an id or a slug
+		//then set the conditions based on that
+		if(is_numeric($slug_or_id)){
+			//if is an id
+			$conditions = array(
+				'id' => $slug_or_id
+			);
+		}
+		else{
+			//if is a slug
+			$conditions = array(
+				'lower(slug)' => strtolower($slug_or_id)
+			);
+		}
 
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
 		$user = $this->find('first', array(
-			'conditions' => array(
-				'lower(slug)' => strtolower($slug)
-			),
+			'conditions' => $conditions,
 			'contain' => array(
 				'Media',
 				'Profile',

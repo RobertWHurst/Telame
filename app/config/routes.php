@@ -53,19 +53,26 @@
 
 // User info
 
-	// Albums
-	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
+	// Media
+	Router::connect('/m/a/*', array('controller' => 'albums', 'action' => 'albums'));
 	
 	// Edit
 	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));
-
-	// Friends List	
-	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'listFriends'));
 
 	// Images - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
 	// Images - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
+	
+	// Messaging
+	Router::connect('/m/i', array('controller' => 'messages', 'action' => 'inbox'));
+	Router::connect('/m/v/*', array('controller' => 'messages', 'action' => 'view'));
+	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'sent'));
+	Router::connect('/m/d', array('controller' => 'messages', 'action' => 'deleted'));
+	Router::connect('/m/c', array('controller' => 'messages', 'action' => 'compose'));
+	
+	// Messaging (Ajax)
+	Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));	
 	
 	// New user adding
 	Router::connect('/a/*', array('controller' => 'profiles', 'action' => 'add'));

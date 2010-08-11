@@ -16,7 +16,7 @@
 		<div class="link">
 <?php 
 		$link_content = $this->Html->image('icons/email.png') . __('inbox', true);
-		echo $html->link($link_content, '#', array('escape' => false));
+		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
 		</div>
 	</div>
