@@ -59,7 +59,7 @@ class User extends AppModel {
 			'rule' => 'isUnique',
 			'allowEmpty' => false,
 			'required' => true,
-			'message' => 'That slug is already in use',
+			'message' => 'That username is already in use',
 		),
 	);
 	

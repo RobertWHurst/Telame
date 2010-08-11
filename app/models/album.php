@@ -18,6 +18,8 @@ class Album extends AppModel {
 		));
 	}
 
+// -------------------- Custom functions
+
 	function getAlbumId($uid, $slug) {
 		$album = $this->find('first', array('conditions' => array('Album.user_id' => $uid, 'Album.title' => $slug), 'fields' => 'Album.id'));
 		return $album['Album']['id'];

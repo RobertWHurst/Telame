@@ -7,5 +7,9 @@
 			<th class="key">Name:</th>
 			<td class="value"><?php echo $user['Profile']['full_name']; ?></td>
 		</tr>
+		<tr class="key">
+			<th class="key">Sex:</th>
+			<td class="value"><?php echo $user['Profile']['sex']; ?></td>
+		</tr>
 	</table>	
 </div>
