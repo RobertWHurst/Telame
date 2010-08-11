@@ -38,6 +38,10 @@
 	height: 20px;
 	border: 1px solid #949494;
 	background: #dedede;
+	resize: none;
+}
+#profile_wall_input textarea{
+	font-family: Helvetica, Arial, sans-serif;
 }
 #profile_wall_input input[type="submit"]{
 	position: absolute;
