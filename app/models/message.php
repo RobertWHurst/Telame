@@ -112,11 +112,6 @@ class Message extends AppModel {
 				)				
 			));
 		
-		//}
-		
-		//foreach($_recived as $message)
-			//$recived[] = $message;
-		
 		return $recived;
 	}
 	
