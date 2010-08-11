@@ -29,15 +29,16 @@ class NotificationsController extends AppController {
 
 		//add selected info
 		foreach($friendLists as $key => $filter){
-			if($filter['Group']['id'] == $selectedFriendList)
+			if($filter['Group']['id'] == $selectedFriendList) {
 				$friendLists[$key]['selected'] = true;
-			else
+			} else {
 				$friendLists[$key]['selected'] = false;
+			}
 		}
 
 		$friends = $this->GroupsUser->getFriends(0, 0, array(
 			'uid' => $this->currentUser['User']['id'],
-			'friendList' => $selectedFriendList
+			'gid' => $selectedFriendList
 		));
 
 		foreach($friends as $key => $friend)

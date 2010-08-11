@@ -3,12 +3,16 @@ class MediaController extends AppController {
 
 	var $components = array('Thumb');
 
-	function avatar($uid) {
-		$this->_resize($uid, Configure::read('AvatarSize'), 'profile');
+	function avatar($id) {
+		$this->_resize($id, Configure::read('AvatarSize'), 'profile');
 	}
 
-	function profile($uid) {
-		$this->_resize($uid, Configure::read('ProfileSize'), 'profile');
+	function thumb($id) {
+		$this->_resize($id, Configure::read('ThumbSize'), 'media');	
+	}
+
+	function profile($id) {
+		$this->_resize($id, Configure::read('ProfileSize'), 'profile');
 	}
 
 
