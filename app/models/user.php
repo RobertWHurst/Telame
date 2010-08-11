@@ -105,14 +105,13 @@ class User extends AppModel {
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
-		$user = $this->find('first', array(
+		return $this->find('first', array(
 			'conditions' => $conditions,
 			'contain' => array(
 				'Media',
 				'Profile',
 			)
 		));
-		return $user;
 	}
 	
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work

@@ -7,7 +7,7 @@ class MessagesController extends AppController {
 		//get the inbox from the db
 		$messages = $this->Message->getRecieved($this->currentUser['User']['id']);
 		
-		$this->set(compact($messages));
+		$this->set(compact('messages'));
 	}
 
 	//THE VIEWER
@@ -16,7 +16,7 @@ class MessagesController extends AppController {
 		//get the inbox from the db
 		$messages = $this->Message->getMessage($this->currentUser['User']['id'], $id);
 		
-		$this->set(compact($messages));
+		$this->set(compact('messages'));
 	}
 	
 	//THE SENT MESSAGES
@@ -25,7 +25,7 @@ class MessagesController extends AppController {
 		//get the inbox from the db
 		$messages = $this->Message->getSent($this->currentUser['User']['id']);
 		
-		$this->set(compact($messages));
+		$this->set(compact('messages'));
 	}
 	
 	//THE DELETED MESSAGES
@@ -52,7 +52,7 @@ class MessagesController extends AppController {
 		
 		//foreach of the target users
 		foreach($uids as $uid){
-			$this->User->
+			$this->User->getProfile();
 		}
 		
 	}
