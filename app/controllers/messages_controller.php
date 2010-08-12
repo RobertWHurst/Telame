@@ -124,12 +124,6 @@ class MessagesController extends AppController {
 	}
 	
 	function manage_messages(){
-	
-		//if there is no data then redirect
-		if(empty($this->data)) {
-			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
-			exit;
-		}
 		
 		krumo($this->data);
 		

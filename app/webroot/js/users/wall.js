@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	
 	var wall_posts_logic = function(){
 		
