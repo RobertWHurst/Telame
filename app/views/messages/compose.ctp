@@ -26,20 +26,7 @@ $this->set('script_for_layout', array(
 			<h1 class="page_title"><?php echo __('messages_inbox_title', true); ?></h1>
 		</div>
 		<div id="page_navigation" class="clearfix">
-			<?php
-				$nav_links = array(
-					array(
-						'label' => __('message_thread_title', true),
-						'url' => array(
-							'controller' => 'messages',
-							'action' => 'view',
-							$this->params['pass'][0]
-						),
-						'classes' => 'button'
-					)
-				);
-				echo $this->element('messages/navigation', compact('nav_links'));
-			?>
+			<?php echo $this->element('messages/navigation'); ?>
 		</div>
 		<div id="page_body" class="clearfix">
 			<div id="composer">
