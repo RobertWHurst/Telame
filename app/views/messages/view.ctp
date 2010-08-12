@@ -12,7 +12,7 @@ $this->set('script_for_layout', array(
 	'main_sidebar'
 ));
 ?>
-<div id="content">
+<div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">
 		<div id="logo">
 			<!-- TODO: link to the news feed -->
