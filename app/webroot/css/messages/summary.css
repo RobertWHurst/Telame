@@ -14,7 +14,11 @@ div.message div.avatar{
 }
 div.message div.message_content h1{
 	font-size: 1.6em;
-	line-height: 1.2em;
+	margin: 0 15px 0 0;
+	overflow: hidden;
+}
+div.message div.message_content h2{
+	font-size: 1.3em;
 	margin: 0 15px 15px 0;
 	overflow: hidden;
 }

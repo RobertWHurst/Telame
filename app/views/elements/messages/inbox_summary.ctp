@@ -3,22 +3,22 @@
 if($message['Message']['parent_id'] > 0)
 	$threadMessage = 'ParentMessage';
 else
-	$threadMessage = 'Message';		
+	$threadMessage = 'Message';	
+	
+//save the message url array
+$mUrl = array('controller' => 'messages', 'action' => 'view', $message[$threadMessage]['id']);
 ?>
 <div class="message clearfix">
 	<div class="avatar">
 <?php
-		$image_url = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);
-		$url = array('controller' => 'users', 'action' => 'profile', $message['Author']['slug']);
-		echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
+		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);
+		$aUrl = array('controller' => 'users', 'action' => 'profile', $message['Author']['slug']);
+		echo $this->Html->image($iUrl, array('url' => $aUrl, 'width' => '60', 'height' => '60'));
 ?>
 	</div>
 	<div class="message_content">
-<?php
-		$link_content = "<h1 class=\"subject\">{$message[$threadMessage]['subject']}</h1>";
-		$link_content .= "<h2 class=\"from\">{$message['Author']['Profile']['full_name']}</h2>";
-		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'view', $message[$threadMessage]['id']), array('escape' => false));
-?>
+		<h1 class="from"><?php echo __('message_from', true) . ' ' . $html->link($message['Author']['Profile']['full_name'], $aUrl); ?></h1>
+		<h2 class=\"subject\"><?php echo __('message_subject', true) . ' ' . $html->link($message[$threadMessage]['subject'], $mUrl); ?></h2>
 	</div>
 	<div class="time"><p><?php echo $message['Message']['created']; ?></p></div>
 </div>

@@ -111,15 +111,11 @@ class Message extends AppModel {
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
-		
-		$thread_ids = $this->_get_threads($uid);
-		$thread_ids[] = -1;
 					
 			$sent = $this->find('all', array(
 				'conditions' => array(
 					'Message.deleted_by_author' => false,
-					'Message.author_id' => $uid,
-					'Message.parent_id' => $thread_ids
+					'Message.author_id' => $uid
 				),
 				'order' => 'Message.created DESC',
 				'contain' => array(

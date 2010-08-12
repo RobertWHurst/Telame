@@ -4,6 +4,7 @@ $this->set('css_for_layout', array(
 	'base',
 	'tall_header',
 	'main_sidebar',
+	'messages/messages',
 	'messages/inbox',
 	'messages/summary'
 ));

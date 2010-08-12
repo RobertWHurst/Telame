@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-12 00:07+0000\n"
-"PO-Revision-Date: 2010-08-11 17:12-0800\n"
+"POT-Creation-Date: 2010-08-12 02:36+0000\n"
+"PO-Revision-Date: 2010-08-11 19:38-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,8 @@ msgstr ""
 #: /controllers/users_controller.php:49;113
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
-#: /views/messages/inbox.ctp:20
+#: /views/messages/inbox.ctp:21
+#: /views/messages/sent.ctp:21
 #: /views/messages/view.ctp:19
 #: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
@@ -102,8 +103,18 @@ msgstr "Friend List"
 msgid "albums"
 msgstr "Photos and Video"
 
+#: /views/elements/messages/inbox_summary.ctp:20
+msgid "message_from"
+msgstr "Sent by:"
+
+#: /views/elements/messages/inbox_summary.ctp:21
+#: /views/elements/messages/sent_summary.ctp:21
+msgid "message_subject"
+msgstr "Subject:"
+
 #: /views/elements/messages/navigation.ctp:5
-#: /views/messages/inbox.ctp:26
+#: /views/messages/inbox.ctp:27
+#: /views/messages/sent.ctp:27
 #: /views/messages/view.ctp:25
 msgid "messages_inbox_title"
 msgstr "Inbox"
@@ -119,6 +130,10 @@ msgstr "Sent Messages"
 #: /views/elements/messages/navigation.ctp:29
 msgid "messages_deleted_title"
 msgstr "Deleted Messages"
+
+#: /views/elements/messages/sent_summary.ctp:20
+msgid "message_to"
+msgstr "Sent to:"
 
 #: /views/elements/notifications/news_sidebar.ctp:3
 msgid "filter_title"
