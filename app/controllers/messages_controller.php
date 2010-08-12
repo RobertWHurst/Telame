@@ -1,7 +1,7 @@
 <?php
-App::import('Vendor', 'php_markdown', array('file' => 'php_markdown/markdown.php'));
 class MessagesController extends AppController {
 
+	var $helpers = array('Markdown');
 	//THE INBOX
 	function inbox(){
 		
