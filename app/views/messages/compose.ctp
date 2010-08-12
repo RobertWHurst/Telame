@@ -23,7 +23,7 @@ $this->set('script_for_layout', array(
 	</div>
 	<div id="page">
 		<div id="page_head" class="clearfix">			
-			<h1 class="page_title"><?php echo __('messages_inbox_title', true); ?></h1>
+			<h1 class="page_title"><?php echo __('messages', true); ?></h1>
 		</div>
 		<div id="page_navigation" class="clearfix">
 			<?php echo $this->element('messages/navigation'); ?>

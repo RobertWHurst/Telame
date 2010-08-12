@@ -70,7 +70,6 @@
 	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
 	Router::connect('/m/vt/*', array('controller' => 'messages', 'action' => 'view'));
 	Router::connect('/m/sm', array('controller' => 'messages', 'action' => 'sent'));
-	Router::connect('/m/dm', array('controller' => 'messages', 'action' => 'deleted'));
 	Router::connect('/m/cm', array('controller' => 'messages', 'action' => 'compose'));
 	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
 	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));

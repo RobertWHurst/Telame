@@ -11,13 +11,14 @@ div.message{
 div.message.unread{
 	background: #333;
 }
-div.message div.status{	
-	float: left;
-	margin: 18px 0;
+div.message div.status{
+	position: absolute;
+	top:31px;
+	left:10px;
 }
 div.message div.avatar{
 	float: left;
-	margin: 0 10px;
+	margin: 0 10px 0 26px;
 }
 div.message div.message_content h1{
 	font-size: 1.6em;
@@ -36,27 +37,18 @@ div.message.unread div.message_content h1,
 div.message.unread div.message_content p{
 	font-weight: bold;
 }
-div.message div.delete{
-	position: absolute;
-	top:10px;
-	right: 10px;
-}
-div.message div.reply{
-	position: absolute;
-	top:30px;
-	right: 10px;
-}
-div.message div.reply:hover,
-div.message div.delete:hover{
-	background: #444;
-}
 div.message div.time{
 	position: absolute;
 	bottom:10px;
 	right: 10px;
 }
+div.message div.check{
+	position: absolute;
+	top:31px;
+	right: 10px;
+}
 div.message div.time p{
-	color: #555;
+	color: #888;
 	font-size: 1.1em;
 	font-weight: bold;
 }

@@ -2,7 +2,7 @@
 //make a navigation strip
 $links = array(
 	array(
-		'label' => __('messages_inbox_title', true),
+		'label' => __('inbox', true),
 		'url' => array(
 			'controller' => 'messages',
 			'action' => 'inbox'
@@ -10,7 +10,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('messages_compose_title', true),
+		'label' => __('compose_message', true),
 		'url' => array(
 			'controller' => 'messages',
 			'action' => 'compose'
@@ -18,18 +18,10 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('messages_sent_title', true),
+		'label' => __('messages_sent', true),
 		'url' => array(
 			'controller' => 'messages',
 			'action' => 'sent'
-		),
-		'classes' => 'button'
-	),
-	array(
-		'label' => __('messages_deleted_title', true),
-		'url' => array(
-			'controller' => 'messages',
-			'action' => 'deleted'
 		),
 		'classes' => 'button'
 	)

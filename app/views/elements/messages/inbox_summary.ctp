@@ -27,6 +27,9 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	<div class="status">
 		<?php echo $status; ?>
 	</div>
+	<div class="check">
+		<?php echo $form->checkbox("selected[{$message['Message']['id']}]"); ?>
+	</div>
 	<div class="avatar">
 <?php
 		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);

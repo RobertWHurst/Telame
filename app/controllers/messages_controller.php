@@ -51,14 +51,6 @@ class MessagesController extends AppController {
 		$this->set(compact('messages'));
 	}
 	
-	//THE DELETED MESSAGES
-	function deleted(){
-		
-		//get the inbox from the db
-		$messages = $this->Message->getDeleted($this->currentUser['User']['id']);
-		
-	}
-	
 	//THE COMPOSER
 	function compose($slug = false){
 		$uid = array();

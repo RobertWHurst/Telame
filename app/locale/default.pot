@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-12 03:00+0000\n"
+"POT-Creation-Date: 2010-08-12 19:13+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -18,9 +18,10 @@ msgstr ""
 #: /controllers/users_controller.php:49;113
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
+#: /views/messages/compose.ctp:20
 #: /views/messages/inbox.ctp:21
 #: /views/messages/sent.ctp:21
-#: /views/messages/view.ctp:19
+#: /views/messages/view.ctp:20
 #: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
 #: /views/users/login.ctp:13
@@ -53,19 +54,19 @@ msgstr ""
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:59
+#: /controllers/wall_posts_controller.php:58
 msgid "wall_post_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:178
+#: /controllers/wall_posts_controller.php:177
 msgid "wall_post_delete_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:193
+#: /controllers/wall_posts_controller.php:192
 msgid "wall_post_bad_hacker"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:200
+#: /controllers/wall_posts_controller.php:199
 msgid "wall_post_delete"
 msgstr ""
 
@@ -87,54 +88,54 @@ msgid "search"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:18
-msgid "wall_title"
+msgid "news_feed"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:26
-msgid "inbox_title"
+msgid "wall"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:34
-msgid "news_feed_title"
+#: /views/messages/compose.ctp:26
+#: /views/messages/inbox.ctp:27
+#: /views/messages/sent.ctp:27
+#: /views/messages/view.ctp:26
+msgid "messages"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:42
-msgid "friend_list_title"
+msgid "friends"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:50
-msgid "albums_title"
+msgid "media"
 msgstr ""
 
-#: /views/elements/messages/inbox_summary.ctp:24
-#: /views/elements/messages/sent_summary.ctp:24
+#: /views/elements/messages/inbox_summary.ctp:41
+#: /views/elements/messages/sent_summary.ctp:35
+#: /views/messages/compose.ctp:38
 msgid "message_subject"
 msgstr ""
 
-#: /views/elements/messages/inbox_summary.ctp:26
+#: /views/elements/messages/inbox_summary.ctp:43
+#: /views/messages/view.ctp:85
 msgid "message_from"
 msgstr ""
 
 #: /views/elements/messages/navigation.ctp:5
-#: /views/messages/inbox.ctp:27
-#: /views/messages/sent.ctp:27
-#: /views/messages/view.ctp:25
-msgid "messages_inbox_title"
+msgid "inbox"
 msgstr ""
 
 #: /views/elements/messages/navigation.ctp:13
-msgid "messages_compose_title"
+msgid "compose_message"
 msgstr ""
 
 #: /views/elements/messages/navigation.ctp:21
-msgid "messages_sent_title"
+msgid "messages_sent"
 msgstr ""
 
-#: /views/elements/messages/navigation.ctp:29
-msgid "messages_deleted_title"
-msgstr ""
-
-#: /views/elements/messages/sent_summary.ctp:26
+#: /views/elements/messages/sent_summary.ctp:37
+#: /views/messages/view.ctp:83
 msgid "message_to"
 msgstr ""
 
@@ -205,8 +206,16 @@ msgstr ""
 msgid "wall_to_wall"
 msgstr ""
 
-#: /views/messages/view.ctp:31
+#: /views/messages/view.ctp:32
 msgid "message_thread_title"
+msgstr ""
+
+#: /views/messages/view.ctp:93
+msgid "composed"
+msgstr ""
+
+#: /views/messages/view.ctp:95
+msgid "read"
 msgstr ""
 
 #: /views/profiles/add.ctp:15

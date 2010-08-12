@@ -77,10 +77,10 @@ class Message extends AppModel {
 		$recived = $this->find('all', array(
 			'conditions' => array(
 				'Message.deleted_by_user' => false,
-				'Message.user_id' => $uid,
-				'Message.parent_id' => -1
+				'Message.user_id' => $uid
 			),
-			'order' => 'Message.created DESC',
+			'fields' => array('DISTINCT ON ("Message"."parent_id") "Message"."parent_id" AS "Message__parent_id"', '*'),
+			'order' => array('Message.parent_id', 'Message.created DESC'),
 			'contain' => array(
 				'User' => array(
 					'Profile'
@@ -95,12 +95,6 @@ class Message extends AppModel {
 			return false;
 
 		return $recived;
-	}
-
-	function getDeleted($uid){
-
-		$this->recursive = 2;
-		$this->Behaviors->attach('Containable');
 	}
 
 	function getSent($uid){

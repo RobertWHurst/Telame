@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-12 03:00+0000\n"
-"PO-Revision-Date: 2010-08-11 20:01-0800\n"
+"POT-Creation-Date: 2010-08-12 19:13+0000\n"
+"PO-Revision-Date: 2010-08-12 12:16-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,9 +19,10 @@ msgstr ""
 #: /controllers/users_controller.php:49;113
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
+#: /views/messages/compose.ctp:20
 #: /views/messages/inbox.ctp:21
 #: /views/messages/sent.ctp:21
-#: /views/messages/view.ctp:19
+#: /views/messages/view.ctp:20
 #: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
 #: /views/users/login.ctp:13
@@ -54,19 +55,19 @@ msgstr "Sorry, but we could not add you.  Please try again or email the admins f
 msgid "user_saved"
 msgstr "You have been successfully added"
 
-#: /controllers/wall_posts_controller.php:59
+#: /controllers/wall_posts_controller.php:58
 msgid "wall_post_error"
 msgstr "Sorry, you're not allowed to do that"
 
-#: /controllers/wall_posts_controller.php:178
+#: /controllers/wall_posts_controller.php:177
 msgid "wall_post_delete_error"
 msgstr "We couldn't find that post."
 
-#: /controllers/wall_posts_controller.php:193
+#: /controllers/wall_posts_controller.php:192
 msgid "wall_post_bad_hacker"
 msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 
-#: /controllers/wall_posts_controller.php:200
+#: /controllers/wall_posts_controller.php:199
 msgid "wall_post_delete"
 msgstr "It's gone"
 
@@ -88,54 +89,54 @@ msgid "search"
 msgstr "Search"
 
 #: /views/elements/sidebar_modules.ctp:18
-msgid "wall_title"
-msgstr "Wall"
-
-#: /views/elements/sidebar_modules.ctp:26
-msgid "inbox_title"
-msgstr "Inbox"
-
-#: /views/elements/sidebar_modules.ctp:34
-msgid "news_feed_title"
+msgid "news_feed"
 msgstr "News Feed"
 
+#: /views/elements/sidebar_modules.ctp:26
+msgid "wall"
+msgstr "Wall"
+
+#: /views/elements/sidebar_modules.ctp:34
+#: /views/messages/compose.ctp:26
+#: /views/messages/inbox.ctp:27
+#: /views/messages/sent.ctp:27
+#: /views/messages/view.ctp:26
+msgid "messages"
+msgstr "Messages"
+
 #: /views/elements/sidebar_modules.ctp:42
-msgid "friend_list_title"
-msgstr "Friend List"
+msgid "friends"
+msgstr "Friends"
 
 #: /views/elements/sidebar_modules.ctp:50
-msgid "albums_title"
-msgstr "Photos and Video"
+msgid "media"
+msgstr "Media"
 
-#: /views/elements/messages/inbox_summary.ctp:24
-#: /views/elements/messages/sent_summary.ctp:24
+#: /views/elements/messages/inbox_summary.ctp:41
+#: /views/elements/messages/sent_summary.ctp:35
+#: /views/messages/compose.ctp:38
 msgid "message_subject"
 msgstr "Subject:"
 
-#: /views/elements/messages/inbox_summary.ctp:26
+#: /views/elements/messages/inbox_summary.ctp:43
+#: /views/messages/view.ctp:85
 msgid "message_from"
 msgstr "From:"
 
 #: /views/elements/messages/navigation.ctp:5
-#: /views/messages/inbox.ctp:27
-#: /views/messages/sent.ctp:27
-#: /views/messages/view.ctp:25
-msgid "messages_inbox_title"
+msgid "inbox"
 msgstr "Inbox"
 
 #: /views/elements/messages/navigation.ctp:13
-msgid "messages_compose_title"
+msgid "compose_message"
 msgstr "Compose Message"
 
 #: /views/elements/messages/navigation.ctp:21
-msgid "messages_sent_title"
+msgid "messages_sent"
 msgstr "Sent Messages"
 
-#: /views/elements/messages/navigation.ctp:29
-msgid "messages_deleted_title"
-msgstr "Deleted Messages"
-
-#: /views/elements/messages/sent_summary.ctp:26
+#: /views/elements/messages/sent_summary.ctp:37
+#: /views/messages/view.ctp:83
 msgid "message_to"
 msgstr "To:"
 
@@ -206,26 +207,45 @@ msgstr "Post"
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
 
-#: /views/messages/view.ctp:31
+#: /views/messages/view.ctp:32
 msgid "message_thread_title"
 msgstr "Message Thread"
+
+#: /views/messages/view.ctp:93
+msgid "composed"
+msgstr "Composed"
+
+#: /views/messages/view.ctp:95
+msgid "read"
+msgstr "Read"
 
 #: /views/profiles/add.ctp:15
 msgid "save"
 msgstr "Save Changes"
 
-#~ msgid "inbox"
+#~ msgid "wall_title"
+#~ msgstr "Wall"
+
+#~ msgid "inbox_title"
 #~ msgstr "Inbox"
 
-#~ msgid "news_feed"
+#~ msgid "news_feed_title"
 #~ msgstr "News Feed"
 
-#~ msgid "not_friend"
-#~ msgstr ""
-#~ "Sorry but the user you are trying to view has their privacy options set "
-#~ "to only allow friends to view there page. I you know this person, ask "
-#~ "them for their slug so you can send them a friend request from your "
-#~ "friends page."
+#~ msgid "friend_list_title"
+#~ msgstr "Friend List"
+
+#~ msgid "albums_title"
+#~ msgstr "Photos and Video"
+
+#~ msgid "messages_inbox_title"
+#~ msgstr "Inbox"
+
+#~ msgid "messages_compose_title"
+#~ msgstr "Compose Message"
+
+#~ msgid "messages_deleted_title"
+#~ msgstr "Deleted Messages"
 
 #~ msgid "edit_my_profile"
 #~ msgstr "Edit My Profile"
