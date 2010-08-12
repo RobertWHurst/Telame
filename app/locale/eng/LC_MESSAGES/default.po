@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-11 23:18+0000\n"
-"PO-Revision-Date: 2010-08-11 16:19-0800\n"
+"POT-Creation-Date: 2010-08-12 00:07+0000\n"
+"PO-Revision-Date: 2010-08-11 17:12-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Country: Canada\n"
 
 #: /controllers/notifications_controller.php:53
-#: /controllers/users_controller.php:40;104
+#: /controllers/users_controller.php:49;113
 #: /views/albums/albums.ctp:22
 #: /views/layouts/pages.ctp:39
 #: /views/messages/inbox.ctp:20
@@ -34,19 +34,22 @@ msgid "news_title"
 msgstr "What's New"
 
 #: /controllers/profiles_controller.php:32
-#, fuzzy
 msgid "user_hash_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:62
+#: /controllers/users_controller.php:39
+msgid "not_allowed_profile"
+msgstr "Sorry but the person your trying to view has blocked public visitors. If you'd like to send them a friend request you can do using their uri slug on the friends page."
+
+#: /controllers/users_controller.php:71
 msgid "password_mismatch"
 msgstr "Your passwords don't match"
 
-#: /controllers/users_controller.php:86;97
+#: /controllers/users_controller.php:95;106
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:107
+#: /controllers/users_controller.php:116
 msgid "user_saved"
 msgstr "You have been successfully added"
 
@@ -106,10 +109,14 @@ msgid "messages_inbox_title"
 msgstr "Inbox"
 
 #: /views/elements/messages/navigation.ctp:13
+msgid "messages_compose_title"
+msgstr "Compose Message"
+
+#: /views/elements/messages/navigation.ctp:21
 msgid "messages_sent_title"
 msgstr "Sent Messages"
 
-#: /views/elements/messages/navigation.ctp:21
+#: /views/elements/messages/navigation.ctp:29
 msgid "messages_deleted_title"
 msgstr "Deleted Messages"
 

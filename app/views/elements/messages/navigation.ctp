@@ -10,6 +10,14 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
+		'label' => __('messages_compose_title', true),
+		'url' => array(
+			'controller' => 'messages',
+			'action' => 'compose'
+		),
+		'classes' => 'button'
+	),
+	array(
 		'label' => __('messages_sent_title', true),
 		'url' => array(
 			'controller' => 'messages',

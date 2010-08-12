@@ -21,11 +21,7 @@ class Message extends AppModel {
 		$this->Behaviors->attach('Containable');
 		
 		$parent_message = $this->find('first', array(
-				'conditions' => array(
-					'OR' => array(
-						'Message.user_id' => $uid,
-						'Message.author_id' => $uid
-					),					
+				'conditions' => array(				
 					'Message.id' => $pid
 				),
 				'contain' => array(

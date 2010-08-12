@@ -34,3 +34,17 @@ div.message div.reply{
 	top:30px;
 	right: 10px;
 }
+div.message div.reply:hover,
+div.message div.delete:hover{
+	background: #444;
+}
+div.message div.time{
+	position: absolute;
+	bottom:10px;
+	right: 10px;
+}
+div.message div.time p{
+	color: #555;
+	font-size: 1.1em;
+	font-weight: bold;
+}

@@ -20,5 +20,5 @@ else
 		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'view', $message[$threadMessage]['id']), array('escape' => false));
 ?>
 	</div>
-	<div class="date"><p><?php echo $message['Message']['created']; ?></p></div>
+	<div class="time"><p><?php echo $message['Message']['created']; ?></p></div>
 </div>

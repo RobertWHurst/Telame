@@ -77,3 +77,4 @@ $this->set('script_for_layout', array(
 		</div>
 	</div>
 </div>
+<?php echo $this->element('copyright'); ?>
