@@ -90,9 +90,9 @@ $this->set('script_for_layout', array(
 						</div>
 						<div class="time"><p>
 <?php 
-						echo __('composed') . $message['Message']['created'];
+						echo __('composed') . $time->timeAgoInWords($message['Message']['created']);
 						if($message['Message']['read'])
-							echo __('read') . $message['Message']['read'];
+							echo __('read') . $time->timeAgoInWords($message['Message']['read']);
 ?>
 						</p></div>
 					</div>

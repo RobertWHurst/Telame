@@ -1,7 +1,7 @@
 <?php
 class MessagesController extends AppController {
 
-	var $helpers = array('Markdown');
+	var $helpers = array('Markdown', 'Time');
 	//THE INBOX
 	function inbox(){
 		
