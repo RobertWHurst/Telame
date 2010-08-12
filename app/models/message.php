@@ -68,19 +68,19 @@ class Message extends AppModel {
 		return $child_messages;
 	}
 
-	function getRecieved($uid){
+	function getReceived($uid){
 		$uid = Sanitize::clean(intval($uid));
 
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
 
-		$recived = $this->find('all', array(
+		$received = $this->find('all', array(
 			'conditions' => array(
 				'Message.deleted_by_user' => false,
 				'Message.user_id' => $uid
 			),
 			'fields' => array('DISTINCT ON ("Message"."parent_id") "Message"."parent_id" AS "Message__parent_id"', '*'),
-			'order' => array('Message.parent_id', 'Message.created DESC'),
+			'order' => array('Message.parent_id'),
 			'contain' => array(
 				'User' => array(
 					'Profile'
@@ -91,10 +91,10 @@ class Message extends AppModel {
 				'ParentMessage'
 			)				
 		));
-		if(!$recived)
+		if(!$received) {
 			return false;
-
-		return $recived;
+		}
+		return Set::sort($received, '{n}.Message.created', 'desc');
 	}
 
 	function getSent($uid){
@@ -108,7 +108,7 @@ class Message extends AppModel {
 				'Message.author_id' => $uid
 			),
 			'fields' => array('DISTINCT ON ("Message"."parent_id") "Message"."parent_id" AS "Message__parent_id"', '*'),
-			'order' => array('Message.parent_id', 'Message.created DESC'),
+			'order' => array('Message.parent_id'),
 			'contain' => array(
 				'User' => array(
 					'Profile'
@@ -120,9 +120,9 @@ class Message extends AppModel {
 			)
 		));
 
-		if(!$sent)
+		if(!$sent) {
 			return false;
-
-		return $sent;
+		}
+		return Set::sort($sent, '{n}.Message.created', 'desc');
 	}
 }
