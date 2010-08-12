@@ -1,6 +1,7 @@
 <?php
 class MessagesController extends AppController {
 
+	var $helpers = array('Markdown');
 	//THE INBOX
 	function inbox(){
 		
@@ -14,7 +15,7 @@ class MessagesController extends AppController {
 	function view($id = null){
 		
 		//get the inbox from the db
-		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
+		$messages = $this->Message->getMessageThread($id);
 		
 		//mark the messages as read
     	$this->Message->updateAll(
@@ -60,6 +61,7 @@ class MessagesController extends AppController {
 	
 	//THE COMPOSER
 	function compose($slug = false){
+		$uid = array();
 		
 		//get the target user id if there is one
 		if($slug){

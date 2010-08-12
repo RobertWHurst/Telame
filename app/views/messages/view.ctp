@@ -86,7 +86,7 @@ $this->set('script_for_layout', array(
 								<?php endif; ?>							
 								<h1 class="subject"><?php echo $message['Message']['subject']; ?></h1>
 							<?php endif; ?>
-							<?php echo Markdown($message['Message']['content']); ?>
+							<?php echo $markdown->parse($message['Message']['content']); ?>
 						</div>
 						<div class="time"><p>
 <?php 

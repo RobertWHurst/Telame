@@ -8,14 +8,13 @@ class WallPostsController extends AppController {
 		exit;
 	}
 
-	function jx_lists($uid = false){
-		
-		if(empty($this->data) || !$uid){
+	function jx_lists($uid = false, $offset = false){
+		if(!$offset || !$uid){
 			echo 'false';
 			exit;
 		}
 
-		$wallPosts = $this->WallPost->getWallPosts(10, $this->data['offset'], array('uid' => $uid));
+		$wallPosts = $this->WallPost->getWallPosts(10, $offset, array('uid' => $uid));
 
 		//set the layout to none (this is ajax);
 		$this->layout = false;

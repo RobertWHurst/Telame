@@ -145,9 +145,10 @@ $(document).ready(function(){
 				//get the button
 				var button = $(this);
 				
+				var offset = $('div.wall_post', '#profile_wall_posts').size();
 				//get the ajaxUrl
-				var ajaxUrl = '/jx' + $(button).attr('href');
-				
+				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
+
 				//get the target post (not the button)
 				domElement = button.parent();
 				
@@ -158,9 +159,7 @@ $(document).ready(function(){
 				domElement.append('<p class="proccess">Loading more posts...<p>');
 				
 				//send the ajax request
-				$.post(core.domain + ajaxUrl, {
-					'data[offset]': $('div.wall_post', '#profile_wall_posts').size()
-				}, 
+				$.post(core.domain + ajaxUrl, 
 				function(data){
 					
 					if(data !== 'false'){
