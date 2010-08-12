@@ -8,7 +8,7 @@
 				<div class="thumb">
 <?php
 					//get the avatar url
-					$avatar_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $friend['Friend']['id']));
+					$avatar_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $friend['Friend']['avatar_id']));
 
 					//get the user's profile url
 					$profile_url = $html->url(array('controller' => 'users', 'action' => 'profile', $friend['Friend']['slug']));
