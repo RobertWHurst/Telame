@@ -94,28 +94,21 @@ class User extends AppModel {
 		return $user['User']['id'];
 	}
 
-	function getProfile($slug_or_id){
-		
-		//findout if we are searching for an id or a slug
-		//then set the conditions based on that
-		if(is_numeric($slug_or_id)){
-			//if is an id
-			$conditions = array(
-				'id' => $slug_or_id
-			);
-		}
-		else{
-			//if is a slug
-			$conditions = array(
-				'lower(slug)' => strtolower($slug_or_id)
-			);
-		}
+	function getSlugFromId($uid) {
+		$this->recursive = -1;
+		$user = $this->find('first', array('conditions' => array('id' => Sanitize::clean(intval($uid))), 'fields' => 'slug'));
+		return $user['User']['slug'];
+	}
+
+	function getProfile($slug){
+		$conditions = array(
+		);
 
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
 		return $this->find('first', array(
-			'conditions' => $conditions,
+			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
 			'contain' => array(
 				'Media',
 				'Profile',

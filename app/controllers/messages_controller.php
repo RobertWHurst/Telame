@@ -52,7 +52,7 @@ class MessagesController extends AppController {
 		
 		//foreach of the target users
 		foreach($uids as $uid){
-			$this->User->getProfile();
+			$this->User->getProfile($uid);
 		}
 		
 	}
