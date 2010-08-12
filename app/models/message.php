@@ -16,6 +16,7 @@ class Message extends AppModel {
 	);
 
 	function getMessageThread($pid){
+		$pid = Sanitize::clean(intval($pid));
 
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
@@ -58,6 +59,7 @@ class Message extends AppModel {
 	}
 
 	function getRecieved($uid){
+		$uid = Sanitize::clean(intval($uid));
 
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');

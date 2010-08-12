@@ -1,4 +1,5 @@
 <?php
+App::import('Sanitize');
 class AppController extends Controller {
 
 	//add user athentication

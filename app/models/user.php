@@ -1,5 +1,4 @@
 <?php
-App::import('Sanitize');
 class User extends AppModel {
 	var $name = 'User';
 
