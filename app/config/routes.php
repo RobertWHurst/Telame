@@ -54,7 +54,7 @@
 // User info
 
 	// Media
-	Router::connect('/m/a/*', array('controller' => 'albums', 'action' => 'albums'));
+	Router::connect('/a/*', array('controller' => 'albums', 'action' => 'albums'));
 	
 	// Edit
 	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));
@@ -67,11 +67,13 @@
 	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
 	
 	// Messaging
-	Router::connect('/m/i', array('controller' => 'messages', 'action' => 'inbox'));
-	Router::connect('/m/v/*', array('controller' => 'messages', 'action' => 'view'));
-	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'sent'));
-	Router::connect('/m/d', array('controller' => 'messages', 'action' => 'deleted'));
-	Router::connect('/m/c', array('controller' => 'messages', 'action' => 'compose'));
+	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
+	Router::connect('/m/vt/*', array('controller' => 'messages', 'action' => 'view'));
+	Router::connect('/m/sm', array('controller' => 'messages', 'action' => 'sent'));
+	Router::connect('/m/dm', array('controller' => 'messages', 'action' => 'deleted'));
+	Router::connect('/m/cm', array('controller' => 'messages', 'action' => 'compose'));
+	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
+	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
 	
 	// Messaging (Ajax)
 	Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));	

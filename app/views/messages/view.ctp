@@ -4,6 +4,7 @@ $this->set('css_for_layout', array(
 	'base',
 	'tall_header',
 	'main_sidebar',
+	'messages/messages',
 	'messages/view'
 ));
 $this->set('script_for_layout', array(
@@ -42,23 +43,30 @@ $this->set('script_for_layout', array(
 		</div>
 		<div id="page_body" class="clearfix">
 			<div id="messages">
-<?php 
+<?php
 				foreach($messages as $message):
-				
-					//figure out if the message is threaded
-					if($message['Message']['subject'])
-						$title = $thread_title = $message['Message']['subject'];
+					//findout if the thread belongs to the current user
+					if($message['Author']['id'] == $currentUser['User']['id'])
+						$is_user_thread = true;
 					else
-						$title = "RE: {$thread_title}";
-		
-				//figure out if the message is a responce or a thread
-				if($message['Message']['parent_id'] > 0)
-					$threadMessage = 'ParentMessage';
-				else
-					$threadMessage = 'Message';
-			
+						$is_user_thread = false;
+					
+					//if this message is the parent
+					if($message['Message']['parent_id'] < 0){
+					
+						//figure out the user_id and author_id for a response
+						$composer['parent_id'] = $message['Message']['id'];
+						$composer['user_id'] = $message['User']['id'];
+						$composer['author_id'] = $currentUser['User']['id'];
+						
+					}
+				
+					if($message['Message']['subject']):
 ?>
-					<div class="message">
+						<div class="message head clearfix">
+					<?php else: ?>
+						<div class="message clearfix">
+					<?php endif; ?>
 						<div class="avatar">
 <?php
 							$image_url = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);
@@ -66,14 +74,31 @@ $this->set('script_for_layout', array(
 							echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
 ?>
 						</div>
-						<h1 class="subject"><?php echo $title; ?></h1>
-						<h2 class="from"><?php echo $message['Author']['Profile']['full_name']; ?></h2>
-						<div class="date"><p><?php echo $message['Message']['created']; ?></p></div>
 						<div class="message_content">
-							<?php echo $message['Message']['content']; ?>
+							<?php if($message['Message']['subject']): ?>
+								<?php if($is_user_thread): ?>
+									<h2 class="to"><?php echo __('message_to', true) . ' ' . $message['User']['Profile']['full_name']; ?></h2>
+								<?php else: ?>
+									<h2 class="from"><?php echo __('message_from', true) . ' ' . $message['Author']['Profile']['full_name']; ?></h2>
+								<?php endif; ?>							
+								<h1 class="subject"><?php echo $message['Message']['subject']; ?></h1>
+							<?php endif; ?>
+							<?php echo Markdown($message['Message']['content']); ?>
 						</div>
+						<div class="time"><p><?php echo $message['Message']['created']; ?></p></div>
 					</div>
 				<?php endforeach; ?>
+				<div id="composer">
+<?php
+					echo $form->create('Message', array('url' =>  array('controller' => 'messages', 'action' => 'send_message')));
+					echo $form->hidden('user_id', array('value' => $composer['user_id']));
+					echo $form->hidden('author_id', array('value' => $composer['author_id']));
+					echo $form->hidden('parent_id', array('value' => $composer['parent_id']));
+					echo $form->hidden('subject', array('value' => null));
+					echo $form->textarea('content');
+					echo $form->end('Post Reply');
+?>
+				</div>
 			</div>
 		</div>
 	</div>

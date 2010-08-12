@@ -14,6 +14,14 @@ class Message extends AppModel {
 			'foreignKey' => 'parent_id'
 		)
 	);
+	
+	var $hasMany = array(
+		'ChildMessage' => array(		
+			'className' => 'Message',		
+			'foreignKey' => 'parent_id',
+			'excusive' => true
+		)
+	);
 
 	function getMessageThread($uid, $pid){
 		
@@ -22,7 +30,11 @@ class Message extends AppModel {
 		
 		$parent_message = $this->find('first', array(
 				'conditions' => array(				
-					'Message.id' => $pid
+					'Message.id' => $pid,
+					'OR' => array(
+						'Message.user_id' => $uid,		
+						'Message.author_id' => $uid
+					)
 				),
 				'contain' => array(
 					'User' => array(
@@ -34,6 +46,9 @@ class Message extends AppModel {
 				)
 			)
 		);
+		
+		if(!$parent_message)
+			return false;
 		
 		$child_messages = $this->find('all', array(
 				'conditions' => array(
@@ -96,6 +111,9 @@ class Message extends AppModel {
 				)				
 			));
 			
+		if(!$recived)
+			return false;			
+			
 		$recived = $this->_remove_duplicate_threads($recived);
 		
 		return $recived;
@@ -128,6 +146,9 @@ class Message extends AppModel {
 					'ParentMessage'
 				)				
 			));
+		
+		if(!$sent)
+			return false;
 		
 		$sent = $this->_remove_duplicate_threads($sent);
 		

@@ -15,11 +15,13 @@ class AppController extends Controller {
 		if (!in_array($this->action, $this->Security->requireSecure) and env('HTTPS')) {
 		 	$this->_unforceSSL();
 		}
-
+		
+		//LOAD VENDORS
 		if(Configure::read('debug') > 0){
 			//load krumo
 			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
 		}
+		App::import('Vendor', 'php_markdown', array('file' => 'php_markdown/markdown.php'));
 
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 

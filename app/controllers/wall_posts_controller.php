@@ -8,14 +8,14 @@ class WallPostsController extends AppController {
 		exit;
 	}
 
-	function jx_lists($id = false){
-
-		if(empty($this->data) || !$id){
+	function jx_lists($uid = false){
+		
+		if(empty($this->data) || !$uid){
 			echo 'false';
 			exit;
 		}
 
-		$wallPosts = $this->WallPost->getWallPosts(10, $this->data['offset'], $id);
+		$wallPosts = $this->WallPost->getWallPosts(10, $this->data['offset'], array('uid' => $uid));
 
 		//set the layout to none (this is ajax);
 		$this->layout = false;
@@ -57,7 +57,7 @@ class WallPostsController extends AppController {
 			//if the poster is not friends with the user then return false
 			if ($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1) {
 				$this->Session->setFlash(__('wall_post_error', true));
-				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug']));
 				exit;
 			}
 		} else {

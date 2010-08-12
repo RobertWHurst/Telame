@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-12 02:36+0000\n"
-"PO-Revision-Date: 2010-08-11 19:38-0800\n"
+"POT-Creation-Date: 2010-08-12 03:00+0000\n"
+"PO-Revision-Date: 2010-08-11 20:01-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -88,29 +88,33 @@ msgid "search"
 msgstr "Search"
 
 #: /views/elements/sidebar_modules.ctp:18
-msgid "inbox"
-msgstr "Inbox"
+msgid "wall_title"
+msgstr "Wall"
 
 #: /views/elements/sidebar_modules.ctp:26
-msgid "news_feed"
-msgstr "News Feed"
+msgid "inbox_title"
+msgstr "Inbox"
 
 #: /views/elements/sidebar_modules.ctp:34
-msgid "friend_list"
-msgstr "Friend List"
+msgid "news_feed_title"
+msgstr "News Feed"
 
 #: /views/elements/sidebar_modules.ctp:42
-msgid "albums"
+msgid "friend_list_title"
+msgstr "Friend List"
+
+#: /views/elements/sidebar_modules.ctp:50
+msgid "albums_title"
 msgstr "Photos and Video"
 
-#: /views/elements/messages/inbox_summary.ctp:20
-msgid "message_from"
-msgstr "Sent by:"
-
-#: /views/elements/messages/inbox_summary.ctp:21
-#: /views/elements/messages/sent_summary.ctp:21
+#: /views/elements/messages/inbox_summary.ctp:24
+#: /views/elements/messages/sent_summary.ctp:24
 msgid "message_subject"
 msgstr "Subject:"
+
+#: /views/elements/messages/inbox_summary.ctp:26
+msgid "message_from"
+msgstr "From:"
 
 #: /views/elements/messages/navigation.ctp:5
 #: /views/messages/inbox.ctp:27
@@ -131,9 +135,9 @@ msgstr "Sent Messages"
 msgid "messages_deleted_title"
 msgstr "Deleted Messages"
 
-#: /views/elements/messages/sent_summary.ctp:20
+#: /views/elements/messages/sent_summary.ctp:26
 msgid "message_to"
-msgstr "Sent to:"
+msgstr "To:"
 
 #: /views/elements/notifications/news_sidebar.ctp:3
 msgid "filter_title"
@@ -210,9 +214,11 @@ msgstr "Message Thread"
 msgid "save"
 msgstr "Save Changes"
 
-#, fuzzy
-#~ msgid "inbox_title"
-#~ msgstr "What's New"
+#~ msgid "inbox"
+#~ msgstr "Inbox"
+
+#~ msgid "news_feed"
+#~ msgstr "News Feed"
 
 #~ msgid "not_friend"
 #~ msgstr ""

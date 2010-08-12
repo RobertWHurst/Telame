@@ -11,10 +11,16 @@ class MessagesController extends AppController {
 	}
 
 	//THE VIEWER
-	function view($id){
+	function view($id = null){
 		
 		//get the inbox from the db
 		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
+		
+		if(!$messages){
+			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
+			exit;
+		}
+			
 		
 		$this->set(compact('messages'));
 	}
@@ -48,18 +54,36 @@ class MessagesController extends AppController {
 			}
 			else
 				$uids[] = $this->User->getIdFromSlug($slug);
-		}	
-		
-		//foreach of the target users
-		foreach($uids as $uid){
-			$this->User->getProfile();
 		}
 		
 	}
 	
 	//SEND A MESSAGE
 	function send_message(){
+	
+		//if there is no data then redirect
+		if(empty($this->data)) {
+			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
+			exit;
+		}
 		
+		//save the user id and poster id
+		$this->Message->set('user_id', $this->data['Message']['user_id']);
+		$this->Message->set('author_id', $this->data['Message']['author_id']);
+		$this->Message->set('parent_id', $this->data['Message']['parent_id']);
+
+		//save the post content and time
+		$this->Message->set('content', $this->data['Message']['content']);
+		$this->Message->set('created', date("Y-m-d H:i:s"));
+		$this->Message->set('read', null);
+		$this->Message->set('deleted_by_user', false);
+		$this->Message->set('deleted_by_author', false);
+		$this->Message->set('subject', $this->data['Message']['subject']);
+
+		//commit the data to the db
+		$this->Message->save();
+		
+		$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
 	}
 	
 	//QUERY FOR POSSIBLE RECIPIENTS

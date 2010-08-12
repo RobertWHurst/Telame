@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-08-12 02:36+0000\n"
+"POT-Creation-Date: 2010-08-12 03:00+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -87,28 +87,32 @@ msgid "search"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:18
-msgid "inbox"
+msgid "wall_title"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:26
-msgid "news_feed"
+msgid "inbox_title"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:34
-msgid "friend_list"
+msgid "news_feed_title"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:42
-msgid "albums"
+msgid "friend_list_title"
 msgstr ""
 
-#: /views/elements/messages/inbox_summary.ctp:20
-msgid "message_from"
+#: /views/elements/sidebar_modules.ctp:50
+msgid "albums_title"
 msgstr ""
 
-#: /views/elements/messages/inbox_summary.ctp:21
-#: /views/elements/messages/sent_summary.ctp:21
+#: /views/elements/messages/inbox_summary.ctp:24
+#: /views/elements/messages/sent_summary.ctp:24
 msgid "message_subject"
+msgstr ""
+
+#: /views/elements/messages/inbox_summary.ctp:26
+msgid "message_from"
 msgstr ""
 
 #: /views/elements/messages/navigation.ctp:5
@@ -130,7 +134,7 @@ msgstr ""
 msgid "messages_deleted_title"
 msgstr ""
 
-#: /views/elements/messages/sent_summary.ctp:20
+#: /views/elements/messages/sent_summary.ctp:26
 msgid "message_to"
 msgstr ""
 

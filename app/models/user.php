@@ -23,10 +23,12 @@ class User extends AppModel {
 		'Notification',
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',
-			'dependent' => true,
-			'exclusive' => true,
+			'exclusive' => true
 		),
-		'Message'
+		'Message' => array(
+			'order' => 	'Message.created ASC',
+			'dependent' => true
+		)
 	);
 
 	var $hasOne = array(
@@ -88,7 +90,7 @@ class User extends AppModel {
 
 // --------------------- Custom functions
 
-	function getIdFromSlug($slug) {
+	function getIdFromSlug($slug){
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
 		return $user['User']['id'];
