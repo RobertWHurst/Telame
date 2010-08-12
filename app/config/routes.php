@@ -54,7 +54,7 @@
 // User info
 
 	// Media
-	Router::connect('/a/*', array('controller' => 'albums', 'action' => 'albums'));
+	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
 	
 	// Edit
 	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));

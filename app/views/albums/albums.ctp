@@ -37,11 +37,15 @@ $this->set('script_for_layout', array(
 			<table>
 				<tr>
 <?php			foreach($allAlbums as $a) {
-					echo '<td>' . $html->link(
-									$html->image('/i/t/' . $a['Cover']['id']), 
-									'/albums/' . $slug . '/' . $a['Album']['title'],
-									array('escape' => false)
-								) ;
+					echo '<td>';
+					$link = '/albums/' . $slug . '/' . $a['Album']['title'];
+					echo $html->link(
+							$html->image('/i/t/' . $a['Cover']['id']), 
+							$link,
+							array('escape' => false)
+						);
+					echo $html->link($a['Album']['title'], $link);
+					echo '</td>';
 				}
 ?>
 				</tr>
