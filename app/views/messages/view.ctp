@@ -74,6 +74,7 @@ $this->set('script_for_layout', array(
 						</div>
 					</div>
 				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </div>

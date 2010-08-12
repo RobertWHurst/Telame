@@ -35,6 +35,7 @@ $this->set('script_for_layout', array(
 					echo $this->element('messages/summary', compact('message'));
 				} 
 ?>
+			</div>
 		</div>
 	</div>
 </div>
