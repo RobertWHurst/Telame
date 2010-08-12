@@ -7,6 +7,12 @@ class UsersController extends AppController {
 	function beforeFilter(){
 		parent::beforeFilter();
 
+		$this->Security->blackHoleCallback = '_forceSSL';
+		$this->Security->requireSecure('login');
+		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
+		 	$this->_unforceSSL();
+		}
+
 //		$this->Auth->allow('signup');
 	}
 	
@@ -129,6 +135,14 @@ class UsersController extends AppController {
 			$users[] = array('name' => $row['UserMeta']['first_name']. ' ' .$profile['UserMeta']['last_name'], 'slug' => $profile['User']['slug']);
 		}
 		$this->set('results', $results);
+	}
+
+	function _forceSSL() {
+		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
+	}
+
+	function _unforceSSL() {
+		$this->redirect('http://' . $_SERVER['SERVER_NAME'] . $this->here);
 	}
 
 }

@@ -5,17 +5,14 @@ class AppController extends Controller {
 	//add user athentication
 	// autologin must be before auth in array
 	var $components = array('Acl', 'AutoLogin', 'Auth', 'Security', 'Session');
+
+	// Current user's info stored here
 	var $currentUser;
 
 	// Not for use when developing
 //	var $persistModel = true;
 
 	function beforeFilter() {
-		$this->Security->blackHoleCallback = '_forceSSL';
-		$this->Security->requireSecure('login');
-		if (!in_array($this->action, $this->Security->requireSecure) and env('HTTPS')) {
-		 	$this->_unforceSSL();
-		}
 		
 		//LOAD VENDORS
 		if(Configure::read('debug') > 0){
@@ -62,14 +59,6 @@ class AppController extends Controller {
 			);
 		$this->set('currentUser', $currentUser);
 		return $currentUser;
-	}
-
-	function _forceSSL() {
-		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
-	}
-
-	function _unforceSSL() {
-		$this->redirect('http://' . $_SERVER['SERVER_NAME'] . $this->here);
 	}
 
 }

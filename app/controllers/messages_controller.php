@@ -21,7 +21,7 @@ class MessagesController extends AppController {
 	function inbox(){
 		
 		//get the inbox from the db
-		$messages = $this->Message->getRecieved($this->currentUser['User']['id']);
+		$messages = $this->Message->getReceived($this->currentUser['User']['id']);
 		
 		$this->set(compact('messages'));
 	}
