@@ -47,54 +47,42 @@ class Message extends AppModel {
 						'Profile'
 					)
 				),
-				'order' => 'Message.created DESC'
+				'order' => 'Message.created ASC'
 			)
 		);
 		
-		$child_messages[] = $parent_message;
+		array_unshift($child_messages, $parent_message);
 		
-		return array_reverse($child_messages);
+		return $child_messages;
 	}
 	
-	function _get_threads($uid){
-		
-		$this->recursive = 1;
-		$this->Behaviors->attach('Containable');
+	//NOTE: this is dirty but it works for now...
+	function _remove_duplicate_threads($messages){
+				
+		foreach($messages as $message){
+			//get the parent id
+			$pid = $message['Message']['parent_id'];
 			
-		$threads = $this->find('all', array(
-				'conditions' => array(
-					'Message.parent_id' => -1,
-					'Message.deleted' => false,
-					'OR' => array(
-						'Message.user_id' => $uid,
-						'Message.author_id' => $uid
-					)
-				),				
-				'fields' => array(
-					'id'
-				)
-			)
-		);
+			//if the pid is -1 then replace it with the messages own id
+			if($pid < 0)
+				$pid = $message['Message']['id'];
+				
+			//add or overwrite the index
+			$_messages[$pid] = $message;
+		}
 		
-		foreach($threads as $thread)
-			$thread_ids[] = $thread['Message']['id'];
-			
-		return $thread_ids;
+		return array_values($_messages);
 	}
 
 	function getRecieved($uid){
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
-		
-		$thread_ids = $this->_get_threads($uid);
-		$thread_ids[] = -1;
 					
 			$recived = $this->find('all', array(
 				'conditions' => array(
-					'Message.deleted' => false,
-					'Message.user_id' => $uid,
-					'Message.parent_id' => $thread_ids
+					'Message.deleted_by_user' => false,
+					'Message.user_id' => $uid
 				),
 				'order' => 'Message.created DESC',
 				'contain' => array(
@@ -107,6 +95,8 @@ class Message extends AppModel {
 					'ParentMessage'
 				)				
 			));
+			
+		$recived = $this->_remove_duplicate_threads($recived);
 		
 		return $recived;
 	}
@@ -121,5 +111,30 @@ class Message extends AppModel {
 		
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
+		
+		$thread_ids = $this->_get_threads($uid);
+		$thread_ids[] = -1;
+					
+			$sent = $this->find('all', array(
+				'conditions' => array(
+					'Message.deleted_by_author' => false,
+					'Message.author_id' => $uid,
+					'Message.parent_id' => $thread_ids
+				),
+				'order' => 'Message.created DESC',
+				'contain' => array(
+					'User' => array(
+						'Profile'
+					),
+					'Author' => array(
+						'Profile'
+					),
+					'ParentMessage'
+				)				
+			));
+		
+		$sent = $this->_remove_duplicate_threads($sent);
+		
+		return $sent;
 	}
 }

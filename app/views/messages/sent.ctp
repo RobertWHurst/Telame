@@ -4,7 +4,7 @@ $this->set('css_for_layout', array(
 	'base',
 	'tall_header',
 	'main_sidebar',
-	'messages/inbox',
+	'messages/sent',
 	'messages/summary'
 ));
 $this->set('script_for_layout', array(
@@ -32,7 +32,7 @@ $this->set('script_for_layout', array(
 			<div id="messages">
 <?php 
 				foreach($messages as $message){
-					echo $this->element('messages/inbox_summary', compact('message'));
+					echo $this->element('messages/sent_summary', compact('message'));
 				} 
 ?>
 			</div>
