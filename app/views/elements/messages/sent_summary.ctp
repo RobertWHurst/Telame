@@ -37,5 +37,5 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 			<?php echo __('message_to', true) . ' ' . $html->link($message['User']['Profile']['full_name'], $iUrl); ?> - <?php echo $message['Message']['content']; ?>
 		</p>
 	</div>
-	<div class="time"><p><?php echo $message['Message']['created']; ?></p></div>
+	<div class="time"><p><?php echo $time->timeAgoInWords($message['Message']['created']); ?></p></div>
 </div>
