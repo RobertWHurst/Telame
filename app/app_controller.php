@@ -1,4 +1,5 @@
 <?php
+App::import('Sanitize');
 class AppController extends Controller {
 
 	//add user athentication
@@ -21,7 +22,6 @@ class AppController extends Controller {
 			//load krumo
 			App::import('Vendor', 'krumo', array('file' => 'krumo/class.krumo.php'));
 		}
-		App::import('Vendor', 'php_markdown', array('file' => 'php_markdown/markdown.php'));
 
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 

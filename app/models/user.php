@@ -36,7 +36,7 @@ class User extends AppModel {
 			'dependent' => true,
 		)
 	);
-	
+
 	var $validate = array(
 		'email' => array(
 			'uniqueEmail' => array(
@@ -50,7 +50,7 @@ class User extends AppModel {
 				'message' => 'A valid email address is required',
 				// on => create or update - will only be enforced then, default is null
 			),
-		), 
+		),
 		'password' => array(
 			'rule' => array('minLength', 8),
 			'allowEmpty' => false,
@@ -64,7 +64,7 @@ class User extends AppModel {
 			'message' => 'That username is already in use',
 		),
 	);
-	
+
 // -------------------- Callback functions
 
 	function beforeFind($queryData) {
@@ -96,41 +96,32 @@ class User extends AppModel {
 		return $user['User']['id'];
 	}
 
-	function getProfile($slug_or_id){
-		
-		//findout if we are searching for an id or a slug
-		//then set the conditions based on that
-		if(is_numeric($slug_or_id)){
-			//if is an id
-			$conditions = array(
-				'id' => $slug_or_id
-			);
-		}
-		else{
-			//if is a slug
-			$conditions = array(
-				'lower(slug)' => strtolower($slug_or_id)
-			);
-		}
+	function getSlugFromId($uid) {
+		$this->recursive = -1;
+		$user = $this->find('first', array('conditions' => array('id' => Sanitize::clean(intval($uid))), 'fields' => 'slug'));
+		return $user['User']['slug'];
+	}
 
+	function getProfile($slug){
+		
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
 		return $this->find('first', array(
-			'conditions' => $conditions,
+			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
 			'contain' => array(
 				'Media',
 				'Profile',
 			)
 		));
 	}
-	
+
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
 	function makeUserDir($id) {
 		$baseDir = APP . 'users' . DS;
 		$home = rand(0, 31500) . DS;
 		$sub = rand(0, 31500) . DS;
-		
+
 		$userHome = $baseDir . $home . $sub . $id . DS;
 		if (mkdir($userHome, 0777, true)) {
 			return array('home' => $home, 'sub' => $sub);
