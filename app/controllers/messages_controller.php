@@ -14,7 +14,7 @@ class MessagesController extends AppController {
 	function view($id){
 		
 		//get the inbox from the db
-		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
+		$messages = $this->Message->getMessageThread($id);
 		
 		$this->set(compact('messages'));
 	}
@@ -38,7 +38,7 @@ class MessagesController extends AppController {
 	
 	//THE COMPOSER
 	function compose($slug = false){
-		
+		$uids = array();
 		//get the target user id if there is one
 		if($slug){
 			//if an array of slugs are given
