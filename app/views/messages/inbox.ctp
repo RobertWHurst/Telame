@@ -11,7 +11,8 @@ $this->set('css_for_layout', array(
 $this->set('script_for_layout', array(
 	'jquery',
 	'base',
-	'main_sidebar'
+	'main_sidebar',
+	'messages/messages'
 ));
 ?>
 <div id="content" class="clearfix">
@@ -32,7 +33,7 @@ $this->set('script_for_layout', array(
 		<div id="page_body" class="clearfix">
 			<div id="messages">
 <?php
-				echo $form->create('Message', array('url' =>  array('controller' => 'messages', 'action' => 'manage_messages')));
+				echo $form->create('Selection', array('url' =>  array('controller' => 'messages', 'action' => 'manage_messages')));
 					if(is_array($messages)):
 						foreach($messages as $message)
 							echo $this->element('messages/inbox_summary', compact('message'));
@@ -42,8 +43,8 @@ $this->set('script_for_layout', array(
 					<?php endif; ?>
 					<div id="controls">
 <?php
-						echo $form->submit('mark_unread', array('value' => 'Mark Selected as Read'));
-						echo $form->submit('delete', array('value' => 'Delete Selected'));
+						echo $html->link('Mark selected as unread', array('controller' => 'messages', 'action' => 'inbox'), array('class' => 'unmark'));
+						echo $html->link('Delete selected', array('controller' => 'messages', 'action' => 'inbox'), array('class' => 'delete'));
 ?>
 					</div>
 				<?php echo $form->end(); ?>

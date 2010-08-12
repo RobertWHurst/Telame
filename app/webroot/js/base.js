@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+$(function($){
 
 	core = {
 		'domain': 'http://' + window.location.hostname

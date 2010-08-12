@@ -46,6 +46,7 @@ div.message div.check{
 	position: absolute;
 	top:31px;
 	right: 10px;
+	display: none;
 }
 div.message div.time p{
 	color: #888;
