@@ -2,6 +2,21 @@
 class MessagesController extends AppController {
 
 	var $helpers = array('Markdown', 'Time');
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		
+		//delete messages that have been deleted by both the user and the author
+    	$this->Message->deleteAll(array(
+    		'OR' => array(
+    			'Message.user_id' => $this->currentUser['User']['id'],
+    			'Message.author_id' => $this->currentUser['User']['id']
+    		),
+    		'Message.deleted_by_user' => true,
+    		'Message.deleted_by_author' => true
+    	));
+	}
+	
 	//THE INBOX
 	function inbox(){
 		
@@ -10,9 +25,11 @@ class MessagesController extends AppController {
 		
 		$this->set(compact('messages'));
 	}
-
+	
 	//THE VIEWER
 	function view($id = null){
+	
+		//if the id is empty
 		
 		//get the inbox from the db
 		$messages = $this->Message->getMessageThread($id);
@@ -94,6 +111,47 @@ class MessagesController extends AppController {
 		$this->Message->save();
 		
 		$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
+	}
+	
+	//DELETE A MESSAGE
+	function delete_message(){
+		
+	}
+	
+	//DELETE A MESSAGE
+	function mark_message_unread(){
+		
+	}
+	
+	function manage_messages(){
+	
+		//if there is no data then redirect
+		if(empty($this->data)) {
+			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
+			exit;
+		}
+		
+		krumo($this->data);
+		
+		die;
+		
+		//save the user id and poster id
+		$this->Message->set('user_id', $this->data['Message']['user_id']);
+		$this->Message->set('author_id', $this->data['Message']['author_id']);
+		$this->Message->set('parent_id', $this->data['Message']['parent_id']);
+
+		//save the post content and time
+		$this->Message->set('content', $this->data['Message']['content']);
+		$this->Message->set('created', date("Y-m-d H:i:s"));
+		$this->Message->set('read', null);
+		$this->Message->set('deleted_by_user', false);
+		$this->Message->set('deleted_by_author', false);
+		$this->Message->set('subject', $this->data['Message']['subject']);
+
+		//commit the data to the db
+		//$this->Message->save();
+		
+		//$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
 	}
 	
 	//QUERY FOR POSSIBLE RECIPIENTS

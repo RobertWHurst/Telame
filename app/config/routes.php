@@ -73,6 +73,8 @@
 	Router::connect('/m/cm', array('controller' => 'messages', 'action' => 'compose'));
 	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
 	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
+	Router::connect('/m/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
+	Router::connect('/m/mm', array('controller' => 'messages', 'action' => 'manage_messages'));
 	
 	// Messaging (Ajax)
 	Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));	

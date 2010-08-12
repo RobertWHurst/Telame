@@ -19,7 +19,6 @@ else{
 	$classes = 'message clearfix unread';
 
 }
-	
 //save the message url array
 $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 ?>
