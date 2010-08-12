@@ -46,17 +46,20 @@ $this->set('script_for_layout', array(
 <?php
 				foreach($messages as $message):
 					//findout if the thread belongs to the current user
-					if($message['Author']['id'] == $currentUser['User']['id'])
+					if($message['Author']['id'] == $currentUser['User']['id']){
 						$is_user_thread = true;
-					else
+						$composer['user_id'] = $message['User']['id'];
+					}
+					else{
 						$is_user_thread = false;
+						$composer['user_id'] = $message['Author']['id'];
+					}
 					
 					//if this message is the parent
 					if($message['Message']['parent_id'] < 0){
 					
 						//figure out the user_id and author_id for a response
 						$composer['parent_id'] = $message['Message']['id'];
-						$composer['user_id'] = $message['User']['id'];
 						$composer['author_id'] = $currentUser['User']['id'];
 						
 					}
@@ -85,7 +88,13 @@ $this->set('script_for_layout', array(
 							<?php endif; ?>
 							<?php echo Markdown($message['Message']['content']); ?>
 						</div>
-						<div class="time"><p><?php echo $message['Message']['created']; ?></p></div>
+						<div class="time"><p>
+<?php 
+						echo __('composed') . $message['Message']['created'];
+						if($message['Message']['read'])
+							echo __('read') . $message['Message']['read'];
+?>
+						</p></div>
 					</div>
 				<?php endforeach; ?>
 				<div id="composer">

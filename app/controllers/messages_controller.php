@@ -16,6 +16,22 @@ class MessagesController extends AppController {
 		//get the inbox from the db
 		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
 		
+		//mark the messages as read
+    	$this->Message->updateAll(
+    		array(
+    			'Message.read' => '\'' . date("Y-m-d H:i:s") . '\''
+    		),
+    		array(
+    			'OR' => array(
+    				'Message.id' => $id,
+    				'Message.parent_id' => $id
+    			),
+    			'Message.read' => null,
+    			'Message.user_id' => $this->currentUser['User']['id']
+    		)
+    	);
+			
+		
 		if(!$messages){
 			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
 			exit;

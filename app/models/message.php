@@ -94,22 +94,22 @@ class Message extends AppModel {
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
 					
-			$recived = $this->find('all', array(
-				'conditions' => array(
-					'Message.deleted_by_user' => false,
-					'Message.user_id' => $uid
+		$recived = $this->find('all', array(
+			'conditions' => array(
+				'Message.deleted_by_user' => false,
+				'Message.user_id' => $uid
+			),
+			'order' => 'Message.created DESC',
+			'contain' => array(
+				'User' => array(
+					'Profile'
 				),
-				'order' => 'Message.created DESC',
-				'contain' => array(
-					'User' => array(
-						'Profile'
-					),
-					'Author' => array(
-						'Profile'
-					),
-					'ParentMessage'
-				)				
-			));
+				'Author' => array(
+					'Profile'
+				),
+				'ParentMessage'
+			)				
+		));
 			
 		if(!$recived)
 			return false;			

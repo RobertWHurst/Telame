@@ -13,6 +13,14 @@ else{
 $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 ?>
 <div class="message clearfix">
+	<div class="status">
+<?php
+		if($message['Message']['read'])
+			echo $html->image('icons/email_open.png');
+		else
+			echo $html->image('icons/email.png');								
+?>
+	</div>
 	<div class="avatar">
 <?php
 		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['User']['id']);

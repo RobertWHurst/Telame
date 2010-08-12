@@ -8,11 +8,25 @@ else{
 	$tid = $message['Message']['id'];
 	$tSubject = $message['Message']['subject'];
 }
+
+//figure out if the message is read
+if($message['Message']['read'] != null){
+	$status = $html->image('icons/email_open.png');
+	$classes = 'message clearfix read';
+}
+else{
+	$status = $html->image('icons/email.png');
+	$classes = 'message clearfix unread';
+
+}
 	
 //save the message url array
 $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 ?>
-<div class="message clearfix">
+<div class="<?php echo $classes; ?>">
+	<div class="status">
+		<?php echo $status; ?>
+	</div>
 	<div class="avatar">
 <?php
 		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);

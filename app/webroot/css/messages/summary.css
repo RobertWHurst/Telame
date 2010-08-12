@@ -1,6 +1,6 @@
 div.message{
 	padding: 10px;
-	background: #333;
+	background: #444;
 	margin-bottom: 10px;
 	position: relative;
 	
@@ -8,9 +8,16 @@ div.message{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+div.message.unread{
+	background: #333;
+}
+div.message div.status{	
+	float: left;
+	margin: 18px 0;
+}
 div.message div.avatar{
 	float: left;
-	margin-right: 10px;
+	margin: 0 10px;
 }
 div.message div.message_content h1{
 	font-size: 1.6em;
@@ -24,6 +31,10 @@ div.message div.message_content p{
 	line-height: 1.2em;
 	margin: 0 15px 15px 0;
 	overflow: hidden;
+}
+div.message.unread div.message_content h1,
+div.message.unread div.message_content p{
+	font-weight: bold;
 }
 div.message div.delete{
 	position: absolute;
