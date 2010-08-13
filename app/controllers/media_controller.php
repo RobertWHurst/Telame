@@ -93,8 +93,24 @@ class MediaController extends AppController {
 			$extension = $extension[count($extension)-1];
 			$filename = trim($media['Media']['filename']);
 			// cached version of filename
-			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 			$name = $media['User']['slug'];
+			
+			$imageSize = getimagesize($baseDir . $dir . $filename);
+			$imageWidth = $imageSize[0];
+			$imageHeight = $imageSize[1];
+	
+			if ($imageWidth < $imageHeight) {
+				// make it wider
+				$ar = $imageHeight / $imageWidth;
+				$size['height'] = round($size['width'] * $ar);
+			} else {
+				// make it taller
+				$ar = $imageWidth / $imageHeight;
+				$size['width'] = round($size['height'] * $ar);
+			}
+
+			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
+
 		} else {
 			$filename = 'img.png';
 			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
