@@ -2,9 +2,6 @@
 class AlbumsController extends AppController {
 
 	function albums($slug = false, $title = false) {
-		$albumMedia = array();
-		$allAlbums = array();
-		$currentAlbum = array();
 
 		// get user id
 		if (!$slug) {
@@ -20,15 +17,15 @@ class AlbumsController extends AppController {
 		}
 
 		// get all albums
-		$allAlbums = $this->Album->getAlbums($user['User']['id']);
+		$albums['all'] = $this->Album->getAlbums($user['User']['id']);
 
 		if ($title) {
 			$aid = $this->Album->getAlbumId($user['User']['id'], $title);
-			$albumMedia = $this->Album->getMedia($aid);
-			$currentAlbum = $this->Album->getAlbumInfo($aid);
+			$albums['currentMedia'] = $this->Album->getMedia($aid);
+			$albums['current'] = $this->Album->getAlbumInfo($aid);
 		}
 	
-		$this->set(compact('currentAlbum', 'allAlbums', 'albumMedia', 'user', 'slug'));
+		$this->set(compact('albums', 'user', 'slug'));
 	}
 
 }
