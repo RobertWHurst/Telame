@@ -74,10 +74,11 @@
 	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
 	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
 	Router::connect('/m/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
-	Router::connect('/m/mm', array('controller' => 'messages', 'action' => 'manage_messages'));
 	
 	// Messaging (Ajax)
-	Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));	
+	//Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));
+	Router::connect('/jx/m/d', array('controller' => 'messages', 'action' => 'jx_delete_message'));
+	Router::connect('/jx/m/mu', array('controller' => 'messages', 'action' => 'jx_mark_message_unread'));	
 	
 	// New user adding
 	Router::connect('/a/*', array('controller' => 'profiles', 'action' => 'add'));

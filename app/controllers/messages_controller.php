@@ -115,41 +115,37 @@ class MessagesController extends AppController {
 	
 	//DELETE A MESSAGE
 	function delete_message(){
+				
+	}
+	
+	//JX DELETE MESSAGES
+	function jx_delete_message(){
+	
+		
+		print_r($this->data);
 		
 	}
 	
-	//DELETE A MESSAGE
+	//UNMARK A MESSAGE
 	function mark_message_unread(){
 		
 	}
 	
+	//JX UNMARK A MESSAGES
+	function jx_mark_message_unread(){
+		
+		print_r($this->data);
+		
+	}
+	
 	function manage_messages(){
-		
-		krumo($this->data);
-		
-		die;
-		
-		//save the user id and poster id
-		$this->Message->set('user_id', $this->data['Message']['user_id']);
-		$this->Message->set('author_id', $this->data['Message']['author_id']);
-		$this->Message->set('parent_id', $this->data['Message']['parent_id']);
-
-		//save the post content and time
-		$this->Message->set('content', $this->data['Message']['content']);
-		$this->Message->set('created', date("Y-m-d H:i:s"));
-		$this->Message->set('read', null);
-		$this->Message->set('deleted_by_user', false);
-		$this->Message->set('deleted_by_author', false);
-		$this->Message->set('subject', $this->data['Message']['subject']);
-
-		//commit the data to the db
-		//$this->Message->save();
-		
-		//$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
 	}
 	
 	//QUERY FOR POSSIBLE RECIPIENTS
 	function jx_recipient(){
 		
+		echo 'true';
+		
+		exit;		
 	}
 }

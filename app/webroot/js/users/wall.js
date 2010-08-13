@@ -16,56 +16,6 @@ $(function(){
 		//the animation speed
 		root.speed = 100;
 				
-		//input wrap hover handler
-		root.inputHoverHandler = function(action){
-			
-			//check the state
-			if(action === 'in'){
-				
-				//remove the old active class and add the inactive class
-				root.wallInputWrap.addClass('active').addClass('hover');
-				
-			}
-			else if(action === 'out'){
-				
-				//remove the old active class and add the inactive class
-				root.wallInputWrap.removeClass('hover');			
-				if(root.wallInputWrap.hasClass('focus') === false){			
-					root.wallInputWrap.removeClass('active');
-				}	
-				
-			}
-				
-		}
-		//input focus handler
-		root.inputFocusHandler = function(action){
-			
-			//check the state
-			if(action === 'in'){
-				
-				//remove the old active class and add the inactive class
-				root.wallInputWrap.addClass('active').addClass('focus');
-				
-				//hide the label
-				root.wallInputLabel.hide();
-				
-			}
-			else if(action === 'out'){
-				
-				//remove the old active class and add the inactive class
-				root.wallInputWrap.removeClass('focus');			
-				if(root.wallInputWrap.hasClass('hover') === false){			
-					root.wallInputWrap.removeClass('active');
-				}	
-								
-				//if the inupt or textarea is empty then hide the label
-				if(root.wallInput.val() === ''){
-					root.wallInputLabel.show();
-				}
-			}
-				
-		}
-		
 		//post hover handler
 		root.postHoverHandler = function(){
 			

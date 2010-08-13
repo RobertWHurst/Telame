@@ -8,7 +8,7 @@ $(function(){
 		//save the dom elements
 		root.messages = $('div.message', '#messages');
 		root.messagesContainer = $('#messages', '#content');
-		root.messagesForm = $('#SelectionInboxForm', '#messages');
+		root.messagesForm = $('#MessageInboxForm', '#messages');
 		root.controlsContainer = $('#controls', '#messages');
 		root.deleteMessagesButton = $('a.delete', '#controls');
 		root.umarkMessagesButton = $('a.unmark', '#controls');
@@ -41,6 +41,16 @@ $(function(){
 				//save the form
 				var formData = root.messagesForm.serialize();
 				
+				//send the data to the delete action
+				$.get(core.domain + '/jx/m/d', formData, function(data){
+					if(data === 'true'){
+						alert('deleted');
+					}
+					else{						
+						alert(data);
+					}
+				});
+				
 			});
 			
 		}
@@ -54,6 +64,16 @@ $(function(){
 						
 				//save the form
 				var formData = root.messagesForm.serialize();
+				
+				//send the data to the delete action
+				$.post(core.domain + '/jx/m/mu', formData, function(data){
+					if(data == 'true'){
+						alert('unmarked');
+					}
+					else{						
+						alert(data);
+					}
+				});
 				
 			});
 					
