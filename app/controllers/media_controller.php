@@ -62,16 +62,11 @@ class MediaController extends AppController {
 			}
 		}
 
-		// find the file extension
-		$temp = explode('.', $filename);
-		$extension = $temp[count($temp)-1];
-		unset($temp);
-
 		$params = array(
 			'id' => $cacheFilename,
 			'name' => $user['User']['slug'],
 			'download' => false,
-			'extension' => $extension,
+			'extension' => $user['Media']['type'],
 			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);
