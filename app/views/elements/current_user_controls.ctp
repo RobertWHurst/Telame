@@ -2,7 +2,7 @@
 	<!-- TODO: once image management is implemented then at a user thumbnail here -->
 	<div class="avatar">
 <?php
-	$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $currentUser['User']['id']));
+	$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $currentUser['User']['avatar_id']));
 	$url = $html->url(array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug']));
 	echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
 ?>

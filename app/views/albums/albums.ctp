@@ -34,21 +34,22 @@ $this->set('script_for_layout', array(
 ?>
 		</div>
 		<div id="page_body" class="clearfix">
-<?php
-			foreach($allAlbums as $a) {
-				echo $html->link($a['Album']['title'], '/albums/' . $slug . '/' . $a['Album']['title']);
-			}
-
-			echo 'All user\'s albums';
-			pr($allAlbums);
-
-			echo 'Current album info';
-			pr($currentAlbum);
-			
-			echo 'Media in current album';
-			pr($albumMedia);
-
+			<table>
+				<tr>
+<?php			foreach($allAlbums as $a) {
+					echo '<td>';
+					$link = '/albums/' . $slug . '/' . $a['Album']['title'];
+					echo $html->link(
+							$html->image('/i/t/' . $a['Cover']['id']), 
+							$link,
+							array('escape' => false)
+						);
+					echo $html->link($a['Album']['title'], $link);
+					echo '</td>';
+				}
 ?>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

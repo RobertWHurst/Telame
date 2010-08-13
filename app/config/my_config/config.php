@@ -4,7 +4,7 @@ Configure::write('SiteName', 'Telame');
 
 // Image sizes
 Configure::write('AvatarSize', array('height' => 60, 'width' => 60));
-Configure::write('ThumbSize', array('height' => 100, 'width' => 100));
+Configure::write('ThumbSize', array('height' => 150, 'width' => 150));
 Configure::write('ProfileSize', array('height' => 300, 'width' => 480));
 
 // User information

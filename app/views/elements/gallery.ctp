@@ -5,7 +5,7 @@
 	   	//get the gallery dispaly mode
 	   	switch($user['Profile']['gallery_mode']):
 	   		default: case 'single':
-	   			echo $this->Html->image(array('controller' => 'media', 'action' => 'profile', $user['User']['id']));	   				
+	   			echo $this->Html->image(array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']));	   				
 	   			break;
 	   		case 'multi':
 	   			echo '[profile pictures slideshow]';

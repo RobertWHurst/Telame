@@ -10,15 +10,16 @@ class Album extends AppModel {
 	);
 	var $hasMany = array('Media');
 
+// -------------------- Custom functions
+
 	function getAlbums($uid) {
+		$this->recursive = 0;
 		return $this->find('all', array(
 			'conditions' => array(
 				'Album.user_id' => $uid
 			),
 		));
 	}
-
-// -------------------- Custom functions
 
 	function getAlbumId($uid, $slug) {
 		$album = $this->find('first', array('conditions' => array('Album.user_id' => Sanitize::clean(intval($uid)), 'Album.title' => Sanitize::clean($slug)), 'fields' => 'Album.id'));

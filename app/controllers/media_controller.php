@@ -19,28 +19,32 @@ class MediaController extends AppController {
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($uid = null, $size) {
-		if (empty($uid)) {
+	function _resize($mid = null, $size) {
+		if (empty($mid)) {
 			$this->cakeError('error404');
 		}
 		// media view for files
 		$this->view = 'Media';
 
 		// we don't need all the associations
-		$this->Media->User->Behaviors->attach('Containable');
+//		$this->Media->User->Behaviors->attach('Containable');
+		$media = $this->Media->find('first', array(
+			'conditions' => array(
+				'Media.id' => $mid
+			),
+		));
+		
 		$user = $this->Media->User->find('first', array(
 			'conditions' => array(
-				'User.id' => $uid
-			),
-			'contain' => array(
-				'Media'
+				'User.id' => $media['User']['id'],
 			)
 		));
+		
 		if (!$user || $user['User']['avatar_id'] == -1) {
 			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
 		} else {
 			// to user's home directory
-			$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $uid . DS . 'images' . DS;		
+			$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $user['User']['id'] . DS . 'images' . DS;		
 		}
 
 		// profile or gallery, etc...

@@ -1,7 +1,7 @@
 <div class="update clearfix">
 	<div class="avatar">
 <?php
-		$image_url = array('controller' => 'media', 'action' => 'avatar', $update['PostAuthor']['id']);
+		$image_url = array('controller' => 'media', 'action' => 'avatar', $update['PostAuthor']['avatar_id']);
 		$url = array('controller' => 'users', 'action' => 'profile', $update['PostAuthor']['slug']);
 		echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
 ?>
