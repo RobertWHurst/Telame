@@ -34,6 +34,8 @@ class ThumbComponent {
 			Debugger::log('Base directory or filename is empty');
 			return false;
 		}
+		$source = $baseDir . $dir . $filename;
+
 		if (empty($size)) {
 			$height = 100;
 			$width = 100;
@@ -73,10 +75,13 @@ class ThumbComponent {
 		App::import('Vendor', 'phpThumb', array('file' => 'phpThumb/phpthumb.class.php'));
 		$phpThumb = new phpThumb();
 
-		$phpThumb->setSourceFilename($baseDir . $dir . $filename);
+		$phpThumb->setSourceFilename($source);
 		$phpThumb->setParameter('w' ,$width);
 		$phpThumb->setParameter('h', $height);
-		$phpThumb->setParameter('zc', 1);
+		// auto rotate based on exif data
+		$phpThumb->setParameter('ar', 'x');
+
+//		$phpThumb->setParameter('zc', 1);
 
 		if($phpThumb->generateThumbnail()){
 			if(!$phpThumb->RenderToFile($cacheDir . $filename . '-' . $height . 'x' . $width . '.jpg')) {
