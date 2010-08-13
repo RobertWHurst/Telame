@@ -31,6 +31,7 @@ class ThumbComponent {
 	function generateThumb($baseDir, $dir, $filename, $size) {
 		// Make sure we have the name of the uploaded file and that the Model is specified
 		if(empty($baseDir) || empty($filename)){
+			Debugger::log('Base directory or filename is empty');
 			return false;
 		}
 		if (empty($size)) {
@@ -55,11 +56,17 @@ class ThumbComponent {
 
 		// verify that the filesystem is writable, if not add an error to the object
 		// dont fail if not and let phpThumb try anyway
-		if(!is_writable($baseDir . 'cache')) {
-			if(!mkdir($baseDir . 'cache')) {
-				Debugger::log($baseDir . 'cache' . ' not writable');
+		$cacheDir = $baseDir . 'cache' . DS;
+		if(!file_exists($cacheDir)) {
+			debugger::log('Cache directory doesn\'t exist');
+			if(!mkdir($cacheDir)) {
+				Debugger::log('Can\' create ' . $cacheDir);
 				return false;
 			}
+		}
+		if(!is_writable($cacheDir)) {
+			debugger::log($cacheDir . ' not writable');
+			chmod($cacheDir, 0777);
 		}
 
 		// Load phpThumb
@@ -72,7 +79,7 @@ class ThumbComponent {
 		$phpThumb->setParameter('zc', 1);
 
 		if($phpThumb->generateThumbnail()){
-			if(!$phpThumb->RenderToFile($baseDir . 'cache' . DS . $filename . '-' . $height . 'x' . $width . '.jpg')) {
+			if(!$phpThumb->RenderToFile($cacheDir . $filename . '-' . $height . 'x' . $width . '.jpg')) {
 				Debugger::log('Could not render to file');
 				return false;
 			}

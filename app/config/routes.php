@@ -66,6 +66,9 @@
 	// Images - Thumbnail
 	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
 	
+	// Media - upload
+	Router::connect('/m/u/*', array('controller' => 'media', 'action' => 'upload'));
+	
 	// Messaging
 	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
 	Router::connect('/m/vt/*', array('controller' => 'messages', 'action' => 'view'));

@@ -3,12 +3,14 @@ class MediaController extends AppController {
 
 	var $components = array('Thumb');
 
+//---------------------------- Image Retrieval Functions ----------------------------//
+
 	function avatar($id) {
 		$this->_resize($id, Configure::read('AvatarSize'));
 	}
 
 	function thumb($id) {
-		$this->_resize($id, Configure::read('ThumbSize'));	
+		$this->_resize($id, Configure::read('ThumbSize'));
 	}
 
 	function profile($id) {
@@ -16,12 +18,23 @@ class MediaController extends AppController {
 	}
 
 
+//---------------------------- Upload Functions ----------------------------//
+
+	function upload() {
+		if (empty($this->data)) {
+
+			$user = $this->Media->User->getProfile($this->currentUser['User']['slug']);
+			$this->set(compact('user'));
+		}
+	}
+
+
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($mid = null, $size) {
+	function _resize($mid, $size) {
 		if (empty($mid)) {
-			$this->cakeError('error404');
+		//	$this->cakeError('error404');
 		}
 		// media view for files
 		$this->view = 'Media';
@@ -33,24 +46,18 @@ class MediaController extends AppController {
 				'Media.id' => $mid
 			),
 		));
-		
-		$user = $this->Media->User->find('first', array(
-			'conditions' => array(
-				'User.id' => $media['User']['id'],
-			)
-		));
-		
-		if (!$user || $user['User']['avatar_id'] == -1) {
-			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
+
+		if (!$media || $media['User']['avatar_id'] == -1) {
+			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS . 'profile' . DS;
 		} else {
 			// to user's home directory
-			$baseDir = APP . 'users' . DS . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $user['User']['id'] . DS . 'images' . DS;		
+			$baseDir = APP . 'users' . DS . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
 		}
 
 		// profile or gallery, etc...
-		$dir = $user['Media']['path'] . DS;
+		$dir = $media['Media']['path'] . DS;
 		// filename
-		$filename = trim($user['Media']['filename']);
+		$filename = trim($media['Media']['filename']) . '.' . $media['Media']['type'];
 		// cached version of filename
 		$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 
@@ -64,9 +71,9 @@ class MediaController extends AppController {
 
 		$params = array(
 			'id' => $cacheFilename,
-			'name' => $user['User']['slug'],
+			'name' => $media['User']['slug'],
 			'download' => false,
-			'extension' => $user['Media']['type'],
+			'extension' => $media['Media']['type'],
 			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);
