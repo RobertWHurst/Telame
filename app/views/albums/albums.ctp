@@ -34,22 +34,22 @@ $this->set('script_for_layout', array(
 ?>
 		</div>
 		<div id="page_body" class="clearfix">
-			<table>
-				<tr>
-<?php			foreach($allAlbums as $a) {
-					echo '<td>';
-					$link = '/albums/' . $slug . '/' . $a['Album']['title'];
-					echo $html->link(
-							$html->image('/i/t/' . $a['Cover']['id']), 
-							$link,
-							array('escape' => false)
-						);
-					echo $html->link($a['Album']['title'], $link);
-					echo '</td>';
-				}
+			<div id="albums">
+				<?php foreach($albums['all'] as $album): ?>
+					<div class="album">
+						<div class="thumb">
+<?php
+							$aUrl = array('controller' => 'albums', 'action' => 'albums', $slug, $album['Album']['title']);
+							$iUrl = array('controller' => 'media', 'action' => 'thumb', $album['Cover']['id']);
+							echo $html->image($iUrl, array('url' => $aUrl,));
 ?>
-				</tr>
-			</table>
+						</div>
+						<div id="label">
+							<?php echo $html->link($album['Album']['title'], $aUrl); ?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </div>
