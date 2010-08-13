@@ -22,9 +22,46 @@ class MediaController extends AppController {
 
 	function upload() {
 		if (empty($this->data)) {
-
 			$user = $this->Media->User->getProfile($this->currentUser['User']['slug']);
 			$this->set(compact('user'));
+		} else {
+			// no errors reported
+			if (!$this->data['Media']['file']['error']) {
+				// file type is allowed
+				if (in_array($this->data['Media']['file']['type'], Configure::read('AllowedFileTypes'))) {
+					// Full path to store user's images
+					$baseDir = APP . 'users' . DS . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
+
+					// user's directory is writable
+					if(is_writable($baseDir)) {
+						$extension = explode('.', $this->data['Media']['file']['name']);
+						$extension = $extension[count($extension)-1];
+
+						$filename = $this->data['Media']['file']['name'] . date('Y-m-d H:i:s') . '.' . $extension;
+						// file does not exist alread, otherwise we need to rename it something else
+						if (!file_exists($baseDir . $filename)) {
+							rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
+							
+							$this->Media->create();
+							$data['Media']['user_id'] = $this->currentUser['User']['id'];
+							$data['Media']['filename'] = $filename;
+							$data['Media']['album_id'] = null;
+							$data['Media']['path'] = null;
+							$data['Media']['size'] = $this->data['Media']['file']['size'];
+							$data['Media']['created'] = date('Y-m-d H:i:s');
+							$data['Media']['type'] = $this->data['Media']['file']['type'];
+							$this->Media->save($data);
+							
+							$this->redirect('/albums');
+							exit;
+
+						} // an else should never occur..
+					} // can't write, somebody fucked something up
+				} else { // file extension not valid
+					// return new error
+					return false;
+				}
+			}
 		}
 	}
 
@@ -39,27 +76,33 @@ class MediaController extends AppController {
 		// media view for files
 		$this->view = 'Media';
 
-		// we don't need all the associations
-//		$this->Media->User->Behaviors->attach('Containable');
+		// find the image
 		$media = $this->Media->find('first', array(
 			'conditions' => array(
 				'Media.id' => $mid
 			),
 		));
 
-		if (!$media || $media['User']['avatar_id'] == -1) {
-			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS . 'profile' . DS;
-		} else {
+		if ($media && $media['User']['avatar_id'] != -1) {
 			// to user's home directory
 			$baseDir = APP . 'users' . DS . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
+			// profile or gallery, etc...
+			$dir = $media['Media']['path'] . DS;
+			// filename
+			$extension = explode('.', $media['Media']['filename']);
+			$extension = $extension[count($extension)-1];
+			$filename = trim($media['Media']['filename']);
+			// cached version of filename
+			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
+			$name = $media['User']['slug'];
+		} else {
+			$filename = 'img.png';
+			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
+			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
+			$dir = 'profile' . DS;
+			$extension = 'png';
+			$name = 'No Image';
 		}
-
-		// profile or gallery, etc...
-		$dir = $media['Media']['path'] . DS;
-		// filename
-		$filename = trim($media['Media']['filename']) . '.' . $media['Media']['type'];
-		// cached version of filename
-		$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 
 		// check for a cached version first
 		if (!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
@@ -71,9 +114,9 @@ class MediaController extends AppController {
 
 		$params = array(
 			'id' => $cacheFilename,
-			'name' => $media['User']['slug'],
+			'name' => $name,
 			'download' => false,
-			'extension' => $media['Media']['type'],
+			'extension' => $extension,
 			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);

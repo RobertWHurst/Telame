@@ -7,8 +7,15 @@ Configure::write('AvatarSize', array('height' => 60, 'width' => 60));
 Configure::write('ThumbSize', array('height' => 150, 'width' => 150));
 Configure::write('ProfileSize', array('height' => 300, 'width' => 480));
 
+Configure::write('AllowedFileTypes', array( 
+    'image/jpeg', 
+    'image/gif', 
+    'image/png', 
+    'image/pjpeg', 
+    'image/x-png' 
+  )); 
+
 // User information
-Configure::write('UserMeta', array('first_name', 'last_name', 'gallery_mode'));
 Configure::write('UserInfo', array(
 						'wall_posts' => array(
 							'limit' => 10,
