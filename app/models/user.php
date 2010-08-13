@@ -58,10 +58,16 @@ class User extends AppModel {
 			'message' => 'Password must be 8 characters long', // to internationalize it must be done in the view
 		),
 		'slug' => array(
-			'rule' => 'isUnique',
-			'allowEmpty' => false,
-			'required' => true,
-			'message' => 'That username is already in use',
+			'unique' => array(
+				'rule' => 'isUnique',
+				'allowEmpty' => false,
+				'required' => true,
+				'message' => 'That username is already in use',
+			),
+			'alphanumeric' => array(
+				'rule' => 'alphaNumeric',
+				'message' => 'Your username can only contain letters and numbers',
+			)
 		),
 	);
 

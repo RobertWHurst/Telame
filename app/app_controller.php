@@ -4,7 +4,7 @@ class AppController extends Controller {
 
 	//add user athentication
 	// autologin must be before auth in array
-	var $components = array('Acl', 'AutoLogin', 'Auth', 'Security', 'Session');
+	var $components = array('Acl', 'AutoLogin', 'Auth', 'RequestHandler', 'Security', 'Session');
 
 	// Current user's info stored here
 	var $currentUser;
@@ -13,7 +13,6 @@ class AppController extends Controller {
 //	var $persistModel = true;
 
 	function beforeFilter() {
-		
 		//LOAD VENDORS
 		if(Configure::read('debug') > 0){
 			//load krumo

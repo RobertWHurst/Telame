@@ -40,7 +40,7 @@ class UsersController extends AppController {
 
 		// Do permission check
 		if ($this->currentUser['User']['id'] != $user['User']['id']) {
-			// FIXME: Remove the @ symbol
+// FIXME: Remove the @ symbol
 			if (!@$this->Acl->check(array('model' => 'User', 'foreign_key' => $this->currentUser['User']['id']), 'User::' . $user['User']['id'] . '/profile', 'read')) {
 				$this->Session->setFlash(__('not_allowed_profile', true));
 				$this->redirect('/');
@@ -97,7 +97,7 @@ class UsersController extends AppController {
 				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
 	
 				// save the user
-				if (!$this->User->save($this->data)) {
+				if (!$this->User->save(Sanitize::clean($this->data))) {
 				    $this->Session->setFlash(__('user_create_error'));
 				    $this->redirect('/');
 				    exit;
@@ -142,7 +142,7 @@ class UsersController extends AppController {
 	}
 
 	function _unforceSSL() {
-		$this->redirect('http://' . $_SERVER['SERVER_NAME'] . $this->here);
+		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
 	}
 
 }

@@ -88,11 +88,10 @@
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
-	Router::connect('/w/a', array('controller' => 'wall_posts', 'action' => 'add'));
 	Router::connect('/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
 
 	// Wall Posts (Ajax)
-	Router::connect('/jx/w/a', array('controller' => 'wall_posts', 'action' => 'jx_add'));
+	Router::connect('/jx/w/a', array('controller' => 'wall_posts', 'action' => 'add'));
 	Router::connect('/jx/w/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
 	

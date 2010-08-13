@@ -118,7 +118,7 @@ $(function(){
 				var formData = root.wallInputForm.serialize();
 				
 				//get the action url
-				var ajaxUrl = '/jx' + root.wallInputForm.attr('action');
+				var ajaxUrl = '/' + root.wallInputForm.attr('action');
 				
 				//remove any state classes from the input wrapper
 				root.wallInputWrap.removeClass('active hover focus');
@@ -168,7 +168,7 @@ $(function(){
 					}
 					else{
 						
-						alert('Sorry but it seems that your browser is no longer able to connect to the server. To post to the wall a contention is required');
+						alert('Sorry but it seems that your browser is no longer able to connect to the server. To post to the wall a connection is required');
 					
 					}
 						
