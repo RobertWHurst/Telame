@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	var $helpers = array('Text', 'Time');
+	var $helpers = array('Markdown', 'Text', 'Time');
 
 	function lists($id = false){
 		echo 'test';

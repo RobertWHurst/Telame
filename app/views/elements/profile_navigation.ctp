@@ -20,7 +20,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('about', true) . $user['Profile']['first_name'],
+		'label' => __('about', true) . ' ' . $user['Profile']['first_name'],
 		'url' => array(
 			'controller' => 'profile',
 			'action' => 'about',

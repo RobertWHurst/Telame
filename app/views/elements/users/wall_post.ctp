@@ -7,12 +7,7 @@
 ?>
 	</div>
 	<div class="post_content">
-		<p>
-			<a href="/<?php echo $post['PostAuthor']['slug']?>" title="<?php echo $post['PostAuthor']['Profile']['full_name'];?>">
-				<?php echo $post['PostAuthor']['Profile']['full_name'];?>
-			</a>
-			<?php echo $text->autoLink($post['WallPost']['post']); ?>
-		</p>
+		<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($post['WallPost']['post'])); ?>
 	</div>
 	<div class="delete">
 <?php 
