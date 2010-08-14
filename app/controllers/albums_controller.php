@@ -2,6 +2,8 @@
 class AlbumsController extends AppController {
 
 	function albums($slug = false, $title = false) {
+		//layout
+		$this->layout = 'profile';
 
 		// get user id
 		if (!$slug) {

@@ -30,6 +30,9 @@ class UsersController extends AppController {
 	}
 
 	function profile($slug){
+		//set the layout
+		$this->layout = 'profile';
+		
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 

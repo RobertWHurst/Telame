@@ -26,6 +26,10 @@ $(function($){
 				_loop.stack[key] = {'callback': callback, 'interval': interval, 'i': 0};
 			}
 			
+			this.killProccess = function(key){
+				delete _loop.stack[key];
+			}
+			
 			//the run switch for the loop
 			this.isActive = true; 
 			

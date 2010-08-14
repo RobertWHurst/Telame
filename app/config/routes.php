@@ -59,15 +59,16 @@
 	// Edit
 	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));
 
-	// Images - Avatar
+	// Media - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
-	// Images - Profile
+	// Media - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
-	// Images - Thumbnail
+	// Media - Thumbnail
 	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
-	
+	// Media - Preview
+	Router::connect('/i/v/*', array('controller' => 'media', 'action' => 'preview'));
 	// Media - upload
-	Router::connect('/m/u/*', array('controller' => 'media', 'action' => 'upload'));
+	Router::connect('/i/u/*', array('controller' => 'media', 'action' => 'upload'));
 	
 	// Messaging
 	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
