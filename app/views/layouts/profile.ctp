@@ -36,6 +36,9 @@
 					echo $this->element('summary');
 ?>
 				</div>
+				<div id="page_navigation" class="clearfix">
+					<?php echo $this->element('profile_navigation'); ?>
+				</div>
 				<div id="page_body" class="clearfix">				
 					<?php echo $content_for_layout; ?>
 				</div>
