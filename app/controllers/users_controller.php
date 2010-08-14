@@ -54,9 +54,6 @@ class UsersController extends AppController {
 		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
 		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 
-		//page title
-		$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name']);
-
 		//pass the profile data to the view
 		$this->set(compact('friends', 'user', 'wallPosts'));
 	}

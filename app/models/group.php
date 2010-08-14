@@ -24,5 +24,4 @@ class Group extends AppModel {
 		));
 	}
 
-
 }

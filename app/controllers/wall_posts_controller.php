@@ -37,31 +37,16 @@ class WallPostsController extends AppController {
 		}
 
 		//save the user id and the visitor id
-		$user_id = Sanitize::clean($this->data['WallPost']['user_id']);
-		$visitor_id = $this->currentUser['User']['id'];
-
-		//get the visiting user's data
-		$visitor = $this->WallPost->User->findById($visitor_id);
+		$wallOwnerId = $this->data['WallPost']['user_id'];
+		$visitorId = $this->currentUser['User']['id'];
 
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
-		if ($user_id != $visitor_id) {
+		if ($wallOwnerId != $visitorId) {
 
 			//IF THE POSTER IS NOT THE THE WALL OWNER
 
-			//get the user's id that owns the wall
-			$user = $this->WallPost->User->findById($user_id);
-
-			//find out if the visitor is a friend
-			$conditions = array(
-				//find links that belong to the user owning the wall
-				'parent_user_id' => $user['User']['id'],
-
-				//and that link to the visitor
-				'child_user_id' => $visitor['User']['id']
-			);
-
 			//if the poster is not friends with the user then return false
-			if ($this->WallPost->User->Friend->find('count', array('conditions' => $conditions)) < 1) {
+			if (!$this->WallPost->User->GroupsUser->isFriend($visitorId, $wallOwnerId)) {
 				if($isAjax) {
 					echo 'false';
 					exit;
@@ -75,15 +60,15 @@ class WallPostsController extends AppController {
 			//IF THE POSTER IS THE THE WALL OWNER
 
 			//the visitor is the user
-			$user = $visitor;
+			$wallOwnerId = $visitorId;
 		}
 
 		if (!$reply_id) {
 			$this->WallPost->set('reply_id', $reply_id);
 		}
 		//save the user id and poster id
-		$this->WallPost->set('user_id', $user['User']['id']);
-		$this->WallPost->set('author_id', $visitor['User']['id']);
+		$this->WallPost->set('user_id', $wallOwnerId);
+		$this->WallPost->set('author_id', $visitorId);
 
 		//save the post type
 		//TODO: this will change based on the content being posted.
@@ -113,7 +98,8 @@ class WallPostsController extends AppController {
 			$this->set('wallPosts', $wallPosts);
 		} else {
 			//redirect the visitor to the wall they posted on
-			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $user['User']['slug'])));
+			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
+			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $slug)));
 			exit;
 		}
 	}

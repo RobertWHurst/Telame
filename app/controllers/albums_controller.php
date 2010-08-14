@@ -1,7 +1,7 @@
 <?php
 class AlbumsController extends AppController {
 
-	function albums($slug = false, $title = false) {
+	function albums($slug = false, $albumSlug = false) {
 		//layout
 		$this->layout = 'profile';
 
@@ -21,8 +21,8 @@ class AlbumsController extends AppController {
 		// get all albums
 		$albums['all'] = $this->Album->getAlbums($user['User']['id']);
 
-		if ($title) {
-			$aid = $this->Album->getAlbumId($user['User']['id'], $title);
+		if ($albumSlug) {
+			$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
 			$albums['currentMedia'] = $this->Album->getMedia($aid);
 			$albums['current'] = $this->Album->getAlbumInfo($aid);
 		}

@@ -22,7 +22,7 @@ $this->set('script_for_layout', array(
 			<div class="wrap_thumb">
 				<div class="thumb">
 <?php
-					$aUrl = array('controller' => 'albums', 'action' => 'albums', $slug, $album['Album']['title']);
+					$aUrl = array('controller' => 'albums', 'action' => 'albums', $slug, $album['Album']['slug']);
 					$iUrl = array('controller' => 'media', 'action' => 'thumb', $album['Cover']['id']);
 					echo $html->image($iUrl, array('url' => $aUrl,));
 ?>

@@ -45,7 +45,7 @@ class MediaController extends AppController {
 						$extension = explode('.', $this->data['Media']['file']['name']);
 						$extension = $extension[count($extension)-1];
 
-						$filename = $this->data['Media']['file']['name'] . date('Y-m-d H:i:s') . '.' . $extension;
+						$filename = $this->data['Media']['file']['name'] . '_' . date('Y-m-d_H-i-s') . '.' . $extension;
 						// file does not exist alread, otherwise we need to rename it something else
 						if (!file_exists($baseDir . $filename)) {
 							rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);

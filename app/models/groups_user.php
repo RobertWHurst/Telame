@@ -39,4 +39,15 @@ class GroupsUser extends AppModel {
 
 		return $friends;
 	}
+	
+	function isFriend($uid, $fid) {
+		
+		$friend = $this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)));
+		if (!$friend) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 }
