@@ -6,7 +6,11 @@ class MediaController extends AppController {
 //---------------------------- Image Retrieval Functions ----------------------------//
 
 	function avatar($id) {
-		$this->_resize($id, Configure::read('AvatarSize'));
+		$this->_resize($id, Configure::read('AvatarSize'), array(
+			'w' => 60,
+			'h' => 60,
+			'zc' => 1
+		));
 	}
 
 	function thumb($id) {
@@ -69,7 +73,7 @@ class MediaController extends AppController {
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($mid, $size) {
+	function _resize($mid, $size, $options = array()) {
 		if (empty($mid)) {
 		//	$this->cakeError('error404');
 		}
@@ -123,7 +127,7 @@ class MediaController extends AppController {
 		// check for a cached version first
 		if (!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
 			// we don't have it, generate it
-			if(!$this->Thumb->generateThumb($baseDir, $dir, $filename, $size)) {
+			if(!$this->Thumb->generateThumb($baseDir, $dir, $filename, $size, $options)) {
 				Debugger::log('Can\'t generate thumbnail');
 			}
 		}

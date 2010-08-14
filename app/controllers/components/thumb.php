@@ -28,7 +28,7 @@ class ThumbComponent {
 	 * @return bool Success?
 	 * @author Nate Constant
 	 **/
-	function generateThumb($baseDir, $dir, $filename, $size) {
+	function generateThumb($baseDir, $dir, $filename, $size, $options = array()) {
 		// Make sure we have the name of the uploaded file and that the Model is specified
 		if(empty($baseDir) || empty($filename)){
 			Debugger::log('Base directory or filename is empty');
@@ -80,6 +80,10 @@ class ThumbComponent {
 		$phpThumb->setParameter('h', $height);
 		// auto rotate based on exif data
 		$phpThumb->setParameter('ar', 'x');
+		
+		foreach($options as $key => $val) {
+			$phpThumb->setParameter($key, $val);
+		}
 
 //		$phpThumb->setParameter('zc', 1);
 
