@@ -49,5 +49,19 @@ class GroupsUser extends AppModel {
 			return true;
 		}
 	}
+	
+	function listGroups($uid, $fid) {
+		$this->Behaviors->attach('Containable');
+		$groups = $this->find('first', array(
+			'conditions' => array(
+				'user_id' => $uid,
+				'friend_id' => $fid,
+			),
+			'contain' => array(
+			)
+		));
+		return $groups;
+	}
+
 
 }

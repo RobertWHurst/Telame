@@ -9,7 +9,7 @@
 	</div>
 	<ul class="controls">
 		<li><?php echo $html->link(__('my_profile', true), array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug'])); ?></li>
-		<li><?php echo $html->link(__('account_settings', true), '#'); ?></li>
+		<li><?php echo $html->link(__('account_settings', true), '/p/'); ?></li>
 		<li><?php echo $html->link(__('logout', true), array('controller' => 'users', 'action' => 'logout')); ?></li>
 	</ul>
 </div>

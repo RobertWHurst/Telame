@@ -55,9 +55,6 @@
 
 	// Media
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
-	
-	// Edit
-	Router::connect('/e/*', array('controller' => 'profiles', 'action' => 'edit'));
 
 	// Media - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
@@ -89,6 +86,11 @@
 
 	// News filters
 	Router::connect('/f/*', array('controller' => 'notifications', 'action' => 'news'));
+
+	// Profile - edit
+	Router::connect('/p/e/*', array('controller' => 'profiles', 'action' => 'edit'));
+	// Profile - index
+	Router::connect('/p/*', array('controller' => 'profiles', 'action' => 'index'));
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));

@@ -43,8 +43,8 @@ class UsersController extends AppController {
 
 		// Do permission check
 		if ($this->currentUser['User']['id'] != $user['User']['id']) {
-// FIXME: Remove the @ symbol
-			if (!@$this->Acl->check(array('model' => 'User', 'foreign_key' => $this->currentUser['User']['id']), 'User::' . $user['User']['id'] . '/profile', 'read')) {
+
+			if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
 				$this->Session->setFlash(__('not_allowed_profile', true));
 				$this->redirect('/');
 				exit;
