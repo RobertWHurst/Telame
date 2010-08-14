@@ -27,7 +27,21 @@
 				<?php echo $this->element('main_sidebar'); ?>
 			</div>
 			<div id="page">
-				<?php echo $content_for_layout; ?>
+				<div id="page_head" class="clearfix">
+<?php
+					//render the profile gallery
+					echo $this->element('gallery');
+
+					//render the profile summary
+					echo $this->element('summary');
+?>
+				</div>
+				<div id="page_navigation" class="clearfix">
+					<?php echo $this->element('profile_navigation'); ?>
+				</div>
+				<div id="page_body" class="clearfix">				
+					<?php echo $content_for_layout; ?>
+				</div>
 			</div>
 		</div>
 		<?php echo $this->element('copyright'); ?>

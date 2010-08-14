@@ -12,45 +12,31 @@ $this->set('css_for_layout', array(
 $this->set('script_for_layout', array(
 	'jquery',
 	'base',
-	'main_sidebar'
+	'main_sidebar',
+	'albums/thumbs'
 ));
 ?>
-<div id="content" class="clearfix">
-	<div id="wrap_main_sidebar">
-		<div id="logo">
-			<!-- TODO: link to the news feed -->
-			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'notifications', 'action' => 'news'))); ?>
-		</div>
-		<?php echo $this->element('main_sidebar'); ?>
-	</div>
-	<div id="page">
-		<div id="page_head" class="clearfix">
+<div id="albums" class="clearfix">
+	<?php foreach($albums['all'] as $album): ?>
+		<div class="album">
+			<div class="wrap_thumb">
+				<div class="thumb">
 <?php
-			//render the profile gallery
-			echo $this->element('gallery');
-
-			//render the profile summary
-			echo $this->element('summary');
+					$aUrl = array('controller' => 'albums', 'action' => 'albums', $slug, $album['Album']['title']);
+					$iUrl = array('controller' => 'media', 'action' => 'thumb', $album['Cover']['id']);
+					echo $html->image($iUrl, array('url' => $aUrl,));
 ?>
-		</div>
-		<div id="page_body" class="clearfix">
-			<div id="albums">
-				<?php foreach($albums['all'] as $album): ?>
-					<div class="album">
-						<div class="thumb">
+				</div>
+				<div class="image">
 <?php
-							$aUrl = array('controller' => 'albums', 'action' => 'albums', $slug, $album['Album']['title']);
-							$iUrl = array('controller' => 'media', 'action' => 'thumb', $album['Cover']['id']);
-							echo $html->image($iUrl, array('url' => $aUrl,));
+					$iUrl = array('controller' => 'media', 'action' => 'preview', $album['Cover']['id']);
+					echo $html->image($iUrl, array('url' => $aUrl,));
 ?>
-						</div>
-						<div id="label">
-							<?php echo $html->link($album['Album']['title'], $aUrl); ?>
-						</div>
-					</div>
-				<?php endforeach; ?>
+				</div>
+			</div>
+			<div class="label">
+				<?php echo $html->link($album['Album']['title'], $aUrl); ?>
 			</div>
 		</div>
-	</div>
+	<?php endforeach; ?>
 </div>
-<?php echo $this->element('copyright'); ?>

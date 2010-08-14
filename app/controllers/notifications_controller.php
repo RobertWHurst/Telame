@@ -14,6 +14,10 @@ class NotificationsController extends AppController {
 	}
 
 	function news($selectedFriendList = null) {
+		
+		//set the layout
+		$this->layout = 'tall_header_w_sidebar';
+		
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-12 19:13+0000\n"
-"PO-Revision-Date: 2010-08-12 12:16-0800\n"
+"POT-Creation-Date: 2010-08-14 09:06+0000\n"
+"PO-Revision-Date: 2010-08-14 02:06-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,23 +15,24 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Canada\n"
 
-#: /controllers/notifications_controller.php:53
-#: /controllers/users_controller.php:49;113
-#: /views/albums/albums.ctp:22
-#: /views/layouts/pages.ctp:39
+#: /controllers/notifications_controller.php:57
+#: /controllers/users_controller.php:58;122
+#: /views/layouts/pages.ctp:28
+#: /views/layouts/profile.ctp:25
+#: /views/layouts/simple_header.ctp:22
+#: /views/layouts/tall_header_w_sidebar.ctp:25
+#: /views/media/upload.ctp:25
 #: /views/messages/compose.ctp:20
-#: /views/messages/inbox.ctp:21
+#: /views/messages/inbox.ctp:22
 #: /views/messages/sent.ctp:21
 #: /views/messages/view.ctp:20
-#: /views/notifications/news.ctp:19
 #: /views/profiles/edit.ctp:5
 #: /views/users/login.ctp:13
-#: /views/users/profile.ctp:25
 msgid "site_name"
 msgstr "Telame"
 
-#: /controllers/notifications_controller.php:53
-#: /views/notifications/news.ctp:25
+#: /controllers/notifications_controller.php:57
+#: /views/notifications/news.ctp:16
 msgid "news_title"
 msgstr "What's New"
 
@@ -39,35 +40,35 @@ msgstr "What's New"
 msgid "user_hash_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:39
+#: /controllers/users_controller.php:48
 msgid "not_allowed_profile"
 msgstr "Sorry but the person your trying to view has blocked public visitors. If you'd like to send them a friend request you can do using their uri slug on the friends page."
 
-#: /controllers/users_controller.php:71
+#: /controllers/users_controller.php:80
 msgid "password_mismatch"
 msgstr "Your passwords don't match"
 
-#: /controllers/users_controller.php:95;106
+#: /controllers/users_controller.php:104;115
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:116
+#: /controllers/users_controller.php:125
 msgid "user_saved"
 msgstr "You have been successfully added"
 
-#: /controllers/wall_posts_controller.php:58
+#: /controllers/wall_posts_controller.php:69
 msgid "wall_post_error"
 msgstr "Sorry, you're not allowed to do that"
 
-#: /controllers/wall_posts_controller.php:177
+#: /controllers/wall_posts_controller.php:134
 msgid "wall_post_delete_error"
 msgstr "We couldn't find that post."
 
-#: /controllers/wall_posts_controller.php:192
+#: /controllers/wall_posts_controller.php:150
 msgid "wall_post_bad_hacker"
 msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 
-#: /controllers/wall_posts_controller.php:199
+#: /controllers/wall_posts_controller.php:157
 msgid "wall_post_delete"
 msgstr "It's gone"
 
@@ -84,6 +85,20 @@ msgstr "Account Settings"
 msgid "logout"
 msgstr "Logout"
 
+#: /views/elements/profile_navigation.ctp:5
+#: /views/elements/sidebar_modules.ctp:26
+msgid "wall"
+msgstr "Wall"
+
+#: /views/elements/profile_navigation.ctp:14
+#: /views/elements/sidebar_modules.ctp:50
+msgid "media"
+msgstr "Media"
+
+#: /views/elements/profile_navigation.ctp:23
+msgid "about"
+msgstr "About"
+
 #: /views/elements/search.ctp:6;7
 msgid "search"
 msgstr "Search"
@@ -92,13 +107,9 @@ msgstr "Search"
 msgid "news_feed"
 msgstr "News Feed"
 
-#: /views/elements/sidebar_modules.ctp:26
-msgid "wall"
-msgstr "Wall"
-
 #: /views/elements/sidebar_modules.ctp:34
 #: /views/messages/compose.ctp:26
-#: /views/messages/inbox.ctp:27
+#: /views/messages/inbox.ctp:28
 #: /views/messages/sent.ctp:27
 #: /views/messages/view.ctp:26
 msgid "messages"
@@ -108,17 +119,13 @@ msgstr "Messages"
 msgid "friends"
 msgstr "Friends"
 
-#: /views/elements/sidebar_modules.ctp:50
-msgid "media"
-msgstr "Media"
-
-#: /views/elements/messages/inbox_summary.ctp:41
-#: /views/elements/messages/sent_summary.ctp:35
+#: /views/elements/messages/inbox_summary.ctp:40
+#: /views/elements/messages/sent_summary.ctp:39
 #: /views/messages/compose.ctp:38
 msgid "message_subject"
 msgstr "Subject:"
 
-#: /views/elements/messages/inbox_summary.ctp:43
+#: /views/elements/messages/inbox_summary.ctp:42
 #: /views/messages/view.ctp:85
 msgid "message_from"
 msgstr "From:"
@@ -135,7 +142,7 @@ msgstr "Compose Message"
 msgid "messages_sent"
 msgstr "Sent Messages"
 
-#: /views/elements/messages/sent_summary.ctp:37
+#: /views/elements/messages/sent_summary.ctp:41
 #: /views/messages/view.ctp:83
 msgid "message_to"
 msgstr "To:"
@@ -145,7 +152,7 @@ msgid "filter_title"
 msgstr "Filter by Friend List"
 
 #: /views/elements/notifications/news_update.ctp:25
-#: /views/elements/users/wall_post.ctp:20
+#: /views/elements/users/wall_post.ctp:15
 msgid "delete"
 msgstr "Delete"
 
@@ -203,9 +210,13 @@ msgstr "Share something cool."
 msgid "wall_post_submit"
 msgstr "Post"
 
-#: /views/elements/users/wall_post.ctp:27
+#: /views/elements/users/wall_post.ctp:22
 msgid "wall_to_wall"
 msgstr "Wall-to-wall"
+
+#: /views/media/upload.ctp:42
+msgid "upload"
+msgstr "Upload"
 
 #: /views/messages/view.ctp:32
 msgid "message_thread_title"

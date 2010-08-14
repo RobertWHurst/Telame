@@ -17,6 +17,10 @@ class MediaController extends AppController {
 		$this->_resize($id, Configure::read('ThumbSize'));
 	}
 
+	function preview($id) {
+		$this->_resize($id, Configure::read('PreviewSize'));
+	}
+
 	function profile($id) {
 		$this->_resize($id, Configure::read('ProfileSize'));
 	}

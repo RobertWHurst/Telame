@@ -1,0 +1,34 @@
+#albums{
+	padding: 10px;
+}
+#albums div.album{
+	padding: 10px;
+	float: left;
+}
+#albums div.wrap_thumb{
+	height: 167px;
+	width: 167px;
+	overflow: hidden;
+	position: relative;
+}
+#albums div.thumb{
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+#albums div.image{
+	top: 0;
+	left: 0;
+	position: absolute;
+	display: none;
+}
+#albums div.label{
+	background: #343434;
+}
+#albums div.label a{
+	text-align: center;
+	display: block;
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 30px;
+}
