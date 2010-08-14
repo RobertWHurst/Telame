@@ -183,6 +183,9 @@ $(function(){
 		}
 		
 		root.construct = function(){
+		
+			//show the label
+			root.wallInputLabel.show();
 			
 			//on input hover event
 			root.inputHoverHandler();

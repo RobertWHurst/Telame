@@ -6,6 +6,7 @@ Configure::write('SiteName', 'Telame');
 Configure::write('AvatarSize', array('height' => 60, 'width' => 60));
 Configure::write('ThumbSize', array('height' => 167, 'width' => 167));
 Configure::write('PreviewSize', array('height' => 200, 'width' => 200));
+Configure::write('SingleSize', array('height' => 235, 'width' => 235));
 Configure::write('ProfileSize', array('height' => 300, 'width' => 480));
 
 Configure::write('AllowedFileTypes', array(
