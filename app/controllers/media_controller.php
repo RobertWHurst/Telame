@@ -20,6 +20,14 @@ class MediaController extends AppController {
 	function preview($id) {
 		$this->_resize($id, Configure::read('PreviewSize'));
 	}
+	
+	function single($id){
+		$this->_resize($id, Configure::read('SingleSize'), array(
+			'w' => 235,
+			'h' => 235,
+			'zc' => 1
+		));		
+	}
 
 	function profile($id) {
 		$this->_resize($id, Configure::read('ProfileSize'));

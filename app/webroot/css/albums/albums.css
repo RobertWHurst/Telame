@@ -1,7 +1,8 @@
 #albums{
 	padding: 10px;
 }
-#albums div.album{
+#albums div.album,
+#albums div.media{
 	padding: 10px;
 	float: left;
 }
@@ -11,7 +12,18 @@
 	overflow: hidden;
 	position: relative;
 }
+#albums div.wrap_single{
+	height: 235px;
+	width: 235px;
+	overflow: hidden;
+	position: relative;
+}
 #albums div.thumb{
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+#albums div.single{
 	top: 0;
 	left: 0;
 	position: absolute;
