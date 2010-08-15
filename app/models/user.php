@@ -1,7 +1,6 @@
 <?php
 App::import('Sanitize');
 class User extends AppModel {
-	var $name = 'User';
 
 	// Connect to the ACL table
 	var $actsAs = array('Acl' => array('type' => 'requester'));
@@ -83,15 +82,7 @@ class User extends AppModel {
 
 // -------------------- ACL functions
 	function parentNode() {
-		if (!$this->id) {
-			return null;
-		}
-		$data = $this->read();
-		if (!$data['User']['group_id']){
-			return null;
-		} else {
-			return array('model' => 'Group', 'foreign_key' => $data['User']['group_id']);
-		}
+		return null;
 	}
 
 // --------------------- Custom functions

@@ -1,8 +1,15 @@
 <?php
 class Group extends AppModel {
 
+	// Connect to the ACL table
+	var $actsAs = array('Acl' => array('type' => 'requester'));
+
 	var $hasAndBelongsToMany = array('User');
 
+// -------------------- ACL functions
+	function parentNode() {
+		return null;
+	}
 
 	function getFriendLists($limit = 0, $offset = 0, $arguments = false){
 		$defaults = array(
