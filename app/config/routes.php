@@ -21,11 +21,9 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-/**
- * Here, we are connecting '/' (base path) to controller called 'Pages',
- * its action called 'display', and we pass a param to select the view file
- * to use (in this case, /app/views/pages/home.ctp)...
- */
+	// enable rss extensions
+	Router::parseExtensions('rss');
+
 	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
 	App::import('Lib', 'routes/HomeRoute');
 
@@ -102,6 +100,9 @@
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
 	Router::connect('/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
+	// Wall Posts (Rss)
+	Router::connect('/rss/*', array('controller' => 'wall_posts', 'action' => 'index'));
+	
 
 	// Wall Posts (Ajax)
 	Router::connect('/jx/w/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
