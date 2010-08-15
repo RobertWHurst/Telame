@@ -40,8 +40,7 @@ class NotificationsController extends AppController {
 		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
 
 		$default_friendLists = array(
-			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0)),
-	//		'hidden' => array('FriendList' => array('name' => 'Hidden', 'id' => 'h'))
+			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0))
 		);
 
 		$friendLists = array_merge($default_friendLists, $friendLists);

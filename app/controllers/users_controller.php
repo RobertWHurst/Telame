@@ -123,6 +123,27 @@ class UsersController extends AppController {
 			}
 		}
 	}
+	
+	function settings(){
+		
+		//get the user id
+		$id = $this->currentUser['User']['id'];
+		
+		if(empty($this->data)){		
+		
+			//save the users new settings
+			
+			//TODO: ACL STUFF HERE
+		
+		}
+		
+		//get the users current settings
+		
+		//TODO: ACL STUFF HERE
+		
+				
+		
+	}
 
 	function jx_search(){
 

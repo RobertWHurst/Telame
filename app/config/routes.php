@@ -94,8 +94,9 @@
 
 	// Profile - edit
 	Router::connect('/p/e/*', array('controller' => 'profiles', 'action' => 'edit'));
-	// Profile - index
-	Router::connect('/p/*', array('controller' => 'profiles', 'action' => 'index'));
+	
+	// User - settings
+	Router::connect('/u/s', array('controller' => 'users', 'action' => 'settings'));	
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
@@ -103,7 +104,6 @@
 	// Wall Posts (Rss)
 	Router::connect('/rss/*', array('controller' => 'notifications', 'action' => 'news'));
 	
-
 	// Wall Posts (Ajax)
 	Router::connect('/jx/w/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));

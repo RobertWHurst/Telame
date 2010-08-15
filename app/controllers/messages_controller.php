@@ -15,6 +15,10 @@ class MessagesController extends AppController {
     		'Message.deleted_by_user' => true,
     		'Message.deleted_by_author' => true
     	));
+    	
+    	
+		//set the layout
+		$this->layout = 'tall_header_w_sidebar';
 	}
 	
 	//THE INBOX
@@ -28,8 +32,6 @@ class MessagesController extends AppController {
 	
 	//THE VIEWER
 	function view($id = null){
-	
-		//if the id is empty
 		
 		//get the inbox from the db
 		$messages = $this->Message->getMessageThread($id);

@@ -14,33 +14,21 @@ $this->set('script_for_layout', array(
 	'main_sidebar'
 ));
 ?>
-<div id="content" class="clearfix">
-	<div id="wrap_main_sidebar">
-		<div id="logo">
-			<!-- TODO: link to the news feed -->
-			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'notifications', 'action' => 'news'))); ?>
-		</div>
-		<?php echo $this->element('main_sidebar'); ?>
-	</div>
-	<div id="page">
-		<div id="page_head" class="clearfix">			
-			<h1 class="page_title"><?php echo __('messages', true); ?></h1>
-		</div>
-		<div id="page_navigation" class="clearfix">
-			<?php echo $this->element('messages/navigation'); ?>
-		</div>
-		<div id="page_body" class="clearfix">
-			<div id="messages">
+<div id="page_head" class="clearfix">			
+	<h1 class="page_title"><?php echo __('messages', true); ?></h1>
+</div>
+<div id="page_navigation" class="clearfix">
+	<?php echo $this->element('messages/navigation'); ?>
+</div>
+<div id="page_body" class="clearfix">
+	<div id="messages">
 <?php 
-				if(is_array($messages)):
-					foreach($messages as $message)
-						echo $this->element('messages/sent_summary', compact('message'));
-				else:					
+		if(is_array($messages)):
+			foreach($messages as $message)
+				echo $this->element('messages/sent_summary', compact('message'));
+		else:					
 ?>
-					<p class="empty">You haven't sent any messages.</p>
-				<?php endif; ?>
-			</div>
-		</div>
+			<p class="empty">You haven't sent any messages.</p>
+		<?php endif; ?>
 	</div>
 </div>
-<?php echo $this->element('copyright'); ?>

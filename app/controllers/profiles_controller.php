@@ -61,11 +61,5 @@ class ProfilesController extends AppController {
 			$this->data = $this->Profile->find('first', array('conditions' => array('user_id' => $uid)));
 		}
  	}
- 	
- 	function index() {
-		$this->layout = 'profile';
-		$user = $this->Profile->User->getProfile($this->currentUser['User']['slug']);
- 		$this->set(compact('user'));
- 	}
 
 }
