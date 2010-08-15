@@ -101,7 +101,7 @@
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
 	Router::connect('/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
 	// Wall Posts (Rss)
-	Router::connect('/rss/*', array('controller' => 'wall_posts', 'action' => 'index'));
+	Router::connect('/rss/*', array('controller' => 'notifications', 'action' => 'news'));
 	
 
 	// Wall Posts (Ajax)

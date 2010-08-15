@@ -1,5 +1,5 @@
 <?php
-class AaclComponent extends Component {
+class AaclComponent extends Object {
 	var $components = array('Acl');
 
 	// $uid is who owns what's being looked at

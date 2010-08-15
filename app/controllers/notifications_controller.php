@@ -1,7 +1,14 @@
 <?php
 class NotificationsController extends AppController {
 
-	var $helpers = array('Time');
+	var $helpers = array('Text', 'Time');
+
+	function beforeFilter() {
+		parent::beforeFilter();
+		if ($this->RequestHandler->isRss()) {
+			$this->Auth->allow('news');
+		}
+	}
 
 	function markRead($id) {
 		if (!$id) {
@@ -13,16 +20,24 @@ class NotificationsController extends AppController {
 		$this->save();
 	}
 
-	function news($selectedFriendList = null) {
-		
-		//set the layout
-		$this->layout = 'tall_header_w_sidebar';
-		
+	function news($selectedFriendList = null, $uid = null, $hash = null) {
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
 
-		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
+		if( $this->RequestHandler->isRss() ) {
+			Configure::write('debug', 0);
+			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => $uid, 'rss_hash' => $hash)));
+			if (!$user) {
+				return false;
+			}
+		} else {
+			//set the layout
+			$this->layout = 'tall_header_w_sidebar';
+			$uid = $this->currentUser['User']['id'];
+		}
+
+		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
 
 		$default_friendLists = array(
 			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0)),
@@ -41,7 +56,7 @@ class NotificationsController extends AppController {
 		}
 
 		$friends = $this->GroupsUser->getFriends(0, 0, array(
-			'uid' => $this->currentUser['User']['id'],
+			'uid' => $uid,
 			'gid' => $selectedFriendList
 		));
 
@@ -49,7 +64,7 @@ class NotificationsController extends AppController {
 			$friends[$key] = $friend['Friend']['id'];
 
 		// add ourself to the list
-		array_push($friends, $this->currentUser['User']['id']);
+		array_push($friends, $uid);
 
 		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;

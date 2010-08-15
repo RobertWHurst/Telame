@@ -4,22 +4,9 @@ class WallPostsController extends AppController {
 	var $components = array('RequestHandler');
 	var $helpers = array('Markdown', 'Text', 'Time');
 
-	function index($id, $hash) {
-		if( $this->RequestHandler->isRss() ) {
-			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => $id, 'rss_hash' => $hash)));
-			if (!$user) {
-				$this->redirect('/');
-				exit;
-			}
-			
-			$wallPosts = $this->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id'], 'User' => true));
-			$this->set(compact('wallPosts'));
-		} else {
-			$this->redirect('/');
-			exit;
-		}
+	function beforeFilter() {
+		parent::beforeFilter();
 	}
-
 
 	function lists($id = false){
 		echo 'test';
