@@ -31,9 +31,9 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	</div>
 	<div class="avatar">
 <?php
-		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);
+		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['Author']['avatar_id']);
 		$aUrl = array('controller' => 'users', 'action' => 'profile', $message['Author']['slug']);
-		echo $this->Html->image($iUrl, array('url' => $aUrl, 'width' => '60', 'height' => '60'));
+		echo $this->Html->image($iUrl, array('url' => $aUrl));
 ?>
 	</div>
 	<div class="message_content">

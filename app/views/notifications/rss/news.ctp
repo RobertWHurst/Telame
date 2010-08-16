@@ -4,9 +4,9 @@ $this->set('documentData', array(
 		'xmlns:dc' => 'http://purl.org/dc/elements/1.1/'));
 
 $this->set('channelData', array(
-		'title' => __("Most Recent Posts", true),
+		'title' => __('site_name', true) . ' | Wall Posts',
 		'link' => $html->url('/', true),
-		'description' => __("Most recent posts.", true),
+		'description' => __('site_name', true) . ' | Wall Posts',
 		'language' => 'en-us'));
 
 foreach ($wallPosts as $post) {
@@ -25,12 +25,14 @@ foreach ($wallPosts as $post) {
 		$bodyText = Sanitize::stripAll($bodyText);
 		$bodyText = $text->truncate($bodyText, 400, '...', true, true);
 
+		$author = $html->link($post['PostAuthor']['Profile']['full_name'], 'http://' . env('SERVER_NAME') . '/' . $post['PostAuthor']['slug']);
+
 		echo  $rss->item(array(), array(
-			'title' => $post['WallPost']['post'],
+			'title' => $author . ': ' . $post['WallPost']['post'],
 			'link' => $postLink,
 			'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
-			'description' =>  $bodyText,
-			'dc:creator' => $post['PostAuthor']['slug'],
+			'description' =>  $author . ': ' . $bodyText,
+			'dc:creator' => $author,
 			'pubDate' => date("D, j M Y H:i:s O", strtotime($post['WallPost']['posted']))
 			)
 		);

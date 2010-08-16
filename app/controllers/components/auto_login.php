@@ -1,4 +1,4 @@
-<?php 
+<?php // FIXME - make check login before page load
 /** 
  * auto_login.php
  *

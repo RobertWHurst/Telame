@@ -30,9 +30,9 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	</div>
 	<div class="avatar">
 <?php
-		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['User']['id']);
+		$iUrl = array('controller' => 'media', 'action' => 'avatar', $message['User']['avatar_id']);
 		$uUrl = array('controller' => 'users', 'action' => 'profile', $message['User']['slug']);
-		echo $this->Html->image($iUrl, array('url' => $uUrl, 'width' => '60', 'height' => '60'));
+		echo $this->Html->image($iUrl, array('url' => $uUrl));
 ?>
 	</div>
 	<div class="message_content">

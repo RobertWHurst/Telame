@@ -63,9 +63,9 @@ $this->set('script_for_layout', array(
 			<?php endif; ?>
 				<div class="avatar">
 <?php
-					$image_url = array('controller' => 'media', 'action' => 'avatar', $message['Author']['id']);
+					$image_url = array('controller' => 'media', 'action' => 'avatar', $message['Author']['avatar_id']);
 					$url = array('controller' => 'messages', 'action' => 'view', $message['Message']['id']);
-					echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
+					echo $this->Html->image($image_url, array('url' => $url));
 ?>
 				</div>
 				<div class="message_content">
@@ -82,9 +82,11 @@ $this->set('script_for_layout', array(
 				<div class="time">
 					<p>
 <?php 
-				echo __('composed') . $time->timeAgoInWords($message['Message']['created']);
-				if($message['Message']['read'])
-					echo __('read') . $time->timeAgoInWords($message['Message']['read']);
+				echo __('composed') . ' ' . $time->timeAgoInWords($message['Message']['created']);
+				if($message['Message']['read']) {
+					echo '<br />';
+					echo __('read') . ' ' . $time->timeAgoInWords($message['Message']['read']);
+				}
 ?>
 					</p>
 				</div>

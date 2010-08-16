@@ -14,7 +14,12 @@ $this->set('script_for_layout', array(
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('news_title', true); ?></h1>
-	<?php echo $html->link('Get your news via RSS', '#', array('title' => 'Get your news via RSS', 'class' => 'rss_link')); ?>
+	<?php if(!empty($user['User']['rss_hash'])) {
+		echo $html->link(
+			'Get your news via RSS',
+			'/rss/0/' . $currentUser['User']['id'] . '/' . $user['User']['rss_hash'] . '.rss',
+			array('title' => 'Get your news via RSS', 'class' => 'rss_link'));
+		} ?>
 </div>
 <div id="page_body" class="clearfix">
 	<div id="news_feed">

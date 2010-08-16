@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title_for_layout; ?></title>
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://<?php echo env('SERVER_NAME')?>/rss/">
 <?php			
 		if(is_array($css_for_layout)){
 			foreach($css_for_layout as $css)
