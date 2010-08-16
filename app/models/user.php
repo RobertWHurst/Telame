@@ -125,6 +125,7 @@ class User extends AppModel {
 	}
 
 	function signup($data) {
+		$error = array();
 		// create a new user
 		$this->create();
 		// fill array with data we need in the db
@@ -141,17 +142,37 @@ class User extends AppModel {
 
 		// save the user
 		if (!$this->save(Sanitize::clean($data))) {
-			return false;
+			$error['User']['new_user'] = 'Could not create new user';
 		}
+		
+		// Save the user id, we'll need it later
+		$uid = $user['User']['id'];
 
 		// make their home directory structure
 		$dir = $this->makeUserDir($this->id);
 		if ($dir != false) {
-		    $this->saveField('home_dir', $dir['home']);
-		    $this->saveField('sub_dir', $dir['sub']);
-		    return true;
+			$this->saveField('home_dir', $dir['home']);
+			$this->saveField('sub_dir', $dir['sub']);
 		} else {
+			$error['User']['user_dir'] = 'Could not create user directory';
+		}
+		
+		unset($data);
+		$this->Album->create();
+		$data['Album']['title'] = 'Profile Pictures';
+		$data['Album']['title'] = 'User\'s Profile Pictures';
+		$data['Album']['user_id'] = $uid;
+		$data['Album']['slug'] = 'profile_pictures';
+
+		if ($this->Album->save($data)) {
+			$error['User']['album_error'] = 'Could not create album';
+		}
+		
+		if (count($error)) {
+			debugger::log($error);
 			return false;
+		} else {
+			return true;
 		}
 	}
 

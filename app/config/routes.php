@@ -50,8 +50,10 @@
 
 // User info
 
-	// Media
+	// Friends
+	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
 
+	// Media
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
 
 	Router::connect('/a/vp/*', array('controller' => 'albums', 'action' => 'view'));
@@ -72,13 +74,13 @@
 	Router::connect('/i/u/*', array('controller' => 'media', 'action' => 'upload'));
 	
 	// Messaging
-	Router::connect('/m/vt/*', array('controller' => 'messages', 'action' => 'view'));
-	Router::connect('/m/sm', array('controller' => 'messages', 'action' => 'sent'));
-	Router::connect('/m/cm', array('controller' => 'messages', 'action' => 'compose'));
-	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
-	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
-	Router::connect('/m/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
-	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
+	Router::connect('/messages/vt/*', array('controller' => 'messages', 'action' => 'view'));
+	Router::connect('/messages/sm', array('controller' => 'messages', 'action' => 'sent'));
+	Router::connect('/messages/cm', array('controller' => 'messages', 'action' => 'compose'));
+	Router::connect('/messages/s', array('controller' => 'messages', 'action' => 'send_message'));
+	Router::connect('/messages/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
+	Router::connect('/messages/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
+	Router::connect('/messages', array('controller' => 'messages', 'action' => 'inbox'));
 	
 	// Messaging (Ajax)
 	//Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));

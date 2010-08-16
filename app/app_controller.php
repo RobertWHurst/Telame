@@ -46,14 +46,15 @@ class AppController extends Controller {
 		$this->User->Behaviors->attach('Containable');
 		$currentUser = $this->User->find('first', array(
 					'conditions' => array(
-						'id' => $this->Session->read('Auth.User.id'),
+						'User.id' => $this->Session->read('Auth.User.id'),
 					),
 					'contain' => array(
 						'Notification' => array(
 							'conditions' => array(
 								'new' => true,
 							)
-						)
+						),
+						'Profile'
 					)
 				)
 			);
