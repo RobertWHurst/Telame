@@ -40,7 +40,7 @@
 		<div class="link">
 <?php 
 		$link_content = $this->Html->image('icons/group.png') . __('friends', true);
-		echo $html->link($link_content, array('controller' => 'friends', 'action' => 'listFriends'), array('escape' => false));
+		echo $html->link($link_content, array('controller' => 'friends', 'action' => 'friendList'), array('escape' => false));
 ?>
 		</div>
 	</div>

@@ -9,13 +9,13 @@ class FriendsController extends AppController {
 		$this->layout = 'profile';
 
 		if (!$slug) {
-			$slug = $this->currentUser['User']['slug'];
 			$user = $this->currentUser;
+		} else {
+			$user = $this->User->getProfile($slug);
 		}
-		
-		$uid = $this->User->getIdFromSlug($slug);
 
-		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $uid));
+
+		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
 		
 		$this->set(compact('friends', 'user'));
 	}
