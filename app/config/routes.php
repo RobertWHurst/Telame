@@ -27,9 +27,6 @@
 	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
 	App::import('Lib', 'routes/HomeRoute');
 
-	// Temp
-	Router::connect('/am/*', array('controller' => 'users', 'action' => 'addMeta'));
-
 // Home page
 
  	// If the first one returns true (the user is logged in) then rediret to news
@@ -43,6 +40,8 @@
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
+	// Confirm email
+	Router::connect('/c/*', array('controller' => 'users', 'action' => 'confirm'));
 
 	// Informational pages
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
@@ -95,7 +94,7 @@
 	// Profile - edit
 	Router::connect('/p/e/*', array('controller' => 'profiles', 'action' => 'edit'));
 	
-	// User - settings
+	// Settings
 	Router::connect('/u/s', array('controller' => 'users', 'action' => 'settings'));	
 
 	// Wall Posts

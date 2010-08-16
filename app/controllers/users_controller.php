@@ -12,21 +12,32 @@ class UsersController extends AppController {
 		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
 		 	$this->_unforceSSL();
 		}
-
+		$this->Auth->allow(array('confirm'));
 //		$this->Auth->allow('signup');
 	}
 	
+	function confirm($email = null, $hash = null) {
+		if (!is_null($email) && !is_null($hash) || !empty($this->data)) {
+			if (!empty($this->data)) {
+				$email = $this->data['User']['email'];
+				$hash = $this->data['User']['hash'];
+			}
+			if ($this->User->confirm($email, $hash)) {
+				$this->Session->setFlash(__('email_confirmed', true));
+			} else {
+				$this->Session->setFlash(__('email_or_hash_failed', true));
+			}
+			$this->redirect('/');
+			exit;
+		} else {
+			$this->data['User']['email'] = $email;
+			$this->data['User']['hash'] = $hash;
+		}
+	}
+
 	//A summary of whats new for the user.
 	function index() {
 		$wp = $this->User->WallPost->find('all');
-	}
-
-	function login(){
-	}
-
-	/** delegate /users/logout request to Auth->logout method */
-	function logout(){
-		$this->redirect($this->Auth->logout());
 	}
 
 	function profile($slug){
@@ -79,47 +90,23 @@ class UsersController extends AppController {
 				unset($this->data['User']['passwd']);
 			// passwords match
 			} else {
-				// if they provided a slug use it, otherwise use their email
-				$slug = (!empty($this->data['User']['slug']) ? $this->data['User']['slug'] : $this->data['User']['email']);
+				if ($this->User->signup($this->data)) {				
+					// send user email
+					$this->Email->from		=  'Telame.com <admin@telame.com>';
+					$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
+					$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
+					$this->Email->sendAs	= 'both';
+					$this->Email->template	= 'signup';
+					$this->set('user', $this->data);
+					$this->Email->send();
 	
-				// create a new user
-				$this->User->create();
-				// fill array with data we need in the db
-				$this->data['User']['added'] = date('Y-m-d');
-				$this->data['User']['accessed'] = date('Y-m-d');
-				$this->data['User']['level'] = '1';
-				$this->data['User']['invisible'] = false;
-				$this->data['User']['slug'] = $slug;
-				$this->data['User']['type'] = '1';
-				$this->data['User']['searchable'] = true;
-				$this->data['User']['avatar_id'] = '-1';
-				$this->data['User']['active'] = false;
-				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
-	
-				// save the user
-				if (!$this->User->save(Sanitize::clean($this->data))) {
-				    $this->Session->setFlash(__('user_create_error'));
-				    $this->redirect('/');
-				    exit;
-				}
-	
-				// make their home directory structure
-				$dir = $this->User->makeUserDir($this->User->id);
-				if ($dir != false) {
-				    $this->User->saveField('home_dir', $dir['home']);
-				    $this->User->saveField('sub_dir', $dir['sub']);
+					// tell the user it's all good
+					$this->Session->setFlash(__('user_saved', true));
 				} else {
 				    $this->Session->setFlash(__('user_create_error'));
-				    $this->redirect('/');
-				    exit;
 				}
-				// send user email
-				$this->Email->from		=  'Telame.com <admin@telame.com>';
-				$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
-				$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
-				$this->Email->send('Welcome to Telame.  You need to finish your account by validating your email. ' . $this->data['User']['hash']);
-				// tell the user it's all good
-				$this->Session->setFlash(__('user_saved', true));
+			    $this->redirect('/');
+			    exit;
 			}
 		}
 	}
@@ -158,12 +145,23 @@ class UsersController extends AppController {
 		$this->set('results', $results);
 	}
 
+
+//----------------- Importand functions we don't need to see often ------------------//
+
 	function _forceSSL() {
 		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
 	}
 
 	function _unforceSSL() {
 		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
+	}
+
+	function login(){
+	}
+
+	/** delegate /users/logout request to Auth->logout method */
+	function logout(){
+		$this->redirect($this->Auth->logout());
 	}
 
 }

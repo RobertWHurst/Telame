@@ -87,6 +87,17 @@ class User extends AppModel {
 
 // --------------------- Custom functions
 
+	function confirm($email, $hash) {
+		$user = $this->find('first', array('conditions' => array('email' => $email, 'hash' => $hash)));
+		if (!$user) {
+			return false;
+		} else {
+			$this->id = $user['User']['id'];
+			$this->saveField('hash', null);
+			return true;
+		}
+	}
+
 	function getIdFromSlug($slug){
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
@@ -111,6 +122,37 @@ class User extends AppModel {
 				'Profile',
 			)
 		));
+	}
+
+	function signup($data) {
+		// create a new user
+		$this->create();
+		// fill array with data we need in the db
+		$data['User']['added'] = date('Y-m-d');
+		$data['User']['accessed'] = date('Y-m-d');
+		$data['User']['level'] = '1';
+		$data['User']['invisible'] = false;
+		$data['User']['slug'] = $data['User']['slug'];
+		$data['User']['type'] = '1';
+		$data['User']['searchable'] = true;
+		$data['User']['avatar_id'] = '-1';
+		$data['User']['active'] = false;
+		$data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
+
+		// save the user
+		if (!$this->save(Sanitize::clean($data))) {
+			return false;
+		}
+
+		// make their home directory structure
+		$dir = $this->makeUserDir($this->id);
+		if ($dir != false) {
+		    $this->saveField('home_dir', $dir['home']);
+		    $this->saveField('sub_dir', $dir['sub']);
+		    return true;
+		} else {
+			return false;
+		}
 	}
 
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
