@@ -4,7 +4,8 @@ class AppController extends Controller {
 
 	//add user athentication
 	// autologin must be before auth in array
-	var $components = array('Aacl', 'AutoLogin', 'Auth', 'RequestHandler', 'Security', 'Session');
+	// Cookie, Auth, and Autologin MUST BE IN THIS ORDER TO WORK PROPERLY
+	var $components = array('Aacl', 'Cookie', 'Auth', 'AutoLogin', 'RequestHandler', 'Security', 'Session');
 
 	// Current user's info stored here
 	var $currentUser;
