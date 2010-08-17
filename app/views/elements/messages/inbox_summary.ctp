@@ -26,8 +26,17 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	<div class="status">
 		<?php echo $status; ?>
 	</div>
-	<div class="check">
-		<?php echo $form->checkbox("selected[{$message['Message']['id']}]"); ?>
+	<div class="delete">
+<?php 
+		$url = array('controller' => 'messages', 'action' => 'delete_message', $message['Message']['id']);
+		echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+?>
+	</div>
+	<div class="reply">
+<?php 
+		$url = array('controller' => 'messages', 'action' => 'reply_to_message', $message['Message']['id']);
+		echo $html->image('icons/email_go.png', array('title' => __('reply',true), 'url' => $url));
+?>
 	</div>
 	<div class="avatar">
 <?php

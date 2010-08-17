@@ -80,11 +80,6 @@
 	Router::connect('/m/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
 	Router::connect('/m', array('controller' => 'messages', 'action' => 'inbox'));
 	
-	// Messaging (Ajax)
-	//Router::connect('/jx/r', array('controller' => 'messages', 'action' => 'jx_recipient'));
-	Router::connect('/jx/m/d', array('controller' => 'messages', 'action' => 'jx_delete_message'));
-	Router::connect('/jx/m/mu', array('controller' => 'messages', 'action' => 'jx_mark_message_unread'));	
-	
 	// New user adding
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
 
