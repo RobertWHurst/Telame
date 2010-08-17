@@ -18,6 +18,12 @@ Configure::write('AllowedFileTypes', array(
   )); 
 
 // User information
+
+Configure::write('UserAcls', array(
+	'media',
+	'profile',
+));
+
 Configure::write('UserInfo', array(
 	'wall_posts' => array(
 		'limit' => 10,
