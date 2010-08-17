@@ -7,90 +7,81 @@ $(function(){
 		
 		//save the dom elements
 		root.messages = $('div.message', '#messages');
+		root.readMessages = $('div.read', '#messages');
+		root.unreadMessages = $('div.unread', '#messages');
+		root.repyButtons = $('div.delete a', '#messages');
 		root.messagesContainer = $('#messages', '#content');
-		root.messagesForm = $('#MessageInboxForm', '#messages');
-		root.controlsContainer = $('#controls', '#messages');
-		root.deleteMessagesButton = $('a.delete', '#controls');
-		root.umarkMessagesButton = $('a.unmark', '#controls');
 		
 		//the animation speed
 		root.speed = 300;
 		
+		//post hover handler
+		root.hoverHandler = function(){
+			
+			//hide all of the wall post controls
+			root.messages.children('div.delete, div.reply').hide();
+		
+			//on hover event for each post	
+			root.messagesContainer.delegate('div.message', 'hover', function(event){
+			
+				//grab the dom element
+				domElement = $(this);
+			
+  				if(event.type == 'mouseover'){
+			
+					//get the target
+					domElement = $(this);
+			
+					domElement.addClass('hover').children('div.delete, div.reply').fadeIn(100);
+  				}
+  				else{
+				
+					domElement.removeClass('hover').children('div.delete, div.reply').fadeOut(100);
+  				}
+			});
+		}
+		
 		//input delete handler
 		root.deleteHandler = function(){
 			
-			
-			
-		}
-		
-		//input unmark handler
-		root.unmarkHandler = function(){	
-		
-		
-		
+			root.messages.each(function(){
+				
+				var domElement = $('div.delete a', this);
+				
+				domElement.live('click', function(event){
 					
-		}
-		
-		//input delete selected handler
-		root.deleteSelectedHandler = function(){
-		
-			//on the event that someone clicks the delete selected button
-			root.deleteMessagesButton.live('click', function(event){
-				event.preventDefault();			
-				
-				//save the form
-				var formData = root.messagesForm.serialize();
-				
-				//send the data to the delete action
-				$.get(core.domain + '/jx/m/d', formData, function(data){
-					if(data === 'true'){
-						alert('deleted');
-					}
-					else{						
-						alert(data);
-					}
+					//prevent the bowser from following the link
+					event.preventDefault();
+					
+					//get the url of the button
+					var ajaxUrl = domElement.attr('href');
+					
+					//tell the message controller to delete the message
+					$.get(core.domain + ajaxUrl, {}, function(data){
+						if(data === 'true'){
+							domElement.parent().parent().slideUp(root.speed);
+						}
+						else{
+							
+						}
+					});
+					
 				});
 				
 			});
 			
-		}
-		
-		//input unmark selected handler
-		root.unmarkSelectedHandler = function(){	
-		
-			//on the event that someone clicks the delete selected button
-			root.umarkMessagesButton.live('click', function(event){
-				event.preventDefault();
-						
-				//save the form
-				var formData = root.messagesForm.serialize();
-				
-				//send the data to the delete action
-				$.post(core.domain + '/jx/m/mu', formData, function(data){
-					if(data == 'true'){
-						alert('unmarked');
-					}
-					else{						
-						alert(data);
-					}
-				});
-				
-			});
-					
 		}
 		
 		//define the constructor
 		root.construct = function(){
 		
-			//show the controls and checkboxes
-			root.controlsContainer.show();
-			root.messages.children('div.check').show();
+			//animate in messages
+			root.readMessages.hide().fadeIn(1200);
+			root.unreadMessages.hide().slideDown(600);
 			
 			//bind all of the event handlers
 			root.deleteHandler();
-			root.unmarkHandler();
-			root.deleteSelectedHandler();
-			root.unmarkSelectedHandler();
+			root.hoverHandler();
 			
 		}
 		

@@ -11,7 +11,8 @@ $this->set('css_for_layout', array(
 $this->set('script_for_layout', array(
 	'jquery',
 	'base',
-	'main_sidebar'
+	'main_sidebar',	
+	'messages/messages'
 ));
 ?>
 <div id="page_head" class="clearfix">			

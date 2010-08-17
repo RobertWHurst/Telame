@@ -24,14 +24,12 @@ $this->set('script_for_layout', array(
 <div id="page_body" class="clearfix">
 	<div id="messages">
 <?php
-		echo $form->create('Message', array('url' =>  array('controller' => 'messages', 'action' => 'manage_messages')));
-			if(is_array($messages)):
-				foreach($messages as $message)
-					echo $this->element('messages/inbox_summary', compact('message'));
-			else:
+		if(is_array($messages)):
+			foreach($messages as $message)
+				echo $this->element('messages/inbox_summary', compact('message'));
+		else:
 ?>
-				<p class="empty">Your Inbox is empty</p>
-			<?php endif; ?>
-		<?php echo $form->end(); ?>
+			<p class="empty">Your Inbox is empty</p>
+		<?php endif; ?>
 	</div>
 </div>

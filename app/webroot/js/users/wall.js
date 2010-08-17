@@ -7,20 +7,14 @@ $(function(){
 		
 		//save the dom elements
 		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
-		root.wallPosts = $('#profile_wall_posts > div.wall_post');
+		root.wallPosts = $('div.wall_post', '#profile_wall_posts');
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
 		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');	
-		root.morePosts = $('div.more a', '#profile_wall');		
-		
-		//the animation speed
-		root.speed = 100;
+		root.morePosts = $('div.more a', '#profile_wall');
 				
 		//post hover handler
 		root.postHoverHandler = function(){
-			
-			//hide all of the wall post controls
-			root.wallPosts.children('div.delete, div.wall_to_wall').hide();
 		
 			//on hover event for each post	
 			root.wallPostsWrapper.delegate('div.wall_post', 'hover', function(event){
@@ -33,11 +27,11 @@ $(function(){
 					//get the target
 					domElement = $(this);
 			
-					domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(root.speed);
+					domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(100);
   				}
   				else{
 				
-					domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(root.speed);
+					domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(100);
   				}
 			});
 		}
@@ -58,26 +52,13 @@ $(function(){
 				
 				//get the target post (not the button)
 				domElement = button.parent();
-				
-				//hide the content
-				domElement.children().hide();
-				
-				//add a proccess dialog
-				domElement.append('<p class="proccess">deleting post...<p>');
 			
 				//send the ajax request
 				$.post(core.domain + ajaxUrl, function(data){
 					
 					if(data === 'true'){					
 						//slide up the post
-						domElement.fadeOut(root.speed * 3, function(){
-							domElement.remove();
-						});
-					}
-					else{		
-						//restore the post
-						domElement.children('p.proccess').remove();
-						domElement.children().fadeIn(root.speed * 3);					
+						domElement.slideUp(300);
 					}
 				});
 				
@@ -113,16 +94,31 @@ $(function(){
 				function(data){
 					
 					if(data !== 'false'){
-					
-						root.wallPostsWrapper.append(data);
 						
+						//convert data to a jquery object
+						data = $(data);
+						
+						//hide the new posts
+						$(data).hide();
+												
 						//remove and reapend the more posts button
 						domElement.remove();
+						
+						//append the new page data	
+						root.wallPostsWrapper.append(data);
 						
 						//reappend the more posts button
 						root.wallPostsWrapper.append(domElement);
 						domElement.children('p.proccess').remove();
-						domElement.children().fadeIn(root.speed * 3);	
+			
+						//hide all of the wall post controls
+						$('div.delete, div.wall_to_wall').hide();
+						
+						//animate in the new posts		
+						$('div.wall_post').slideDown(600);
+						
+						//show the button again
+						domElement.children().fadeIn(300);	
 					}
 					else{		
 						//restore the post
@@ -133,6 +129,9 @@ $(function(){
 		}
 		
 		root.construct = function(){
+			
+			//hide all of the wall post controls
+			$('div.delete, div.wall_to_wall').hide();
 		
 			//on hover event for each post	
 			root.postHoverHandler();

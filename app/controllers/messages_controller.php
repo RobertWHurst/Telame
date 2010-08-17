@@ -5,19 +5,7 @@ class MessagesController extends AppController {
 	
 	function beforeFilter(){
 		parent::beforeFilter();
-		
-		//delete message thread that have been deleted by both the user and the author
-    	$this->Message->deleteAll(array(
-    		'OR' => array(
-    			'Message.user_id' => $this->currentUser['User']['id'],
-    			'Message.author_id' => $this->currentUser['User']['id']
-    		),
-    		'Message.parent_id' => -1,
-    		'Message.deleted_by_user' => true,
-    		'Message.deleted_by_author' => true
-    	));
-    	
-    	
+		    	
 		//set the layout
 		$this->layout = 'tall_header_w_sidebar';
 	}
@@ -118,6 +106,8 @@ class MessagesController extends AppController {
 	
 	//DELETE A MESSAGE (donest actually delete anything, just hides it. intill the other owner deletes it to)(only accepts threads)
 	function delete_message($mid){
+	
+		$isAjax = $this->RequestHandler->isAjax();
 		
 		$uid = $this->currentUser['User']['id'];
 		
@@ -140,9 +130,25 @@ class MessagesController extends AppController {
     				),
     				'Message.user_id' => $uid
     			)
-    		);
+    		);    		
     		
-    		$this->Session->setFlash(__('message_thread_deleted', true));
+			//delete message thread that have been deleted by both the user and the author
+    		$this->Message->deleteAll(array(
+    			'OR' => array(
+    				'Message.user_id' => $this->currentUser['User']['id'],
+    				'Message.author_id' => $this->currentUser['User']['id']
+    			),
+    			'Message.parent_id' => -1,
+    			'Message.deleted_by_user' => true,
+    			'Message.deleted_by_author' => true
+    		));
+    		
+    		if($isAjax){
+    			echo 'true';
+    			exit;
+    		}
+    		else
+    			$this->Session->setFlash(__('message_thread_deleted', true));
     	}
     	elseif($userIs == 'author'){
     		$this->Message->updateAll(
@@ -161,10 +167,30 @@ class MessagesController extends AppController {
     			)
     		);
     		
-    		$this->Session->setFlash(__('message_thread_deleted', true));
+			//delete message thread that have been deleted by both the user and the author
+    		$this->Message->deleteAll(array(
+    			'OR' => array(
+    				'Message.user_id' => $this->currentUser['User']['id'],
+    				'Message.author_id' => $this->currentUser['User']['id']
+    			),
+    			'Message.parent_id' => -1,
+    			'Message.deleted_by_user' => true,
+    			'Message.deleted_by_author' => true
+    		));
+    		
+    		if($isAjax){
+    			echo 'true';
+    			exit;
+    		}
+    		else    		
+    			$this->Session->setFlash(__('message_thread_deleted', true));
     	}
     	
-    	$this->redirect($this->referer());
+    	if($isAjax){
+    		echo 'false';
+    	}
+    	else
+    		$this->redirect($this->referer());
     	exit;
 	}
 	

@@ -145,7 +145,8 @@ class Message extends AppModel {
 					'Profile'
 				),
 				'ParentMessage'
-			)
+			),
+			'order' => 'Message.created DESC'
 		));
 
 		if(!$sent) {

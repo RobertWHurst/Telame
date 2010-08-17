@@ -72,4 +72,85 @@ $(function($){
 	
 	//create the loop
 	loop = new construct.loop;
+	
+	// the flash logic
+	flashLogic = function(){
+		
+		//set the root for easy access
+		var root = this;
+		
+		//store the selectors
+		root.flashWrap = $('#flash');
+		root.flashMessages = $('div.message', '#flash');
+		
+		//create a function for displaying a flash message via javascript
+		root.setMessage = function(key, message){
+			
+			//create the message within a jquery object
+			var message = $('<div class="message ' + key + '">' + message + '</div>');
+			
+			//hide the message
+			message.hide();
+			
+			//append it the the flash container
+			root.flashWrap.prepend(message);
+			
+			//animate it in
+			message.slideDown(600);
+						
+			//after ten seconds hide the messages
+			setTimeout(function(){
+				message.slideUp(600, function(){
+					$(this).remove();
+				});				
+			}, 10000);
+			
+		}
+		
+		//create a handler for closing messages manually
+		root.closeHandler = function(){
+			
+			root.flashWrap.delegate('div.message', 'click', function(){
+			
+				var domElement = $(this);
+				
+				domElement.slideUp(300, function(){
+					$(this).remove();
+				});
+			
+			});
+		}
+		
+		//create a constructor
+		root.construct = function(){
+		
+			//set the flash wrapper to fixed position
+			root.flashWrap.css({
+				'position': 'fixed',
+				'top': 0,
+				'width': '100%',
+				'opacity': 0.9,
+				'z-index': 9999,
+				'cursor': 'pointer'
+			});
+			
+			//slide down the messages
+			root.flashMessages.hide().slideDown(600);
+			
+			//after ten seconds hide the messages
+			setTimeout(function(){
+				root.flashMessages.slideUp(600, function(){
+					$(this).remove();
+				});				
+			}, 10000);
+			
+			//execute the handlers
+			root.closeHandler();
+			
+		}
+		
+		root.construct();
+	}
+	
+	flash = new flashLogic;
 });

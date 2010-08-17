@@ -34,7 +34,7 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	</div>
 	<div class="reply">
 <?php 
-		$url = array('controller' => 'messages', 'action' => 'reply_to_message', $message['Message']['id']);
+		$url = array('controller' => 'messages', 'action' => 'view', $tid);
 		echo $html->image('icons/email_go.png', array('title' => __('reply',true), 'url' => $url));
 ?>
 	</div>
