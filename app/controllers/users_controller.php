@@ -12,10 +12,14 @@ class UsersController extends AppController {
 		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
 		 	$this->_unforceSSL();
 		}
-		$this->Auth->allow(array('confirm'));
+		$this->Auth->allow(array('confirm', 'signup'));
 //		$this->Auth->allow('signup');
 	}
-	
+
+	function test() {
+		$this->User->createAcl(2);
+	}
+
 	function confirm($email = null, $hash = null) {
 		if (!is_null($email) && !is_null($hash) || !empty($this->data)) {
 			if (!empty($this->data)) {
@@ -43,7 +47,7 @@ class UsersController extends AppController {
 	function profile($slug){
 		//set the layout
 		$this->layout = 'profile';
-		
+
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 
@@ -81,7 +85,7 @@ class UsersController extends AppController {
 
 	function signup() {
 		$this->layout = 'pages';
-		
+
 		if (!empty($this->data)) {
 			// make sure the passwords match, if not show the page again with all the current info except the password
 			if ($this->data['User']['password'] != $this->Auth->password($this->data['User']['passwd'])) {
@@ -90,7 +94,9 @@ class UsersController extends AppController {
 				unset($this->data['User']['passwd']);
 			// passwords match
 			} else {
-				if ($this->User->signup($this->data)) {				
+				// We need the hash here for the email
+				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
+				if ($this->User->signup($this->data)) {
 					// send user email
 					$this->Email->from		=  'Telame.com <admin@telame.com>';
 					$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
@@ -99,7 +105,7 @@ class UsersController extends AppController {
 					$this->Email->template	= 'signup';
 					$this->set('user', $this->data);
 					$this->Email->send();
-	
+
 					// tell the user it's all good
 					$this->Session->setFlash(__('user_saved', true));
 				} else {
@@ -110,26 +116,32 @@ class UsersController extends AppController {
 			}
 		}
 	}
-	
-	function settings(){
-		
+
+	function settings() {
+
 		//get the user id
 		$id = $this->currentUser['User']['id'];
-		
-		if(empty($this->data)){		
-		
+
+		if(empty($this->data)){
+			$this->layout = 'profile';
+
+			$user = $this->currentUser;
+
+
+			$this->set(compact('user'));
+
 			//save the users new settings
-			
+
 			//TODO: ACL STUFF HERE
-		
+
 		}
-		
+
 		//get the users current settings
-		
+
 		//TODO: ACL STUFF HERE
-		
-				
-		
+
+
+
 	}
 
 	function jx_search(){

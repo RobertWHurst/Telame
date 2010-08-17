@@ -98,6 +98,27 @@ class User extends AppModel {
 		}
 	}
 
+	function createAcl($uid) {
+		App::import('Component', 'Acl');
+		$this->Acl = new AclComponent();
+		$this->Acl->startup($controller);
+
+		$node = $this->Acl->Aco->node('Users');
+		$parentId = Set::extract($node, "0.Aco.id");
+
+		$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
+		$this->Acl->Aco->save();
+
+		$node = $this->Acl->Aco->node('User::' . $uid);
+		$parentId = Set::extract($node, "0.Aco.id");
+
+		foreach (Configure::read('UserAcls') as $acl) {
+			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $acl));
+			$this->Acl->Aco->save();
+		}
+		return true;
+	}
+
 	function getIdFromSlug($slug){
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
@@ -111,7 +132,7 @@ class User extends AppModel {
 	}
 
 	function getProfile($slug){
-		
+
 		//get the profile
 		$this->Behaviors->attach('Containable');
 
@@ -125,6 +146,7 @@ class User extends AppModel {
 	}
 
 	function signup($data) {
+		$error = array();
 		// create a new user
 		$this->create();
 		// fill array with data we need in the db
@@ -137,21 +159,46 @@ class User extends AppModel {
 		$data['User']['searchable'] = true;
 		$data['User']['avatar_id'] = '-1';
 		$data['User']['active'] = false;
-		$data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
 
 		// save the user
 		if (!$this->save(Sanitize::clean($data))) {
-			return false;
+			$error['User']['new_user'] = 'Could not create new user';
 		}
+
+		// Save the user id, we'll need it later
+		$this->recursive = -1;
+		$user = $this->find('first', array('conditions' => array('email' => $data['User']['email']), 'fields' => array('id')));
+		$uid = $user['User']['id'];
 
 		// make their home directory structure
 		$dir = $this->makeUserDir($this->id);
 		if ($dir != false) {
-		    $this->saveField('home_dir', $dir['home']);
-		    $this->saveField('sub_dir', $dir['sub']);
-		    return true;
+			$this->saveField('home_dir', $dir['home']);
+			$this->saveField('sub_dir', $dir['sub']);
 		} else {
+			$error['User']['user_dir'] = 'Could not create user directory';
+		}
+
+		unset($data);
+		$this->Album->create();
+		$data['Album']['title'] = 'Profile Pictures';
+		$data['Album']['description'] = 'User\'s Profile Pictures';
+		$data['Album']['user_id'] = $uid;
+		$data['Album']['slug'] = 'profile_pictures';
+
+		if (!$this->Album->save($data)) {
+			$error['User']['album_error'] = 'Could not create album';
+		}
+
+		if (!$this->createAcl($uid)) {
+			$error['User']['acl'] = 'ACL error';
+		}
+
+		if (count($error)) {
+			debugger::log($error['User']);
 			return false;
+		} else {
+			return true;
 		}
 	}
 
