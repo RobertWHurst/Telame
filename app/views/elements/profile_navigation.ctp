@@ -20,6 +20,15 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
+		'label' => $user['Profile']['first_name'] . '\'s ' . __('friends', true),
+		'url' => array(
+			'controller' => 'friends',
+			'action' => 'friendList',
+			$user['User']['slug']
+		),
+		'classes' => 'button'
+	),
+	array(
 		'label' => __('about', true) . ' ' . $user['Profile']['first_name'],
 		'url' => array(
 			'controller' => 'profile',
@@ -38,8 +47,9 @@ if(isset($nav_links))
 <ul>
 <?php
 foreach($links as $link):
-	if($this->params['controller'] == $link['url']['controller'] && $this->params['action'] == $link['url']['action'])
+	if($this->params['controller'] == $link['url']['controller'] && $this->params['action'] == $link['url']['action']) {
 		$link['classes'] = 'button current';
+	}
 ?>				
 	<li><?php echo $html->link($link['label'], $link['url'], array('class' => $link['classes'])); ?></li>
 <?php endforeach; ?>

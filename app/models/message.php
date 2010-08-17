@@ -3,15 +3,17 @@ class Message extends AppModel {
 	var $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'user_id'
+			'foreignKey' => 'user_id',
+			'counterCache' => true,
+			'counterScope' => array('Message.read' => NULL)
 		),
 		'Author' => array(
 			'className' => 'User',
-			'foreignKey' => 'author_id'
+			'foreignKey' => 'author_id',
 		),
 		'ParentMessage' => array(
 			'className' => 'Message',
-			'foreignKey' => 'parent_id'
+			'foreignKey' => 'parent_id',
 		)
 	);
 

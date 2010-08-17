@@ -31,7 +31,8 @@
 	<div id="module_inbox" class="module">
 		<div class="link">
 <?php 
-		$link_content = $this->Html->image('icons/email.png') . __('messages', true) . ' (#)';
+		$msgCount = ($currentUser['User']['message_count'] ? ' (' . $currentUser['User']['message_count'] . ')' : '');
+		$link_content = $this->Html->image('icons/email.png') . __('messages', true) . $msgCount;
 		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
 		</div>
