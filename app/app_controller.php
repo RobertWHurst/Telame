@@ -23,7 +23,7 @@ class AppController extends Controller {
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
 
 		//redirect to the user's news feed.
-        $this->Auth->loginRedirect = array('/');
+        $this->Auth->loginRedirect = array('controller' => 'notifications', 'action' => 'news');
 
 		//redirect home after logout
 		$this->Auth->logoutRedirect = array(Configure::read('Routing.admin') => false, 'controller' => 'pages', 'action' => 'home');

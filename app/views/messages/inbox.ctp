@@ -32,12 +32,6 @@ $this->set('script_for_layout', array(
 ?>
 				<p class="empty">Your Inbox is empty</p>
 			<?php endif; ?>
-			<div id="controls">
-<?php
-				echo $html->link('Mark selected as unread', array('controller' => 'messages', 'action' => 'inbox'), array('class' => 'unmark'));
-				echo $html->link('Delete selected', array('controller' => 'messages', 'action' => 'inbox'), array('class' => 'delete'));
-?>
-			</div>
 		<?php echo $form->end(); ?>
 	</div>
 </div>

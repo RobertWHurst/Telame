@@ -6,12 +6,13 @@ class MessagesController extends AppController {
 	function beforeFilter(){
 		parent::beforeFilter();
 		
-		//delete messages that have been deleted by both the user and the author
+		//delete message thread that have been deleted by both the user and the author
     	$this->Message->deleteAll(array(
     		'OR' => array(
     			'Message.user_id' => $this->currentUser['User']['id'],
     			'Message.author_id' => $this->currentUser['User']['id']
     		),
+    		'Message.parent_id' => -1,
     		'Message.deleted_by_user' => true,
     		'Message.deleted_by_author' => true
     	));
@@ -34,7 +35,7 @@ class MessagesController extends AppController {
 	function view($id = null){
 		
 		//get the inbox from the db
-		$messages = $this->Message->getMessageThread($id);
+		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
 		
 		//mark the messages as read
     	$this->Message->updateAll(
@@ -115,9 +116,56 @@ class MessagesController extends AppController {
 		$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
 	}
 	
-	//DELETE A MESSAGE
-	function delete_message(){
+	//DELETE A MESSAGE (donest actually delete anything, just hides it. intill the other owner deletes it to)(only accepts threads)
+	function delete_message($mid){
+		
+		$uid = $this->currentUser['User']['id'];
+		
+		//findout how the current user is assocsiated with the message
+		$userIs = $this->Message->userIs($mid, $uid);
+		
+		//get the parent message id so we can take out all messages at once
+		$mpid = $this->Message->getParent($mid);
 				
+		if($userIs == 'user'){
+		//mark the messages as deleted
+    		$this->Message->updateAll(
+    			array(
+    				'Message.deleted_by_user' => 'true'
+    			),
+    			array(
+    				'OR' => array(
+    					'Message.id' => $mpid,
+    					'Message.parent_id' => $mpid
+    				),
+    				'Message.user_id' => $uid
+    			)
+    		);
+    		
+    		$this->Session->setFlash(__('message_thread_deleted', true));
+    	}
+    	elseif($userIs == 'author'){
+    		$this->Message->updateAll(
+    			array(
+    				'Message.deleted_by_author' => 'true'
+    			),
+    			array(
+    				'OR' => array(
+    					'AND' => array(
+    						'Message.id' => $mpid,
+    						'Message.parent_id' =>  -1				
+    					),
+    					'Message.parent_id' => $mpid
+    				),
+    				'Message.author_id' => $uid
+    			)
+    		);
+    		
+    		$this->Session->setFlash(__('message_thread_deleted', true));
+    	}
+    	
+    	$this->redirect($this->referer());
+    	exit;
 	}
 	
 	//JX DELETE MESSAGES
