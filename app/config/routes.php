@@ -102,6 +102,8 @@
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
 	Router::connect('/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
+	Router::connect('/w/like/*', array('controller' => 'wall_posts', 'action' => 'like'));
+	Router::connect('/w/dislike/*', array('controller' => 'wall_posts', 'action' => 'dislike'));
 	// Wall Posts (Rss)
 	Router::connect('/rss/*', array('controller' => 'notifications', 'action' => 'news'));
 	
