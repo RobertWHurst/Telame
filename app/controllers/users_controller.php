@@ -84,7 +84,7 @@ class UsersController extends AppController {
 	}
 
 	function signup() {
-		$this->layout = 'pages';
+		$this->layout = 'simple_header';
 
 		if (!empty($this->data)) {
 			// make sure the passwords match, if not show the page again with all the current info except the password
@@ -144,19 +144,6 @@ class UsersController extends AppController {
 
 	}
 
-	function jx_search(){
-
-		//TODO: these results will need to be ranked by relationship, network, secondary relationships, and location, in that order.
-
-		//get all the searchable profiles
-		$results = $this->User->findAllBySearchable(true);
-
-		foreach($results as $row){
-			$users[] = array('name' => $row['UserMeta']['first_name']. ' ' .$profile['UserMeta']['last_name'], 'slug' => $profile['User']['slug']);
-		}
-		$this->set('results', $results);
-	}
-
 
 //----------------- Importand functions we don't need to see often ------------------//
 
@@ -169,6 +156,7 @@ class UsersController extends AppController {
 	}
 
 	function login(){
+		$this->layout = 'tall_header';
 	}
 
 	/** delegate /users/logout request to Auth->logout method */
