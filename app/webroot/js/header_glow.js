@@ -15,7 +15,7 @@ $(function($){
 		root.glow = $('#backgroundHeadGlow');
 		
 		//get the current level of opacity
-		root.level = root.glow.css('opacity') | 0;		
+		root.level = root.glow.css('opacity');		
 		
 		if(root.glow.hasClass('up')){
 			root.opacity = 1;
@@ -30,7 +30,7 @@ $(function($){
 		}
 		
 		//preform the animataion
-		root.glow.stop().animate({
+		root.glow.animate({
 			'opacity': root.opacity
 		}, root.timeInt, headerGlow);
 	};
