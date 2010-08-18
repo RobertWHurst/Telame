@@ -4,13 +4,25 @@
 	height: 300px;
 	background: #400c5d url(../img/header.png) no-repeat top center;
 	border-bottom: 1px solid #110019;
+	position: relative;
+	z-index: 0;
+}
+#backgroundHeadGlow{
+	width: 100%;
+	height: 300px;
+	background: #400c5d url(../img/header_glow.png) no-repeat top center;
+	position: relative;
+	z-index: 1;
+	display: none;
 }
 #backgroundBase{
 	width: 100%;
 	border-top: 1px solid #333;
 }
 #wrap_content{
+	position: relative;
 	margin-top: -242px;
+	z-index: 2;
 }
 #content{
 	width: 980px;

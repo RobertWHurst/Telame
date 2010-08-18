@@ -6,6 +6,9 @@ $this->set('css_for_layout', array(
 	'users/signup'
 ));
 $this->set('script_for_layout', array(
+	'jquery',
+	'base',
+	'header_glow',
 	'users/taglines'
 ));
 ?>

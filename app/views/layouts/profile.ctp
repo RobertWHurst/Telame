@@ -17,7 +17,9 @@
 	<div id="flash">
 		<?php echo $this->Session->flash(); ?>
 	</div>
-	<div id="backgroundHead"></div>
+	<div id="backgroundHead">		
+		<div id="backgroundHeadGlow"></div>
+	</div>
 	<div id="backgroundBase"></div>	
 	<div id="wrap_content">
 		<div id="content" class="clearfix">

@@ -5,8 +5,10 @@ $this->set('css_for_layout', array(
 	'tall_header',
 	'users/login'
 ));
-$this->set('script_for_layout', array(
-	//SCRIPT
+$this->set('script_for_layout', array(	
+	'jquery',
+	'base',
+	'header_glow'
 ));
 ?>
 <div id="login_logo">

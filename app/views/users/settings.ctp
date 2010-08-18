@@ -11,7 +11,8 @@ $this->set('css_for_layout', array(
 $this->set('script_for_layout', array(
 	'jquery',
 	'base',
-	'main_sidebar',
+	'header_glow',
+	'main_sidebar'
 ));
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name'] . '\'s ' . __('settings', true));
