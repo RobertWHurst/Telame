@@ -145,7 +145,7 @@ class UsersController extends AppController {
 	}
 
 
-//----------------- Importand functions we don't need to see often ------------------//
+//----------------- Important functions we don't need to see often ------------------//
 
 	function _forceSSL() {
 		$this->redirect('https://' . env('SERVER_NAME') . $this->here);

@@ -1,6 +1,5 @@
 <?php
 class PagesController extends AppController {
-	var $name = 'Pages';
 	var $uses = array();
 	var $helpers = array('Time');
 
@@ -18,7 +17,7 @@ class PagesController extends AppController {
 		parent::beforeRender();
 		
 		//set the css and layout
-		$this->layout = 'pages';
+		$this->layout = 'simple_header';
 	}
 
 /**
