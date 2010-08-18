@@ -6,8 +6,8 @@ $(function($){
 		var root = this;	
 	
 		//TIMING SETTINGS
-		root.max = 8000;
-		root.min = 3000;	
+		root.max = 6000;
+		root.min = 2000;	
 		
 		root.timeInt = Math.floor(root.min + (Math.random() * (root.max - root.min)));
 		
