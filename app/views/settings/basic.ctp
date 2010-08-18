@@ -6,7 +6,7 @@ $this->set('css_for_layout', array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'users/profile',
+	'settings/settings',
 ));
 $this->set('script_for_layout', array(
 	'jquery',
@@ -16,7 +16,14 @@ $this->set('script_for_layout', array(
 ));
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name'] . '\'s ' . __('settings', true));
-
-
-pr($user);
 ?>
+<div id="page_head">
+	<h1 class="page_title"><?php echo __('basic_settings_title', true); ?></h1>
+</div>
+<div id="page_body" class="clearfix">
+	<div id="basic">
+<?php
+		pr($user);
+?>
+	</div>
+</div>

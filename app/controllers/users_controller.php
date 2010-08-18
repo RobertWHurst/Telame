@@ -117,33 +117,6 @@ class UsersController extends AppController {
 		}
 	}
 
-	function settings() {
-
-		//get the user id
-		$id = $this->currentUser['User']['id'];
-
-		if(empty($this->data)){
-			$this->layout = 'profile';
-
-			$user = $this->currentUser;
-
-
-			$this->set(compact('user'));
-
-			//save the users new settings
-
-			//TODO: ACL STUFF HERE
-
-		}
-
-		//get the users current settings
-
-		//TODO: ACL STUFF HERE
-
-
-
-	}
-
 
 //----------------- Important functions we don't need to see often ------------------//
 

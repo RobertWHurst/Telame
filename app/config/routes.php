@@ -54,11 +54,9 @@
 	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
 
 	// Media
+	Router::connect('/albums/album/image/*', array('controller' => 'albums', 'action' => 'view'));
+	Router::connect('/albums/album/*', array('controller' => 'albums', 'action' => 'album'));
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
-
-	Router::connect('/a/vp/*', array('controller' => 'albums', 'action' => 'view'));
-	Router::connect('/a/va/*', array('controller' => 'albums', 'action' => 'album'));
-	Router::connect('/a/*', array('controller' => 'albums', 'action' => 'albums'));
 
 	// Media - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
@@ -74,9 +72,9 @@
 	Router::connect('/i/u/*', array('controller' => 'media', 'action' => 'upload'));
 	
 	// Messaging
-	Router::connect('/messages/vt/*', array('controller' => 'messages', 'action' => 'view'));
-	Router::connect('/messages/sm', array('controller' => 'messages', 'action' => 'sent'));
-	Router::connect('/messages/cm', array('controller' => 'messages', 'action' => 'compose'));
+	Router::connect('/messages/thread/*', array('controller' => 'messages', 'action' => 'view'));
+	Router::connect('/messages/sent', array('controller' => 'messages', 'action' => 'sent'));
+	Router::connect('/messages/compose', array('controller' => 'messages', 'action' => 'compose'));
 	Router::connect('/messages/s', array('controller' => 'messages', 'action' => 'send_message'));
 	Router::connect('/messages/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
 	Router::connect('/messages/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
@@ -86,13 +84,11 @@
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
 
 	// News filters
-	Router::connect('/f/*', array('controller' => 'notifications', 'action' => 'news'));
-
-	// Profile - edit
-	Router::connect('/p/e/*', array('controller' => 'profiles', 'action' => 'edit'));
+	Router::connect('/news/*', array('controller' => 'notifications', 'action' => 'news'));
 	
 	// Settings
-	Router::connect('/u/s', array('controller' => 'users', 'action' => 'settings'));	
+	Router::connect('/settings/profile', array('controller' => 'settings', 'action' => 'profile'));
+	Router::connect('/settings', array('controller' => 'settings', 'action' => 'basic'));
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
