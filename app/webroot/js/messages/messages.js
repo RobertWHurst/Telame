@@ -77,7 +77,6 @@ $(function(){
 		
 			//animate in messages
 			root.readMessages.hide().fadeIn(1200);
-			root.unreadMessages.hide().slideDown(600);
 			
 			//bind all of the event handlers
 			root.deleteHandler();
