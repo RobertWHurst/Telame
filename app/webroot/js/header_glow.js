@@ -35,6 +35,8 @@ $(function($){
 		}, root.timeInt, headerGlow);
 	};
 	
-	headerGlow();
+	if(core.setting('headerGlow') === true){
+		headerGlow();
+	}
 	
 });

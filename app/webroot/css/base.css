@@ -12,7 +12,6 @@ body{
 	color: #efefef;
 	font-family: Helvetica, Arial, sans-serif;
 }
-
 /* DEFAULT HEADING STYLES */
 h1, h2, h3, h4, h5, h6{
 	/* h1 - h6 rules */
@@ -146,6 +145,12 @@ input[type="radio"]{
 input[type="checkbox"]{
 	border: 1px solid #ccc;
 	outline:none;
+}
+textarea{	
+	border: 1px solid #ccc;
+	outline:none;
+	font-size: 16px;
+	padding: 3px;
 }
 select{
 	/* select - rules */
