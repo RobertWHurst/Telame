@@ -7,7 +7,7 @@ $(function($){
 	
 		//TIMING SETTINGS
 		root.max = 6000;
-		root.min = 2000;	
+		root.min = 1500;	
 		
 		root.timeInt = Math.floor(root.min + (Math.random() * (root.max - root.min)));
 		
@@ -19,28 +19,22 @@ $(function($){
 		
 		if(root.glow.hasClass('up')){
 			root.opacity = 1;
+			root.glow.removeClass('up').addClass('down');
 		}
 		else if(root.glow.hasClass('down')){	
 			root.opacity = 0;
+			root.glow.removeClass('down').addClass('up');
 		}
 		else{
 			root.glow.fadeIn(root.timeInt).addClass('up');
 		}
-			
-		//if we hit the top reverse the trend
-		if(root.level > 0.9){
-			root.glow.removeClass('up').addClass('down');
-		}	
 		
-		//if we hit the top reverse the trend
-		if(root.level < 0.1){
-			root.glow.removeClass('down').addClass('up');
-		}
-		
+		//preform the animataion
 		root.glow.stop().animate({
 			'opacity': root.opacity
 		}, root.timeInt);
 		
+		//set the timeout till the next animation cycle
 		setTimeout(headerGlow, root.timeInt);
 	};
 	
