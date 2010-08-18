@@ -1,6 +1,6 @@
 $(function(){
 
-	var messages_logic = function(){
+	var messageLogic = function(){
 		
 		//save this as root
 		var root = this;
@@ -76,7 +76,7 @@ $(function(){
 		root.construct = function(){
 		
 			//animate in messages
-			root.readMessages.hide().fadeIn(1200);
+			root.readMessages.hide().fadeIn(600);
 			
 			//bind all of the event handlers
 			root.deleteHandler();
@@ -89,6 +89,6 @@ $(function(){
 		
 	}
 	
-	new messages_logic;
+	new messageLogic;
 	
 });
