@@ -9,6 +9,7 @@ $(function(){
 		root.searchInput = $('#searchQuery', '#main_sidebar');
 		root.searchInputLabel = $('div.search label', '#main_sidebar');
 		root.searchInputWrap = $('div.search', '#main_sidebar');
+		root.activeModules = $('div.active', '#main_sidebar');
 		
 		//the animation speed
 		root.speed = 300;
@@ -64,6 +65,31 @@ $(function(){
 				
 		}
 		
+		root.activeStateProccess = function(){
+			
+			//apply the logic to each active moduale indiviually
+			root.activeModules.each(function(){
+			
+				//define the dom object
+				var domElement = $(this);
+						
+				//get the height and the top
+				var height = domElement.css('height');
+				var backgroundOffset = domElement.css('background-position-y');
+				
+				//if the offset equals the height reset the offset
+				if(backgroundOffset == height){
+					domElement.css('background-position-y', 0);
+				}
+				//else increment it
+				else{
+					domElement.css('background-position-y', backgroundOffset + 1);				
+				}				
+				
+			});
+			
+		}
+		
 		//define the constructor
 		root.construct = function(){
 			
@@ -82,6 +108,9 @@ $(function(){
 			root.searchInput.blur(function(){
 				root.focusHandler('out');
 			});
+			
+			//the active state proccess
+			loop.newProccess('activeSidebarModules', root.activeStateProccess, 1);
 			
 		}
 		

@@ -32,10 +32,7 @@ $(function($){
 		//preform the animataion
 		root.glow.stop().animate({
 			'opacity': root.opacity
-		}, root.timeInt);
-		
-		//set the timeout till the next animation cycle
-		setTimeout(headerGlow, root.timeInt);
+		}, root.timeInt, headerGlow);
 	};
 	
 	headerGlow();

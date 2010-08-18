@@ -9,7 +9,7 @@
 	 * The options should be fead from the app controller.
 	 * 
 	 */
-	 
+	
 	/* DELETE THE BELOW BEFORE RELEASE!!! */
 ?>
 	<div id="module_newsfeed" class="module">
@@ -29,9 +29,11 @@
 		</div>
 	</div>
 	<div id="module_inbox" class="module">
-		<div class="link">
 <?php 
 		$msgCount = ($currentUser['User']['message_count'] ? ' (' . $currentUser['User']['message_count'] . ')' : '');
+?>
+		<div class="<?php echo ($msgCount)? 'link active' : 'link'; ?>">
+<?php
 		$link_content = $this->Html->image('icons/email.png') . __('messages', true) . $msgCount;
 		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
