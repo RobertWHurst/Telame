@@ -56,8 +56,7 @@ class AuthExtensionComponent extends Object {
 			return;
 		}
 		
-		$all_fields = isset($cookie['email']) && isset($cookie['hash1'])
-		 	&& isset($cookie['time']) && isset($cookie['hash']); 
+		$all_fields = isset($cookie['email']) && isset($cookie['hash1']) && isset($cookie['time']) && isset($cookie['hash']); 
 
 		// all fields present?
 		if (!$all_fields) {
@@ -65,8 +64,7 @@ class AuthExtensionComponent extends Object {
 			return;
 		}
 		// global hash correct?
-		if (Security::hash($cookie['email'] . $cookie['hash1'] . $cookie['time']) 
-			!== $cookie['hash']) {
+		if (Security::hash($cookie['email'] . $cookie['hash1'] . $cookie['time']) !== $cookie['hash']) {
 			$this->logout();
 			return;
 		}
@@ -79,14 +77,15 @@ class AuthExtensionComponent extends Object {
 		// find the user
 		App::import('Model', 'User');
 	 	$User = new User();
+	 	$User->recursive = -1;
 		$u = $User->findByEmail($cookie['email']);
 		if (!$u) {
 			$this->logout();
 			return;
 		}
 		
-		if (Security::hash($u['User']['password'] . 'blah blah blah, fucking blah', null, true) 
-			=== $cookie['hash1']) {
+		$controller->Auth->fields = array('username' => 'email', 'password' => 'password');
+		if (Security::hash($u['User']['password'] . Configure::read('Security.salt'), null, true) === $cookie['hash1']) {
 			// user confirmed
 			$login_array = array('User' => array(
 				'email' => $u['User']['email'],
@@ -95,10 +94,10 @@ class AuthExtensionComponent extends Object {
 			
 			if ($controller->Auth->login($login_array)) {
 				//  Clear auth message, just in case we use it.
-				$controller->Session->del('Message.auth');
+				$controller->Session->delete('Message.auth');
 				$controller->redirect($controller->Auth->redirect());
 			} else { // Delete invalid Cookie
-				$this->logout();
+//				$this->logout();
 			}
 		} else {
 			$u = null;		
@@ -110,17 +109,16 @@ class AuthExtensionComponent extends Object {
 		$auth_user = $this->controller->Auth->user();
 		if ($auth_user) {
 			if (!empty($this->controller->data) && $this->controller->data['User']['remember_me']) {
+				$this->controller->User->recursive = -1;
 				$u = $this->controller->User->findById($auth_user['User']['id']);
-				
+
 				$cookie = array();
 				$cookie['email'] = $u['User']['email'];
-				$cookie['hash1'] = Security::hash(
-					$u['User']['password'] . 'blah blah blah, fucking blah', null, true);
+				$cookie['hash1'] = Security::hash($u['User']['password'] . Configure::read('Security.salt'), null, true);
 				$cookie['time'] = time();
-				$cookie['hash'] = Security::hash(
-					$cookie['email'] . $cookie['hash1'] . $cookie['time']); 
-				$this->controller->Cookie->write('preferences', $cookie, true, 
-					AuthExtensionComponent::cookie_expire_string);
+				$cookie['hash'] = Security::hash($cookie['email'] . $cookie['hash1'] . $cookie['time']); 
+
+				$this->controller->Cookie->write(AuthExtensionComponent::cookie_name, $cookie, true, AuthExtensionComponent::cookie_expire_string);
 				unset($this->controller->data['User']['remember_me']);
 				$u = null;
 			} else {
