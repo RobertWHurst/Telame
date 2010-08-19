@@ -1,7 +1,7 @@
 $(function($){
 
 	core = {
-		'domain': 'http://' + window.location.hostname
+		'domain': 'http://' + window.location.hostname,
 		
 		'setting': function(settingName){
 			
