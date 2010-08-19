@@ -35,3 +35,5 @@ Configure::write('UserInfo', array(
 		'order' => 'random()'
 	),
 ));
+
+define('USER_DIR', APP . 'users' . DS);

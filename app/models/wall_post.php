@@ -14,7 +14,8 @@ class WallPost extends AppModel {
 		'Replies' => array(
 			'className' => 'WallPost',
 			'foreignKey' => 'reply_parent_id'
-		)
+		),
+		'WallPostLike'
 	);
 	
 	//TODO: needs containable.
@@ -67,18 +68,4 @@ class WallPost extends AppModel {
 		return $wallPosts;
 	}
 	
-	function dislike($id) {
-		$id = intval($id);
-		$this->id = $id;
-		$wp = $this->read('dislike');
-		$this->saveField('dislike', $wp['WallPost']['dislike']+1);
-	}
-
-	function like($id) {
-		$id = intval($id);
-		$this->id = $id;
-		$wp = $this->read('like');
-		$this->saveField('like', $wp['WallPost']['like']+1);
-	
-	}
 }

@@ -46,7 +46,7 @@ class MediaController extends AppController {
 				// file type is allowed
 				if (in_array($this->data['Media']['file']['type'], Configure::read('AllowedFileTypes'))) {
 					// Full path to store user's images
-					$baseDir = APP . 'users' . DS . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
+					$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
 
 					// user's directory is writable
 					if(is_writable($baseDir)) {
@@ -101,7 +101,7 @@ class MediaController extends AppController {
 
 		if ($media && $media['User']['avatar_id'] != -1) {
 			// to user's home directory
-			$baseDir = APP . 'users' . DS . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
+			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
 			// profile or gallery, etc...
 			$dir = $media['Media']['path'] . DS;
 			// filename
@@ -129,7 +129,7 @@ class MediaController extends AppController {
 
 		} else {
 			$filename = 'img.png';
-			$baseDir = APP . 'users' . DS . 'system_files' . DS . 'images' . DS;
+			$baseDir = USER_DIR . 'system_files' . DS . 'images' . DS;
 			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 			$dir = 'profile' . DS;
 			$extension = 'png';
