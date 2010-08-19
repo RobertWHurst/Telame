@@ -302,3 +302,13 @@ msgstr "Save Changes"
 #~ msgid_plural "seconds"
 #~ msgstr[0] "second"
 #~ msgstr[1] "seconds"
+
+msgid "person_likes_this"
+msgid_plural "people_like_this"
+msgstr[0] "person likes this"
+msgstr[1] "people like this"
+
+msgid "person_dislikes_this"
+msgid_plural "people_dislike_this"
+msgstr[0] "person dislikes this"
+msgstr[1] "people dislike this"

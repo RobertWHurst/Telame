@@ -98,7 +98,7 @@ class UsersController extends AppController {
 				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
 				if ($this->User->signup($this->data)) {
 					// send user email
-					$this->Email->from		=  'Telame.com <admin@telame.com>';
+					$this->Email->from		=	'Telame.com <admin@telame.com>';
 					$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
 					$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
 					$this->Email->sendAs	= 'both';
@@ -109,10 +109,10 @@ class UsersController extends AppController {
 					// tell the user it's all good
 					$this->Session->setFlash(__('user_saved', true));
 				} else {
-				    $this->Session->setFlash(__('user_create_error'));
+					$this->Session->setFlash(__('user_create_error'));
 				}
-			    $this->redirect('/');
-			    exit;
+				   $this->redirect('/');
+				   exit;
 			}
 		}
 	}
@@ -130,11 +130,14 @@ class UsersController extends AppController {
 
 	function login(){
 		$this->layout = 'tall_header';
+		$this->AuthExtension->checkRememberMe();
 	}
 
 	/** delegate /users/logout request to Auth->logout method */
 	function logout(){
-		$this->redirect($this->Auth->logout());
+		$this->AuthExtension->logout();
+		$this->Auth->logout();
+		$this->redirect('/');
 	}
 
 }

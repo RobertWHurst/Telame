@@ -48,5 +48,7 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+// Make sure all the dates are the same, and since we're Vancouver based, set it to us.
+date_default_timezone_set('America/Vancouver');
 
 include(APP . DS . 'config' . DS . 'my_config' . DS . 'config.php');

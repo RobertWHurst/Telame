@@ -30,11 +30,11 @@
 <?php 	// I would have made these ajax if we were using the Ajax helper, since it would be $ajax->link instead of $html->link and be done with it, but since you're writing all the javascript yourself I don't know what the fuck I'm doing, so I will leave it up to you to fix.
 		echo $html->link('Like', array('controller' => 'wall_posts', 'action' => 'like', $update['WallPost']['id']));
 		if ($update['WallPost']['like']) {
-			echo $html->image('icons/thumb_up.png') . ' ' . $update['WallPost']['like'] . ' ' .  __('people_like_this', true);
+			echo $html->image('icons/thumb_up.png') . ' ' . $update['WallPost']['like'] . ' ' .  __n('person_likes_this', 'people_like_this', $update['WallPost']['like'], true);
 		}
 		echo '<br />';
 		if ($update['WallPost']['dislike']) {
-			echo $html->image('icons/thumb_down.png') . ' ' . $update['WallPost']['dislike'] . ' ' .  __('people_dislike_this', true);
+			echo $html->image('icons/thumb_down.png') . ' ' . $update['WallPost']['dislike'] . ' ' .  __n('person_dislikes_this', 'people_dislike_this', $update['WallPost']['dislike'], true);
 		}
 
 		echo $html->link('Disike', array('controller' => 'wall_posts', 'action' => 'dislike', $update['WallPost']['id'])) 

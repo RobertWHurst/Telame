@@ -65,7 +65,7 @@ class NotificationsController extends AppController {
 		// add ourself to the list
 		array_push($friends, $uid);
 
-		$wallPosts = $this->WallPost->getWallPosts(0, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
+		$wallPosts = $this->WallPost->getWallPosts(20, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
