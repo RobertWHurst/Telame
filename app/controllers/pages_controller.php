@@ -1,24 +1,82 @@
 <?php
 class PagesController extends AppController {
 	var $uses = array();
-	var $helpers = array('Time');
+	var $helpers = array('Text', 'Time', 'Markdown');
 
 	function beforeFilter() {
 		parent::beforeFilter();
-
+		if ($this->RequestHandler->isRss()) {
+			$this->Auth->allow('news');
+		}
 		// Allows access to certain pages
-		$this->Auth->allow('display', 'home');
-	}
-
-	function home() {
+		$this->Auth->allow('display', 'home', 'news');
 	}
 
 	function beforeRender() {
 		parent::beforeRender();
 		
+	}
+
+	function home() {
 		//set the css and layout
 		$this->layout = 'simple_header';
 	}
+
+	function news($selectedFriendList = null, $uid = null, $hash = null) {
+		$this->loadModel('Group');
+		$this->loadModel('GroupsUser');
+		$this->loadModel('WallPost');
+
+		if( $this->RequestHandler->isRss() ) {
+			Configure::write('debug', 0);
+			// this just checks that the hash is valid for the specified user
+			$this->WallPost->User->recursive = -1;
+			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => intval($uid), 'rss_hash' => intval($hash))));
+			if (!$user) {
+				return false;
+			}
+		} else {
+			//set the layout
+			$this->layout = 'tall_header_w_sidebar';
+			$uid = $this->currentUser['User']['id'];
+		}
+
+		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
+
+		$default_friendLists = array(
+			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0))
+		);
+
+		$friendLists = array_merge($default_friendLists, $friendLists);
+
+		//add selected info
+		foreach($friendLists as $key => $filter){
+			if($filter['Group']['id'] == $selectedFriendList) {
+				$friendLists[$key]['selected'] = true;
+			} else {
+				$friendLists[$key]['selected'] = false;
+			}
+		}
+
+		$friends = $this->GroupsUser->getFriends(0, 0, array(
+			'uid' => $uid,
+			'gid' => $selectedFriendList
+		));
+
+		foreach($friends as $key => $friend)
+			$friends[$key] = $friend['Friend']['id'];
+
+		// add ourself to the list
+		array_push($friends, $uid);
+
+		$wallPosts = $this->WallPost->getWallPosts(20, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
+		$user = $this->currentUser;
+
+		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
+
+		$this->set(compact('user', 'wallPosts', 'friendLists'));
+	}
+
 
 /**
  * Displays a view

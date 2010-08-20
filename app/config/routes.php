@@ -30,7 +30,7 @@
 // Home page
 
  	// If the first one returns true (the user is logged in) then rediret to news
-	Router::connect('/', array('controller' => 'notifications', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
 	// False, redirect to signup page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 	
