@@ -5,7 +5,7 @@ class MediaController extends AppController {
 
 //---------------------------- Image Retrieval Functions ----------------------------//
 
-	function avatar($id) {
+	function avatar($id = false) {
 		$this->_resize($id, Configure::read('AvatarSize'), array(
 			'w' => 60,
 			'h' => 60,
@@ -13,15 +13,15 @@ class MediaController extends AppController {
 		));
 	}
 
-	function thumb($id) {
+	function thumb($id = false) {
 		$this->_resize($id, Configure::read('ThumbSize'));
 	}
 
-	function preview($id) {
+	function preview($id = false) {
 		$this->_resize($id, Configure::read('PreviewSize'));
 	}
 	
-	function single($id){
+	function single($id = false){
 		$this->_resize($id, Configure::read('SingleSize'), array(
 			'w' => 235,
 			'h' => 235,
@@ -29,7 +29,7 @@ class MediaController extends AppController {
 		));		
 	}
 
-	function profile($id) {
+	function profile($id = false) {
 		$this->_resize($id, Configure::read('ProfileSize'));
 	}
 
@@ -92,14 +92,18 @@ class MediaController extends AppController {
 		// media view for files
 		$this->view = 'Media';
 
-		// find the image
-		$media = $this->Media->find('first', array(
-			'conditions' => array(
-				'Media.id' => $mid
-			),
-		));
-
-		if ($media && $media['User']['avatar_id'] != -1) {
+		if ($mid) {
+			// find the image
+			$media = $this->Media->find('first', array(
+				'conditions' => array(
+					'Media.id' => $mid
+				),
+			));
+		} else {
+			$media = false;
+		}
+		
+		if ($media && $media['User']['avatar_id'] != -1 ) {
 			// to user's home directory
 			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
 			// profile or gallery, etc...

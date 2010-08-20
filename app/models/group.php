@@ -13,7 +13,8 @@ class Group extends AppModel {
 
 	function getFriendLists($limit = 0, $offset = 0, $arguments = false){
 		$defaults = array(
-			'uid' => false
+			'uid' => false,
+			'type' => 'all'
 		);
 		
 		$options = parseArguments($defaults, $arguments);
@@ -23,7 +24,7 @@ class Group extends AppModel {
 		);
 		
 		$this->recursive = -1;
-		return $this->find('all', array(
+		return $this->find($options['type'], array(
 			'limit' => $limit,
 			'offset' => $offset,
 			'conditions' => $conditions,

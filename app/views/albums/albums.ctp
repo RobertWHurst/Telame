@@ -18,7 +18,9 @@ $this->set('script_for_layout', array(
 ));
 ?>
 <div id="albums" class="clearfix">
-	<?php foreach($albums as $album): ?>
+<?php
+	echo $html->link(__('create_new_album', true), array('controller' => 'albums', 'action' => 'new'));
+	foreach($albums as $album): ?>
 		<div class="album">
 			<div class="wrap_thumb">
 				<div class="thumb">

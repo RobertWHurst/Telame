@@ -16,8 +16,16 @@ class UsersController extends AppController {
 //		$this->Auth->allow('signup');
 	}
 
-	function test() {
-		$this->User->createAcl(2);
+	function addFriend() {
+		if (!empty($this->data)) {
+			$this->User->GroupsUser->save($this->data);
+		} else {
+			$friendLists = $this->User->Group->getFriendLists(0, 0, array(
+				'uid' => $this->currentUser['User']['id'],
+				'type' => 'list',
+				));
+			$this->set(compact('friendLists'));
+		}
 	}
 
 	function confirm($email = null, $hash = null) {
@@ -61,16 +69,18 @@ class UsersController extends AppController {
 
 			if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
 				$this->Session->setFlash(__('not_allowed_profile', true));
-				$this->redirect('/');
-				exit;
+//				$this->redirect('/');
+//				exit;
+				$friends = array();
+				$wallPosts = array();
+			} else {
+				$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
+				$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 			}
 		}
-
-		$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
-		$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
-
+		$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
 		//pass the profile data to the view
-		$this->set(compact('friends', 'user', 'wallPosts'));
+		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts'));
 	}
 
 	function search(){

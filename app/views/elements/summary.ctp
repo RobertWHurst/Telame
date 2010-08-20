@@ -2,6 +2,9 @@
 	<h1 class="name">
 		<?php echo $user['Profile']['full_name']; ?>
 	</h1>
+	<?php if(isset($isFreind) && !$isFriend) { ?>
+	<h2><?php echo $html->link('Add ' . $user['Profile']['full_name'] . ' as friend', '/f/a/'); ?></h2>
+	<?php } ?>
 	<table>
 		<tr class="key">
 			<th class="key">Name:</th>

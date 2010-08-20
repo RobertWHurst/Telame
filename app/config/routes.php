@@ -49,11 +49,14 @@
 
 
 // User info
+	// Add Friend
+	Router::connect('/f/a/*', array('controller' => 'users', 'action' => 'addFriend'));
 
-	// Friends
+	// Friend list
 	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
 
 	// Media
+	Router::connect('/albums/new/*', array('controller' => 'albums', 'action' => 'newAlbum'));
 	Router::connect('/albums/album/image/*', array('controller' => 'albums', 'action' => 'view'));
 	Router::connect('/albums/album/*', array('controller' => 'albums', 'action' => 'album'));
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));

@@ -50,6 +50,7 @@ class GroupsUser extends AppModel {
 		}
 	}
 	
+	// takes User_ID and Friend_ID and returns what groups the friend is in
 	function listGroups($uid, $fid) {
 		$this->Behaviors->attach('Containable');
 		$groups = $this->find('first', array(
