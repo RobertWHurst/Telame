@@ -17,7 +17,7 @@ class GroupsUser extends AppModel {
 			'gid' => false
 		);
 
-		$options = $this->parseArguments($defaults, $arguments);
+		$options = parseArguments($defaults, $arguments);
 
 		$this->Behaviors->attach('Containable');
 

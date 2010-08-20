@@ -7,7 +7,7 @@ $(function(){
 		
 		//save the dom elements
 		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
-		root.wallPosts = $('div.wall_post', '#profile_wall_posts');
+		root.wallPosts = $('div.wallPost', '#profile_wall_posts');
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
 		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');	
@@ -17,7 +17,7 @@ $(function(){
 		root.postHoverHandler = function(){
 		
 			//on hover event for each post	
-			root.wallPostsWrapper.delegate('div.wall_post', 'hover', function(event){
+			root.wallPostsWrapper.delegate('div.wallPost, div.comment', 'hover', function(event){
 			
 				//grab the dom element
 				domElement = $(this);
@@ -76,7 +76,7 @@ $(function(){
 				//get the button
 				var button = $(this);
 				
-				var offset = $('div.wall_post', '#profile_wall_posts').size();
+				var offset = $('div.wallPost', '#profile_wall_posts').size();
 				//get the ajaxUrl
 				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
 

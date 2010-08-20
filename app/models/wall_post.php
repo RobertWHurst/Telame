@@ -32,7 +32,7 @@ class WallPost extends AppModel {
 		);
 		
 		//parse the options
-		$options = $this->parseArguments($defaults, $arguments, true);
+		$options = parseArguments($defaults, $arguments, true);
 		
 		//get the profile
 		$this->Behaviors->attach('Containable');
