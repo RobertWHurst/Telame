@@ -27,7 +27,9 @@ class NotificationsController extends AppController {
 
 		if( $this->RequestHandler->isRss() ) {
 			Configure::write('debug', 0);
-			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => $uid, 'rss_hash' => $hash)));
+			// this just checks that the hash is valid for the specified user
+			$this->WallPost->User->recursive = -1;
+			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => intval($uid), 'rss_hash' => intval($hash))));
 			if (!$user) {
 				return false;
 			}

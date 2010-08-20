@@ -42,7 +42,7 @@ msgstr "Sorry, but we could not add you.  Please try again or email the admins f
 
 #: /controllers/users_controller.php:48
 msgid "not_allowed_profile"
-msgstr "Sorry but the person your trying to view has blocked public visitors. If you'd like to send them a friend request you can do using their uri slug on the friends page."
+msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
 
 #: /controllers/users_controller.php:80
 msgid "password_mismatch"
