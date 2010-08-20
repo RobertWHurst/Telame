@@ -189,12 +189,12 @@ class WallPostsController extends AppController {
 	
 	function dislike($id) {
 		$this->layout = 'ajax';
-		$this->WallPost->dislike($id);
+		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
 	}
 	
 	function like($id) {
 		$this->layout = 'ajax';
-		$this->WallPost->like($id);
+		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
 	}
 }
 ?>

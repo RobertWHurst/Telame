@@ -18,15 +18,26 @@ class User extends AppModel {
 		'Album' => array(
 			'dependent'=> true,
 		),
-		'GroupsUser',
-		'Notification',
-		'WallPost' => array(
-			'order' => 	'WallPost.id DESC',
-			'exclusive' => true
+		'GroupsUser' => array(
+			'dependent'=> true,
+		),
+		'Media' => array(
+			'dependent' => true,
 		),
 		'Message' => array(
 			'order' => 	'Message.created ASC',
 			'dependent' => true
+		),
+		'Notification' => array(
+			'dependent'=> true,
+		),
+		'WallPost' => array(
+			'order' => 	'WallPost.id DESC',
+			'exclusive' => true,
+			'dependent'=> true,
+		),
+		'WallPostLike' => array(
+			'dependent' => true,
 		)
 	);
 
@@ -119,6 +130,25 @@ class User extends AppModel {
 		return true;
 	}
 
+// almost all related db info should be deleted automatically
+// aco's 
+// files
+// groups
+
+	function delete($uid) {
+		$uid = intval($uid);
+		$this->id = $uid;
+		$this->recursive = -1;
+		$user = $this->findById($uid);
+		
+		$userDir = USER_DIR . $user['User']['home_dir'] . DS . $user['User']['sub_dir'];
+		$this->removeUserDir($userDir);
+		// TODO; finish removing the rest of the user info
+		
+		// Remove the user and all dependent data
+		$this->delete($uid, true);
+	}
+
 	function getIdFromSlug($slug){
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
@@ -204,7 +234,7 @@ class User extends AppModel {
 
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
 	function makeUserDir($id) {
-		$baseDir = APP . 'users' . DS;
+		$baseDir = USER_DIR;
 		$home = rand(0, 31500) . DS;
 		$sub = rand(0, 31500) . DS;
 
@@ -213,6 +243,19 @@ class User extends AppModel {
 			return array('home' => $home, 'sub' => $sub);
 		} else {
 			return false;
+		}
+	}
+	
+	
+ 	function removeUserDir($dir){
+		if(is_file($dir)) {
+			return @unlink($dir);
+		} elseif(is_dir($dir)) {
+			$scan = glob(rtrim($dir,'/').'/*');
+			foreach($scan as $index=>$path) {
+				recursiveDelete($path);
+			}
+			return @rmdir($dir);
 		}
 	}
 }
