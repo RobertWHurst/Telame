@@ -1,7 +1,7 @@
 <?php
 class NotificationsController extends AppController {
 
-	var $helpers = array('Text', 'Time');
+	var $helpers = array('Text', 'Time', 'Markdown');
 
 	function beforeFilter() {
 		parent::beforeFilter();

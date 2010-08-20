@@ -25,14 +25,12 @@
 	font-size: 1.6em;
 	line-height: 1.8em;
 	margin: 0 15px  0;
-	overflow: hidden;
 	font-weight: normal;
 }
 #messages div.message div.message_content p{
 	font-size: 1.2em;
 	line-height: 1.2em;
 	margin: 0 15px 15px 0;
-	overflow: hidden;
 }
 #messages div.message.unread div.message_content h1,
 #messages div.message.unread div.message_content p{
@@ -42,20 +40,6 @@
 	position: absolute;
 	bottom:10px;
 	right: 10px;
-}
-#messages div.message div.delete{
-	position: absolute;
-	top:10px;
-	right: 10px;
-}
-#messages div.message div.reply{
-	position: absolute;
-	top:30px;
-	right: 10px;
-}
-#messages div.message div.reply:hover,
-#messages div.message div.delete:hover{
-	background: #444;
 }
 #messages div.message div.time p{
 	color: #888;

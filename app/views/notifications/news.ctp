@@ -4,13 +4,13 @@ $this->set('css_for_layout', array(
 	'base',
 	'tall_header',
 	'main_sidebar',
+	'wall_posts',
 	'notifications/news_feed',
 	'notifications/news_sidebar'
 ));
 $this->set('script_for_layout', array(
 	'jquery',
-	'base',
-	'header_glow'
+	'base'
 ));
 ?>
 <div id="page_head">
@@ -26,7 +26,7 @@ $this->set('script_for_layout', array(
 	<div id="news_feed">
 <?php
 		foreach($wallPosts as $update)
-			echo $this->element('notifications/news_update', array('update' => $update));
+			echo $this->element('wallPost', array('post' => $update));
 ?>
 	</div>
 	<?php echo $this->element('notifications/news_sidebar', array('friendLists' => $friendLists)); ?>

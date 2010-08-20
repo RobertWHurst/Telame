@@ -4,6 +4,7 @@ $this->set('css_for_layout', array(
 	'base',
 	'gallery',
 	'summary',
+	'wall_posts',
 	'tall_header',
 	'main_sidebar',
 	'users/profile',

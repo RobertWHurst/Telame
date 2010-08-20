@@ -199,3 +199,11 @@ optgroup{
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
+div.arrow_up{
+	height: 0;
+	width: 0;
+	border-color: transparent transparent #444 transparent;
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	margin: 0 auto;
+}

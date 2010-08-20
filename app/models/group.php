@@ -16,7 +16,7 @@ class Group extends AppModel {
 			'uid' => false
 		);
 		
-		$options = $this->parseArguments($defaults, $arguments);
+		$options = parseArguments($defaults, $arguments);
 		
 		$conditions = array(
 			'user_id' => array($options['uid'], '-1')
