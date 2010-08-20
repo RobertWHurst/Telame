@@ -1,11 +1,8 @@
 <?php
 class Media extends AppModel {
-	var $belongsTo = array('Album');
-	var $hasOne = array(
-		'User' => array(
-			'ClassName' => 'User',
-			'foreignKey' => 'avatar_id',
-		),
+	var $belongsTo = array(
+		'Album', 
+		'User'
 	);
 
 // -------------------- Custom functions

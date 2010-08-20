@@ -56,6 +56,7 @@ class UsersController extends AppController {
 		//set the layout
 		$this->layout = 'profile';
 
+		$canView = true;
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 
@@ -69,15 +70,17 @@ class UsersController extends AppController {
 
 			if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
 				$this->Session->setFlash(__('not_allowed_profile', true));
-//				$this->redirect('/');
-//				exit;
-				$friends = array();
-				$wallPosts = array();
-			} else {
-				$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
-				$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
+				$canView = false;
 			}
 		}
+		if ($canView) {
+			$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
+			$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
+		} else {
+			$friends = array();
+			$wallPosts = array();
+		}
+
 		$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
 		//pass the profile data to the view
 		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts'));

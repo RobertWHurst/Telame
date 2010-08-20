@@ -74,13 +74,16 @@ class ThumbComponent {
 		// Load phpThumb
 		App::import('Vendor', 'phpThumb', array('file' => 'phpThumb/phpthumb.class.php'));
 		$phpThumb = new phpThumb();
+		// phpThumb configs
+		$phpThumb->setParameter('config_cache_force_passthru', false);
 
+		// image configs
 		$phpThumb->setSourceFilename($source);
 		$phpThumb->setParameter('w' ,$width);
 		$phpThumb->setParameter('h', $height);
 		// auto rotate based on exif data
 		$phpThumb->setParameter('ar', 'x');
-		
+
 		foreach($options as $key => $val) {
 			$phpThumb->setParameter($key, $val);
 		}

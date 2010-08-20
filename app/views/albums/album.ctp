@@ -29,14 +29,14 @@ $this->set('nav_links', array(
 ));
 ?>
 <div id="albums" class="clearfix">
-	<?php foreach($album as $media): ?>
+<?php foreach($album as $media): ?>
 		<div class="media">
 			<div class="wrap_single">
 				<div class="single">
 <?php
 					//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
 					$iUrl = array('controller' => 'media', 'action' => 'single', $media['Media']['id']);
-					echo $html->image($iUrl, array('/url' => $aUrl,));
+					echo $html->image($iUrl);//, array('/url' => $aUrl,));
 ?>
 				</div>
 			</div>

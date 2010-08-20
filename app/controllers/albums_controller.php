@@ -1,10 +1,13 @@
 <?php
 class AlbumsController extends AppController {
 
-	function albums($slug = false) {
+	function beforeRender() {
+		parent::beforeRender();
 		//layout
-		$this->layout = 'profile';
+		$this->layout = 'profile';	
+	}
 
+	function albums($slug = false) {
 		// get user id
 		if (!$slug) {
 			$slug = $this->currentUser['User']['slug'];
@@ -25,9 +28,6 @@ class AlbumsController extends AppController {
 	}
 
 	function album($slug = false, $albumSlug = false){
-		//layout
-		$this->layout = 'profile';
-
 		// get user id
 		if (!$slug) {
 			$slug = $this->currentUser['User']['slug'];
@@ -63,8 +63,6 @@ class AlbumsController extends AppController {
 			}
 			$this->redirect('/albums');
 		} else {
-			//layout
-			$this->layout = 'profile';
 			$user = $this->currentUser;
 			$this->set(compact('user'));	
 		}

@@ -20,13 +20,13 @@ class MediaController extends AppController {
 	function preview($id = false) {
 		$this->_resize($id, Configure::read('PreviewSize'));
 	}
-	
+
 	function single($id = false){
 		$this->_resize($id, Configure::read('SingleSize'), array(
 			'w' => 235,
 			'h' => 235,
 			'zc' => 1
-		));		
+		));
 	}
 
 	function profile($id = false) {
@@ -57,7 +57,7 @@ class MediaController extends AppController {
 						// file does not exist alread, otherwise we need to rename it something else
 						if (!file_exists($baseDir . $filename)) {
 							rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
-							
+
 							$this->Media->create();
 							$data['Media']['user_id'] = $this->currentUser['User']['id'];
 							$data['Media']['filename'] = $filename;
@@ -67,7 +67,7 @@ class MediaController extends AppController {
 							$data['Media']['created'] = date('Y-m-d H:i:s');
 							$data['Media']['type'] = $this->data['Media']['file']['type'];
 							$this->Media->save($data);
-							
+
 							$this->redirect('/albums');
 							exit;
 
@@ -102,8 +102,8 @@ class MediaController extends AppController {
 		} else {
 			$media = false;
 		}
-		
-		if ($media && $media['User']['avatar_id'] != -1 ) {
+
+		if ($media) {
 			// to user's home directory
 			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
 			// profile or gallery, etc...
@@ -114,11 +114,11 @@ class MediaController extends AppController {
 			$filename = trim($media['Media']['filename']);
 			// cached version of filename
 			$name = $media['User']['slug'];
-			
+
 			$imageSize = getimagesize($baseDir . $dir . $filename);
 			$imageWidth = $imageSize[0];
 			$imageHeight = $imageSize[1];
-	
+
 			if ($imageWidth < $imageHeight) {
 				// make it wider
 				$ar = $imageHeight / $imageWidth;
