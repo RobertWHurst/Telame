@@ -125,8 +125,14 @@ class AuthExtensionComponent extends Object {
 				// if there is a cookie, it's not good (the user would not have used the login form)
 				$this->logout();
 			}
-			$this->controller->redirect('http://' . env('SERVER_NAME') . '/');
-			return;
+			$referer = $this->controller->referer();
+			$referer = explode('/', $referer);
+			
+			if ($referer[count($referer)-1] == 'login') {
+				$referer = 'http://' . env('SERVER_NAME') . '/';
+			}
+			$this->controller->redirect($referer);
+			exit;
 		}
 	}
 	
