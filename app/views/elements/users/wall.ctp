@@ -10,12 +10,12 @@
 				echo $this->element('wallPost', array('post' => $post, 'show_post_controls' => true));
 			}
 			if(true /*TODO: this needs to check the total number of wall posts a user has*/): ?>
-				<div class="more">
+				<!--<div class="more">
 <?php 
 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'lists', $user['User']['id']));
 					echo $html->link(__('older_posts', true), $url);
 ?>
-				</div>
+				</div>-->
 			<?php endif; ?>
 		<?php else: ?>
 			<p class="no_posts">

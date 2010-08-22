@@ -11,7 +11,7 @@
 			<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($post['WallPost']['post'])); ?>
 		</div>
 		<?php if(isset($show_post_controls)): ?>
-			<div class="delete">
+			<div class="deletePost">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
@@ -89,19 +89,19 @@
 			<?php if($post['Replies']): foreach($post['Replies'] as $comment): ?>
 				<div class="comment">
 					<?php if(isset($show_post_controls)): ?>
-						<div class="delete">
+						<div class="deleteComment">
 <?php 
-							$url = array('controller' => 'wall_posts', 'action' => 'delete', $comment['WallPost']['id']);
+							$url = array('controller' => 'wall_posts', 'action' => 'delete', $comment['id']);
 							echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 						</div>
 					<?php endif; ?>
 					<div class="content">
-						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($comment['WallPost']['post'])); ?>
+						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($comment['post'])); ?>
 					</div>
 					<div class="time">
 						<p>
-							<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
+							<?php echo $time->timeAgoInWords($comment['posted']); ?>
 						</p>
 					</div>
 				</div>	
@@ -110,7 +110,7 @@
 <?php
 				//create the form
 				$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));	
-				echo $this->Form->create('WallPost', array('url' =>  $url));
+				echo $this->Form->create('WallPostComment', array('url' =>  $url));
 					echo $this->Form->input('post', array('label' => __('comment', true), 'type' => 'text'));
 					echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
 				echo $this->Form->end(__('wall_post_submit', true));

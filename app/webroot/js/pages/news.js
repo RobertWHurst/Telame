@@ -70,6 +70,18 @@ $(function(){
 		//delete handler
 		root.postCommentsHandler = function(){
 		
+			//hide all of the comment wrappers with no comments
+			$('div.comments', root.wallPostsWrapper).each(function(){
+				var domElement = $(this);
+				wallCommentsWrap = domElement.parents('div.commentsWrap');
+				if(domElement.children().size() <= 1){
+					wallCommentsWrap.hide();
+				}
+				else{
+					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
+				}
+			})
+		
 			//on hover event for each post comment
 			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
 				
@@ -159,7 +171,7 @@ $(function(){
 		root.construct = function(){
 			
 			//hide all of the wall post controls
-			$('div.baseline_controls, div.commentsWrap').hide();
+			$('div.baseline_controls').hide();
 			$('div.baseline_info').show();
 		
 			//on hover event for each post	

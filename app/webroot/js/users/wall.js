@@ -23,7 +23,7 @@ $(function(){
 				//grab the dom element and its components
 				var domElement = $(this);
 				var baselineInfo = $('div.baseline_info', domElement);
-				var controls = $('div.delete, div.wall_to_wall, div.baseline_controls', domElement);
+				var controls = $('div.deletePost, div.wall_to_wall, div.baseline_controls', domElement);
 			
   				if(event.type == 'mouseover'){
 					
@@ -52,7 +52,7 @@ $(function(){
 			
 				//grab the dom element and its components
 				var domElement = $(this);
-				var deleteControl = $('div.delete', domElement);
+				var deleteControl = $('div.deleteComment', domElement);
 			
   				if(event.type == 'mouseover'){
   				
@@ -72,6 +72,18 @@ $(function(){
 		
 		//delete handler
 		root.postCommentsHandler = function(){
+		
+			//hide all of the comment wrappers with no comments
+			$('div.comments', root.wallPostsWrapper).each(function(){
+				var domElement = $(this);
+				wallCommentsWrap = domElement.parents('div.commentsWrap');
+				if(domElement.children().size() <= 1){
+					wallCommentsWrap.hide();
+				}
+				else{
+					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
+				}
+			})
 		
 			//on hover event for each post comment
 			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
@@ -97,7 +109,7 @@ $(function(){
 		//delete handler
 		root.postDeleteHandler = function(){
 			
-			root.wallPostsWrapper.delegate('div.delete', 'click', function(event){
+			root.wallPostsWrapper.delegate('div.deletePost', 'click', function(event){
 				
 				//prevent the default action
 				event.preventDefault();
@@ -150,8 +162,7 @@ $(function(){
 				domElement.append('<p class="proccess">Loading more posts...<p>');
 				
 				//send the ajax request
-				$.post(core.domain + ajaxUrl, 
-				function(data){
+				$.post(core.domain + ajaxUrl, function(data){
 					
 					if(data !== 'false'){
 						
@@ -159,14 +170,14 @@ $(function(){
 						data = $(data);
 						
 						//hide the new posts
-						$(data).hide();
+						//data.hide();
 												
 						//remove and reapend the more posts button
 						domElement.remove();
 			
 						//hide all of the wall post controls
-						$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
-						$('div.baseline_info', data).show();
+						//$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
+						//$('div.baseline_info', data).show();
 						
 						//append the new page data	
 						root.wallPostsWrapper.append(data);
@@ -176,7 +187,7 @@ $(function(){
 						domElement.children('p.proccess').remove();
 						
 						//animate in the new posts		
-						$('div.wall_post').slideDown(600);
+						$('div.wallPostWrap').slideDown(600);
 						
 						//show the button again
 						domElement.children().fadeIn(300);	
@@ -192,7 +203,7 @@ $(function(){
 		root.construct = function(){
 			
 			//hide all of the wall post controls
-			$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap').hide();
+			$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls').hide();
 			$('div.baseline_info').show();
 		
 			//on hover event for each post	
