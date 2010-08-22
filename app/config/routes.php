@@ -100,7 +100,7 @@
 	Router::connect('/w/like/*', array('controller' => 'wall_posts', 'action' => 'like'));
 	Router::connect('/w/dislike/*', array('controller' => 'wall_posts', 'action' => 'dislike'));
 	// Wall Posts (Rss)
-	Router::connect('/rss/*', array('controller' => 'notifications', 'action' => 'news'));
+	Router::connect('/rss/*', array('controller' => 'pages', 'action' => 'news'));
 	
 	// Wall Posts (Ajax)
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
