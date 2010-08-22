@@ -13,7 +13,8 @@ class WallPost extends AppModel {
 	var $hasMany = array(
 		'Replies' => array(
 			'className' => 'WallPost',
-			'foreignKey' => 'reply_parent_id'
+			'foreignKey' => 'reply_parent_id',
+			'dependent' => true
 		),
 		'WallPostLike'
 	);
