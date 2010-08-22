@@ -32,17 +32,17 @@ $(function(){
 					
 						//add the hover class to the post and fade in the controls
 						domElement.addClass('hover');
-						controls.fadeIn(100);
+						controls.show();
 					});
   				}
-  				else{  		
+  				else{	
 					
 					//remove the hover class from the post and fade out the controls			
 					domElement.removeClass('hover');
-					controls.fadeOut(100, function(){
+					controls.hide(1, function(){
 						
 						//show the baseline info
-						baselineInfo.fadeIn(300);
+						baselineInfo.show();
 					});
   				}
 			});
