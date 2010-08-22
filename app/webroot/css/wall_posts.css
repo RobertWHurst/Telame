@@ -71,11 +71,11 @@ div.wallPostWrap div.wallPost div.baseline div.baseline_controls a{
 	margin-right: 1em;
 }
 div.wallPostWrap div.commentsWrap{
-	width:458px;
+	width:358px;
+	margin: 0 15px 0 75px;
 }
 div.wallPostWrap div.comments{	
 	padding: 5px;
-	margin: 0 20px 0 75px;
 	background: #444;
 	position: relative;
 	
@@ -131,7 +131,7 @@ div.wallPostWrap div.comments div.input label{
 	color: #949494;
 }
 div.wallPostWrap div.comments div.input input[type="text"]{
-	width: 298px;
+	width: 293px;
 	height: 18px;
 	font-size: 12px;
 	padding: 3px 50px 3px 3px;
