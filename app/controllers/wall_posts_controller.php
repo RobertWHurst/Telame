@@ -188,13 +188,31 @@ class WallPostsController extends AppController {
 	}
 	
 	function dislike($id) {
-		$this->layout = 'ajax';
+		$isAjax = $this->RequestHandler->isAjax();
+		
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
+		
+		//if not an ajax call redirect from the referer    	
+    	if($isAjax){
+    		echo 'true';
+    	}
+    	else
+    		$this->redirect($this->referer());
+    	exit;
 	}
 	
 	function like($id) {
-		$this->layout = 'ajax';
+		$isAjax = $this->RequestHandler->isAjax();
+		
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
+		
+		//if not an ajax call redirect from the referer    	
+    	if($isAjax){
+    		echo 'true';
+    	}
+    	else
+    		$this->redirect($this->referer());
+    	exit;
 	}
 }
 ?>

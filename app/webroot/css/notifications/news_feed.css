@@ -1,7 +1,7 @@
 #news_feed{
-	width: 438px;
+	width: 458px;
 	min-height: 600px;
-	padding: 20px;
+	padding: 10px;
 	float: left;
 	border-right: 1px solid #787878;
 }

@@ -8,6 +8,7 @@ $(function(){
 		//save the dom elements
 		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
 		root.wallPosts = $('div.wallPost', '#profile_wall_posts');
+		root.wallComments = $('div.comment', '#profile_wall_posts');
 		root.wallInput = $('#WallPostPost', '#profile_wall_input');
 		root.wallInputLabel = $('label', '#profile_wall_input');
 		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');	
@@ -17,21 +18,78 @@ $(function(){
 		root.postHoverHandler = function(){
 		
 			//on hover event for each post	
-			root.wallPostsWrapper.delegate('div.wallPost, div.comment', 'hover', function(event){
+			root.wallPostsWrapper.delegate('div.wallPost', 'hover', function(event){
 			
-				//grab the dom element
-				domElement = $(this);
+				//grab the dom element and its components
+				var domElement = $(this);
+				var baselineInfo = $('div.baseline_info', domElement);
+				var controls = $('div.delete, div.wall_to_wall, div.baseline_controls', domElement);
 			
   				if(event.type == 'mouseover'){
+					
+					//hide the baseline info
+					baselineInfo.hide(1, function(){
+					
+						//add the hover class to the post and fade in the controls
+						domElement.addClass('hover');
+						controls.fadeIn(100);
+					});
+  				}
+  				else{  		
+					
+					//remove the hover class from the post and fade out the controls			
+					domElement.removeClass('hover');
+					controls.fadeOut(100, function(){
+						
+						//show the baseline info
+						baselineInfo.fadeIn(300);
+					});
+  				}
+			});
+		
+			//on hover event for each post comment
+			root.wallPostsWrapper.delegate('div.comment', 'hover', function(event){
 			
-					//get the target
-					domElement = $(this);
+				//grab the dom element and its components
+				var domElement = $(this);
+				var deleteControl = $('div.delete', domElement);
 			
-					domElement.addClass('hover').children('div.delete, div.wall_to_wall').fadeIn(100);
+  				if(event.type == 'mouseover'){
+  				
+					//add the hover class to the comment and fade in the delete button
+					domElement.addClass('hover');
+					deleteControl.fadeIn(100);
+  				}
+  				else{  		
+					
+					//remove the hover class from the comment and fade out the delete button	
+					domElement.removeClass('hover');
+					deleteControl.fadeOut(100);
+  				}
+			});
+		}
+		
+		
+		//delete handler
+		root.postCommentsHandler = function(){
+		
+			//on hover event for each post comment
+			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
+				
+				//prevent the default action
+				event.preventDefault();
+			
+				//grab the dom element and its components
+				var domElement = $(this);
+				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
+			
+  				if(wallCommentsWrap.hasClass('open')){
+  				
+					wallCommentsWrap.removeClass('open').slideUp(300);
   				}
   				else{
-				
-					domElement.removeClass('hover').children('div.delete, div.wall_to_wall').fadeOut(100);
+  				
+					wallCommentsWrap.addClass('open').slideDown(300);
   				}
 			});
 		}
@@ -58,7 +116,9 @@ $(function(){
 					
 					if(data === 'true'){					
 						//slide up the post
-						domElement.slideUp(300);
+						domElement.parent().slideUp(300, function(){
+							$(this).remove();
+						});
 					}
 				});
 				
@@ -103,6 +163,10 @@ $(function(){
 												
 						//remove and reapend the more posts button
 						domElement.remove();
+			
+						//hide all of the wall post controls
+						$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
+						$('div.baseline_info', data).show();
 						
 						//append the new page data	
 						root.wallPostsWrapper.append(data);
@@ -110,9 +174,6 @@ $(function(){
 						//reappend the more posts button
 						root.wallPostsWrapper.append(domElement);
 						domElement.children('p.proccess').remove();
-			
-						//hide all of the wall post controls
-						$('div.delete, div.wall_to_wall').hide();
 						
 						//animate in the new posts		
 						$('div.wall_post').slideDown(600);
@@ -131,10 +192,13 @@ $(function(){
 		root.construct = function(){
 			
 			//hide all of the wall post controls
-			$('div.delete, div.wall_to_wall').hide();
+			$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap').hide();
+			$('div.baseline_info').show();
 		
 			//on hover event for each post	
 			root.postHoverHandler();
+			
+			root.postCommentsHandler();
 			
 			//on click event for delete and wall to wall
 			root.postDeleteHandler();

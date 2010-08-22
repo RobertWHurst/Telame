@@ -141,8 +141,9 @@ $(function(){
 						//convert the data into a jquery object
 						var data = $(data);
 						
-						//hide the controls
-						data.children('div.delete, div.wall_to_wall').hide();
+						//hide the controls						
+						$('div.delete, div.wall_to_wall, div.baseline_controls', data).hide();
+						$('div.baseline_info', data).show();
 						
 						//take the data and add it to the top of the wall
 						root.wallPosts.prepend(data);

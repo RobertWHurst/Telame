@@ -25,43 +25,35 @@
 ?>
 			</div>
 		<?php endif; ?>
-		<div class="likeness_controls">
-<?php
-			echo $html->link('Like', array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
-			echo $html->link('Dislike', array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
-?>
-		</div>
-		<div class="comment_controls">
-<?php
-			echo $html->link('Comment', '#');
-?>
-		</div>
-		<div class="time">
-			<p>
-				<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
-			</p>
-		</div>
-	</div>
-	<div class="likenessWrap">
-		<div class="arrow_up"></div>
-		<div class="likeness clearfix">
-			<div class="info">
-			
+		<div class="baseline">
+			<div class="baseline_controls">
 <?php 	
-			$like_info = $html->image('icons/thumb_up.png');
-			$like_info .= " {$post['WallPost']['like']}";
-			$like_info .= ' ' .  __n('person_likes_this', 'people_like_this', $post['WallPost']['like'], true);
-			
-			$dislike_info = $html->image('icons/thumb_down.png');
-			$dislike_info .= " {$post['WallPost']['dislike']}";
-			$dislike_info .= ' ' .  __n('person_dislikes_this', 'people_dislike_this', $post['WallPost']['dislike'], true);
-						
+				$like = ($post['WallPost']['like'])? "Like ({$post['WallPost']['like']})" : 'Like';
+				$dislike = ($post['WallPost']['dislike'])? "Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
+							
+				echo $html->link($like, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
+				echo $html->link($dislike, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
+
+				echo $html->link('Comments', '#', array('class' => 'showComments'));
 ?>
-				<p><?php echo $like_info; ?></p>
-				<p><?php echo $dislike_info; ?></p>
 			</div>
-			<div class="bars">
-				svg bars via json data....
+			<div class="baseline_info">
+<?php
+				if($post['WallPost']['like'] || $post['WallPost']['dislike']):
+					$like = " {$post['WallPost']['like']}";
+					$like .= ' ' .  __n('person_likes_this', 'people_like_this', $post['WallPost']['like'], true);
+			
+					$dislike = " {$post['WallPost']['dislike']}";
+					$dislike .= ' ' .  __n('person_dislikes_this', 'people_dislike_this', $post['WallPost']['dislike'], true);
+?>
+					<p><?php echo ($post['WallPost']['like'])? $like : '' ; ?></p>
+					<p><?php echo ($post['WallPost']['dislike'])? $dislike : '' ; ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="time">
+				<p>
+					<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -104,6 +96,11 @@
 					<?php endif; ?>
 					<div class="content">
 						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($comment['WallPost']['post'])); ?>
+					</div>
+					<div class="time">
+						<p>
+							<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
+						</p>
 					</div>
 				</div>	
 			<?php endforeach; endif; ?>	
