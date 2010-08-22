@@ -87,7 +87,7 @@
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
 
 	// News filters
-	Router::connect('/news/*', array('controller' => 'notifications', 'action' => 'news'));
+	Router::connect('/news/*', array('controller' => 'pages', 'action' => 'news'));
 	
 	// Settings
 	Router::connect('/settings/profile', array('controller' => 'settings', 'action' => 'profile'));
@@ -95,6 +95,7 @@
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
+	Router::connect('/w/a/*', array('controller' => 'wall_posts', 'action' => 'add'));
 	Router::connect('/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'));
 	Router::connect('/w/like/*', array('controller' => 'wall_posts', 'action' => 'like'));
 	Router::connect('/w/dislike/*', array('controller' => 'wall_posts', 'action' => 'dislike'));
@@ -102,9 +103,7 @@
 	Router::connect('/rss/*', array('controller' => 'notifications', 'action' => 'news'));
 	
 	// Wall Posts (Ajax)
-	Router::connect('/jx/w/d/*', array('controller' => 'wall_posts', 'action' => 'jx_delete'));
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
-	Router::connect('/jx/w/a', array('controller' => 'wall_posts', 'action' => 'add'));
 	
 // This must be last
 	// Profile

@@ -10,98 +10,7 @@ $(function(){
 		root.wallPosts = $('div.wallPost', '#news_feed');
 		root.wallComments = $('div.comment', '#news_feed');
 		//root.morePosts = $('div.more a', '#profile_wall');
-				
-		//post hover handler
-		root.postHoverHandler = function(){
 		
-			//on hover event for each post	
-			root.wallPostsWrapper.delegate('div.wallPost', 'hover', function(event){
-			
-				//grab the dom element and its components
-				var domElement = $(this);
-				var baselineInfo = $('div.baseline_info', domElement);
-				var controls = $('div.baseline_controls', domElement);
-			
-  				if(event.type == 'mouseover'){
-					
-					//hide the baseline info
-					baselineInfo.hide(1, function(){
-					
-						//add the hover class to the post and fade in the controls
-						domElement.addClass('hover');
-						controls.fadeIn(100);
-					});
-  				}
-  				else{  		
-					
-					//remove the hover class from the post and fade out the controls			
-					domElement.removeClass('hover');
-					controls.fadeOut(100, function(){
-						
-						//show the baseline info
-						baselineInfo.fadeIn(300);
-					});
-  				}
-			});
-		
-			//on hover event for each post comment
-			root.wallPostsWrapper.delegate('div.comment', 'hover', function(event){
-			
-				//grab the dom element and its components
-				var domElement = $(this);
-				var deleteControl = $('div.delete', domElement);
-			
-  				if(event.type == 'mouseover'){
-  				
-					//add the hover class to the comment and fade in the delete button
-					domElement.addClass('hover');
-					deleteControl.fadeIn(100);
-  				}
-  				else{  		
-					
-					//remove the hover class from the comment and fade out the delete button	
-					domElement.removeClass('hover');
-					deleteControl.fadeOut(100);
-  				}
-			});
-		}
-		
-		
-		//delete handler
-		root.postCommentsHandler = function(){
-		
-			//hide all of the comment wrappers with no comments
-			$('div.comments', root.wallPostsWrapper).each(function(){
-				var domElement = $(this);
-				wallCommentsWrap = domElement.parents('div.commentsWrap');
-				if(domElement.children().size() <= 1){
-					wallCommentsWrap.hide();
-				}
-				else{
-					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
-				}
-			})
-		
-			//on hover event for each post comment
-			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
-				
-				//prevent the default action
-				event.preventDefault();
-			
-				//grab the dom element and its components
-				var domElement = $(this);
-				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
-			
-  				if(wallCommentsWrap.hasClass('open')){
-  				
-					wallCommentsWrap.removeClass('open').slideUp(300);
-  				}
-  				else{
-  				
-					wallCommentsWrap.addClass('open').slideDown(300);
-  				}
-			});
-		}
 		
 		/*
 		root.morePostsHandler = function(){
@@ -174,10 +83,17 @@ $(function(){
 			$('div.baseline_controls').hide();
 			$('div.baseline_info').show();
 		
-			//on hover event for each post	
-			root.postHoverHandler();
-			
-			root.postCommentsHandler();
+			//hide all of the comment wrappers with no comments
+			$('div.comments', root.wallPostsWrapper).each(function(){
+				var domElement = $(this);
+				wallCommentsWrap = domElement.parents('div.commentsWrap');
+				if(domElement.children().size() <= 0){
+					wallCommentsWrap.hide();
+				}
+				else{
+					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
+				}
+			});
 			
 			//on click for more posts			
 			//root.morePostsHandler();

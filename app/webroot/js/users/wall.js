@@ -118,7 +118,7 @@ $(function(){
 				var button = $(this);
 				
 				//get the ajaxUrl
-				var ajaxUrl = '/jx' + $('a', button).attr('href');
+				var ajaxUrl = $('a', button).attr('href');
 				
 				//get the target post (not the button)
 				domElement = button.parent();

@@ -36,14 +36,24 @@ class WallPostsController extends AppController {
 				echo 'false';
 				exit;
 			} else {
-				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $currentUser['User']['Slug']));
 				exit;
 			}
 		}
-
+		
+		//get the relpy id if any
+		if(isset($this->data['WallPost']['reply_parent_id']))
+			$reply_id = $this->data['WallPost']['reply_parent_id'];
+		
 		//save the user id and the visitor id
 		$wallOwnerId = $this->data['WallPost']['user_id'];
+			
+		$wallOwnerSlug = $this->WallPost->User->getSlugFromId($wallOwnerId);
 		$visitorId = $this->currentUser['User']['id'];
+		$visitorSlug = $this->WallPost->User->getSlugFromId($visitorId);
+		
+		//get the user object so it can be used by the wall post element
+		$user = $this->WallPost->User->getProfile($wallOwnerSlug);
 
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
 		if ($wallOwnerId != $visitorId) {
@@ -57,7 +67,7 @@ class WallPostsController extends AppController {
 					exit;
 				} else {
 					$this->Session->setFlash(__('wall_post_error', true));
-					$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug']));
+					$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitorSlug));
 					exit;
 				}
 			}
@@ -67,9 +77,11 @@ class WallPostsController extends AppController {
 			//the visitor is the user
 			$wallOwnerId = $visitorId;
 		}
-
-		if (!$reply_id) {
-			$this->WallPost->set('reply_id', $reply_id);
+		
+		$this->WallPost->create();
+		
+		if($reply_id){
+			$this->WallPost->set('reply_parent_id', $reply_id);
 		}
 		//save the user id and poster id
 		$this->WallPost->set('user_id', $wallOwnerId);
@@ -77,12 +89,12 @@ class WallPostsController extends AppController {
 
 		//save the post type
 		//TODO: this will change based on the content being posted.
-		$this->WallPost->set('type', 1);
+		$this->WallPost->set('type', 'post');
 
 		//save the post content and time
 		$this->WallPost->set('post', Sanitize::html($this->data['WallPost']['post'], array('remove' => true)));
 		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
-
+		
 		//commit the data to the db
 		$this->WallPost->save();
 
@@ -100,11 +112,11 @@ class WallPostsController extends AppController {
 			$this->layout = false;
 		
 			//send the new post to the view
-			$this->set('wallPosts', $wallPosts);
+			$this->set(compact('wallPosts', 'user'));
 		} else {
 			//redirect the visitor to the wall they posted on
 			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
-			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $slug)));
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
 			exit;
 		}
 	}
@@ -114,7 +126,7 @@ class WallPostsController extends AppController {
 
 		//get the visitor's data
 		$this->WallPost->User->recursive = -1;
-		$visitor = $this->WallPost->User->findById($this->currentUser['User']['id']);
+		$visitor_slug = $this->WallPost->User->getSlugFromId($this->currentUser['User']['id']);
 
 		//if the wall id is missing
 		if(!$id) {
@@ -123,41 +135,10 @@ class WallPostsController extends AppController {
 				exit;
 			} else {
 				$this->Session->setFlash(__('wall_post_delete_error', true));
-				$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
 		}
-
-		//check to make sure the user is deleting a wall psot they actually own
-		$conditions = array(
-			'wall_posts.id' => $id,
-			'wall_posts.user_id' => $visitor['User']['id']
-		);
-
-		//if we don't find one then deny them the action
-		if($this->WallPost->find('count', array('conditions' => $conditions)) < 1){
-
-			//set the flash message and redirect them, the metaling sods! :<
-			$this->Session->setFlash(__('wall_post_bad_hacker', true));
-			$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-			exit;
-		}
-
-		//if everything checks out then delete the post and exit
-		$this->WallPost->delete($id);
-		$this->Session->setFlash(__('wall_post_delete', true));
-		$this->redirect(router::url(array('controller' => 'users', 'action' => 'profile', $visitor['User']['slug'])));
-		exit;
-	}
-
-	function jx_delete($id = false) {
-
-		//get the visitor's data
-		$visitor = $this->WallPost->User->findById($this->currentUser['User']['id']);
-
-		//if the wall id is missing
-		if(!$id)
-			echo 'false';
 
 		//check to make sure the user is deleting a wall post they actually own or that they are the author
 		$condition_set_1 = array(
@@ -178,13 +159,30 @@ class WallPostsController extends AppController {
 			$this->WallPost->find('count', array(
 				'conditions' => $condition_set_2
 			)) < 1
-		)
-			echo 'false';
-		else{
-			$this->WallPost->delete($id);
-			echo 'true';
+		){
+			if($isAjax){				
+				echo 'false';
+				exit;
+			}
+			else{
+				//set the flash message and redirect them, the metaling sods! :<
+				$this->Session->setFlash(__('wall_post_bad_hacker', true));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
+				exit;
+			}
 		}
-		exit;
+
+		//if everything checks out then delete the post and exit
+		$this->WallPost->delete($id);
+		if($isAjax){
+			echo 'true';
+			exit;
+		}
+		else{
+			$this->Session->setFlash(__('wall_post_delete', true));
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
+			exit;
+		}
 	}
 	
 	function dislike($id) {

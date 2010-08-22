@@ -4,7 +4,7 @@
 <?php
 			$image_url = array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['avatar_id']);
 			$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
-			echo $this->Html->image($image_url, array('url' => $url, 'width' => '60', 'height' => '60'));
+			echo $this->Html->image($image_url, array('url' => $url));
 ?>
 		</div>
 		<div class="content">
@@ -25,18 +25,20 @@
 ?>
 			</div>
 		<?php endif; ?>
-		<div class="baseline">
-			<div class="baseline_controls">
+		<div class="baseline">			
+			<?php if(isset($show_post_controls)): ?>
+				<div class="baseline_controls">
 <?php 	
-				$like = ($post['WallPost']['like'])? __('like', true) . " ({$post['WallPost']['like']})" : 'Like';
-				$dislike = ($post['WallPost']['dislike'])? __('dislike', true) . " Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
-							
-				echo $html->link($like, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
-				echo $html->link($dislike, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
-
-				echo $html->link(__('comment', true), '#', array('class' => 'showComments'));
+					$like = ($post['WallPost']['like'])? __('like', true) . " ({$post['WallPost']['like']})" : 'Like';
+					$dislike = ($post['WallPost']['dislike'])? __('dislike', true) . " Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
+								
+					echo $html->link($like, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
+					echo $html->link($dislike, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
+	
+					echo $html->link(__('comment', true), '#', array('class' => 'showComments'));
 ?>
-			</div>
+				</div>			
+			<?php endif; ?>
 			<div class="baseline_info">
 <?php
 				if($post['WallPost']['like'] || $post['WallPost']['dislike']):
@@ -57,37 +59,11 @@
 			</div>
 		</div>
 	</div>
-<?php 
-	/*
-	$post['Replies'][] = array(
-		'WallPost' => array(
-			'id' => '#',
-			'post' => 'This is a test comment. It is hard cored and not part of the db.'
-		),
-		'PostAuthor' => array(
-			'Profile' => array(
-				'full_name' => 'Mr. Bolts X08'
-			)
-		)
-	);
-	$post['Replies'][] = array(
-		'WallPost' => array(
-			'id' => '#',
-			'post' => 'Just one more comment to see how two comments look together.'
-		),
-		'PostAuthor' => array(
-			'Profile' => array(
-				'full_name' => 'Mr. Bolts X34'
-			)
-		)
-	); 
-	*/
-?>
 	<div class="commentsWrap">
 		<div class="arrow_up"></div>		
 		<div class="comments">	
 			<?php if($post['Replies']): foreach($post['Replies'] as $comment): ?>
-				<div class="comment">
+				<div class="comment clearfix">
 					<?php if(isset($show_post_controls)): ?>
 						<div class="deleteComment">
 <?php 
@@ -96,6 +72,13 @@
 ?>
 						</div>
 					<?php endif; ?>
+					<div class="avatar">
+<?php
+						$image_url = array('controller' => 'media', 'action' => 'avatar', $comment['PostAuthor']['avatar_id']);
+						$url = array('controller' => 'users', 'action' => 'profile', $comment['PostAuthor']['slug']);
+						echo $this->Html->image($image_url, array('url' => $url));
+?>
+					</div>
 					<div class="content">
 						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($comment['post'])); ?>
 					</div>
@@ -105,17 +88,22 @@
 						</p>
 					</div>
 				</div>	
-			<?php endforeach; endif; ?>	
-			<div class="input">
 <?php
-				//create the form
-				$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));	
-				echo $this->Form->create('WallPostComment', array('url' =>  $url));
-					echo $this->Form->input('post', array('label' => __('comment', true), 'type' => 'text'));
-					echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
-				echo $this->Form->end(__('wall_post_submit', true));
+			endforeach; endif;
+			if(isset($show_post_controls)):
 ?>
-			</div>
+				<div class="input">
+<?php
+					//create the form
+					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));	
+					echo $this->Form->create('WallPost', array('url' =>  $url));
+						echo $this->Form->input('post', array('label' => __('comment', true), 'type' => 'text'));
+						echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
+						echo $this->Form->hidden('reply_parent_id', array('value' => $post['WallPost']['id']));
+					echo $this->Form->end(__('wall_post_submit', true));
+?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
