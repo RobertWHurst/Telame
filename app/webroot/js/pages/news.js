@@ -1,18 +1,15 @@
 $(function(){
 	
-	var wallPostsLogic = function(){
+	var newsLogic = function(){
 		
 		//save this as root
 		var root = this;
 		
 		//save the dom elements
-		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
-		root.wallPosts = $('div.wallPost', '#profile_wall_posts');
-		root.wallComments = $('div.comment', '#profile_wall_posts');
-		root.wallInput = $('#WallPostPost', '#profile_wall_input');
-		root.wallInputLabel = $('label', '#profile_wall_input');
-		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');	
-		root.morePosts = $('div.more a', '#profile_wall');
+		root.wallPostsWrapper = $('#news_feed', '#page_body');
+		root.wallPosts = $('div.wallPost', '#news_feed');
+		root.wallComments = $('div.comment', '#news_feed');
+		//root.morePosts = $('div.more a', '#profile_wall');
 				
 		//post hover handler
 		root.postHoverHandler = function(){
@@ -23,7 +20,7 @@ $(function(){
 				//grab the dom element and its components
 				var domElement = $(this);
 				var baselineInfo = $('div.baseline_info', domElement);
-				var controls = $('div.delete, div.wall_to_wall, div.baseline_controls', domElement);
+				var controls = $('div.baseline_controls', domElement);
 			
   				if(event.type == 'mouseover'){
 					
@@ -94,38 +91,7 @@ $(function(){
 			});
 		}
 		
-		//delete handler
-		root.postDeleteHandler = function(){
-			
-			root.wallPostsWrapper.delegate('div.delete', 'click', function(event){
-				
-				//prevent the default action
-				event.preventDefault();
-				
-				//get the button
-				var button = $(this);
-				
-				//get the ajaxUrl
-				var ajaxUrl = '/jx' + $('a', button).attr('href');
-				
-				//get the target post (not the button)
-				domElement = button.parent();
-			
-				//send the ajax request
-				$.post(core.domain + ajaxUrl, function(data){
-					
-					if(data === 'true'){					
-						//slide up the post
-						domElement.parent().slideUp(300, function(){
-							$(this).remove();
-						});
-					}
-				});
-				
-			});
-
-		}
-		
+		/*
 		root.morePostsHandler = function(){
 		
 			root.morePosts.live('click', function(event){
@@ -136,7 +102,7 @@ $(function(){
 				//get the button
 				var button = $(this);
 				
-				var offset = $('div.wallPost', '#profile_wall_posts').size();
+				var offset = $('div.wallPost', '#news_feed').size();
 				//get the ajaxUrl
 				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
 
@@ -165,7 +131,7 @@ $(function(){
 						domElement.remove();
 			
 						//hide all of the wall post controls
-						$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
+						$('div.baseline_controls, div.commentsWrap', data).hide();
 						$('div.baseline_info', data).show();
 						
 						//append the new page data	
@@ -188,11 +154,12 @@ $(function(){
 				});
 			});		
 		}
+		*/
 		
 		root.construct = function(){
 			
 			//hide all of the wall post controls
-			$('div.delete, div.wall_to_wall, div.baseline_controls, div.commentsWrap').hide();
+			$('div.baseline_controls, div.commentsWrap').hide();
 			$('div.baseline_info').show();
 		
 			//on hover event for each post	
@@ -200,17 +167,14 @@ $(function(){
 			
 			root.postCommentsHandler();
 			
-			//on click event for delete and wall to wall
-			root.postDeleteHandler();
-			
 			//on click for more posts			
-			root.morePostsHandler();
+			//root.morePostsHandler();
 		}
 		
 		//self execute
 		root.construct();
 				
 	}
-	new wallPostsLogic;
+	new newsLogic;
 
 });

@@ -5,12 +5,13 @@ $this->set('css_for_layout', array(
 	'tall_header',
 	'main_sidebar',
 	'wall_posts',
-	'notifications/news_feed',
-	'notifications/news_sidebar'
+	'pages/news_feed',
+	'pages/news_sidebar'
 ));
 $this->set('script_for_layout', array(
 	'jquery',
-	'base'
+	'base',
+	'pages/news'
 ));
 ?>
 <div id="page_head">
@@ -29,5 +30,5 @@ $this->set('script_for_layout', array(
 			echo $this->element('wallPost', array('post' => $update));
 ?>
 	</div>
-	<?php echo $this->element('notifications/news_sidebar', array('friendLists' => $friendLists)); ?>
+	<?php echo $this->element('pages/news_sidebar', array('friendLists' => $friendLists)); ?>
 </div>

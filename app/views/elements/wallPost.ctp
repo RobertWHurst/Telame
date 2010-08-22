@@ -28,13 +28,13 @@
 		<div class="baseline">
 			<div class="baseline_controls">
 <?php 	
-				$like = ($post['WallPost']['like'])? "Like ({$post['WallPost']['like']})" : 'Like';
-				$dislike = ($post['WallPost']['dislike'])? "Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
+				$like = ($post['WallPost']['like'])? __('like', true) . " ({$post['WallPost']['like']})" : 'Like';
+				$dislike = ($post['WallPost']['dislike'])? __('dislike', true) . " Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
 							
 				echo $html->link($like, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
 				echo $html->link($dislike, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
 
-				echo $html->link('Comments', '#', array('class' => 'showComments'));
+				echo $html->link(__('comment', true), '#', array('class' => 'showComments'));
 ?>
 			</div>
 			<div class="baseline_info">
@@ -58,6 +58,7 @@
 		</div>
 	</div>
 <?php 
+	/*
 	$post['Replies'][] = array(
 		'WallPost' => array(
 			'id' => '#',
@@ -80,6 +81,7 @@
 			)
 		)
 	); 
+	*/
 ?>
 	<div class="commentsWrap">
 		<div class="arrow_up"></div>		
