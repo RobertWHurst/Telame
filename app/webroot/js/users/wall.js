@@ -83,7 +83,7 @@ $(function(){
 				else{
 					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
 				}
-			})
+			});
 		
 			//on hover event for each post comment
 			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
