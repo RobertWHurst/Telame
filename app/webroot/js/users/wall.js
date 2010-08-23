@@ -94,15 +94,9 @@ $(function(){
 				//grab the dom element and its components
 				var domElement = $(this);
 				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
-			
-  				if(wallCommentsWrap.hasClass('open')){
   				
-					wallCommentsWrap.removeClass('open').slideUp(300);
-  				}
-  				else{
-  				
-					wallCommentsWrap.addClass('open').slideDown(300);
-  				}
+  				domElement.remove();
+				wallCommentsWrap.slideDown(300);
 			});
 		}
 		

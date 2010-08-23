@@ -8,7 +8,7 @@
 ?>
 		</div>
 		<div class="content">
-			<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($post['WallPost']['post'])); ?>
+			<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . "\r\n " . $post['WallPost']['post']); ?>
 		</div>
 		<?php if(isset($show_post_controls)): ?>
 			<div class="deletePost">
@@ -96,11 +96,11 @@
 <?php
 					//create the form
 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));	
-					echo $this->Form->create('WallPost', array('url' =>  $url));
-						echo $this->Form->input('post', array('label' => __('comment', true), 'type' => 'text'));
-						echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
-						echo $this->Form->hidden('reply_parent_id', array('value' => $post['WallPost']['id']));
-					echo $this->Form->end(__('wall_post_submit', true));
+					echo $form->create('WallPost', array('url' =>  $url, 'id' => "WallPost_{$post['WallPost']['id']}"));
+						echo $form->input('post', array('label' => __('comment', true), 'type' => 'text', 'id' => "WallPostPost_{$post['WallPost']['id']}"));
+						echo $form->hidden('user_id', array('value' => $user['User']['id'], 'id' => "WallPostComment_{$post['WallPost']['id']}"));
+						echo $form->hidden('reply_parent_id', array('value' => $post['WallPost']['id'], 'id' => "WallPostReplyParentId_{$post['WallPost']['id']}"));
+					echo $form->end(__('wall_post_submit', true));
 ?>
 				</div>
 			<?php endif; ?>

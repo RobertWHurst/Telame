@@ -15,13 +15,22 @@ div.wallPostWrap div.wallPost div.avatar{
 	float: left;
 	margin-right: 10px;
 }
-div.wallPostWrap div.content{
+div.wallPostWrap div.wallPost div.content{
 	margin: 0 15px 15px 70px;
+	overflow: hidden;
 }
-div.wallPostWrap div.content p{
+div.wallPostWrap div.wallPost div.content p{
 	font-size: 1.4em;
 	line-height: 1.4em;
 	margin-bottom: 15px;
+}
+div.wallPostWrap div.wallPost div.content h1{
+	font-size: 1.6em;
+	line-height: 1.6em;
+	margin-bottom: 15px;
+	text-decoration: underline;
+	font-weight: bold; 
+	display: block;
 }
 div.wallPostWrap div.deletePost{
 	position: absolute;
@@ -100,6 +109,7 @@ div.wallPostWrap div.comments  div.comment div.avatar img{
 }
 div.wallPostWrap div.comments div.comment div.content{
 	margin: 0 15px 15px 64px;
+	overflow: hidden;
 }
 div.wallPostWrap div.comments div.comment div.content p{
 	margin-bottom: 15px;

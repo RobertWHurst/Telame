@@ -142,7 +142,7 @@ $(function(){
 						var data = $(data);
 						
 						//hide the controls						
-						$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls', data).hide();
+						$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
 						$('div.baseline_info', data).show();
 						
 						//take the data and add it to the top of the wall

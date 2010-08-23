@@ -181,7 +181,7 @@
 #profile_wall_posts{
 	padding: 0 10px;
 }
-#profile_wall_posts div.wallPost p.proccess{
+#profile_wall_posts p.proccess{
 	text-align: center;
 	font-size: 1.6em;
 }
