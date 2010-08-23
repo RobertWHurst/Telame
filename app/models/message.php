@@ -21,7 +21,7 @@ class Message extends AppModel {
 		'ChildMessage' => array(
 			'className' => 'Message',
 			'foreignKey' => 'parent_id',
-			'excusive' => true
+			'dependent' => true
 		)
 	);
 	
