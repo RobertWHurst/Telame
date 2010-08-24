@@ -125,18 +125,10 @@ class AuthExtensionComponent extends Object {
 				// if there is a cookie, it's not good (the user would not have used the login form)
 				$this->logout();
 			}
-			// explode the refering url
-			$referer = explode('/', $this->controller->referer());
-
-			// check if the last element is 'login'
-			if ($referer[count($referer)-1] == 'login') {
-				// it is? well then send them to the root, and make sure it's not SSL
-				$referer = 'http://' . env('SERVER_NAME') . '/';
-			}
-			// Send 'em off
-			$this->controller->redirect($referer);
-			exit;
+//			$r = $this->controller->Cookie->read('r');
+			$this->controller->redirect(empty($r) ? '/' : $r);
 		}
+		return;
 	}
 
 	function logout() {

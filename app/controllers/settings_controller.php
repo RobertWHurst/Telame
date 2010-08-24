@@ -3,21 +3,23 @@ class SettingsController extends AppController{
 
 	var $uses = array();
 
+	function beforeRender() {
+		parent::beforefilter();
+
+		//set the layout
+		$this->layout = 'tall_header_w_sidebar';
+
+		$user = $this->currentUser;
+
+		$this->set(compact('user'));
+	}
+
 	function basic() {
 
 		//get the user id
 		$id = $this->currentUser['User']['id'];
 
 		if(empty($this->data)){
-	
-			//set the layout
-			$this->layout = 'tall_header_w_sidebar';
-
-			$user = $this->currentUser;
-
-
-			$this->set(compact('user'));
-
 			//save the users new settings
 
 			//TODO: ACL STUFF HERE
@@ -29,21 +31,22 @@ class SettingsController extends AppController{
 		//TODO: ACL STUFF HERE
 	}
 
+	function groups() {
+		$this->loadModel('Group');
+		$groups = $this->Group->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
+		
+		$parent = $this->Aacl->getAcoTree($this->currentUser['User']['id']);
+		
+		pr($parent);
+		$this->set(compact('groups'));
+	}
+
 	function profile() {
 
 		//get the user id
 		$id = $this->currentUser['User']['id'];
 
 		if(empty($this->data)){
-	
-			//set the layout
-			$this->layout = 'tall_header_w_sidebar';
-
-			$user = $this->currentUser;
-
-
-			$this->set(compact('user'));
-
 			//save the users new settings
 
 			//TODO: ACL STUFF HERE

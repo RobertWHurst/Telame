@@ -21,4 +21,10 @@ class AaclComponent extends Object {
 		}
 		return true;
 	}
+
+	function getAcoTree($uid) {
+		$parent = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
+		$children = $this->Acl->Aco->children($parent['Aco']['id']);
+		return $children;
+	}
 }

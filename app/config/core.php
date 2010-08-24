@@ -164,7 +164,7 @@
  * characters."
  * @link http://php.net/session_name
  */
-	Configure::write('Session.cookie', 'TELAME');
+	Configure::write('Session.cookie', 'Telame');
 
 /**
  * Session time out time (in minutes).
@@ -244,7 +244,7 @@
  * If you are on PHP 5.3 uncomment this line and correct your server timezone
  * to fix the date & time related errors.
  */
-	date_default_timezone_set('UTC');
+	date_default_timezone_set('America/Vancouver');
 
 /**
  *

@@ -16,7 +16,7 @@
 		<div class="link">
 <?php 
 		$link_content = $this->Html->image('icons/newspaper.png') . __('news_feed', true);
-		echo $html->link($link_content, array('controller' => 'notifications', 'action' => 'news'), array('escape' => false));
+		echo $html->link($link_content, array('controller' => 'pages', 'action' => 'news'), array('escape' => false));
 ?>
 		</div>
 	</div>

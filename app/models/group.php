@@ -11,12 +11,12 @@ class Group extends AppModel {
 		return null;
 	}
 
-	function getFriendLists($limit = 0, $offset = 0, $arguments = false){
+	function getFriendLists($limit = 0, $offset = 0, $arguments = false) {
 		$defaults = array(
 			'uid' => false,
 			'type' => 'all'
 		);
-		
+
 		$options = parseArguments($defaults, $arguments);
 		
 		$conditions = array(

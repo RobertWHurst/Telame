@@ -47,16 +47,12 @@ class UsersController extends AppController {
 		}
 	}
 
-	//A summary of whats new for the user.
-	function index() {
-		$wp = $this->User->WallPost->find('all');
-	}
-
 	function profile($slug){
 		//set the layout
 		$this->layout = 'profile';
 
-		$canView = true;
+		$canView = false;
+
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
 
@@ -65,14 +61,23 @@ class UsersController extends AppController {
 			exit;
 		}
 
-		// Do permission check
+		// check if the requested user is yourself
 		if ($this->currentUser['User']['id'] != $user['User']['id']) {
 
-			if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
+			// Do permission check
+			if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
+				$canView = true;
+			} else {
 				$this->Session->setFlash(__('not_allowed_profile', true));
-				$canView = false;
 			}
+			// are you friends with this person
+			$isFriend = ($this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']) ? true : false);
+		} else {
+			// These are defaults for viewing your own profile
+			$canView = true;
+			$isFriend = true;
 		}
+
 		if ($canView) {
 			$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
 			$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
@@ -81,7 +86,7 @@ class UsersController extends AppController {
 			$wallPosts = array();
 		}
 
-		$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
+
 		//pass the profile data to the view
 		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts'));
 	}
