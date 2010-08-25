@@ -95,9 +95,16 @@ class AuthExtensionComponent extends Object {
 			if ($controller->Auth->login($login_array)) {
 				//  Clear auth message, just in case we use it.
 				$controller->Session->delete('Message.auth');
-				$controller->redirect($controller->Auth->redirect());
+
+				// Read the cooke, if it's empty, redirect home
+				$ref = $this->controller->Cookie->read('here');
+				if (empty($ref) || stristr($ref, 'login') !== false) {
+					$ref = '/';
+				}
+
+				$controller->redirect($ref);
 			} else { // Delete invalid Cookie
-//				$this->logout();
+				$this->logout();
 			}
 		} else {
 			$u = null;
@@ -125,8 +132,7 @@ class AuthExtensionComponent extends Object {
 				// if there is a cookie, it's not good (the user would not have used the login form)
 				$this->logout();
 			}
-//			$r = $this->controller->Cookie->read('r');
-			$this->controller->redirect(empty($r) ? '/' : $r);
+			$this->controller->redirect('/');
 		}
 		return;
 	}

@@ -59,6 +59,20 @@
 		foreach($script_for_layout as $script)
 			echo $html->script($script);
 	}
+
 ?>
+<script type="text/javascript">
+SetCookie('CakeCookie[here]', document.URL, '14');
+function SetCookie(cookieName,cookieValue,nDays) {
+	var today = new Date();
+	var expire = new Date();
+	if (nDays==null || nDays==0) 
+		nDays=1;
+	expire.setTime(today.getTime() + 3600000*24*nDays);
+	document.cookie = cookieName+"="+cookieValue
+                 + ";expires="+expire.toGMTString();
+}
+</script>
+
 </body>
 </html>
