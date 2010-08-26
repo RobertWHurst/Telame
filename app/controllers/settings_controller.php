@@ -33,12 +33,14 @@ class SettingsController extends AppController{
 
 	function groups() {
 		$this->loadModel('Group');
-		$groups = $this->Group->getFriendLists(0, 0, array('uid' => $this->currentUser['User']['id']));
-		
-		$parent = $this->Aacl->getAcoTree($this->currentUser['User']['id']);
-		
-		pr($parent);
-		$this->set(compact('groups'));
+
+		$results = array();
+		$uid = $this->currentUser['User']['id'];
+
+		$groups = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
+		$acoTree = $this->Aacl->getAcoTree($uid, $groups);
+
+		$this->set(compact('acoTree', 'groups'));
 	}
 
 	function profile() {

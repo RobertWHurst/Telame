@@ -22,9 +22,33 @@ class AaclComponent extends Object {
 		return true;
 	}
 
-	function getAcoTree($uid) {
-		$parent = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
-		$children = $this->Acl->Aco->children($parent['Aco']['id']);
+	function getAcoTree($uid, $groups, $parent = null) {
+		if (is_null($parent)) {
+			$parent = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid), 'fields' => 'id'));
+		} else {
+			$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $parent['Aco']['id']), 'fields' => 'id'));
+		}
+		$children = $this->Acl->Aco->children($parent['Aco']['id'], true);
+
+		foreach ($children as $key => $child) {
+			foreach ($groups as $group) {
+				$children[$key]['Group'][$group['Group']['id']] = @$this->Acl->check(array('model' => 'Group', 'foreign_key' => $group['Group']['id']),  $child['Aco']['alias'], 'read');
+			}
+
+			if ($this->hasChildren($child)) {
+				$children[$key]['Children'] = $this->getAcoTree($uid, $groups, $child);
+			}
+		}
+
 		return $children;
+	}
+
+
+	function hasChildren($parent) {
+		if ($parent['Aco']['rght'] == $parent['Aco']['lft'] +1 ) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

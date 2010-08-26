@@ -80,7 +80,7 @@
 ?>
 					</div>
 					<div class="content">
-						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $text->autoLink($comment['post'])); ?>
+						<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $comment['post']); ?>
 					</div>
 					<div class="time">
 						<p>

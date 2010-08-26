@@ -2,7 +2,7 @@
 class WallPostsController extends AppController {
 
 	var $components = array('RequestHandler');
-	var $helpers = array('Markdown', 'Text', 'Time');
+	var $helpers = array('Markdown', 'Time');
 
 	function beforeFilter() {
 		parent::beforeFilter();
