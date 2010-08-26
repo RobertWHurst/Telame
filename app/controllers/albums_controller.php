@@ -1,10 +1,14 @@
 <?php
 class AlbumsController extends AppController {
 
+	function beforeFilter() {
+		parent::beforeFilter();
+	}
+
 	function beforeRender() {
 		parent::beforeRender();
 		//layout
-		$this->layout = 'profile';	
+		$this->layout = 'profile';
 	}
 
 	function albums($slug = false) {
@@ -21,8 +25,16 @@ class AlbumsController extends AppController {
             exit;
 		}
 
+		$uid = $user['User']['id'];
+
+		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
+			$this->Session->setFlash(__('not_allowed_images', true));
+			$this->redirect($this->referer());
+			exit;
+		}
+
 		// get all albums
-		$albums = $this->Album->getAlbums($user['User']['id']);
+		$albums = $this->Album->getAlbums($uid);
 
 		$this->set(compact('albums', 'user'));
 	}
@@ -40,8 +52,8 @@ class AlbumsController extends AppController {
             $this->redirect($this->referer(array('action' => 'index')));
             exit;
 		}
-
-		$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
+		$uid = $user['User']['id'];
+		$aid = $this->Album->getAlbumId($uid, $albumSlug);
 
 		if (!$aid) {
             $this->redirect($this->referer(array('action' => 'index')));
