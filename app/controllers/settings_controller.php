@@ -1,6 +1,7 @@
 <?php
 class SettingsController extends AppController{
 
+	var $helpers = array('Acl');
 	var $uses = array();
 
 	function beforeRender() {
@@ -31,7 +32,7 @@ class SettingsController extends AppController{
 		//TODO: ACL STUFF HERE
 	}
 
-	function groups() {
+	function permissions() {
 		$uid = $this->currentUser['User']['id'];
 
 		$acoTree = $this->Aacl->getAcoTree($uid);

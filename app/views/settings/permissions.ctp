@@ -23,9 +23,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 <div id="page_body" class="clearfix">
 	<div id="basic">
 <?php
-	foreach ($acoTree as $aco) {
-		pr($aco); 
-	}
+	$acl->formatAcoTree($acoTree);
 ?>
 	</div>
 </div>

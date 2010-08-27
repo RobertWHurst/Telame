@@ -52,6 +52,9 @@
 	// Add Friend
 	Router::connect('/f/a/*', array('controller' => 'users', 'action' => 'addFriend'));
 
+	// Events
+	Router::connect('/calendar/*', array('controller' => 'events', 'action' => 'calendar'));
+
 	// Friend list
 	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
 
@@ -91,8 +94,8 @@
 	
 	// Settings
 	Router::connect('/settings', array('controller' => 'settings', 'action' => 'basic'));
+	Router::connect('/settings/permissions', array('controller' => 'settings', 'action' => 'permissions'));
 	Router::connect('/settings/profile', array('controller' => 'settings', 'action' => 'profile'));
-	Router::connect('/settings/groups', array('controller' => 'settings', 'action' => 'groups'));
 
 	// Wall Posts
 	Router::connect('/w/l/*', array('controller' => 'wall_posts', 'action' => 'lists'));
@@ -108,4 +111,4 @@
 	
 // This must be last
 	// Profile
-	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'));
+	Router::connect('/u/*', array('controller' => 'users', 'action' => 'profile'));
