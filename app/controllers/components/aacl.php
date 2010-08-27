@@ -34,7 +34,7 @@ class AaclComponent extends Object {
 
 	// We take the User ID, their groups, and optionally a parent to start
 	// With the info we build an array of ACO's and their children and what groups can do what with them
-	function getAcoTree($uid, $groups, $parent = null) {
+	function getAcoTree($uid, $groups = null, $parent = null) {
 		// If the parent is null, we need they UID, this is the starting point
 		if (is_null($parent)) {
 			// Find the user's lowest level ACO, and only get the ID, it's all we need
@@ -42,18 +42,26 @@ class AaclComponent extends Object {
 		} else {
 			$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $parent['Aco']['id']), 'fields' => 'id'));
 		}
+		
+		if (is_null($groups)) {
+			App::Import('Model', 'Group');
+			$this->Group = new Group();
+			$groups = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
+		}
 		// Find all the direct children, only direct
 		$children = $this->Acl->Aco->children($parent['Aco']['id'], true);
 
 		// now loop through all the kids
 		foreach ($children as $key => $child) {
+			$i = 0;
 			// also the groups (this could potentially be a LOT of looping, may need tweaking)
 			foreach ($groups as $group) {
 				// Check if the group is allowed to read the current ACO, and store the result in the $child[$key]['Groups']['id'] array
 				// Use the @ to suppress error messages.
 				// FIXME: Remove the @, this will only work if/when all the groups are stored in the db for the user's acos
 				$result = @$this->Acl->check(array('model' => 'Group', 'foreign_key' => $group['Group']['id']),  $child['Aco']['alias'], 'read');
-				$children[$key]['Group'][$group['Group']['id']] = ($result ? 1 : 0);
+				$children[$key]['Groups'][$i] = $group;
+				$children[$key]['Groups'][$i++]['Group']['canRead'] = ($result ? 1 : 0);
 			}
 
 			// check if this child has kids

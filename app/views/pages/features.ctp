@@ -1,3 +1,15 @@
+<?php
+//INCLUDES
+$this->set('css_for_layout', array(
+	'base',
+	'simple_header'
+));
+$this->set('script_for_layout', array(
+	'jquery',
+	'base',
+	'users/taglines'
+));
+?>
 <!- // Consider moving this div to the layout if it's used on all pages.  -->
 <div id="content">
 	<div id="features">

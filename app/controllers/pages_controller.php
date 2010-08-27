@@ -17,7 +17,7 @@ class PagesController extends AppController {
 		
 	}
 
-	function home() {
+	function features() {
 		//set the css and layout
 		$this->layout = 'simple_header';
 	}

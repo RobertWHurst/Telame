@@ -14,18 +14,16 @@ class AlbumsController extends AppController {
 	function albums($slug = false) {
 		// get user id
 		if (!$slug) {
-			$slug = $this->currentUser['User']['slug'];
+			$user = $this->currentUser;
+		} else {
+			// get the user's info based on their slug
+			$user = $this->Album->User->getProfile($slug);
 		}
-
-		// get the user's info based on their slug
-		$user = $this->Album->User->getProfile($slug);
 
 		if (!$user) {
             $this->redirect($this->referer(array('action' => 'index')));
             exit;
 		}
-
-		$uid = $user['User']['id'];
 
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
 			$this->Session->setFlash(__('not_allowed_images', true));
@@ -34,7 +32,7 @@ class AlbumsController extends AppController {
 		}
 
 		// get all albums
-		$albums = $this->Album->getAlbums($uid);
+		$albums = $this->Album->getAlbums($user['User']['id']);
 
 		$this->set(compact('albums', 'user'));
 	}
@@ -42,18 +40,18 @@ class AlbumsController extends AppController {
 	function album($slug = false, $albumSlug = false){
 		// get user id
 		if (!$slug) {
-			$slug = $this->currentUser['User']['slug'];
+			$user = $this->currentUser;
+		} else {
+			// get the user's info based on their slug
+			$user = $this->Album->User->getProfile($slug);
 		}
-
-		// get the user's info based on their slug
-		$user = $this->Album->User->getProfile($slug);
 
 		if (!$user) {
             $this->redirect($this->referer(array('action' => 'index')));
             exit;
 		}
-		$uid = $user['User']['id'];
-		$aid = $this->Album->getAlbumId($uid, $albumSlug);
+
+		$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
 
 		if (!$aid) {
             $this->redirect($this->referer(array('action' => 'index')));
