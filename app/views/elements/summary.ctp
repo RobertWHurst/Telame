@@ -3,7 +3,7 @@
 		<?php echo $user['Profile']['full_name']; ?>
 	</h1>
 	<?php if(isset($isFriend) && !$isFriend) { ?>
-	<h2><?php echo $html->link('Add ' . $user['Profile']['full_name'] . ' as friend', '/f/a/'); ?></h2>
+	<h2><?php echo $html->link('Add ' . $user['Profile']['full_name'] . ' as friend', '/f/a/' . $user['User']['id']); ?></h2>
 	<?php } ?>
 	<table>
 		<tr class="key">

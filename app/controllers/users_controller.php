@@ -8,24 +8,12 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 
 		$this->Security->blackHoleCallback = '_forceSSL';
-		$this->Security->requireSecure('login');
+		$this->Security->requireSecure('login', 'signup');
 		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
 		 	$this->_unforceSSL();
 		}
 		$this->Auth->allow(array('confirm', 'signup'));
 //		$this->Auth->allow('signup');
-	}
-
-	function addFriend() {
-		if (!empty($this->data)) {
-			$this->User->GroupsUser->save($this->data);
-		} else {
-			$friendLists = $this->User->Group->getFriendLists(0, 0, array(
-				'uid' => $this->currentUser['User']['id'],
-				'type' => 'list',
-				));
-			$this->set(compact('friendLists'));
-		}
 	}
 
 	function confirm($email = null, $hash = null) {
@@ -101,9 +89,9 @@ class UsersController extends AppController {
 		$this->set('results', $results);
 	}
 
-	function signup() {
+	function signup($key = null) {
 		$this->layout = 'simple_header';
-
+		// data has been posted
 		if (!empty($this->data)) {
 			// make sure the passwords match, if not show the page again with all the current info except the password
 			if ($this->data['User']['password'] != $this->Auth->password($this->data['User']['passwd'])) {
@@ -112,8 +100,17 @@ class UsersController extends AppController {
 				unset($this->data['User']['passwd']);
 			// passwords match
 			} else {
-				// We need the hash here for the email
-				$this->data['User']['hash'] =  sha1(date('Y-m-d') . Configure::read('Security.salt'));
+				// import the beta keys model
+				$this->loadModel('BetaKey');
+				$key = $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
+				if (!$key) {
+					$this->Session->setFlash(__('invalid_key', true));
+					$this->redirect($this->referer());
+					exit;
+				}
+
+				// We need the hash here for the confirmation email
+				$this->data['User']['hash'] =  sha1(date('Y-m-d') . $this->data['User']['email'] . Configure::read('Security.salt'));
 				if ($this->User->signup($this->data)) {
 					// send user email
 					$this->Email->from		=	'Telame.com <admin@telame.com>';
@@ -124,6 +121,9 @@ class UsersController extends AppController {
 					$this->set('user', $this->data);
 					$this->Email->send();
 
+					// Delete the beta key here, that way it's the last thing to be done, if something else fails, they can try again
+					$this->BetaKey->delete($key['BetaKey']['id']);
+
 					// tell the user it's all good
 					$this->Session->setFlash(__('user_saved', true));
 				} else {
@@ -132,6 +132,9 @@ class UsersController extends AppController {
 				   $this->redirect('/');
 				   exit;
 			}
+		} else {
+			// add the beta key to the default $this->data array
+			$this->data['User']['beta_key'] = $key;
 		}
 	}
 

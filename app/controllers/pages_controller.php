@@ -22,6 +22,11 @@ class PagesController extends AppController {
 		$this->layout = 'simple_header';
 	}
 
+	function home() {
+		//set the css and layout
+		$this->layout = 'simple_header';
+	}
+
 	function news($selectedFriendList = null, $uid = null, $hash = null) {
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');

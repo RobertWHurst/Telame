@@ -39,7 +39,7 @@
 	// Signup and Login/logout
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
+	Router::connect('/signup/*', array('controller' => 'users', 'action' => 'signup'));
 	// Confirm email
 	Router::connect('/c/*', array('controller' => 'users', 'action' => 'confirm'));
 
@@ -49,12 +49,11 @@
 
 
 // User info
-	// Add Friend
-	Router::connect('/f/a/*', array('controller' => 'users', 'action' => 'addFriend'));
-
 	// Events
 	Router::connect('/calendar/*', array('controller' => 'events', 'action' => 'calendar'));
 
+	// Friend - add
+	Router::connect('/f/a/*', array('controller' => 'friends', 'action' => 'addFriend'));
 	// Friend list
 	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
 

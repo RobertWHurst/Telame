@@ -24,6 +24,7 @@ $this->set('script_for_layout', array(
 		echo $form->input('password');
 		echo $form->input('passwd', array('label' => 'Password again'));
 		echo $form->input('slug', array('label' => 'Personal Username'));
+		echo $form->input('beta_key');
 		echo $form->end(__('signup', true));
 ?>	
 	</div>
