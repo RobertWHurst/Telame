@@ -123,15 +123,23 @@ class User extends AppModel {
 		$node = $this->Acl->Aco->node('User::' . $uid);
 		$parentId = Set::extract($node, "0.Aco.id");
 
-		foreach (Configure::read('UserAcls') as $acl) {
-			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $acl));
+
+		//FIXME This needs a recursive function to extract the acl info to store it in the DB
+		foreach (Configure::read('UserAcls') as $key => $acl) {
+			if (is_array($key)) {
+				$node = $this->Acl->Aco->node($key);
+				$pid = Set::extract($node, "0.Aco.id");
+			} else {
+				$pid = $parentId;
+			}
+			$this->Acl->Aco->create(array('parent_id' => $pid, 'alias' => $acl));
 			$this->Acl->Aco->save();
 		}
 		return true;
 	}
 
 // almost all related db info should be deleted automatically
-// aco's 
+// aco's
 // files
 // groups
 
@@ -140,11 +148,11 @@ class User extends AppModel {
 		$this->id = $uid;
 		$this->recursive = -1;
 		$user = $this->findById($uid);
-		
+
 		$userDir = USER_DIR . $user['User']['home_dir'] . DS . $user['User']['sub_dir'];
 		$this->removeUserDir($userDir);
 		// TODO; finish removing the rest of the user info
-		
+
 		// Remove the user and all dependent data
 		$this->delete($uid, true);
 	}
@@ -245,8 +253,8 @@ class User extends AppModel {
 			return false;
 		}
 	}
-	
-	
+
+
  	function removeUserDir($dir){
 		if(is_file($dir)) {
 			return @unlink($dir);

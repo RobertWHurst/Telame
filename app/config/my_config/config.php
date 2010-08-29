@@ -20,7 +20,12 @@ Configure::write('AllowedFileTypes', array(
 // User information
 
 Configure::write('UserAcls', array(
-	'media',
+	'friends',
+	'media' => array(
+		'documents', 
+		'images', 
+		'videos'
+	),
 	'profile',
 ));
 
