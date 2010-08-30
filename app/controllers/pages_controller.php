@@ -36,7 +36,8 @@ class PagesController extends AppController {
 			Configure::write('debug', 0);
 			// this just checks that the hash is valid for the specified user
 			$this->WallPost->User->recursive = -1;
-			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => intval($uid), 'rss_hash' => intval($hash))));
+			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => intval($uid), 'User.rss_hash' => $hash)));
+
 			if (!$user) {
 				return false;
 			}
@@ -44,6 +45,9 @@ class PagesController extends AppController {
 			//set the layout
 			$this->layout = 'tall_header_w_sidebar';
 			$uid = $this->currentUser['User']['id'];
+			if (!$uid) {
+				$this->redirect('/');
+			}
 		}
 
 		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
