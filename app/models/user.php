@@ -109,31 +109,36 @@ class User extends AppModel {
 		}
 	}
 
-	function createAcl($uid) {
+	function createAcl($uid = null, $root = null, $acls = null) {
 		App::import('Component', 'Acl');
 		$this->Acl = new AclComponent();
 		$this->Acl->startup($controller);
 
-		$node = $this->Acl->Aco->node('Users');
-		$parentId = Set::extract($node, "0.Aco.id");
+		if (is_null($vals)) {
+			$node = $this->Acl->Aco->node('Users');
+			$parentId = Set::extract($node, "0.Aco.id");
 
-		$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
-		$this->Acl->Aco->save();
-
-		$node = $this->Acl->Aco->node('User::' . $uid);
-		$parentId = Set::extract($node, "0.Aco.id");
-
-
-		//FIXME This needs a recursive function to extract the acl info to store it in the DB
-		foreach (Configure::read('UserAcls') as $key => $acl) {
-			if (is_array($key)) {
-				$node = $this->Acl->Aco->node($key);
-				$pid = Set::extract($node, "0.Aco.id");
-			} else {
-				$pid = $parentId;
-			}
-			$this->Acl->Aco->create(array('parent_id' => $pid, 'alias' => $acl));
+			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
 			$this->Acl->Aco->save();
+
+			$node = $this->Acl->Aco->node('User::' . $uid);
+			$parentId = Set::extract($node, "0.Aco.id");
+			
+			$acls = Configure::read('UserAcls');
+		} else {
+			$node = $this->Acl->node($root);
+			$parentId = Set::extract($node, '0.Aco.id');
+		}
+
+		foreach ($acls as $key => $val) {
+			if (is_array($val)) {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $key));
+				$this->Acl->Aco->save();
+				$this->createAcl($uid, $key, $val);
+			} else {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $val));
+				$this->Acl->Aco->save();
+			}
 		}
 		return true;
 	}
