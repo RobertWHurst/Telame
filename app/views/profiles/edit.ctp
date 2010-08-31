@@ -23,4 +23,6 @@
 		</div>
 	</div>
 </div>
-<?php echo $this->element('copyright'); ?>
+<footer>
+			<?php echo $this->element('copyright'); ?>
+		</footer>

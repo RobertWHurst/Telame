@@ -57,7 +57,7 @@ $(function(){
 					var ajaxUrl = domElement.attr('href');
 					
 					//tell the message controller to delete the message
-					$.get(core.domain + ajaxUrl, {}, function(data){
+					$.post(core.domain + ajaxUrl, {}, function(data){
 						if(data === 'true'){
 							domElement.parent().parent().slideUp(root.speed);
 						}

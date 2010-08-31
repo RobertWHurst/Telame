@@ -47,7 +47,9 @@
 				</div>
 			</div>
 		</div>
-		<?php echo $this->element('copyright'); ?>
+		<footer>
+			<?php echo $this->element('copyright'); ?>
+		</footer>
 	</div>
 	<?php if(Configure::read('debug') > 0): ?>
 		<div id="sql_dump">

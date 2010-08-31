@@ -20,6 +20,8 @@ $this->set('script_for_layout', array(
 		<p>If you want to know when were up and ready to go, signup for our <?php echo $html->link('newsletter', 'http://automailer.thinktankdesign.ca/signup/for_list/telame'); ?>.
 	</div>
 	
-	<?php echo $this->element('copyright'); ?>	
+	<footer>
+			<?php echo $this->element('copyright'); ?>
+		</footer>	
 	
 </div>

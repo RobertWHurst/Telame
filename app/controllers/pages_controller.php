@@ -20,11 +20,15 @@ class PagesController extends AppController {
 	function features() {
 		//set the css and layout
 		$this->layout = 'simple_header';
+		
+		$this->set('title_for_layout', __('site_name', true));
 	}
 
 	function home() {
 		//set the css and layout
 		$this->layout = 'simple_header';
+		
+		$this->set('title_for_layout', __('site_name', true));
 	}
 
 	function news($selectedFriendList = null, $uid = null, $hash = null) {

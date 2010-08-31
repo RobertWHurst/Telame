@@ -1,25 +1,28 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	
 	<title><?php echo $title_for_layout; ?></title>
 <?php			
-		if(is_array($css_for_layout)){
-			foreach($css_for_layout as $css)
-				echo $html->css($css);
-		}
-		
+		echo $html->css($css_for_layout);		
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
+		echo $html->meta('viewport', 'width=device-width; initial-scale=1.0; maximum-scale=1.0;');
+		echo $html->meta('title', 'Telame');
+		echo $html->meta('description', 'Telame: The world\'s first responsible social network');
+		echo $html->meta('author', 'Robert Hurst and Eric Friesen');
 ?>
 </head>
 <body>
-	<div id="flash">
-		<?php echo $this->Session->flash(); ?>
-	</div>
-	<div id="backgroundHead">		
-		<div id="backgroundHeadGlow"></div>
-	</div>
-	<div id="backgroundBase"></div>	
+	<header>
+		<div id="flash">
+			<?php echo $this->Session->flash(); ?>
+		</div>
+		<div id="backgroundHead"></div>
+		<div id="backgroundBase"></div>	
+	</header>
 	<div id="wrap_content">
 		<div id="content" class="clearfix">
 			<div id="wrap_main_sidebar">
@@ -32,7 +35,11 @@
 				<?php echo $content_for_layout; ?>
 			</div>
 		</div>
-		<?php echo $this->element('copyright'); ?>
+		<footer>
+			<footer>
+			<?php echo $this->element('copyright'); ?>
+		</footer>
+		</footer>
 	</div>
 	<?php if(Configure::read('debug') > 0): ?>
 		<div id="sql_dump">

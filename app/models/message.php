@@ -5,7 +5,10 @@ class Message extends AppModel {
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'counterCache' => true,
-			'counterScope' => array('Message.read' => NULL)
+			'counterScope' => array(
+				'Message.read' => null,
+				'Message.deleted_by_user' => false,
+			)
 		),
 		'Author' => array(
 			'className' => 'User',

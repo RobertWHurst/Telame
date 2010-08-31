@@ -52,3 +52,13 @@
 	text-align: center;
 	line-height: 8.0em;
 }
+#messages div.message div.delete{
+	position: absolute;
+	top:10px;
+	right: 10px;
+}
+#messages div.message div.reply{
+	position: absolute;
+	top:30px;
+	right: 10px;
+}

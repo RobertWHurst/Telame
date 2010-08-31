@@ -22,7 +22,9 @@ $this->set('script_for_layout', array(
 			<p>Description of Feature 1</p>
 		</div>
 		
-		<?php echo $this->element('copyright'); ?>	
+		<footer>
+			<?php echo $this->element('copyright'); ?>
+		</footer>	
 		
 	</div>
 </div>
