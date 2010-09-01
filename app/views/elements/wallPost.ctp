@@ -8,7 +8,17 @@
 ?>
 		</div>
 		<div class="content">
-			<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . "\r\n " . $post['WallPost']['post']); ?>
+<?php			
+			if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){		
+				$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
+				$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' to ' . $html->link($post['User']['Profile']['full_name'], $aUrl) . ":\r\n\r\n ";				
+			}
+			else{				
+				$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ';				
+			}
+			
+			echo $markdown->parse($author_name . $post['WallPost']['post']);
+?>
 		</div>
 		<?php if(isset($show_post_controls)): ?>
 			<div class="deletePost">

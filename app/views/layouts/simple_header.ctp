@@ -35,5 +35,12 @@
 		<?php echo $content_for_layout; ?>
 	</div>
 	<?php echo $html->script($script_for_layout); ?>
+	<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
+	<script type="text/javascript">
+		try{
+			reinvigorate.track("h8664-j06plyeuf7");
+		}
+		catch(err){}
+	</script>
 </body>
 </html>
