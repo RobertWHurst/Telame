@@ -40,7 +40,7 @@
 				<div class="baseline_controls">
 <?php 	
 					$like = ($post['WallPost']['like'])? __('like', true) . " ({$post['WallPost']['like']})" : 'Like';
-					$dislike = ($post['WallPost']['dislike'])? __('dislike', true) . " Dislike ({$post['WallPost']['dislike']})" : 'Dislike';
+					$dislike = ($post['WallPost']['dislike'])? __('dislike', true) . " ({$post['WallPost']['dislike']})" : 'Dislike';
 								
 					echo $html->link($like, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']));
 					echo $html->link($dislike, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']));
