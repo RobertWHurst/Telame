@@ -36,14 +36,15 @@
 	font-size: 16px;
 	padding: 3px 50px 3px 3px;
 	width: 385px;
-	height: 20px;
 	border: 1px solid #949494;
 	background: #dedede;
-	resize: none;
-	outline: none;
+}
+#profile_wall_input input[type="text"]{
+	height: 20px;
 }
 #profile_wall_input textarea{
 	font-family: Helvetica, Arial, sans-serif;
+	resize: none;
 }
 #profile_wall_input input[type="submit"]{
 	position: absolute;

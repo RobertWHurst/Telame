@@ -7,12 +7,9 @@ $(function(){
 		
 		//save the dom elements
 		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
-		root.wallPosts = $('div.wallPost', '#profile_wall_posts');
-		root.wallComments = $('div.comment', '#profile_wall_posts');
-		root.wallInput = $('#WallPostPost', '#profile_wall_input');
-		root.wallInputLabel = $('label', '#profile_wall_input');
-		root.wallInputWrap = $('#profile_wall_input', '#profile_wall');	
-		root.morePosts = $('div.more a', '#profile_wall');
+		root.wallPostsComments = $('div.comments', root.wallPostsWrapper);
+		root.commentForms = $('form', root.wallPostsComments);
+		root.morePostsButton = $('div.more a', '#profile_wall');
 				
 		//post hover handler
 		root.postHoverHandler = function(){
@@ -69,37 +66,6 @@ $(function(){
 			});
 		}
 		
-		
-		//delete handler
-		root.postCommentsHandler = function(){
-		
-			//hide all of the comment wrappers with no comments
-			$('div.comments', root.wallPostsWrapper).each(function(){
-				var domElement = $(this);
-				wallCommentsWrap = domElement.parents('div.commentsWrap');
-				if(domElement.children().size() <= 1){
-					wallCommentsWrap.hide();
-				}
-				else{
-					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
-				}
-			});
-		
-			//on hover event for each post comment
-			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
-				
-				//prevent the default action
-				event.preventDefault();
-			
-				//grab the dom element and its components
-				var domElement = $(this);
-				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
-  				
-  				domElement.remove();
-				wallCommentsWrap.slideDown(300);
-			});
-		}
-		
 		//delete handler
 		root.postDeleteHandler = function(){
 			
@@ -130,18 +96,251 @@ $(function(){
 				
 			});
 
+		}		
+		
+		//comments hover handler
+		root.postCommentsHoverHandler = function(){
+		
+			//hide all of the comment wrappers with no comments
+			root.wallPostsComments.each(function(){
+				var domElement = $(this);
+				wallCommentsWrap = domElement.parents('div.commentsWrap');
+				if(domElement.children().size() <= 1){
+					wallCommentsWrap.hide();
+				}
+				else{
+					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
+				}
+			});
+		
+			//on hover event for each post comment
+			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
+				
+				//prevent the default action
+				event.preventDefault();
+			
+				//grab the dom element and its components
+				var domElement = $(this);
+				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
+  				
+  				domElement.remove();
+				wallCommentsWrap.slideDown(300);
+			});
+		}
+		
+		root.postCommentDeleteHandler = function(){
+			
+			root.wallPostsWrapper.delegate('div.deleteComment', 'click', function(event){
+				
+				//prevent the default action
+				event.preventDefault();
+				
+				//get the button
+				var domElement = $(this);
+				
+				//get the ajaxUrl
+				var ajaxUrl = $('a', domElement).attr('href');
+			
+				//send the ajax request
+				$.post(core.domain + ajaxUrl, function(data){
+					
+					if(data === 'true'){					
+						//slide up the post
+						domElement.parent().slideUp(300, function(){
+							$(this).remove();
+						});
+					}
+				});
+				
+			});
+			
+		}
+				
+		root.postCommentInputHoverHandler = function(){
+		
+			root.wallPostsWrapper.delegate('div.commentInput', 'hover', function(event){
+				
+				var domElement = $(this);
+				
+  				if(event.type == 'mouseover'){
+					//remove the old active class and add the inactive class
+					domElement.addClass('active').addClass('hover');
+				}
+				else{
+					//remove the old active class and add the inactive class
+					domElement.removeClass('hover');			
+					if(domElement.hasClass('focus') === false){	
+						domElement.removeClass('active');
+					}
+				}
+				
+			});
+			
+		}
+				
+		root.postCommentInputFocusHandler = function(){
+		
+			root.wallPostsWrapper.delegate('div.commentInput', 'focus', function(){
+			
+				var domElement = $(this);
+				
+				var input = $('textarea, input:text', domElement);
+				
+				if(!input.hasClass('textarea')){
+					
+					//get the input id, and name.
+					var inputMeta = {
+						'id': input.attr('id'),
+						'name': input.attr('name')
+					}
+				
+					//convert the input to a textarea					
+					input.replaceWith('<textarea id="' + inputMeta.id + '" class="textarea" name="' + inputMeta.name + '"></textarea>');
+					
+					//if the element selector					
+					input = $('#' + inputMeta.id, domElement);
+					
+					//regain focus
+					input.autogrow().focus();
+				}
+				else{
+				
+					//remove the old active class and add the inactive class
+					domElement.addClass('active').addClass('focus');
+				
+					//hide the label
+					$('label', domElement).hide();
+				
+				}
+				
+				
+			});
+			
+			root.wallPostsWrapper.delegate('div.commentInput', 'blur', function(){
+			
+				var domElement = $(this);
+				
+				var input = $('textarea, input:text', domElement);
+				
+				//remove the old active class and add the inactive class
+				domElement.removeClass('focus');			
+				if(domElement.hasClass('hover') === false){			
+					domElement.removeClass('active');
+				}
+				
+				if(input.val() === ''){
+					$('label', domElement).show();
+					
+					if(input.hasClass('textarea')){
+				
+						//get the input id, and name.
+						var inputMeta = {
+							'id': input.attr('id'),
+							'name': input.attr('name')
+						}
+				
+						//convert the textarea to an input
+						input.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+						//delete any textarea shadows
+						$('div.autogrow_shadow').remove();
+						
+					}
+				}
+				
+			});
+			
+		}
+		
+		
+		
+		root.postCommentSubmitHandler = function(){
+		
+			//on submit
+			root.commentForms.submit(function(event){
+			
+				
+				//stop the form from sending the headers
+				event.preventDefault();
+				
+				//save the current domElement
+				var domElement = $(this);
+				
+				//get the action url
+				var ajaxUrl = domElement.attr('action');
+								
+				//get the form data
+				var formData = domElement.serialize();
+				
+				//get the input wrap
+				var inputWrapper = domElement.parent();
+				
+				//get the input wrap
+				var postComments = inputWrapper.parent();
+				
+				//get the input 
+				var input = $('input:text, textarea', domElement);
+				
+				//remove any state classes from the input wrapper
+				inputWrapper.removeClass('active hover focus');
+				
+				//clear the input
+				input.attr('value', "").blur();
+					
+				//turn the input into a posting dialog
+				inputWrapper.children().hide();
+				inputWrapper.append('<p class="proccess">Posting...</p>');
+				
+				$.post(core.domain + ajaxUrl, formData, function(data){
+					
+					if(data !== 'false'){
+					
+						
+						//convert the data into a jquery object
+						var data = $(data);
+						
+						//hide the controls						
+						$('div.deleteComment', data).hide();
+						
+						//take the data and add it to the top of the wall
+						$('div.comment:last', postComments).after(data);
+						
+						if(input.hasClass('textarea')){
+				
+							//get the input id, and name.
+							var inputMeta = {
+								'id': input.attr('id'),
+								'name': input.attr('name')
+							}
+				
+							//convert the textarea to an input
+							input.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
+						
+							//delete any textarea shadows
+							$('div.autogrow_shadow').remove();
+						}
+						
+					}
+						
+					//remove the progress dialog and show the input box again
+					inputWrapper.children('p.proccess').remove();
+					inputWrapper.children().show();
+					
+				});
+				
+			});
 		}
 		
 		root.morePostsHandler = function(){
 		
-			root.morePosts.live('click', function(event){
+			root.morePostsButton.live('click', function(event){
 				
 				//prevent the default action
 				event.preventDefault();
 				
 				//get the button
 				var button = $(this);
-				
+				//get the current element count
 				var offset = $('div.wallPost', '#profile_wall_posts').size();
 				//get the ajaxUrl
 				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
@@ -198,12 +397,25 @@ $(function(){
 			
 			//hide all of the wall post controls
 			$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls').hide();
-			$('div.baseline_info').show();
+			$('div.baseline_info, div.commentInput label').show();
 		
 			//on hover event for each post	
 			root.postHoverHandler();
 			
-			root.postCommentsHandler();
+			//on hover of comments
+			root.postCommentsHoverHandler();
+			
+			//on the click of each delete button of each comment
+			root.postCommentDeleteHandler();
+			
+			//on hover of comment inputs
+			root.postCommentInputHoverHandler();
+			
+			//on focus of comment inputs
+			root.postCommentInputFocusHandler();
+			
+			//on submit of a comment
+			root.postCommentSubmitHandler();
 			
 			//on click event for delete and wall to wall
 			root.postDeleteHandler();

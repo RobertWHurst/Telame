@@ -29,7 +29,7 @@ class WallPost extends AppModel {
 			'aid' => false,
 			'User' => false,
 			'PostAuthor' => true,
-			'Replies' => true
+			'Replies' => false
 		);
 		
 		//parse the options
@@ -40,8 +40,8 @@ class WallPost extends AppModel {
 
 		// create conditions
 		// get only get parents in the top level, not replies.
-		$conditions['reply_parent_id'] = null;
-		
+		if($options['Replies'] == false)
+			$conditions['reply_parent_id'] = null;
 		if($options['id'])
 			$conditions['WallPost.id'] = $options['id'];
 		if($options['uid'])
@@ -54,8 +54,8 @@ class WallPost extends AppModel {
 			$contain[] = 'User.Profile';
 		if($options['PostAuthor'])
 			$contain[] = 'PostAuthor.Profile';
-		if($options['Replies'])
-			$contain[] = 'Replies.PostAuthor.Profile';
+		
+		$contain[] = 'Replies.PostAuthor.Profile';
 		
 		$this->recursive = 2;
 		$wallPosts = $this->find('all', array(
