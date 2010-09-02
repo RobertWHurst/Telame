@@ -6,12 +6,23 @@
 	 * 
 	 * TODO:
 	 * This file should dynamically load modules based on a users settings.
-	 * The options should be fead from the app controller.
+	 * The options should be fed from the app controller.
 	 * 
 	 */
 	
 	/* DELETE THE BELOW BEFORE RELEASE!!! */
 ?>
+	<div id="module_notifications" class="module">
+<?php 
+		$noteCount = ($currentUser['User']['notification_count'] ? ' (' . $currentUser['User']['notification_count'] . ')' : '');
+?>
+		<div class="<?php echo ($noteCount)? 'link active' : 'link'; ?>">
+<?php
+		$link_content = $this->Html->image('icons/asterisk_yellow.png') . __('notifications', true) . $noteCount;
+		echo $html->link($link_content, array('controller' => 'notifications', 'action' => 'index'), array('escape' => false));
+?>
+		</div>
+	</div>
 	<div id="module_newsfeed" class="module">
 		<div class="link">
 <?php 

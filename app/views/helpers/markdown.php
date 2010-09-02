@@ -17,7 +17,7 @@ class MarkdownHelper extends AppHelper {
 		 */
 		 
 		 //format the content with markdown
-		 $text = preg_replace('/ ((?:http[s]*|[s]*ftp|git):\/\/[^\s]+) /', ' <a href="$1" rel="" target="TELAME_LINK">$1</a> ', $text);
+		 $text = preg_replace('/ ((?:http[s]*|[s]*ftp|git):\/\/[^\s]+)/', ' <a href="$1" rel="" target="TELAME_LINK">$1</a> ', $text);
 		 
 		 //convert urls to links
 		 $text = Markdown($text);

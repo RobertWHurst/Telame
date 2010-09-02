@@ -14,6 +14,10 @@ class Notification extends AppModel {
 		return $this->find('all', array(
 				'conditions' => array(
 					'user_id' => $uid
+				),
+				'order' => array(
+					'Notification.new',
+					'Notification.id'
 				)
 			)
 		);

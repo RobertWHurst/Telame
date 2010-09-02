@@ -5,6 +5,20 @@ class NotificationsController extends AppController {
 		parent::beforeFilter();
 	}
 
+	function beforeRender(){
+		parent::beforeRender();
+
+		//set the layout
+		$this->layout = 'tall_header_w_sidebar';
+	}
+
+
+	function index() {
+		$notifications = $this->Notification->getAllNotifications($this->currentUser['User']['id']);
+
+		$this->set(compact('notifications'));
+	}
+
 	function markRead($id) {
 		if (!$id) {
 			$this->redirect('/');
