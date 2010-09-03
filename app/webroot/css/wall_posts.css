@@ -95,6 +95,7 @@ div.wallPostWrap div.comments{
 div.wallPostWrap div.comments div.comment{	
 	padding: 5px;
 	background: #555;
+	width: 336px;
 	position: relative;
 	border: 1px solid #595959;
 	min-height: 16px;
@@ -130,24 +131,32 @@ div.wallPostWrap div.comments div.comment div.time p{
 	color: #888;
 	font-size: 1.0em;
 }
-div.wallPostWrap div.comments div.input{
+div.wallPostWrap div.comments div.commentInput{
 	position: relative;
 }
-div.wallPostWrap div.comments div.input label{
+div.wallPostWrap div.comments div.commentInput label{
 	position: absolute;
 	top:5px;
 	left:5px;
 	font-size: 12px;
 	color: #949494;
+	display: none;
 }
-div.wallPostWrap div.comments div.input input[type="text"]{
+div.wallPostWrap div.comments div.commentInput input[type="text"],
+div.wallPostWrap div.comments div.commentInput textarea{
 	width: 293px;
-	height: 18px;
 	font-size: 12px;
 	padding: 3px 50px 3px 3px;
 	background: #dedede;
 }
-div.wallPostWrap div.comments div.input input[type="submit"]{
+div.wallPostWrap div.comments div.commentInput input[type="text"]{
+	height: 18px;
+}
+div.wallPostWrap div.comments div.commentInput textarea{
+	font-family: Helvetica, Arial, sans-serif;
+	resize: none;
+}
+div.wallPostWrap div.comments div.commentInput input[type="submit"]{
 	position: absolute;
 	top:5px;
 	right:0;
@@ -155,4 +164,20 @@ div.wallPostWrap div.comments div.input input[type="submit"]{
 	font-size: 12px;
 	color: #949494;
 	cursor: pointer;
+}
+div.wallPostWrap div.comments div.commentInput.active input[type="text"],
+div.wallPostWrap div.comments div.commentInput.active textarea{
+	border: 1px solid #669b00;
+	background: #fff;
+}
+div.wallPostWrap div.comments div.commentInput.active label,
+div.wallPostWrap div.comments div.commentInput.active input[type="submit"]{
+	color: #669b00;
+}
+div.wallPostWrap div.comments div.commentInput.focus input[type="submit"]{
+	font-weight: bold;
+	text-decoration: underline;
+}
+div.wallPostWrap div.comments div.commentInput.focus input:hover[type="submit"]{
+	color: #86cf00;
 }

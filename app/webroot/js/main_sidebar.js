@@ -1,6 +1,6 @@
 $(function(){
 
-	var sidebar_logic = function(){
+	var sidebarLogic = function(){
 		
 		//save this as root
 		var root = this;
@@ -94,6 +94,6 @@ $(function(){
 		
 	}
 	
-	new sidebar_logic;
+	new sidebarLogic;
 
 });

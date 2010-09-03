@@ -54,7 +54,7 @@ class WallPostsController extends AppController {
 		
 		//get the user object so it can be used by the wall post element
 		$user = $this->WallPost->User->getProfile($wallOwnerSlug);
-
+		
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
 		if ($wallOwnerId != $visitorId) {
 
@@ -100,20 +100,25 @@ class WallPostsController extends AppController {
 
 		//TODO
 		//we need to save a notification right here.
-
-		if ($isAjax) {
+		
+		if($isAjax){
 			//get the new wall post id
 			$new_post_id = $this->WallPost->id;
-		
+			
 			//load the view
-			$wallPosts = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id));
-		
+			$wallPosts = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'Replies' => true));
+			
+			if($wallPosts[0]['WallPost']['reply_parent_id'])
+				$is_comment = true;
+					
 			//set the layout to none (this is ajax);
 			$this->layout = false;
 		
 			//send the new post to the view
-			$this->set(compact('wallPosts', 'user'));
-		} else {
+			$this->set(compact('wallPosts', 'user', 'is_comment'));
+			
+		}
+		else{
 			//redirect the visitor to the wall they posted on
 			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
