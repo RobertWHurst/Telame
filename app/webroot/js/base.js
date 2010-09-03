@@ -1,3 +1,9 @@
+// I'm sure you will want to change this, put it somewhere different, or whatever, but for now it works ;)
+function changeImg() {
+	document.getElementById("notifications").src = (document.getElementById("notifications").src.indexOf("icons/asterisk_yellow.png") == -1)?"/img/icons/asterisk_yellow.png":"/img/icons/asterisk_orange.png"; 
+}
+
+
 $(function($){
 
 	core = {
