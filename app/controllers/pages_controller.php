@@ -6,10 +6,10 @@ class PagesController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		if ($this->RequestHandler->isRss()) {
-			$this->Auth->allow('news');
+			$this->Auth->allow('display', 'home', 'news');
 		}
 		// Allows access to certain pages
-		$this->Auth->allow('display', 'home', 'news');
+		$this->Auth->allow('display', 'home');
 	}
 
 	function beforeRender() {
@@ -49,9 +49,6 @@ class PagesController extends AppController {
 			//set the layout
 			$this->layout = 'tall_header_w_sidebar';
 			$uid = $this->currentUser['User']['id'];
-			if (!$uid) {
-				$this->redirect('/');
-			}
 		}
 
 		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
