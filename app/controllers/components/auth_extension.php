@@ -99,7 +99,7 @@ class AuthExtensionComponent extends Object {
 				// Read the cooke, if it's empty, redirect home
 				$ref = $this->controller->Cookie->read('here');
 				if (empty($ref) || stristr($ref, 'login') !== false) {
-					$ref = '/';
+					$this->controller->redirect('http://' . env('SERVER_NAME'));
 				}
 
 				$controller->redirect($ref);
@@ -132,7 +132,7 @@ class AuthExtensionComponent extends Object {
 				// if there is a cookie, it's not good (the user would not have used the login form)
 				$this->logout();
 			}
-			$this->controller->redirect('/');
+			$this->controller->redirect('http://' . env('SERVER_NAME'));
 		}
 		return;
 	}
