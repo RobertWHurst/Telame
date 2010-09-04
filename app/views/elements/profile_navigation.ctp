@@ -1,4 +1,4 @@
-<?php 
+<?php
 //make a navigation strip
 $links = array(
 	array(
@@ -50,7 +50,7 @@ foreach($links as $link):
 	if($this->params['controller'] == $link['url']['controller'] && $this->params['action'] == $link['url']['action']) {
 		$link['classes'] = 'button current';
 	}
-?>				
-	<li><?php echo $html->link($link['label'], $link['url'], array('class' => $link['classes'])); ?></li>
+?>
+	<li><?php echo $html->link(ucwords(strtolower($link['label'])), $link['url'], array('class' => $link['classes'])); ?></li>
 <?php endforeach; ?>
 </ul>

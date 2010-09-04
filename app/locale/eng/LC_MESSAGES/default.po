@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-08-14 09:06+0000\n"
-"PO-Revision-Date: 2010-08-14 02:06-0800\n"
-"Last-Translator: none <none@none.com>\n"
+"POT-Creation-Date: 2010-09-04 10:06-0700\n"
+"PO-Revision-Date: 2010-09-04 10:12-0800\n"
+"Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,24 +15,48 @@ msgstr ""
 "X-Poedit-Language: English\n"
 "X-Poedit-Country: Canada\n"
 
-#: /controllers/notifications_controller.php:57
-#: /controllers/users_controller.php:58;122
-#: /views/layouts/pages.ctp:28
-#: /views/layouts/profile.ctp:25
-#: /views/layouts/simple_header.ctp:22
-#: /views/layouts/tall_header_w_sidebar.ctp:25
+#: /app_controller.php:64
+msgid "email_not_confirmed"
+msgstr "That email address is not confirmed"
+
+#: /controllers/albums_controller.php:29
+#, fuzzy
+msgid "not_allowed_images"
+msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
+
+#: /controllers/albums_controller.php:72
+#, fuzzy
+msgid "album_added"
+msgstr "Photos and Video"
+
+#: /controllers/friends_controller.php:37
+msgid "not_allowed_friends"
+msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
+
+#: /controllers/messages_controller.php:151;186
+#, fuzzy
+msgid "message_thread_deleted"
+msgstr "Message Thread"
+
+#: /controllers/pages_controller.php:24;31;85
+#: /controllers/users_controller.php:118
+#: /views/elements/email/html/signup.ctp:1
+#: /views/layouts/profile.ctp:28
+#: /views/layouts/simple_header.ctp:26
+#: /views/layouts/tall_header_w_sidebar.ctp:30
 #: /views/media/upload.ctp:25
-#: /views/messages/compose.ctp:20
-#: /views/messages/inbox.ctp:22
-#: /views/messages/sent.ctp:21
-#: /views/messages/view.ctp:20
+#: /views/pages/rss/news.ctp:7;9
 #: /views/profiles/edit.ctp:5
-#: /views/users/login.ctp:13
+#: /views/settings/basic.ctp:18
+#: /views/settings/permissions.ctp:18
+#: /views/users/confirm.ctp:13
+#: /views/users/login.ctp:15
+#: /views/users/profile.ctp:23
 msgid "site_name"
 msgstr "Telame"
 
-#: /controllers/notifications_controller.php:57
-#: /views/notifications/news.ctp:16
+#: /controllers/pages_controller.php:85
+#: /views/pages/news.ctp:18
 msgid "news_title"
 msgstr "What's New"
 
@@ -40,37 +64,61 @@ msgstr "What's New"
 msgid "user_hash_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
-#: /controllers/users_controller.php:48
+#: /controllers/users_controller.php:26
+msgid "email_confirmed"
+msgstr "Your email has been successfully confirmed"
+
+#: /controllers/users_controller.php:28
+msgid "email_or_hash_failed"
+msgstr "Either the email or hash supplied is incorrect, please try again"
+
+#: /controllers/users_controller.php:59
 msgid "not_allowed_profile"
 msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
 
-#: /controllers/users_controller.php:80
+#: /controllers/users_controller.php:98
 msgid "password_mismatch"
 msgstr "Your passwords don't match"
 
-#: /controllers/users_controller.php:104;115
-msgid "user_create_error"
-msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
+#: /controllers/users_controller.php:107
+msgid "invalid_key"
+msgstr "That key is invalid"
 
-#: /controllers/users_controller.php:125
+#: /controllers/users_controller.php:128
 msgid "user_saved"
 msgstr "You have been successfully added"
+
+#: /controllers/users_controller.php:130
+msgid "user_create_error"
+msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
 #: /controllers/wall_posts_controller.php:69
 msgid "wall_post_error"
 msgstr "Sorry, you're not allowed to do that"
 
-#: /controllers/wall_posts_controller.php:134
+#: /controllers/wall_posts_controller.php:142
 msgid "wall_post_delete_error"
 msgstr "We couldn't find that post."
 
-#: /controllers/wall_posts_controller.php:150
+#: /controllers/wall_posts_controller.php:174
 msgid "wall_post_bad_hacker"
 msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 
-#: /controllers/wall_posts_controller.php:157
+#: /controllers/wall_posts_controller.php:187
 msgid "wall_post_delete"
 msgstr "It's gone"
+
+#: /views/albums/album.ctp:20
+msgid "album"
+msgstr "Album"
+
+#: /views/albums/albums.ctp:22
+msgid "create_new_album"
+msgstr "Create new album"
+
+#: /views/albums/new_album.ctp:26
+msgid "add_album"
+msgstr "Add new album"
 
 #: /views/elements/current_user_controls.ctp:11
 msgid "my_profile"
@@ -86,16 +134,21 @@ msgid "logout"
 msgstr "Logout"
 
 #: /views/elements/profile_navigation.ctp:5
-#: /views/elements/sidebar_modules.ctp:26
+#: /views/elements/sidebar_modules.ctp:44;44
 msgid "wall"
 msgstr "Wall"
 
 #: /views/elements/profile_navigation.ctp:14
-#: /views/elements/sidebar_modules.ctp:50
+#: /views/elements/sidebar_modules.ctp:71;71
 msgid "media"
 msgstr "Media"
 
 #: /views/elements/profile_navigation.ctp:23
+#: /views/elements/sidebar_modules.ctp:63;63
+msgid "friends"
+msgstr "Friends"
+
+#: /views/elements/profile_navigation.ctp:32
 msgid "about"
 msgstr "About"
 
@@ -103,30 +156,74 @@ msgstr "About"
 msgid "search"
 msgstr "Search"
 
-#: /views/elements/sidebar_modules.ctp:18
+#: /views/elements/sidebar_modules.ctp:28;28
+#: /views/notifications/index.ctp:16
+msgid "notifications"
+msgstr "Notifications"
+
+#: /views/elements/sidebar_modules.ctp:36;36
 msgid "news_feed"
 msgstr "News Feed"
 
-#: /views/elements/sidebar_modules.ctp:34
-#: /views/messages/compose.ctp:26
-#: /views/messages/inbox.ctp:28
-#: /views/messages/sent.ctp:27
-#: /views/messages/view.ctp:26
+#: /views/elements/sidebar_modules.ctp:55;55
+#: /views/messages/compose.ctp:18
+#: /views/messages/inbox.ctp:20
+#: /views/messages/sent.ctp:20
+#: /views/messages/view.ctp:18
 msgid "messages"
 msgstr "Messages"
 
-#: /views/elements/sidebar_modules.ctp:42
-msgid "friends"
-msgstr "Friends"
+#: /views/elements/wallPost.ctp:10;61;115
+#: /views/elements/messages/inbox_summary.ctp:32
+#: /views/elements/messages/sent_summary.ctp:31
+msgid "delete"
+msgstr "Delete"
 
-#: /views/elements/messages/inbox_summary.ctp:40
-#: /views/elements/messages/sent_summary.ctp:39
-#: /views/messages/compose.ctp:38
+#: /views/elements/wallPost.ctp:68
+msgid "wall_to_wall"
+msgstr "Wall-to-wall"
+
+#: /views/elements/wallPost.ctp:76
+msgid "like"
+msgstr "Like"
+
+#: /views/elements/wallPost.ctp:77
+msgid "dislike"
+msgstr "Dislike"
+
+#: /views/elements/wallPost.ctp:82;144
+msgid "comment"
+msgstr "Comment"
+
+#: /views/elements/wallPost.ctp:147
+#: /views/elements/users/wall_input.ctp:20
+msgid "wall_post_submit"
+msgstr "Post"
+
+#: /views/elements/wallPost.ctp:90
+msgid "person_likes_this"
+msgid_plural "people_like_this"
+msgstr[0] "person likes this"
+msgstr[1] "people like this"
+
+#: /views/elements/wallPost.ctp:93
+msgid "person_dislikes_this"
+msgid_plural "people_dislike_this"
+msgstr[0] "person dislikes this"
+msgstr[1] "people dislike this"
+
+#: /views/elements/messages/inbox_summary.ctp:38
+msgid "reply"
+msgstr "Reply"
+
+#: /views/elements/messages/inbox_summary.ctp:49
+#: /views/elements/messages/sent_summary.ctp:42
+#: /views/messages/compose.ctp:30
 msgid "message_subject"
 msgstr "Subject:"
 
-#: /views/elements/messages/inbox_summary.ctp:42
-#: /views/messages/view.ctp:85
+#: /views/elements/messages/inbox_summary.ctp:51
+#: /views/messages/view.ctp:77
 msgid "message_from"
 msgstr "From:"
 
@@ -142,38 +239,29 @@ msgstr "Compose Message"
 msgid "messages_sent"
 msgstr "Sent Messages"
 
-#: /views/elements/messages/sent_summary.ctp:41
-#: /views/messages/view.ctp:83
+#: /views/elements/messages/sent_summary.ctp:44
+#: /views/messages/view.ctp:75
 msgid "message_to"
 msgstr "To:"
 
-#: /views/elements/notifications/news_sidebar.ctp:3
-msgid "filter_title"
-msgstr "Filter by Friend List"
-
-#: /views/elements/notifications/news_update.ctp:25
-#: /views/elements/users/wall_post.ctp:15
-msgid "delete"
-msgstr "Delete"
-
 #: /views/elements/pages/login.ctp:4
-#: /views/users/login.ctp:19
+#: /views/users/login.ctp:21
 msgid "email"
 msgstr "Email"
 
 #: /views/elements/pages/login.ctp:5
-#: /views/users/login.ctp:20
+#: /views/users/login.ctp:22
 msgid "password"
 msgstr "Password"
 
 #: /views/elements/pages/login.ctp:6
-#: /views/users/login.ctp:21
+#: /views/users/login.ctp:23
 msgid "auto_login"
 msgstr "Log me in automatically"
 
 #: /views/elements/pages/login.ctp:7
 #: /views/elements/pages/navigation.ctp:7
-#: /views/users/login.ctp:22
+#: /views/users/login.ctp:24
 msgid "login"
 msgstr "Login"
 
@@ -182,13 +270,17 @@ msgid "features"
 msgstr "Features"
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:24
+#: /views/users/signup.ctp:28
 msgid "signup"
 msgstr "Signup"
 
 #: /views/elements/pages/navigation.ctp:10
 msgid "profile_title"
 msgstr "My Profile"
+
+#: /views/elements/pages/news_sidebar.ctp:3
+msgid "filter_title"
+msgstr "Filter by Friend List"
 
 #: /views/elements/users/wall.ctp:16
 msgid "older_posts"
@@ -206,33 +298,53 @@ msgstr "What's on your mind?"
 msgid "wall_post_label"
 msgstr "Share something cool."
 
-#: /views/elements/users/wall_input.ctp:20
-msgid "wall_post_submit"
-msgstr "Post"
+#: /views/friends/add_friend.ctp:18
+#, fuzzy
+msgid "add_friend"
+msgstr "Friends"
 
-#: /views/elements/users/wall_post.ctp:22
-msgid "wall_to_wall"
-msgstr "Wall-to-wall"
+#: /views/friends/add_friend.ctp:28
+msgid "add"
+msgstr "Add"
 
 #: /views/media/upload.ctp:42
 msgid "upload"
 msgstr "Upload"
 
-#: /views/messages/view.ctp:32
+#: /views/messages/view.ctp:24
 msgid "message_thread_title"
 msgstr "Message Thread"
 
-#: /views/messages/view.ctp:93
+#: /views/messages/view.ctp:86
 msgid "composed"
 msgstr "Composed"
 
-#: /views/messages/view.ctp:95
+#: /views/messages/view.ctp:89
 msgid "read"
 msgstr "Read"
 
 #: /views/profiles/add.ctp:15
 msgid "save"
 msgstr "Save Changes"
+
+#: /views/settings/basic.ctp:18
+#: /views/settings/permissions.ctp:18
+#, fuzzy
+msgid "settings"
+msgstr "Account Settings"
+
+#: /views/settings/basic.ctp:21
+#, fuzzy
+msgid "basic_settings_title"
+msgstr "Account Settings"
+
+#: /views/settings/permissions.ctp:21
+msgid "group_permission_title"
+msgstr "User Permissions"
+
+#: /views/users/confirm.ctp:20
+msgid "confirm"
+msgstr "Confirm"
 
 #~ msgid "wall_title"
 #~ msgstr "Wall"
@@ -245,9 +357,6 @@ msgstr "Save Changes"
 
 #~ msgid "friend_list_title"
 #~ msgstr "Friend List"
-
-#~ msgid "albums_title"
-#~ msgstr "Photos and Video"
 
 #~ msgid "messages_inbox_title"
 #~ msgstr "Inbox"
@@ -302,13 +411,3 @@ msgstr "Save Changes"
 #~ msgid_plural "seconds"
 #~ msgstr[0] "second"
 #~ msgstr[1] "seconds"
-
-msgid "person_likes_this"
-msgid_plural "people_like_this"
-msgstr[0] "person likes this"
-msgstr[1] "people like this"
-
-msgid "person_dislikes_this"
-msgid_plural "people_dislike_this"
-msgstr[0] "person dislikes this"
-msgstr[1] "people dislike this"

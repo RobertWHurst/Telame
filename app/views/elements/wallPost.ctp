@@ -19,7 +19,10 @@
 ?>
 	</div>
 	<div class="content">
-		<?php echo $markdown->parse($html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ' . $post['WallPost']['post']); ?>
+<?php 
+		echo $html->link($post['PostAuthor']['Profile']['full_name'], $url);
+		echo $markdown->parse($post['WallPost']['post']); 
+?>
 	</div>
 		<div class="time">
 			<p>
@@ -50,8 +53,8 @@
 				else{				
 					$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ';				
 				}
-				
-				echo $markdown->parse($author_name . $post['WallPost']['post']);
+				echo $author_name;
+				echo $markdown->parse($post['WallPost']['post']);
 ?>
 			</div>
 			<?php if(isset($show_post_controls)): ?>
@@ -124,7 +127,9 @@
 ?>
 						</div>
 						<div class="content">
-							<?php echo $markdown->parse($html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' ' . $comment['post']); ?>
+<?php						echo $html->link($comment['PostAuthor']['Profile']['full_name'], $url);
+							echo $markdown->parse($comment['post']); 
+?>
 						</div>
 						<div class="time">
 							<p>

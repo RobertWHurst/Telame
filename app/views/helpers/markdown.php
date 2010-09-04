@@ -6,6 +6,9 @@ class MarkdownHelper extends AppHelper {
 	var $helpers = array('Text');
 
 	function parse($text) {
+		// Clean the text.  This will need testing for XSS and such
+		$text = Sanitize::clean($text, array('encode' => false, 'remove_html' => true));
+
 		// match links and format
 		$text = preg_replace('/ ((?:http[s]*|[s]*ftp|git):\/\/[^\s]+)/', ' <a href="$1" rel="" target="_blank">$1</a> ', $text);
 
@@ -22,10 +25,10 @@ class MarkdownHelper extends AppHelper {
 		App::Import('Model', 'emoticon');
 		$this->Emoticon = new Emoticon;
 
-		$emoticons = $this->Emoticon->find('all');
+		$emoticons = $this->Emoticon->find('all', array('order' => 'code DESC'));
 
 	    foreach($emoticons as $emoticon) {
-			$text = str_ireplace($emoticon['Emoticon']['code'], '<img alt="' . $emoticon['Emoticon']['code'] . '" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" />', $text);
+			$text = str_ireplace($emoticon['Emoticon']['code'], ' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" />', $text);
 	    }
 	    return $text;
 	}
