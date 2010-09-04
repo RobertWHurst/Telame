@@ -6,13 +6,29 @@
 	<h2><?php echo $html->link('Add ' . $user['Profile']['full_name'] . ' as friend', '/f/a/' . $user['User']['id']); ?></h2>
 	<?php } ?>
 	<table>
-		<tr class="key">
-			<th class="key">Name:</th>
-			<td class="value"><?php echo $user['Profile']['full_name']; ?></td>
+		<tr>
+			<th>Name:</th>
+			<td><?php echo $user['Profile']['full_name']; ?></td>
 		</tr>
-		<tr class="key">
-			<th class="key">Sex:</th>
-			<td class="value"><?php echo $user['Profile']['sex']; ?></td>
+<?php	if (!is_null($user['Profile']['sex'])): ?>
+		<tr>
+			<th>Sex:</th>
+			<td><?php echo $user['Profile']['sex']; ?></td>
 		</tr>
+<?php	endif;
+		if (!is_null($user['Profile']['dob'])): 
+?>
+		<tr>
+			<th>Date of Birth:</th>
+			<td><?php 
+				$dob = strtotime($user['Profile']['dob']);
+				echo date('M j, Y', $dob); 
+				if ($dob == strtotime('today')) {
+					echo ' ' . $html->image('icons/cake.png');
+				}
+			?>
+			</td>
+		</tr>
+<?php	endif; ?>
 	</table>	
 </div>

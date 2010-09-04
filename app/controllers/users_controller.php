@@ -67,7 +67,7 @@ class UsersController extends AppController {
 		}
 
 		if ($canView) {
-			$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
+			$friends = $this->User->GroupsUser->getFriends(10, 0, array('uid' => $user['User']['id'], 'random' => true));
 			$wallPosts = $this->User->WallPost->getWallPosts(10, 0, array('uid' => $user['User']['id']));
 		} else {
 			$friends = array();
