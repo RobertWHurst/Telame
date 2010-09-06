@@ -22,7 +22,7 @@
 <?php
 		//Note: author name is included in the parse because markdown sees
 		//it as part of the paragraph and wrapps it within the p tags.
-		$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url);
+		$author_name = '<strong>' . $html->link($post['PostAuthor']['Profile']['full_name'], $url). ' </strong>';
 		echo $markdown->parse($author_name . $post['WallPost']['post']); 
 ?>
 	</div>
@@ -50,10 +50,10 @@
 <?php			
 				if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){		
 					$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
-					$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' to ' . $html->link($post['User']['Profile']['full_name'], $aUrl) . ":\r\n\r\n ";				
+					$author_name = '<strong>' . $html->link($post['PostAuthor']['Profile']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['Profile']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";				
 				}
 				else{				
-					$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ';				
+					$author_name = '<strong>' . $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' </strong>';				
 				}
 				//Note: author name is included in the parse because markdown sees
 				//it as part of the paragraph and wrapps it within the p tags.
@@ -130,7 +130,7 @@
 ?>
 						</div>
 						<div class="content">
-<?php						$author_name = $html->link($comment['PostAuthor']['Profile']['full_name'], $url);
+<?php						$author_name = '<strong>' . $html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' </strong>';
 							//Note: author name is included in the parse because markdown sees
 							//it as part of the paragraph and wrapps it within the p tags.
 							echo $markdown->parse($author_name . $comment['post']); 
