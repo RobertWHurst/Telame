@@ -19,9 +19,11 @@
 ?>
 	</div>
 	<div class="content">
-<?php 
-		echo $html->link($post['PostAuthor']['Profile']['full_name'], $url);
-		echo $markdown->parse($post['WallPost']['post']); 
+<?php
+		//Note: author name is included in the parse because markdown sees
+		//it as part of the paragraph and wrapps it within the p tags.
+		$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url);
+		echo $markdown->parse($author_name . $post['WallPost']['post']); 
 ?>
 	</div>
 		<div class="time">
@@ -53,8 +55,9 @@
 				else{				
 					$author_name = $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' ';				
 				}
-				echo $author_name;
-				echo $markdown->parse($post['WallPost']['post']);
+				//Note: author name is included in the parse because markdown sees
+				//it as part of the paragraph and wrapps it within the p tags.
+				echo $markdown->parse($author_name . $post['WallPost']['post']);
 ?>
 			</div>
 			<?php if(isset($show_post_controls)): ?>
@@ -127,8 +130,10 @@
 ?>
 						</div>
 						<div class="content">
-<?php						echo $html->link($comment['PostAuthor']['Profile']['full_name'], $url);
-							echo $markdown->parse($comment['post']); 
+<?php						$author_name = $html->link($comment['PostAuthor']['Profile']['full_name'], $url);
+							//Note: author name is included in the parse because markdown sees
+							//it as part of the paragraph and wrapps it within the p tags.
+							echo $markdown->parse($author_name . $comment['post']); 
 ?>
 						</div>
 						<div class="time">

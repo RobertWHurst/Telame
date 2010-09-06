@@ -303,7 +303,7 @@ $(function(){
 						$('div.deleteComment', data).hide();
 						
 						//take the data and add it to the top of the wall
-						$('div.comment:last', postComments).after(data);
+						inputWrapper.before(data);
 						
 						if(input.hasClass('textarea')){
 				

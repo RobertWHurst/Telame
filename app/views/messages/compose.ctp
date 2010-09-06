@@ -9,8 +9,7 @@ $this->set('css_for_layout', array(
 ));
 $this->set('script_for_layout', array(
 	'jquery',
-	'base',
-	'header_glow',
+	'base', 
 	'main_sidebar'
 ));
 ?>
