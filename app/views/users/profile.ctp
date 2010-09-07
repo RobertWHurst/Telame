@@ -7,7 +7,6 @@ $this->set('css_for_layout', array(
 	'wall_posts',
 	'tall_header',
 	'main_sidebar',
-	'users/profile',
 	'users/wall',
 	'users/wall_sidebar'
 ));
