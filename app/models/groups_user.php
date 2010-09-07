@@ -9,13 +9,15 @@ class GroupsUser extends AppModel {
 		)
 	);
 
-	function getFriends($limit = 0, $offset = 0, $arguments = false){
+	function getFriends($arguments = false){
 
 		$defaults = array(
 			'friendList' => false,
-			'uid' => false,
 			'gid' => false,
-			'random' => false
+			'limit' => 10,
+			'offset' => 0,
+			'random' => false,
+			'uid' => false,
 		);
 
 		$options = parseArguments($defaults, $arguments);
@@ -44,9 +46,9 @@ class GroupsUser extends AppModel {
 		$this->recursive = 2;
 		$friends = $this->find('all', array(
 			'conditions' => $conditions,
-			'limit' => $limit,
-			'offset' => $offset,
 			'contain' => 'Friend.Profile',
+			'limit' => $options['limit'],
+			'offset' => $options['offset'],
 			'order' => $order,
 		));
 
@@ -54,7 +56,6 @@ class GroupsUser extends AppModel {
 		if (!$options['random']) {
 			$friends = Set::sort($friends, '{n}.Friend.Profile.full_name', 'asc');
 		}
-
 		return $friends;
 	}
 
@@ -68,7 +69,7 @@ class GroupsUser extends AppModel {
 		}
 	}
 
-	// takes User_ID and Friend_ID and returns what groups the friend is in
+	// takes User_ID and Friend_ID and returns what group the friend is in
 	function listGroups($uid, $fid) {
 		$this->Behaviors->attach('Containable');
 		$groups = $this->find('first', array(
