@@ -6,7 +6,6 @@ $this->set('css_for_layout', array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'users/profile',
 	'calendar/fullcalendar.css',
 ));
 $this->set('script_for_layout', array(

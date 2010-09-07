@@ -6,7 +6,6 @@ $this->set('css_for_layout', array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'users/profile',
 	'albums/albums'
 ));
 $this->set('script_for_layout', array(
