@@ -128,10 +128,11 @@ class WallPostsController extends AppController {
 
 	function delete($id = false) {
 		$isAjax = $this->RequestHandler->isAjax();
+		$uid = $this->currentUser['User']['id'];
 
 		//get the visitor's data
 		$this->WallPost->User->recursive = -1;
-		$visitor_slug = $this->WallPost->User->getSlugFromId($this->currentUser['User']['id']);
+		$visitor_slug = $this->WallPost->User->getSlugFromId($uid);
 
 		//if the wall id is missing
 		if(!$id) {
@@ -145,48 +146,41 @@ class WallPostsController extends AppController {
 			}
 		}
 
-		//check to make sure the user is deleting a wall post they actually own or that they are the author
-		$condition_set_1 = array(
-			'wall_posts.id' => $id,
-			'wall_posts.author_id' => $this->currentUser['User']['id']
-		);
-		$condition_set_2 = array(
-			'wall_posts.id' => $id,
-			'wall_posts.user_id' => $this->currentUser['User']['id']
-		);
+		//check to make sure the user is deleting a wall post they actually own or that they are the author of
+		$wallPost = $this->WallPost->find('first', array(
+			'conditions' => array(
+				'WallPost.id' => $id, 
+				'OR' => array(
+					'WallPost.author_id' => $uid,
+					'WallPost.user_id' => $uid
+				)
+			)
+		));
+		// will return false if we don't find a post matching the conditions
+		if ($wallPost) {
+			// delete all replies first
+			$this->WallPost->deleteAll(array('WallPost.reply_parent_id' => $wallPost['WallPost']['id']));
 
-		//if we don't count one and they are not the authors then deny them the action
-		if(
-			$this->WallPost->find('count', array(
-				'conditions' => $condition_set_1
-			)) < 1 &&
-
-			$this->WallPost->find('count', array(
-				'conditions' => $condition_set_2
-			)) < 1
-		){
-			if($isAjax){				
-				echo 'false';
+			//if everything checks out then delete the post and exit
+			$this->WallPost->delete($id);
+			if($isAjax){
+				echo 'true';
+				exit;
+			} else {
+				$this->Session->setFlash(__('wall_post_delete', true));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
-			else{
+		} else {
+			if ($isAjax) {				
+				echo 'false';
+				exit;
+			} else {
 				//set the flash message and redirect them, the metaling sods! :<
 				$this->Session->setFlash(__('wall_post_bad_hacker', true));
 				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
-		}
-
-		//if everything checks out then delete the post and exit
-		$this->WallPost->delete($id);
-		if($isAjax){
-			echo 'true';
-			exit;
-		}
-		else{
-			$this->Session->setFlash(__('wall_post_delete', true));
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
-			exit;
 		}
 	}
 	

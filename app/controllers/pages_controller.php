@@ -5,11 +5,12 @@ class PagesController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
+		// Allows access to certain pages
 		if ($this->RequestHandler->isRss()) {
 			$this->Auth->allow('display', 'home', 'news');
+		} else {
+			$this->Auth->allow('display', 'home');
 		}
-		// Allows access to certain pages
-		$this->Auth->allow('display', 'home');
 	}
 
 	function beforeRender() {
@@ -68,7 +69,7 @@ class PagesController extends AppController {
 			}
 		}
 
-		$friends = $this->GroupsUser->getFriends(0, 0, array(
+		$friends = $this->GroupsUser->getFriends(array(
 			'uid' => $uid,
 			'gid' => $selectedFriendList
 		));
