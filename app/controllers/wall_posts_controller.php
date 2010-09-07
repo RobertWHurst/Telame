@@ -40,21 +40,21 @@ class WallPostsController extends AppController {
 				exit;
 			}
 		}
-		
+
 		//get the relpy id if any
 		if(isset($this->data['WallPost']['reply_parent_id']))
 			$reply_id = $this->data['WallPost']['reply_parent_id'];
-		
+
 		//save the user id and the visitor id
 		$wallOwnerId = $this->data['WallPost']['user_id'];
-			
+
 		$wallOwnerSlug = $this->WallPost->User->getSlugFromId($wallOwnerId);
 		$visitorId = $this->currentUser['User']['id'];
 		$visitorSlug = $this->WallPost->User->getSlugFromId($visitorId);
-		
+
 		//get the user object so it can be used by the wall post element
 		$user = $this->WallPost->User->getProfile($wallOwnerSlug);
-		
+
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
 		if ($wallOwnerId != $visitorId) {
 
@@ -77,9 +77,9 @@ class WallPostsController extends AppController {
 			//the visitor is the user
 			$wallOwnerId = $visitorId;
 		}
-		
+
 		$this->WallPost->create();
-		
+
 		if($reply_id){
 			$this->WallPost->set('reply_parent_id', $reply_id);
 		}
@@ -94,29 +94,29 @@ class WallPostsController extends AppController {
 		//save the post content and time
 		$this->WallPost->set('post', $this->data['WallPost']['post']);
 		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
-		
+
 		//commit the data to the db
 		$this->WallPost->save();
 
 		//TODO
 		//we need to save a notification right here.
-		
+
 		if($isAjax){
 			//get the new wall post id
 			$new_post_id = $this->WallPost->id;
-			
+
 			//load the view
 			$wallPosts = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'Replies' => true));
-			
+
 			if($wallPosts[0]['WallPost']['reply_parent_id'])
 				$is_comment = true;
-					
+
 			//set the layout to none (this is ajax);
 			$this->layout = false;
-		
+
 			//send the new post to the view
 			$this->set(compact('wallPosts', 'user', 'is_comment'));
-			
+
 		}
 		else{
 			//redirect the visitor to the wall they posted on
@@ -149,7 +149,7 @@ class WallPostsController extends AppController {
 		//check to make sure the user is deleting a wall post they actually own or that they are the author of
 		$wallPost = $this->WallPost->find('first', array(
 			'conditions' => array(
-				'WallPost.id' => $id, 
+				'WallPost.id' => $id,
 				'OR' => array(
 					'WallPost.author_id' => $uid,
 					'WallPost.user_id' => $uid
@@ -172,7 +172,7 @@ class WallPostsController extends AppController {
 				exit;
 			}
 		} else {
-			if ($isAjax) {				
+			if ($isAjax) {
 				echo 'false';
 				exit;
 			} else {
@@ -183,13 +183,13 @@ class WallPostsController extends AppController {
 			}
 		}
 	}
-	
+
 	function dislike($id) {
 		$isAjax = $this->RequestHandler->isAjax();
-		
+
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
-		
-		//if not an ajax call redirect from the referer    	
+
+		//if not an ajax call redirect from the referer
     	if($isAjax){
     		echo 'true';
     	}
@@ -197,13 +197,13 @@ class WallPostsController extends AppController {
     		$this->redirect($this->referer());
     	exit;
 	}
-	
+
 	function like($id) {
 		$isAjax = $this->RequestHandler->isAjax();
-		
+
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
-		
-		//if not an ajax call redirect from the referer    	
+
+		//if not an ajax call redirect from the referer
     	if($isAjax){
     		echo 'true';
     	}
