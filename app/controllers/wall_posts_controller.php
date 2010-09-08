@@ -101,19 +101,19 @@ class WallPostsController extends AppController {
 		//TODO
 		//we need to save a notification right here.
 
+		// FIXME
 		if($isAjax){
 			//get the new wall post id
 			$new_post_id = $this->WallPost->id;
 
 			//load the view
-			$wallPost = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'Replies' => true));
-			$wallPost = $wallPost[0];
+			$wallPost = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'single' => true));
 			
 			//set the layout to none (this is ajax);
 			$this->layout = false;
 			
 			//if this is a comment then load the comment element
-			if($wallPost['WallPost']['reply_parent_id']){
+			if($wallPost['WallPost']['reply_parent_id']) {
 				$this->set(array('comment' => $wallPost, 'user' => $user, 'show_post_controls' => true));
 				$this->render('/elements/wall_post_comment');
 			}

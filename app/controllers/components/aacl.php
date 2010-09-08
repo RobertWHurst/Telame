@@ -2,6 +2,10 @@
 class AaclComponent extends Object {
 	var $components = array('Acl');
 
+	function initialize(&$controller) {
+		$this->controller = $controller;
+	}
+
 	// $uid is who owns what's being looked at
 	// $fid is who is trying to view it
 	// $what is 'profile' or 'media' etc
@@ -88,18 +92,20 @@ class AaclComponent extends Object {
 	function saveAco($data) {
 		// we can't use the security tokens here, so remove them
 		unset($data['_Token']);
-		pr($data);
-		foreach ($data as $aco) {
-			foreach ($aco as $group => $perm) {
-				// can read
-				if ($perm) {
-//					$this->Acl->allow();
-				} else {
-//					$this->Acl->deny();
+		$uid = $this->controller->currentUser['User']['id'];
+		foreach ($data as $acoKey => $acoVal) {
+			foreach ($acoVal as $group => $perm) {
+				if (!is_array($perm)) {
+					$gid = explode('_', $group);
+					// can read
+					if ($perm) {
+						$this->Acl->allow('Group.' . $gid[1], 'User::' . $uid . '/' . $acoKey, 'read');
+					} else {
+						$this->Acl->deny('Group.' . $gid[1], 'User::' . $uid . '/' . $acoKey, 'read');
+					}
 				}
 			}
 		}
-
 		exit;
 		return true;
 	}

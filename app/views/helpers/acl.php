@@ -39,7 +39,7 @@ class AclHelper extends AppHelper {
 							</p>
 						</div>
 						<div class="switch">
-<?php						echo $this->Form->input((!is_null($parent) ? $parent . '.' : '') . $aco['Aco']['alias'] . '.' . $group['Group']['title'], array(
+<?php						echo $this->Form->input((!is_null($parent) ? $parent . '.' : '') . $aco['Aco']['alias'] . '.Group_' . $group['Group']['id'], array(
 								'type' => 'checkbox',
 								'checked' => ($canRead ? 'checked' : ''),
 								'label' => __('public', true)
