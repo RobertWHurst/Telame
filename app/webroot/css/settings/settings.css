@@ -12,7 +12,7 @@
 	border-radius: 5px;
 }
 #permissions div.aco-object h1{
-	font-size: 3.6em;
+	font-size: 2.4em;
 }
 #permissions div.aco-group{
 	padding: 10px;
@@ -34,7 +34,8 @@
 	float: left;
 }
 #permissions div.decription p{
-	font-size: 1.8em;
+	font-size: 1.4em;
+	line-height: 16px;
 }
 #permissions div.switch{
 	float: right;
@@ -77,7 +78,7 @@
 	border-radius: 5px;
 }
 #lists h1{
-	font-size: 3.6em;
+	font-size: 2.4em;
 	margin-bottom: 20px;
 }
 #lists div.list a{

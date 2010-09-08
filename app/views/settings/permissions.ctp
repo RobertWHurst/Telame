@@ -43,7 +43,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 						<div class="aco-group clearfix <?php echo ($canRead) ? 'on' : 'off'; ?>">
 							<div class="decription">
 								<p><?php
-									echo $group['Group']['title'];
+									echo "<strong>{$group['Group']['title']}</strong> ";
 									echo $canRead ? __('can_read', true) . ' ' . __($aco['Aco']['alias'] ,true) : __('cannot_read', true) . ' ' . __($aco['Aco']['alias'], true); ?>
 								</p>
 							</div>
