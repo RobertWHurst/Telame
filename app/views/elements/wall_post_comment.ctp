@@ -1,11 +1,15 @@
 <div class="comment clearfix">
-	<?php if(isset($show_post_controls)): ?>
-		<div class="deleteComment">
 <?php 
-			$url = array('controller' => 'wall_posts', 'action' => 'delete', $comment['id']);
-			echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+	if(isset($show_post_controls)):
+		if($comment['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']):
 ?>
-		</div>
+			<div class="deleteComment">
+<?php 
+				$url = array('controller' => 'wall_posts', 'action' => 'delete', $comment['id']);
+				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+?>
+			</div>
+		<?php endif; ?>
 	<?php endif; ?>
 	<div class="avatar">
 <?php
