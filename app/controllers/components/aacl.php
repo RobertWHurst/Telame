@@ -84,4 +84,26 @@ class AaclComponent extends Object {
 			return true;
 		}
 	}
+	
+	function saveAco($data) {
+		// we can't use the security tokens here, so remove them
+		unset($data['_Token']);
+		pr($data);
+		foreach ($data as $aco) {
+			foreach ($aco as $group => $perm) {
+				// can read
+				if ($perm) {
+//					$this->Acl->allow();
+				} else {
+//					$this->Acl->deny();
+				}
+			}
+		}
+
+		exit;
+		return true;
+	}
 }
+
+
+
