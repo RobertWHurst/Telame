@@ -52,7 +52,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 								echo $form->input($aco['Aco']['alias'] . '.' . $group['Group']['title'], array(
 									'type' => 'checkbox',
 									'checked' => ($canRead ? 'checked' : ''),
-									'label' => __('public', true),,
+									'label' => __('public', true)
 									//'id' => "Aco_{$group['Group']['id']}"
 								));
 ?>
