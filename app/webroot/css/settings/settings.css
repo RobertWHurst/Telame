@@ -1,5 +1,9 @@
-div.aco-object{
-	background: #444;
+#permissions{
+	width: 478px;
+	float: left;
+}
+#permissions div.aco-object{
+	background: #333;
 	padding: 20px;
 	margin: 20px;
 	
@@ -7,35 +11,35 @@ div.aco-object{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.aco-object h1{
+#permissions div.aco-object h1{
 	font-size: 3.6em;
 }
-div.aco-group{
-	padding: 15px;
+#permissions div.aco-group{
+	padding: 10px;
 	margin-top: 20px;
 	
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.aco-group.off{
+#permissions div.aco-group.off{
 	background: #555;
 	border: 1px solid #f88;
 }
-div.aco-group.on{
+#permissions div.aco-group.on{
 	background: #656565;
 	border: 1px solid #c1ef52;
 }
-div.decription{
+#permissions div.decription{
 	float: left;
 }
-div.decription p{
+#permissions div.decription p{
 	font-size: 1.8em;
 }
-div.switch{
+#permissions div.switch{
 	float: right;
 }
-div.save_changes{
+#permissions div.save_changes{
 	text-align: right;
 	background: #444;
 	padding: 20px;
@@ -45,7 +49,7 @@ div.save_changes{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.save_changes input[type="submit"]{
+#permissions div.save_changes input[type="submit"]{
 	font-size: 1.8em;
 	color: #d3ef91;
 	background-color: #656565;
@@ -53,8 +57,40 @@ div.save_changes input[type="submit"]{
 	-moz-border-radius: 2px;
 	padding: 6px;
 }
-div.save_changes input[type="submit"]:hover{
+#permissions div.save_changes input[type="submit"]:hover{
 	color: #c1ef52;
 	background-color: #8f977c;
 	border-color: #c1ef52;
+}
+#lists{
+	float: right;
+	width:228px;
+	padding: 20px;
+	margin: 20px 20px 20px 0;
+	background: #2a2a2a;
+	border:1px solid #555;
+	border-top:1px solid #000000;
+	border-bottom:1px solid #aaa;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#lists h1{
+	font-size: 3.6em;
+	margin-bottom: 20px;
+}
+#lists div.list a{
+	padding: 10px;
+	display:block;
+	font-size:1.3em;
+	font-weight:bold;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+#lists div.list.selected a{
+	background: #484848;
+	border: 1px solid #5c5c5c;
 }

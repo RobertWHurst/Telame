@@ -16,28 +16,35 @@ class SettingsController extends AppController{
 	}
 
 	function basic() {
-
-		//get the user id
-		$id = $this->currentUser['User']['id'];
-
-		if(empty($this->data)){
-			//save the users new settings
-
-			//TODO: ACL STUFF HERE
-
-		}
-
-		//get the users current settings
-
-		//TODO: ACL STUFF HERE
+		
 	}
 
-	function permissions() {
+	function permissions($selectedFriendList = 0) {
+		$this->loadModel('Group');
+	
+		//get the current user and note their id.
 		$uid = $this->currentUser['User']['id'];
 
+		//get the current user's acl data.
 		$acoTree = $this->Aacl->getAcoTree($uid);
+		
+		//get the current user's lists
+		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
+		$psudeoLists = array(
+			'public' => array('Group' => array('title' => __('public', true), 'id' => 0))
+		);
+		$friendLists = array_merge($psudeoLists, $friendLists);
 
-		$this->set(compact('acoTree', 'groups'));
+		//add selected info
+		foreach($friendLists as $key => $filter){
+			if($filter['Group']['id'] == $selectedFriendList) {
+				$friendLists[$key]['selected'] = true;
+			} else {
+				$friendLists[$key]['selected'] = false;
+			}
+		}
+		
+		$this->set(compact('acoTree', 'friendLists'));
 	}
 
 	function profile() {

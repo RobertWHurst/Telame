@@ -54,11 +54,11 @@ class PagesController extends AppController {
 
 		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
 
-		$default_friendLists = array(
+		$psudeoLists = array(
 			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0))
 		);
 
-		$friendLists = array_merge($default_friendLists, $friendLists);
+		$friendLists = array_merge($psudeoLists, $friendLists);
 
 		//add selected info
 		foreach($friendLists as $key => $filter){
