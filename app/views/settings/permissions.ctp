@@ -30,13 +30,17 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 			foreach($acoTree as $aco):
 ?>
 				<div class="aco-object">
-					<h1>
+					<div class="heading">
+						<h1>
 <?php
-						echo __('permissions_for', true);
-						echo ' ';
-						echo __($aco['Aco']['alias'], true);
+							echo __('permissions_for', true);
+							echo ' ';
+							echo __($aco['Aco']['alias'], true);
 ?>
-					</h1>
+						</h1>
+						<div class="chevron">
+						</div>
+					</div>
 <?php 				foreach($aco['Groups'] as $group):
 						$canRead = $group['Group']['canRead'];
 ?>
@@ -65,13 +69,5 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 		<div class="save_changes">
 			<?php echo $form->end(__('save', true)); ?>
 		</div>
-	</div>
-	<div id="lists">
-		<h1><?php __('lists'); ?></h1>
-		<?php foreach($friendLists as $friendList): ?>
-			<div id="list-<?php echo $friendList['Group']['id']; ?>" class="list<?php echo ($friendList['selected']) ? ' selected' : '' ; ?>">
-				<a href="<?php echo $html->url(array('controller' => 'settings', 'action' => 'permissions', $friendList['Group']['id'])); ?>" title="List"><?php echo $friendList['Group']['title']; ?></a>
-			</div>
-		<?php endforeach; ?>
 	</div>
 </div>

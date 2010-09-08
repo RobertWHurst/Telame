@@ -29,25 +29,9 @@ class SettingsController extends AppController{
 			//get the current user's acl data.
 			$acoTree = $this->Aacl->getAcoTree($uid);
 			
-			//get the current user's lists
-			$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
-			$psudeoLists = array(
-				'public' => array('Group' => array('title' => __('public', true), 'id' => 0))
-			);
-			$friendLists = array_merge($psudeoLists, $friendLists);
-		
-			//add selected info
-			foreach($friendLists as $key => $filter){
-				if($filter['Group']['id'] == $selectedFriendList) {
-					$friendLists[$key]['selected'] = true;
-				} else {
-					$friendLists[$key]['selected'] = false;
-				}
-			}
-			
-			$this->set(compact('acoTree', 'friendLists'));
+			$this->set(compact('acoTree'));
 		} else {
-			if ($this->Aacl->saveAco($this->data)) {
+			if ($this->Aacl->saveAco($this->data)){
 				$this->Session->setFlash(__('permissions_saved', true));
 			} else {
 				$this->Session->setFlash(__('permissions_not_saved', true));
