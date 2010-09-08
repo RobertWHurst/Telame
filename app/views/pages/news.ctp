@@ -27,7 +27,7 @@ $this->set('script_for_layout', array(
 	<div id="news_feed">
 <?php
 		foreach($wallPosts as $update)
-			echo $this->element('wallPost', array('post' => $update, 'show_user_and_author' => true));
+			echo $this->element('wall_post', array('post' => $update, 'show_user_and_author' => true));
 ?>
 	</div>
 	<?php echo $this->element('pages/news_sidebar', array('friendLists' => $friendLists)); ?>

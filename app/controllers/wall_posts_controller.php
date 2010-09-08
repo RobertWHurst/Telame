@@ -106,16 +106,22 @@ class WallPostsController extends AppController {
 			$new_post_id = $this->WallPost->id;
 
 			//load the view
-			$wallPosts = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'Replies' => true));
-
-			if($wallPosts[0]['WallPost']['reply_parent_id'])
-				$is_comment = true;
-
+			$wallPost = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'Replies' => true));
+			$wallPost = $wallPost[0];
+			
 			//set the layout to none (this is ajax);
 			$this->layout = false;
-
-			//send the new post to the view
-			$this->set(compact('wallPosts', 'user', 'is_comment'));
+			
+			//if this is a comment then load the comment element
+			if($wallPost['WallPost']['reply_parent_id']){
+				$this->set(array('comment' => $wallPost, 'user' => $user, 'show_post_controls' => true));
+				$this->render('/elements/wall_post_comment');
+			}
+			//if this is a post then load the post element
+			else{
+				$this->set(array('post' => $wallPost, 'user' => $user, 'show_post_controls' => true));
+				$this->render('/elements/wall_post');
+			}
 
 		}
 		else{

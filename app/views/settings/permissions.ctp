@@ -34,12 +34,4 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 			<?php echo $form->end(__('save', true)); ?>
 		</div>
 	</div>
-	<div id="lists">
-		<h1><?php __('lists'); ?></h1>
-		<?php foreach($friendLists as $friendList): ?>
-			<div id="list-<?php echo $friendList['Group']['id']; ?>" class="list<?php echo ($friendList['selected']) ? ' selected' : '' ; ?>">
-				<a href="<?php echo $html->url(array('controller' => 'settings', 'action' => 'permissions', $friendList['Group']['id'])); ?>" title="List"><?php echo $friendList['Group']['title']; ?></a>
-			</div>
-		<?php endforeach; ?>
-	</div>
 </div>
