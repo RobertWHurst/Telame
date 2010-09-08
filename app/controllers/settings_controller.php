@@ -37,7 +37,7 @@ class SettingsController extends AppController{
 				$this->Session->setFlash(__('permissions_not_saved', true));
 			}
 
-			$this->redirect($this->referer());
+			$this->redirect($this->here);
 			exit;
 		}
 	}

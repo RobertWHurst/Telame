@@ -99,14 +99,13 @@ class AaclComponent extends Object {
 					$gid = explode('_', $group);
 					// can read
 					if ($perm) {
-						$this->Acl->allow('Group.' . $gid[1], 'User::' . $uid . '/' . $acoKey, 'read');
+						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . '/' . $acoKey, 'read');
 					} else {
-						$this->Acl->deny('Group.' . $gid[1], 'User::' . $uid . '/' . $acoKey, 'read');
+						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . '/' . $acoKey, 'read');
 					}
 				}
 			}
 		}
-		exit;
 		return true;
 	}
 }
