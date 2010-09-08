@@ -1,0 +1,60 @@
+div.aco-object{
+	background: #444;
+	padding: 20px;
+	margin: 20px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.aco-object h1{
+	font-size: 3.6em;
+}
+div.aco-group{
+	padding: 15px;
+	margin-top: 20px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.aco-group.off{
+	background: #555;
+	border: 1px solid #f88;
+}
+div.aco-group.on{
+	background: #656565;
+	border: 1px solid #c1ef52;
+}
+div.decription{
+	float: left;
+}
+div.decription p{
+	font-size: 1.8em;
+}
+div.switch{
+	float: right;
+}
+div.save_changes{
+	text-align: right;
+	background: #444;
+	padding: 20px;
+	margin: 20px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.save_changes input[type="submit"]{
+	font-size: 1.8em;
+	color: #d3ef91;
+	background-color: #656565;
+	border: 1px solid #d3ef91;
+	-moz-border-radius: 2px;
+	padding: 6px;
+}
+div.save_changes input[type="submit"]:hover{
+	color: #c1ef52;
+	background-color: #8f977c;
+	border-color: #c1ef52;
+}

@@ -6,12 +6,13 @@ $this->set('css_for_layout', array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'settings/settings',
+	'settings/settings'
 ));
 $this->set('script_for_layout', array(
 	'jquery',
 	'base', 
-	'main_sidebar'
+	'main_sidebar',
+	'settings/settings'
 ));
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name'] . '\'s ' . __('settings', true));
