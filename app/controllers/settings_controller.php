@@ -19,7 +19,7 @@ class SettingsController extends AppController{
 		
 	}
 	
-	function permissions() {
+	function permissions($selectedFriendList = 0) {
 		if(empty($this->data)) {
 			$this->loadModel('Group');
 		
