@@ -9,8 +9,31 @@ class Notification extends AppModel {
 			'counterScope' => array('Notification.new' => true)
 	));
 
+	function addNotification($uid, $type, $title, $content) {
+		$notifications = array(
+			'friend',
+			'pm',
+		);
+
+		if (!in_array($type, $notifications)) {
+			return false;
+		}
+
+		$this->create();
+		$this->data['Notification']['title'] = Sanitize::clean($title);
+		$this->data['Notification']['content'] = Sanitize::clean($content);
+		$this->data['Notification']['type'] = $type;
+		$this->data['Notification']['user_id'] = $uid;
+		$this->data['Notification']['new'] = true;
+
+		if (!$this->save($this->data)) {
+			return false;
+		}
+		return true;
+	}
+
 	function getAllNotifications($uid) {
-		$this->Notification->recursive = -1;
+		$this->recursive = -1;
 		return $this->find('all', array(
 				'conditions' => array(
 					'user_id' => $uid

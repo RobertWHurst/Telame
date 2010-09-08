@@ -21,7 +21,7 @@ $this->set('script_for_layout', array(
 <div id="page_body" class="clearfix">
 	<div id="add_friend">
 <?php
-		echo $form->create('GroupsUser', array('Url' => array('controller' => 'Users', 'action' => 'addFriend')));
+		echo $form->create('GroupsUser', array('url' => array('controller' => 'friends', 'action' => 'addFriend', $friend['User']['id'])));
 		echo $form->input('group_id', array('options' => $friendLists));
 		echo $form->hidden('friend_id', array('value' => $friend['User']['id']));
 		echo $form->end(__('add', true));
