@@ -33,11 +33,22 @@ class SettingsController extends AppController{
 	}
 
 	function permissions() {
-		$uid = $this->currentUser['User']['id'];
+		if(empty($this->data)) {
+			$uid = $this->currentUser['User']['id'];
 
-		$acoTree = $this->Aacl->getAcoTree($uid);
+			$acoTree = $this->Aacl->getAcoTree($uid);
 
-		$this->set(compact('acoTree', 'groups'));
+			$this->set(compact('acoTree', 'groups'));
+		} else {
+			if ($this->Aacl->saveAco($this->data)) {
+				$this->Session->setFlash(__('permissions_saved', true));
+			} else {
+				$this->Session->setFlash(__('permissions_not_saved', true));
+			}
+
+			$this->redirect($this->referer());
+			exit;
+		}
 	}
 
 	function profile() {
@@ -56,5 +67,5 @@ class SettingsController extends AppController{
 
 		//TODO: ACL STUFF HERE
 	}
-	
+
 }

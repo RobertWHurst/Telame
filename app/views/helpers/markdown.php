@@ -28,7 +28,8 @@ class MarkdownHelper extends AppHelper {
 		$emoticons = $this->Emoticon->find('all', array('order' => 'code DESC'));
 
 	    foreach($emoticons as $emoticon) {
-			$text = str_ireplace($emoticon['Emoticon']['code'], ' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" />', $text);
+	    	// arrays are used in str_ireplace for speed, even though it's a single search
+			$text = str_ireplace(array($emoticon['Emoticon']['code']), array(' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" />'), $text);
 	    }
 	    return $text;
 	}

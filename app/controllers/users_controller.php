@@ -13,7 +13,6 @@ class UsersController extends AppController {
 		 	$this->_unforceSSL();
 		}
 		$this->Auth->allow(array('confirm', 'signup'));
-//		$this->Auth->allow('signup');
 	}
 
 	function confirm($email = null, $hash = null) {
