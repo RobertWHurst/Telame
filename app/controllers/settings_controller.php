@@ -33,8 +33,6 @@ class SettingsController extends AppController{
 
 	function permissions($selectedFriendList = 0) {
 		if(empty($this->data)) {
-			$this->loadModel('Group');
-
 			//get the current user and note their id.
 			$uid = $this->currentUser['User']['id'];
 
