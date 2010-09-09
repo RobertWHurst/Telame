@@ -19,18 +19,54 @@ div.wallPostWrap div.wallPost div.content{
 	margin: 0 15px 15px 70px;
 	overflow: hidden;
 }
+div.wallPostWrap div.wallPost div.content h1{
+	font-size: 2.4em;
+	line-height: 2.4em;
+	text-decoration: underline;
+	font-weight: bold;
+}
+div.wallPostWrap div.wallPost div.content h2{
+	font-size: 1.8em;
+	line-height: 1.8em;
+	text-decoration: underline;
+	font-weight: bold;
+}
+div.wallPostWrap div.wallPost div.content h3{
+	font-size: 1.6em;
+	line-height: 1.6em;
+	text-decoration: underline;
+	font-weight: bold;
+}
 div.wallPostWrap div.wallPost div.content p{
 	font-size: 1.4em;
 	line-height: 1.4em;
 	margin-bottom: 15px;
 }
-div.wallPostWrap div.wallPost div.content h1{
-	font-size: 1.6em;
-	line-height: 1.6em;
+div.wallPostWrap div.wallPost div.content ul,
+div.wallPostWrap div.wallPost div.content ol{
 	margin-bottom: 15px;
-	text-decoration: underline;
-	font-weight: bold; 
-	display: block;
+}
+div.wallPostWrap div.wallPost div.content ul{
+	list-style: disc inside none;
+}
+div.wallPostWrap div.wallPost div.content ol{
+	list-style: decimal inside none;
+}
+div.wallPostWrap div.wallPost div.content li{
+	font-size: 1.4em;
+	line-height: 1.4em;
+	font-weight: bold;
+}
+div.wallPostWrap div.wallPost div.content pre{
+	padding: 2px 4px;
+	margin-bottom: 15px;
+	background: #000;
+}
+div.wallPostWrap div.wallPost div.content code{
+	font-size: 14px;
+	line-height: 16px;
+	background: #000;
+	color: #fff;
 }
 div.wallPostWrap div.deletePost{
 	position: absolute;
