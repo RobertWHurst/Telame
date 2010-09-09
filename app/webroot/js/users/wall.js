@@ -294,6 +294,8 @@ $(function(){
 				inputWrapper.append('<p class="proccess">Posting...</p>');
 				
 				$.post(core.domain + ajaxUrl, formData, function(data){
+				
+					flash.setMessage('info', 'Your comment was successful.');
 					
 					if(data !== 'false'){
 					
@@ -348,10 +350,10 @@ $(function(){
 				$.post(core.domain + ajaxUrl, function(){
 					
 					if(domElement.hasClass('like')){
-						flash.setMessage('likeness', 'Post Liked');
+						flash.setMessage('info', 'Post Liked');
 					}
 					else if(domElement.hasClass('dislike')){
-						flash.setMessage('likeness', 'Post Disliked');
+						flash.setMessage('info', 'Post Disliked');
 					}
 					
 				});
