@@ -92,7 +92,8 @@ $(function($){
 		var root = this;
 		
 		//store the selectors
-		root.flashWrap = $('#flash');
+		root.flashWrap = $('#flashWrapper');
+		root.flash = $('#flash');
 		root.flashMessages = $('div.message', '#flash');
 		
 		//create a function for displaying a flash message via javascript
@@ -105,7 +106,7 @@ $(function($){
 			message.hide();
 			
 			//append it the the flash container
-			root.flashWrap.prepend(message);
+			root.flashWrap.children('#flash').prepend(message);
 			
 			//animate it in
 			message.slideDown(600);

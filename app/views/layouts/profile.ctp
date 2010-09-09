@@ -14,9 +14,7 @@
 ?>
 </head>
 <body>
-	<div id="flash">
-		<?php echo $this->Session->flash(); ?>
-	</div>
+	<?php echo $this->element('flash'); ?>
 	<div id="backgroundHead">		
 		<div id="backgroundHeadGlow"></div>
 	</div>

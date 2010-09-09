@@ -17,9 +17,7 @@
 </head>
 <body>
 	<header>
-		<div id="flash">
-			<?php echo $this->Session->flash(); ?>
-		</div>
+		<?php echo $this->element('flash'); ?>
 		<div id="wrap_header">
 			<div id="header">
 				<div id="logo">

@@ -252,8 +252,6 @@ $(function(){
 			
 		}
 		
-		
-		
 		root.postCommentSubmitHandler = function(){
 		
 			//on submit
@@ -325,6 +323,32 @@ $(function(){
 					//remove the progress dialog and show the input box again
 					inputWrapper.children('p.proccess').remove();
 					inputWrapper.children().show();
+					
+				});
+				
+			});
+		}
+		
+		root.likenessPostHandeler = function(){
+			
+			root.wallPostsWrapper.delegate('a.like, a.dislike', 'click', function(event){
+				
+				//disable the default action
+				event.preventDefault();
+				
+				var domElement = $(this);
+				
+				//get the ajax url
+				var ajaxUrl = domElement.attr('href');
+				
+				$.post(core.domain + ajaxUrl, function(){
+					
+					if(domElement.hasClass('like')){
+						flash.setMessage('likeness', 'Post Liked');
+					}
+					else if(domElement.hasClass('dislike')){
+						flash.setMessage('likeness', 'Post Disliked');
+					}
 					
 				});
 				
@@ -416,6 +440,9 @@ $(function(){
 			
 			//on submit of a comment
 			root.postCommentSubmitHandler();
+			
+			//on disliking or liking a post
+			root.likenessPostHandeler();
 			
 			//on click event for delete and wall to wall
 			root.postDeleteHandler();

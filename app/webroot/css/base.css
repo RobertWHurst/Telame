@@ -187,17 +187,21 @@ optgroup{
 	line-height: 1.2em;
 	padding-bottom: 1.2em;
 }
-#flash div.message{
-	font-size: 1.6em;
-	line-height: 0.8em;
-	padding: 10px;
-	color: #ff0000;
-	border: 1px solid #f00;
+#flash{
 	background: #fcc;
+	width: 980px;
+	margin: 0 auto;
 	
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+}
+#flash div.message{
+	height: 36px;
+	font-size: 1.8em;
+	line-height: 36px;
+	text-align: center;
+	color: #ff0000;
 }
 div.arrow_up{
 	height: 0;
