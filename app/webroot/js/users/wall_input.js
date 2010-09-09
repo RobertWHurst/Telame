@@ -137,6 +137,7 @@ $(function(){
 					
 					if(data !== 'false'){
 					
+						flash.setMessage('info', 'Your post was successful.');
 						
 						//convert the data into a jquery object
 						var data = $(data);
@@ -166,11 +167,6 @@ $(function(){
 							root.wallInput = $('#WallPostPost', '#profile_wall_input');
 						}
 						
-					}
-					else{
-						
-						alert('Sorry but it seems that your browser is no longer able to connect to the server. To post to the wall a connection is required');
-					
 					}
 						
 					//remove the progress dialog and show the input box again

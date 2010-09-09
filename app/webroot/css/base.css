@@ -196,20 +196,21 @@ optgroup{
 	-webkit-border-radius: 0 0 10px 10px;
 	border-radius: 0 0 10px 10px;
 }
-#flash div.message{
+#flash div{
 	height: 36px;
 	font-size: 1.8em;
+	font-weight: bold;
 	line-height: 36px;
 	text-align: center;
 	color: #fff;
 }
-#flash div.message.info{
+#flash div.info{
 	color: #c1ef52;
 }
-#flash div.message.warning{
-	color: #fff833;
+#flash div.warning{
+	color: #fffb7f;
 }
-#flash div.message.error{
+#flash div.error{
 	color: #f33;
 }
 div.arrow_up{

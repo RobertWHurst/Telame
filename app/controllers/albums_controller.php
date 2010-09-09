@@ -26,7 +26,7 @@ class AlbumsController extends AppController {
 		}
 
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
-			$this->Session->setFlash(__('not_allowed_images', true), array('class' => 'warning'));
+			$this->Session->setFlash(__('not_allowed_images', true), 'default', array('class' => 'warning'));
 			$this->redirect($this->referer());
 			exit;
 		}
@@ -69,7 +69,7 @@ class AlbumsController extends AppController {
 			$this->data['Album']['user_id'] = $this->currentUser['User']['id'];
 			$this->data['Album']['slug'] = Inflector::slug($this->data['Album']['title']);
 			if ($this->Album->save($this->data)) {
-				$this->Session->setFlash(__('album_added', true));
+				$this->Session->setFlash(__('album_added', true), 'default', array('class' => 'info'));
 			}
 			$this->redirect('/albums');
 		} else {

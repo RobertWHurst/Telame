@@ -42,9 +42,9 @@ class SettingsController extends AppController{
 			$this->set(compact('acoTree'));
 		} else {
 			if ($this->Aacl->saveAco($this->data)){
-				$this->Session->setFlash(__('permissions_saved', true), array('class' => 'info'));
+				$this->Session->setFlash(__('permissions_saved', true), 'default', array('class' => 'info'));
 			} else {
-				$this->Session->setFlash(__('permissions_not_saved', true), array('class' => 'warning'));
+				$this->Session->setFlash(__('permissions_not_saved', true), 'default', array('class' => 'warning'));
 			}
 
 			$this->redirect($this->here);

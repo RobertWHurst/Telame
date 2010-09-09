@@ -58,13 +58,16 @@ $(function(){
 					
 					//tell the message controller to delete the message
 					$.post(core.domain + ajaxUrl, {}, function(data){
-						if(data === 'true'){
-							domElement.parent().parent().slideUp(root.speed);
+						if(data === 'true'){							
+							flash.setMessage('info', 'The message was deleted.');
 						}
 						else{
-							
+							flash.setMessage('error', 'The message could not be deleted.');
 						}
 					});
+					
+					//slide up the message
+					domElement.parent().parent().slideUp(root.speed);
 					
 				});
 				

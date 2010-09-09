@@ -22,9 +22,9 @@ class UsersController extends AppController {
 				$hash = $this->data['User']['hash'];
 			}
 			if ($this->User->confirm($email, $hash)) {
-				$this->Session->setFlash(__('email_confirmed', true), array('class' => 'info'));
+				$this->Session->setFlash(__('email_confirmed', true), 'default', array('class' => 'info'));
 			} else {
-				$this->Session->setFlash(__('email_or_hash_failed', true), array('class' => 'error'));
+				$this->Session->setFlash(__('email_or_hash_failed', true), 'default', array('class' => 'error'));
 			}
 			$this->redirect('/');
 			exit;
@@ -55,7 +55,7 @@ class UsersController extends AppController {
 			if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
 				$canView = true;
 			} else {
-				$this->Session->setFlash(__('not_allowed_profile', true));
+				$this->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
 			}
 			// are you friends with this person
 			$isFriend = ($this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']) ? true : false);
@@ -94,7 +94,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			// make sure the passwords match, if not show the page again with all the current info except the password
 			if ($this->data['User']['password'] != $this->Auth->password($this->data['User']['passwd'])) {
-				$this->Session->setFlash(__('password_mismatch', true));
+				$this->Session->setFlash(__('password_mismatch', true), 'default', array('class' => 'error'));
 				unset($this->data['User']['password']);
 				unset($this->data['User']['passwd']);
 			// passwords match
@@ -103,7 +103,7 @@ class UsersController extends AppController {
 				$this->loadModel('BetaKey');
 				$key = $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
 				if (!$key) {
-					$this->Session->setFlash(__('invalid_key', true));
+					$this->Session->setFlash(__('invalid_key', true), 'default', array('class' => 'error'));
 					$this->redirect($this->referer());
 					exit;
 				}
@@ -124,9 +124,9 @@ class UsersController extends AppController {
 					$this->BetaKey->delete($key['BetaKey']['id']);
 
 					// tell the user it's all good
-					$this->Session->setFlash(__('user_saved', true));
+					$this->Session->setFlash(__('user_saved', true), 'default', array('class' => 'info'));
 				} else {
-					$this->Session->setFlash(__('user_create_error'));
+					$this->Session->setFlash(__('user_create_error'), 'default', array('class' => 'error'));
 				}
 				   $this->redirect('/');
 				   exit;

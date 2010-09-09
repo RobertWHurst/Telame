@@ -100,7 +100,7 @@ $(function($){
 		root.setMessage = function(key, message){
 			
 			//create the message within a jquery object
-			var message = $('<div class="message ' + key + '">' + message + '</div>');
+			var message = $('<div class="' + key + '">' + message + '</div>');
 			
 			//hide the message
 			message.hide();

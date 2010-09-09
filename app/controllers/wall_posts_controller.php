@@ -66,7 +66,7 @@ class WallPostsController extends AppController {
 					echo 'false';
 					exit;
 				} else {
-					$this->Session->setFlash(__('wall_post_error', true));
+					$this->Session->setFlash(__('wall_post_error', true), 'default', array('class' => 'error'));
 					$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitorSlug));
 					exit;
 				}
@@ -146,7 +146,7 @@ class WallPostsController extends AppController {
 				echo 'false';
 				exit;
 			} else {
-				$this->Session->setFlash(__('wall_post_delete_error', true));
+				$this->Session->setFlash(__('wall_post_delete_error', true), 'default', array('class' => 'error'));
 				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
@@ -173,7 +173,7 @@ class WallPostsController extends AppController {
 				echo 'true';
 				exit;
 			} else {
-				$this->Session->setFlash(__('wall_post_delete', true));
+				$this->Session->setFlash(__('wall_post_delete', true), 'default', array('class' => 'info'));
 				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
@@ -183,7 +183,7 @@ class WallPostsController extends AppController {
 				exit;
 			} else {
 				//set the flash message and redirect them, the metaling sods! :<
-				$this->Session->setFlash(__('wall_post_bad_hacker', true));
+				$this->Session->setFlash(__('wall_post_bad_hacker', true), 'default', array('class' => 'warning'));
 				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}

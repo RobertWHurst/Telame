@@ -29,7 +29,7 @@ class ProfilesController extends AppController {
 				$this->set(compact('email', 'hash'));
 				
 			} else {
-				$this->Session->setFlash(__('user_hash_error', true), array('class' => 'error'));
+				$this->Session->setFlash(__('user_hash_error', true), 'default', array('class' => 'error'));
 				$this->redirect('/');
 				exit;
 			}
@@ -49,7 +49,7 @@ class ProfilesController extends AppController {
 			//If the form data can be validated and saved...
 			if($this->Profile->save($this->data)) {
 				//Set a session flash message and redirect.
-				$this->Session->setFlash("Profile Saved!");
+				$this->Session->setFlash(__('profile_updated', true), 'default', array('class' => 'info'));
 				$this->redirect('/' . $this->currentUser['User']['slug']);
 				exit;
 			}
