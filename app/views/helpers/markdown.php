@@ -10,7 +10,7 @@ class MarkdownHelper extends AppHelper {
 		$text = Sanitize::clean($text, array('encode' => false, 'remove_html' => true));
 
 		// match links and format
-		$text = preg_replace('/ ((?:http[s]*|[s]*ftp|git):\/\/[^\s]+)/', ' <a href="$1" rel="" target="_blank">$1</a> ', $text);
+		$text = preg_replace('/[\s]((?:(?:(?:http[s]*|[s]*ftp|git|svn):\/\/)|(?:mailto))[^\s]+)/', ' <a href="$1" rel="" target="_blank">$1</a> ', $text);
 
 		// add emoticons
 		$text = $this->emoticons($text);
