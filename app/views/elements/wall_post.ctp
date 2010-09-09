@@ -18,7 +18,7 @@
 			}
 			//Note: author name is included in the parse because markdown sees
 			//it as part of the paragraph and wrapps it within the p tags.
-			echo $markdown->parse($author_name . $post['WallPost']['post']);
+			echo $markdown->parse($author_name . "\r\n" . $post['WallPost']['post']);
 ?>
 		</div>
 		<?php if(isset($show_post_controls)): ?>
@@ -37,8 +37,7 @@
 				//$url = '#';
 				//echo $html->image('icons/comments.png', array('title' => __('wall_to_wall',true), 'url' => $url));
 ? >
-			</div>
-			-->
+			</div> -->
 		<?php endif; ?>
 		<div class="baseline">			
 			<?php if(isset($show_post_controls)): ?>
