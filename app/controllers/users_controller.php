@@ -22,9 +22,9 @@ class UsersController extends AppController {
 				$hash = $this->data['User']['hash'];
 			}
 			if ($this->User->confirm($email, $hash)) {
-				$this->Session->setFlash(__('email_confirmed', true));
+				$this->Session->setFlash(__('email_confirmed', true), array('class' => 'info'));
 			} else {
-				$this->Session->setFlash(__('email_or_hash_failed', true));
+				$this->Session->setFlash(__('email_or_hash_failed', true), array('class' => 'error'));
 			}
 			$this->redirect('/');
 			exit;

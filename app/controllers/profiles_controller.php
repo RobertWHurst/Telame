@@ -29,7 +29,7 @@ class ProfilesController extends AppController {
 				$this->set(compact('email', 'hash'));
 				
 			} else {
-				$this->Session->setFlash(__('user_hash_error', true));
+				$this->Session->setFlash(__('user_hash_error', true), array('class' => 'error'));
 				$this->redirect('/');
 				exit;
 			}

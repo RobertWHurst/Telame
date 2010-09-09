@@ -148,7 +148,7 @@ class MessagesController extends AppController {
     			exit;
     		}
     		else
-    			$this->Session->setFlash(__('message_thread_deleted', true));
+    			$this->Session->setFlash(__('message_thread_deleted', true), array('class' => 'info'));
     	}
     	elseif($userIs == 'author'){
     		$this->Message->updateAll(

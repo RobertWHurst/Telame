@@ -48,7 +48,7 @@ class FriendsController extends AppController {
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'friends')) {
 			$friends = $this->User->GroupsUser->getFriends(0, 0, array('uid' => $user['User']['id']));
 		} else {
-			$this->Session->setFlash(__('not_allowed_friends', true));
+			$this->Session->setFlash(__('not_allowed_friends', true), array('class' => 'warning'));
 			$this->redirect($this->referer());
 		}
 		$this->set(compact('friends', 'user'));

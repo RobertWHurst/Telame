@@ -26,7 +26,7 @@ class AlbumsController extends AppController {
 		}
 
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
-			$this->Session->setFlash(__('not_allowed_images', true));
+			$this->Session->setFlash(__('not_allowed_images', true), array('class' => 'warning'));
 			$this->redirect($this->referer());
 			exit;
 		}
