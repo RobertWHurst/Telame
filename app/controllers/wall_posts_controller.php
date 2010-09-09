@@ -92,7 +92,7 @@ class WallPostsController extends AppController {
 		$this->WallPost->set('type', 'post');
 
 		//save the post content and time
-		$this->WallPost->set('post', $this->data['WallPost']['post']);
+		$this->WallPost->set('post', strip_tags($this->data['WallPost']['post']));
 		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
 
 		//commit the data to the db
