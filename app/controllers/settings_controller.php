@@ -16,19 +16,31 @@ class SettingsController extends AppController{
 	}
 
 	function basic() {
-		
+
 	}
-	
+
+	function friends() {
+		$this->loadModel('GroupsUser');
+		$friends = $this->GroupsUser->getFriends(array('uid' => $this->currentUser['User']['id']));
+		$this->set(compact('friends'));
+	}
+
+	function groups() {
+		$this->loadModel('Group');
+		$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
+		$this->set(compact('groups'));
+	}
+
 	function permissions($selectedFriendList = 0) {
 		if(empty($this->data)) {
 			$this->loadModel('Group');
-		
+
 			//get the current user and note their id.
 			$uid = $this->currentUser['User']['id'];
-		
+
 			//get the current user's acl data.
 			$acoTree = $this->Aacl->getAcoTree($uid);
-			
+
 			$this->set(compact('acoTree'));
 		} else {
 			if ($this->Aacl->saveAco($this->data)){

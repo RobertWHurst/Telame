@@ -10,6 +10,22 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
+		'label' => __('friends', true),
+		'url' => array(
+			'controller' => 'settings',
+			'action' => 'friends'
+		),
+		'classes' => 'button'
+	),
+	array(
+		'label' => __('groups', true),
+		'url' => array(
+			'controller' => 'settings',
+			'action' => 'groups'
+		),
+		'classes' => 'button'
+	),
+	array(
 		'label' => __('permissions', true),
 		'url' => array(
 			'controller' => 'settings',
@@ -20,9 +36,9 @@ $links = array(
 );
 
 //allow the view to add the the links
-if(isset($nav_links))
+if(isset($nav_links)) {
 	$links = array_merge($links, $nav_links);
-
+}
 ?>
 <ul>
 <?php
