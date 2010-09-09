@@ -60,13 +60,17 @@ class GroupsUser extends AppModel {
 	}
 
 	function isFriend($uid, $fid) {
-
+		// make sure they are on our list
 		$friend = $this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)));
-		if (!$friend) {
-			return false;
-		} else {
-			return true;
+		// they are on our list, are we on theirs?
+		if ($friend) {
+			// make sure we are on their list
+			$friend = $this->find('first', array('conditions' => array('user_id' => $fid, 'friend_id' => $uid)));
+			if ($friend) {
+				return true;
+			}
 		}
+		return false;
 	}
 
 	// takes User_ID and Friend_ID and returns what group the friend is in

@@ -52,7 +52,7 @@ class PagesController extends AppController {
 			$uid = $this->currentUser['User']['id'];
 		}
 
-		$friendLists = $this->Group->getFriendLists(0, 0, array('uid' => $uid));
+		$friendLists = $this->Group->getFriendLists(array('uid' => $uid));
 
 		$psudeoLists = array(
 			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0))
