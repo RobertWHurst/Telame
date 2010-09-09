@@ -148,12 +148,17 @@ $(function(){
 				//send the ajax request
 				$.post(core.domain + ajaxUrl, function(data){
 					
-					if(data === 'true'){					
-						//slide up the post
-						domElement.parent().slideUp(300, function(){
-							$(this).remove();
-						});
+					if(data === 'true'){
+						flash.setMessage('info', 'The comment was deleted.');
 					}
+					else{
+						flash.setMessage('error', 'The comment could not be deleted.');
+					}
+				});
+									
+				//slide up the post
+				domElement.parent().slideUp(300, function(){
+					$(this).remove();
 				});
 				
 			});
@@ -295,7 +300,7 @@ $(function(){
 				
 				$.post(core.domain + ajaxUrl, formData, function(data){
 				
-					flash.setMessage('info', 'Your comment was successful.');
+					flash.setMessage('info', 'Your comment was posted.');
 					
 					if(data !== 'false'){
 					

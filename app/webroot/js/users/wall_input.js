@@ -137,7 +137,7 @@ $(function(){
 					
 					if(data !== 'false'){
 					
-						flash.setMessage('info', 'Your post was successful.');
+						flash.setMessage('info', 'Your wall post was posted.');
 						
 						//convert the data into a jquery object
 						var data = $(data);

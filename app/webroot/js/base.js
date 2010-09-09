@@ -94,7 +94,7 @@ $(function($){
 		//store the selectors
 		root.flashWrap = $('#flashWrapper');
 		root.flash = $('#flash');
-		root.flashMessages = $('div.message', '#flash');
+		root.flashMessages = $('div', '#flash');
 		
 		//create a function for displaying a flash message via javascript
 		root.setMessage = function(key, message){
@@ -123,7 +123,7 @@ $(function($){
 		//create a handler for closing messages manually
 		root.closeHandler = function(){
 			
-			root.flashWrap.delegate('div.message', 'click', function(){
+			root.flash.delegate('div', 'click', function(){
 			
 				var domElement = $(this);
 				

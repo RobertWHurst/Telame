@@ -12,7 +12,8 @@
 #main_sidebar{
 	width: 100%;
 	padding-top: 10px;
-	background: url(../../img/page_head.png) no-repeat top left;
+	background: url(../../img/sidebar_head.png) no-repeat top left;
+	border-bottom: #787878 solid 1px;
 }
 #main_sidebar div.avatar{
 	width: 60px;
@@ -72,8 +73,8 @@
 	padding: 10px 20px;
 	background: #343434;
 	border-left: 1px solid #787878;
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #333;
+	/*border-top: 1px solid #aaa;
+	border-bottom: 1px solid #333;*/
 }
 #modules div.module div.link a:hover{
 	background: #5c5c5c;
