@@ -29,7 +29,7 @@ class MarkdownHelper extends AppHelper {
 
 	    foreach($emoticons as $emoticon) {
 	    	// arrays are used in str_ireplace for speed, even though it's a single search
-			$text = str_ireplace(array($emoticon['Emoticon']['code']), array(' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" />'), $text);
+			$text = str_ireplace(array($emoticon['Emoticon']['code']), array(' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" height="16px" width="16px" />'), $text);
 	    }
 	    return $text;
 	}
