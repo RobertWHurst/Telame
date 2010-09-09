@@ -49,7 +49,7 @@ class ProfilesController extends AppController {
 			//If the form data can be validated and saved...
 			if($this->Profile->save($this->data)) {
 				//Set a session flash message and redirect.
-				$this->Session->setFlash("Profile Saved!");
+				$this->Session->setFlash(__('profile_updated', true), array('class' => 'info'));
 				$this->redirect('/' . $this->currentUser['User']['slug']);
 				exit;
 			}
