@@ -40,7 +40,7 @@ class MessagesController extends AppController {
     		)
     	);
 			
-		
+		$this->Message->updateCount($this->currentUser['User']['id']);
 		if(!$messages){
 			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
 			exit;

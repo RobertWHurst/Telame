@@ -27,22 +27,22 @@ class Message extends AppModel {
 			'dependent' => true
 		)
 	);
-	
+
 	//NOTE: this is dirty but it works for now...
 	function _remove_duplicate_threads($messages){
-				
+
 		foreach($messages as $message){
 			//get the parent id
 			$pid = $message['Message']['parent_id'];
-			
+
 			//if the pid is -1 then replace it with the messages own id
 			if($pid < 0)
 				$pid = $message['Message']['id'];
-				
+
 			//add or overwrite the index
 			$_messages[$pid] = $message;
 		}
-		
+
 		return array_values($_messages);
 	}
 
@@ -58,7 +58,7 @@ class Message extends AppModel {
 					// the following prevents access to messages
 					// that do not belong to the passed uid.
 					'OR' => array(
-						'Message.user_id' => $uid,		
+						'Message.user_id' => $uid,
 						'Message.author_id' => $uid
 					)
 				),
@@ -119,7 +119,7 @@ class Message extends AppModel {
 					'Profile'
 				),
 				'ParentMessage'
-			)				
+			)
 		));
 		if(!$received) {
 			return false;
@@ -158,9 +158,9 @@ class Message extends AppModel {
 		//return Set::sort($sent, '{n}.Message.created', 'desc');
 		return $this->_remove_duplicate_threads($sent);
 	}
-	
+
 	//returns the relation of a user id to a given message
-	function userIs($mid, $uid){		
+	function userIs($mid, $uid){
 		$this->recursive = 1;
 		$this->Behaviors->attach('Containable');
 		$message = $this->find('first', array(
@@ -173,7 +173,7 @@ class Message extends AppModel {
 				'Message.author_id'
 			)
 		));
-		
+
 		if($uid == $message['Message']['user_id'])
 			return 'user';
 		elseif($uid == $message['Message']['author_id'])
@@ -181,8 +181,8 @@ class Message extends AppModel {
 		else
 			return false;
 	}
-	
-	function getParent($mid){		
+
+	function getParent($mid){
 		$this->recursive = 1;
 		$this->Behaviors->attach('Containable');
 		$message = $this->find('first', array(
@@ -194,10 +194,16 @@ class Message extends AppModel {
 				'Message.parent_id'
 			)
 		));
-		
+
 		if($message)
 			return $message['Message']['parent_id'];
 		else
 			return false;
+	}
+
+	function updateCount($uid) {
+		$count = $this->find('count', array('conditions' => array('Message.user_id' => $uid, 'Message.read' => null)));
+		$this->User->id = $uid;
+		$this->User->saveField('message_count', $count);
 	}
 }
