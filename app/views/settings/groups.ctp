@@ -25,8 +25,19 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile'][
 </div>
 <div id="page_body" class="clearfix">
 	<div id="permissions">
+		<h1>Add new group</h1>
 <?php
-	pr($groups);
+		echo $form->create('Group', array('url' => $this->here));
+		echo $form->input('title');
+		echo $form->end(__('save', true));
+
+		foreach($groups as $group) {
+			echo $group['Group']['title'];
+			if ($group['Group']['user_id'] == $currentUser['User']['id']) {
+				echo $html->link(__('delete', true), $this->here . '/' . $group['Group']['id'], null, __('confirm_delete', true) . ' \'' . $group['Group']['title'] . '\'');
+			}
+			echo '<br />';
+		}
 ?>
 	</div>
 </div>

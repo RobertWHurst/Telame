@@ -25,10 +25,37 @@ class SettingsController extends AppController{
 		$this->set(compact('friends'));
 	}
 
-	function groups() {
+	function groups($id = null) {
 		$this->loadModel('Group');
-		$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
-		$this->set(compact('groups'));
+		// we're loading the page to view the groups, or to delete a group
+		if (empty($this->data)) {
+			// if ID is not null, we're deleting
+			if (is_null($id)) {
+				$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
+				$this->set(compact('groups'));
+			} else { // delete block
+				// get the group
+				$group = $this->Group->findById($id);
+				// ensure the person is the groups owner
+				if ($group['Group']['user_id'] != $this->currentUser['User']['id']) {
+					$this->Session->setFlash(__('group_not_allowed_delete', true));
+				} elseif ($this->Group->delete($id)) {
+					$this->Session->setFlash(__('group_deleted', true));
+				} else {
+					$this->Session->setFlash(__('group_not_deleted', true));
+				}
+				$this->redirect($this->referer());
+			}
+		} else {
+			$this->Group->create();
+			$this->data['Group']['user_id'] = $this->currentUser['User']['id'];
+			if ($this->Group->save($this->data)) {
+				$this->Session->setFlash(__('group_added', true));
+			} else {
+				$this->Session->setFlash(__('group_not_added', true));
+			}
+			$this->redirect($this->here);
+		}
 	}
 
 	function permissions($selectedFriendList = 0) {

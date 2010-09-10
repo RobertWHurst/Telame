@@ -18,9 +18,10 @@ $this->set('script_for_layout', array(
 ));
 //page title
 
+pr($friends);
 
 foreach($friends as $friend) {
-	echo $friend['Friend']['Profile']['full_name'];
+//	echo $friend['Friend']['Profile']['full_name'];
 }
 
 ?>

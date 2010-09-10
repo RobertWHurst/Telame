@@ -18,7 +18,7 @@ $this->set('script_for_layout', array(
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name'] . '\'s ' . __('settings', true));
 ?>
 <div id="page_head">
-	<h1 class="page_title"><?php echo __('basic_settings_title', true); ?></h1>
+	<h1 class="page_title"><?php echo __('settings', true); ?></h1>
 </div>
 <div id="page_navigation" class="clearfix">
 	<?php echo $this->element('settings/navigation'); ?>
