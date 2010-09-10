@@ -56,6 +56,7 @@ class WallPost extends AppModel {
 			$contain[] = 'PostAuthor.Profile';
 
 		$contain[] = 'Replies.PostAuthor.Profile';
+		$contain[] = 'WallPostLike.User';
 
 		if ($options['single']) {
 			$type = 'first';

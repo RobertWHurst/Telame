@@ -89,20 +89,28 @@ class AaclComponent extends Object {
 		}
 	}
 	
-	function saveAco($data) {
+	function saveAco($data, $parent = null) {
 		// we can't use the security tokens here, so remove them
-		unset($data['_Token']);
+		if (is_null($parent)) {
+			unset($data['_Token']);
+		}
+
 		$uid = $this->controller->currentUser['User']['id'];
-		foreach ($data as $acoKey => $acoVal) {
-			foreach ($acoVal as $group => $perm) {
+		foreach ($data as $alias => $groups) {
+			foreach ($groups as $group => $perm) {
+
 				if (!is_array($perm)) {
 					$gid = explode('_', $group);
 					// can read
 					if ($perm) {
-						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . '/' . $acoKey, 'read');
+						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
 					} else {
-						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . '/' . $acoKey, 'read');
+						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
 					}
+				} else {
+					$perm = array($group => $perm);
+					// first is array of data, second is parent name
+					$this->saveAco($perm, $parent . '/' . $alias);
 				}
 			}
 		}

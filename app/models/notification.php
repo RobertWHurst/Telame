@@ -45,4 +45,11 @@ class Notification extends AppModel {
 			)
 		);
 	}
+
+	function updateCount($uid) {
+		$count = $this->find('count', array('conditions' => array('Notification.user_id' => $uid, 'Notification.read' => null)));
+		$this->User->id = $uid;
+		$this->User->saveField('notification_count', $count);
+	}
+
 }

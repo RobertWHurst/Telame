@@ -1,7 +1,7 @@
 <?php
 class WallPostLike extends AppModel {
 
-	var $belongsTo = array('WallPost');
+	var $belongsTo = array('User', 'WallPost');
 
 	function doLike($wpid, $uid, $like) {
 		$wpid = intval($wpid);

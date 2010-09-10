@@ -15,6 +15,7 @@
 		echo $html->meta('author', 'Robert Hurst and Eric Friesen');
 ?>
 </head>
+<?php flush(); ?>
 <body>
 	<header>
 		<?php echo $this->element('flash'); ?>

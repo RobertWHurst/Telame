@@ -24,9 +24,14 @@ class NotificationsController extends AppController {
 			$this->redirect('/');
 			exit;
 		}
+		// get the message
 		$this->read(null, $id);
+		// set "new" to false
 		$this->set('new', false);
+		// save it
 		$this->save();
+		// update notification count
+		$this->Notification->updateCounter($this->currentUser['User']['id']);
 	}
 
 }
