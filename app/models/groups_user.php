@@ -22,7 +22,6 @@ class GroupsUser extends AppModel {
 
 		$options = parseArguments($defaults, $arguments);
 
-		$this->Behaviors->attach('Containable');
 
 		if ($options['uid']) {
 			$conditions['user_id'] = $options['uid'];
@@ -39,23 +38,20 @@ class GroupsUser extends AppModel {
 		if ($options['random']) {
 			$order = 'RANDOM()';
 		} else {
-			// this will be overridden below, so it's useless
-			$order = '';
+			$order = 'Friend.slug';
 		}
 
 		$this->recursive = 2;
 		$friends = $this->find('all', array(
 			'conditions' => $conditions,
-			'contain' => 'Friend.Profile',
+			'contain' => array(
+				'Friend.Profile',
+			),
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
 			'order' => $order,
 		));
 
-		// not random, order by full name
-		if (!$options['random']) {
-			$friends = Set::sort($friends, '{n}.Friend.Profile.full_name', 'asc');
-		}
 		return $friends;
 	}
 
@@ -75,7 +71,6 @@ class GroupsUser extends AppModel {
 
 	// takes User_ID and Friend_ID and returns what group the friend is in
 	function listGroups($uid, $fid) {
-		$this->Behaviors->attach('Containable');
 		$groups = $this->find('first', array(
 			'conditions' => array(
 				'user_id' => $uid,

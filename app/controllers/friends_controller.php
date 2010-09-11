@@ -24,7 +24,7 @@ class FriendsController extends AppController {
 			$slug = $this->User->getSlugFromId($fid);
 			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
 		} else {
-			$friendLists = $this->User->Group->getFriendLists(0, 0, array(
+			$friendLists = $this->User->Group->getFriendLists(array(
 				'uid' => $this->currentUser['User']['id'],
 				'type' => 'list',
 				));
