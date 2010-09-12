@@ -25,7 +25,7 @@ foreach ($wallPosts as $post) {
 		$bodyText = Sanitize::stripAll($bodyText);
 		$bodyText = $text->truncate($bodyText, 400, '...', true, true);
 
-		$author = $html->link($post['PostAuthor']['Profile']['full_name'], 'http://' . env('SERVER_NAME') . '/' . $post['PostAuthor']['slug']);
+		$author = $html->link($post['PostAuthor']['full_name'], 'http://' . env('SERVER_NAME') . '/' . $post['PostAuthor']['slug']);
 
 		echo  $rss->item(array(), array(
 			'title' => $author . ': ' . $post['WallPost']['post'],

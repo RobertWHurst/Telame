@@ -20,7 +20,7 @@
 	</div>
 	<div class="content">
 <?php
-		$author_name = '<strong>' . $html->link($comment['PostAuthor']['Profile']['full_name'], $url) . ' </strong>';
+		$author_name = '<strong>' . $html->link($comment['PostAuthor']['full_name'], $url) . ' </strong>';
 		//Note: author name is included in the parse because markdown sees
 		//it as part of the paragraph and wrapps it within the p tags.
 		echo $markdown->parse($author_name . "\r\n" . $comment['post']); 

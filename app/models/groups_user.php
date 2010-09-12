@@ -38,7 +38,7 @@ class GroupsUser extends AppModel {
 		if ($options['random']) {
 			$order = 'RANDOM()';
 		} else {
-			$order = 'Friend.slug';
+			$order = array('Friend.first_name', 'Friend.last_name');
 		}
 
 		$this->recursive = 2;

@@ -15,7 +15,7 @@ $this->set('script_for_layout', array(
 	'settings/settings'
 ));
 //page title
-$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name'] . '\'s ' . __('settings', true));
+$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name'] . '\'s ' . __('settings', true));
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('friends_title', true); ?></h1>

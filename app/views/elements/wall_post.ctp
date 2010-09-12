@@ -11,10 +11,10 @@
 <?php			
 			if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){		
 				$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
-				$author_name = '<strong>' . $html->link($post['PostAuthor']['Profile']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['Profile']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";				
+				$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";				
 			}
 			else{				
-				$author_name = '<strong>' . $html->link($post['PostAuthor']['Profile']['full_name'], $url) . ' </strong>';				
+				$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . ' </strong>';				
 			}
 			//Note: author name is included in the parse because markdown sees
 			//it as part of the paragraph and wrapps it within the p tags.

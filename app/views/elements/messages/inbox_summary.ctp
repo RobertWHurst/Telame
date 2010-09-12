@@ -48,7 +48,7 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 	<div class="message_content">
 		<h1 class="subject"><?php echo __('message_subject', true) . ' ' . $html->link($tSubject, $mUrl); ?></h1>
 		<p>
-			<?php echo __('message_from', true) . ' ' . $html->link($message['Author']['Profile']['full_name'], $aUrl); ?> &mdash; <?php echo $message['Message']['content']; ?>
+			<?php echo __('message_from', true) . ' ' . $html->link($message['Author']['full_name'], $aUrl); ?> &mdash; <?php echo $message['Message']['content']; ?>
 		</p>
 	</div>
 	<div class="time"><p><?php echo $time->timeAgoInWords($message['Message']['created']); ?></p></div>

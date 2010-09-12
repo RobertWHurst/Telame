@@ -71,9 +71,9 @@ $this->set('script_for_layout', array(
 				<div class="message_content">
 					<?php if($message['Message']['subject']): ?>
 						<?php if($is_user_thread): ?>
-							<h2 class="to"><?php echo __('message_to', true) . ' ' . $message['User']['Profile']['full_name']; ?></h2>
+							<h2 class="to"><?php echo __('message_to', true) . ' ' . $message['User']['full_name']; ?></h2>
 						<?php else: ?>
-							<h2 class="from"><?php echo __('message_from', true) . ' ' . $message['Author']['Profile']['full_name']; ?></h2>
+							<h2 class="from"><?php echo __('message_from', true) . ' ' . $message['Author']['full_name']; ?></h2>
 						<?php endif; ?>							
 						<h1 class="subject"><?php echo $message['Message']['subject']; ?></h1>
 					<?php endif; ?>

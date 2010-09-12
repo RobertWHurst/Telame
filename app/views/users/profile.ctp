@@ -18,7 +18,7 @@ $this->set('script_for_layout', array(
 	'users/wall'
 ));
 //page title
-$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['Profile']['full_name']);
+$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name']);
 
 echo $this->element('users/wall'); ?>
 <div id="wall_sidebar">

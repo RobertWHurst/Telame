@@ -10,7 +10,7 @@
 		<div id="page_head" class="clearfix">
 			<div id="profile_summary">
 				<h1 class="name">
-					<?php echo $this->data['Profile']['full_name']; ?>
+					<?php echo $this->data['User']['full_name']; ?>
 				</h1>
 <?php			echo $form->create('Profile', array('url' => '/e/' . $currentUser['User']['slug']));
 				echo $form->input('first_name');

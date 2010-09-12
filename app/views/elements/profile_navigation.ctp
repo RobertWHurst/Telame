@@ -2,7 +2,7 @@
 //make a navigation strip
 $links = array(
 	array(
-		'label' => $user['Profile']['first_name'] . '\'s ' . __('wall', true),
+		'label' => $user['User']['first_name'] . '\'s ' . __('wall', true),
 		'url' => array(
 			'controller' => 'users',
 			'action' => 'profile',
@@ -11,7 +11,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => $user['Profile']['first_name'] . '\'s ' . __('media', true),
+		'label' => $user['User']['first_name'] . '\'s ' . __('media', true),
 		'url' => array(
 			'controller' => 'albums',
 			'action' => 'albums',
@@ -20,7 +20,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => $user['Profile']['first_name'] . '\'s ' . __('friends', true),
+		'label' => $user['User']['first_name'] . '\'s ' . __('friends', true),
 		'url' => array(
 			'controller' => 'friends',
 			'action' => 'friendList',
@@ -29,7 +29,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('about', true) . ' ' . $user['Profile']['first_name'],
+		'label' => __('about', true) . ' ' . $user['User']['first_name'],
 		'url' => array(
 			'controller' => 'profile',
 			'action' => 'about',

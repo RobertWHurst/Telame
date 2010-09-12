@@ -81,6 +81,12 @@ class User extends AppModel {
 		),
 	);
 
+	function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+		$this->virtualFields['full_name'] = sprintf('initcap(%s.first_name) || \' \' || initcap(%s.last_name)', $this->alias, $this->alias);
+	}
+
+
 // -------------------- Callback functions
 
 	function beforeFind($queryData) {
@@ -175,10 +181,7 @@ class User extends AppModel {
 	}
 
 	function getProfile($slug){
-
 		//get the profile
-		$this->Behaviors->attach('Containable');
-
 		return $this->find('first', array(
 			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
 			'contain' => array(
