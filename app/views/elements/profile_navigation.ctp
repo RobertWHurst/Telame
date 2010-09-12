@@ -22,7 +22,7 @@ $links = array(
 	array(
 		'label' => $user['User']['first_name'] . '\'s ' . __('friends', true),
 		'url' => array(
-			'controller' => 'friends',
+			'controller' => 'groups_users',
 			'action' => 'friendList',
 			$user['User']['slug']
 		),

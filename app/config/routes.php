@@ -53,9 +53,9 @@
 	Router::connect('/calendar/*', array('controller' => 'events', 'action' => 'calendar'));
 
 	// Friend - add
-	Router::connect('/f/a/*', array('controller' => 'friends', 'action' => 'addFriend'));
+	Router::connect('/f/a/*', array('controller' => 'groups_users', 'action' => 'addFriend'));
 	// Friend list
-	Router::connect('/friends/*', array('controller' => 'friends', 'action' => 'friendList'));
+	Router::connect('/friends/*', array('controller' => 'groups_users', 'action' => 'friendList'));
 
 	// Media
 	Router::connect('/albums/new/*', array('controller' => 'albums', 'action' => 'newAlbum'));

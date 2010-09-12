@@ -61,7 +61,7 @@
 		<div class="link">
 <?php
 		$link_content = $this->Html->image('icons/group.png', array('alt' => __('friends', true))) . __('friends', true);
-		echo $html->link($link_content, array('controller' => 'friends', 'action' => 'friendList'), array('escape' => false));
+		echo $html->link($link_content, array('controller' => 'groups_users', 'action' => 'friendList'), array('escape' => false));
 ?>
 		</div>
 	</div>

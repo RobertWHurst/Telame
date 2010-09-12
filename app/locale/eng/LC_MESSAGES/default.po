@@ -22,7 +22,7 @@ msgstr "That email address is not confirmed"
 #: /controllers/albums_controller.php:29
 #, fuzzy
 msgid "not_allowed_images"
-msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
+msgstr "Sorry, but you are not allowed to see this person's images.  Try adding them as a friend first."
 
 #: /controllers/albums_controller.php:72
 #, fuzzy
@@ -36,7 +36,7 @@ msgstr "Friends"
 
 #: /controllers/friends_controller.php:51
 msgid "not_allowed_friends"
-msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
+msgstr "Sorry, but you are not allowed to see this person's friends list.  Try adding them as a friend first."
 
 #: /controllers/messages_controller.php:151;186
 #, fuzzy

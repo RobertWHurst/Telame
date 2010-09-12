@@ -18,6 +18,10 @@ $this->set('script_for_layout', array(
 ));
 //page title
 
+echo $paginator->numbers();
+echo '<br />';
+echo $paginator->counter();
+
 pr($friends);
 
 foreach($friends as $friend) {

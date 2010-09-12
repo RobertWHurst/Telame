@@ -18,6 +18,7 @@ class GroupsUser extends AppModel {
 			'offset' => 0,
 			'random' => false,
 			'uid' => false,
+			'order' => array('Friend.first_name', 'Friend.last_name'),
 		);
 
 		$options = parseArguments($defaults, $arguments);
@@ -36,9 +37,7 @@ class GroupsUser extends AppModel {
 		}
 
 		if ($options['random']) {
-			$order = 'RANDOM()';
-		} else {
-			$order = array('Friend.first_name', 'Friend.last_name');
+			$options['order'] = 'RANDOM()';
 		}
 
 		$this->recursive = 2;
@@ -49,7 +48,7 @@ class GroupsUser extends AppModel {
 			),
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
-			'order' => $order,
+			'order' => $options['order'],
 		));
 
 		return $friends;
@@ -81,4 +80,5 @@ class GroupsUser extends AppModel {
 		));
 		return $groups;
 	}
+
 }

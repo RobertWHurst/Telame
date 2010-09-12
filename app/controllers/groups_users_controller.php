@@ -1,9 +1,14 @@
 <?php
-// this is a helper controller, it doesn't have a 'friend' model, it only uses other models
-class FriendsController extends AppController {
+class GroupsUsersController extends AppController {
 
-	var $uses = array();
+	var $helpers = array('Paginator');
 
+	/**
+	 * \brief addFriend optionally takes a user id and adds them to your friends list.
+	 *
+	 * If a user id is specified, and post data is empty, a page is loaded asking which list you want to add the user to.  
+	 * Once there is post data there should be the frind ID, and the list ID, then add them to the DB
+	 */
 	function addFriend($fid = null) {
 		$this->loadModel('User');
 		$this->layout = 'tall_header_w_sidebar';
@@ -35,18 +40,30 @@ class FriendsController extends AppController {
 	}
 
 	function friendList($slug = false) {
-		$this->loadModel('User');
 		//set the layout
 		$this->layout = 'profile';
 
 		if (!$slug) {
 			$user = $this->currentUser;
 		} else {
-			$user = $this->User->getProfile($slug);
+			$user = $this->GroupsUser->User->getProfile($slug);
 		}
 
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'friends')) {
-			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id']));
+			$this->paginate = array(
+				'conditions' => array(
+					'user_id' => $this->currentUser['User']['id'],
+				),
+				'contain' => array(
+					'Friend.Profile',
+				),
+				'limit' => 1,
+				'order' => array(
+					'Friend.first_name',
+					'Friend.last_name',
+				),
+			);
+			$friends = $this->paginate('GroupsUser');
 		} else {
 			$this->Session->setFlash(__('not_allowed_friends', true), 'default', array('class' => 'warning'));
 			$this->redirect($this->referer());
