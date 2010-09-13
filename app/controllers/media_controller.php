@@ -1,11 +1,11 @@
 <?php
 class MediaController extends AppController {
 
-	var $components = array('Thumb');
+	var $components = array('Thumb', 'ScaleTool');
 
 //---------------------------- Image Retrieval Functions ----------------------------//
 
-	function avatar($id = false) {
+	function avatar($id = false){
 		$this->_resize($id, Configure::read('AvatarSize'), array(
 			'w' => 60,
 			'h' => 60,
@@ -13,11 +13,11 @@ class MediaController extends AppController {
 		));
 	}
 
-	function thumb($id = false) {
+	function thumb($id = false){
 		$this->_resize($id, Configure::read('ThumbSize'));
 	}
 
-	function preview($id = false) {
+	function preview($id = false){
 		$this->_resize($id, Configure::read('PreviewSize'));
 	}
 
@@ -29,7 +29,7 @@ class MediaController extends AppController {
 		));
 	}
 
-	function profile($id = false) {
+	function profile($id = false){
 		$this->_resize($id, Configure::read('ProfileSize'));
 	}
 
@@ -118,17 +118,11 @@ class MediaController extends AppController {
 			$imageSize = getimagesize($baseDir . $dir . $filename);
 			$imageWidth = $imageSize[0];
 			$imageHeight = $imageSize[1];
-
-			if ($imageWidth < $imageHeight) {
-				// make it wider
-				$ar = $imageHeight / $imageWidth;
-				$size['height'] = round($size['width'] * $ar);
-			} else {
-				// make it taller
-				$ar = $imageWidth / $imageHeight;
-				$size['width'] = round($size['height'] * $ar);
-			}
-
+			
+			$this->ScaleTool->setMode('fill');
+			$this->ScaleTool->setBox($size['height'], $size['width']);
+			$size = $this->ScaleTool->getNewSize($imageHeight, $imageWidth);
+			
 			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 
 		} else {
@@ -141,7 +135,7 @@ class MediaController extends AppController {
 		}
 
 		// check for a cached version first
-		if (!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
+		if(!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
 			// we don't have it, generate it
 			if(!$this->Thumb->generateThumb($baseDir, $dir, $filename, $size, $options)) {
 				Debugger::log('Can\'t generate thumbnail');

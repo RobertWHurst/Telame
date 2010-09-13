@@ -29,6 +29,7 @@ class ThumbComponent {
 	 * @author Nate Constant
 	 **/
 	function generateThumb($baseDir, $dir, $filename, $size, $options = array()) {
+		
 		// Make sure we have the name of the uploaded file and that the Model is specified
 		if(empty($baseDir) || empty($filename)){
 			Debugger::log('Base directory or filename is empty');
@@ -74,9 +75,13 @@ class ThumbComponent {
 		// Load phpThumb
 		App::import('Vendor', 'phpThumb', array('file' => 'phpThumb/phpthumb.class.php'));
 		$phpThumb = new phpThumb();
+		
 		// phpThumb configs
 		$phpThumb->setParameter('config_cache_force_passthru', false);
-
+		
+		// ignore aspect ratio and allow enlarging		
+		$phpThumb->setParameter('iar', 1);
+		
 		// image configs
 		$phpThumb->setSourceFilename($source);
 		$phpThumb->setParameter('w' ,$width);
