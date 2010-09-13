@@ -8,11 +8,12 @@ $(function(){
 		//save the dom elements
 		root.gallery = $('#profile_gallery', '#page_head');
 		root.galleryControls = $('div.controls', root.gallery);
+		root.galleryOptionsPane = $('div.options_pane', root.gallery);
 				
 		//the animation speed
 		root.speed = 300;
 		
-		//input wrap hover handler
+		//gallyer hover handler
 		root.galleryhoverHandler = function(){
 		
 			//on hover event for each post comment
@@ -21,6 +22,19 @@ $(function(){
 			},
 			function(){
 				root.galleryControls.hide();
+			});
+				
+		}
+		
+		//gallery options click handler
+		root.galleryOptionsClickHandler = function(){
+		
+			//on hover event for each post comment
+			root.gallery.click(function(){
+				root.galleryOptionsPane.show();
+			},
+			function(){
+				root.galleryOptionsPane.hide();
 			});
 				
 		}

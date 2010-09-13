@@ -6,13 +6,15 @@ $this->set('css_for_layout', array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'settings/settings'
+	'settings/settings',
+	'settings/gallery_options'
 ));
 $this->set('script_for_layout', array(
 	'jquery',
-	'base', 
+	'base',
+	'gallery_options',
 	'main_sidebar',
-	'settings/settings'
+	'settings/settings',
 ));
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name'] . '\'s ' . __('settings', true));
@@ -25,6 +27,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 </div>
 <div id="page_body" class="clearfix">
 	<div id="basic">
+		<?php echo $this->element('settings/gallery_options'); ?>
 <?php
 		pr($user);
 ?>

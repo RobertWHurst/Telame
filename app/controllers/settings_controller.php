@@ -16,7 +16,24 @@ class SettingsController extends AppController{
 	}
 
 	function basic() {
+		$this->loadModel('User');
+		
+		//get the gallery pos data
+		$galleryPosData = unserialize($this->currentUser['Profile']['gallery_pos_data']);
+		
+		$this->set(compact('galleryPosData'));
+		
+	}
 
+	function gallery() {	
+	
+		//if the request is not ajax redirect to basics as this control set is pressent there.	
+		if(!$this->RequestHandler->isAjax())
+			$this->redirect(array('controller' => 'settings', 'action' => 'basic'));
+			
+		$this->layout = false;
+		
+		$this->render('element/settings/gallery_controls');		
 	}
 
 	function friends() {

@@ -9,7 +9,7 @@
 		<?php if($currentUser['User']['id'] == $user['User']['id']): ?>
 			<div class="options">
 <?php 
-				$url = array('controller' => 'users', 'action' => 'gallery');
+				$url = array('controller' => 'settings', 'action' => 'gallery');
 				echo $html->image('icons/cog_edit.png', array('title' => __('gallery_options',true), 'url' => $url));
 ?>
 			</div>
