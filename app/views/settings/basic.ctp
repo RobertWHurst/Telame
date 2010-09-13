@@ -28,8 +28,5 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 <div id="page_body" class="clearfix">
 	<div id="basic">
 		<?php echo $this->element('settings/gallery_options'); ?>
-<?php
-		pr($user);
-?>
 	</div>
 </div>
