@@ -72,10 +72,16 @@ class UsersController extends AppController {
 			$friends = array();
 			$wallPosts = array();
 		}
-
+		
+		//get gallery position data
+		$galleryPosData = unserialize($user['Profile']['gallery_pos_data']);
 
 		//pass the profile data to the view
-		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts'));
+		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts', 'galleryPosData'));
+	}
+	
+	function updateGalleryPos($uid, $mid, $posData){
+		krumo($posData);
 	}
 
 	function search(){
