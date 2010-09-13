@@ -13,7 +13,7 @@
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 ?>
 </head>
-<?php flush(); ?>
+<?php ob_flush(); ?>
 <body>
 	<?php echo $this->element('flash'); ?>
 	<div id="backgroundHead">		
