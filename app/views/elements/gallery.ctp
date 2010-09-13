@@ -1,4 +1,20 @@
 <div id="profile_gallery">
+	<div class="controls">
+		<!--<div class="view">
+<?php 
+			//$url = array('controller' => 'media', 'action' => 'gallery');
+			//echo $html->image('icons/cog_edit.png', array('title' => __('gallery_options',true), 'url' => $url));
+?>
+		</div>-->
+		<?php if($currentUser['User']['id'] == $user['User']['id']): ?>
+			<div class="options">
+<?php 
+				$url = array('controller' => 'users', 'action' => 'gallery');
+				echo $html->image('icons/cog_edit.png', array('title' => __('gallery_options',true), 'url' => $url));
+?>
+			</div>
+		<?php endif; ?>
+	</div>
 	<div class="frame"></div>
 	<div class="images">
 <?php

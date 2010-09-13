@@ -11,7 +11,8 @@ $this->set('css_for_layout', array(
 ));
 $this->set('script_for_layout', array(
 	'jquery',
-	'base', 
+	'base',
+	'profile',
 	'main_sidebar',
 	'users/wall_input',
 	'users/wall'
