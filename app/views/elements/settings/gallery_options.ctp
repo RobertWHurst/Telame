@@ -5,25 +5,25 @@
 			<div class="up">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete');
-				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+				echo $html->image('icons/arrow_up.png', array('title' => __('up',true), 'url' => $url));
 ?>
 			</div>
 			<div class="down">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete');
-				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+				echo $html->image('icons/arrow_down.png', array('title' => __('down',true), 'url' => $url));
 ?>
 			</div>
 			<div class="left">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete');
-				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+				echo $html->image('icons/arrow_left.png', array('title' => __('left',true), 'url' => $url));
 ?>
 			</div>
 			<div class="right">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete');
-				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+				echo $html->image('icons/arrow_right.png', array('title' => __('right',true), 'url' => $url));
 ?>
 			</div>
 		</div>
@@ -62,11 +62,10 @@
 		</div>
 	<?php endif; ?>
 	<div class="zoom">
-		<h3>Zoom</h3>
 		<div class="zoom_out">
 <?php 
 			$url = array('controller' => 'wall_posts', 'action' => 'delete');
-			echo $html->image('icons/zoom_out.png', array('title' => __('delete',true), 'url' => $url));
+			echo $html->image('icons/zoom_out.png', array('title' => __('zoom_out',true), 'url' => $url));
 ?>
 		</div>
 		<div class="slider">
@@ -75,7 +74,7 @@
 		<div class="zoom_in">
 <?php 
 			$url = array('controller' => 'wall_posts', 'action' => 'delete');
-			echo $html->image('icons/zoom_in.png', array('title' => __('delete',true), 'url' => $url));
+			echo $html->image('icons/zoom_in.png', array('title' => __('zoom_in',true), 'url' => $url));
 ?>
 		</div>
 	</div>

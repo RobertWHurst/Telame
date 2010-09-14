@@ -15,24 +15,25 @@
 	position: absolute;
 	z-index: 3;
 	top:20px;
-	right: 20px;
+	left: 20px;
 	width: 48px;
 	height: 48px;
 	display: none;
 }
 #gallery_options.nojs div.directional{
 	display: block;
+	background: url('../../img/settings/directional.png') no-repeat;
 }
 #gallery_options div.directional div.up{
 	position: absolute;
-	top:0;
+	top:2px;
 	left: 16px;
 	width: 16px;
 	height: 16px;
 }
 #gallery_options div.directional div.down{
 	position: absolute;
-	bottom: 0;
+	bottom: 2px;
 	left: 16px;
 	width: 16px;
 	height: 16px;
@@ -40,14 +41,14 @@
 #gallery_options div.directional div.left{
 	position: absolute;
 	top: 16px;
-	left: 0;
+	left: 2px;
 	width: 16px;
 	height: 16px;
 }
 #gallery_options div.directional div.right{
 	position: absolute;
 	top: 16px;
-	right: 0;
+	right: 2px;
 	width: 16px;
 	height: 16px;
 }
@@ -75,16 +76,13 @@
 #gallery_options div.zoom{
 	position: relative;
 	height: 16px;
-	border: 1px solid #787878;
+	background: #555;
 	border-top: none;
-	padding: 20px;
-}
-#gallery_options div.zoom h3{
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	font-size: 1.1em;
-	line-height: 16px;
+	padding: 10px 20px;
+	
+	-moz-border-radius: 0 0 20px 20px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 #gallery_options div.zoom div.zoom_in{
 	float: left;
@@ -96,10 +94,10 @@
 	float: left;
 	height: 16px;
 	width: 16px;
-	margin-left: 103px;
+	margin-left: 104px;
 }
 #gallery_options.nojs div.zoom div.zoom_out{
-	margin-left: 318px;
+	margin-left: 319px;
 }
 #gallery_options div.zoom div.slider{
 	float: left;
