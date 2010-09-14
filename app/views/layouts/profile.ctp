@@ -4,22 +4,18 @@
 	<meta charset="UTF-8">
 	<title><?php echo $title_for_layout; ?></title>
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://<?php echo env('SERVER_NAME')?>/rss/">
-<?php			
-		if(is_array($css_for_layout)){
-			foreach($css_for_layout as $css)
-				echo $html->css($css);
-		}
-		
+<?php
+		echo $asset->scripts_for_layout();
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 ?>
 </head>
 <?php ob_flush(); ?>
 <body>
 	<?php echo $this->element('flash'); ?>
-	<div id="backgroundHead">		
+	<div id="backgroundHead">
 		<div id="backgroundHeadGlow"></div>
 	</div>
-	<div id="backgroundBase"></div>	
+	<div id="backgroundBase"></div>
 	<div id="wrap_content">
 		<div id="content" class="clearfix">
 			<div id="wrap_main_sidebar">
@@ -41,7 +37,7 @@
 				<div id="page_navigation" class="clearfix">
 					<?php echo $this->element('profile_navigation'); ?>
 				</div>
-				<div id="page_body" class="clearfix">				
+				<div id="page_body" class="clearfix">
 					<?php echo $content_for_layout; ?>
 				</div>
 			</div>
@@ -55,12 +51,5 @@
 			<?php echo $this->element('sql_dump'); ?>
 		</div>
 	<?php endif; ?>
-<?php
-	if(is_array($script_for_layout)){
-		foreach($script_for_layout as $script)
-			echo $html->script($script);
-	}
-	echo $html->script('cookie');
-?>
 </body>
 </html>

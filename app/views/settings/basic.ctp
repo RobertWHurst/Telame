@@ -1,6 +1,6 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'gallery',
 	'summary',
@@ -8,14 +8,17 @@ $this->set('css_for_layout', array(
 	'main_sidebar',
 	'settings/settings',
 	'settings/gallery_options'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'gallery_options',
 	'main_sidebar',
 	'settings/settings',
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name'] . '\'s ' . __('settings', true));
 ?>

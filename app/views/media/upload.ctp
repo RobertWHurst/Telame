@@ -1,6 +1,6 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'gallery',
 	'summary',
@@ -8,14 +8,17 @@ $this->set('css_for_layout', array(
 	'main_sidebar',
 	'users/wall',
 	'users/wall_sidebar'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'main_sidebar',
 	'users/wall_input',
 	'users/wall'
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 ?>
 <div id="content" class="clearfix">
 	<div id="wrap_main_sidebar">

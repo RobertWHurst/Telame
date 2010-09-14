@@ -1,6 +1,6 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'gallery',
 	'summary',
@@ -8,15 +8,19 @@ $this->set('css_for_layout', array(
 	'main_sidebar',
 	'users/wall',
 	'users/wall_sidebar'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'profile',
 	'main_sidebar',
 	'users/wall_input',
 	'users/wall'
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
+
 //page title
 
 echo $paginator->numbers();

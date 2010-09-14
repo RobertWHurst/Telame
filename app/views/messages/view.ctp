@@ -1,19 +1,22 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'tall_header',
 	'main_sidebar',
 	'messages/messages',
 	'messages/view'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
-	'base', 
+	'base',
 	'main_sidebar'
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 ?>
-<div id="page_head" class="clearfix">			
+<div id="page_head" class="clearfix">
 	<h1 class="page_title"><?php echo __('messages', true); ?></h1>
 </div>
 <div id="page_navigation" class="clearfix">
@@ -45,16 +48,16 @@ $this->set('script_for_layout', array(
 				$is_user_thread = false;
 				$composer['user_id'] = $message['Author']['id'];
 			}
-			
+
 			//if this message is the parent
 			if($message['Message']['parent_id'] < 0){
-		
+
 				//figure out the user_id and author_id for a response
 				$composer['parent_id'] = $message['Message']['id'];
 				$composer['author_id'] = $currentUser['User']['id'];
-				
+
 			}
-		
+
 			if($message['Message']['subject']):
 ?>
 				<div class="message head clearfix">
@@ -74,14 +77,14 @@ $this->set('script_for_layout', array(
 							<h2 class="to"><?php echo __('message_to', true) . ' ' . $message['User']['full_name']; ?></h2>
 						<?php else: ?>
 							<h2 class="from"><?php echo __('message_from', true) . ' ' . $message['Author']['full_name']; ?></h2>
-						<?php endif; ?>							
+						<?php endif; ?>
 						<h1 class="subject"><?php echo $message['Message']['subject']; ?></h1>
 					<?php endif; ?>
 					<?php echo $markdown->parse($message['Message']['content']); ?>
 				</div>
 				<div class="time">
 					<p>
-<?php 
+<?php
 				echo __('composed') . ' ' . $time->timeAgoInWords($message['Message']['created']);
 				if($message['Message']['read']) {
 					echo '<br />';

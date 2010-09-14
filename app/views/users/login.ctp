@@ -1,14 +1,17 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'tall_header',
 	'users/login'
-));
-$this->set('script_for_layout', array(	
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 ?>
 <div id="login_logo">
 	<?php echo $html->image('logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>

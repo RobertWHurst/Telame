@@ -3,11 +3,11 @@
 <head>
 
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
 	<title><?php echo $title_for_layout; ?></title>
-<?php			
-		echo $html->css($css_for_layout);		
+<?php
+		echo $asset->scripts_for_layout();
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 		echo $html->meta('viewport', 'width=device-width; initial-scale=1.0; maximum-scale=1.0;');
 		echo $html->meta('title', 'Telame');
@@ -33,7 +33,6 @@
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
 	</div>
-	<?php echo $html->script($script_for_layout); ?>
 	<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
 	<script type="text/javascript">
 		try{

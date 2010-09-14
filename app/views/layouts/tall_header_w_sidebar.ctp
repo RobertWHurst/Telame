@@ -3,11 +3,11 @@
 <head>
 
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
-	
-	<title><?php echo $title_for_layout; ?></title>
-<?php			
-		echo $html->css($css_for_layout);		
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>mini<?php echo $title_for_layout; ?></title>
+<?php
+		echo $asset->scripts_for_layout();
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 		echo $html->meta('viewport', 'width=device-width; initial-scale=1.0; maximum-scale=1.0;');
 		echo $html->meta('title', 'Telame');
@@ -20,7 +20,7 @@
 	<header>
 		<?php echo $this->element('flash'); ?>
 		<div id="backgroundHead"></div>
-		<div id="backgroundBase"></div>	
+		<div id="backgroundBase"></div>
 	</header>
 	<div id="wrap_content">
 		<div id="content" class="clearfix">
@@ -45,13 +45,6 @@
 			<?php echo $this->element('sql_dump'); ?>
 		</div>
 	<?php endif; ?>
-<?php
-	if(is_array($script_for_layout)){
-		foreach($script_for_layout as $script)
-			echo $html->script($script);
-	}
-	echo $html->script('cookie');
-?>
 	<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
 	<script type="text/javascript">
 		try{

@@ -1,15 +1,18 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'tall_header',
 	'main_sidebar'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'main_sidebar'
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 echo $form->create();
 echo $form->inputs();
 echo $form->end(__('save', true));

@@ -1,17 +1,20 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'gallery',
 	'summary',
 	'tall_header',
 	'main_sidebar',
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'main_sidebar',
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 ?>
 <div id="userControls" class="clearfix">
 </div>
