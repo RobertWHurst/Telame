@@ -69,7 +69,7 @@
 ?>
 		</div>
 		<div class="slider">
-			<div class="slide"></div>
+			<div class="slide_handle"></div>
 		</div>
 		<div class="zoom_in">
 <?php 

@@ -76,7 +76,7 @@
 #gallery_options div.zoom{
 	position: relative;
 	height: 16px;
-	background: #555;
+	background: #444;
 	border-top: none;
 	padding: 10px 20px;
 	
@@ -100,11 +100,27 @@
 	margin-left: 319px;
 }
 #gallery_options div.zoom div.slider{
+	position: relative;
 	float: left;
-	background-color: #ff0;
-	width: 428px;
+	background: url(../../img/settings/zoom_slider.png) no-repeat;
 	height: 16px;
+	width: 428px;
 	margin-left: 10px;
+}
+#gallery_options div.zoom div.slide_handle{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 16px;
+	width: 16px;
+	background: url(../../img/settings/zoom_slider.png);
+	background-position: -428px 0;
+	
+}
+#gallery_options div.zoom div.slide_handle:hover,
+#gallery_options div.zoom div.slide_handle.active{
+	background-position: -444px 0;
+	
 }
 #gallery_options.nojs div.zoom div.slider{
 	display: none;
