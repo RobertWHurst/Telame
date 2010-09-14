@@ -1,19 +1,23 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'gallery',
 	'summary',
 	'tall_header',
 	'main_sidebar',
 	'albums/albums'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base',
 	'profile',
-	'main_sidebar'
-));
+	'main_sidebar',
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
+
 $this->set('nav_links', array(
 	array(
 		'label' => __('album', true),

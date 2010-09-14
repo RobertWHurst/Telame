@@ -7,7 +7,7 @@ class AppController extends Controller {
 	// Cookie, Auth, and AuthExtension MUST BE IN THIS ORDER TO WORK PROPERLY
 	var $components = array('Aacl', 'Cookie', 'Auth', 'AuthExtension', 'RequestHandler', 'Security', 'Session');
 
-	var $helpers = array('Form', 'Html', 'Session');
+	var $helpers = array('Form', 'Html', 'Session', 'Asset.asset');
 
 	// Current user's info stored here
 	var $currentUser;

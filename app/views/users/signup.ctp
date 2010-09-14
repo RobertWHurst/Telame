@@ -1,15 +1,18 @@
 <?php
 //INCLUDES
-$this->set('css_for_layout', array(
+$html->css(array(
 	'base',
 	'simple_header',
 	'users/signup'
-));
-$this->set('script_for_layout', array(
+), null, array('inline' => false));
+$js = array(
 	'jquery',
 	'base', 
 	'users/taglines'
-));
+);
+foreach ($js as $j) {
+	$javascript->link($j, false);
+}
 ?>
 <div id="content">
 	
