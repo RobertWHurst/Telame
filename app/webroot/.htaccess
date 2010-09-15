@@ -1,3 +1,6 @@
+# enabled to allows s.telame.com to work
+Options +FollowSymLinks
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
@@ -53,3 +56,5 @@ FileETag None
 <ifModule mod_headers.c>
   Header unset Last-Modified
 </ifModule>
+
+SetOutputFilter DEFLATE

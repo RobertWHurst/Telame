@@ -3,7 +3,7 @@ App::import('Vendor', 'php_markdown', array('file' => 'php_markdown/markdown.php
 
 class MarkdownHelper extends AppHelper {
 
-	var $helpers = array('Text');
+	var $helpers = array('HtmlImage', 'Text');
 
 	function parse($text) {
 		// Clean the text.  This will need testing for XSS and such
@@ -29,7 +29,7 @@ class MarkdownHelper extends AppHelper {
 
 	    foreach($emoticons as $emoticon) {
 	    	// arrays are used in str_ireplace for speed, even though it's a single search
-			$text = str_ireplace(array($emoticon['Emoticon']['code']), array(' <img alt="" src="/img/icons/' . $emoticon['Emoticon']['name'] . '" height="16px" width="16px" />'), $text);
+			$text = str_ireplace(array($emoticon['Emoticon']['code']), array($this->HtmlImage->image('icons/' . $emoticon['Emoticon']['name'], array('static' => true))), $text);
 	    }
 	    return $text;
 	}

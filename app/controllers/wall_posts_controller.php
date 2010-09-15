@@ -19,7 +19,7 @@ class WallPostsController extends AppController {
 			exit;
 		}
 
-		$wallPosts = $this->WallPost->getWallPosts(10, $offset, array('uid' => $uid));
+		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $uid, 'limit' => 10, 'offset' => $offset));
 
 		//set the layout to none (this is ajax);
 		$this->layout = false;
@@ -107,7 +107,7 @@ class WallPostsController extends AppController {
 			$new_post_id = $this->WallPost->id;
 
 			//load the view
-			$wallPost = $this->WallPost->getWallPosts(1, 0, array('id' => $new_post_id, 'single' => true));
+			$wallPost = $this->WallPost->getWallPosts(array('id' => $new_post_id, 'single' => true));
 			
 			//set the layout to none (this is ajax);
 			$this->layout = false;
