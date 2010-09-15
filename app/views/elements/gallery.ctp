@@ -23,9 +23,10 @@
 	   		default: case 'single':
 	   			
 	   			//find the image offset (if exists)
-	   			$top = $left = $height = $width = 0;
+	   			$top = $left = $height = $width = $useOptions = 0;
 	   			foreach($galleryPosData as $coords){	   					
 	   				if($coords['id'] == $user['User']['avatar_id']){
+	   					$useOptions = true;
 	   					$top = $coords['y'];
 	   					$left = $coords['x'];
 	   					$height = $coords['h'];
@@ -35,7 +36,8 @@
 	   			}
 	   			
 	   			$url = array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']);
-	   			$options = array('id' => 'image-' . $user['User']['avatar_id'], 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
+	   			if($useOptions)
+	   				$options = array('id' => 'image-' . $user['User']['avatar_id'], 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
 	   			
 	   			echo $this->Html->image($url, $options);	   				
 	   			break;
