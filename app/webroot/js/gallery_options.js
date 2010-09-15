@@ -34,8 +34,6 @@ $(function(){
 				var sliderWidth,
 					sliderHandleWidth,
 					sliderOffsetX,
-					dragHandleHeight,
-					dragHandleWidth,
 					dragOffsetX,
 					dragOffsetY,
 					dragWrapOffsetX,
@@ -70,12 +68,10 @@ $(function(){
 				sliderOffsetX = root.slider.offset().left;
 				
 				//get the drag offset
-				dragHandleHeight = root.dragHandle.height();
-				dragHandleWidth = root.dragHandle.width();
 				dragWrapOffsetX = root.dragHandleWrap.offset().left;
 				dragWrapOffsetY = root.dragHandleWrap.offset().top;
 				
-				//save the current dimentions of the image	
+				//save the current dimentions of the image
 				CurrentImageHeight = root.currentImage.height();
 				CurrentImageWidth = root.currentImage.width();
 				
@@ -169,6 +165,10 @@ $(function(){
 				$(window).mouseup(function(){
 					loop.killProccess('slide_handle_drag');
 					root.slideHandle.removeClass('active');
+				
+					//update the current dimentions of the image
+					CurrentImageHeight = root.currentImage.height();
+					CurrentImageWidth = root.currentImage.width();
 				});
 				
 				
@@ -192,8 +192,8 @@ $(function(){
 					root.dragHandle.width(newWidth);
 					
 					//calculate the new offset over hang
-					newOffset.top = ((BaseImageHeight - newHeight) / 2) + baseImageOffset.top;
-					newOffset.left = ((BaseImageWidth - newWidth) / 2) + baseImageOffset.left;
+					newOffset.top = ((CurrentImageHeight - newHeight) / 2) + baseImageOffset.top;
+					newOffset.left = ((CurrentImageWidth - newWidth) / 2) + baseImageOffset.left;
 					
 					root.currentImage.css(newOffset);
 					root.dragHandle.css(newOffset);
@@ -277,25 +277,25 @@ $(function(){
 					dragHandlePositionX = cursorPositionDragWrapX - clickPositionDragX;
 					
 					//check the range of x
-					if(dragHandlePositionX < -(dragHandleWidth / 2)){
+					if(dragHandlePositionX < -(CurrentImageWidth / 2)){
 						//if the cursor position is below the limit
-						dragHandlePositionX = -(dragHandleWidth / 2);
+						dragHandlePositionX = -(CurrentImageWidth / 2);
 					}
-					else if(dragHandlePositionX > (dragHandleWidth / 2) + dragHandleWidth){
+					else if(dragHandlePositionX > (CurrentImageWidth / 2) + CurrentImageWidth){
 						//if the cursor position is above the limit			
-						dragHandlePositionX = (dragHandleWidth / 2) + dragHandleWidth;
+						dragHandlePositionX = (CurrentImageWidth / 2) + CurrentImageWidth;
 					}			
 					
 					dragHandlePositionY = cursorPositionDragWrapY - clickPositionDragY;
 					
 					//check the range of x
-					if(dragHandlePositionY < -(dragHandleHeight / 2)){
+					if(dragHandlePositionY < -(CurrentImageHeight / 2)){
 						//if the cursor position is below the limit
-						dragHandlePositionY = -(dragHandleHeight / 2);
+						dragHandlePositionY = -(CurrentImageHeight / 2);
 					}
-					else if(dragHandlePositionY > (dragHandleHeight / 2) + dragHandleHeight){
+					else if(dragHandlePositionY > (CurrentImageHeight / 2) + CurrentImageHeight){
 						//if the cursor position is above the limit			
-						dragHandlePositionY = (dragHandleHeight / 2) + dragHandleHeight;
+						dragHandlePositionY = (CurrentImageHeight / 2) + CurrentImageHeight;
 					}
 					
 					setImagePosition(dragHandlePositionY, dragHandlePositionX);
