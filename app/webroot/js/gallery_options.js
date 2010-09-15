@@ -38,8 +38,8 @@ $(function(){
 					dragOffsetY,
 					dragWrapOffsetX,
 					dragWrapOffsetY,
-					CurrentImageHeight,
-					CurrentImageWidth,
+					currentImageHeight,
+					currentImageWidth,
 					BaseImageHeight,
 					BaseImageWidth,
 					cursorOffsetX,
@@ -72,8 +72,8 @@ $(function(){
 				dragWrapOffsetY = root.dragHandleWrap.offset().top;
 				
 				//save the current dimentions of the image
-				CurrentImageHeight = root.currentImage.height();
-				CurrentImageWidth = root.currentImage.width();
+				currentImageHeight = root.currentImage.height();
+				currentImageWidth = root.currentImage.width();
 				
 				//strip the forced image size
 				root.currentImage.css({
@@ -89,8 +89,8 @@ $(function(){
 				baseImageOffset = root.currentImage.position();
 				
 				//set the height and width back to the saved current
-				root.currentImage.height(CurrentImageHeight);
-				root.currentImage.width(CurrentImageWidth);
+				root.currentImage.height(currentImageHeight);
+				root.currentImage.width(currentImageWidth);
 				
 				
 							
@@ -167,8 +167,8 @@ $(function(){
 					root.slideHandle.removeClass('active');
 				
 					//update the current dimentions of the image
-					CurrentImageHeight = root.currentImage.height();
-					CurrentImageWidth = root.currentImage.width();
+					currentImageHeight = root.currentImage.height();
+					currentImageWidth = root.currentImage.width();
 				});
 				
 				
@@ -192,8 +192,8 @@ $(function(){
 					root.dragHandle.width(newWidth);
 					
 					//calculate the new offset over hang
-					newOffset.top = ((CurrentImageHeight - newHeight) / 2) + baseImageOffset.top;
-					newOffset.left = ((CurrentImageWidth - newWidth) / 2) + baseImageOffset.left;
+					newOffset.top = ((currentImageHeight - newHeight) / 2) + baseImageOffset.top;
+					newOffset.left = ((currentImageWidth - newWidth) / 2) + baseImageOffset.left;
 					
 					root.currentImage.css(newOffset);
 					root.dragHandle.css(newOffset);
@@ -238,7 +238,7 @@ $(function(){
 				}); 
 				
 				//calculate the zoom of the image and set the slider
-				zoom = CurrentImageWidth / BaseImageWidth * 100;
+				zoom = currentImageWidth / BaseImageWidth * 100;
 				setSliderValue(zoom / 2);
 				
 				
@@ -277,25 +277,25 @@ $(function(){
 					dragHandlePositionX = cursorPositionDragWrapX - clickPositionDragX;
 					
 					//check the range of x
-					if(dragHandlePositionX < -(CurrentImageWidth / 2)){
+					if(dragHandlePositionX < -currentImageWidth){
 						//if the cursor position is below the limit
-						dragHandlePositionX = -(CurrentImageWidth / 2);
+						dragHandlePositionX = -currentImageWidth;
 					}
-					else if(dragHandlePositionX > (CurrentImageWidth / 2) + CurrentImageWidth){
+					else if(dragHandlePositionX > baseImageWidth){
 						//if the cursor position is above the limit			
-						dragHandlePositionX = (CurrentImageWidth / 2) + CurrentImageWidth;
+						dragHandlePositionX = baseImageWidth;
 					}			
 					
 					dragHandlePositionY = cursorPositionDragWrapY - clickPositionDragY;
 					
 					//check the range of x
-					if(dragHandlePositionY < -(CurrentImageHeight / 2)){
+					if(dragHandlePositionY < -currentImageHeight){
 						//if the cursor position is below the limit
-						dragHandlePositionY = -(CurrentImageHeight / 2);
+						dragHandlePositionY = -currentImageHeight;
 					}
-					else if(dragHandlePositionY > (CurrentImageHeight / 2) + CurrentImageHeight){
+					else if(dragHandlePositionY > baseImageHeight){
 						//if the cursor position is above the limit			
-						dragHandlePositionY = (CurrentImageHeight / 2) + CurrentImageHeight;
+						dragHandlePositionY = baseImageHeight;
 					}
 					
 					setImagePosition(dragHandlePositionY, dragHandlePositionX);
