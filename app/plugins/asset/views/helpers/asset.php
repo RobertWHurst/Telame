@@ -90,11 +90,11 @@ class AssetHelper extends Helper {
 			switch($asset['type']) {
 				case 'js':
 					$processed = $this->__process($asset['type'], $asset['assets']);
-					$scripts_for_layout[] = $this->Javascript->link('/' . $this->cachePaths['js'] . '/' . $processed);
+					$scripts_for_layout[] = $this->Javascript->link(Configure::read('StaticDomain') . '/' . $this->cachePaths['js'] . '/' . $processed);
 					break;
 				case 'css':
 					$processed = $this->__process($asset['type'], $asset['assets']);
-					$scripts_for_layout[] = $this->Html->css('/' . $this->cachePaths['css'] . '/' . $processed);
+					$scripts_for_layout[] = $this->Html->css(Configure::read('StaticDomain') . '/' . $this->cachePaths['css'] . '/' . $processed . '.css');
 					break;				
 				default:
 					$scripts_for_layout[] = $asset['assets']['script'];

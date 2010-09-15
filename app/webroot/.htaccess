@@ -48,13 +48,4 @@ Options +FollowSymLinks
   </filesMatch>
 </ifModule>
 
-<ifModule mod_headers.c>
-  Header unset ETag
-</ifModule>
-FileETag None
-
-<ifModule mod_headers.c>
-  Header unset Last-Modified
-</ifModule>
-
 SetOutputFilter DEFLATE

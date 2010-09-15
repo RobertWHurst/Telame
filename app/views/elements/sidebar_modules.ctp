@@ -25,7 +25,7 @@
 ?>
 		<div class="<?php echo ($noteCount)? 'link active' : 'link'; ?>">
 <?php
-		$link_content = $this->Html->image('icons/asterisk_yellow.png', array('alt' => __('notifications', true), 'id' => 'notifications')) . __('notifications', true) . $noteCount;
+		$link_content = $this->HtmlImage->Image('icons/asterisk_yellow.png', array('static' => true, 'alt' => __('notifications', true), 'id' => 'notifications')) . __('notifications', true) . $noteCount;
 		echo $html->link($link_content, array('controller' => 'notifications', 'action' => 'index'), array('escape' => false));
 ?>
 		</div>
@@ -33,7 +33,7 @@
 	<div id="module_newsfeed" class="module">
 		<div class="link">
 <?php
-		$link_content = $this->Html->image('icons/newspaper.png', array('alt' => __('news_feed', true))) . __('news_feed', true);
+		$link_content = $this->HtmlImage->Image('icons/newspaper.png', array('static' => true, 'alt' => __('news_feed', true))) . __('news_feed', true);
 		echo $html->link($link_content, array('controller' => 'pages', 'action' => 'news'), array('escape' => false));
 ?>
 		</div>
@@ -41,7 +41,7 @@
 	<div id="module_wall" class="module">
 		<div class="link">
 <?php
-		$link_content = $this->Html->image('icons/comment.png', array('alt' => __('wall', true))) . __('wall', true);
+		$link_content = $this->HtmlImage->Image('icons/comment.png', array('static' => true, 'alt' => __('wall', true))) . __('wall', true);
 		echo $html->link($link_content, array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug']), array('escape' => false));
 ?>
 		</div>
@@ -52,7 +52,7 @@
 ?>
 		<div class="<?php echo ($msgCount)? 'link active' : 'link'; ?>">
 <?php
-		$link_content = $this->Html->image('icons/email.png', array('alt' => __('messages', true))) . __('messages', true) . $msgCount;
+		$link_content = $this->HtmlImage->Image('icons/email.png', array('static' => true, 'alt' => __('messages', true))) . __('messages', true) . $msgCount;
 		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
 		</div>
@@ -60,7 +60,7 @@
 	<div id="module_lists" class="module">
 		<div class="link">
 <?php
-		$link_content = $this->Html->image('icons/group.png', array('alt' => __('friends', true))) . __('friends', true);
+		$link_content = $this->HtmlImage->Image('icons/group.png', array('static' => true, 'alt' => __('friends', true))) . __('friends', true);
 		echo $html->link($link_content, array('controller' => 'groups_users', 'action' => 'friendList'), array('escape' => false));
 ?>
 		</div>
@@ -68,7 +68,7 @@
 	<div id="module_photos" class="module">
 		<div class="link">
 <?php
-		$link_content = $this->Html->image('icons/photo.png', array('alt' => __('media', true))) . __('media', true);
+		$link_content = $this->HtmlImage->Image('icons/photo.png', array('static' => true, 'alt' => __('media', true))) . __('media', true);
 		echo $html->link($link_content, array('controller' => 'albums', 'action' => 'albums'), array('escape' => false));
 ?>
 		</div>
