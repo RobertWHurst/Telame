@@ -34,26 +34,25 @@ $(function(){
 				var sliderWidth,
 					sliderHandleWidth,
 					sliderOffsetX,
-					dragOffsetX,
-					dragOffsetY,
 					dragWrapOffsetX,
 					dragWrapOffsetY,
 					currentImageHeight,
 					currentImageWidth,
 					baseImageHeight,
 					baseImageWidth,
+					baseImageOffset,
 					cursorOffsetX,
 					cursorOffsetY,
 					cursorPositionSliderX,
-					clickPositionDragX,
-					clickPositionDragY,
 					cursorPositionDragWrapX,
 					cursorPositionDragWrapY,
 					sliderHandlePositionX,
-					Imageoffset,
-					dragHandleWidth,
 					dragHandlePositionX,
-					dragHandlePositionY;
+					dragHandlePositionY,
+					dragOffsetX,
+					dragOffsetY,
+					clickPositionDragX,
+					clickPositionDragY;
    				
 				//set the drag handle to the same size and offset as the current image		
 				root.dragHandle.height(root.currentImage.height());
@@ -179,7 +178,7 @@ $(function(){
 					var newOffset = {};
 					
 					//set the scale factor
-					scaleFactor = (percent + 50) / 100;
+					var scaleFactor = (percent + 50) / 100;
 					
 					//calculate the new width and height.
 					newHeight = Math.round(baseImageHeight * scaleFactor);
@@ -205,7 +204,7 @@ $(function(){
 					event.preventDefault();
 					
 					//get the current zoom
-					zoom = getSliderValue();
+					var zoom = getSliderValue();
 					
 					if (delta > 0){
 					
