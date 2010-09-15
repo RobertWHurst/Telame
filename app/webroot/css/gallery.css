@@ -40,7 +40,7 @@
 #profile_gallery div.images img{
 	position: absolute;
 	
-	-moz-box-shadow: 0px 0px 10px #bc79ff;
-	-webkit-box-shadow: 0px 0px 10px #bc79ff;
-	box-shadow: 0px 0px 10px #bc79ff;
+	-moz-box-shadow: 0px 0px 25px #1a1a1a;
+	-webkit-box-shadow: 0px 0px 25px #1a1a1a;
+	box-shadow: 0px 0px 25px #1a1a1a;
 }

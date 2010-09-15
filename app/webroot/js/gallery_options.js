@@ -183,7 +183,7 @@ $(function(){
 				}
 				
 				//bind the scroll wheel
-				root.galleryOptionsExample.mousewheel(function(event, delta){
+				/*root.galleryOptionsExample.mousewheel(function(event, delta){
 					
 					event.preventDefault();
 					
@@ -218,7 +218,7 @@ $(function(){
 						setSliderValue(zoom);
 						scaleImage(getSliderValue());
 					}
-				}); 
+				});*/
 				
 				//calculate the zoom of the image and set the slider
 				zoom = currentImageWidth / baseImageWidth * 100;
@@ -345,9 +345,7 @@ $(function(){
 				var ajaxUrl = '/s/u/' + currentImageState.id + '/' + currentImageState.top + '/' + currentImageState.left + '/' + currentImageState.height + '/' + currentImageState.width;
 				
 				//send the data via post data
-				$.post(core.domain + ajaxUrl, function(data){
-					$('div.info p').html(data);
-				});
+				$.post(core.domain + ajaxUrl);
 				
 			}
 			

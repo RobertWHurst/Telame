@@ -18,36 +18,46 @@
 	<div class="frame"></div>
 	<div class="images">
 <?php
-	   	//get the gallery dispaly mode
-	   	switch($user['Profile']['gallery_mode']):
-	   		default: case 'single':
-	   			
-	   			//find the image offset (if exists)
-	   			$top = $left = $height = $width = $useOptions = $options = null;
-	   			if(isset($galleryPosData) && is_array($galleryPosData)){
-	   				foreach($galleryPosData as $coords){	   					
-	   					if($coords['id'] == $user['User']['avatar_id']){
-	   						$useOptions = true;
-	   						$top = $coords['y'];
-	   						$left = $coords['x'];
-	   						$height = $coords['h'];
-	   						$width = $coords['w'];
-	   						break;
-	   					}
-	   				}
-	   			}
-	   			
-	   			$url = array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']);
-	   			if($useOptions)
-	   				$options = array('id' => 'image-' . $user['User']['avatar_id'], 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
-	   			
-	   			echo $this->Html->image($url, $options);	   				
-	   			break;
-	   		case 'multi':
-	   			echo '[profile pictures slideshow]';
-	   			//TODO when the use has more than one image then loop through them here
-	   			break;
-	   	endswitch;
+			//get the gallery dispaly mode
+			switch($user['Profile']['gallery_mode']):
+				
+				default: case 'single':
+					
+					
+					//setup the image url
+					$url = array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']);
+						   				
+					//find the image offset (if exists)	   				
+					if(isset($galleryPosData[$user['User']['avatar_id']])){	
+						$coords = $galleryPosData[$user['User']['avatar_id']];
+						$top = $coords['y'];
+						$left = $coords['x'];
+						$height = $coords['h'];
+						$width = $coords['w'];
+					}
+					
+					
+					//options default
+					$options = array('id' => "image-{$user['User']['avatar_id']}");
+					
+					
+					//if there are coords
+					if(isset($coords))
+						$options = array('id' => "image-{$user['User']['avatar_id']}", 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
+					
+					
+					//echo the image tag
+					echo $this->Html->image($url, $options);
+					
+					
+					
+					break;
+					
+				case 'multi':
+					echo '[profile pictures slideshow]';
+					//TODO when the use has more than one image then loop through them here
+					break;
+			endswitch;
 ?>
 	</div>
 </div>

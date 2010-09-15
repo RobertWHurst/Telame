@@ -39,11 +39,10 @@ class SettingsController extends AppController{
 		if(!empty($data)){
 			
 			//fix the id
-			$data['id'] = (int) str_replace('image-', '', $data['id']);
+			echo $data['id'] = (int) str_replace('image-', '', $data['id']);
 			
 			//create the serial data
-			$serialData = serialize(array(array(
-				'id' => $data['id'],
+			$serialData = serialize(array($data['id'] => array(
 				'x' => $data['left'],
 				'y' => $data['top'],
 				'h' => $data['height'],
