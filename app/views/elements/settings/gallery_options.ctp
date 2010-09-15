@@ -48,7 +48,7 @@
 	   				}
 	   				
 	   				$url = array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']);
-	   				$options = array('style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
+	   				$options = array('id' => 'image-' . $user['User']['avatar_id'], 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
 	   				
 	   				echo $this->Html->image($url, $options);
 	   				break;

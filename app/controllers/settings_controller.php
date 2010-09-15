@@ -15,7 +15,7 @@ class SettingsController extends AppController{
 		$this->set(compact('user'));
 	}
 
-	function basic() {
+	function basic(){
 		$this->loadModel('User');
 		
 		//get the gallery pos data
@@ -25,18 +25,48 @@ class SettingsController extends AppController{
 		
 	}
 
-	function gallery() {	
-	
+	function gallery($id = null, $top = null, $left = null, $height = null, $width = null){
+		$this->loadModel('User');
+		
+		$data = compact('id', 'top', 'left', 'height', 'width');
+		
 		//if the request is not ajax redirect to basics as this control set is pressent there.	
 		if(!$this->RequestHandler->isAjax())
 			$this->redirect(array('controller' => 'settings', 'action' => 'basic'));
-			
+	
 		$this->layout = false;
 		
-		$this->render('element/settings/gallery_controls');		
+		if(!empty($data)){
+			
+			//fix the id
+			$data['id'] = (int) str_replace('image-', '', $data['id']);
+			
+			//create the serial data
+			$serialData = serialize(array(
+				'id' => $data['id'],
+				'x' => $data['left'],
+				'y' => $data['top'],
+				'h' => $data['height'],
+				'w' => $data['width']
+			));
+			
+			pr($this->currentUser);
+			
+			$this->User->Profile->save(array(
+				'id' => $this->currentUser['Profile']['id'],
+				'user_id' => $this->currentUser['User']['id'],
+				'gallery_pos_data' => $serialData
+			));
+			
+			pr($data);
+			exit();
+		}
+		else{		
+			//$this->render('element/settings/gallery_controls');
+		}	
 	}
 
-	function friends() {
+	function friends(){
 		$this->loadModel('GroupsUser');
 		$friends = $this->GroupsUser->getFriends(array('uid' => $this->currentUser['User']['id']));
 		$this->set(compact('friends'));

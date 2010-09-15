@@ -156,22 +156,6 @@ $(function(){
 				
 				
 				
-				root.slider.mousedown(function(event){
-					event.preventDefault();
-					root.slideHandle.addClass('active');
-					loop.newProccess('slide_handle_drag', dragSliderHandle, 1);
-				});
-				$(window).mouseup(function(){
-					loop.killProccess('slide_handle_drag');
-					root.slideHandle.removeClass('active');
-				
-					//update the current dimentions of the image
-					currentImageHeight = root.currentImage.height();
-					currentImageWidth = root.currentImage.width();
-				});
-				
-				
-				
 				//declare a function to scale the image.
 				var scaleImage = function(percent){
 					
@@ -302,9 +286,19 @@ $(function(){
 					
 				}
 				
-					
-				root.dragHandle.mousedown(function(event){
+				
+				//when starting a zoom
+				root.slider.mousedown(function(event){
 					event.preventDefault();
+					root.slideHandle.addClass('active');
+					loop.newProccess('slide_handle_drag', dragSliderHandle, 1);
+				});
+				
+				//when stating a drag
+				root.dragHandle.mousedown(function(event){
+				
+					event.preventDefault();
+					
 					root.dragHandle.addClass('active');
 					
 					dragOffsetX = root.dragHandle.offset().left;
@@ -315,15 +309,47 @@ $(function(){
       				
 					loop.newProccess('image_handle_drag', dragImageHandle, 1);
 				});
-				var end = function(){
+				$(window).mouseup(function(){
+				
 					loop.killProccess('image_handle_drag');
+					loop.killProccess('slide_handle_drag');
+					
 					root.dragHandle.removeClass('active');
+					root.slideHandle.removeClass('active');
+					
+					//update the current dimentions of the image
 					baseImageOffset = root.currentImage.position();
-				};
-				$(window).mouseup(end);
-				$(window).click(end);
+				
+					//update the current dimentions of the image
+					currentImageHeight = root.currentImage.height();
+					currentImageWidth = root.currentImage.width();
+					
+					//sumbit the changes via ajax
+					saveCurrentImageState();
+				});
 			
-			});	
+			});
+			
+			var saveCurrentImageState = function(){
+				
+				//get the image state
+				var currentImageState = {
+					'height': root.currentImage.height(),
+					'width': root.currentImage.width(),
+					'top': root.currentImage.position().top,
+					'left': root.currentImage.position().left,
+					'id': root.currentImage.attr('id')
+				}
+				
+				//set the ajax url
+				var ajaxUrl = '/s/u/' + currentImageState.id + '/' + currentImageState.top + '/' + currentImageState.left + '/' + currentImageState.height + '/' + currentImageState.width;
+				
+				//send the data via post data
+				$.post(core.domain + ajaxUrl, function(data){
+					$('div.info p').html(data);
+				});
+				
+			}
 			
 		}
 		
