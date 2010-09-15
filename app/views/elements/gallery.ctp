@@ -24,14 +24,16 @@
 	   			
 	   			//find the image offset (if exists)
 	   			$top = $left = $height = $width = $useOptions = $options = null;
-	   			foreach($galleryPosData as $coords){	   					
-	   				if($coords['id'] == $user['User']['avatar_id']){
-	   					$useOptions = true;
-	   					$top = $coords['y'];
-	   					$left = $coords['x'];
-	   					$height = $coords['h'];
-	   					$width = $coords['w'];
-	   					break;
+	   			if(is_array($galleryPosData)){
+	   				foreach($galleryPosData as $coords){	   					
+	   					if($coords['id'] == $user['User']['avatar_id']){
+	   						$useOptions = true;
+	   						$top = $coords['y'];
+	   						$left = $coords['x'];
+	   						$height = $coords['h'];
+	   						$width = $coords['w'];
+	   						break;
+	   					}
 	   				}
 	   			}
 	   			
