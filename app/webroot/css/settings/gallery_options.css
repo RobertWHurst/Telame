@@ -59,19 +59,26 @@
 	width: 726px;
 	background: url('../../img/settings/gallery_positioning_frame.png') no-repeat;
 }
-#gallery_options div.photos{
+#gallery_options div.photos,
+#gallery_options div.img_handle_wrap{
 	position: absolute;
-	z-index: 1;
 	height: 300px;
 	width: 480px;
 	top: 50px;
 	left: 123px;
-	
-	opacity: 0.8;
-	filter: alpha(opacity=80);
+}
+#gallery_options div.photos{
+	z-index: 1;
+}
+#gallery_options div.img_handle_wrap{
+	z-index: 3;
 }
 #gallery_options div.photos img{
-	position: relative;
+	position: absolute;
+}
+#gallery_options div.img_handle{
+	position: absolute;
+	z-index: 4;
 }
 #gallery_options div.zoom{
 	position: relative;
