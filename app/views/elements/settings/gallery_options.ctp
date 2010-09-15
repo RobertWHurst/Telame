@@ -37,8 +37,9 @@
 	   			default: case 'single':
 					//find the image offset (if exists)
 	   				$top = $left = $height = $width = $useOptions = $options = null;
+	   				
 	   				foreach($galleryPosData as $coords){	   
-	   					if(is_array($galleryPosData)){					
+	   					if(isset($galleryPosData) && is_array($galleryPosData)){					
 	   						if($coords['id'] == $user['User']['avatar_id']){
 	   							$useOptions = true;
 	   							$top = $coords['y'];

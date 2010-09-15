@@ -24,7 +24,7 @@
 	   			
 	   			//find the image offset (if exists)
 	   			$top = $left = $height = $width = $useOptions = $options = null;
-	   			if(is_array($galleryPosData)){
+	   			if(isset($galleryPosData) && is_array($galleryPosData)){
 	   				foreach($galleryPosData as $coords){	   					
 	   					if($coords['id'] == $user['User']['avatar_id']){
 	   						$useOptions = true;
