@@ -276,26 +276,27 @@ $(function(){
 					
 					dragHandlePositionX = cursorPositionDragWrapX - clickPositionDragX;
 					
+					var limit = baseImageWidth / 2;
 					//check the range of x
-					if(dragHandlePositionX < -currentImageWidth){
+					if(dragHandlePositionX < -currentImageWidth + limit){
 						//if the cursor position is below the limit
-						dragHandlePositionX = -currentImageWidth;
+						dragHandlePositionX = -currentImageWidth + limit;
 					}
-					else if(dragHandlePositionX > baseImageWidth){
+					else if(dragHandlePositionX > baseImageWidth - limit){
 						//if the cursor position is above the limit			
-						dragHandlePositionX = baseImageWidth;
+						dragHandlePositionX = baseImageWidth - limit;
 					}			
 					
 					dragHandlePositionY = cursorPositionDragWrapY - clickPositionDragY;
 					
 					//check the range of x
-					if(dragHandlePositionY < -currentImageHeight){
+					if(dragHandlePositionY < -currentImageHeight + limit){
 						//if the cursor position is below the limit
-						dragHandlePositionY = -currentImageHeight;
+						dragHandlePositionY = -currentImageHeight + limit;
 					}
-					else if(dragHandlePositionY > baseImageHeight){
+					else if(dragHandlePositionY > baseImageHeight - limit){
 						//if the cursor position is above the limit			
-						dragHandlePositionY = baseImageHeight;
+						dragHandlePositionY = baseImageHeight - limit;
 					}
 					
 					setImagePosition(dragHandlePositionY, dragHandlePositionX);
