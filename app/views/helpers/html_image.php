@@ -37,7 +37,7 @@ class HtmlImageHelper extends AppHelper
 			}
 		}
 		if (isset($options['static']) && $options['static']) {
-			$src = 'http://' . Configure::read('StaticDomain') . '.' . env('SERVER_NAME') . DS . 'img' . DS . $src;
+			$src = 'http://' . Configure::read('StaticDomain') . DS . 'img' . DS . $src;
 		}
 
 		return $this->Html->image($src, $options);
