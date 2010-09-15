@@ -40,8 +40,8 @@ $(function(){
 					dragWrapOffsetY,
 					currentImageHeight,
 					currentImageWidth,
-					BaseImageHeight,
-					BaseImageWidth,
+					baseImageHeight,
+					baseImageWidth,
 					cursorOffsetX,
 					cursorOffsetY,
 					cursorPositionSliderX,
@@ -82,8 +82,8 @@ $(function(){
 				});
 				
 				//save the base image size
-				BaseImageHeight = root.currentImage.height();
-				BaseImageWidth = root.currentImage.width();
+				baseImageHeight = root.currentImage.height();
+				baseImageWidth = root.currentImage.width();
 				
 				//get the current top and left offset
 				baseImageOffset = root.currentImage.position();
@@ -182,8 +182,8 @@ $(function(){
 					scaleFactor = (percent + 50) / 100;
 					
 					//calculate the new width and height.
-					newHeight = Math.round(BaseImageHeight * scaleFactor);
-					newWidth = Math.round(BaseImageWidth * scaleFactor);
+					newHeight = Math.round(baseImageHeight * scaleFactor);
+					newWidth = Math.round(baseImageWidth * scaleFactor);
 					
 					//set the new height and width
 					root.currentImage.height(newHeight);
@@ -238,7 +238,7 @@ $(function(){
 				}); 
 				
 				//calculate the zoom of the image and set the slider
-				zoom = currentImageWidth / BaseImageWidth * 100;
+				zoom = currentImageWidth / baseImageWidth * 100;
 				setSliderValue(zoom / 2);
 				
 				
