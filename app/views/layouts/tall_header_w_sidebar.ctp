@@ -8,7 +8,7 @@
 	<title><?php echo $title_for_layout; ?></title>
 <?php
 		echo $asset->scripts_for_layout();
-		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
+		echo $html->meta('favicon.ico', Configure::read('StaticDomain') . '/favicon.ico', array('type' => 'icon'));
 		echo $html->meta('viewport', 'width=device-width; initial-scale=1.0; maximum-scale=1.0;');
 		echo $html->meta('title', 'Telame');
 		echo $html->meta('description', 'Telame: The world\'s first responsible social network');
