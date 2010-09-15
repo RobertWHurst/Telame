@@ -27,7 +27,9 @@
 ?>
 			</div>
 		</div>
-		<div class="img_handle"></div>
+		<div class="img_handle_wrap">
+			<div class="img_handle"></div>
+		</div>
 		<div class="frame"></div>
 		<div class="photos">
 <?php
@@ -47,7 +49,8 @@
 	   				$options = array('style' => "top: {$top}px; left: {$left}px;");
 	   				
 	   				echo $this->Html->image($url, $options);
-	   			
+	   				break;
+	   				
 	   			case 'multi':
 	   				echo '[profile pictures slideshow]';
 	   				//TODO when the use has more than one image then loop through them here
