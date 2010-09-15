@@ -179,7 +179,7 @@ $(function(){
 					var newOffset = {};
 					
 					//set the scale factor
-					scaleFactor = (percent * 2) / 100;
+					scaleFactor = (percent + 50) / 100;
 					
 					//calculate the new width and height.
 					newHeight = Math.round(BaseImageHeight * scaleFactor);
