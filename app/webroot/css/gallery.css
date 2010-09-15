@@ -4,6 +4,7 @@
 	height: 300px;
 	overflow: hidden;
 	position: relative;
+	background: url('../../img/users/profile_gallery_background.png') no-repeat;	
 }
 #profile_gallery div.frame{
 	position: absolute;
@@ -38,4 +39,8 @@
 }
 #profile_gallery div.images img{
 	position: absolute;
+	
+	-moz-box-shadow: 0px 0px 10px #bc79ff;
+	-webkit-box-shadow: 0px 0px 10px #bc79ff;
+	box-shadow: 0px 0px 10px #bc79ff;
 }
