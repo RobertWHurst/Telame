@@ -54,6 +54,23 @@ class GroupsUser extends AppModel {
 		return $friends;
 	}
 
+	/* returns all your friend ids in list form
+	 * Friend_id and User_id seem backwards, but we want to do a test based on which users are friends with you, they have confirmed so
+	 */
+	function getFriendIds($uid, $gid = false) {
+		$this->recursive = -1;
+		$fids = $this->find('list', array(
+			'conditions' => array(
+				'friend_id' => $uid,
+				($gid) ? array('group_id' => $gid) : '',
+			), 
+			'fields' => array(
+				'user_id'
+			)
+		));
+		return $fids;
+	}
+
 	function isFriend($uid, $fid) {
 		// make sure they are on our list
 		$friend = $this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)));

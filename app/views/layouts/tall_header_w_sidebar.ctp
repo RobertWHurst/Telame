@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>mini<?php echo $title_for_layout; ?></title>
+	<title><?php echo $title_for_layout; ?></title>
 <?php
 		echo $asset->scripts_for_layout();
 		echo $html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
@@ -26,7 +26,7 @@
 		<div id="content" class="clearfix">
 			<div id="wrap_main_sidebar">
 				<div id="logo">
-					<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'news'))); ?>
+					<?php echo $htmlImage->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'news'), 'static' => true)); ?>
 				</div>
 				<?php echo $this->element('main_sidebar'); ?>
 			</div>

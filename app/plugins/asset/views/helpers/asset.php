@@ -44,7 +44,7 @@ class AssetHelper extends Helper {
   //options: default, low_compression, high_compression, highest_compression
   //default is no compression
   //I like high_compression because it still leaves the file readable.
-  var $cssCompression = 'high_compression';
+  var $cssCompression = 'highest_compression';
 
   var $helpers = array('Html', 'Javascript');
   var $viewScriptCount = 0;

@@ -69,18 +69,11 @@ class PagesController extends AppController {
 			}
 		}
 
-		$friends = $this->GroupsUser->getFriends(array(
-			'uid' => $uid,
-			'gid' => $selectedFriendList
-		));
-
-		foreach($friends as $key => $friend)
-			$friends[$key] = $friend['Friend']['id'];
-
 		// add ourself to the list
+		$friends = $this->GroupsUser->getFriendIds($uid, $selectedFriendList);
 		array_push($friends, $uid);
 
-		$wallPosts = $this->WallPost->getWallPosts(20, 0, array('uid' => $friends, 'aid' => $friends, 'User' => true));
+		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));

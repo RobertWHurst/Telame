@@ -22,7 +22,7 @@
 		<div id="wrap_header">
 			<div id="header">
 				<div id="logo">
-					<?php echo $html->image('pages/logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'signup', 'action' => 'index'))); ?>
+					<?php echo $htmlImage->image('pages/logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'signup', 'action' => 'index'), 'static' => true)); ?>
 				</div>
 				<div class="headerRight">
 					<?php echo $this->element('pages/navigation'); ?>

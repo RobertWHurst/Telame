@@ -20,7 +20,7 @@ class WallPost extends AppModel {
 	);
 
 	//TODO: needs containable.
-	function getWallPosts($limit = 0, $offset = 0, $arguments = false){
+	function getWallPosts($arguments = false){
 
 		//set the default options
 		$defaults = array(
@@ -29,46 +29,57 @@ class WallPost extends AppModel {
 			'aid' => false,
 			'User' => false,
 			'PostAuthor' => true,
-			'single' => false
+			'single' => false,
+			'limit' => 20,
+			'offset' => 0,
 		);
 
 		//parse the options
 		$options = parseArguments($defaults, $arguments, true);
 
-		//get the profile
-		$this->Behaviors->attach('Containable');
-
 		// create conditions
 		// get only get parents in the top level, not replies.
-		if($options['single'] == false)
+		if($options['single'] == false) {
 			$conditions['reply_parent_id'] = null;
-		if($options['id'])
+		}
+		if($options['id']) {
 			$conditions['WallPost.id'] = $options['id'];
-		if($options['uid'])
+		}
+		if($options['uid']) {
 			$conditions['WallPost.user_id'] = $options['uid'];
-		if($options['aid'])
-			$conditions['WallPost.author_id'] = $options['aid'];
+		}
+		if($options['aid']) {
+			$conditions['AND'] = array(
+				'WallPost.author_id' => $options['aid'],
+				'WallPost.user_id' => $options['uid'],
+			);
+			unset($conditions['WallPost.user_id']);
+		}
 
 		//create the contain rules
-		if($options['User'])
-			$contain[] = 'User.Profile';
-		if($options['PostAuthor'])
-			$contain[] = 'PostAuthor.Profile';
+		if($options['User']) {
+			$contain[] = 'User';
+		}
+		if($options['PostAuthor']) {
+			$contain[] = 'PostAuthor';
+		}
 
-		$contain[] = 'Replies.PostAuthor.Profile';
+		$contain[] = 'Replies.PostAuthor';
 		$contain[] = 'WallPostLike.User';
 
 		if ($options['single']) {
 			$type = 'first';
+			$options['limit'] = 1;
 		} else {
 			$type = 'all';
 		}
+
 		$this->recursive = 2;
 		$wallPosts = $this->find($type, array(
 			'conditions' => $conditions,
 			'contain' => $contain,
-			'limit' => $limit,
-			'offset' => $offset,
+			'limit' => $options['limit'],
+			'offset' => $options['offset'],
 			'order' => 'WallPost.id DESC'
 		));
 
@@ -79,7 +90,6 @@ class WallPost extends AppModel {
 				$wallPosts[$key] = $val;
 			}
 		}
-
 		return $wallPosts;
 	}
 

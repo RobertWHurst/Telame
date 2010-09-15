@@ -12,7 +12,6 @@ $js = array(
 	'jquery',
 	'base',
 	'pages/news',
-	'cookie'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);

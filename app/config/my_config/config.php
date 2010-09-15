@@ -1,6 +1,7 @@
 <?php
 // Specify custome config information here
 Configure::write('SiteName', 'Telame');
+Configure::write('StaticDomain', 's');
 
 // Image sizes
 Configure::write('AvatarSize', array('height' => 60, 'width' => 60));
