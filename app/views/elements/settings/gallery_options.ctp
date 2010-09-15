@@ -36,8 +36,8 @@
 	   		switch($user['Profile']['gallery_mode']):
 	   			default: case 'single':
 					//find the image offset (if exists)
-	   				$top = $left = 0;
-	   				foreach($galleryPosData as $coords){
+	   				$top = $left = $height = $width = 0;
+	   				foreach($galleryPosData as $coords){	   					
 	   					if($coords['id'] == $user['User']['avatar_id']){
 	   						$top = $coords['y'];
 	   						$left = $coords['x'];

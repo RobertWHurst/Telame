@@ -42,15 +42,13 @@ class SettingsController extends AppController{
 			$data['id'] = (int) str_replace('image-', '', $data['id']);
 			
 			//create the serial data
-			$serialData = serialize(array(
+			$serialData = serialize(array(array(
 				'id' => $data['id'],
 				'x' => $data['left'],
 				'y' => $data['top'],
 				'h' => $data['height'],
 				'w' => $data['width']
-			));
-			
-			pr($this->currentUser);
+			)));
 			
 			$this->User->Profile->save(array(
 				'id' => $this->currentUser['Profile']['id'],
@@ -58,7 +56,6 @@ class SettingsController extends AppController{
 				'gallery_pos_data' => $serialData
 			));
 			
-			pr($data);
 			exit();
 		}
 		else{		
