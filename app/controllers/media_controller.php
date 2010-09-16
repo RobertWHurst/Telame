@@ -99,6 +99,10 @@ class MediaController extends AppController {
 					'Media.id' => $mid
 				),
 			));
+
+			if (!$this->Media->User->GroupsUser->isFriend($media['User']['id'], $this->currentUser['User']['id'])) {
+				$media = false;
+			}
 		} else {
 			$media = false;
 		}
@@ -118,11 +122,11 @@ class MediaController extends AppController {
 			$imageSize = getimagesize($baseDir . $dir . $filename);
 			$imageWidth = $imageSize[0];
 			$imageHeight = $imageSize[1];
-			
+
 			$this->ScaleTool->setMode('fill');
 			$this->ScaleTool->setBox($size['height'], $size['width']);
 			$size = $this->ScaleTool->getNewSize($imageHeight, $imageWidth);
-			
+
 			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 
 		} else {

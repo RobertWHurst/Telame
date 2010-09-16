@@ -1,6 +1,6 @@
 <div id="profile_summary">
 	<div class="controls">		
-		<?php if(isset($isFriend) && !$isFriend) { ?>
+		<?php if($canRequest) { ?>
 			<p><?php echo $html->link('Add ' . $user['User']['full_name'] . ' as friend', '/f/a/' . $user['User']['id']); ?></p>
 		<?php } ?>
 	</div>

@@ -58,7 +58,13 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
 			}
 			// are you friends with this person
-			$isFriend = ($this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']) ? true : false);
+			$canRequest = false;
+			$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
+			if (!$isFriend) {
+				if (!$this->User->GroupsUser->requestSent($this->currentUser['User']['id'], $user['User']['id'])) {
+					$canRequest = true;
+				}
+			}
 		} else {
 			// These are defaults for viewing your own profile
 			$canView = true;
@@ -77,7 +83,7 @@ class UsersController extends AppController {
 		$galleryPosData = unserialize($user['Profile']['gallery_pos_data']);
 
 		//pass the profile data to the view
-		$this->set(compact('friends', 'isFriend', 'user', 'wallPosts', 'galleryPosData'));
+		$this->set(compact('canRequest', 'friends', 'user', 'wallPosts', 'galleryPosData'));
 	}
 	
 	function updateGalleryPos($uid, $mid, $posData){

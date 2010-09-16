@@ -72,6 +72,10 @@ class GroupsUser extends AppModel {
 	}
 
 	function isFriend($uid, $fid) {
+		// checking against self
+		if ($uid == $fid) {
+			return true;
+		}
 		// make sure they are on our list
 		$friend = $this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)));
 		// they are on our list, are we on theirs?
@@ -98,4 +102,11 @@ class GroupsUser extends AppModel {
 		return $groups;
 	}
 
+	function requestSent($uid, $fid) {
+		if ($this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

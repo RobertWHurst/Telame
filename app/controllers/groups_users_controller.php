@@ -13,6 +13,13 @@ class GroupsUsersController extends AppController {
 		$this->loadModel('User');
 		$this->layout = 'tall_header_w_sidebar';
 
+		if (!$this->GroupsUser->isFriend($this->currentUser['User']['id'], $fid)) {
+			if ($this->GroupsUser->requestSent($this->currentUser['User']['id'], $fid)) {
+				$this->Session->setFlash(__('friend_request_already_sent', true));
+				$this->redirect($this->referer());
+			}
+		}
+
 		// Save data, we will check for a confirm vs an initial add inside
 		if (!empty($this->data) && !is_null($fid)) {
 			$this->data['GroupsUser']['user_id'] = $this->currentUser['User']['id'];
@@ -47,6 +54,7 @@ class GroupsUsersController extends AppController {
 				'uid' => $this->currentUser['User']['id'],
 				'type' => 'list',
 				));
+				
 			$slug = $this->User->getSlugFromId($fid);
 			$friend = $this->User->getProfile($slug);
 			$this->set(compact('confirm', 'cid', 'friend', 'friendLists'));

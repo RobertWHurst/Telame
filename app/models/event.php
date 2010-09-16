@@ -4,6 +4,7 @@ class Event extends AppModel {
 	var $belongsTo = array('User');
 
 	function getEvents($start, $end, $uid) {
+		$this->recursive = -1;
 		// Get the events corresponding to the time range
 		$conditions = array('Event.start BETWEEN ? AND ?' => array(date('Y-m-d H:i:s', $start), date('Y-m-d H:i:s', $end)), 'Event.user_id' => $uid);
 		$events = $this->find('all', array('conditions' => $conditions));

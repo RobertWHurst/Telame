@@ -36,6 +36,7 @@ $(document).ready(function() {
 			right: 'month,agendaWeek,agendaDay'
 		},
 		editable: true,
+		weekMode: 'variable',
 		dayClick: function(date, allDay, jsEvent, view) {
 			$("#eventdata").show();
 			$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendar/add/" + allDay + "/" + $.fullCalendar.formatDate(date, "dd/MM/yyyy/HH/mm"));

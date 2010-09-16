@@ -6,7 +6,7 @@ class EventsController extends AppController {
 			//Set default duration: 1hr and format to a leading zero.
 			$hourPlus = intval($hour)+1;
 			if (strlen($hourPlus) == 1) {
-				$hourPlus = '0'.$hourPlus;
+				$hourPlus = '0' . $hourPlus;
 			}
 	
 			//Create a time string to display in view. The time string
@@ -39,7 +39,7 @@ class EventsController extends AppController {
 			//Event type is set to editable - because this is a user event.
 			$this->Event->create();
 			$this->data['Event']['title'] = Sanitize::paranoid($this->data['Event']['title'], array('!', '\'', '?', '_', '.', ' ', '-'));
-			$this->data['Event']['editable'] = '1';
+			$this->data['Event']['editable'] = true;
 			$this->data['Event']['user_id'] = $this->currentUser['User']['id'];
 			if ($this->Event->save($this->data)) {
 				$this->Session->setFlash(__('event_saved', true));
@@ -69,7 +69,7 @@ class EventsController extends AppController {
 
 	function edit($id = null) {
 		if (empty($this->data)) {
-			if ($id == null) {
+			if (is_null($id)) {
 				//fail gracefully in case of error
 				return;
 			}
@@ -133,6 +133,7 @@ class EventsController extends AppController {
 
 	function move($id = null, $dayDelta, $minDelta, $allDay) {
 		if ($id != null) {
+			$this->Event->recursive = -1;
 			$ev = $this->Event->findById($id);  //1 - locate the event in the DB
 			if ($allDay == 'true') { //2- handle all day events
 				$ev['Event']['allday'] = 1;
