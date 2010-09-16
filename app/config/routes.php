@@ -50,6 +50,12 @@
 
 // User info
 	// Events
+	Router::connect('/calendar/add/*', array('controller' => 'events', 'action' => 'add'));
+	Router::connect('/calendar/edit/*', array('controller' => 'events', 'action' => 'edit'));
+	Router::connect('/calendar/delete/*', array('controller' => 'events', 'action' => 'delete'));
+	Router::connect('/calendar/feed/*', array('controller' => 'events', 'action' => 'feed'));
+	Router::connect('/calendar/move/*', array('controller' => 'events', 'action' => 'move'));
+	Router::connect('/calendar/resize/*', array('controller' => 'events', 'action' => 'resize'));
 	Router::connect('/calendar/*', array('controller' => 'events', 'action' => 'calendar'));
 
 	// Friend - add

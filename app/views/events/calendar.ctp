@@ -22,13 +22,50 @@ foreach ($js as $j) {
 //page title
 
 ?>
-
+<div id="eventdata"></div>
 <div id="calendar"></div>
 
-<script type='text/javascript'>
-
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({});
-    });
-
+<script type="text/javascript">// <![CDATA[
+		$(document).ready(function() {
+		$("#eventdata").hide();
+		$('#calendar').fullCalendar({
+				dayClick: function(date, allDay, jsEvent, view) {
+				$("#eventdata").show();
+				$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendar/add/"+allDay+"/"+$.fullCalendar.formatDate( date, "dd/MM/yyyy/HH/mm"));
+			},
+			eventClick: function(calEvent, jsEvent, view) {
+				$("#eventdata").show();
+				$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendar/edit/"+calEvent.id);
+			},
+			eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+				if (dayDelta>=0) {
+					dayDelta = "+"+dayDelta;
+				}
+				if (minuteDelta>=0) {
+					minuteDelta="+"+minuteDelta;
+				}
+				$.post("/calendar/move/"+event.id+"/"+dayDelta+"/"+minuteDelta+"/"+allDay);
+				},
+			eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+				if (dayDelta>=0) {
+					dayDelta = "+"+dayDelta;
+				}
+				if (minuteDelta>=0) {
+					minuteDelta="+"+minuteDelta;
+				}
+				$.post("/calendar/resize/"+event.id+"/"+dayDelta+"/"+minuteDelta);
+			},
+			events: "/calendar/feed",
+			<?php if (isset($openYear)) { ?>
+			year: <?php echo $openYear.',';
+			}
+			if (isset($openMonth)) { ?>
+			month: <?php echo $openMonth.',';
+			}
+			if (isset($openDay)) { ?>
+			date: <?php echo $openDay.',';
+			} ?>
+		});
+	})
+// ]]>
 </script>

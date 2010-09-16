@@ -1,9 +1,9 @@
 <?php
 // added for page load timing
-$time = microtime(); 
-$time = explode(" ", $time); 
-$time = $time[1] + $time[0]; 
-$start = $time; 
+$time = microtime();
+$time = explode(" ", $time);
+$time = $time[1] + $time[0];
+$start = $time;
 /**
  * Index
  *
@@ -88,9 +88,9 @@ $start = $time;
 		$Dispatcher->dispatch();
 	}
 
-	$time = microtime(); 
-	$time = explode(" ", $time); 
-	$time = $time[1] + $time[0]; 
-	$finish = $time; 
-	$totaltime = ($finish - $start); 
-	echo "<!-- $totaltime -->"; 
+	$time = microtime();
+	$time = explode(" ", $time);
+	$time = $time[1] + $time[0];
+	$finish = $time;
+	$totaltime = ($finish - $start);
+//	echo "<!-- $totaltime -->";

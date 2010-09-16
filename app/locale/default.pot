@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-09-10 10:28-0700\n"
+"POT-Creation-Date: 2010-09-15 13:18-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /app_controller.php:64
+#: /app_controller.php:66
 msgid "email_not_confirmed"
 msgstr ""
 
@@ -26,11 +26,11 @@ msgstr ""
 msgid "album_added"
 msgstr ""
 
-#: /controllers/friends_controller.php:18
+#: /controllers/groups_users_controller.php:23
 msgid "friend_request"
 msgstr ""
 
-#: /controllers/friends_controller.php:51
+#: /controllers/groups_users_controller.php:68
 msgid "not_allowed_friends"
 msgstr ""
 
@@ -38,27 +38,27 @@ msgstr ""
 msgid "message_thread_deleted"
 msgstr ""
 
-#: /controllers/pages_controller.php:25;32;86
-#: /controllers/users_controller.php:117
+#: /controllers/pages_controller.php:25;32;79
+#: /controllers/users_controller.php:123
 #: /views/elements/email/html/signup.ctp:1
-#: /views/layouts/profile.ctp:27
+#: /views/layouts/profile.ctp:23
 #: /views/layouts/simple_header.ctp:25
 #: /views/layouts/tall_header_w_sidebar.ctp:29
-#: /views/media/upload.ctp:24
+#: /views/media/upload.ctp:27
 #: /views/pages/rss/news.ctp:7;9
 #: /views/profiles/edit.ctp:5
-#: /views/settings/basic.ctp:18
-#: /views/settings/friends.ctp:18
-#: /views/settings/groups.ctp:18
-#: /views/settings/permissions.ctp:18
-#: /views/users/confirm.ctp:13
-#: /views/users/login.ctp:14
-#: /views/users/profile.ctp:21
+#: /views/settings/basic.ctp:23
+#: /views/settings/friends.ctp:21
+#: /views/settings/groups.ctp:21
+#: /views/settings/permissions.ctp:21
+#: /views/users/confirm.ctp:16
+#: /views/users/login.ctp:17
+#: /views/users/profile.ctp:25
 msgid "site_name"
 msgstr ""
 
-#: /controllers/pages_controller.php:86
-#: /views/pages/news.ctp:18
+#: /controllers/pages_controller.php:79
+#: /views/pages/news.ctp:22
 msgid "news_title"
 msgstr ""
 
@@ -70,11 +70,31 @@ msgstr ""
 msgid "profile_updated"
 msgstr ""
 
-#: /controllers/settings_controller.php:45
+#: /controllers/settings_controller.php:85
+msgid "group_not_allowed_delete"
+msgstr ""
+
+#: /controllers/settings_controller.php:87
+msgid "group_deleted"
+msgstr ""
+
+#: /controllers/settings_controller.php:89
+msgid "group_not_deleted"
+msgstr ""
+
+#: /controllers/settings_controller.php:97
+msgid "group_added"
+msgstr ""
+
+#: /controllers/settings_controller.php:99
+msgid "group_not_added"
+msgstr ""
+
+#: /controllers/settings_controller.php:116
 msgid "permissions_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:47
+#: /controllers/settings_controller.php:118
 msgid "permissions_not_saved"
 msgstr ""
 
@@ -90,19 +110,19 @@ msgstr ""
 msgid "not_allowed_profile"
 msgstr ""
 
-#: /controllers/users_controller.php:97
+#: /controllers/users_controller.php:103
 msgid "password_mismatch"
 msgstr ""
 
-#: /controllers/users_controller.php:106
+#: /controllers/users_controller.php:112
 msgid "invalid_key"
 msgstr ""
 
-#: /controllers/users_controller.php:127
+#: /controllers/users_controller.php:133
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:129
+#: /controllers/users_controller.php:135
 msgid "user_create_error"
 msgstr ""
 
@@ -122,15 +142,15 @@ msgstr ""
 msgid "wall_post_bad_hacker"
 msgstr ""
 
-#: /views/albums/album.ctp:18
+#: /views/albums/album.ctp:23
 msgid "album"
 msgstr ""
 
-#: /views/albums/albums.ctp:20
+#: /views/albums/albums.ctp:24
 msgid "create_new_album"
 msgstr ""
 
-#: /views/albums/new_album.ctp:24
+#: /views/albums/new_album.ctp:29
 msgid "add_album"
 msgstr ""
 
@@ -145,6 +165,10 @@ msgstr ""
 #: /views/elements/current_user_controls.ctp:13
 #: /views/elements/pages/navigation.ctp:11
 msgid "logout"
+msgstr ""
+
+#: /views/elements/gallery.ctp:13
+msgid "gallery_options"
 msgstr ""
 
 #: /views/elements/profile_navigation.ctp:5
@@ -172,7 +196,7 @@ msgid "search"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:28;28
-#: /views/notifications/index.ctp:15
+#: /views/notifications/index.ctp:18
 msgid "notifications"
 msgstr ""
 
@@ -181,10 +205,10 @@ msgid "news_feed"
 msgstr ""
 
 #: /views/elements/sidebar_modules.ctp:55;55
-#: /views/messages/compose.ctp:17
-#: /views/messages/inbox.ctp:19
-#: /views/messages/sent.ctp:19
-#: /views/messages/view.ctp:17
+#: /views/messages/compose.ctp:20
+#: /views/messages/inbox.ctp:22
+#: /views/messages/sent.ctp:22
+#: /views/messages/view.ctp:20
 msgid "messages"
 msgstr ""
 
@@ -192,6 +216,7 @@ msgstr ""
 #: /views/elements/wall_post_comment.ctp:9
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
+#: /views/settings/groups.ctp:40
 msgid "delete"
 msgstr ""
 
@@ -230,12 +255,12 @@ msgstr ""
 
 #: /views/elements/messages/inbox_summary.ctp:49
 #: /views/elements/messages/sent_summary.ctp:42
-#: /views/messages/compose.ctp:29
+#: /views/messages/compose.ctp:32
 msgid "message_subject"
 msgstr ""
 
 #: /views/elements/messages/inbox_summary.ctp:51
-#: /views/messages/view.ctp:76
+#: /views/messages/view.ctp:79
 msgid "message_from"
 msgstr ""
 
@@ -252,28 +277,28 @@ msgid "messages_sent"
 msgstr ""
 
 #: /views/elements/messages/sent_summary.ctp:44
-#: /views/messages/view.ctp:74
+#: /views/messages/view.ctp:77
 msgid "message_to"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:4
-#: /views/users/login.ctp:20
+#: /views/users/login.ctp:23
 msgid "email"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:5
-#: /views/users/login.ctp:21
+#: /views/users/login.ctp:24
 msgid "password"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:6
-#: /views/users/login.ctp:22
+#: /views/users/login.ctp:25
 msgid "auto_login"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:7
 #: /views/elements/pages/navigation.ctp:7
-#: /views/users/login.ctp:23
+#: /views/users/login.ctp:26
 msgid "login"
 msgstr ""
 
@@ -282,7 +307,7 @@ msgid "features"
 msgstr ""
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:27
+#: /views/users/signup.ctp:30
 msgid "signup"
 msgstr ""
 
@@ -292,6 +317,30 @@ msgstr ""
 
 #: /views/elements/pages/news_sidebar.ctp:3
 msgid "filter_title"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:8
+msgid "up"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:14
+msgid "down"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:20
+msgid "left"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:26
+msgid "right"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:75
+msgid "zoom_out"
+msgstr ""
+
+#: /views/elements/settings/gallery_options.ctp:84
+msgid "zoom_in"
 msgstr ""
 
 #: /views/elements/settings/navigation.ctp:5
@@ -322,11 +371,11 @@ msgstr ""
 msgid "wall_post_label"
 msgstr ""
 
-#: /views/friends/add_friend.ctp:17
+#: /views/groups_users/add_friend.ctp:20
 msgid "add_friend"
 msgstr ""
 
-#: /views/friends/add_friend.ctp:27
+#: /views/groups_users/add_friend.ctp:30
 msgid "add"
 msgstr ""
 
@@ -346,47 +395,52 @@ msgstr ""
 msgid "public"
 msgstr ""
 
-#: /views/media/upload.ctp:41
+#: /views/media/upload.ctp:44
 msgid "upload"
 msgstr ""
 
-#: /views/messages/view.ctp:23
+#: /views/messages/view.ctp:26
 msgid "message_thread_title"
 msgstr ""
 
-#: /views/messages/view.ctp:85
+#: /views/messages/view.ctp:88
 msgid "composed"
 msgstr ""
 
-#: /views/messages/view.ctp:88
+#: /views/messages/view.ctp:91
 msgid "read"
 msgstr ""
 
-#: /views/profiles/add.ctp:15
-#: /views/settings/permissions.ctp:34
+#: /views/profiles/add.ctp:18
+#: /views/settings/groups.ctp:35
+#: /views/settings/permissions.ctp:37
 msgid "save"
 msgstr ""
 
-#: /views/settings/basic.ctp:18;21
-#: /views/settings/friends.ctp:18
-#: /views/settings/groups.ctp:18
-#: /views/settings/permissions.ctp:18
+#: /views/settings/basic.ctp:23;26
+#: /views/settings/friends.ctp:21
+#: /views/settings/groups.ctp:21
+#: /views/settings/permissions.ctp:21
 msgid "settings"
 msgstr ""
 
-#: /views/settings/friends.ctp:21
+#: /views/settings/friends.ctp:24
 msgid "friends_title"
 msgstr ""
 
-#: /views/settings/groups.ctp:21
+#: /views/settings/groups.ctp:24
 msgid "groups_title"
 msgstr ""
 
-#: /views/settings/permissions.ctp:21
+#: /views/settings/groups.ctp:40
+msgid "confirm_delete"
+msgstr ""
+
+#: /views/settings/permissions.ctp:24
 msgid "group_permission_title"
 msgstr ""
 
-#: /views/users/confirm.ctp:20
+#: /views/users/confirm.ctp:23
 msgid "confirm"
 msgstr ""
 
