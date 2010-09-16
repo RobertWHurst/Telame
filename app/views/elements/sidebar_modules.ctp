@@ -73,4 +73,12 @@
 ?>
 		</div>
 	</div>
+	<div id="module_calendar" class="module">
+		<div class="link">
+<?php
+		$link_content = $this->HtmlImage->Image('icons/calendar.png', array('static' => true, 'alt' => __('calendar', true))) . __('calendar', true);
+		echo $html->link($link_content, array('controller' => 'events', 'action' => 'calendar'), array('escape' => false));
+?>
+		</div>
+	</div>
 </div>
