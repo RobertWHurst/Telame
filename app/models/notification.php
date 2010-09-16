@@ -9,9 +9,9 @@ class Notification extends AppModel {
 			'counterScope' => array('Notification.new' => true)
 	));
 
-	function addNotification($uid, $type, $title, $content) {
+	function addNotification($uid, $type, $title, $content, $mid) {
 		$notifications = array(
-			'friend',
+			'groups_user',
 			'pm',
 		);
 
@@ -25,6 +25,7 @@ class Notification extends AppModel {
 		$this->data['Notification']['type'] = $type;
 		$this->data['Notification']['user_id'] = $uid;
 		$this->data['Notification']['new'] = true;
+		$this->data['Notification']['model_id'] = true;
 
 		if (!$this->save($this->data)) {
 			return false;
@@ -34,7 +35,7 @@ class Notification extends AppModel {
 
 	function getAllNotifications($uid) {
 		$this->recursive = -1;
-		return $this->find('all', array(
+		$note = $this->find('all', array(
 				'conditions' => array(
 					'user_id' => $uid
 				),
@@ -44,6 +45,37 @@ class Notification extends AppModel {
 				)
 			)
 		);
+		// FIXME
+		// This is hard coded to always return 'user', not necessarilly the best
+		foreach ($note as $key => $val) {
+			$type = Inflector::classify($val['Notification']['type']);
+			App::Import('Model', $type);
+			$this->$type = new $type;
+		
+			$data = $this->$type->find('first', array(
+				'conditions' => array(
+					$type . '.id' => $val['Notification']['model_id'],
+				),
+				'contain' => array(
+					'User',
+				)
+			));
+		
+			$note[$key]['User'] = $data['User'];
+		}
+		return $note;
+	}
+
+	function markRead($nid, $uid) {
+		$this->recursive = -1;
+		$note = $this->findById($nid);
+		if ($note['Notification']['user_id'] != $uid) {
+			return false;
+		} else {
+			$this->id = $nid;
+			$this->saveField('new', false);
+			return true;
+		}
 	}
 
 	function updateCount($uid) {

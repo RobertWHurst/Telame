@@ -24,9 +24,11 @@ foreach ($js as $j) {
 <div id="page_body" class="clearfix">
 	<div id="add_friend">
 <?php
-		echo $form->create('GroupsUser', array('url' => array('controller' => 'friends', 'action' => 'addFriend', $friend['User']['id'])));
+		echo $form->create('GroupsUser', array('url' => array('controller' => 'groups_users', 'action' => 'addFriend', $friend['User']['id'])));
 		echo $form->input('group_id', array('options' => $friendLists));
 		echo $form->hidden('friend_id', array('value' => $friend['User']['id']));
+		echo $form->hidden('confirm', array('value' => ($confirm ? true : false)));
+		echo $form->hidden('cid', array('value' => $cid));
 		echo $form->end(__('add', true));
 ?>
 	</div>

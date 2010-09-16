@@ -20,6 +20,14 @@ foreach ($js as $j) {
 <div id="page_body" class="clearfix">
 	<div id="notifications">
 <?php
+	foreach($notifications as $n) {
+		echo $n['Notification']['content'] . '<br />';
+		echo $n['User']['full_name'] . __('friend_added_you', true) . '<br />';
+		if ($n['Notification']['new']) {
+			echo $html->link(__('friend_confirm', true), '/f/a/' . $n['User']['id'] . '/true/' . $n['Notification']['id']);
+		}
+	}
+
 	pr($notifications);
 ?>
 	</div>
