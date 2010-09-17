@@ -13,9 +13,9 @@
 	<?php endif; ?>
 	<div class="avatar">
 <?php
-		$image_url = array('controller' => 'media', 'action' => 'avatar', $comment['PostAuthor']['avatar_id']);
+		$image_url = array('controller' => 'media', 'action' => 'comment', $comment['PostAuthor']['avatar_id']);
 		$url = array('controller' => 'users', 'action' => 'profile', $comment['PostAuthor']['slug']);
-		echo $this->Html->image($image_url, array('url' => $url));
+		echo $this->Html->image($image_url, array_merge(array('url' => $url), Configure::read('CommentSize')));
 ?>
 	</div>
 	<div class="content">

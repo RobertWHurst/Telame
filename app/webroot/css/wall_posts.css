@@ -140,10 +140,6 @@ div.wallPostWrap div.comments  div.comment div.avatar{
 	float: left;
 	margin-right: 5px;	
 }
-div.wallPostWrap div.comments  div.comment div.avatar img{
-	height: 30px;
-	width: 30px;
-}
 div.wallPostWrap div.comments div.comment div.content{
 	margin: 0 15px 15px 35px;
 	overflow: hidden;

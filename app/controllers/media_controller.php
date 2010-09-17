@@ -13,6 +13,10 @@ class MediaController extends AppController {
 		));
 	}
 
+	function comment($id = false){
+		$this->_resize($id, Configure::read('AvatarSize'));
+	}
+
 	function thumb($id = false){
 		$this->_resize($id, Configure::read('ThumbSize'));
 	}

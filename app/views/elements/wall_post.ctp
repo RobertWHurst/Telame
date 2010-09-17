@@ -4,7 +4,7 @@
 <?php
 			$image_url = array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['avatar_id']);
 			$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
-			echo $this->Html->image($image_url, array('url' => $url));
+			echo $this->Html->image($image_url, array_merge(array('url' => $url), Configure::read('AvatarSize')));
 ?>
 		</div>
 		<div class="content">

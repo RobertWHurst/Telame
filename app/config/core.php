@@ -170,7 +170,7 @@
  * Session time out time (in minutes).
  * Actual value depends on 'Security.level' setting.
  */
-	Configure::write('Session.timeout', '1000');
+	Configure::write('Session.timeout', '100');
 
 /**
  * If set to false, sessions are not automatically started.
