@@ -33,3 +33,4 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 		<?php echo $this->element('settings/gallery_options'); ?>
 	</div>
 </div>
+<?php pr($currentUser); ?>
