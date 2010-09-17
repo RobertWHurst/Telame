@@ -96,7 +96,7 @@ class WallPostsController extends AppController {
 		$this->data['WallPost']['posted'] = date("Y-m-d H:i:s");
 
 		// add which groups can view this
-		$this->data
+//		$this->data
 
 		//commit the data to the db
 		$this->WallPost->save($this->data);
