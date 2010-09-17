@@ -91,13 +91,13 @@ class UsersController extends AppController {
 	}
 
 	function search(){
+		if (!empty($this->data)) {
+			$this->layout = 'tall_header_w_sidebar';
 
-		//TODO: these results will need to be ranked by relationship, network, secondary relationships, and location, in that order.
-
-		//get all the searchable profiles
-		$results = $this->User->findAllBySearchable(true);
-
-		$this->set('results', $results);
+			//get all the searchable profiles
+			$results = $this->User->findAllBySearchable($this->data['search']['query']);
+			$this->set('results', $results);
+		}
 	}
 
 	function signup($key = null) {

@@ -168,6 +168,25 @@ class User extends AppModel {
 		$this->delete($uid, true);
 	}
 
+	function findAllBySearchable($search) {
+		$search = Sanitize::clean($search);
+		$users = $this->find('all', array(
+			'conditions' => array(
+				'searchable' => true,
+				'OR' => array(
+					'User.first_name ILIKE' => '%' . $search . '%',
+					'User.last_name ILIKE' => '%' . $search . '%',
+					'User.slug ILIKE' => '%' . $search . '%',
+					'User.email ILIKE' => '%' . $search . '%',
+				)
+			), 
+			'contain' => array(
+			)
+		));
+		
+		return $users;
+	}
+
 	function getIdFromSlug($slug){
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
