@@ -1,3 +1,4 @@
+AddDefaultCharset UTF-8
 # enabled to allows s.telame.com to work
 Options +FollowSymLinks
 

@@ -71,6 +71,8 @@
 
 	// Media - Avatar
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
+	// Media - Comment
+	Router::connect('/i/c/*', array('controller' => 'media', 'action' => 'comment'));
 	// Media - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 	// Media - Thumbnail
