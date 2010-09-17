@@ -21,6 +21,14 @@ foreach ($js as $j) {
 	<h1 class="page_title"><?php echo __('search_title', true); ?></h1>
 </div>
 <div id="page_body" class="clearfix">
+	<!-- Shows the page numbers -->
+	<?php echo $this->Paginator->numbers(); ?>
+	<!-- Shows the next and previous links -->
+	<?php echo $this->Paginator->prev('Ç Previous'); ?>
+	<?php echo $this->Paginator->next('Next È'); ?> 
+	<!-- prints X of Y, where X is current page and Y is number of pages -->
+	<?php echo $this->Paginator->counter(); ?>
+
 	<div id="search_results">
 <?php
 		foreach($results as $user) {

@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	var $components = array('Email');
-	var $helpers = array('Markdown', 'Time');
+	var $helpers = array('Markdown', 'Paginator', 'Time');
 
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -13,6 +13,7 @@ class UsersController extends AppController {
 		 	$this->_unforceSSL();
 		}
 		$this->Auth->allow(array('confirm', 'signup'));
+
 	}
 
 	function confirm($email = null, $hash = null) {
@@ -78,26 +79,65 @@ class UsersController extends AppController {
 			$friends = array();
 			$wallPosts = array();
 		}
-		
+
 		//get gallery position data
 		$galleryPosData = unserialize($user['Profile']['gallery_pos_data']);
 
 		//pass the profile data to the view
 		$this->set(compact('canRequest', 'friends', 'user', 'wallPosts', 'galleryPosData'));
 	}
-	
+
 	function updateGalleryPos($uid, $mid, $posData){
 		krumo($posData);
 	}
 
 	function search(){
-		if (!empty($this->data)) {
-			$this->layout = 'tall_header_w_sidebar';
+		$this->layout = 'tall_header_w_sidebar';
 
-			//get all the searchable profiles
-			$results = $this->User->findAllBySearchable($this->data['search']['query']);
-			$this->set('results', $results);
+		// this is for a technique called Post/Redirect/Get
+		if (!empty($this->data)) {
+			// Set up the URL that we will redirect to
+			$url = array('controller' => 'users', 'action' => 'search');
+
+			// If we have parameters, loop through and URL encode them
+			if( is_array($this->data['Search']) ) {
+				foreach($this->data['Search'] as &$search) {
+					$search = urlencode($search);
+				}
+			}
+
+			// Merge our URL-encoded data with the URL parameters set above...
+			$params = array_merge($url, $this->data['Search']);
+
+			// Do the (magical) redirect
+			$this->redirect($params);
 		}
+
+		// Clean the params, just to be safe
+		$search = Sanitize::clean($this->params['named']['query']);
+		$this->User->recursive = -1;
+		$this->paginate = array(
+			'conditions' => array(
+				'searchable' => true,
+				'OR' => array(
+					'User.first_name ILIKE' => '%' . $search . '%',
+					'User.last_name ILIKE' => '%' . $search . '%',
+					'User.slug ILIKE' => '%' . $search . '%',
+					'User.email ILIKE' => '%' . $search . '%',
+				)
+			),
+			'contain' => array(
+			),
+			'limit' => 2,
+			'order' => array(
+				'User.first_name',
+				'User.last_name',
+			)
+		);
+
+		 $results = $this->paginate('User');
+		//get all the searchable profiles
+		$this->set('results', $results);
 	}
 
 	function signup($key = null) {
@@ -169,7 +209,7 @@ class UsersController extends AppController {
 	function logout(){
 		$this->AuthExtension->logout();
 		$this->Auth->logout();
-		
+
 		$this->redirect('/');
 	}
 

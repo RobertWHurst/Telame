@@ -33,7 +33,7 @@
 	Router::connect('/', array('controller' => 'pages', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
 	// False, redirect to signup page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
-	
+
 // Site pages
 
 	// Signup and Login/logout
@@ -81,7 +81,7 @@
 	Router::connect('/i/s/*', array('controller' => 'media', 'action' => 'single'));
 	// Media - upload
 	Router::connect('/i/u/*', array('controller' => 'media', 'action' => 'upload'));
-	
+
 	// Messaging
 	Router::connect('/messages/thread/*', array('controller' => 'messages', 'action' => 'view'));
 	Router::connect('/messages/sent', array('controller' => 'messages', 'action' => 'sent'));
@@ -90,13 +90,16 @@
 	Router::connect('/messages/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
 	Router::connect('/messages/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'));
 	Router::connect('/messages', array('controller' => 'messages', 'action' => 'inbox'));
-	
+
 	// New user adding
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
 
 	// News filters
 	Router::connect('/news/*', array('controller' => 'pages', 'action' => 'news'));
-	
+
+	// Search
+	Router::connect('/search/*', array('controller' => 'users', 'action' => 'search'));
+
 	// Settings
 	Router::connect('/settings', array('controller' => 'settings', 'action' => 'basic'));
 	Router::connect('/settings/permissions', array('controller' => 'settings', 'action' => 'permissions'));
@@ -111,10 +114,10 @@
 	Router::connect('/w/dislike/*', array('controller' => 'wall_posts', 'action' => 'dislike'));
 	// Wall Posts (Rss)
 	Router::connect('/rss/*', array('controller' => 'pages', 'action' => 'news'));
-	
+
 	// Wall Posts (Ajax)
 	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
-	
+
 // This must be last
 	// Profile
 	Router::connect('/u/*', array('controller' => 'users', 'action' => 'profile'));
