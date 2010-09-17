@@ -74,7 +74,7 @@ class AlbumsController extends AppController {
 			$this->redirect('/albums');
 		} else {
 			$user = $this->currentUser;
-			$this->set(compact('user'));	
+			$this->set(compact('user'));
 		}
 	}
 }

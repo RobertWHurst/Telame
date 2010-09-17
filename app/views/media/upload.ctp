@@ -19,33 +19,10 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
-?>
-<div id="content" class="clearfix">
-	<div id="wrap_main_sidebar">
-		<div id="logo">
-			<!-- TODO: link to the news feed -->
-			<?php echo $html->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'news'))); ?>
-		</div>
-		<?php echo $this->element('main_sidebar'); ?>
-	</div>
-	<div id="page">
-		<div id="page_head" class="clearfix">
-<?php
-			//render the profile gallery
-			echo $this->element('gallery');
+	echo $form->create('Media', array('type' => 'file'));
+	echo $form->input('file', array('type' => 'file'));
+	echo $form->input('title');
+	echo $form->input('album', array('options' => $albums));
+	echo $form->end(__('upload', true));
 
-			//render the profile summary
-			echo $this->element('summary');
 ?>
-		</div>
-		<div id="page_body" class="clearfix">
-<?php			echo $form->create('Media', array('type' => 'file'));
-				echo $form->input('file', array('type' => 'file'));
-				echo $form->end(__('upload', true));
-			
-?>		</div>
-	</div>
-</div>
-<footer>
-			<?php echo $this->element('copyright'); ?>
-		</footer>

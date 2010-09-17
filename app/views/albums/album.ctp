@@ -34,6 +34,7 @@ $this->set('nav_links', array(
 <div id="albums" class="clearfix">
 <?php foreach($album as $media): ?>
 		<div class="media">
+<?php		echo $media['Media']['title']; ?>
 			<div class="wrap_single">
 				<div class="single">
 <?php

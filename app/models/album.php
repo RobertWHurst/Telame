@@ -5,7 +5,7 @@ class Album extends AppModel {
 		'Cover' => array(
 			'className' => 'Media',
 			'foreignKey' => 'cover_id',
-		), 
+		),
 		'User'
 	);
 	var $hasMany = array('Media');
@@ -16,8 +16,19 @@ class Album extends AppModel {
 		$this->recursive = 0;
 		return $this->find('all', array(
 			'conditions' => array(
-				'Album.user_id' => $uid
+				'Album.user_id' => $uid,
 			),
+			'order' => 'Album.id'
+		));
+	}
+
+	function getAlbumList($uid) {
+		$this->recursive = -1;
+		return $this->find('list', array(
+			'conditions' => array(
+				'Album.user_id' => $uid,
+			),
+			'order' => 'Album.title',
 		));
 	}
 
@@ -33,5 +44,15 @@ class Album extends AppModel {
 	function getMedia($aid) {
 		$this->Media->recursive = -1;
 		return $this->Media->find('all', array('conditions' => array('album_id' => Sanitize::clean(intval($aid)))));
+	}
+
+	function isAlbumOwner($uid, $aid) {
+		$this->recursive = -1;
+		$album = $this->find('first', array('conditions' => array('Album.user_id' => $uid, 'Album.id' => $aid)));
+		if ($album) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

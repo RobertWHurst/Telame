@@ -38,44 +38,50 @@ class MediaController extends AppController {
 
 	function upload() {
 		if (empty($this->data)) {
+			$this->layout = 'profile';
 			$user = $this->Media->User->getProfile($this->currentUser['User']['slug']);
-			$this->set(compact('user'));
+			$albums = $this->Media->Album->getAlbumList($this->currentUser['User']['id']);
+
+			$this->set(compact('albums', 'user'));
 		} else {
 			// no errors reported
 			if (!$this->data['Media']['file']['error']) {
-				// file type is allowed
-				if (in_array($this->data['Media']['file']['type'], Configure::read('AllowedFileTypes'))) {
-					// Full path to store user's images
-					$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
+				// check if they own the album they're trying to upload to
+				if ($this->Media->Album->isAlbumOwner($this->currentUser['User']['id'], $this->data['Media']['album'])) {
+					// file type is allowed
+					if (in_array($this->data['Media']['file']['type'], Configure::read('AllowedFileTypes'))) {
+						// Full path to store user's images
+						$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
 
-					// user's directory is writable
-					if(is_writable($baseDir)) {
-						$extension = explode('.', $this->data['Media']['file']['name']);
-						$extension = $extension[count($extension)-1];
+						// user's directory is writable
+						if(is_writable($baseDir)) {
+							$extension = explode('.', $this->data['Media']['file']['name']);
+							$extension = $extension[count($extension)-1];
 
-						$filename = $this->data['Media']['file']['name'] . '_' . date('Y-m-d_H-i-s') . '.' . $extension;
-						// file does not exist alread, otherwise we need to rename it something else
-						if (!file_exists($baseDir . $filename)) {
-							rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
+							$filename = $this->data['Media']['file']['name'] . '_' . date('Y-m-d_H-i-s') . '.' . $extension;
+							// file does not exist alread, otherwise we need to rename it something else
+							if (!file_exists($baseDir . $filename)) {
+								rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
 
-							$this->Media->create();
-							$data['Media']['user_id'] = $this->currentUser['User']['id'];
-							$data['Media']['filename'] = $filename;
-							$data['Media']['album_id'] = null;
-							$data['Media']['path'] = null;
-							$data['Media']['size'] = $this->data['Media']['file']['size'];
-							$data['Media']['created'] = date('Y-m-d H:i:s');
-							$data['Media']['type'] = $this->data['Media']['file']['type'];
-							$this->Media->save($data);
+								$this->Media->create();
+								$data['Media']['user_id'] = $this->currentUser['User']['id'];
+								$data['Media']['filename'] = $filename;
+								$data['Media']['album_id'] = $this->data['Media']['album'];
+								$data['Media']['path'] = null;
+								$data['Media']['size'] = $this->data['Media']['file']['size'];
+								$data['Media']['created'] = date('Y-m-d H:i:s');
+								$data['Media']['type'] = $this->data['Media']['file']['type'];
+								$this->Media->save($data);
 
-							$this->redirect('/albums');
-							exit;
+								$this->redirect('/albums');
+								exit;
 
-						} // an else should never occur..
-					} // can't write, somebody fucked something up
-				} else { // file extension not valid
-					// return new error
-					return false;
+							} // an else should never occur..
+						} // can't write, somebody fucked something up
+					} else { // file extension not valid
+						// return new error
+						return false;
+					}
 				}
 			}
 		}

@@ -22,6 +22,8 @@ foreach ($js as $j) {
 <div id="albums" class="clearfix">
 <?php
 	echo $html->link(__('create_new_album', true), array('controller' => 'albums', 'action' => 'new'));
+	echo $html->link(__('upload_images', true), array('controller' => 'media', 'action' => 'upload'));
+
 	foreach($albums as $album): ?>
 		<div class="album">
 			<div class="wrap_thumb">

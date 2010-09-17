@@ -50,7 +50,6 @@ class WallPostsController extends AppController {
 
 		$wallOwnerSlug = $this->WallPost->User->getSlugFromId($wallOwnerId);
 		$visitorId = $this->currentUser['User']['id'];
-		$visitorSlug = $this->WallPost->User->getSlugFromId($visitorId);
 
 		//get the user object so it can be used by the wall post element
 		$user = $this->WallPost->User->getProfile($wallOwnerSlug);
@@ -66,6 +65,7 @@ class WallPostsController extends AppController {
 					echo 'false';
 					exit;
 				} else {
+					$visitorSlug = $this->WallPost->User->getSlugFromId($visitorId);
 					$this->Session->setFlash(__('wall_post_error', true), 'default', array('class' => 'error'));
 					$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitorSlug));
 					exit;
@@ -81,22 +81,25 @@ class WallPostsController extends AppController {
 		$this->WallPost->create();
 
 		if($reply_id){
-			$this->WallPost->set('reply_parent_id', $reply_id);
+			$this->data['reply_parent_id'] = $reply_id;
 		}
 		//save the user id and poster id
-		$this->WallPost->set('user_id', $wallOwnerId);
-		$this->WallPost->set('author_id', $visitorId);
+		$this->data['WallPost']['user_id'] = $wallOwnerId;
+		$this->data['WallPost']['author_id'] = $visitorId;
 
 		//save the post type
 		//TODO: this will change based on the content being posted.
-		$this->WallPost->set('type', 'post');
+		$this->data['WallPost']['type'] = 'post';
 
 		//save the post content and time
-		$this->WallPost->set('post', strip_tags($this->data['WallPost']['post']));
-		$this->WallPost->set('posted', date("Y-m-d H:i:s"));
+		$this->data['WallPost']['post'] = Sanitize::clean($this->data['WallPost']['post']);
+		$this->data['WallPost']['posted'] = date("Y-m-d H:i:s");
+
+		// add which groups can view this
+		$this->data
 
 		//commit the data to the db
-		$this->WallPost->save();
+		$this->WallPost->save($this->data);
 
 		//TODO
 		//we need to save a notification right here.

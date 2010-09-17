@@ -39,6 +39,7 @@ class UsersController extends AppController {
 		$this->layout = 'profile';
 
 		$canView = false;
+		$canRequest = false;
 
 		// get the user's info based on their slug
 		$user = $this->User->getProfile($slug);
@@ -58,7 +59,6 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
 			}
 			// are you friends with this person
-			$canRequest = false;
 			$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
 			if (!$isFriend) {
 				if (!$this->User->GroupsUser->requestSent($this->currentUser['User']['id'], $user['User']['id'])) {
