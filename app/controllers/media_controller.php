@@ -14,7 +14,7 @@ class MediaController extends AppController {
 	}
 
 	function comment($id = false){
-		$this->_resize($id, Configure::read('AvatarSize'));
+		$this->_resize($id, Configure::read('CommentSize'));
 	}
 
 	function thumb($id = false){
