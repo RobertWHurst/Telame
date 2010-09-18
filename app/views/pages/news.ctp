@@ -6,12 +6,15 @@ $html->css(array(
 	'main_sidebar',
 	'wall_posts',
 	'pages/news_feed',
-	'pages/news_sidebar'
+	'pages/news_sidebar',
+	'wall'
 ), null, array('inline' => false));
 $js = array(
 	'jquery',
 	'base',
 	'pages/news',
+	'wall',
+	'wall_input'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
@@ -30,8 +33,7 @@ foreach ($js as $j) {
 <div id="page_body" class="clearfix">
 	<div id="news_feed">
 <?php
-		foreach($wallPosts as $update)
-			echo $this->element('wall_post', array('post' => $update, 'show_user_and_author' => true));
+		echo $this->element('wall', array('wallPosts' => $wallPosts, 'show_user_and_author' => true));
 ?>
 	</div>
 	<?php echo $this->element('pages/news_sidebar', array('friendLists' => $friendLists)); ?>

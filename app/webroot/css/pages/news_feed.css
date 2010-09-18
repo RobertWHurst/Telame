@@ -1,9 +1,6 @@
 #news_feed{
-	width: 458px;
 	min-height: 600px;
-	padding: 10px;
 	float: left;
-	border-right: 1px solid #787878;
 }
 #news_feed div.wallPost div.delete,
 #news_feed div.wallPost div.wall_to_wall{

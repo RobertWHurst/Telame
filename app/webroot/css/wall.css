@@ -83,7 +83,7 @@
 #profile_wall_input div.box.bottom{
 	position: absolute;
 	width: 100%;
-	background: url(../../img/users/wall_input_h.png);
+	background: url(../img/users/wall_input_h.png);
 	z-index: 2;
 }
 #profile_wall_input div.box.top{
@@ -110,7 +110,7 @@
 #profile_wall_input div.box.bottom.right{
 	z-index: 3;
 	top:0;
-	background: url(../../img/users/wall_input_r.png);
+	background: url(../img/users/wall_input_r.png);
 }
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.bottom.left,
@@ -136,7 +136,7 @@
 }
 #profile_wall_input div.box.left,
 #profile_wall_input div.box.right{
-	background: url(../../img/users/wall_input_v.png);
+	background: url(../img/users/wall_input_v.png);
 	height: 100%;
 	z-index: 2;
 }

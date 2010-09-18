@@ -7,7 +7,7 @@ $html->css(array(
 	'wall_posts',
 	'tall_header',
 	'main_sidebar',
-	'users/wall',
+	'wall',
 	'users/wall_sidebar'
 ), null, array('inline' => false));
 $js = array(
@@ -15,8 +15,8 @@ $js = array(
 	'base',
 	'profile',
 	'main_sidebar',
-	'users/wall_input',
-	'users/wall'
+	'wall_input',
+	'wall'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
@@ -24,7 +24,7 @@ foreach ($js as $j) {
 //page title
 $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name']);
 
-echo $this->element('users/wall'); ?>
+echo $this->element('wall'); ?>
 <div id="wall_sidebar">
 	<?php echo $this->element('users/friends'); ?>
 </div>
