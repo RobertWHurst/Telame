@@ -29,19 +29,20 @@ $this->set('nav_links', array(
 		),
 		'classes' => 'button'
 	)
-));
-?>
+)); ?>
 <div id="albums" class="clearfix">
-<?php foreach($album as $media): ?>
+<?php
+	echo $html->link(__('upload_images', true), array('controller' => 'media', 'action' => 'upload', $aid));
+	foreach($album as $media): ?>
 		<div class="media">
-<?php		echo $media['Media']['title']; ?>
+	<?php		echo $media['Media']['title']; ?>
 			<div class="wrap_single">
 				<div class="single">
-<?php
+	<?php
 					//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
 					$iUrl = array('controller' => 'media', 'action' => 'single', $media['Media']['id']);
 					echo $html->image($iUrl);//, array('/url' => $aUrl,));
-?>
+	?>
 				</div>
 			</div>
 		</div>

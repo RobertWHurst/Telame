@@ -46,6 +46,12 @@ class Album extends AppModel {
 		return $this->Media->find('all', array('conditions' => array('album_id' => Sanitize::clean(intval($aid)))));
 	}
 
+	function getSlugFromId($aid) {
+		$this->recursive = -1;
+		$album = $this->find('first', array('conditions' => array('Album.id' => Sanitize::clean(intval($aid))), 'fields' => array('slug')));
+		return $album['Album']['slug'];
+	}
+
 	function isAlbumOwner($uid, $aid) {
 		$this->recursive = -1;
 		$album = $this->find('first', array('conditions' => array('Album.user_id' => $uid, 'Album.id' => $aid)));
@@ -54,5 +60,11 @@ class Album extends AppModel {
 		} else {
 			return false;
 		}
+	}
+
+	// Takes album_id, and image_id, sets that image to that album's cover
+	function setAlbumCover($aid, $iid) {
+		$this->id = $aid;
+		$this->saveField('cover_id', $iid);
 	}
 }

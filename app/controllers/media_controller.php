@@ -40,13 +40,15 @@ class MediaController extends AppController {
 
 //---------------------------- Upload Functions ----------------------------//
 
-	function upload() {
+	function upload($aid = false) {
 		if (empty($this->data)) {
 			$this->layout = 'profile';
 			$user = $this->Media->User->getProfile($this->currentUser['User']['slug']);
 			$albums = $this->Media->Album->getAlbumList($this->currentUser['User']['id']);
 
-			$this->set(compact('albums', 'user'));
+			$aid = ($aid ? $aid : false);
+
+			$this->set(compact('aid', 'albums', 'user'));
 		} else {
 			// no errors reported
 			if (!$this->data['Media']['file']['error']) {
@@ -63,10 +65,13 @@ class MediaController extends AppController {
 							$extension = $extension[count($extension)-1];
 
 							$filename = $this->data['Media']['file']['name'] . '_' . date('Y-m-d_H-i-s') . '.' . $extension;
-							// file does not exist alread, otherwise we need to rename it something else
+							// file does not exist already, otherwise we need to rename it something else
 							if (!file_exists($baseDir . $filename)) {
 								rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
 
+								// save the album cover image
+								$albumCover = !$this->Media->inAlbum($this->data['Media']['album']);
+		
 								$this->Media->create();
 								$data['Media']['user_id'] = $this->currentUser['User']['id'];
 								$data['Media']['filename'] = $filename;
@@ -76,8 +81,13 @@ class MediaController extends AppController {
 								$data['Media']['created'] = date('Y-m-d H:i:s');
 								$data['Media']['type'] = $this->data['Media']['file']['type'];
 								$this->Media->save($data);
+					
+								if ($albumCover) {
+									$this->Media->Album->setAlbumCover($this->data['Media']['album'], $this->Media->id);
+								}
 
-								$this->redirect('/albums');
+								$albumSlug = $this->Media->Album->getSlugFromId($this->data['Media']['album']);
+								$this->redirect('/album/' . $this->currentUser['User']['slug'] . '/' . $albumSlug);
 								exit;
 
 							} // an else should never occur..
@@ -88,7 +98,11 @@ class MediaController extends AppController {
 					}
 				}
 			}
+			$this->Session->setFlash(__('media_upload_failed', true), 'default', array('class' => 'error'));
+			$this->redirect(array('controller' => 'albums', 'action' => 'album', $this->data['Media']['album_id']));
+			exit;
 		}
+
 	}
 
 
