@@ -12,7 +12,6 @@ $html->css(array(
 $js = array(
 	'jquery',
 	'base',
-	'pages/news',
 	'wall',
 	'wall_input'
 );

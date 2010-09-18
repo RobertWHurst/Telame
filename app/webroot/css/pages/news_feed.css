@@ -2,10 +2,6 @@
 	min-height: 600px;
 	float: left;
 }
-#news_feed div.wallPost div.delete,
-#news_feed div.wallPost div.wall_to_wall{
-	display: none;
-}
 #page_head a.rss_link{
 	top:26px;
 	right:20px;

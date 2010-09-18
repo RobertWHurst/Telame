@@ -1,67 +1,58 @@
-#permissions div.aco-object{
+div.options_group{
 	background: #333;
-	padding: 20px;
-	margin: 20px;
+	margin: 20px 20px 0 20px;
+	padding-bottom: 10px;
 	
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
 }
-#permissions div.aco-object div.heading h1{
-	font-size: 2.4em;
-}
-#permissions div.aco-object div.heading div.chevron{
-	height: 16px;
-	width: 16px;
-	font-size: 2.4em;
-	background: url('/img/chevron');
-	background-position: 0 0;
-}
-#permissions div.aco-group{
-	padding: 10px;
-	margin-top: 20px;
-	
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-#permissions div.aco-group.off{
-	background: #555;
-	border: 1px solid #f88;
-}
-#permissions div.aco-group.on{
-	background: #656565;
-	border: 1px solid #c1ef52;
-}
-#permissions div.decription{
+
+div.options_group label{
+	width: 50%;
+	height: 20px;
+	font-size: 1.6em;
+	line-height: 20px;
 	float: left;
+	margin: 20px 0 0 20px;
 }
-#permissions div.decription p{
-	font-size: 1.4em;
-	line-height: 16px;
+div.options_group input[type="text"]{
+	height: 20px;
+	padding: 3px;
+	width: 316px;
 }
-#permissions div.switch{
-	float: right;
+div.options_group select{
+	height: 26px;
+	width: 324px;
 }
-#permissions div.save_changes{
+div.options_group select,
+div.options_group input[type="text"]{
+	float: left;
+	font-size: 1.3em;
+	font-weight: bold;
+	color: #363636;
+	line-height: 20px;
+	margin: 20px 0 0 0;
+}
+div.save_changes{
 	text-align: right;
 	background: #444;
-	padding: 20px;
-	margin: 20px;
+	padding: 10px 20px 20px 20px;
+	margin: 0 20px 20px 20px;
 	
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
 }
-#permissions div.save_changes input[type="submit"]{
-	font-size: 1.4em;
+div.save_changes input[type="submit"]{
+	font-size: 1.3em;
 	color: #d3ef91;
 	background-color: #656565;
 	border: 1px solid #d3ef91;
 	-moz-border-radius: 2px;
-	padding: 6px;
+	padding: 3px;
 }
-#permissions div.save_changes input[type="submit"]:hover{
+div.save_changes input[type="submit"]:hover{
 	color: #c1ef52;
 	background-color: #8f977c;
 	border-color: #c1ef52;
