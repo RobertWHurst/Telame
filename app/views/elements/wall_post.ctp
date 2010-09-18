@@ -80,14 +80,8 @@
 		<div class="comments">	
 <?php 
 			if($post['Replies']){
-				foreach($post['Replies'] as $comment){
-					
-					$vars['comment'] = $comment;
-					if(isset($show_post_controls))
-						$vars['show_post_controls'] = $show_post_controls;
-					
-					echo $this->element('wall_post_comment', $vars);
-				}
+				foreach($post['Replies'] as $comment)
+					echo $this->element('wall_post_comment', compact('comment'));
 			}
 ?>
 			<div class="commentInput">
