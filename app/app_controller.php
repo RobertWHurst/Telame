@@ -45,21 +45,9 @@ class AppController extends Controller {
 
 	function getCurrentUser() {
 		$this->loadModel('User');
-		$this->User->Behaviors->attach('Containable');
-		$currentUser = $this->User->find('first', array(
-					'conditions' => array(
-						'User.id' => $this->Session->read('Auth.User.id'),
-					),
-					'contain' => array(
-						'Notification' => array(
-							'conditions' => array(
-								'new' => true,
-							)
-						),
-						'Profile'
-					)
-				)
-			);
+
+		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
+		
 		if(!is_null($currentUser['User']['hash'])) {
 			$this->AutoLogin->delete();
 			$this->Session->destroy();

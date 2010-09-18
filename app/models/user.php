@@ -168,7 +168,7 @@ class User extends AppModel {
 		$this->delete($uid, true);
 	}
 
-	function getIdFromSlug($slug){
+	function getIdFromSlug($slug) {
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
 		return $user['User']['id'];
@@ -180,15 +180,40 @@ class User extends AppModel {
 		return $user['User']['slug'];
 	}
 
-	function getProfile($slug){
+	function getProfile($slug, $arguments = array()) {
+	
+/*	FIXME bug in parseargs
+		$defaults = array(
+			'contain' => array(
+				'Profile', 
+				'Profile.Country', 
+				'Notification' => array(
+					'conditions' => array(
+						'new' => true
+					)
+				)
+			));
+
+		$options = parseArguments($defaults, $arguments);
+pr($options);
+*/
+
+	
 		//get the profile
-		return $this->find('first', array(
+		$this->recursive = 2;
+		$user = $this->find('first', array(
 			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
 			'contain' => array(
-				'Media',
-				'Profile',
+				'Profile', 
+				'Profile.Country', 
+				'Notification' => array(
+					'conditions' => array(
+						'new' => true
+					)
+				)
 			)
 		));
+		return $user;
 	}
 
 	function signup($data) {

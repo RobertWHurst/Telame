@@ -1,5 +1,4 @@
 <?php
 class Profile extends AppModel {
-	var $belongsTo = array('User');	
-
+	var $belongsTo = array('Country', 'User');
 }
