@@ -1,6 +1,7 @@
 <?php
 class GroupsUsersController extends AppController {
 
+	var $components = array('Profile');
 	var $helpers = array('Paginator');
 
 	/**
@@ -54,7 +55,7 @@ class GroupsUsersController extends AppController {
 				));
 				
 			$slug = $this->GroupsUser->User->getSlugFromId($fid);
-			$friend = $this->GroupsUser->User->getProfile($slug);
+			$user = $this->Profile->getProfile($slug);
 			$this->set(compact('confirm', 'cid', 'friend', 'friendLists'));
 		}
 	}
@@ -62,12 +63,7 @@ class GroupsUsersController extends AppController {
 	function friendList($slug = false) {
 		//set the layout
 		$this->layout = 'profile';
-
-		if (!$slug) {
-			$user = $this->currentUser;
-		} else {
-			$user = $this->GroupsUser->User->getProfile($slug);
-		}
+		$user = $this->Profile->getProfile($slug);
 
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'friends')) {
 			$this->paginate = array(

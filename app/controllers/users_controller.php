@@ -1,7 +1,7 @@
 <?php
 class UsersController extends AppController {
 
-	var $components = array('Email');
+	var $components = array('Email', 'Profile');
 	var $helpers = array('Markdown', 'Paginator', 'Time');
 
 	function beforeFilter(){
@@ -35,56 +35,10 @@ class UsersController extends AppController {
 		}
 	}
 
-	function profile($slug){
+	function profile($slug) {
 		//set the layout
 		$this->layout = 'profile';
-
-		$canView = false;
-		$canRequest = false;
-
-		// get the user's info based on their slug
-		$user = $this->User->getProfile($slug);
-
-		if(!$user){
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
-			exit;
-		}
-
-		// check if the requested user is yourself
-		if ($this->currentUser['User']['id'] != $user['User']['id']) {
-
-			// Do permission check
-			if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'profile')) {
-				$canView = true;
-			} else {
-				$this->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
-			}
-			// are you friends with this person
-			$isFriend = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
-			if (!$isFriend) {
-				if (!$this->User->GroupsUser->requestSent($this->currentUser['User']['id'], $user['User']['id'])) {
-					$canRequest = true;
-				}
-			}
-		} else {
-			// These are defaults for viewing your own profile
-			$canView = true;
-			$isFriend = true;
-		}
-
-		if ($canView) {
-			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 10));
-			$wallPosts = $this->User->WallPost->getWallPosts(array('uid' => $user['User']['id']));
-		} else {
-			$friends = array();
-			$wallPosts = array();
-		}
-
-		//get gallery position data
-		$galleryPosData = unserialize($user['Profile']['gallery_pos_data']);
-
-		//pass the profile data to the view
-		$this->set(compact('canRequest', 'friends', 'user', 'wallPosts', 'galleryPosData'));
+		$this->Profile->getProfile($slug);
 	}
 
 	function updateGalleryPos($uid, $mid, $posData){

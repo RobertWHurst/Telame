@@ -32,6 +32,12 @@
 				<td><?php echo $user['Profile']['city']; ?></td>
 			</tr>
 		<?php endif; ?>
+		<?php if(!is_null($user['Profile']['country_id'])): ?>
+			<tr>
+				<th>Country</th>
+				<td><?php echo $user['Profile']['Country']['name'] . ' ' . $htmlImage->image('flags' . DS . strtolower($user['Profile']['Country']['iso2']) . '.png', array('static' => true)); ?></td>
+			</tr>
+		<?php endif; ?>
 		<?php if(!is_null($user['Profile']['political'])): ?>
 			<tr>
 				<th>Political Views:</th>
