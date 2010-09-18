@@ -60,7 +60,7 @@ class AlbumsController extends AppController {
 
 		$album = $this->Album->getMedia($aid);
 
-		$this->set(compact('album', 'user'));
+		$this->set(compact('aid', 'album', 'user'));
 	}
 
 	function newAlbum() {

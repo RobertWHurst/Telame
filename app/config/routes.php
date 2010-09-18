@@ -49,7 +49,7 @@
 
 
 // User info
-	// Events
+	// Calendar
 	Router::connect('/calendar/add/*', array('controller' => 'events', 'action' => 'add'));
 	Router::connect('/calendar/edit/*', array('controller' => 'events', 'action' => 'edit'));
 	Router::connect('/calendar/delete/*', array('controller' => 'events', 'action' => 'delete'));
@@ -65,8 +65,8 @@
 
 	// Media
 	Router::connect('/albums/new/*', array('controller' => 'albums', 'action' => 'newAlbum'));
-	Router::connect('/albums/album/image/*', array('controller' => 'albums', 'action' => 'view'));
-	Router::connect('/albums/album/*', array('controller' => 'albums', 'action' => 'album'));
+	Router::connect('/album/image/*', array('controller' => 'albums', 'action' => 'view'));
+	Router::connect('/album/*', array('controller' => 'albums', 'action' => 'album'));
 	Router::connect('/albums/*', array('controller' => 'albums', 'action' => 'albums'));
 
 	// Media - Avatar
