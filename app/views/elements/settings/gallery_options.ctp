@@ -1,5 +1,4 @@
 <div id="gallery_options" class="nojs">
-	<h1>Gallery Options</h1>
 	<div class="example">
 		<div class="directional">
 			<div class="up">
@@ -96,9 +95,5 @@
 			echo $html->image('icons/zoom_in.png', array('title' => __('zoom_in',true), 'url' => $url));
 ?>
 		</div>
-	</div>
-	<div class="info">
-		<p>
-		</p>
 	</div>
 </div>

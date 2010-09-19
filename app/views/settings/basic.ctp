@@ -38,6 +38,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 			echo $form->create('Profile', array('url' => array('controller' => 'settings', 'action' => 'basic')));
 ?>
 			<div class="options_group clearfix">
+				<h1>Your Information</h1>
 <?php
 				echo $form->input('first_name', array(
 					'label' => __('first_name', true),
@@ -92,12 +93,13 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 					'maxYear' => date('Y') + 2,
 				));
 ?>
-			</div>
-			<div class="save_changes">
 				<?php echo $form->end(__('update_profile', true)); ?>
 			</div>
 		</div>
-		<?php echo $this->element('settings/gallery_options'); ?>
+		<div class="options_group clearfix">
+			<h1>Gallery</h1>
+			<?php echo $this->element('settings/gallery_options'); ?>
+		</div>
 	</div>
 	<?php pr($currentUser); ?>
 </div>
