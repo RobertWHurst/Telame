@@ -81,6 +81,16 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 						'married' => __('married', true)
 					)
 				));
+				echo $form->input('country_id', array(
+					'label' => __('country', true),
+					'options' => $countries,
+					'default' => $profile['country_id'],
+				));
+				echo $form->input('dob', array(
+					'dateFormat' => 'Y-M-D',
+					'minYear' => date('Y') - 97,
+					'maxYear' => date('Y') + 2,
+				));
 ?>
 			</div>
 			<div class="save_changes">
