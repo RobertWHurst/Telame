@@ -4,7 +4,7 @@
 <?php
 			$image_url = array('controller' => 'media', 'action' => 'avatar', $post['PostAuthor']['avatar_id']);
 			$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
-			echo $this->Html->image($image_url, array_merge(array('url' => $url), Configure::read('AvatarSize')));
+			echo $htmlImage->image($image_url, array_merge(array('url' => $url), Configure::read('AvatarSize')));
 ?>
 		</div>
 		<div class="content">
@@ -25,7 +25,7 @@
 			<div class="deletePost">
 <?php 
 				$url = array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
-				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
+				echo $htmlImage->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 			</div>
 		<?php endif; ?>
