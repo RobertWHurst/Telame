@@ -15,32 +15,43 @@ class SettingsController extends AppController{
 		$this->set(compact('user'));
 	}
 
-	function basic(){
+	function basic() {
 		$this->loadModel('User');
-		
-		//get the gallery pos data
-		$galleryPosData = unserialize($this->currentUser['Profile']['gallery_pos_data']);
-		
-		$this->set(compact('galleryPosData'));
-		
+		if (empty($this->data)) {
+			$this->loadModel('Country');
+
+			//get the gallery pos data
+			$galleryPosData = unserialize($this->currentUser['Profile']['gallery_pos_data']);
+			$countries = $this->Country->getList();
+
+			$this->set(compact('countries', 'galleryPosData'));
+		} else {
+			$this->User->Profile->id = $this->currentUser['Profile']['id'];
+			if ($this->User->Profile->save(Sanitize::clean($this->data))) {
+				$this->Session->setFlash(__('profile_settings_saved', true));
+			} else {
+				$this->Session->setFlash(__('profile_settings_saved', true));
+			}
+			$this->redirect($this->referer());
+		}
 	}
 
 	function gallery($id = null, $top = null, $left = null, $height = null, $width = null){
 		$this->loadModel('User');
-		
+
 		$data = compact('id', 'top', 'left', 'height', 'width');
-		
-		//if the request is not ajax redirect to basics as this control set is pressent there.	
+
+		//if the request is not ajax redirect to basics as this control set is pressent there.
 		if(!$this->RequestHandler->isAjax())
 			$this->redirect(array('controller' => 'settings', 'action' => 'basic'));
-	
+
 		$this->layout = false;
-		
+
 		if(!empty($data)){
-			
+
 			//fix the id
 			echo $data['id'] = (int) str_replace('image-', '', $data['id']);
-			
+
 			//create the serial data
 			$serialData = serialize(array($data['id'] => array(
 				'x' => $data['left'],
@@ -48,18 +59,18 @@ class SettingsController extends AppController{
 				'h' => $data['height'],
 				'w' => $data['width']
 			)));
-			
+
 			$this->User->Profile->save(array(
 				'id' => $this->currentUser['Profile']['id'],
 				'user_id' => $this->currentUser['User']['id'],
 				'gallery_pos_data' => $serialData
 			));
-			
+
 			exit();
 		}
-		else{		
+		else{
 			//$this->render('element/settings/gallery_controls');
-		}	
+		}
 	}
 
 	function friends(){

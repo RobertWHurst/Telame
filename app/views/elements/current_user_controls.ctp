@@ -4,7 +4,7 @@
 <?php
 	$image_url = $html->url(array('controller' => 'media', 'action' => 'avatar', $currentUser['User']['avatar_id']));
 	$url = $html->url(array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug']));
-	echo $this->Html->image($image_url, array('url' => $url));
+	echo $htmlImage->image($image_url, array('url' => $url));
 ?>
 	</div>
 	<ul class="controls">
