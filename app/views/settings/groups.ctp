@@ -28,19 +28,25 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 </div>
 <div id="page_body" class="clearfix">
 	<div id="permissions">
-		<h1>Add new group</h1>
+		<div class="options_group clearfix">
+		<h1><?php echo __('add_group', true); ?></h1>
 <?php
-		echo $form->create('Group', array('url' => $this->here));
-		echo $form->input('title');
-		echo $form->end(__('save', true));
-
-		foreach($groups as $group) {
-			echo $group['Group']['title'];
-			if ($group['Group']['user_id'] == $currentUser['User']['id']) {
-				echo $html->link(__('delete', true), $this->here . '/' . $group['Group']['id'], null, __('confirm_delete', true) . ' \'' . $group['Group']['title'] . '\'');
-			}
-			echo '<br />';
-		}
+			echo $form->create('Group', array('url' => $this->here));
+			echo $form->input('title');
+			echo $form->end(__('add_group', true));
 ?>
+		</div>
+		<div class="options_group clearfix">
+			<h1><?php echo __('groups', true); ?></h1>
+			<?php foreach($groups as $group): ?>
+				<div class="group">
+					<h3><?php echo $group['Group']['title']; ?></h3>
+<?php
+					$url = array('controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
+					echo $html->link(__('delete', true), $url);
+?>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </div>

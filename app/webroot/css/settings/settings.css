@@ -1,13 +1,15 @@
 div.options_group{
 	background: #333;
 	margin: 20px 20px 0 20px;
-	padding-bottom: 10px;
 	
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
-
+div.options_group h1{
+	font-size: 2.4em;
+	padding: 20px;
+}
 div.options_group label{
 	width: 50%;
 	height: 20px;
@@ -34,25 +36,17 @@ div.options_group input[type="text"]{
 	line-height: 20px;
 	margin: 20px 0 0 0;
 }
-div.save_changes{
-	text-align: right;
-	background: #444;
-	padding: 10px 20px 20px 20px;
-	margin: 0 20px 20px 20px;
-	
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
-}
-div.save_changes input[type="submit"]{
+div.options_group input[type="submit"]{
 	font-size: 1.3em;
+	float: right;
 	color: #d3ef91;
 	background-color: #656565;
 	border: 1px solid #d3ef91;
 	-moz-border-radius: 2px;
 	padding: 3px;
+	margin: 20px;
 }
-div.save_changes input[type="submit"]:hover{
+div.options_group input[type="submit"]:hover{
 	color: #c1ef52;
 	background-color: #8f977c;
 	border-color: #c1ef52;

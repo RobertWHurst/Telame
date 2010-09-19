@@ -1,6 +1,3 @@
-#gallery_options{
-	padding: 20px;	
-}
 #gallery_options div.example{
 	position: relative;
 	z-index: 1;
@@ -83,13 +80,8 @@
 #gallery_options div.zoom{
 	position: relative;
 	height: 16px;
-	background: #444;
 	border-top: none;
-	padding: 10px 20px;
-	
-	-moz-border-radius: 0 0 20px 20px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	padding: 20px;
 }
 #gallery_options div.zoom div.zoom_in{
 	float: left;
