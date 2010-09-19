@@ -87,7 +87,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 					'default' => $profile['country_id'],
 				));
 				echo $form->input('dob', array(
-					'dateFormat' => 'Y-M-D',
+					'dateFormat' => 'MDY',
 					'minYear' => date('Y') - 97,
 					'maxYear' => date('Y') + 2,
 				));
