@@ -41,9 +41,11 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 			<?php foreach($groups as $group): ?>
 				<div class="group">
 					<h3><?php echo $group['Group']['title']; ?></h3>
-<?php
+<?php			// only show the delete link for groups they own
+				if ($group['Group']['user_id'] == $currentUser['User']['id']) {
 					$url = array('controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
 					echo $html->link(__('delete', true), $url);
+				}
 ?>
 				</div>
 			<?php endforeach; ?>
