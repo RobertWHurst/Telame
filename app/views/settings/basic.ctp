@@ -91,6 +91,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 					'dateFormat' => 'MDY',
 					'minYear' => date('Y') - 97,
 					'maxYear' => date('Y') + 2,
+					'selected' => strtotime($profile['dob']),
 				));
 ?>
 				<?php echo $form->end(__('update_profile', true)); ?>

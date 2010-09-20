@@ -28,6 +28,16 @@ class SettingsController extends AppController{
 		} else {
 			$this->User->Profile->id = $this->currentUser['Profile']['id'];
 			if ($this->User->Profile->save(Sanitize::clean($this->data))) {
+				$dob = array();
+				$dob['Event']['start'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 00:00:00';
+				$dob['Event']['end'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 23:00:00';
+				$dob['Event']['allday'] = '1';
+				$dob['Event']['title'] = __('your_birthday', true);
+				$dob['Event']['editable'] = false;
+				$dob['Event']['recurring'] = true;
+				
+				$this->User->Event->addEvent($this->currentUser['User']['id'], $dob);
+				
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
 				$this->Session->setFlash(__('profile_settings_saved', true));

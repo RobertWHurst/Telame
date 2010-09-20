@@ -8,7 +8,7 @@ class EventsController extends AppController {
 			if (strlen($hourPlus) == 1) {
 				$hourPlus = '0' . $hourPlus;
 			}
-	
+
 			//Create a time string to display in view. The time string
 			//is either	 'Fri 26 / Mar, 09 : 00 ‰ÛÓ 10 : 00' or
 			//'All day event: (Fri 26 / Mar)'
@@ -24,24 +24,17 @@ class EventsController extends AppController {
 					', ' . $hour . ' : ' . $min . ' &mdash; ' . $hourPlus . ' : ' . $min;
 			}
 			$this->set('displayTime', $displayTime);
-	
+
 			//Populate the event fields for the add form
 			$event['Event']['title'] = 'Event description';
 			$event['Event']['start'] = $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min . ':00';
 			$event['Event']['end'] = $year . '-' . $month . '-' . $day . ' ' . $hourPlus . ':' . $min . ':00';
 			$this->set('event', $event);
-	
+
 			//Do not use a view template.
 			$this->layout = false;
 		} else {
-		
-			//Create and save the new event in the table.
-			//Event type is set to editable - because this is a user event.
-			$this->Event->create();
-			$this->data['Event']['title'] = Sanitize::paranoid($this->data['Event']['title'], array('!', '\'', '?', '_', '.', ' ', '-'));
-			$this->data['Event']['editable'] = true;
-			$this->data['Event']['user_id'] = $this->currentUser['User']['id'];
-			if ($this->Event->save($this->data)) {
+			if ($this->Event->addEvent($this->currentUser['User']['id'], $this->data)) {
 				$this->Session->setFlash(__('event_saved', true));
 			} else {
 				$this->Session->setFlash(__('event_not_saved', true));
@@ -93,6 +86,7 @@ class EventsController extends AppController {
 	}
 
 	function delete($id) {
+		$this->data = $this->Event->read(null, $id);
 		if ($this->Event->isOwner($id, $this->currentUser['User']['id'])) {
 			if ($this->Event->delete($id)) {
 				$this->Session->setFlash(__('event_deleted', true));
@@ -102,7 +96,8 @@ class EventsController extends AppController {
 		} else {
 			$this->Session->setFlash(__('event_not_allowed_delete', true));
 		}
-		$this->redirect(array('controller' => 'events', 'action' => 'calendar'));
+		$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
+			substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 	}
 
 	function feed() {
@@ -116,10 +111,14 @@ class EventsController extends AppController {
 
 			//Create an event entry
 			$rows[] = array('id' => $events[$key]['Event']['id'],
-			'title' => $events[$key]['Event']['title'],
-			'start' => date('Y-m-d H:i', strtotime($events[$key]['Event']['start'])),
-			'end' => date('Y-m-d H:i', strtotime($events[$key]['Event']['end'])),
-			'allDay' => $all,
+				'title' => $events[$key]['Event']['title'],
+				'allDay' => $all,
+				// check for recurring events
+				'recurring' => $events[$key]['Event']['recurring'],
+				// if the event is recurring year after year, set the display year to the year being requested, while retaining all other info
+				'start' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['start'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['start']))),
+				// set the end year to the same as the start, because if in december, the start can be one year, and the end +1
+				'end' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['end'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['end']))),
 			);
 		}
 
@@ -143,7 +142,7 @@ class EventsController extends AppController {
 			//3 - Start
 			$ev['Event']['end'] = date('Y-m-d H:i:s', strtotime('' . $dayDelta . ' days ' . $minDelta . ' minutes', strtotime($ev['Event']['end'])));
 			$ev['Event']['start'] = date('Y-m-d H:i:s', strtotime('' . $dayDelta . ' days ' . $minDelta . ' minutes', strtotime($ev['Event']['start'])));
-			
+
 			$this->Event->save($ev); //4 - Save the event with the new data
 			//5 - redirect and reload
 			$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($ev['Event']['start'], 0, 4), substr($ev['Event']['start'], 5, 2), substr($ev['Event']['start'], 8, 2)));

@@ -18,8 +18,11 @@ class User extends AppModel {
 		'Album' => array(
 			'dependent'=> true,
 		),
+		'Event' => array(
+			'dependent' => true,
+		),
 		'GroupsUser' => array(
-			'dependent'=> true,
+			'dependent' => true,
 		),
 		'Media' => array(
 			'dependent' => true,
