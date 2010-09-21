@@ -17,6 +17,7 @@ class SettingsController extends AppController{
 
 	function basic() {
 		$this->loadModel('User');
+		// Default page
 		if (empty($this->data)) {
 			$this->loadModel('Country');
 
@@ -25,9 +26,11 @@ class SettingsController extends AppController{
 			$countries = $this->Country->getList();
 
 			$this->set(compact('countries', 'galleryPosData'));
-		} else {
+		} // user has changed profile, save info
+		else {
 			$this->User->Profile->id = $this->currentUser['Profile']['id'];
 			if ($this->User->Profile->save(Sanitize::clean($this->data))) {
+				// update their birthday
 				$dob = array();
 				$dob['Event']['start'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 00:00:00';
 				$dob['Event']['end'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 23:00:00';
@@ -38,6 +41,14 @@ class SettingsController extends AppController{
 
 				$this->User->Event->removeBirthday($this->currentUser['User']['id']);
 				$this->User->Event->addEvent($this->currentUser['User']['id'], $dob);
+
+				// save thier name too
+				$this->User->read(null, $this->currentUser['User']['id']);
+				$this->User->set(array(
+					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
+					'last_name' => Sanitize::clean($this->data['Profile']['last_name'])
+				));
+				$this->User->save();
 
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
