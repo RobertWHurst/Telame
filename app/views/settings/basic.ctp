@@ -69,8 +69,8 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 						<td class="field"><?php echo $form->input('rel_status', array('options' => array('single' => __('single', true), 'in_a_relationship' => __('in_a_relationship', true), 'married' => __('married', true), 'its_complicated' => __('its_complicated', true)), 'default' => $profile['rel_status'], 'label' => false)); ?></td>
 					</tr>
 					<tr>
-						<td><?php echo $form->label(__('home_town', true)); ?></td>
-						<td class="field"><?php echo $form->input('home_town', array('value' => $profile['home_town'], 'label' => false)); ?></td>
+						<td><?php echo $form->label(__('city', true)); ?></td>
+						<td class="field"><?php echo $form->input('city', array('value' => $profile['city'], 'label' => false)); ?></td>
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('country', true)); ?></td>

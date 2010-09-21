@@ -18,18 +18,10 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('groups', true),
+		'label' => __('lists_and_privacy', true),
 		'url' => array(
 			'controller' => 'settings',
 			'action' => 'groups'
-		),
-		'classes' => 'button'
-	),
-	array(
-		'label' => __('permissions', true),
-		'url' => array(
-			'controller' => 'settings',
-			'action' => 'permissions'
 		),
 		'classes' => 'button'
 	)

@@ -28,27 +28,21 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 </div>
 <div id="page_body" class="clearfix">
 	<div id="permissions">
-		<div class="options_group clearfix">
-		<h1><?php echo __('add_group', true); ?></h1>
-<?php
-			echo $form->create('Group', array('url' => $this->here));
-			echo $form->input('title');
-			echo $form->end(__('add_group', true));
-?>
-		</div>
-		<div class="options_group clearfix">
+		<div class="groups_list clearfix">
 			<h1><?php echo __('groups', true); ?></h1>
 			<?php foreach($groups as $group): ?>
 				<div class="group">
 					<h3><?php echo $group['Group']['title']; ?></h3>
-<?php			// only show the delete link for groups they own
-				if ($group['Group']['user_id'] == $currentUser['User']['id']) {
-					$url = array('controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
-					echo $html->link(__('delete', true), $url);
-				}
+<?php
+					$url = array('controller' => 'settings', 'action' => 'delete_group', $group['Group']['id']);
+					echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
+					<p>[list stats...]</p>
 				</div>
 			<?php endforeach; ?>
+		</div>
+		<div class="permissions">
+			[permissions for current group]
 		</div>
 	</div>
 </div>
