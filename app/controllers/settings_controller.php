@@ -35,9 +35,10 @@ class SettingsController extends AppController{
 				$dob['Event']['title'] = __('your_birthday', true);
 				$dob['Event']['editable'] = false;
 				$dob['Event']['recurring'] = true;
-				
+
+				$this->User->Event->removeBirthday($this->currentUser['User']['id']);
 				$this->User->Event->addEvent($this->currentUser['User']['id'], $dob);
-				
+
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
 				$this->Session->setFlash(__('profile_settings_saved', true));

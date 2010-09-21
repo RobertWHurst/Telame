@@ -55,4 +55,20 @@ class Event extends AppModel {
 		}
 	}
 
+	function removeBirthday($uid) {
+		$this->recursive = -1;
+		$bday = $this->find('first', array(
+			'conditions' => array(
+				'Event.user_id' => $uid,
+				'Event.title' => 'your_birthday',
+			)
+		));
+		
+		if ($this->delete($bday['Event']['id'])) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
