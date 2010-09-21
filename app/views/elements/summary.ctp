@@ -11,19 +11,19 @@
 		<?php if(!is_null($user['Profile']['sex'])): ?>
 			<tr>
 				<th>Sex:</th>
-				<td><?php echo $user['Profile']['sex']; ?></td>
+				<td><?php echo __($user['Profile']['sex'], true); ?></td>
 			</tr>
 		<?php endif; ?>
 		<?php if(!is_null($user['Profile']['rel_status'])): ?>
 			<tr>
 				<th>Relationship Status:</th>
-				<td><?php echo $user['Profile']['rel_status']; ?></td>
+				<td><?php echo __($user['Profile']['rel_status'], true); ?></td>
 			</tr>
 		<?php endif; ?>
 		<?php if(!is_null($user['Profile']['sex_interest'])): ?>
 			<tr>
 				<th>Interested In:</th>
-				<td><?php echo $user['Profile']['sex_interest']; ?></td>
+				<td><?php echo __($user['Profile']['sex_interest'], true); ?></td>
 			</tr>
 		<?php endif; ?>
 		<?php if(!is_null($user['Profile']['city'])): ?>

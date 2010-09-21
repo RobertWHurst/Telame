@@ -34,7 +34,7 @@ class ProfileComponent extends Object {
 			if($this->Aacl->checkPermissions($user['User']['id'], $this->controller->currentUser['User']['id'], 'profile')) {
 				$canView = true;
 			} else {
-				$this->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
+				$this->controller->Session->setFlash(__('not_allowed_profile', true), 'default', array('class' => 'warning'));
 			}
 			// are you friends with this person
 			$isFriend = $this->User->GroupsUser->isFriend($this->controller->currentUser['User']['id'], $user['User']['id']);

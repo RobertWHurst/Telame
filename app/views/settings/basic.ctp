@@ -78,7 +78,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('dob', true)); ?></td>
-						<td class="field"><?php echo $form->input('dob', array('dateFormat' => 'MDY', 'minYear' => date('Y') - 97, 'maxYear' => date('Y') + 2, 'value' => $profile['dob'], 'label' => false)); ?></td>
+						<td class="field"><?php echo $form->input('dob', array('dateFormat' => 'MDY', 'minYear' => date('Y') - 97, 'maxYear' => date('Y') + 2, 'selected' => strtotime($profile['dob']), 'label' => false)); ?></td>
 					</tr>
 				</table>
 				<?php echo $form->end(__('update_profile', true)); ?>
