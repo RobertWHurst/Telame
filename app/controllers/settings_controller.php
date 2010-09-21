@@ -90,37 +90,67 @@ class SettingsController extends AppController{
 		$this->set(compact('friends'));
 	}
 
-	function groups($id = null) {
+	function groups($gid = null) {
 		$this->loadModel('Group');
-		// we're loading the page to view the groups, or to delete a group
-		if (empty($this->data)) {
-			// if ID is not null, we're deleting
-			if (is_null($id)) {
-				$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
-				$this->set(compact('groups'));
-			} else { // delete block
-				// get the group
-				$group = $this->Group->findById($id);
-				// ensure the person is the groups owner
-				if ($group['Group']['user_id'] != $this->currentUser['User']['id']) {
-					$this->Session->setFlash(__('group_not_allowed_delete', true));
-				} elseif ($this->Group->delete($id)) {
-					$this->Session->setFlash(__('group_deleted', true));
-				} else {
-					$this->Session->setFlash(__('group_not_deleted', true));
+
+		//get the group list
+		$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
+
+		//get the current user and note their id.
+		$uid = $this->currentUser['User']['id'];
+
+		//create an empty permissions var
+		$permissions = false;
+
+		if($gid){
+			//get the current user's acl data.
+			$acoTree = $this->Aacl->getAcoTree($uid);
+
+			//filter through the tree for useful data
+			foreach($acoTree as $aco){
+				foreach($aco['Groups'] as $group){
+					if($group['Group']['id'] == $gid){
+						$currentGroup = $group;
+						$permissions[$aco['Aco']['id']] = array(
+							'id' => $aco['Aco']['id'],
+							'alias' => $aco['Aco']['alias'],
+							'canRead' => ($group['Group']['canRead'])? 'yes' : 'no'
+						);
+					}
 				}
-				$this->redirect($this->referer());
 			}
-		} else {
-			$this->Group->create();
-			$this->data['Group']['user_id'] = $this->currentUser['User']['id'];
-			if ($this->Group->save($this->data)) {
-				$this->Session->setFlash(__('group_added', true));
-			} else {
-				$this->Session->setFlash(__('group_not_added', true));
-			}
-			$this->redirect($this->here);
 		}
+
+		//set the view data
+		$this->set(compact('groups', 'currentGroup', 'permissions'));
+	}
+
+	function create_group($id){
+		$this->Group->create();
+		$this->data['Group']['user_id'] = $this->currentUser['User']['id'];
+		if($this->Group->save($this->data)){
+			$this->Session->setFlash(__('group_added', true));
+		}
+		else{
+			$this->Session->setFlash(__('group_not_added', true));
+		}
+		$this->redirect($this->here);
+	}
+
+	function delete_group($id){
+		$group = $this->Group->findById($id);
+		// get the group
+		// ensure the person is the groups owner
+		if($group['Group']['user_id'] != $this->currentUser['User']['id']){
+			$this->Session->setFlash(__('group_not_allowed_delete', true));
+		}
+		elseif($this->Group->delete($id)){
+			$this->Session->setFlash(__('group_deleted', true));
+		}
+		else{
+			$this->Session->setFlash(__('group_not_deleted', true));
+		}
+		$this->redirect($this->referer());
 	}
 
 	function permissions($selectedFriendList = 0) {

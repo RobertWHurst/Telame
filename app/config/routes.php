@@ -105,7 +105,7 @@
 	// Settings
 	Router::connect('/settings', array('controller' => 'settings', 'action' => 'basic'));
 	Router::connect('/settings/permissions', array('controller' => 'settings', 'action' => 'permissions'));
-	Router::connect('/settings/profile', array('controller' => 'settings', 'action' => 'profile'));
+	Router::connect('/settings/groups', array('controller' => 'settings', 'action' => 'groups'));
 	Router::connect('/s/u/*', array('controller' => 'settings', 'action' => 'gallery'));
 
 	// Wall Posts

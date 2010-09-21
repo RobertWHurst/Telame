@@ -60,3 +60,64 @@ div.options_group input[type="submit"]:hover{
 div.options_group div.date select{
 	width: 105px;
 }
+div.options_group p{
+	font-size: 1.3em;
+	padding: 0 0 20px 20px;
+}
+div.groups_list{
+	width: 210px;
+	margin: 20px;
+	padding: 10px;
+	background: #252525;
+	float: left;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.group{
+	padding: 5px 10px;
+	position: relative;
+}
+div.group.current{
+	background: #484848;
+	border: 1px solid #5c5c5c;
+	padding: 4px 9px;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.group a.button{
+	font-size: 1.6em;
+}
+div.group div.delete{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+div.group_permissions{
+	width: 458px;
+	margin: 20px;
+	margin-left: 0;
+	padding: 10px;
+	background: #333;
+	float: left;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+div.group_permissions label{
+	font-size: 1.6em;
+}
+div.group_permissions input[type="radio"]{
+	vertical-align: 0;
+	margin-left: 10px;
+}
+div.group_permissions table{
+	width: 438px;
+}
+div.group_permissions td{
+	padding: 10px;
+}

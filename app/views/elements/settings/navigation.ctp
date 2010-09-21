@@ -10,18 +10,18 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => __('friends', true),
-		'url' => array(
-			'controller' => 'settings',
-			'action' => 'friends'
-		),
-		'classes' => 'button'
-	),
-	array(
 		'label' => __('lists_and_privacy', true),
 		'url' => array(
 			'controller' => 'settings',
 			'action' => 'groups'
+		),
+		'classes' => 'button'
+	),
+	array(
+		'label' => __('manage_friends', true),
+		'url' => array(
+			'controller' => 'settings',
+			'action' => 'friends'
 		),
 		'classes' => 'button'
 	)
