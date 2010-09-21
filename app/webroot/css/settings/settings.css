@@ -6,6 +6,16 @@ div.options_group{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+div.options_group table{
+	width: 688px;
+	margin: 0 20px;
+}
+div.options_group td{
+	padding:10px 0;
+}
+div.options_group td.field{
+	text-align: right;
+}
 div.options_group h1{
 	font-size: 2.4em;
 	padding: 20px;
@@ -13,10 +23,8 @@ div.options_group h1{
 div.options_group label{
 	width: 50%;
 	height: 20px;
-	font-size: 1.6em;
+	font-size: 2em;
 	line-height: 20px;
-	float: left;
-	margin: 20px 0 0 20px;
 }
 div.options_group input[type="text"]{
 	height: 20px;
@@ -29,15 +37,13 @@ div.options_group select{
 }
 div.options_group select,
 div.options_group input[type="text"]{
-	float: left;
-	font-size: 1.3em;
+	font-size: 1.6em;
 	font-weight: bold;
 	color: #363636;
 	line-height: 20px;
-	margin: 20px 0 0 0;
 }
 div.options_group input[type="submit"]{
-	font-size: 1.3em;
+	font-size: 1.6em;
 	float: right;
 	color: #d3ef91;
 	background-color: #656565;
@@ -50,4 +56,7 @@ div.options_group input[type="submit"]:hover{
 	color: #c1ef52;
 	background-color: #8f977c;
 	border-color: #c1ef52;
+}
+div.options_group div.date select{
+	width: 105px;
 }

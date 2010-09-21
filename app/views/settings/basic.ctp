@@ -39,60 +39,48 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 ?>
 			<div class="options_group clearfix">
 				<h1>Your Information</h1>
-<?php
-				echo $form->input('first_name', array(
-					'label' => __('first_name', true),
-					'value' => $user['first_name']
-				));
-				echo $form->input('last_name', array(
-					'label' => __('last_name', true),
-					'value' => $user['last_name']
-				));
-				echo $form->input('sex', array(
-					'label' => __('sex', true),
-					'default' => $profile['sex'],
-					'options' => array(
-						'male' => __('male', true),
-						'female' => __('female', true)
-					)
-				));
-				echo $form->input('sex_interest', array(
-					'label' => __('sex_interest', true),
-					'default' => $profile['sex_interest'],
-					'options' => array(
-						'men' => __('men', true),
-						'women' => __('women', true),
-						'bisexual' => __('bisexual', true)
-					)
-				));
-				echo $form->input('political', array(
-					'label' => __('political', true),
-					'value' => $profile['political']
-				));
-				echo $form->input('religious', array(
-					'label' => __('religious', true),
-					'value' => $profile['religious']
-				));
-				echo $form->input('rel_status', array(
-					'label' => __('rel_status', true),
-					'default' => $profile['rel_status'],
-					'options' => array(
-						'male' => __('single', true),
-						'female' => __('dating', true),
-						'married' => __('married', true)
-					)
-				));
-				echo $form->input('country_id', array(
-					'label' => __('country', true),
-					'options' => $countries,
-					'default' => $profile['country_id'],
-				));
-				echo $form->input('dob', array(
-					'dateFormat' => 'MDY',
-					'minYear' => date('Y') - 97,
-					'maxYear' => date('Y') + 2,
-				));
-?>
+				<table>
+					<tr>
+						<td><?php echo $form->label(__('first_name', true)); ?></td>
+						<td class="field"><?php echo $form->input('first_name', array('value' => $user['first_name'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('last_name', true)); ?></td>
+						<td class="field"><?php echo $form->input('last_name', array('value' => $user['last_name'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('sex', true)); ?></td>
+						<td class="field"><?php echo $form->input('sex', array('options' => array('male' => __('male', true), 'female' => __('female', true)), 'default' => $profile['sex'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('sex_interest', true)); ?></td>
+						<td class="field"><?php echo $form->input('sex_interest', array('options' => array('men' => __('men', true), 'women' => __('women', true), 'bisexual' => __('bisexual', true)), 'default' => $profile['sex_interest'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('political', true)); ?></td>
+						<td class="field"><?php echo $form->input('political', array('value' => $profile['political'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('religious', true)); ?></td>
+						<td class="field"><?php echo $form->input('religious', array('value' => $profile['religious'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('rel_status', true)); ?></td>
+						<td class="field"><?php echo $form->input('rel_status', array('options' => array('single' => __('single', true), 'in_a_relationship' => __('in_a_relationship', true), 'married' => __('married', true), 'its_complicated' => __('its_complicated', true)), 'default' => $profile['rel_status'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('home_town', true)); ?></td>
+						<td class="field"><?php echo $form->input('home_town', array('value' => $profile['home_town'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('country', true)); ?></td>
+						<td class="field"><?php echo $form->input('country_id', array('options' => $countries, 'default' => $profile['country_id'], 'label' => false)); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('dob', true)); ?></td>
+						<td class="field"><?php echo $form->input('dob', array('dateFormat' => 'MDY', 'minYear' => date('Y') - 97, 'maxYear' => date('Y') + 2, 'value' => $profile['dob'], 'label' => false)); ?></td>
+					</tr>
+				</table>
 				<?php echo $form->end(__('update_profile', true)); ?>
 			</div>
 		</div>
@@ -101,5 +89,4 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['fu
 			<?php echo $this->element('settings/gallery_options'); ?>
 		</div>
 	</div>
-	<?php pr($currentUser); ?>
 </div>
