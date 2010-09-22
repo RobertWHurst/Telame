@@ -27,7 +27,8 @@ class UsersController extends AppController {
 			} else {
 				$this->Session->setFlash(__('email_or_hash_failed', true), 'default', array('class' => 'error'));
 			}
-			$this->redirect('/');
+			// send them to their profile right away
+			$this->redirect(array('url' => array('slug' => $this->currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic')));
 			exit;
 		} else {
 			$this->data['User']['email'] = $email;
@@ -51,7 +52,7 @@ class UsersController extends AppController {
 		// this is for a technique called Post/Redirect/Get
 		if (!empty($this->data)) {
 			// Set up the URL that we will redirect to
-			$url = array('controller' => 'users', 'action' => 'search');
+			$url = array('query' => $this->data['Search']['query'], 'controller' => 'users', 'action' => 'search');
 
 			// If we have parameters, loop through and URL encode them
 			if( is_array($this->data['Search']) ) {
@@ -68,7 +69,7 @@ class UsersController extends AppController {
 		}
 
 		// Clean the params, just to be safe
-		$search = Sanitize::clean($this->params['named']['query']);
+		$search = Sanitize::clean($this->params['query']);
 		$this->User->recursive = -1;
 		$this->paginate = array(
 			'conditions' => array(

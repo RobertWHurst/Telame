@@ -506,7 +506,7 @@ msgstr "Male"
 
 #: /views/settings/basic.ctp:53
 msgid "female"
-msgstr "Femail"
+msgstr "Female"
 
 #: /views/settings/basic.ctp:56
 msgid "sex_interest"
@@ -566,7 +566,7 @@ msgstr "Date of birth"
 
 #: /views/settings/basic.ctp:84
 msgid "update_profile"
-msgstr "Edit My Profile"
+msgstr "Save My Profile"
 
 #: /views/settings/friends.ctp:24
 msgid "friends_title"

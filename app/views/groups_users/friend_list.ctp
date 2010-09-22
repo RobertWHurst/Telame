@@ -21,7 +21,6 @@ foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 
-//page title
 $this->Paginator->options(array(
 	'url' => array(
 		'controller' => 'groups_users',

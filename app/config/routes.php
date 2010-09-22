@@ -29,6 +29,7 @@
 	App::import('Lib', 'routes/SlugRoute');
 
 	Router::connectNamed(array('page'));
+	Router::connectNamed(array('query'));
 	Router::connectNamed(array('slug'));
 
 // Home page
@@ -109,6 +110,8 @@
 	Router::connect('/:slug/notifications', array('controller' => 'notifications', 'action' => 'index'), array('routeClass' => 'SlugRoute'));
 	
 	// Search
+	Router::connect('/search/:query/:page/*', array('controller' => 'users', 'action' => 'search'), array('page' => '[0-9]+'));
+	Router::connect('/search/:query/*', array('controller' => 'users', 'action' => 'search'));
 	Router::connect('/search/*', array('controller' => 'users', 'action' => 'search'));
 
 	// Settings

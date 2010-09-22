@@ -119,6 +119,7 @@ class EventsController extends AppController {
 				'start' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['start'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['start']))),
 				// set the end year to the same as the start, because if in december, the start can be one year, and the end +1
 				'end' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['end'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['end']))),
+				'editable' => $events[$key]['Event']['editable'],
 			);
 		}
 

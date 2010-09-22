@@ -9,10 +9,6 @@ class SettingsController extends AppController{
 
 		//set the layout
 		$this->layout = 'tall_header_w_sidebar';
-
-		$user = $this->currentUser;
-
-		$this->set(compact('user'));
 	}
 
 	function basic() {
@@ -35,7 +31,7 @@ class SettingsController extends AppController{
 				$dob['Event']['start'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 00:00:00';
 				$dob['Event']['end'] = $this->data['Profile']['dob']['year'] . '-' . $this->data['Profile']['dob']['month'] . '-' . $this->data['Profile']['dob']['day'] . ' 23:00:00';
 				$dob['Event']['allday'] = '1';
-				$dob['Event']['title'] = __('your_birthday', true);
+				$dob['Event']['title'] = 'your_birthday';
 				$dob['Event']['editable'] = false;
 				$dob['Event']['recurring'] = true;
 
