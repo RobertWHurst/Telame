@@ -209,11 +209,11 @@ pr($options);
 			'contain' => array(
 				'Profile', 
 				'Profile.Country', 
-				'Notification' => array(
-					'conditions' => array(
-						'new' => true
-					)
-				)
+//				'Notification' => array(
+//					'conditions' => array(
+//						'new' => true
+//					)
+//				)
 			)
 		));
 		return $user;

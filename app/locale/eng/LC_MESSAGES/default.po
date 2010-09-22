@@ -421,7 +421,7 @@ msgstr "Basic Settings"
 
 #: /views/elements/settings/navigation.ctp:13
 msgid "lists_and_privacy"
-msgstr "Grops and Privacy"
+msgstr "Groups and Privacy"
 
 #: /views/elements/settings/navigation.ctp:21
 msgid "manage_friends"

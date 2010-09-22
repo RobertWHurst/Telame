@@ -4,36 +4,36 @@ $links = array(
 	array(
 		'label' => $user['User']['first_name'] . '\'s ' . __('wall', true),
 		'url' => array(
+			'slug' => $user['User']['slug'],
 			'controller' => 'users',
 			'action' => 'profile',
-			$user['User']['slug']
 		),
 		'classes' => 'button'
 	),
 	array(
 		'label' => $user['User']['first_name'] . '\'s ' . __('media', true),
 		'url' => array(
+			'slug' => $user['User']['slug'],
 			'controller' => 'albums',
 			'action' => 'albums',
-			$user['User']['slug']
 		),
 		'classes' => 'button'
 	),
 	array(
 		'label' => $user['User']['first_name'] . '\'s ' . __('friends', true),
 		'url' => array(
+			'slug' => $user['User']['slug'],
 			'controller' => 'groups_users',
 			'action' => 'friendList',
-			$user['User']['slug']
 		),
 		'classes' => 'button'
 	),
 	array(
 		'label' => __('about', true) . ' ' . $user['User']['first_name'],
 		'url' => array(
+			'slug' => $user['User']['slug'],
 			'controller' => 'profile',
-			'action' => 'about',
-			$user['User']['slug']
+			'action' => 'about'
 		),
 		'classes' => 'button'
 	)

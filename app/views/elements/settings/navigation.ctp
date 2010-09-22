@@ -4,6 +4,7 @@ $links = array(
 	array(
 		'label' => __('basic', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'], 
 			'controller' => 'settings',
 			'action' => 'basic'
 		),
@@ -12,6 +13,7 @@ $links = array(
 	array(
 		'label' => __('lists_and_privacy', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'], 
 			'controller' => 'settings',
 			'action' => 'groups'
 		),
@@ -20,6 +22,7 @@ $links = array(
 	array(
 		'label' => __('manage_friends', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'], 
 			'controller' => 'settings',
 			'action' => 'friends'
 		),

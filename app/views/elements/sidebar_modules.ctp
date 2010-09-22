@@ -26,7 +26,7 @@
 		<div class="<?php echo ($noteCount)? 'link active' : 'link'; ?>">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/asterisk_yellow.png', array('static' => true, 'alt' => __('notifications', true), 'id' => 'notifications')) . __('notifications', true) . $noteCount;
-		echo $html->link($link_content, array('controller' => 'notifications', 'action' => 'index'), array('escape' => false));
+		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'notifications', 'action' => 'index'), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 		<div class="<?php echo ($msgCount)? 'link active' : 'link'; ?>">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/email.png', array('static' => true, 'alt' => __('messages', true))) . __('messages', true) . $msgCount;
-		echo $html->link($link_content, array('controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
+		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/group.png', array('static' => true, 'alt' => __('friends', true))) . __('friends', true);
-		echo $html->link($link_content, array('controller' => 'groups_users', 'action' => 'friendList'), array('escape' => false));
+		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'friendList'), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/photo.png', array('static' => true, 'alt' => __('media', true))) . __('media', true);
-		echo $html->link($link_content, array('controller' => 'albums', 'action' => 'albums'), array('escape' => false));
+		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'albums', 'action' => 'albums'), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -77,7 +77,7 @@
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/date.png', array('static' => true, 'alt' => __('calendar', true))) . __('calendar', true);
-		echo $html->link($link_content, array('controller' => 'events', 'action' => 'calendar'), array('escape' => false));
+		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar'), array('escape' => false));
 ?>
 		</div>
 	</div>
