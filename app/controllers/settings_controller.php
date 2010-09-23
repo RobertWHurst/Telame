@@ -118,7 +118,7 @@ class SettingsController extends AppController{
 		$uid = $this->currentUser['User']['id'];
 
 		//create an empty permissions var
-		$permissions = false;
+		$permissions = $currentGroup = false;
 
 		if($gid){
 			//get the current user's acl data.
