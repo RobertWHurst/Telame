@@ -63,6 +63,9 @@
 	Router::connect('/:slug/calendar/resize/*', array('controller' => 'events', 'action' => 'resize'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/calendar/*', array('controller' => 'events', 'action' => 'calendar'), array('routeClass' => 'SlugRoute'));
 
+	// Delete account
+	Router::connect('/:slug/delete/*', array('controller' => 'settings', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
+
 	// Friend - add
 	Router::connect('/:slug/f/a/*', array('controller' => 'groups_users', 'action' => 'addFriend'), array('routeClass' => 'SlugRoute'));
 	// Friend list

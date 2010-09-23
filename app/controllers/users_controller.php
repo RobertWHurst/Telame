@@ -17,6 +17,7 @@ class UsersController extends AppController {
 	}
 
 	function confirm($email = null, $hash = null) {
+		$this->layout = 'tall_header';
 		if (!is_null($email) && !is_null($hash) || !empty($this->data)) {
 			if (!empty($this->data)) {
 				$email = $this->data['User']['email'];
@@ -24,11 +25,11 @@ class UsersController extends AppController {
 			}
 			if ($this->User->confirm($email, $hash)) {
 				$this->Session->setFlash(__('email_confirmed', true), 'default', array('class' => 'info'));
+				$this->redirect('/login');
 			} else {
 				$this->Session->setFlash(__('email_or_hash_failed', true), 'default', array('class' => 'error'));
+				$this->redirect($this->referer());
 			}
-			// send them to their profile right away
-			$this->redirect(array('url' => array('slug' => $this->currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic')));
 			exit;
 		} else {
 			$this->data['User']['email'] = $email;
@@ -99,24 +100,21 @@ class UsersController extends AppController {
 		$this->layout = 'simple_header';
 		// data has been posted
 		if (!empty($this->data)) {
-			// make sure the passwords match, if not show the page again with all the current info except the password
-			if ($this->data['User']['password'] != $this->Auth->password($this->data['User']['passwd'])) {
-				$this->Session->setFlash(__('password_mismatch', true), 'default', array('class' => 'error'));
-				unset($this->data['User']['password']);
-				unset($this->data['User']['passwd']);
-			// passwords match
-			} else {
-				// import the beta keys model
-				$this->loadModel('BetaKey');
-				$key = $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
-				if (!$key) {
-					$this->Session->setFlash(__('invalid_key', true), 'default', array('class' => 'error'));
-					$this->redirect($this->referer());
-					exit;
-				}
+			// import the beta keys model
+			$this->loadModel('BetaKey');
 
+			// prepare to validate the user info
+			$this->User->set($this->data);
+
+			// check if all the fields validate
+			if (!$this->User->validates()) {
+				$this->Session->setFlash(__('validation_error', true), 'default', array('class' => 'error'));
+			// all checks out
+			} else {
 				// We need the hash here for the confirmation email
-				$this->data['User']['hash'] =  sha1(date('Y-m-d') . $this->data['User']['email'] . Configure::read('Security.salt'));
+				$this->data['User']['hash'] =  sha1(date('Y-m-d H:i:s') . $this->data['User']['email'] . Configure::read('Security.salt'));
+				$this->data['User']['password'] = $this->Auth->password($this->data['User']['user_password']);
+
 				if ($this->User->signup($this->data)) {
 					// send user email
 					$this->Email->from		=	'Telame.com <admin@telame.com>';
@@ -128,6 +126,7 @@ class UsersController extends AppController {
 					$this->Email->send();
 
 					// Delete the beta key here, that way it's the last thing to be done, if something else fails, they can try again
+					$key = $this->BetaKey->findByKey($this->data['User']['beta_key']);
 					$this->BetaKey->delete($key['BetaKey']['id']);
 
 					// tell the user it's all good
@@ -135,13 +134,16 @@ class UsersController extends AppController {
 				} else {
 					$this->Session->setFlash(__('user_create_error'), 'default', array('class' => 'error'));
 				}
-				   $this->redirect('/');
-				   exit;
+				
+				$this->redirect('/');
+				exit;
 			}
-		} else {
+		} else { // end if (!empty$this->data)
 			// add the beta key to the default $this->data array
 			$this->data['User']['beta_key'] = $key;
 		}
+		unset($this->data['User']['password']);
+		unset($this->data['User']['passwd']);		
 	}
 
 

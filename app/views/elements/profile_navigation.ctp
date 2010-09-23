@@ -1,8 +1,9 @@
 <?php
 //make a navigation strip
+$who = (empty($user['User']['first_name']) ? __('your', true) : $user['User']['first_name']) . ' ';
 $links = array(
 	array(
-		'label' => $user['User']['first_name'] . '\'s ' . __('wall', true),
+		'label' => $who . __('wall', true),
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'users',
@@ -11,7 +12,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => $user['User']['first_name'] . '\'s ' . __('media', true),
+		'label' => $who . __('media', true),
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'albums',
@@ -20,7 +21,7 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
-		'label' => $user['User']['first_name'] . '\'s ' . __('friends', true),
+		'label' => $who . __('friends', true),
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'groups_users',

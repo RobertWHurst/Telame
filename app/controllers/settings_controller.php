@@ -42,9 +42,10 @@ class SettingsController extends AppController{
 				$this->User->read(null, $this->currentUser['User']['id']);
 				$this->User->set(array(
 					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
-					'last_name' => Sanitize::clean($this->data['Profile']['last_name'])
+					'last_name' => Sanitize::clean($this->data['Profile']['last_name']),
+					'first_login' => false,
 				));
-				$this->User->save();
+				$this->User->save(null, array('fieldList' => array('first_name', 'last_name', 'first_login')));
 
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
@@ -52,6 +53,15 @@ class SettingsController extends AppController{
 			}
 			$this->redirect($this->referer());
 		}
+	}
+
+	function delete() {
+		$this->loadModel('User');
+		$this->User->deleteAccount($this->currentUser['User']['id']);
+		$this->Session->setFlash(__('account_deleted', true));
+		$this->AuthExtension->logout();
+		$this->Auth->logout();
+		$this->redirect('/');
 	}
 
 	function gallery($id = null, $top = null, $left = null, $height = null, $width = null){

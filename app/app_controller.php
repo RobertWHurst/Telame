@@ -35,17 +35,24 @@ class AppController extends Controller {
 
 		// This is available everywhere, be careful what you include, we don't want excessive info
 		if (Configure::read('LoggedIn')) {
+			$this->loadModel('User');
 			// The currently logged in user's infomration
 			$this->currentUser = $this->getCurrentUser();
+			// ensure the user has a profile
+			$this->checkProfile();
 		}
 	}
 
 	function beforeRender() {
 	}
 
-	function getCurrentUser() {
-		$this->loadModel('User');
+	function checkProfile() {
+		if ($this->currentUser['User']['first_login']) {
+			$this->Session->setFlash(__('new_user_welcome', true));
+		}
+	}
 
+	function getCurrentUser() {
 		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
 		
 		if(!is_null($currentUser['User']['hash'])) {
