@@ -154,20 +154,7 @@ class AaclComponent extends Object {
 	}
 
 	function deleteAcoTree($uid) {
-		$node = $this->Acl->Aco->node('User::' . $uid);
-		$nodeId = Set::extract($node, "0.Aco.id");
-		$this->Acl->Aco->recursive = -1;
-		$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $nodeId)));
-
-		$children = $this->Acl->Aco->find('all', array(
-			'conditions' => array(
-				'lft BETWEEN ? AND ?' => array($parent['Aco']['lft'], $parent['Aco']['rght']),
-			)
-		));
-
-		foreach ($children as $child) {
-			$this->Acl->Aco->delete($child['Aco']['id']);
-		}
+		$this->Acl->Aco->delete('User::' . $uid);
 	}
 }
 

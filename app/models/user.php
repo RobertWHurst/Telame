@@ -57,7 +57,7 @@ class User extends AppModel {
 		),
 		'email' => array(
 			'uniqueEmail' => array(
-				'rule' => 'isUnique',
+				'rule' => array('checkUnique', 'email'),
 				'message' => 'That email is already in use',
 			),
 			'validEmail' => array(
@@ -82,7 +82,7 @@ class User extends AppModel {
 		),
 		'slug' => array(
 			'unique' => array(
-				'rule' => 'checkUniqueSlug',
+				'rule' => array('checkUnique', 'slug'),
 				'allowEmpty' => false,
 				'required' => true,
 				'message' => 'That username is already in use',
@@ -141,8 +141,9 @@ class User extends AppModel {
 		return !in_array($slug['slug'], Configure::read('BlacklistUsernames'));
 	}
 
-	function checkUniqueSlug($slug) {
-		return !$this->find('first', array('conditions' => array('lower(User.slug)' => strtolower($slug['slug']))));
+	function checkUnique($array, $value) {
+		$what = strtolower($value);
+		return !$this->find('first', array('conditions' => array('lower(User.' . $what . ')' => strtolower($array[$what]))));
 	}
 
 	function identicalFieldValues( $field=array(), $compare_field=null ) {
