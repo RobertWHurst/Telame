@@ -16,6 +16,14 @@ foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 
+$this->Paginator->options(array(
+	'url' => array(
+		'controller' => 'users',
+		'action' => 'search',
+		'query' => $this->params['query'],
+	)
+));
+
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('search_title', true); ?></h1>

@@ -2,7 +2,6 @@
 class GroupsUsersController extends AppController {
 
 	var $components = array('Profile');
-	var $helpers = array('Paginator');
 
 	/**
 	 * \brief addFriend optionally takes a user id and adds them to your friends list.
@@ -60,15 +59,15 @@ class GroupsUsersController extends AppController {
 		}
 	}
 
-	function friendList($slug = false) {
+	function friendList() {
 		//set the layout
 		$this->layout = 'profile';
-		$user = $this->Profile->getProfile($slug);
+		$user = $this->Profile->getProfile($this->params['slug']);
 
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'friends')) {
 			$this->paginate = array(
 				'conditions' => array(
-					'user_id' => $this->currentUser['User']['id'],
+					'user_id' => $user['User']['id'],
 				),
 				'contain' => array(
 					'Friend.Profile',

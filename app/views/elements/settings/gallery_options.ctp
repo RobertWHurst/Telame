@@ -32,17 +32,17 @@
 		<div class="frame"></div>
 		<div class="photos">
 <?php
-	   		switch($user['Profile']['gallery_mode']):
+	   		switch($currentUser['Profile']['gallery_mode']):
 	   			default: case 'single':
 	   			
 	   			
 	   			
 	   				//setup the image url
-	   				$url = array('controller' => 'media', 'action' => 'profile', $user['User']['avatar_id']);
+	   				$url = array('controller' => 'media', 'action' => 'profile', $currentUser['User']['avatar_id']);
 	   					   				
 					//find the image offset (if exists)	   				
-	   				if(isset($galleryPosData[$user['User']['avatar_id']])){	
-	   					$coords = $galleryPosData[$user['User']['avatar_id']];
+	   				if(isset($galleryPosData[$currentUser['User']['avatar_id']])){	
+	   					$coords = $galleryPosData[$currentUser['User']['avatar_id']];
 	   					$top = $coords['y'];
 	   					$left = $coords['x'];
 	   					$height = $coords['h'];
@@ -51,12 +51,12 @@
 	   				
 	   				
 	   				//options default
-	   				$options = array('id' => "image-{$user['User']['avatar_id']}");
+	   				$options = array('id' => "image-{$currentUser['User']['avatar_id']}");
 	   				
 	   				
 	   				//if there are coords
 	   				if(isset($coords))
-	   					$options = array('id' => "image-{$user['User']['avatar_id']}", 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
+	   					$options = array('id' => "image-{$currentUser['User']['avatar_id']}", 'style' => "top: {$top}px; left: {$left}px; height: {$height}px; width: {$width}px;");
 	   				
 	   				
 	   				//echo the image tag
@@ -74,7 +74,7 @@
 ?>
 		</div>
 	</div>
-	<?php if($user['Profile']['gallery_mode'] == 'multi'): ?>
+	<?php if($currentUser['Profile']['gallery_mode'] == 'multi'): ?>
 		<div class="selector">
 			thumb of each image will go here...
 		</div>

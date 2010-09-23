@@ -312,7 +312,7 @@ class Debugger extends Object {
 		}
 
 		if ($error == 'Fatal Error') {
-			exit;
+			exit();
 		}
 		return true;
 	}

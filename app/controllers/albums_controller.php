@@ -13,8 +13,8 @@ class AlbumsController extends AppController {
 		$this->layout = 'profile';
 	}
 
-	function albums($slug = false) {
-		$user = $this->Profile->getProfile($slug);
+	function albums() {
+		$user = $this->Profile->getProfile($this->params['slug']);
 
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
 			$this->Session->setFlash(__('not_allowed_images', true), 'default', array('class' => 'warning'));
@@ -28,8 +28,8 @@ class AlbumsController extends AppController {
 		$this->set(compact('albums', 'user'));
 	}
 
-	function album($slug = false, $albumSlug = false){
-		$user = $this->Profile->getProfile($slug);
+	function album($albumSlug = false){
+		$user = $this->Profile->getProfile($this->params['slug']);
 
 		$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
 

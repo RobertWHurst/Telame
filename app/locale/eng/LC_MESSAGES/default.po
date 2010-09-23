@@ -363,6 +363,10 @@ msgstr "Email"
 msgid "password"
 msgstr "Password"
 
+msgid "password_again"
+msgstr "Password Again"
+
+
 #: /views/elements/pages/login.ctp:6
 #: /views/users/login.ctp:25
 msgid "auto_login"
@@ -421,7 +425,7 @@ msgstr "Basic Settings"
 
 #: /views/elements/settings/navigation.ctp:13
 msgid "lists_and_privacy"
-msgstr "Grops and Privacy"
+msgstr "Groups and Privacy"
 
 #: /views/elements/settings/navigation.ctp:21
 msgid "manage_friends"
@@ -506,7 +510,7 @@ msgstr "Male"
 
 #: /views/settings/basic.ctp:53
 msgid "female"
-msgstr "Femail"
+msgstr "Female"
 
 #: /views/settings/basic.ctp:56
 msgid "sex_interest"
@@ -566,7 +570,7 @@ msgstr "Date of birth"
 
 #: /views/settings/basic.ctp:84
 msgid "update_profile"
-msgstr "Edit My Profile"
+msgstr "Save My Profile"
 
 #: /views/settings/friends.ctp:24
 msgid "friends_title"

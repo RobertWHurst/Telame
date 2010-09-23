@@ -23,8 +23,8 @@ foreach ($js as $j) {
 <?php 
 		echo $form->create();
 		echo $form->input('email');
-		echo $form->input('password');
-		echo $form->input('passwd', array('label' => 'Password again'));
+		echo $form->input('user_password', array('label' => __('password', true), 'type' => 'password'));
+		echo $form->input('user_password_again', array('label' => __('password_again', true), 'type' => 'password'));
 		echo $form->input('slug', array('label' => 'Personal Username'));
 		echo $form->input('beta_key');
 		echo $form->end(__('signup', true));

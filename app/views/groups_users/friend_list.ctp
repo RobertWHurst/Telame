@@ -21,11 +21,17 @@ foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 
-//page title
+$this->Paginator->options(array(
+	'url' => array(
+		'controller' => 'groups_users',
+		'action' => 'friendList',
+		'slug' => $this->params['slug'],
+	)
+));
 
-echo $paginator->numbers();
+echo $this->Paginator->numbers();
 echo '<br />';
-echo $paginator->counter();
+echo $this->Paginator->counter();
 
 pr($friends);
 

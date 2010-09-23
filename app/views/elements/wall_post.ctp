@@ -24,7 +24,7 @@
 		<?php if($post['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']): ?>
 			<div class="deletePost">
 <?php 
-				$url = array('controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
+				$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 			</div>
@@ -40,17 +40,17 @@
 					$text = __('like', true);
 					$classes = "like";
 				}
-				echo $html->link($text, array('controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']), array('class' => $classes));
+				echo $html->link($text, array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']), array('class' => $classes));
 
 				if($post['WallPost']['dislike']){
-					$text = __('dislike', true) . " ({$post['WallPost']['dislike']})";
+					$text = __('dislike', true) . ' (' . $post['WallPost']['dislike'] . ')';
 					$classes = "dislike disliked";
 				}
 				else{
 					$text = __('dislike', true);
 					$classes = "dislike";
 				}
-				echo $html->link($text, array('controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']), array('class' => $classes));
+				echo $html->link($text, array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'dislike', $post['WallPost']['id']), array('class' => $classes));
 
 				echo $html->link(__('comment', true), '', array('class' => 'showComments'));
 ?>
@@ -58,10 +58,10 @@
 		    <div class="baseline_info">
 <?php
 				if($post['WallPost']['like'] || $post['WallPost']['dislike']):
-					$like = " {$post['WallPost']['like']}";
+					$like = ' ' . $post['WallPost']['like'];
 					$like .= ' ' .	__n('person_likes_this', 'people_like_this', $post['WallPost']['like'], true);
 			
-					$dislike = " {$post['WallPost']['dislike']}";
+					$dislike = ' ' . $post['WallPost']['dislike'];
 					$dislike .= ' ' .  __n('person_dislikes_this', 'people_dislike_this', $post['WallPost']['dislike'], true);
 ?>
 					<p><?php echo ($post['WallPost']['like'])? $like : '' ; ?></p>
@@ -87,11 +87,11 @@
 			<div class="commentInput">
 <?php
 				//create the form
-				$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));
-				echo $form->create('WallPost', array('url' =>  $url, 'id' => "WallPost_{$post['WallPost']['id']}"));
-					echo $form->input('post', array('label' => __('comment', true), 'type' => 'text', 'id' => "WallPostPost_{$post['WallPost']['id']}"));
+				$url = $html->url(array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'add'));
+				echo $form->create('WallPost', array('url' =>  $url, 'id' => 'WallPost_' . $post['WallPost']['id']));
+					echo $form->input('post', array('label' => __('comment', true), 'type' => 'text', 'id' => 'WallPostPost_' . $post['WallPost']['id']));
 					echo $form->hidden('user_id', array('value' => $user['User']['id'], 'id' => "WallPostComment_{$post['WallPost']['id']}"));
-					echo $form->hidden('reply_parent_id', array('value' => $post['WallPost']['id'], 'id' => "WallPostReplyParentId_{$post['WallPost']['id']}"));
+					echo $form->hidden('reply_parent_id', array('value' => $post['WallPost']['id'], 'id' => 'WallPostReplyParentId_' . $post['WallPost']['id'] ));
 				echo $form->end(__('wall_post_submit', true));
 ?>
 			</div>

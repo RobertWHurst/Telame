@@ -9,7 +9,7 @@
 	<div class="box inner">
 	<?php
 		//create the form
-		$url = $html->url(array('controller' => 'wall_posts', 'action' => 'add'));	
+		$url = $html->url(array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'add'));	
 		echo $this->Form->create('WallPost', array('url' =>  $url));
 		if($user['User']['id'] == $currentUser['User']['id'])
 			$label = __('wall_post_label_personal', true);

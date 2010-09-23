@@ -25,7 +25,6 @@ $this->set('nav_links', array(
 			'controller' => 'albums',
 			'action' => 'album',
 			$this->params['pass'][0],
-			$this->params['pass'][1]
 		),
 		'classes' => 'button'
 	)
@@ -40,7 +39,7 @@ $this->set('nav_links', array(
 				<div class="single">
 	<?php
 					//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
-					$iUrl = array('controller' => 'media', 'action' => 'single', $media['Media']['id']);
+					$iUrl = array('slug' => $user['User']['slug'], 'controller' => 'media', 'action' => 'single', $media['Media']['id']);
 					echo $html->image($iUrl);//, array('/url' => $aUrl,));
 	?>
 				</div>

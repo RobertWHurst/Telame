@@ -39,7 +39,7 @@ class EventsController extends AppController {
 			} else {
 				$this->Session->setFlash(__('event_not_saved', true));
 			}
-			$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
+			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
 				substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 		}
 	}
@@ -80,7 +80,7 @@ class EventsController extends AppController {
 		} else {
 			$this->Event->id = $this->data['Event']['id'];
 			$this->Event->saveField('title', $this->data['Event']['title']);
-			$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
+			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
 				substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 		}
 	}
@@ -96,7 +96,7 @@ class EventsController extends AppController {
 		} else {
 			$this->Session->setFlash(__('event_not_allowed_delete', true));
 		}
-		$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
+		$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
 			substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 	}
 
@@ -119,6 +119,7 @@ class EventsController extends AppController {
 				'start' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['start'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['start']))),
 				// set the end year to the same as the start, because if in december, the start can be one year, and the end +1
 				'end' => ($events[$key]['Event']['recurring'] ? date('Y', $this->params['url']['start']) . '-' . date('m-d H:i', strtotime($events[$key]['Event']['end'])) : date('Y-m-d H:i', strtotime($events[$key]['Event']['end']))),
+				'editable' => $events[$key]['Event']['editable'],
 			);
 		}
 
@@ -145,7 +146,7 @@ class EventsController extends AppController {
 
 			$this->Event->save($ev); //4 - Save the event with the new data
 			//5 - redirect and reload
-			$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($ev['Event']['start'], 0, 4), substr($ev['Event']['start'], 5, 2), substr($ev['Event']['start'], 8, 2)));
+			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($ev['Event']['start'], 0, 4), substr($ev['Event']['start'], 5, 2), substr($ev['Event']['start'], 8, 2)));
 		}
 	}
 
@@ -155,7 +156,7 @@ class EventsController extends AppController {
 			$ev['Event']['end'] = date('Y-m-d H:i:s', strtotime('' . $dayDelta . ' days ' . $minDelta . ' minutes', strtotime($ev['Event']['end'])));
 			$this->Event->save($ev);
 		}
-		$this->redirect(array('controller' => 'events', 'action' => 'calendar', substr($ev['Event']['start'], 0, 4), substr($ev['Event']['start'], 5, 2), substr($ev['Event']['start'], 8, 2)));
+		$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($ev['Event']['start'], 0, 4), substr($ev['Event']['start'], 5, 2), substr($ev['Event']['start'], 8, 2)));
 	}
 
 }

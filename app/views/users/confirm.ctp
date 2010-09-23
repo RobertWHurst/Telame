@@ -6,6 +6,8 @@ $html->css(array(
 	'users/login'
 ), null, array('inline' => false));
 $js = array(
+	'jquery',
+	'base'
 	//SCRIPT
 );
 foreach ($js as $j) {
