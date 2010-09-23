@@ -115,9 +115,12 @@ class UsersController extends AppController {
 				$this->data['User']['hash'] =  sha1(date('Y-m-d H:i:s') . $this->data['User']['email'] . Configure::read('Security.salt'));
 				$this->data['User']['password'] = $this->Auth->password($this->data['User']['user_password']);
 
-				if ($this->User->signup($this->data)) {
+				$uid = $this->User->signup($this->data);
+				if ($uid) {
+					$this->Aacl->createAcl($uid);
+
 					// send user email
-					$this->Email->from		=	'Telame.com <admin@telame.com>';
+					$this->Email->from		= 'Telame.com <admin@telame.com>';
 					$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
 					$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
 					$this->Email->sendAs	= 'both';
@@ -134,7 +137,7 @@ class UsersController extends AppController {
 				} else {
 					$this->Session->setFlash(__('user_create_error'), 'default', array('class' => 'error'));
 				}
-				
+
 				$this->redirect('/');
 				exit;
 			}
@@ -143,7 +146,7 @@ class UsersController extends AppController {
 			$this->data['User']['beta_key'] = $key;
 		}
 		unset($this->data['User']['password']);
-		unset($this->data['User']['passwd']);		
+		unset($this->data['User']['passwd']);
 	}
 
 

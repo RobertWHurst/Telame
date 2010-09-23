@@ -58,6 +58,7 @@ class SettingsController extends AppController{
 	function delete() {
 		$this->loadModel('User');
 		$this->User->deleteAccount($this->currentUser['User']['id']);
+		$this->Aacl->deleteAcoTree($this->currentUser['User']['id']);
 		$this->Session->setFlash(__('account_deleted', true));
 		$this->AuthExtension->logout();
 		$this->Auth->logout();

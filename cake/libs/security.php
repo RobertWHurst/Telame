@@ -57,18 +57,24 @@ class Security extends Object {
  * @static
  */
 	function inactiveMins() {
-		switch (Configure::read('Security.level')) {
-			case 'high':
-				return 10;
-			break;
-			case 'medium':
-				return 100;
-			break;
-			case 'low':
-			default:
-				return 300;
-				break;
-		}
+	    $_this =& Security::getInstance();
+	    $timeout = Configure::read('Session.timeout');
+	    if (!isset($timeout)) {
+	        $timeout = 1; // if not configured - use the original pattern
+	    }
+	    switch (Configure::read('Security.level')) {
+	        case 'high':
+	            $factor = 10 ;
+	            break;
+	        case 'medium':
+	            $factor = 100 ;
+	            break;
+	        case 'low':
+	        default:
+	            $factor = 300 ;
+	            break;
+	    }
+	    return $factor * $timeout / 60;
 	}
 
 /**
