@@ -363,6 +363,10 @@ msgstr "Email"
 msgid "password"
 msgstr "Password"
 
+msgid "password_again"
+msgstr "Password Again"
+
+
 #: /views/elements/pages/login.ctp:6
 #: /views/users/login.ctp:25
 msgid "auto_login"

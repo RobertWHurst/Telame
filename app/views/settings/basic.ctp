@@ -1,4 +1,4 @@
-<?php
+	<?php
 //INCLUDES
 $html->css(array(
 	'base',
@@ -84,6 +84,10 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 		<div class="options_group clearfix">
 			<h1>Gallery</h1>
 			<?php echo $this->element('settings/gallery_options'); ?>
+		</div>
+		<div class="options_group clearfix">
+			<h1>Delete Account</h1>
+			<?php echo $html->link(__('delete_account', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'delete'), null, __('delete_are_you_sure', true)); ?>
 		</div>
 	</div>
 </div>

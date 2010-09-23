@@ -4,6 +4,7 @@ $links = array(
 	array(
 		'label' => __('inbox', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'],
 			'controller' => 'messages',
 			'action' => 'inbox'
 		),
@@ -12,6 +13,7 @@ $links = array(
 	array(
 		'label' => __('compose_message', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'],
 			'controller' => 'messages',
 			'action' => 'compose'
 		),
@@ -20,6 +22,7 @@ $links = array(
 	array(
 		'label' => __('messages_sent', true),
 		'url' => array(
+			'slug' => $currentUser['User']['slug'],
 			'controller' => 'messages',
 			'action' => 'sent'
 		),

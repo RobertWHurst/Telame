@@ -51,6 +51,10 @@ class User extends AppModel {
 	);
 
 	var $validate = array(
+		'beta_key' => array(
+			'rule' => 'checkBetaKey',
+			'message' => 'That beta key is invalid',
+		),
 		'email' => array(
 			'uniqueEmail' => array(
 				'rule' => 'isUnique',
@@ -64,15 +68,19 @@ class User extends AppModel {
 				// on => create or update - will only be enforced then, default is null
 			),
 		),
-		'password' => array(
-			'rule' => array('minLength', 8),
-			'allowEmpty' => false,
+		'first_name' => array(
 			'required' => true,
-			'message' => 'Password must be 8 characters long', // to internationalize it must be done in the view
+			'allowEmpty' => false,
+			'rule' => 'alphanumeric',
+		),
+		'last_name' => array(
+			'required' => true,
+			'allowEmpty' => false,
+			'rule' => 'alphanumeric',
 		),
 		'slug' => array(
 			'unique' => array(
-				'rule' => 'isUnique',
+				'rule' => 'checkUniqueSlug',
 				'allowEmpty' => false,
 				'required' => true,
 				'message' => 'That username is already in use',
@@ -80,6 +88,24 @@ class User extends AppModel {
 			'alphanumeric' => array(
 				'rule' => 'alphaNumeric',
 				'message' => 'Your username can only contain letters and numbers',
+			),
+			'slug' => array(
+				'rule' => 'checkBlacklist',
+				'message' => 'That username is invalid',
+			),
+		),
+		'user_password' => array(
+			'length' => array(
+				'rule' => array('minLength', 8),
+				'allowEmpty' => false,
+				'required' => true,
+				'message' => 'Password must be 8 characters long', // to internationalize it must be done in the view
+			),
+		),
+		'user_password_again' => array(
+			'identicalFieldValues' => array(
+				'rule' => array('identicalFieldValues', 'user_password'),
+				'message' => 'Please re-enter your password so that the values match'
 			)
 		),
 	);
@@ -99,7 +125,36 @@ class User extends AppModel {
 		return $queryData;
 	}
 
+// -------------------- Callback functions used by the validator
 
+	function checkBetaKey($key) {
+			App::Import('Model', 'BetaKey');
+			$this->BetaKey = new BetaKey;
+			// find the key they've given
+			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));	
+	}
+
+	function checkBlacklist($slug) {
+		//$slug will have value: array('slug' => 'username')
+		return !in_array($slug['slug'], Configure::read('BlacklistUsernames'));
+	}
+
+	function checkUniqueSlug($slug) {
+		return !$this->find('first', array('conditions' => array('lower(User.slug)' => strtolower($slug['slug']))));
+	}
+
+	function identicalFieldValues( $field=array(), $compare_field=null ) {
+		foreach( $field as $key => $value){
+			$v1 = $value;
+			$v2 = $this->data[$this->name][$compare_field];
+			if($v1 !== $v2) {
+				return false;
+			} else {
+				continue;
+			}
+		}
+		return true;
+	}
 // -------------------- ACL functions
 	function parentNode() {
 		return null;
@@ -123,7 +178,12 @@ class User extends AppModel {
 		$this->Acl = new AclComponent();
 		$this->Acl->startup($controller);
 
-		if (is_null($vals)) {
+		// the user_id is already in the aco table
+		if (is_null($root) && $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)))) {
+			return false;
+		}
+
+		if (is_null($acls)) {
 			$node = $this->Acl->Aco->node('Users');
 			$parentId = Set::extract($node, "0.Aco.id");
 
@@ -132,10 +192,10 @@ class User extends AppModel {
 
 			$node = $this->Acl->Aco->node('User::' . $uid);
 			$parentId = Set::extract($node, "0.Aco.id");
-			
+
 			$acls = Configure::read('UserAcls');
 		} else {
-			$node = $this->Acl->node($root);
+			$node = $this->Acl->Aco->node($root);
 			$parentId = Set::extract($node, '0.Aco.id');
 		}
 
@@ -157,13 +217,13 @@ class User extends AppModel {
 // files
 // groups
 
-	function delete($uid) {
+	function deleteAccount($uid) {
 		$uid = intval($uid);
 		$this->id = $uid;
 		$this->recursive = -1;
 		$user = $this->findById($uid);
 
-		$userDir = USER_DIR . $user['User']['home_dir'] . DS . $user['User']['sub_dir'];
+		$userDir = USER_DIR . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $user['User']['id'];
 		$this->removeUserDir($userDir);
 		// TODO; finish removing the rest of the user info
 
@@ -184,12 +244,12 @@ class User extends AppModel {
 	}
 
 	function getProfile($slug, $arguments = array()) {
-	
+
 /*	FIXME bug in parseargs
 		$defaults = array(
 			'contain' => array(
-				'Profile', 
-				'Profile.Country', 
+				'Profile',
+				'Profile.Country',
 				'Notification' => array(
 					'conditions' => array(
 						'new' => true
@@ -201,14 +261,14 @@ class User extends AppModel {
 pr($options);
 */
 
-	
+
 		//get the profile
 		$this->recursive = 2;
 		$user = $this->find('first', array(
 			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
 			'contain' => array(
-				'Profile', 
-				'Profile.Country', 
+				'Profile',
+				'Profile.Country',
 //				'Notification' => array(
 //					'conditions' => array(
 //						'new' => true
@@ -232,17 +292,16 @@ pr($options);
 		$data['User']['type'] = '1';
 		$data['User']['searchable'] = true;
 		$data['User']['avatar_id'] = '-1';
-		$data['User']['active'] = false;
+		$data['User']['first_login'] = true;
 
 		// save the user
 		if (!$this->save(Sanitize::clean($data))) {
-			$error['User']['new_user'] = 'Could not create new user';
+			// don't continue anything if this failed
+			return false;
 		}
 
-		// Save the user id, we'll need it later
-		$this->recursive = -1;
-		$user = $this->find('first', array('conditions' => array('email' => $data['User']['email']), 'fields' => array('id')));
-		$uid = $user['User']['id'];
+		// no longer needed, scrap it
+		unset($data);
 
 		// make their home directory structure
 		$dir = $this->makeUserDir($this->id);
@@ -253,18 +312,22 @@ pr($options);
 			$error['User']['user_dir'] = 'Could not create user directory';
 		}
 
-		unset($data);
+		$this->Profile->create();
+		$profile['dob'] = 'NULL';
+		$profile['gallery'] = 'NULL';
+		$this->Profile->save($profile);
+
 		$this->Album->create();
 		$data['Album']['title'] = 'Profile Pictures';
-		$data['Album']['description'] = 'User\'s Profile Pictures';
-		$data['Album']['user_id'] = $uid;
+		$data['Album']['description'] = __('profile_pictures', true);
+		$data['Album']['user_id'] = $this->id;
 		$data['Album']['slug'] = 'profile_pictures';
 
 		if (!$this->Album->save($data)) {
 			$error['User']['album_error'] = 'Could not create album';
 		}
 
-		if (!$this->createAcl($uid)) {
+		if (!$this->createAcl($this->id)) {
 			$error['User']['acl'] = 'ACL error';
 		}
 
@@ -279,10 +342,10 @@ pr($options);
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
 	function makeUserDir($id) {
 		$baseDir = USER_DIR;
-		$home = rand(0, 31500) . DS;
-		$sub = rand(0, 31500) . DS;
+		$home = rand(0, 31500);
+		$sub = rand(0, 31500);
 
-		$userHome = $baseDir . $home . $sub . $id . DS;
+		$userHome = $baseDir . $home . DS . $sub . DS . $id . DS;
 		if (mkdir($userHome, 0777, true)) {
 			return array('home' => $home, 'sub' => $sub);
 		} else {
@@ -297,7 +360,7 @@ pr($options);
 		} elseif(is_dir($dir)) {
 			$scan = glob(rtrim($dir,'/').'/*');
 			foreach($scan as $index=>$path) {
-				recursiveDelete($path);
+				$this->removeUserDir($path);
 			}
 			return @rmdir($dir);
 		}

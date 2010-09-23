@@ -1,4 +1,12 @@
 <?php
+Configure::write('BlacklistUsernames', array(
+	'c', //confirm new user
+	'login',
+	'logout',
+	'search',
+	'signup',
+));
+
 // Specify custome config information here
 Configure::write('SiteName', 'Telame');
 Configure::write('StaticDomain', 'http://s.telame.com');
