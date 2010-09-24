@@ -3,7 +3,7 @@ class Event extends AppModel {
 
 	var $belongsTo = array('User');
 
-	function addEvent($uid, $data) {
+	function add($uid, $data) {
 			//Create and save the new event in the table.
 			//Event type is set to editable - because this is a user event.
 			$this->create();
@@ -13,7 +13,7 @@ class Event extends AppModel {
 			}
 			$data['Event']['user_id'] = $uid;
 			if ($this->save($data)) {
-				return true;
+				return $this->id;
 			} else {
 				return false;
 			}

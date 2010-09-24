@@ -21,7 +21,7 @@ foreach ($js as $j) {
 //page title
 ?>
 <div id="page_head">
-	<h1 class="page_title"><?php echo __('calendar_title', true); ?></h1>
+	<h1 class="page_title"><?php echo $user['User']['first_name'] . '\'s ' . __('calendar_title', true); ?></h1>
 </div>
 <div id="page_body">
 	<div id="eventdata"></div>

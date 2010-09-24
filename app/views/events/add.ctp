@@ -13,7 +13,8 @@
 			'action' => 'add',
 		)
 	));
-	echo $form->input('title' , array('label' => 'Event title'));
+	echo $form->input('title' , array('label' => __('event_title', true)));
+	echo $form->input('show_on_wall' , array('label' => __('event_show_wall', true), 'default' => 'checked'));
 	echo '<br />At: ' . $displayTime;
 	echo $form->input('start', array('type'=>'hidden', 'value'=>$event['Event']['start']));
 	echo $form->input('end', array('type'=>'hidden', 'value'=>$event['Event']['end']));

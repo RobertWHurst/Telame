@@ -78,7 +78,6 @@ class WallPostsController extends AppController {
 			$wallOwnerId = $visitorId;
 		}
 
-		$this->WallPost->create();
 
 		if($reply_id){
 			$this->data['reply_parent_id'] = $reply_id;
@@ -87,19 +86,11 @@ class WallPostsController extends AppController {
 		$this->data['WallPost']['user_id'] = $wallOwnerId;
 		$this->data['WallPost']['author_id'] = $visitorId;
 
-		//save the post type
-		//TODO: this will change based on the content being posted.
-		$this->data['WallPost']['type'] = 'post';
-
-		//save the post content and time
-		$this->data['WallPost']['post'] = Sanitize::clean($this->data['WallPost']['post']);
-		$this->data['WallPost']['posted'] = date("Y-m-d H:i:s");
-
 		// add which groups can view this
 //		$this->data
 
 		//commit the data to the db
-		$this->WallPost->save($this->data);
+		$this->WallPost->add($this->data, array('type' => 'post'));
 
 		//TODO
 		//we need to save a notification right here.

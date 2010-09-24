@@ -1,6 +1,6 @@
 <?php
 //make a navigation strip
-$who = (empty($user['User']['first_name']) ? __('your', true) : $user['User']['first_name']) . ' ';
+$who = (empty($user['User']['first_name']) ? __('your', true) : $user['User']['first_name']) . '\'s ';
 $links = array(
 	array(
 		'label' => $who . __('wall', true),
@@ -17,6 +17,15 @@ $links = array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'albums',
 			'action' => 'albums',
+		),
+		'classes' => 'button'
+	),
+	array(
+		'label' => $who . __('calendar', true),
+		'url' => array(
+			'slug' => $user['User']['slug'],
+			'controller' => 'events',
+			'action' => 'calendar',
 		),
 		'classes' => 'button'
 	),

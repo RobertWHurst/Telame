@@ -8,22 +8,38 @@
 ?>
 		</div>
 		<div class="content">
-<?php			
-			if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){		
-				$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
-				$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";				
+<?php
+				if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){
+					$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
+					$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";
+				}
+				else{
+					$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . ' </strong>';
+				}
+
+			if($post['WallPost']['type'] == 'post') {
+				//Note: author name is included in the parse because markdown sees
+				//it as part of the paragraph and wrapps it within the p tags.
+				echo $markdown->parse($author_name . "\r\n" . $post['WallPost']['post']);
+			} elseif($post['WallPost']['type'] == 'event') {
+			$url = array(
+				'slug' => $post['PostAuthor']['slug'], 
+				'controller' => 'events', 
+				'action' => 'calendar', 
+				substr($post['Event']['start'], 0, 4),
+				substr($post['Event']['start'], 5, 2), 
+				substr($post['Event']['start'], 8, 2)
+			);
+				echo $markdown->parse(
+					$author_name . __('added_an_event', true) . "\r\n<br />" . 
+					$html->link($post['Event']['title'], $url)
+				);
 			}
-			else{				
-				$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . ' </strong>';				
-			}
-			//Note: author name is included in the parse because markdown sees
-			//it as part of the paragraph and wrapps it within the p tags.
-			echo $markdown->parse($author_name . "\r\n" . $post['WallPost']['post']);
 ?>
 		</div>
 		<?php if($post['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']): ?>
 			<div class="deletePost">
-<?php 
+<?php
 				$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
@@ -31,7 +47,7 @@
 		<?php endif; ?>
 		<div class="baseline">
 			<div class="baseline_controls">
-<?php 	
+<?php
 				if($post['WallPost']['like']){
 					$text = __('like', true) . " ({$post['WallPost']['like']})";
 					$classes = "like liked";
@@ -60,7 +76,7 @@
 				if($post['WallPost']['like'] || $post['WallPost']['dislike']):
 					$like = ' ' . $post['WallPost']['like'];
 					$like .= ' ' .	__n('person_likes_this', 'people_like_this', $post['WallPost']['like'], true);
-			
+
 					$dislike = ' ' . $post['WallPost']['dislike'];
 					$dislike .= ' ' .  __n('person_dislikes_this', 'people_dislike_this', $post['WallPost']['dislike'], true);
 ?>
@@ -76,9 +92,9 @@
 		</div>
 	</div>
 	<div class="commentsWrap">
-		<div class="arrow_up"></div>		
-		<div class="comments">	
-<?php 
+		<div class="arrow_up"></div>
+		<div class="comments">
+<?php
 			if($post['Replies']){
 				foreach($post['Replies'] as $comment)
 					echo $this->element('wall_post_comment', compact('comment'));
