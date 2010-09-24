@@ -53,6 +53,7 @@ class AaclComponent extends Object {
 			$this->Group = new Group();
 			$groups = $this->Group->getFriendLists(array('uid' => $uid));
 		}
+		
 		// Find all the direct children, only direct
 		$children = $this->Acl->Aco->children($parent['Aco']['id'], true);
 

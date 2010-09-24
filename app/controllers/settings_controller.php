@@ -109,38 +109,38 @@ class SettingsController extends AppController{
 	}
 
 	function groups($gid = null) {
-		$this->loadModel('Group');
+		if(empty($this->data)) {
+			$this->loadModel('Group');
 
-		//get the group list
-		$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
+			//get the group list
+			$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
 
-		//get the current user and note their id.
-		$uid = $this->currentUser['User']['id'];
+			//get the current user and note their id.
+			$uid = $this->currentUser['User']['id'];
 
-		//create an empty permissions var
-		$permissions = $currentGroup = false;
+			//create an empty permissions var
+			$permissions = $currentGroup = false;
 
-		if($gid){
-			//get the current user's acl data.
-			$acoTree = $this->Aacl->getAcoTree($uid);
-
-			//filter through the tree for useful data
-			foreach($acoTree as $aco){
-				foreach($aco['Groups'] as $group){
-					if($group['Group']['id'] == $gid){
-						$currentGroup = $group;
-						$permissions[$aco['Aco']['id']] = array(
-							'id' => $aco['Aco']['id'],
-							'alias' => $aco['Aco']['alias'],
-							'canRead' => ($group['Group']['canRead'])? 'yes' : 'no'
-						);
-					}
-				}
+			if ($gid) {
+				//get the current user's acl data.
+				$this->Group->recursive = -1;
+				// find needs to be of type all or else the aacl won't know the format
+				$group = $this->Group->find('all', array('conditions' => array('Group.id' => Sanitize::clean(intval($gid)))));
+				$permissions = $this->Aacl->getAcoTree($uid, $group);
 			}
-		}
 
-		//set the view data
-		$this->set(compact('groups', 'currentGroup', 'permissions'));
+			//set the view data
+			$this->set(compact('groups', 'currentGroup', 'permissions'));
+		// Save permissions
+		} else {
+			if ($this->Aacl->saveAco($this->data)){
+				$this->Session->setFlash(__('permissions_saved', true), 'default', array('class' => 'info'));
+			} else {
+				$this->Session->setFlash(__('permissions_not_saved', true), 'default', array('class' => 'warning'));
+			}
+			$this->redirect($this->here);
+			exit;
+		}
 	}
 
 	function create_group($id){
@@ -169,27 +169,6 @@ class SettingsController extends AppController{
 			$this->Session->setFlash(__('group_not_deleted', true));
 		}
 		$this->redirect($this->referer());
-	}
-
-	function permissions($selectedFriendList = 0) {
-		if(empty($this->data)) {
-			//get the current user and note their id.
-			$uid = $this->currentUser['User']['id'];
-
-			//get the current user's acl data.
-			$acoTree = $this->Aacl->getAcoTree($uid);
-
-			$this->set(compact('acoTree'));
-		} else {
-			if ($this->Aacl->saveAco($this->data)){
-				$this->Session->setFlash(__('permissions_saved', true), 'default', array('class' => 'info'));
-			} else {
-				$this->Session->setFlash(__('permissions_not_saved', true), 'default', array('class' => 'warning'));
-			}
-
-			$this->redirect($this->here);
-			exit;
-		}
 	}
 
 	function profile() {

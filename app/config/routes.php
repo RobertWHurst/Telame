@@ -120,7 +120,7 @@
 	// Settings
 	Router::connect('/:slug/settings', array('controller' => 'settings', 'action' => 'basic'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/settings/friends', array('controller' => 'settings', 'action' => 'friends'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/:slug/settings/groups', array('controller' => 'settings', 'action' => 'groups'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/settings/groups/*', array('controller' => 'settings', 'action' => 'groups'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/s/u/*', array('controller' => 'settings', 'action' => 'gallery'), array('routeClass' => 'SlugRoute'));
 
 	// Wall Posts
