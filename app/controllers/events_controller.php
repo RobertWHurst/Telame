@@ -58,19 +58,24 @@ class EventsController extends AppController {
 	}
 
 	function calendar($year=null, $month=null, $day=null) {
-		$this->Profile->getProfile($this->params['slug']);
-		$this->layout = 'tall_header_w_sidebar';
-		if ($year != null) {
-			$this->set('openYear', $year);
-			if ($month != null) {
-				$month = ltrim($month, '0');
-				$month = $month-1;
-				$this->set('openMonth', $month);
+		$user = $this->Profile->getProfile($this->params['slug']);
+		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'calendar')) {
+			$this->layout = 'tall_header_w_sidebar';
+			if ($year != null) {
+				$this->set('openYear', $year);
+				if ($month != null) {
+					$month = ltrim($month, '0');
+					$month = $month-1;
+					$this->set('openMonth', $month);
+				}
+				if ($day != null){
+					$day = ltrim($day, '0');
+					$this->set('openDay', $day);
+				}
 			}
-			if ($day != null){
-				$day = ltrim($day, '0');
-				$this->set('openDay', $day);
-			}
+		} else {
+			$this->Session->setFlash(__('not_allowed_calendar', true), 'default', array('class' => 'warning'));
+			$this->redirect($this->referer());
 		}
 	}
 

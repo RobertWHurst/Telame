@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-09-21 08:22-0700\n"
+"POT-Creation-Date: 2010-09-25 11:24-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /app_controller.php:54
-msgid "email_not_confirmed"
+#: /app_controller.php:51
+msgid "new_user_welcome"
 msgstr ""
 
-#: /security.php:178
-msgid "You cannot use an empty key for Security::cipher()"
+#: /app_controller.php:62
+msgid "email_not_confirmed"
 msgstr ""
 
 #: /controllers/albums_controller.php:20
@@ -30,43 +30,47 @@ msgstr ""
 msgid "album_added"
 msgstr ""
 
-#: /controllers/events_controller.php:38
+#: /controllers/events_controller.php:40
 msgid "event_saved"
 msgstr ""
 
-#: /controllers/events_controller.php:40
+#: /controllers/events_controller.php:52
 msgid "event_not_saved"
 msgstr ""
 
-#: /controllers/events_controller.php:92
+#: /controllers/events_controller.php:77
+msgid "not_allowed_calendar"
+msgstr ""
+
+#: /controllers/events_controller.php:114
 msgid "event_deleted"
 msgstr ""
 
-#: /controllers/events_controller.php:94
+#: /controllers/events_controller.php:116
 msgid "event_not_deleted"
 msgstr ""
 
-#: /controllers/events_controller.php:97
+#: /controllers/events_controller.php:119
 msgid "event_not_allowed_delete"
 msgstr ""
 
-#: /controllers/groups_users_controller.php:18
+#: /controllers/groups_users_controller.php:17
 msgid "friend_request_already_sent"
 msgstr ""
 
-#: /controllers/groups_users_controller.php:34
+#: /controllers/groups_users_controller.php:33
 msgid "friend_request"
 msgstr ""
 
-#: /controllers/groups_users_controller.php:43
+#: /controllers/groups_users_controller.php:42
 msgid "bad_hacker"
 msgstr ""
 
-#: /controllers/groups_users_controller.php:46
+#: /controllers/groups_users_controller.php:45
 msgid "friend_added_successfully"
 msgstr ""
 
-#: /controllers/groups_users_controller.php:84
+#: /controllers/groups_users_controller.php:83
 msgid "not_allowed_friends"
 msgstr ""
 
@@ -78,8 +82,8 @@ msgstr ""
 msgid "message_thread_deleted"
 msgstr ""
 
-#: /controllers/pages_controller.php:25;32;79
-#: /controllers/users_controller.php:123
+#: /controllers/pages_controller.php:25;32;80
+#: /controllers/users_controller.php:125
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:23
 #: /views/layouts/simple_header.ctp:25
@@ -90,13 +94,13 @@ msgstr ""
 #: /views/settings/friends.ctp:21
 #: /views/settings/groups.ctp:21
 #: /views/settings/permissions.ctp:21
-#: /views/users/confirm.ctp:16
+#: /views/users/confirm.ctp:18
 #: /views/users/login.ctp:17
 #: /views/users/profile.ctp:25
 msgid "site_name"
 msgstr ""
 
-#: /controllers/pages_controller.php:79
+#: /controllers/pages_controller.php:80
 #: /views/pages/news.ctp:24
 msgid "news_title"
 msgstr ""
@@ -109,63 +113,59 @@ msgstr ""
 msgid "profile_updated"
 msgstr ""
 
-#: /controllers/settings_controller.php:38
-msgid "your_birthday"
-msgstr ""
-
-#: /controllers/settings_controller.php:53;55
+#: /controllers/settings_controller.php:50;52
 msgid "profile_settings_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:143
-msgid "group_added"
+#: /controllers/settings_controller.php:62
+msgid "account_deleted"
 msgstr ""
 
-#: /controllers/settings_controller.php:146
-msgid "group_not_added"
-msgstr ""
-
-#: /controllers/settings_controller.php:156
-msgid "group_not_allowed_delete"
-msgstr ""
-
-#: /controllers/settings_controller.php:159
-msgid "group_deleted"
-msgstr ""
-
-#: /controllers/settings_controller.php:162
-msgid "group_not_deleted"
-msgstr ""
-
-#: /controllers/settings_controller.php:178
+#: /controllers/settings_controller.php:137
 msgid "permissions_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:180
+#: /controllers/settings_controller.php:139
 msgid "permissions_not_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:26
+#: /controllers/settings_controller.php:150
+msgid "group_added"
+msgstr ""
+
+#: /controllers/settings_controller.php:153
+msgid "group_not_added"
+msgstr ""
+
+#: /controllers/settings_controller.php:163
+msgid "group_not_allowed_delete"
+msgstr ""
+
+#: /controllers/settings_controller.php:166
+msgid "group_deleted"
+msgstr ""
+
+#: /controllers/settings_controller.php:169
+msgid "group_not_deleted"
+msgstr ""
+
+#: /controllers/users_controller.php:27
 msgid "email_confirmed"
 msgstr ""
 
-#: /controllers/users_controller.php:28
+#: /controllers/users_controller.php:30
 msgid "email_or_hash_failed"
 msgstr ""
 
-#: /controllers/users_controller.php:103
-msgid "password_mismatch"
+#: /controllers/users_controller.php:111
+msgid "validation_error"
 msgstr ""
 
-#: /controllers/users_controller.php:112
-msgid "invalid_key"
-msgstr ""
-
-#: /controllers/users_controller.php:133
+#: /controllers/users_controller.php:136
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:135
+#: /controllers/users_controller.php:138
 msgid "user_create_error"
 msgstr ""
 
@@ -173,15 +173,15 @@ msgstr ""
 msgid "wall_post_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:152
+#: /controllers/wall_posts_controller.php:143
 msgid "wall_post_delete_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:179
+#: /controllers/wall_posts_controller.php:170
 msgid "wall_post_delete"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:189
+#: /controllers/wall_posts_controller.php:180
 msgid "wall_post_bad_hacker"
 msgstr ""
 
@@ -189,11 +189,15 @@ msgstr ""
 msgid "not_allowed_profile"
 msgstr ""
 
+#: /models/user.php:286
+msgid "profile_pictures"
+msgstr ""
+
 #: /views/albums/album.ctp:23
 msgid "album"
 msgstr ""
 
-#: /views/albums/album.ctp:35
+#: /views/albums/album.ctp:34
 #: /views/albums/albums.ctp:25
 msgid "upload_images"
 msgstr ""
@@ -223,22 +227,31 @@ msgstr ""
 msgid "gallery_options"
 msgstr ""
 
-#: /views/elements/profile_navigation.ctp:5
+#: /views/elements/profile_navigation.ctp:3
+msgid "your"
+msgstr ""
+
+#: /views/elements/profile_navigation.ctp:6
 #: /views/elements/sidebar_modules.ctp:44;44
 msgid "wall"
 msgstr ""
 
-#: /views/elements/profile_navigation.ctp:14
+#: /views/elements/profile_navigation.ctp:15
 #: /views/elements/sidebar_modules.ctp:71;71
 msgid "media"
 msgstr ""
 
-#: /views/elements/profile_navigation.ctp:23
+#: /views/elements/profile_navigation.ctp:24
+#: /views/elements/sidebar_modules.ctp:79;79
+msgid "calendar"
+msgstr ""
+
+#: /views/elements/profile_navigation.ctp:33
 #: /views/elements/sidebar_modules.ctp:63;63
 msgid "friends"
 msgstr ""
 
-#: /views/elements/profile_navigation.ctp:32
+#: /views/elements/profile_navigation.ctp:42
 msgid "about"
 msgstr ""
 
@@ -263,10 +276,6 @@ msgstr ""
 msgid "messages"
 msgstr ""
 
-#: /views/elements/sidebar_modules.ctp:79;79
-msgid "calendar"
-msgstr ""
-
 #: /views/elements/wall.ctp:15
 msgid "older_posts"
 msgstr ""
@@ -284,11 +293,15 @@ msgid "wall_post_label"
 msgstr ""
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:95
+#: /views/elements/wall_post.ctp:111
 msgid "wall_post_submit"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:28
+#: /views/elements/wall_post.ctp:34
+msgid "added_an_event"
+msgstr ""
+
+#: /views/elements/wall_post.ctp:44
 #: /views/elements/wall_post_comment.ctp:8
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
@@ -296,25 +309,25 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:36;40
+#: /views/elements/wall_post.ctp:52;56
 msgid "like"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:46;50
+#: /views/elements/wall_post.ctp:62;66
 msgid "dislike"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:55;92
+#: /views/elements/wall_post.ctp:71;108
 msgid "comment"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:62
+#: /views/elements/wall_post.ctp:78
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /views/elements/wall_post.ctp:65
+#: /views/elements/wall_post.ctp:81
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] ""
@@ -339,11 +352,11 @@ msgstr ""
 msgid "inbox"
 msgstr ""
 
-#: /views/elements/messages/navigation.ctp:13
+#: /views/elements/messages/navigation.ctp:14
 msgid "compose_message"
 msgstr ""
 
-#: /views/elements/messages/navigation.ctp:21
+#: /views/elements/messages/navigation.ctp:23
 msgid "messages_sent"
 msgstr ""
 
@@ -359,6 +372,7 @@ msgstr ""
 
 #: /views/elements/pages/login.ctp:5
 #: /views/users/login.ctp:24
+#: /views/users/signup.ctp:26
 msgid "password"
 msgstr ""
 
@@ -418,12 +432,36 @@ msgstr ""
 msgid "basic"
 msgstr ""
 
-#: /views/elements/settings/navigation.ctp:13
+#: /views/elements/settings/navigation.ctp:14
 msgid "lists_and_privacy"
 msgstr ""
 
-#: /views/elements/settings/navigation.ctp:21
+#: /views/elements/settings/navigation.ctp:23
 msgid "manage_friends"
+msgstr ""
+
+#: /views/events/add.ctp:16
+msgid "event_title"
+msgstr ""
+
+#: /views/events/add.ctp:17
+msgid "event_show_wall"
+msgstr ""
+
+#: /views/events/calendar.ctp:24
+msgid "calendar_title"
+msgstr ""
+
+#: /views/events/calendar.ctp:30
+msgid "calendar_no_js"
+msgstr ""
+
+#: /views/events/edit.ctp:8
+msgid "event_delete"
+msgstr ""
+
+#: /views/events/edit.ctp:16
+msgid "event_delte_confirm"
 msgstr ""
 
 #: /views/groups_users/add_friend.ctp:20
@@ -435,7 +473,6 @@ msgid "add"
 msgstr ""
 
 #: /views/helpers/acl.php:25
-#: /views/settings/groups.ctp:60
 msgid "permissions_for"
 msgstr ""
 
@@ -476,6 +513,7 @@ msgid "friend_confirm"
 msgstr ""
 
 #: /views/profiles/add.ctp:18
+#: /views/settings/groups.ctp:62
 #: /views/settings/permissions.ctp:37
 msgid "save"
 msgstr ""
@@ -487,84 +525,92 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
-#: /views/settings/basic.ctp:44
+#: /views/settings/basic.ctp:41
 msgid "first_name"
 msgstr ""
 
-#: /views/settings/basic.ctp:48
+#: /views/settings/basic.ctp:45
 msgid "last_name"
 msgstr ""
 
-#: /views/settings/basic.ctp:52
+#: /views/settings/basic.ctp:49
 msgid "sex"
 msgstr ""
 
-#: /views/settings/basic.ctp:53
+#: /views/settings/basic.ctp:50
 msgid "male"
 msgstr ""
 
-#: /views/settings/basic.ctp:53
+#: /views/settings/basic.ctp:50
 msgid "female"
 msgstr ""
 
-#: /views/settings/basic.ctp:56
+#: /views/settings/basic.ctp:53
 msgid "sex_interest"
 msgstr ""
 
-#: /views/settings/basic.ctp:57
+#: /views/settings/basic.ctp:54
 msgid "men"
 msgstr ""
 
-#: /views/settings/basic.ctp:57
+#: /views/settings/basic.ctp:54
 msgid "women"
 msgstr ""
 
-#: /views/settings/basic.ctp:57
+#: /views/settings/basic.ctp:54
 msgid "bisexual"
 msgstr ""
 
-#: /views/settings/basic.ctp:60
+#: /views/settings/basic.ctp:57
 msgid "political"
 msgstr ""
 
-#: /views/settings/basic.ctp:64
+#: /views/settings/basic.ctp:61
 msgid "religious"
 msgstr ""
 
-#: /views/settings/basic.ctp:68
+#: /views/settings/basic.ctp:65
 msgid "rel_status"
 msgstr ""
 
-#: /views/settings/basic.ctp:69
+#: /views/settings/basic.ctp:66
 msgid "single"
 msgstr ""
 
-#: /views/settings/basic.ctp:69
+#: /views/settings/basic.ctp:66
 msgid "in_a_relationship"
 msgstr ""
 
-#: /views/settings/basic.ctp:69
+#: /views/settings/basic.ctp:66
 msgid "married"
 msgstr ""
 
-#: /views/settings/basic.ctp:69
+#: /views/settings/basic.ctp:66
 msgid "its_complicated"
 msgstr ""
 
-#: /views/settings/basic.ctp:72
+#: /views/settings/basic.ctp:69
 msgid "city"
 msgstr ""
 
-#: /views/settings/basic.ctp:76
+#: /views/settings/basic.ctp:73
 msgid "country"
 msgstr ""
 
-#: /views/settings/basic.ctp:80
+#: /views/settings/basic.ctp:77
 msgid "dob"
 msgstr ""
 
-#: /views/settings/basic.ctp:84
+#: /views/settings/basic.ctp:81
 msgid "update_profile"
+msgstr ""
+
+#: /views/settings/basic.ctp:90
+msgid "delete_account"
+msgstr ""
+
+#: /views/settings/basic.ctp:90
+msgid "delete_are_you_sure"
 msgstr ""
 
 #: /views/settings/friends.ctp:24
@@ -579,19 +625,7 @@ msgstr ""
 msgid "groups"
 msgstr ""
 
-#: /views/settings/groups.ctp:65
-msgid "this_group_can_view_your"
-msgstr ""
-
-#: /views/settings/groups.ctp:68
-msgid "no"
-msgstr ""
-
-#: /views/settings/groups.ctp:68
-msgid "yes"
-msgstr ""
-
-#: /views/settings/groups.ctp:74
+#: /views/settings/groups.ctp:64
 msgid "select_group_for_permissions"
 msgstr ""
 
@@ -599,11 +633,15 @@ msgstr ""
 msgid "group_permission_title"
 msgstr ""
 
-#: /views/users/confirm.ctp:23
+#: /views/users/confirm.ctp:25
 msgid "confirm"
 msgstr ""
 
-#: /views/users/search.ctp:21
+#: /views/users/search.ctp:29
 msgid "search_title"
+msgstr ""
+
+#: /views/users/signup.ctp:27
+msgid "password_again"
 msgstr ""
 
