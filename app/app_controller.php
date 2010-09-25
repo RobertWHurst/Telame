@@ -66,4 +66,12 @@ class AppController extends Controller {
 		return $currentUser;
 	}
 
+	function _forceSSL() {
+		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
+	}
+
+	function _unforceSSL() {
+		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
+	}
+
 }

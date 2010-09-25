@@ -152,14 +152,6 @@ class UsersController extends AppController {
 
 //----------------- Important functions we don't need to see often ------------------//
 
-	function _forceSSL() {
-		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
-	}
-
-	function _unforceSSL() {
-		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
-	}
-
 	function login(){
 		$this->layout = 'tall_header';
 		$this->AuthExtension->checkRememberMe();

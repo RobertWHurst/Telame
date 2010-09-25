@@ -4,6 +4,18 @@ class SettingsController extends AppController{
 	var $helpers = array('Acl');
 	var $uses = array();
 
+	function beforeFilter(){
+		parent::beforeFilter();
+
+		$this->Security->blackHoleCallback = '_forceSSL';
+		$this->Security->requireSecure('basic');
+		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
+		 	$this->_unforceSSL();
+		}
+		$this->Auth->allow(array('confirm', 'signup'));
+
+	}
+
 	function beforeRender() {
 		parent::beforefilter();
 
@@ -36,16 +48,29 @@ class SettingsController extends AppController{
 				$dob['Event']['recurring'] = true;
 
 				$this->User->Event->removeBirthday($this->currentUser['User']['id']);
-				$this->User->Event->addEvent($this->currentUser['User']['id'], $dob);
+				$this->User->Event->add($this->currentUser['User']['id'], $dob);
 
-				// save thier name too
-				$this->User->read(null, $this->currentUser['User']['id']);
-				$this->User->set(array(
+				if (!empty($this->data['Profile']['user_password']) && $this->data['Profile']['user_password'] == $this->data['Profile']['user_password_again']) {
+					$userInfo = array(
 					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
 					'last_name' => Sanitize::clean($this->data['Profile']['last_name']),
 					'first_login' => false,
-				));
-				$this->User->save(null, array('fieldList' => array('first_name', 'last_name', 'first_login')));
+					'password' => $this->Auth->password($this->data['Profile']['user_password']),
+					);
+					$fieldList = array('first_name', 'last_name', 'first_login', 'password');
+				} else {
+					$userInfo = array(
+					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
+					'last_name' => Sanitize::clean($this->data['Profile']['last_name']),
+					'first_login' => false,
+					);
+					$fieldList = array('first_name', 'last_name', 'first_login');
+				}
+
+				// save thier name too
+				$this->User->read(null, $this->currentUser['User']['id']);
+				$this->User->set($userInfo);
+				$this->User->save(null, array('fieldList' => $fieldList));
 
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
