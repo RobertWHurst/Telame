@@ -54,6 +54,16 @@ class GroupsUser extends AppModel {
 		return $friends;
 	}
 
+	function getFriendBirthdays($uid) {
+		$friendIds = $this->getFriendIds($uid);
+		return $this->User->Profile->find('all', array(
+			'conditions' => array(
+				'Profile.dob LIKE' => '%' . date('-m-d', strtotime('now')),
+				'User.id' => $friendIds,
+			)
+		));
+	}
+
 	/* returns all your friend ids in list form
 	 * Friend_id and User_id seem backwards, but we want to do a test based on which users are friends with you, they have confirmed so
 	 */

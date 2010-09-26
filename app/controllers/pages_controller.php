@@ -77,9 +77,11 @@ class PagesController extends AppController {
 		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 
+		$birthdays = $this->GroupsUser->getFriendBirthdays($this->currentUser['User']['id']);
+
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
 
-		$this->set(compact('user', 'wallPosts', 'friendLists'));
+		$this->set(compact('birthdays', 'friendLists', 'user', 'wallPosts'));
 	}
 
 

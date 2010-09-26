@@ -7,4 +7,8 @@
 			<?php endforeach; ?>
 		</ul>
 	</div>
+	
+	<div>
+		<?php pr($birthdays); ?>
+	</div>
 </div>
