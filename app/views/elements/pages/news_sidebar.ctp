@@ -7,8 +7,23 @@
 			<?php endforeach; ?>
 		</ul>
 	</div>
-	
-	<div>
-		<?php pr($birthdays); ?>
+
+<?php if(is_array($birthdays)): ?>
+	<div class="news_filters">
+		<h1><?php __('birthdays_today'); ?></h1>
+<?php 	foreach ($birthdays as $bday) {
+			echo $htmlImage->image('icons/cake.png', array('static' => true));
+			echo $html->link($bday['User']['full_name'], array(
+				'controller' => 'users',
+				'action' => 'profile',
+				$bday['User']['slug'],
+			));
+			$year = date('Y', strtotime($bday['Profile']['dob']));
+			$thisYear = date('Y');
+			echo ' - ' . ($thisYear - $year);
+		}
+?>
 	</div>
+<?php endif; ?>
+
 </div>
