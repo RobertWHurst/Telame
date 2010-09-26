@@ -13,7 +13,7 @@
 			$event['Event']['id'],
 		),
 		null,
-		__('event_delte_confirm', true)
+		__('event_delete_confirm', true)
 	);
 	echo $form->end(array('label' => 'Save' ));
 	//Below is just a cancel button. See previous post for the back() function ?>

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-09-25 11:24-0700\n"
+"POT-Creation-Date: 2010-09-25 18:38-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -82,7 +82,7 @@ msgstr ""
 msgid "message_thread_deleted"
 msgstr ""
 
-#: /controllers/pages_controller.php:25;32;80
+#: /controllers/pages_controller.php:25;32;82
 #: /controllers/users_controller.php:125
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:23
@@ -100,7 +100,7 @@ msgstr ""
 msgid "site_name"
 msgstr ""
 
-#: /controllers/pages_controller.php:80
+#: /controllers/pages_controller.php:82
 #: /views/pages/news.ctp:24
 msgid "news_title"
 msgstr ""
@@ -113,39 +113,39 @@ msgstr ""
 msgid "profile_updated"
 msgstr ""
 
-#: /controllers/settings_controller.php:50;52
+#: /controllers/settings_controller.php:75;77
 msgid "profile_settings_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:62
+#: /controllers/settings_controller.php:87
 msgid "account_deleted"
 msgstr ""
 
-#: /controllers/settings_controller.php:137
+#: /controllers/settings_controller.php:162
 msgid "permissions_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:139
+#: /controllers/settings_controller.php:164
 msgid "permissions_not_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:150
+#: /controllers/settings_controller.php:175
 msgid "group_added"
 msgstr ""
 
-#: /controllers/settings_controller.php:153
+#: /controllers/settings_controller.php:178
 msgid "group_not_added"
 msgstr ""
 
-#: /controllers/settings_controller.php:163
+#: /controllers/settings_controller.php:188
 msgid "group_not_allowed_delete"
 msgstr ""
 
-#: /controllers/settings_controller.php:166
+#: /controllers/settings_controller.php:191
 msgid "group_deleted"
 msgstr ""
 
-#: /controllers/settings_controller.php:169
+#: /controllers/settings_controller.php:194
 msgid "group_not_deleted"
 msgstr ""
 
@@ -371,6 +371,7 @@ msgid "email"
 msgstr ""
 
 #: /views/elements/pages/login.ctp:5
+#: /views/settings/basic.ctp:49
 #: /views/users/login.ctp:24
 #: /views/users/signup.ctp:26
 msgid "password"
@@ -402,6 +403,10 @@ msgstr ""
 
 #: /views/elements/pages/news_sidebar.ctp:3
 msgid "filter_title"
+msgstr ""
+
+#: /views/elements/pages/news_sidebar.ctp:13
+msgid "birthdays_today"
 msgstr ""
 
 #: /views/elements/settings/gallery_options.ctp:7
@@ -533,83 +538,88 @@ msgstr ""
 msgid "last_name"
 msgstr ""
 
-#: /views/settings/basic.ctp:49
-msgid "sex"
-msgstr ""
-
-#: /views/settings/basic.ctp:50
-msgid "male"
-msgstr ""
-
-#: /views/settings/basic.ctp:50
-msgid "female"
-msgstr ""
-
 #: /views/settings/basic.ctp:53
-msgid "sex_interest"
-msgstr ""
-
-#: /views/settings/basic.ctp:54
-msgid "men"
-msgstr ""
-
-#: /views/settings/basic.ctp:54
-msgid "women"
-msgstr ""
-
-#: /views/settings/basic.ctp:54
-msgid "bisexual"
+#: /views/users/signup.ctp:27
+msgid "password_again"
 msgstr ""
 
 #: /views/settings/basic.ctp:57
-msgid "political"
+msgid "sex"
+msgstr ""
+
+#: /views/settings/basic.ctp:58
+msgid "male"
+msgstr ""
+
+#: /views/settings/basic.ctp:58
+msgid "female"
 msgstr ""
 
 #: /views/settings/basic.ctp:61
-msgid "religious"
+msgid "sex_interest"
+msgstr ""
+
+#: /views/settings/basic.ctp:62
+msgid "men"
+msgstr ""
+
+#: /views/settings/basic.ctp:62
+msgid "women"
+msgstr ""
+
+#: /views/settings/basic.ctp:62
+msgid "bisexual"
 msgstr ""
 
 #: /views/settings/basic.ctp:65
-msgid "rel_status"
-msgstr ""
-
-#: /views/settings/basic.ctp:66
-msgid "single"
-msgstr ""
-
-#: /views/settings/basic.ctp:66
-msgid "in_a_relationship"
-msgstr ""
-
-#: /views/settings/basic.ctp:66
-msgid "married"
-msgstr ""
-
-#: /views/settings/basic.ctp:66
-msgid "its_complicated"
+msgid "political"
 msgstr ""
 
 #: /views/settings/basic.ctp:69
-msgid "city"
+msgid "religious"
 msgstr ""
 
 #: /views/settings/basic.ctp:73
-msgid "country"
+msgid "rel_status"
+msgstr ""
+
+#: /views/settings/basic.ctp:74
+msgid "single"
+msgstr ""
+
+#: /views/settings/basic.ctp:74
+msgid "in_a_relationship"
+msgstr ""
+
+#: /views/settings/basic.ctp:74
+msgid "married"
+msgstr ""
+
+#: /views/settings/basic.ctp:74
+msgid "its_complicated"
 msgstr ""
 
 #: /views/settings/basic.ctp:77
-msgid "dob"
+msgid "city"
 msgstr ""
 
 #: /views/settings/basic.ctp:81
+msgid "country"
+msgstr ""
+
+#: /views/settings/basic.ctp:85
+msgid "dob"
+msgstr ""
+
+#: /views/settings/basic.ctp:89
 msgid "update_profile"
 msgstr ""
 
-#: /views/settings/basic.ctp:90
+#: /views/settings/basic.ctp:98
 msgid "delete_account"
 msgstr ""
 
-#: /views/settings/basic.ctp:90
+#: /views/settings/basic.ctp:98
 msgid "delete_are_you_sure"
 msgstr ""
 
@@ -639,9 +649,5 @@ msgstr ""
 
 #: /views/users/search.ctp:29
 msgid "search_title"
-msgstr ""
-
-#: /views/users/signup.ctp:27
-msgid "password_again"
 msgstr ""
 
