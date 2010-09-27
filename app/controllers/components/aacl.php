@@ -1,4 +1,5 @@
 <?php
+// Additional ACL
 class AaclComponent extends Object {
 	var $components = array('Acl');
 
@@ -46,12 +47,13 @@ class AaclComponent extends Object {
 		} else {
 			$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $parent['Aco']['id']), 'fields' => 'id'));
 		}
-		
+
 		if (is_null($groups)) {
 			App::Import('Model', 'Group');
 			$this->Group = new Group();
 			$groups = $this->Group->getFriendLists(array('uid' => $uid));
 		}
+		
 		// Find all the direct children, only direct
 		$children = $this->Acl->Aco->children($parent['Aco']['id'], true);
 
@@ -88,7 +90,7 @@ class AaclComponent extends Object {
 			return true;
 		}
 	}
-	
+
 	function saveAco($data, $parent = null) {
 		// we can't use the security tokens here, so remove them
 		if (is_null($parent)) {
@@ -115,6 +117,45 @@ class AaclComponent extends Object {
 			}
 		}
 		return true;
+	}
+
+	function createAcl($uid = null, $root = null, $acls = null) {
+		// the user_id is already in the aco table
+		if (is_null($root) && $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)))) {
+			return false;
+		}
+
+		if (is_null($acls)) {
+			$node = $this->Acl->Aco->node('Users');
+			$parentId = Set::extract($node, "0.Aco.id");
+
+			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
+			$this->Acl->Aco->save();
+
+			$node = $this->Acl->Aco->node('User::' . $uid);
+			$parentId = Set::extract($node, "0.Aco.id");
+
+			$acls = Configure::read('UserAcls');
+		} else {
+			$node = $this->Acl->Aco->node($root);
+			$parentId = Set::extract($node, '0.Aco.id');
+		}
+
+		foreach ($acls as $key => $val) {
+			if (is_array($val)) {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $key));
+				$this->Acl->Aco->save();
+				$this->createAcl($uid, $key, $val);
+			} else {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $val));
+				$this->Acl->Aco->save();
+			}
+		}
+		return true;
+	}
+
+	function deleteAcoTree($uid) {
+		$this->Acl->Aco->delete('User::' . $uid);
 	}
 }
 

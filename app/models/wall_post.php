@@ -19,6 +19,22 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
+	function add($data, $args = false) {
+		$defaults = array(
+			'type' => 'post',
+		);
+		$options = parseArguments($defaults, $args);
+
+		$this->create();
+
+		//save the post content and time
+		$data['WallPost']['post'] = Sanitize::clean($data['WallPost']['post']);
+		$data['WallPost']['posted'] = date("Y-m-d H:i:s");
+		$data['WallPost']['type'] = $options['type'];
+
+		$this->save($data);
+	}
+
 	//TODO: needs containable.
 	function getWallPosts($arguments = false){
 
@@ -90,7 +106,26 @@ class WallPost extends AppModel {
 				$wallPosts[$key] = $val;
 			}
 		}
+		$count = count($wallPosts);
+		for ($i=0; $i<$count; $i++) {
+			if (!is_null($wallPosts[$i]['WallPost']['model_id'])) {
+				$model = Inflector::classify($wallPosts[$i]['WallPost']['type']);
+				App::Import('Model', $model);
+				$this->$model = new $model;
+				$this->$model->recursive = -1;
+				$data = $this->$model->findById($wallPosts[$i]['WallPost']['model_id']);
+				
+				$wallPosts[$i][$model] = $data[$model];
+				
+			}
+		}
+
 		return $wallPosts;
+	}
+
+	function remove($id) {
+		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
+		$this->delete($id);
 	}
 
 }

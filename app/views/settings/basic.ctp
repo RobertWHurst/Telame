@@ -46,6 +46,14 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 						<td class="field"><?php echo $form->input('last_name', array('value' => $currentUser['User']['last_name'], 'label' => false)); ?></td>
 					</tr>
 					<tr>
+						<td><?php echo $form->label(__('password', true)); ?></td>
+						<td class="field"><?php echo $form->input('user_password', array('label' => false, 'type' => 'password')); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('password_again', true)); ?></td>
+						<td class="field"><?php echo $form->input('user_password_again', array('label' => false, 'type' => 'password')); ?></td>
+					</tr>
+					<tr>
 						<td><?php echo $form->label(__('sex', true)); ?></td>
 						<td class="field"><?php echo $form->input('sex', array('options' => array('male' => __('male', true), 'female' => __('female', true)), 'default' => $currentUser['Profile']['sex'], 'label' => false)); ?></td>
 					</tr>

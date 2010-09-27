@@ -1,6 +1,8 @@
 <?php
 class EventsController extends AppController {
 
+	var $components = array('Profile');
+
 	function add($allday=null, $day=null, $month=null, $year=null, $hour=null, $min=null) {
 		if (empty($this->data)) {
 			//Set default duration: 1hr and format to a leading zero.
@@ -34,29 +36,46 @@ class EventsController extends AppController {
 			//Do not use a view template.
 			$this->layout = false;
 		} else {
-			if ($this->Event->addEvent($this->currentUser['User']['id'], $this->data)) {
+			if ($eid = $this->Event->add($this->currentUser['User']['id'], $this->data)) {
 				$this->Session->setFlash(__('event_saved', true));
+	
+				if ($this->data['Event']['show_on_wall']) {
+					$this->loadModel('WallPost');
+					$data['WallPost']['post'] = Sanitize::clean($this->data['Event']['title']);
+					$data['WallPost']['author_id'] = $this->currentUser['User']['id'];
+					$data['WallPost']['user_id'] = $this->currentUser['User']['id'];
+					$data['WallPost']['model_id'] = $eid;
+
+					$this->WallPost->add($data, array('type' => 'event'));
+				}
 			} else {
-				$this->Session->setFlash(__('event_not_saved', true));
+				$this->Session->setFlash(__('event_not_saved', true));			
 			}
+			
 			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
 				substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 		}
 	}
 
 	function calendar($year=null, $month=null, $day=null) {
-		$this->layout = 'tall_header_w_sidebar';
-		if ($year != null) {
-			$this->set('openYear', $year);
-			if ($month != null) {
-				$month = ltrim($month, '0');
-				$month = $month-1;
-				$this->set('openMonth', $month);
+		$user = $this->Profile->getProfile($this->params['slug']);
+		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'calendar')) {
+			$this->layout = 'tall_header_w_sidebar';
+			if ($year != null) {
+				$this->set('openYear', $year);
+				if ($month != null) {
+					$month = ltrim($month, '0');
+					$month = $month-1;
+					$this->set('openMonth', $month);
+				}
+				if ($day != null){
+					$day = ltrim($day, '0');
+					$this->set('openDay', $day);
+				}
 			}
-			if ($day != null){
-				$day = ltrim($day, '0');
-				$this->set('openDay', $day);
-			}
+		} else {
+			$this->Session->setFlash(__('not_allowed_calendar', true), 'default', array('class' => 'warning'));
+			$this->redirect($this->referer());
 		}
 	}
 
@@ -89,6 +108,9 @@ class EventsController extends AppController {
 		$this->data = $this->Event->read(null, $id);
 		if ($this->Event->isOwner($id, $this->currentUser['User']['id'])) {
 			if ($this->Event->delete($id)) {
+				$this->loadModel('WallPost');
+				$wallPost = $this->WallPost->findByModelId($this->data['Event']['id']);
+				$this->WallPost->remove($wallPost['WallPost']['id']);
 				$this->Session->setFlash(__('event_deleted', true));
 			} else {
 				$this->Session->setFlash(__('event_not_deleted', true));

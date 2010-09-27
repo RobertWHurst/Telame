@@ -342,10 +342,10 @@ $(function(){
 				}
 				
 				//set the ajax url
-				var ajaxUrl = '/s/u/' + currentImageState.id + '/' + currentImageState.top + '/' + currentImageState.left + '/' + currentImageState.height + '/' + currentImageState.width;
+				var ajaxUrl = '/u/' + currentImageState.id + '/' + currentImageState.top + '/' + currentImageState.left + '/' + currentImageState.height + '/' + currentImageState.width;
 				
 				//send the data via post data
-				$.post(core.domain + ajaxUrl);
+				$.post(location.href + ajaxUrl);
 				
 			}
 			

@@ -21,7 +21,7 @@ foreach ($js as $j) {
 //page title
 ?>
 <div id="page_head">
-	<h1 class="page_title"><?php echo __('calendar_title', true); ?></h1>
+	<h1 class="page_title"><?php echo $user['User']['first_name'] . '\'s ' . __('calendar_title', true); ?></h1>
 </div>
 <div id="page_body">
 	<div id="eventdata"></div>
@@ -44,11 +44,11 @@ foreach ($js as $j) {
 				weekMode: 'variable',
 				dayClick: function(date, allDay, jsEvent, view) {
 					$("#eventdata").show();
-					$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendar/add/" + allDay + "/" + $.fullCalendar.formatDate(date, "dd/MM/yyyy/HH/mm"));
+					$("#eventdata").load("/<?php echo $currentUser['User']['slug']?>/calendar/add/" + allDay + "/" + $.fullCalendar.formatDate(date, "dd/MM/yyyy/HH/mm"));
 				},
 				eventClick: function(calEvent, jsEvent, view) {
 					$("#eventdata").show();
-					$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendar/edit/" + calEvent.id);
+					$("#eventdata").load("/<?php echo $currentUser['User']['slug']?>/calendar/edit/" + calEvent.id);
 				},
 				eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
 					if (dayDelta >= 0) {
@@ -57,7 +57,7 @@ foreach ($js as $j) {
 					if (minuteDelta >= 0) {
 						minuteDelta = "+" + minuteDelta;
 					}
-					$.post("/calendar/move/" + event.id + "/" + dayDelta + "/" + minuteDelta + "/" + allDay);
+					$.post("/<?php echo $currentUser['User']['slug']?>/calendar/move/" + event.id + "/" + dayDelta + "/" + minuteDelta + "/" + allDay);
 					},
 				eventResize: function(event, dayDelta, minuteDelta, revertFunc) {
 					if (dayDelta >= 0) {
@@ -66,9 +66,9 @@ foreach ($js as $j) {
 					if (minuteDelta >= 0) {
 						minuteDelta = "+" + minuteDelta;
 					}
-					$.post("/calendar/resize/" + event.id + "/" + dayDelta + "/" + minuteDelta);
+					$.post("/<?php echo $currentUser['User']['slug']?>/calendar/resize/" + event.id + "/" + dayDelta + "/" + minuteDelta);
 				},
-				events: "/calendar/feed",
+				events: "/<?php echo $currentUser['User']['slug']?>/calendar/feed",
 				<?php if (isset($openYear)) { ?>
 				year: <?php echo $openYear.',';
 				}

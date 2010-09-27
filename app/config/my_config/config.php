@@ -30,6 +30,7 @@ Configure::write('AllowedFileTypes', array(
 // User information
 
 Configure::write('UserAcls', array(
+	'calendar',
 	'friends',
 	'media' => array(
 		'documents', 

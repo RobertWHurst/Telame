@@ -15,20 +15,20 @@ class PagesController extends AppController {
 
 	function beforeRender() {
 		parent::beforeRender();
-		
+
 	}
 
 	function features() {
 		//set the css and layout
 		$this->layout = 'simple_header';
-		
+
 		$this->set('title_for_layout', __('site_name', true));
 	}
 
 	function home() {
 		//set the css and layout
 		$this->layout = 'simple_header';
-		
+
 		$this->set('title_for_layout', __('site_name', true));
 	}
 
@@ -36,13 +36,14 @@ class PagesController extends AppController {
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
+		$uid = intval($uid);
 
-		if( $this->RequestHandler->isRss() ) {
+		if ($this->RequestHandler->isRss()) {
 			Configure::write('debug', 0);
 			// this just checks that the hash is valid for the specified user
 			$this->WallPost->User->recursive = -1;
-			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => intval($uid), 'User.rss_hash' => $hash)));
-
+			$user = $this->WallPost->User->find('first', array('conditions' => array('User.id' => $uid, 'User.rss_hash' => Sanitize::paranoid($hash))));
+			$this->RequestHandler->setContent('rss');
 			if (!$user) {
 				return false;
 			}
@@ -76,9 +77,11 @@ class PagesController extends AppController {
 		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $friends, 'aid' => $friends, 'User' => true));
 		$user = $this->currentUser;
 
+		$birthdays = $this->GroupsUser->getFriendBirthdays($this->currentUser['User']['id']);
+
 		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
 
-		$this->set(compact('user', 'wallPosts', 'friendLists'));
+		$this->set(compact('birthdays', 'friendLists', 'user', 'wallPosts'));
 	}
 
 

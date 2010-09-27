@@ -4,6 +4,18 @@ class SettingsController extends AppController{
 	var $helpers = array('Acl');
 	var $uses = array();
 
+	function beforeFilter(){
+		parent::beforeFilter();
+
+		$this->Security->blackHoleCallback = '_forceSSL';
+		$this->Security->requireSecure('basic');
+		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
+		 	$this->_unforceSSL();
+		}
+		$this->Auth->allow(array('confirm', 'signup'));
+
+	}
+
 	function beforeRender() {
 		parent::beforefilter();
 
@@ -36,16 +48,29 @@ class SettingsController extends AppController{
 				$dob['Event']['recurring'] = true;
 
 				$this->User->Event->removeBirthday($this->currentUser['User']['id']);
-				$this->User->Event->addEvent($this->currentUser['User']['id'], $dob);
+				$this->User->Event->add($this->currentUser['User']['id'], $dob);
 
-				// save thier name too
-				$this->User->read(null, $this->currentUser['User']['id']);
-				$this->User->set(array(
+				if (!empty($this->data['Profile']['user_password']) && $this->data['Profile']['user_password'] == $this->data['Profile']['user_password_again']) {
+					$userInfo = array(
 					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
 					'last_name' => Sanitize::clean($this->data['Profile']['last_name']),
 					'first_login' => false,
-				));
-				$this->User->save(null, array('fieldList' => array('first_name', 'last_name', 'first_login')));
+					'password' => $this->Auth->password($this->data['Profile']['user_password']),
+					);
+					$fieldList = array('first_name', 'last_name', 'first_login', 'password');
+				} else {
+					$userInfo = array(
+					'first_name' => Sanitize::clean($this->data['Profile']['first_name']),
+					'last_name' => Sanitize::clean($this->data['Profile']['last_name']),
+					'first_login' => false,
+					);
+					$fieldList = array('first_name', 'last_name', 'first_login');
+				}
+
+				// save thier name too
+				$this->User->read(null, $this->currentUser['User']['id']);
+				$this->User->set($userInfo);
+				$this->User->save(null, array('fieldList' => $fieldList));
 
 				$this->Session->setFlash(__('profile_settings_saved', true));
 			} else {
@@ -58,6 +83,7 @@ class SettingsController extends AppController{
 	function delete() {
 		$this->loadModel('User');
 		$this->User->deleteAccount($this->currentUser['User']['id']);
+		$this->Aacl->deleteAcoTree($this->currentUser['User']['id']);
 		$this->Session->setFlash(__('account_deleted', true));
 		$this->AuthExtension->logout();
 		$this->Auth->logout();
@@ -108,38 +134,38 @@ class SettingsController extends AppController{
 	}
 
 	function groups($gid = null) {
-		$this->loadModel('Group');
+		if(empty($this->data)) {
+			$this->loadModel('Group');
 
-		//get the group list
-		$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
+			//get the group list
+			$groups = $this->Group->getFriendLists(array('uid' => $this->currentUser['User']['id']));
 
-		//get the current user and note their id.
-		$uid = $this->currentUser['User']['id'];
+			//get the current user and note their id.
+			$uid = $this->currentUser['User']['id'];
 
-		//create an empty permissions var
-		$permissions = $currentGroup = false;
+			//create an empty permissions var
+			$permissions = $currentGroup = false;
 
-		if($gid){
-			//get the current user's acl data.
-			$acoTree = $this->Aacl->getAcoTree($uid);
-
-			//filter through the tree for useful data
-			foreach($acoTree as $aco){
-				foreach($aco['Groups'] as $group){
-					if($group['Group']['id'] == $gid){
-						$currentGroup = $group;
-						$permissions[$aco['Aco']['id']] = array(
-							'id' => $aco['Aco']['id'],
-							'alias' => $aco['Aco']['alias'],
-							'canRead' => ($group['Group']['canRead'])? 'yes' : 'no'
-						);
-					}
-				}
+			if ($gid) {
+				//get the current user's acl data.
+				$this->Group->recursive = -1;
+				// find needs to be of type all or else the aacl won't know the format
+				$group = $this->Group->find('all', array('conditions' => array('Group.id' => Sanitize::clean(intval($gid)))));
+				$permissions = $this->Aacl->getAcoTree($uid, $group);
 			}
-		}
 
-		//set the view data
-		$this->set(compact('groups', 'currentGroup', 'permissions'));
+			//set the view data
+			$this->set(compact('groups', 'currentGroup', 'permissions'));
+		// Save permissions
+		} else {
+			if ($this->Aacl->saveAco($this->data)){
+				$this->Session->setFlash(__('permissions_saved', true), 'default', array('class' => 'info'));
+			} else {
+				$this->Session->setFlash(__('permissions_not_saved', true), 'default', array('class' => 'warning'));
+			}
+			$this->redirect($this->here);
+			exit;
+		}
 	}
 
 	function create_group($id){
@@ -168,27 +194,6 @@ class SettingsController extends AppController{
 			$this->Session->setFlash(__('group_not_deleted', true));
 		}
 		$this->redirect($this->referer());
-	}
-
-	function permissions($selectedFriendList = 0) {
-		if(empty($this->data)) {
-			//get the current user and note their id.
-			$uid = $this->currentUser['User']['id'];
-
-			//get the current user's acl data.
-			$acoTree = $this->Aacl->getAcoTree($uid);
-
-			$this->set(compact('acoTree'));
-		} else {
-			if ($this->Aacl->saveAco($this->data)){
-				$this->Session->setFlash(__('permissions_saved', true), 'default', array('class' => 'info'));
-			} else {
-				$this->Session->setFlash(__('permissions_not_saved', true), 'default', array('class' => 'warning'));
-			}
-
-			$this->redirect($this->here);
-			exit;
-		}
 	}
 
 	function profile() {

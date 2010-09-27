@@ -56,13 +56,22 @@ class AppController extends Controller {
 		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
 		
 		if(!is_null($currentUser['User']['hash'])) {
-			$this->AutoLogin->delete();
+			$this->AuthExtension->logout();
+			$this->Auth->logout();
 			$this->Session->destroy();
 			$this->Session->setFlash(__('email_not_confirmed', true), 'default', array('class' => 'error'));
 			$this->redirect('/c/' . $currentUser['User']['email']);
 		}
 		$this->set('currentUser', $currentUser);
 		return $currentUser;
+	}
+
+	function _forceSSL() {
+		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
+	}
+
+	function _unforceSSL() {
+		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
 	}
 
 }

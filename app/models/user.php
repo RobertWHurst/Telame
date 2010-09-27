@@ -57,7 +57,7 @@ class User extends AppModel {
 		),
 		'email' => array(
 			'uniqueEmail' => array(
-				'rule' => 'isUnique',
+				'rule' => array('checkUnique', 'email'),
 				'message' => 'That email is already in use',
 			),
 			'validEmail' => array(
@@ -72,15 +72,17 @@ class User extends AppModel {
 			'required' => true,
 			'allowEmpty' => false,
 			'rule' => 'alphanumeric',
+			'on' => 'update',
 		),
 		'last_name' => array(
 			'required' => true,
 			'allowEmpty' => false,
 			'rule' => 'alphanumeric',
+			'on' => 'update',
 		),
 		'slug' => array(
 			'unique' => array(
-				'rule' => 'checkUniqueSlug',
+				'rule' => array('checkUnique', 'slug'),
 				'allowEmpty' => false,
 				'required' => true,
 				'message' => 'That username is already in use',
@@ -131,7 +133,7 @@ class User extends AppModel {
 			App::Import('Model', 'BetaKey');
 			$this->BetaKey = new BetaKey;
 			// find the key they've given
-			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));	
+			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
 	}
 
 	function checkBlacklist($slug) {
@@ -139,8 +141,9 @@ class User extends AppModel {
 		return !in_array($slug['slug'], Configure::read('BlacklistUsernames'));
 	}
 
-	function checkUniqueSlug($slug) {
-		return !$this->find('first', array('conditions' => array('lower(User.slug)' => strtolower($slug['slug']))));
+	function checkUnique($array, $value) {
+		$what = strtolower($value);
+		return !$this->find('first', array('conditions' => array('lower(User.' . $what . ')' => strtolower($array[$what]))));
 	}
 
 	function identicalFieldValues( $field=array(), $compare_field=null ) {
@@ -171,45 +174,6 @@ class User extends AppModel {
 			$this->saveField('hash', null);
 			return true;
 		}
-	}
-
-	function createAcl($uid = null, $root = null, $acls = null) {
-		App::import('Component', 'Acl');
-		$this->Acl = new AclComponent();
-		$this->Acl->startup($controller);
-
-		// the user_id is already in the aco table
-		if (is_null($root) && $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)))) {
-			return false;
-		}
-
-		if (is_null($acls)) {
-			$node = $this->Acl->Aco->node('Users');
-			$parentId = Set::extract($node, "0.Aco.id");
-
-			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
-			$this->Acl->Aco->save();
-
-			$node = $this->Acl->Aco->node('User::' . $uid);
-			$parentId = Set::extract($node, "0.Aco.id");
-
-			$acls = Configure::read('UserAcls');
-		} else {
-			$node = $this->Acl->Aco->node($root);
-			$parentId = Set::extract($node, '0.Aco.id');
-		}
-
-		foreach ($acls as $key => $val) {
-			if (is_array($val)) {
-				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $key));
-				$this->Acl->Aco->save();
-				$this->createAcl($uid, $key, $val);
-			} else {
-				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $val));
-				$this->Acl->Aco->save();
-			}
-		}
-		return true;
 	}
 
 // almost all related db info should be deleted automatically
@@ -313,8 +277,8 @@ pr($options);
 		}
 
 		$this->Profile->create();
-		$profile['dob'] = 'NULL';
-		$profile['gallery'] = 'NULL';
+		$profile['Profile']['user_id'] = $this->id;
+		$profile['Profile']['dob'] = '1900-01-01';
 		$this->Profile->save($profile);
 
 		$this->Album->create();
@@ -327,15 +291,11 @@ pr($options);
 			$error['User']['album_error'] = 'Could not create album';
 		}
 
-		if (!$this->createAcl($this->id)) {
-			$error['User']['acl'] = 'ACL error';
-		}
-
 		if (count($error)) {
 			debugger::log($error['User']);
 			return false;
 		} else {
-			return true;
+			return $this->id;
 		}
 	}
 
