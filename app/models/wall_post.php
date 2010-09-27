@@ -108,7 +108,7 @@ class WallPost extends AppModel {
 		}
 		$count = count($wallPosts);
 		for ($i=0; $i<$count; $i++) {
-			if (!is_null($wallPosts[$i]['WallPost']['model_id'])) {
+			if (isset($wallPosts[$i]) && !is_null($wallPosts[$i]['WallPost']['model_id'])) {
 				$model = Inflector::classify($wallPosts[$i]['WallPost']['type']);
 				App::Import('Model', $model);
 				$this->$model = new $model;

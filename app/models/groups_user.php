@@ -54,7 +54,7 @@ class GroupsUser extends AppModel {
 		return $friends;
 	}
 
-	function getFriendBirthdays($uid) {
+	function getBirthdays($uid) {
 		$friendIds = $this->getFriendIds($uid);
 		return $this->User->Profile->find('all', array(
 			'conditions' => array(

@@ -16,8 +16,8 @@
 	echo $form->input('title' , array('label' => __('event_title', true)));
 	echo $form->input('show_on_wall' , array('label' => __('event_show_wall', true), 'default' => 'checked'));
 	echo '<br />At: ' . $displayTime;
-	echo $form->input('start', array('type'=>'hidden', 'value'=>$event['Event']['start']));
-	echo $form->input('end', array('type'=>'hidden', 'value'=>$event['Event']['end']));
-	echo $form->input('allday', array('type'=>'hidden', 'value'=>$event['Event']['allday']));
-	echo  $form->end(array('label'=>'Save', 'name' => 'save')); 
+	echo $form->input('start', array('value'=>$event['Event']['start']));
+	echo $form->input('end', array('value'=>$event['Event']['end']));
+	echo $form->input('allday', array('value'=>$event['Event']['allday']));
+	echo $form->end(__('event_add', true)); 
 ?>

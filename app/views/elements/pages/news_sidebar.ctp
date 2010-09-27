@@ -8,7 +8,7 @@
 		</ul>
 	</div>
 
-<?php if(is_array($birthdays)): ?>
+<?php if(!empty($birthdays)): ?>
 	<div class="news_filters">
 		<h1><?php __('birthdays_today'); ?></h1>
 <?php 	foreach ($birthdays as $bday) {

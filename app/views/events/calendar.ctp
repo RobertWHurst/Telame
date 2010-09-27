@@ -68,7 +68,7 @@ foreach ($js as $j) {
 					}
 					$.post("/<?php echo $currentUser['User']['slug']?>/calendar/resize/" + event.id + "/" + dayDelta + "/" + minuteDelta);
 				},
-				events: "/<?php echo $currentUser['User']['slug']?>/calendar/feed",
+				events: "/<?php echo $user['User']['slug']?>/calendar/feed",
 				<?php if (isset($openYear)) { ?>
 				year: <?php echo $openYear.',';
 				}

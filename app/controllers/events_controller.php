@@ -38,7 +38,7 @@ class EventsController extends AppController {
 		} else {
 			if ($eid = $this->Event->add($this->currentUser['User']['id'], $this->data)) {
 				$this->Session->setFlash(__('event_saved', true));
-	
+
 				if ($this->data['Event']['show_on_wall']) {
 					$this->loadModel('WallPost');
 					$data['WallPost']['post'] = Sanitize::clean($this->data['Event']['title']);
@@ -49,11 +49,17 @@ class EventsController extends AppController {
 					$this->WallPost->add($data, array('type' => 'event'));
 				}
 			} else {
-				$this->Session->setFlash(__('event_not_saved', true));			
+				$this->Session->setFlash(__('event_not_saved', true));
 			}
-			
-			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
-				substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
+
+			$this->redirect(array(
+				'slug' => $this->currentUser['User']['slug'],
+				'controller' => 'events',
+				'action' => 'calendar',
+				$this->data['Event']['start']['year'],
+				$this->data['Event']['start']['month'],
+				$this->data['Event']['start']['day'],
+			));
 		}
 	}
 
@@ -99,8 +105,15 @@ class EventsController extends AppController {
 		} else {
 			$this->Event->id = $this->data['Event']['id'];
 			$this->Event->saveField('title', $this->data['Event']['title']);
-			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar', substr($this->data['Event']['start'], 0, 4),
-				substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
+
+			$this->redirect(array(
+				'slug' => $this->currentUser['User']['slug'],
+				'controller' => 'events',
+				'action' => 'calendar',
+				$this->data['Event']['start']['year'],
+				$this->data['Event']['start']['month'],
+				$this->data['Event']['start']['day'],
+			));
 		}
 	}
 
@@ -123,7 +136,13 @@ class EventsController extends AppController {
 	}
 
 	function feed() {
-		$events = $this->Event->getEvents($this->params['url']['start'], $this->params['url']['end'], $this->currentUser['User']['id']);
+		$user = $this->Profile->getProfile($this->params['slug']);
+		
+		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'calendar')) {
+			return;
+		}
+
+		$events = $this->Event->getEvents($this->params['url']['start'], $this->params['url']['end'], $user['User']['id']);
 
 		//Create the json array
 		$rows = array();
