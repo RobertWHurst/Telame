@@ -13,7 +13,160 @@ function changeImg() {
 $(function($){
 
 	core = {
+
+		//save the current domain
 		'domain': 'http://' + window.location.hostname,
+
+		//shows a modal screen with a callback for on click of the screen itself
+		'showModalScreen': function(modal, callback, agruments){
+
+			//append the modal
+			$('body').append(modal);
+
+			//save selectors
+			var s = {};
+			s.modalScreen = $('#modal_screen');
+
+			var defaults = {
+				'speed': 0,
+				'animation': ''
+			};
+
+			//parse agruments
+			var options = core.parseAguments(defaults, agruments);
+
+			//start a proccess to fit the screen to the document
+			var fitProc = function(){
+
+				var documentElement = $(document);
+
+				s.modalScreen.height(documentElement.height());
+				s.modalScreen.width(documentElement.width());
+
+			};
+			loop.newProccess('modaleScreenPos', fitProc, 1);
+
+			//show modal screen
+			switch(options.animation){
+
+				case 'fade':
+						s.modalScreen.fadeIn(options.speed);
+					break;
+
+				case 'slide':
+						s.modalScreen.slideDown(options.speed);
+					break;
+
+				default:
+						s.modalScreen.show(options.speed);
+					break;
+			}
+
+			//bind a click event to the modal
+			s.modalScreen.click(function(event){
+
+				//hide modal screen
+				switch(options.animation){
+
+					default:
+							s.modalScreen.hide(options.speed);
+						break;
+
+					case 'fade':
+							s.modalScreen.fadeOut(options.speed);
+						break;
+
+					case 'slide':
+							s.modalScreen.slideUp(options.speed);
+						break;
+
+				}
+
+				//end the positioning proccess
+				loop.killProccess('modaleScreenPos');
+
+				//execute the callback
+				callback(event);
+
+			});
+
+		},
+
+		//take to arrays and
+		'parseAguments': function(defaultsArray, newValuesArray, discardUnset){
+
+			//make sure both the defaults array and the new values array is set.
+			//the also must be an array or an object.
+
+			if(
+				typeof defaultsArray !== 'object' && typeof defaultsArray !== 'array' ||
+				typeof newValuesArray !== 'object' && typeof newValuesArray !== 'array'
+			){
+				return false;
+			}
+
+			//check to see if values not set in the defaults array should
+			//be discarded, otherwise set it to false.
+			discardUnset = (typeof discardUnset === 'undefined');
+
+			//copy the defaults
+			var results = defaultsArray;
+
+			//define loop vars
+			var newValue, defaultValue, subdefaultsArray, newSubvaluesArray;
+
+			//loop
+			for(var key in newValuesArray){
+
+				//save the current argument
+				newValue = newValuesArray[key];
+				defaultValue =  defaultsArray[key];
+
+				//if we are to discard unset values and the value does not exist
+				//skip (discard) it.
+				if(typeof defaultValue === 'undefined' && typeof discardUnset === true) {
+					continue;
+				}
+
+				//check to see if the current argument is acually an array or object
+				if(typeof newValue === 'object' || typeof newValue === 'array'){
+
+					//if we are to key unset arrays and objects and the object or array
+					// does not exist or is not an array over write the default (keep it).
+					if(typeof defaultValue !== 'object' && typeof defaultValue !== 'array' && typeof discardUnset === true) {
+
+						//save the array
+						results[key] = newValue[key];
+						continue;
+					}
+
+					//if we are to discard unset arrays or objects and the default is not
+					//and object or array skip (discard) it.
+					if(typeof defaultValue !== 'object' || typeof defaultValue !== 'array'){
+						continue;
+					}
+
+					//if the default value is actually an object or array and the new
+					//value is an object or array then invoke recursion to parse the
+					//new array or object against the default.
+					subdefaultsArray = defaultValue;
+					newSubvaluesArray = newValue;
+
+					results[key] = core.parseAguments(subdefaultsArray, newSubvaluesArray, discardUnset);
+
+				}
+
+				//if the current value is not an object or array
+				else{
+
+					//overwrite the default with the new value
+					results[key] = newValue;
+
+				}
+			} //end of for-in
+
+			return results;
+		}
 	};
 	
 	//CONSTRUCTORS

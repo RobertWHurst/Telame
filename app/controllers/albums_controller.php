@@ -9,11 +9,12 @@ class AlbumsController extends AppController {
 
 	function beforeRender() {
 		parent::beforeRender();
-		//layout
-		$this->layout = 'profile';
 	}
 
 	function albums() {
+		//layout
+		$this->layout = 'profile';
+
 		$user = $this->Profile->getProfile($this->params['slug']);
 
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
@@ -29,6 +30,9 @@ class AlbumsController extends AppController {
 	}
 
 	function album($albumSlug = false){
+		//layout
+		$this->layout = 'page';
+
 		$user = $this->Profile->getProfile($this->params['slug']);
 
 		$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
@@ -45,16 +49,40 @@ class AlbumsController extends AppController {
 
 	function newAlbum() {
 
+		$isAjax = $this->RequestHandler->isAjax();
+
+		if($isAjax)
+			$this->layout = false;
+
 		if(!empty($this->data)) {
 			$this->data['Album']['user_id'] = $this->currentUser['User']['id'];
 			$this->data['Album']['slug'] = Inflector::slug($this->data['Album']['title']);
 			if ($this->Album->save($this->data)) {
-				$this->Session->setFlash(__('album_added', true), 'default', array('class' => 'info'));
+				if(!$isAjax) {
+					$this->Session->setFlash(__('album_added', true), 'default', array('class' => 'info'));
+					$this->redirect('/albums');
+				} else {
+					echo 'true';
+					exit;
+				}
 			}
-			$this->redirect('/albums');
+			else{
+				if(!$isAjax){
+					$this->Session->setFlash(__('album_not_added', true), 'default', array('class' => 'info'));
+					$this->redirect('/albums');
+				}else{
+					echo 'false';
+					exit;
+				}
+			}
 		} else {
 			$user = $this->currentUser;
 			$this->set(compact('user'));
+
+			if($isAjax){
+				$this->layout = false;
+				$this->render('/elements/albums/create');
+			}
 		}
 	}
 }

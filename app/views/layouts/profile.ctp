@@ -12,9 +12,7 @@
 <?php ob_flush(); ?>
 <body>
 	<?php echo $this->element('flash'); ?>
-	<div id="backgroundHead">
-		<div id="backgroundHeadGlow"></div>
-	</div>
+	<div id="backgroundHead"></div>
 	<div id="backgroundBase"></div>
 	<div id="wrap_content">
 		<div id="content" class="clearfix">
@@ -51,5 +49,6 @@
 			<?php echo $this->element('sql_dump'); ?>
 		</div>
 	<?php endif; ?>
+	<div id="modal_screen"></div>
 </body>
 </html>

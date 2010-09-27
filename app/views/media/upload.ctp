@@ -19,11 +19,5 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
-
-	echo $form->create('Media', array('type' => 'file'));
-	echo $form->input('file', array('type' => 'file'));
-	echo $form->input('title');
-	echo $form->input('album', array('options' => $albums, 'selected' => $aid));
-	echo $form->end(__('upload', true));
-
+	echo $this->element('media/upload');
 ?>

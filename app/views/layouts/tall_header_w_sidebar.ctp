@@ -52,5 +52,6 @@
 		}
 		catch(err){}
 	</script>
+	<div id="modal_screen"></div>
 </body>
 </html>

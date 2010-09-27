@@ -35,7 +35,7 @@ $(function(){
 				
 			});
 				
-		}
+		};
 		
 		//input focus handler
 		root.inputFocusHandler = function(){
@@ -48,7 +48,7 @@ $(function(){
 					var inputMeta = {
 						'id': root.wallInput.attr('id'),
 						'name': root.wallInput.attr('name')
-					}
+					};
 				
 					//convert the input to a textarea
 					root.wallInput.replaceWith('<textarea id="' + inputMeta.id + '" class="textarea" name="' + inputMeta.name + '"></textarea>');
@@ -89,7 +89,7 @@ $(function(){
 						var inputMeta = {
 							'id': root.wallInput.attr('id'),
 							'name': root.wallInput.attr('name')
-						}
+						};
 				
 						//convert the textarea to an input
 						root.wallInput.replaceWith('<input type="text" id="' + inputMeta.id + '" name="' + inputMeta.name + '" value=""/>');
@@ -104,7 +104,7 @@ $(function(){
 				
 			});
 				
-		}
+		};
 		
 		root.submitHandler = function(){
 			
@@ -177,7 +177,7 @@ $(function(){
 				
 			});
 			
-		}
+		};
 		
 		root.construct = function(){
 		
@@ -193,7 +193,7 @@ $(function(){
 			//on submit handleer
 			root.submitHandler();
 			
-		}
+		};
 		
 		//self execute
 		root.construct();
