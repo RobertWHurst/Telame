@@ -5,6 +5,7 @@ Configure::write('BlacklistUsernames', array(
 	'logout',
 	'search',
 	'signup',
+	'Tom Zalgo Aldis',
 ));
 
 // Specify custome config information here

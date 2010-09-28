@@ -300,7 +300,7 @@ msgstr "Post"
 
 #: /views/elements/wall_post.ctp:34
 msgid "added_an_event"
-msgstr "Event successfully added"
+msgstr "added an event"
 
 #: /views/elements/wall_post.ctp:44
 #: /views/elements/wall_post_comment.ctp:8

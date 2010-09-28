@@ -12,7 +12,7 @@
 	<div class="avatar">
 <?php
 		$image_url = array('controller' => 'media', 'action' => 'comment', $comment['PostAuthor']['avatar_id']);
-		$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'users', 'action' => 'profile', $comment['PostAuthor']['slug']);
+		$url = array('controller' => 'users', 'action' => 'profile', $comment['PostAuthor']['slug']);
 		echo $htmlImage->image($image_url, array_merge(array('url' => $url), Configure::read('CommentSize')));
 ?>
 	</div>
