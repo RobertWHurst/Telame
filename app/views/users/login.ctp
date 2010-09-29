@@ -12,6 +12,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('login', true));
 ?>
 <div id="login_logo">
 	<?php echo $html->image('logo.png', array('title' => __('site_name', true), 'url' => array('controller' => 'pages', 'action' => 'home'))); ?>

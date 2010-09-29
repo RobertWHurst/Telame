@@ -17,6 +17,8 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('message_inbox', true));
+
 ?>
 <div id="page_head" class="clearfix">			
 	<h1 class="page_title"><?php echo __('messages', true); ?></h1>

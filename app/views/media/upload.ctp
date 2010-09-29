@@ -19,5 +19,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('upload', true));
+
 	echo $this->element('media/upload');
 ?>

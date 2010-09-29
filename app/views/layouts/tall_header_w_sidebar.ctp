@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php echo $title_for_layout; ?></title>
+	<title><?php echo __('site_name', true) . ' | ' . $title_for_layout; ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	<title><?php echo $title_for_layout; ?></title>

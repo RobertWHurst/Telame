@@ -79,8 +79,6 @@ class PagesController extends AppController {
 
 		$birthdays = $this->GroupsUser->getBirthdays($this->currentUser['User']['id']);
 
-		$this->set('title_for_layout', __('site_name', true) . ' | ' . __('news_title', true));
-
 		$this->set(compact('birthdays', 'friendLists', 'user', 'wallPosts'));
 	}
 

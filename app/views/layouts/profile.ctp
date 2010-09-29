@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title><?php echo $title_for_layout; ?></title>
+	<title><?php echo __('site_name', true) . ' | ' . $title_for_layout; ?></title>
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://<?php echo env('SERVER_NAME')?>/rss/">
 <?php
 		echo $asset->scripts_for_layout();

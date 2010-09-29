@@ -17,6 +17,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('album', true));
 
 $this->set('nav_links', array(
 	array(

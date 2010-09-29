@@ -5,7 +5,7 @@
 	<title><?php echo $title_for_layout; ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title><?php echo $title_for_layout; ?></title>
+	<title><?php echo __('site_name', true) . ' | ' . $title_for_layout; ?></title>
 <?php
 		echo $asset->scripts_for_layout();
 		echo $html->meta('favicon.ico', Configure::read('StaticDomain') . '/favicon.ico', array('type' => 'icon'));

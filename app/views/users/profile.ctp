@@ -22,7 +22,7 @@ foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 //page title
-$this->set('title_for_layout', __('site_name', true) . ' | ' . $user['User']['full_name']);
+$this->set('title_for_layout', $user['User']['full_name']);
 
 echo $this->element('wall'); ?>
 <div id="wall_sidebar">

@@ -15,6 +15,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('add_friend', true));
 ?>
 <div id="page_head" class="clearfix">			
 	<h1 class="page_title"><?php echo __('add_friend', true) . ' ' . $friend['User']['full_name']; ?></h1>

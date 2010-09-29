@@ -20,7 +20,7 @@ foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 //page title
-$this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
+$this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('settings', true); ?></h1>

@@ -23,6 +23,7 @@ $this->Paginator->options(array(
 		'query' => $this->params['query'],
 	)
 ));
+$this->set('title_for_layout', __('search', true));
 
 ?>
 <div id="page_head">

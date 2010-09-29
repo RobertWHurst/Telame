@@ -18,7 +18,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
-
+$this->set('title_for_layout', __('news_title', true));
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('news_title', true); ?></h1>

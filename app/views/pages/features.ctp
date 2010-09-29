@@ -12,6 +12,7 @@ $js = array(
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
+$this->set('title_for_layout', __('features', true));
 ?>
 <!- // Consider moving this div to the layout if it's used on all pages.  -->
 <div id="content">
