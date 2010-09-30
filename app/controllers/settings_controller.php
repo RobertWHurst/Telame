@@ -213,4 +213,33 @@ class SettingsController extends AppController{
 		//TODO: ACL STUFF HERE
 	}
 
+
+
+
+// ----------------------- ADMIN SETTINGS ----------------------- //
+
+	function admin_betaKeys() {
+		if ($this->currentUser['User']['level'] > 0) {
+			$this->redirect('/');
+			exit;
+		}
+		$this->loadModel('BetaKey');
+		
+		$keys = $this->BetaKey->find('all');
+
+		$this->set(compact('keys'));
+	}
+
+	function admin_generatekeys() {
+		if (!empty($this->data)) {
+			$this->loadModel('BetaKey');
+			for ($i=0; $i<$this->data['BetaKey']['howmany']; $i++) {
+				$key = sha1(Configure::read('Security.salt') . microtime());
+				$this->BetaKey->create();
+				$this->BetaKey->save(array('BetaKey' => array('key' => $key)));
+			}
+		}
+		$this->redirect($this->referer());	
+	}
+
 }

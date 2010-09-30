@@ -52,6 +52,10 @@
 	Router::connect('/features', array('controller' => 'pages', 'action' => 'display', 'features'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+// Admin stuff
+	Router::connect('/admin/generatekeys', array('controller' => 'settings', 'action' => 'generatekeys', 'admin' => true));
+	Router::connect('/admin', array('controller' => 'settings', 'action' => 'betakeys', 'admin' => true));
+
 
 // User info
 	// Calendar
