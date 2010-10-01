@@ -52,8 +52,14 @@ class User extends AppModel {
 
 	var $validate = array(
 		'beta_key' => array(
-			'rule' => 'checkBetaKey',
-			'message' => 'That beta key is invalid',
+			'usedKey' => array(
+				'rule' => 'checkBetaKeyUsed',
+				'message' => 'That beta key has already been used',
+			),
+			'validKey' => array(
+				'rule' => 'checkBetaKey',
+				'message' => 'That beta key is invalid',
+			),
 		),
 		'email' => array(
 			'uniqueEmail' => array(
@@ -136,7 +142,14 @@ class User extends AppModel {
 			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
 	}
 
-	function checkBlacklist($slug) {
+	function checkBetaKeyUsed($key) {
+			App::Import('Model', 'BetaKey');
+			$this->BetaKey = new BetaKey;
+			// find the key they've given
+			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'], 'email' => $this->data['User']['email'])));
+	}
+
+	function checkBlacklist($slug, $email) {
 		//$slug will have value: array('slug' => 'username')
 		return !in_array($slug['slug'], Configure::read('BlacklistUsernames'));
 	}
@@ -146,7 +159,7 @@ class User extends AppModel {
 		return !$this->find('first', array('conditions' => array('lower(User.' . $what . ')' => strtolower($array[$what]))));
 	}
 
-	function identicalFieldValues( $field=array(), $compare_field=null ) {
+	function identicalFieldValues($field=array(), $compare_field=null) {
 		foreach( $field as $key => $value){
 			$v1 = $value;
 			$v2 = $this->data[$this->name][$compare_field];

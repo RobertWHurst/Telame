@@ -100,6 +100,11 @@ class UsersController extends AppController {
 		$this->layout = 'simple_header';
 		// data has been posted
 		if (!empty($this->data)) {
+			if (!$this->data['User']['agree']) {
+				$this->Session->setFlash(__('tos_must_agree', true), 'default', array('class' => 'error'));
+				$this->redirect($this->referer());
+				exit;
+			}
 			// import the beta keys model
 			$this->loadModel('BetaKey');
 
