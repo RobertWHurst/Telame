@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-09-30 18:58-0700\n"
+"POT-Creation-Date: 2010-10-01 08:50-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -26,11 +26,11 @@ msgstr ""
 msgid "not_allowed_images"
 msgstr ""
 
-#: /controllers/albums_controller.php:62
+#: /controllers/albums_controller.php:65
 msgid "album_added"
 msgstr ""
 
-#: /controllers/albums_controller.php:71
+#: /controllers/albums_controller.php:74
 msgid "album_not_added"
 msgstr ""
 
@@ -78,7 +78,23 @@ msgstr ""
 msgid "not_allowed_friends"
 msgstr ""
 
-#: /controllers/media_controller.php:101
+#: /controllers/media_controller.php:45
+msgid "media_not_deleted_no_id"
+msgstr ""
+
+#: /controllers/media_controller.php:66
+msgid "media_deleted"
+msgstr ""
+
+#: /controllers/media_controller.php:68
+msgid "media_not_deleted_error"
+msgstr ""
+
+#: /controllers/media_controller.php:71
+msgid "media_not_deleted_not_owner"
+msgstr ""
+
+#: /controllers/media_controller.php:148
 msgid "media_upload_failed"
 msgstr ""
 
@@ -87,7 +103,7 @@ msgid "message_thread_deleted"
 msgstr ""
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:125
+#: /controllers/users_controller.php:130
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
 #: /views/layouts/simple_header.ctp:8;25
@@ -152,15 +168,19 @@ msgstr ""
 msgid "email_or_hash_failed"
 msgstr ""
 
-#: /controllers/users_controller.php:111
+#: /controllers/users_controller.php:104
+msgid "tos_must_agree"
+msgstr ""
+
+#: /controllers/users_controller.php:116
 msgid "validation_error"
 msgstr ""
 
-#: /controllers/users_controller.php:136
+#: /controllers/users_controller.php:141
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:138
+#: /controllers/users_controller.php:143
 msgid "user_create_error"
 msgstr ""
 
@@ -184,7 +204,7 @@ msgstr ""
 msgid "not_allowed_profile"
 msgstr ""
 
-#: /models/user.php:286
+#: /models/user.php:299
 msgid "profile_pictures"
 msgstr ""
 
@@ -194,6 +214,14 @@ msgstr ""
 
 #: /views/albums/album.ctp:35
 msgid "upload_images"
+msgstr ""
+
+#: /views/albums/album.ctp:39
+msgid "delete_image"
+msgstr ""
+
+#: /views/albums/album.ctp:39
+msgid "media_delete_confirm"
 msgstr ""
 
 #: /views/albums/albums.ctp:22
@@ -301,15 +329,11 @@ msgid "wall_post_label"
 msgstr ""
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:111
+#: /views/elements/wall_post.ctp:93
 msgid "wall_post_submit"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:34
-msgid "added_an_event"
-msgstr ""
-
-#: /views/elements/wall_post.ctp:44
+#: /views/elements/wall_post.ctp:26
 #: /views/elements/wall_post_comment.ctp:8
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
@@ -317,32 +341,32 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:52;56
+#: /views/elements/wall_post.ctp:34;38
 msgid "like"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:62;66
+#: /views/elements/wall_post.ctp:44;48
 msgid "dislike"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:71;108
+#: /views/elements/wall_post.ctp:53;90
 msgid "comment"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:78
+#: /views/elements/wall_post.ctp:60
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /views/elements/wall_post.ctp:81
+#: /views/elements/wall_post.ctp:63
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] ""
 msgstr[1] ""
 
 #: /views/elements/media/upload.ctp:15
-#: /views/media/upload.ctp:22
+#: /views/media/upload.ctp:20
 msgid "upload"
 msgstr ""
 
@@ -408,7 +432,7 @@ msgid "features"
 msgstr ""
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:16;31
+#: /views/users/signup.ctp:16;37
 msgid "signup"
 msgstr ""
 
@@ -462,6 +486,14 @@ msgstr ""
 
 #: /views/elements/settings/admin/navigation.ctp:5
 msgid "admin_beta_keys"
+msgstr ""
+
+#: /views/elements/wall_post_types/event.ctp:11
+msgid "added_an_event"
+msgstr ""
+
+#: /views/elements/wall_post_types/media.ctp:9
+msgid "added_media"
 msgstr ""
 
 #: /views/events/add.ctp:16
@@ -705,5 +737,13 @@ msgstr ""
 
 #: /views/users/search.ctp:30
 msgid "search_title"
+msgstr ""
+
+#: /views/users/signup.ctp:29
+msgid "personal_username"
+msgstr ""
+
+#: /views/users/signup.ctp:35
+msgid "agree"
 msgstr ""
 

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-09-30 18:58-0700\n"
-"PO-Revision-Date: 2010-09-30 18:59-0800\n"
+"POT-Creation-Date: 2010-10-01 08:50-0700\n"
+"PO-Revision-Date: 2010-10-01 08:52-0800\n"
 "Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +27,11 @@ msgstr "That email address is not confirmed"
 msgid "not_allowed_images"
 msgstr "Sorry, but you are not allowed to see this person's images."
 
-#: /controllers/albums_controller.php:62
+#: /controllers/albums_controller.php:65
 msgid "album_added"
 msgstr "Album added"
 
-#: /controllers/albums_controller.php:71
+#: /controllers/albums_controller.php:74
 msgid "album_not_added"
 msgstr "Album not added"
 
@@ -79,7 +79,23 @@ msgstr "Friend successfully added"
 msgid "not_allowed_friends"
 msgstr "Sorry, but you are not allowed to see this person's friends list.  Try adding them as a friend first."
 
-#: /controllers/media_controller.php:101
+#: /controllers/media_controller.php:45
+msgid "media_not_deleted_no_id"
+msgstr "Can't delete that, you didn't supply an ID"
+
+#: /controllers/media_controller.php:66
+msgid "media_deleted"
+msgstr "Media deleted"
+
+#: /controllers/media_controller.php:68
+msgid "media_not_deleted_error"
+msgstr "We couldn't delete that, there was an error"
+
+#: /controllers/media_controller.php:71
+msgid "media_not_deleted_not_owner"
+msgstr "You can't delete that, you don't own it"
+
+#: /controllers/media_controller.php:148
 msgid "media_upload_failed"
 msgstr "Sorry, we couldn't upload your media, please try again"
 
@@ -88,7 +104,7 @@ msgid "message_thread_deleted"
 msgstr "Message deleted"
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:125
+#: /controllers/users_controller.php:130
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
 #: /views/layouts/simple_header.ctp:8;25
@@ -153,15 +169,19 @@ msgstr "Your email has been successfully confirmed"
 msgid "email_or_hash_failed"
 msgstr "Either the email or hash supplied is incorrect, please try again"
 
-#: /controllers/users_controller.php:111
+#: /controllers/users_controller.php:104
+msgid "tos_must_agree"
+msgstr "You must agree with the Terms of Service"
+
+#: /controllers/users_controller.php:116
 msgid "validation_error"
 msgstr "One or more of the fields is invalid, please try again"
 
-#: /controllers/users_controller.php:136
+#: /controllers/users_controller.php:141
 msgid "user_saved"
 msgstr "You have been successfully added"
 
-#: /controllers/users_controller.php:138
+#: /controllers/users_controller.php:143
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
@@ -185,7 +205,7 @@ msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 msgid "not_allowed_profile"
 msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
 
-#: /models/user.php:286
+#: /models/user.php:299
 msgid "profile_pictures"
 msgstr "Profile pictures"
 
@@ -196,6 +216,14 @@ msgstr "Album"
 #: /views/albums/album.ctp:35
 msgid "upload_images"
 msgstr "Upload new images"
+
+#: /views/albums/album.ctp:39
+msgid "delete_image"
+msgstr "Delete Image"
+
+#: /views/albums/album.ctp:39
+msgid "media_delete_confirm"
+msgstr "Are you sure you want to delete this image?"
 
 #: /views/albums/albums.ctp:22
 msgid "albums"
@@ -302,15 +330,11 @@ msgid "wall_post_label"
 msgstr "Share something cool."
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:111
+#: /views/elements/wall_post.ctp:93
 msgid "wall_post_submit"
 msgstr "Post"
 
-#: /views/elements/wall_post.ctp:34
-msgid "added_an_event"
-msgstr "added an event"
-
-#: /views/elements/wall_post.ctp:44
+#: /views/elements/wall_post.ctp:26
 #: /views/elements/wall_post_comment.ctp:8
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
@@ -318,32 +342,32 @@ msgstr "added an event"
 msgid "delete"
 msgstr "Delete"
 
-#: /views/elements/wall_post.ctp:52;56
+#: /views/elements/wall_post.ctp:34;38
 msgid "like"
 msgstr "Like"
 
-#: /views/elements/wall_post.ctp:62;66
+#: /views/elements/wall_post.ctp:44;48
 msgid "dislike"
 msgstr "Dislike"
 
-#: /views/elements/wall_post.ctp:71;108
+#: /views/elements/wall_post.ctp:53;90
 msgid "comment"
 msgstr "Comment"
 
-#: /views/elements/wall_post.ctp:78
+#: /views/elements/wall_post.ctp:60
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] "person likes this"
 msgstr[1] "people like this"
 
-#: /views/elements/wall_post.ctp:81
+#: /views/elements/wall_post.ctp:63
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] "person dislikes this"
 msgstr[1] "people dislike this"
 
 #: /views/elements/media/upload.ctp:15
-#: /views/media/upload.ctp:22
+#: /views/media/upload.ctp:20
 msgid "upload"
 msgstr "Upload"
 
@@ -409,7 +433,7 @@ msgid "features"
 msgstr "Features"
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:16;31
+#: /views/users/signup.ctp:16;37
 msgid "signup"
 msgstr "Signup"
 
@@ -464,6 +488,14 @@ msgstr "Manage Friends"
 #: /views/elements/settings/admin/navigation.ctp:5
 msgid "admin_beta_keys"
 msgstr "Beta Keys Admin"
+
+#: /views/elements/wall_post_types/event.ctp:11
+msgid "added_an_event"
+msgstr "added an event"
+
+#: /views/elements/wall_post_types/media.ctp:9
+msgid "added_media"
+msgstr "Media added"
 
 #: /views/events/add.ctp:16
 msgid "event_title"
@@ -569,9 +601,8 @@ msgid "news_title"
 msgstr "What's New"
 
 #: /views/settings/admin_betakeys.ctp:19;22
-#, fuzzy
 msgid "admin_settings"
-msgstr "Account Settings"
+msgstr "Admin Settings"
 
 #: /views/settings/admin_betakeys.ctp:33
 msgid "keys_how_many"
@@ -708,6 +739,14 @@ msgstr "Confirm"
 #: /views/users/search.ctp:30
 msgid "search_title"
 msgstr "Search"
+
+#: /views/users/signup.ctp:29
+msgid "personal_username"
+msgstr "Personal Username"
+
+#: /views/users/signup.ctp:35
+msgid "agree"
+msgstr "Agree"
 
 #~ msgid "add_album"
 #~ msgstr "Add new album"
