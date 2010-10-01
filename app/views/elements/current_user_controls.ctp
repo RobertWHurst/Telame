@@ -10,6 +10,9 @@
 	<ul class="controls">
 		<li><?php echo $html->link(__('my_profile', true), array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug'])); ?></li>
 		<li><?php echo $html->link(__('account_settings', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic')); ?></li>
+<?php if ($currentUser['User']['level'] <= 0) { ?>
+		<li><?php echo $html->link(__('admin', true), array('controller' => 'settings', 'action' => 'betakeys', 'admin' => true)); ?></li>
+<?php } ?>
 		<li><?php echo $html->link(__('logout', true), array('controller' => 'users', 'action' => 'logout')); ?></li>
 	</ul>
 </div>

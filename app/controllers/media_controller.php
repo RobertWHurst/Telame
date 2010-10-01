@@ -38,7 +38,41 @@ class MediaController extends AppController {
 	}
 
 
-//---------------------------- Upload Functions ----------------------------//
+//---------------------------- Management Functions ----------------------------//
+
+	function delete($id = null) {
+		if (is_null($id)) {
+			$this->Session->setFlash(__('media_not_deleted_no_id', true));
+			$this->redirect($this->referer());
+			exit;
+		}
+		$id = intval($id);
+		$media = $this->Media->find('first', array(
+			'conditions' => array(
+				'Media.id' => $id, 
+				'Media.user_id' => $this->currentUser['User']['id']
+			),
+			'contain' => array(
+				'User'
+			)
+		));
+
+		if ($media) {
+			if ($this->Media->delete($id)) {
+				@unlink(USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . 'images' . DS . $media['Media']['filename']);
+				$this->loadModel('WallPost');
+				$wp = $this->WallPost->find('first', array('conditions' => array('WallPost.user_id' => $media['User']['id'], 'WallPost.type' => 'media', 'WallPost.model_id' => $media['Media']['id'])));
+				$this->WallPost->delete($wp['WallPost']['id']);
+				$this->Session->setFlash(__('media_deleted', true));
+			} else {
+				$this->Session->setFlash(__('media_not_deleted_error', true));
+			}
+		} else {
+			$this->Session->setFlash(__('media_not_deleted_not_owner', true));
+		}	
+		$this->redirect($this->referer());
+		exit;
+	}
 
 	function upload($aid = false) {
 		if (empty($this->data)) {
@@ -80,13 +114,26 @@ class MediaController extends AppController {
 								$data['Media']['size'] = $this->data['Media']['file']['size'];
 								$data['Media']['created'] = date('Y-m-d H:i:s');
 								$data['Media']['type'] = $this->data['Media']['file']['type'];
+								$data['Media']['title'] = $this->data['Media']['title'];
 								$this->Media->save($data);
+								
+								$mid = $this->Media->id;
 					
 								if ($albumCover) {
 									$this->Media->Album->setAlbumCover($this->data['Media']['album'], $this->Media->id);
 								}
 
 								$albumSlug = $this->Media->Album->getSlugFromId($this->data['Media']['album']);
+								
+								$this->loadModel('WallPost');
+								$data['WallPost']['post'] = Sanitize::clean($this->data['Media']['title']);
+								$data['WallPost']['author_id'] = $this->currentUser['User']['id'];
+								$data['WallPost']['user_id'] = $this->currentUser['User']['id'];
+								$data['WallPost']['model_id'] = $mid;
+
+								$this->WallPost->add($data, array('type' => 'media'));
+
+								
 								$this->redirect('/album/' . $this->currentUser['User']['slug'] . '/' . $albumSlug);
 								exit;
 

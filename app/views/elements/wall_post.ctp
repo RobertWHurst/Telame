@@ -16,25 +16,7 @@
 				else{
 					$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . ' </strong>';
 				}
-
-			if($post['WallPost']['type'] == 'post') {
-				//Note: author name is included in the parse because markdown sees
-				//it as part of the paragraph and wrapps it within the p tags.
-				echo $markdown->parse($author_name . "\r\n" . $post['WallPost']['post']);
-			} elseif($post['WallPost']['type'] == 'event') {
-			$url = array(
-				'slug' => $post['PostAuthor']['slug'], 
-				'controller' => 'events', 
-				'action' => 'calendar', 
-				substr($post['Event']['start'], 0, 4),
-				substr($post['Event']['start'], 5, 2), 
-				substr($post['Event']['start'], 8, 2)
-			);
-				echo $markdown->parse(
-					$author_name . __('added_an_event', true) . "\r\n<br />" . 
-					$html->link($post['Event']['title'], $url)
-				);
-			}
+				echo $this->element('wall_post_types/' . $post['WallPost']['type'], array('author_name' => $author_name, 'post' => $post));
 ?>
 		</div>
 		<?php if($post['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']): ?>
@@ -49,7 +31,7 @@
 			<div class="baseline_controls">
 <?php
 				if($post['WallPost']['like']){
-					$text = __('like', true) . " ({$post['WallPost']['like']})";
+					$text = __('like', true) . ' (' . $post['WallPost']['like'] . ')';
 					$classes = "like liked";
 				}
 				else{

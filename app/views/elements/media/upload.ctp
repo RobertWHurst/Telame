@@ -8,7 +8,7 @@
 
 	<div class="box inner">
 <?php
-		echo $form->create('Media', array('type' => 'file'));
+		echo $form->create('Media', array('type' => 'file', 'url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'media', 'action' => 'upload')));
 			echo $form->input('file', array('type' => 'file'));
 			echo $form->input('title');
 			echo $form->input('album', array('options' => $albums, 'selected' => $aid));

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-09-29 10:47-0700\n"
-"PO-Revision-Date: 2010-09-29 10:49-0800\n"
+"POT-Creation-Date: 2010-09-30 18:58-0700\n"
+"PO-Revision-Date: 2010-09-30 18:59-0800\n"
 "Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -202,6 +202,7 @@ msgid "albums"
 msgstr "Albums"
 
 #: /views/albums/albums.ctp:51
+#: /views/elements/albums/create.ctp:18
 msgid "create_album"
 msgstr "Create new album"
 
@@ -221,7 +222,11 @@ msgstr "My Profile"
 msgid "account_settings"
 msgstr "Account Settings"
 
-#: /views/elements/current_user_controls.ctp:13
+#: /views/elements/current_user_controls.ctp:14
+msgid "admin"
+msgstr "Admin Panel"
+
+#: /views/elements/current_user_controls.ctp:16
 #: /views/elements/pages/navigation.ctp:11
 msgid "logout"
 msgstr "Logout"
@@ -337,6 +342,11 @@ msgid_plural "people_dislike_this"
 msgstr[0] "person dislikes this"
 msgstr[1] "people dislike this"
 
+#: /views/elements/media/upload.ctp:15
+#: /views/media/upload.ctp:22
+msgid "upload"
+msgstr "Upload"
+
 #: /views/elements/messages/inbox_summary.ctp:38
 msgid "reply"
 msgstr "Reply"
@@ -451,6 +461,10 @@ msgstr "Groups and Privacy"
 msgid "manage_friends"
 msgstr "Manage Friends"
 
+#: /views/elements/settings/admin/navigation.ctp:5
+msgid "admin_beta_keys"
+msgstr "Beta Keys Admin"
+
 #: /views/events/add.ctp:16
 msgid "event_title"
 msgstr "Title"
@@ -514,10 +528,6 @@ msgstr "can not view your"
 msgid "public"
 msgstr "Can view"
 
-#: /views/media/upload.ctp:22
-msgid "upload"
-msgstr "Upload"
-
 #: /views/messages/compose.ctp:18
 msgid "message_compose"
 msgstr "Compose New Message"
@@ -557,6 +567,19 @@ msgstr "Home"
 #: /views/pages/news.ctp:21;24
 msgid "news_title"
 msgstr "What's New"
+
+#: /views/settings/admin_betakeys.ctp:19;22
+#, fuzzy
+msgid "admin_settings"
+msgstr "Account Settings"
+
+#: /views/settings/admin_betakeys.ctp:33
+msgid "keys_how_many"
+msgstr "How many keys would you like to generate?"
+
+#: /views/settings/admin_betakeys.ctp:34
+msgid "keys_generate"
+msgstr "Make 'em"
 
 #: /views/settings/basic.ctp:23;26
 #: /views/settings/friends.ctp:21

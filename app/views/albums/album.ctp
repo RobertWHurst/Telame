@@ -32,17 +32,18 @@ $this->set('nav_links', array(
 )); ?>
 <div id="albums" class="clearfix">
 <?php
-	echo $html->link(__('upload_images', true), array('controller' => 'media', 'action' => 'upload', $aid));
+	echo $html->link(__('upload_images', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'media', 'action' => 'upload', $aid));
 	foreach($album as $media): ?>
 		<div class="media">
-	<?php		echo $media['Media']['title']; ?>
+<?php		echo $media['Media']['title']; 
+			echo $html->link(__('delete_image', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'media', 'action' => 'delete', $media['Media']['id']), null, __('media_delete_confirm', true));
+?>
 			<div class="wrap_single">
 				<div class="single">
-	<?php
-					//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
-					$iUrl = array('slug' => $user['User']['slug'], 'controller' => 'media', 'action' => 'single', $media['Media']['id']);
-					echo $html->image($iUrl);//, array('/url' => $aUrl,));
-	?>
+<?php				//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
+					$iUrl = array('controller' => 'media', 'action' => 'single', $media['Media']['id']);
+					echo $htmlImage->image($iUrl);//, array('/url' => $aUrl,));
+?>
 				</div>
 			</div>
 		</div>

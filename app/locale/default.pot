@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-09-29 10:47-0700\n"
+"POT-Creation-Date: 2010-09-30 18:58-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -201,6 +201,7 @@ msgid "albums"
 msgstr ""
 
 #: /views/albums/albums.ctp:51
+#: /views/elements/albums/create.ctp:18
 msgid "create_album"
 msgstr ""
 
@@ -220,7 +221,11 @@ msgstr ""
 msgid "account_settings"
 msgstr ""
 
-#: /views/elements/current_user_controls.ctp:13
+#: /views/elements/current_user_controls.ctp:14
+msgid "admin"
+msgstr ""
+
+#: /views/elements/current_user_controls.ctp:16
 #: /views/elements/pages/navigation.ctp:11
 msgid "logout"
 msgstr ""
@@ -336,6 +341,11 @@ msgid_plural "people_dislike_this"
 msgstr[0] ""
 msgstr[1] ""
 
+#: /views/elements/media/upload.ctp:15
+#: /views/media/upload.ctp:22
+msgid "upload"
+msgstr ""
+
 #: /views/elements/messages/inbox_summary.ctp:38
 msgid "reply"
 msgstr ""
@@ -450,6 +460,10 @@ msgstr ""
 msgid "manage_friends"
 msgstr ""
 
+#: /views/elements/settings/admin/navigation.ctp:5
+msgid "admin_beta_keys"
+msgstr ""
+
 #: /views/events/add.ctp:16
 msgid "event_title"
 msgstr ""
@@ -513,10 +527,6 @@ msgstr ""
 msgid "public"
 msgstr ""
 
-#: /views/media/upload.ctp:22
-msgid "upload"
-msgstr ""
-
 #: /views/messages/compose.ctp:18
 msgid "message_compose"
 msgstr ""
@@ -555,6 +565,18 @@ msgstr ""
 
 #: /views/pages/news.ctp:21;24
 msgid "news_title"
+msgstr ""
+
+#: /views/settings/admin_betakeys.ctp:19;22
+msgid "admin_settings"
+msgstr ""
+
+#: /views/settings/admin_betakeys.ctp:33
+msgid "keys_how_many"
+msgstr ""
+
+#: /views/settings/admin_betakeys.ctp:34
+msgid "keys_generate"
 msgstr ""
 
 #: /views/settings/basic.ctp:23;26

@@ -97,6 +97,8 @@
 	Router::connect('/i/s/*', array('controller' => 'media', 'action' => 'single'));
 	// Media - upload
 	Router::connect('/:slug/media/upload/*', array('controller' => 'media', 'action' => 'upload'), array('routeClass' => 'SlugRoute'));
+	// Media - delete
+	Router::connect('/:slug/media/delete/*', array('controller' => 'media', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
 
 	// Messaging
 	Router::connect('/:slug/messages/thread/*', array('controller' => 'messages', 'action' => 'view'), array('routeClass' => 'SlugRoute'));

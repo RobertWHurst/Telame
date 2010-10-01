@@ -31,12 +31,15 @@ class AlbumsController extends AppController {
 
 	function album($albumSlug = false){
 		//layout
-		$this->layout = 'page';
+		$this->layout = 'profile';
 
 		$user = $this->Profile->getProfile($this->params['slug']);
 
-		$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
-
+		if (!is_numeric($albumSlug)) {
+			$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
+		} else {
+			$aid = intval($albumSlug);
+		}
 		if (!$aid) {
             $this->redirect($this->referer(array('action' => 'index')));
             exit;
