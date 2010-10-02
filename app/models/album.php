@@ -63,8 +63,14 @@ class Album extends AppModel {
 	}
 
 	// Takes album_id, and image_id, sets that image to that album's cover
-	function setAlbumCover($aid, $iid) {
-		$this->id = $aid;
-		$this->saveField('cover_id', $iid);
+	function setAlbumCover($aid, $iid, $uid) {
+		$album = $this->find('first', array('conditions' => array('Album.id' => $aid, 'Album.user_id' => $uid)));
+		if ($album) {
+			$this->id = intval($aid);
+			$this->saveField('cover_id', intval($iid));
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

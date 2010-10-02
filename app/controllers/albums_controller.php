@@ -88,4 +88,15 @@ class AlbumsController extends AppController {
 			}
 		}
 	}
+	
+	// takes album id, and image id, sets that image to the cover
+	function setAlbumCover($aid, $iid) {
+		$uid = $this->currentUser['User']['id'];
+		if ($this->Album->setAlbumCover($aid, $iid, $uid)) {
+			$this->Session->setFlash(__('album_cover_changed', true));
+		} else {
+			$this->Session->setFlash(__('album_cover_not_changed', true));
+		}
+		$this->redirect($this->referer());
+	}
 }

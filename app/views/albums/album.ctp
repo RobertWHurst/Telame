@@ -36,6 +36,7 @@ $this->set('nav_links', array(
 	foreach($album as $media): ?>
 		<div class="media">
 <?php		echo $media['Media']['title']; 
+			echo $html->link(__('album_set_cover', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'albums', 'action' => 'setAlbumCover', $media['Media']['album_id'], $media['Media']['id']));
 			echo $html->link(__('delete_image', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'media', 'action' => 'delete', $media['Media']['id']), null, __('media_delete_confirm', true));
 ?>
 			<div class="wrap_single">

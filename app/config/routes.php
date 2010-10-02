@@ -79,6 +79,7 @@
 
 	// Media
 	Router::connect('/:slug/albums/new/*', array('controller' => 'albums', 'action' => 'newAlbum'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/album/setCover/*', array('controller' => 'albums', 'action' => 'setAlbumCover'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/album/image/*', array('controller' => 'albums', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/album/*', array('controller' => 'albums', 'action' => 'album'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/albums/*', array('controller' => 'albums', 'action' => 'albums'), array('routeClass' => 'SlugRoute'));
