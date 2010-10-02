@@ -1,8 +1,18 @@
-div.wallPostWrap{
+div.wall_post_wrap{
 	margin-bottom: 10px;
 	width:458px;
 }
-div.wallPostWrap div.wallPost{
+div.wall_post_wrap div.action{
+	padding: 10px;
+	background: #555;
+	position: relative;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	
+}
+div.wall_post_wrap div.wall_post{
 	padding: 10px;
 	background: #333;
 	position: relative;
@@ -11,115 +21,116 @@ div.wallPostWrap div.wallPost{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.wallPostWrap div.wallPost div.avatar{
+div.wall_post_wrap div.wall_post div.avatar{
 	float: left;
 	margin-right: 10px;
 }
-div.wallPostWrap div.wallPost div.content{
+div.wall_post_wrap div.wall_post div.content{
 	margin: 0 15px 15px 70px;
 	overflow: hidden;
 }
-div.wallPostWrap div.wallPost div.content h1{
+div.wall_post_wrap div.wall_post div.content h1{
 	font-size: 2.4em;
 	line-height: 2.4em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wallPostWrap div.wallPost div.content h2{
+div.wall_post_wrap div.wall_post div.content h2{
 	font-size: 1.8em;
 	line-height: 1.8em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wallPostWrap div.wallPost div.content h3{
+div.wall_post_wrap div.wall_post div.content h3{
 	font-size: 1.6em;
 	line-height: 1.6em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wallPostWrap div.wallPost div.content p{
+div.wall_post_wrap div.wall_post div.content p,
+div.wall_post_wrap div.action div.content p{
 	font-size: 1.4em;
 	line-height: 1.4em;
 	margin-bottom: 15px;
 }
-div.wallPostWrap div.wallPost div.content ul,
-div.wallPostWrap div.wallPost div.content ol{
+div.wall_post_wrap div.wall_post div.content ul,
+div.wall_post_wrap div.wall_post div.content ol{
 	margin-bottom: 15px;
 }
-div.wallPostWrap div.wallPost div.content ul{
+div.wall_post_wrap div.wall_post div.content ul{
 	list-style: disc inside none;
 }
-div.wallPostWrap div.wallPost div.content ol{
+div.wall_post_wrap div.wall_post div.content ol{
 	list-style: decimal inside none;
 }
-div.wallPostWrap div.wallPost div.content li{
+div.wall_post_wrap div.wall_post div.content li{
 	font-size: 1.4em;
 	line-height: 1.4em;
 	font-weight: bold;
 }
-div.wallPostWrap div.wallPost div.content pre{
+div.wall_post_wrap div.wall_post div.content pre{
 	padding: 2px 4px;
 	margin-bottom: 15px;
 	background: #000;
 }
-div.wallPostWrap div.wallPost div.content code{
+div.wall_post_wrap div.wall_post div.content code{
 	font-size: 14px;
 	line-height: 16px;
 	background: #000;
 	color: #fff;
 }
-div.wallPostWrap div.deletePost{
+div.wall_post_wrap div.deletePost{
 	position: absolute;
 	top:10px;
 	right: 10px;
 }
-div.wallPostWrap div.wall_to_wall{
+div.wall_post_wrap div.wall_to_wall{
 	position: absolute;
 	top:30px;
 	right: 10px;
 }
-div.wallPostWrap div.wall_to_wall:hover,
-div.wallPostWrap div.delete:hover{
+div.wall_post_wrap div.wall_to_wall:hover,
+div.wall_post_wrap div.delete:hover{
 	background: #444;
 }
-div.wallPostWrap div.wallPost div.baseline{
+div.wall_post_wrap div.wall_post div.baseline{
 	position: absolute;
 	bottom:10px;
 	margin-left: 70px;
 	width:368px;
 }
-div.wallPostWrap div.wallPost div.baseline div.time{
+div.wall_post_wrap div.wall_post div.baseline div.time{
 	float: right;
 }
-div.wallPostWrap div.wallPost div.baseline div.time p{
+div.wall_post_wrap div.wall_post div.baseline div.time p{
 	color: #888;
 	font-size: 1.1em;
 	font-weight: bold;
 }
-div.wallPostWrap div.wallPost div.baseline div.baseline_info{
+div.wall_post_wrap div.wall_post div.baseline div.baseline_info{
 	display: none;
 	float: left;
 }
-div.wallPostWrap div.wallPost div.baseline div.baseline_info p{
+div.wall_post_wrap div.wall_post div.baseline div.baseline_info p{
 	font-size: 1.1em;
 	font-weight: bold;
 	margin-right: 1em;
 	float: left;
 	color: #888;
 }
-div.wallPostWrap div.wallPost div.baseline div.baseline_controls{
+div.wall_post_wrap div.wall_post div.baseline div.baseline_controls{
 	float: left;
 }
-div.wallPostWrap div.wallPost div.baseline div.baseline_controls a{
+div.wall_post_wrap div.wall_post div.baseline div.baseline_controls a{
 	font-size: 1.1em;
 	font-weight: bold;
 	margin-right: 1em;
 }
-div.wallPostWrap div.commentsWrap{
+div.wall_post_wrap div.commentsWrap{
 	width:358px;
 	margin: 0 15px 0 75px;
 }
-div.wallPostWrap div.comments{	
+div.wall_post_wrap div.comments{	
 	padding: 5px;
 	background: #444;
 	position: relative;
@@ -128,7 +139,7 @@ div.wallPostWrap div.comments{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.wallPostWrap div.comments div.comment{	
+div.wall_post_wrap div.comments div.comment{	
 	padding: 5px;
 	background: #555;
 	width: 338px;
@@ -136,36 +147,36 @@ div.wallPostWrap div.comments div.comment{
 	border-bottom: 1px solid #595959;
 	min-height: 16px;
 }
-div.wallPostWrap div.comments  div.comment div.avatar{
+div.wall_post_wrap div.comments  div.comment div.avatar{
 	float: left;
 	margin-right: 5px;	
 }
-div.wallPostWrap div.comments div.comment div.content{
+div.wall_post_wrap div.comments div.comment div.content{
 	margin: 0 15px 15px 35px;
 	overflow: hidden;
 }
-div.wallPostWrap div.comments div.comment div.content p{
+div.wall_post_wrap div.comments div.comment div.content p{
 	font-size: 1.2em;
 	line-height: 1.2em;
 }
-div.wallPostWrap div.comments div.comment div.deleteComment{
+div.wall_post_wrap div.comments div.comment div.deleteComment{
 	position: absolute;
 	top:5px;
 	right:5px;
 }
-div.wallPostWrap div.comments div.comment div.time{
+div.wall_post_wrap div.comments div.comment div.time{
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
 }
-div.wallPostWrap div.comments div.comment div.time p{
+div.wall_post_wrap div.comments div.comment div.time p{
 	color: #888;
 	font-size: 1.0em;
 }
-div.wallPostWrap div.comments div.commentInput{
+div.wall_post_wrap div.comments div.commentInput{
 	position: relative;
 }
-div.wallPostWrap div.comments div.commentInput label{
+div.wall_post_wrap div.comments div.commentInput label{
 	position: absolute;
 	top:5px;
 	left:5px;
@@ -173,21 +184,21 @@ div.wallPostWrap div.comments div.commentInput label{
 	color: #949494;
 	display: none;
 }
-div.wallPostWrap div.comments div.commentInput input[type="text"],
-div.wallPostWrap div.comments div.commentInput textarea{
+div.wall_post_wrap div.comments div.commentInput input[type="text"],
+div.wall_post_wrap div.comments div.commentInput textarea{
 	width: 293px;
 	font-size: 12px;
 	padding: 3px 50px 3px 3px;
 	background: #dedede;
 }
-div.wallPostWrap div.comments div.commentInput input[type="text"]{
+div.wall_post_wrap div.comments div.commentInput input[type="text"]{
 	height: 18px;
 }
-div.wallPostWrap div.comments div.commentInput textarea{
+div.wall_post_wrap div.comments div.commentInput textarea{
 	font-family: Helvetica, Arial, sans-serif;
 	resize: none;
 }
-div.wallPostWrap div.comments div.commentInput input[type="submit"]{
+div.wall_post_wrap div.comments div.commentInput input[type="submit"]{
 	position: absolute;
 	top:5px;
 	right:0;
@@ -196,19 +207,19 @@ div.wallPostWrap div.comments div.commentInput input[type="submit"]{
 	color: #949494;
 	cursor: pointer;
 }
-div.wallPostWrap div.comments div.commentInput.active input[type="text"],
-div.wallPostWrap div.comments div.commentInput.active textarea{
+div.wall_post_wrap div.comments div.commentInput.active input[type="text"],
+div.wall_post_wrap div.comments div.commentInput.active textarea{
 	border: 1px solid #669b00;
 	background: #fff;
 }
-div.wallPostWrap div.comments div.commentInput.active label,
-div.wallPostWrap div.comments div.commentInput.active input[type="submit"]{
+div.wall_post_wrap div.comments div.commentInput.active label,
+div.wall_post_wrap div.comments div.commentInput.active input[type="submit"]{
 	color: #669b00;
 }
-div.wallPostWrap div.comments div.commentInput.focus input[type="submit"]{
+div.wall_post_wrap div.comments div.commentInput.focus input[type="submit"]{
 	font-weight: bold;
 	text-decoration: underline;
 }
-div.wallPostWrap div.comments div.commentInput.focus input:hover[type="submit"]{
+div.wall_post_wrap div.comments div.commentInput.focus input:hover[type="submit"]{
 	color: #86cf00;
 }

@@ -46,7 +46,7 @@ class EventsController extends AppController {
 					$data['WallPost']['user_id'] = $this->currentUser['User']['id'];
 					$data['WallPost']['model_id'] = $eid;
 
-					$this->WallPost->add($data, array('type' => 'event'));
+					$this->WallPost->add($data, array('type' => 'event', 'class' => 'action'));
 				}
 			} else {
 				$this->Session->setFlash(__('event_not_saved', true));
