@@ -1,4 +1,4 @@
-<?php
+	<?php
 //INCLUDES
 $html->css(array(
 	'base',
@@ -6,21 +6,19 @@ $html->css(array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'settings/settings',
-	'settings/gallery_options'
+	'settings/settings'
 ), null, array('inline' => false));
 $js = array(
 	'jquery',
 	'base',
-	'gallery_options',
 	'main_sidebar',
-	'settings/settings',
+	'settings/settings'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
 }
 //page title
-$this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
+$this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
 ?>
 <div id="page_head">
 	<h1 class="page_title"><?php echo __('settings', true); ?></h1>
@@ -31,11 +29,9 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 <div id="page_body" class="clearfix">
 	<div id="basic">
 		<div id="profile_options">
-<?php
-			echo $form->create('Profile', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic')));
-?>
 			<div class="options_group clearfix">
 				<h1>Your Information</h1>
+				<?php echo $form->create('Profile', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic'))); ?>
 				<table>
 					<tr>
 						<td><?php echo $form->label(__('first_name', true)); ?></td>
@@ -44,14 +40,6 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 					<tr>
 						<td><?php echo $form->label(__('last_name', true)); ?></td>
 						<td class="field"><?php echo $form->input('last_name', array('value' => $currentUser['User']['last_name'], 'label' => false)); ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $form->label(__('password', true)); ?></td>
-						<td class="field"><?php echo $form->input('user_password', array('label' => false, 'type' => 'password')); ?></td>
-					</tr>
-					<tr>
-						<td><?php echo $form->label(__('password_again', true)); ?></td>
-						<td class="field"><?php echo $form->input('user_password_again', array('label' => false, 'type' => 'password')); ?></td>
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('sex', true)); ?></td>
@@ -86,16 +74,30 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 						<td class="field"><?php echo $form->input('dob', array('dateFormat' => 'MDY', 'minYear' => date('Y') - 97, 'maxYear' => date('Y') + 2, 'selected' => strtotime($currentUser['Profile']['dob']), 'label' => false)); ?></td>
 					</tr>
 				</table>
-				<?php echo $form->end(__('update_profile', true)); ?>
+				<?php echo $form->end(__('update_profile', true)); ?>				
 			</div>
 		</div>
-		<div class="options_group clearfix">
-			<h1>Gallery</h1>
-			<?php echo $this->element('settings/gallery_options'); ?>
-		</div>
-		<div class="options_group clearfix">
-			<h1>Delete Account</h1>
-			<?php echo $html->link(__('delete_account', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'delete'), null, __('delete_are_you_sure', true)); ?>
+		<div id="account_options">
+			<div class="options_group clearfix">
+				<?php echo $form->create('Profile', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic'))); ?>
+				<h1><?php __('change_your_passowrd'); ?></h1>
+				<table>
+					<tr>
+						<td><?php echo $form->label(__('password', true)); ?></td>
+						<td class="field"><?php echo $form->input('user_password', array('label' => false, 'type' => 'password')); ?></td>
+					</tr>
+					<tr>
+						<td><?php echo $form->label(__('password_again', true)); ?></td>
+						<td class="field"><?php echo $form->input('user_password_again', array('label' => false, 'type' => 'password')); ?></td>
+					</tr>
+				</table>
+				<?php echo $form->end(__('update_profile', true)); ?>
+			</div>
+			<div class="options_group clearfix">
+				<h1><?php __('delete_account'); ?></h1>
+				<p><?php __('delete_account_warning'); ?></p>
+				<?php echo $html->link(__('delete_account', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'delete'), array('class' => 'button '), __('delete_are_you_sure', true)); ?>
+			</div>
 		</div>
 	</div>
 </div>

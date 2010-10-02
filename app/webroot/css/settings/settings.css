@@ -1,6 +1,7 @@
 div.options_group{
 	background: #333;
-	margin: 20px 20px 0 20px;
+	margin: 20px;
+	padding-bottom: 20px; 
 	
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -19,6 +20,26 @@ div.options_group td.field{
 div.options_group h1{
 	font-size: 2.4em;
 	padding: 20px;
+}
+div.options_group a.button,
+div.options_group input[type="submit"]{	
+	font-size: 1.6em;
+	color: #d3ef91;
+	background-color: #656565;
+	border: 1px solid #d3ef91;
+	-moz-border-radius: 2px;
+	padding: 3px;
+	margin: 20px auto;
+	display: block;
+	width: 150px;
+	text-align: center;
+	text-decoration: none;
+}
+div.options_group a.button:hover,
+div.options_group input[type="submit"]:hover{
+	color: #c1ef52;
+	background-color: #8f977c;
+	border-color: #c1ef52;
 }
 div.options_group label{
 	width: 50%;
@@ -41,21 +62,6 @@ div.options_group input[type="text"]{
 	font-weight: bold;
 	color: #363636;
 	line-height: 20px;
-}
-div.options_group input[type="submit"]{
-	font-size: 1.6em;
-	float: right;
-	color: #d3ef91;
-	background-color: #656565;
-	border: 1px solid #d3ef91;
-	-moz-border-radius: 2px;
-	padding: 3px;
-	margin: 20px;
-}
-div.options_group input[type="submit"]:hover{
-	color: #c1ef52;
-	background-color: #8f977c;
-	border-color: #c1ef52;
 }
 div.options_group div.date select{
 	width: 105px;
@@ -120,4 +126,9 @@ div.group_permissions table{
 }
 div.group_permissions td{
 	padding: 10px;
+}
+div.group_permissions p.empty{
+	padding: 300px 0 0 0;
+	font-size: 1.6em;
+	text-align: center;
 }

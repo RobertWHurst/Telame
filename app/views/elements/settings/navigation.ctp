@@ -11,6 +11,15 @@ $links = array(
 		'classes' => 'button'
 	),
 	array(
+		'label' => __('gallery', true),
+		'url' => array(
+			'slug' => $currentUser['User']['slug'], 
+			'controller' => 'settings',
+			'action' => 'gallery'
+		),
+		'classes' => 'button'
+	),
+	array(
 		'label' => __('lists_and_privacy', true),
 		'url' => array(
 			'slug' => $currentUser['User']['slug'], 

@@ -28,7 +28,8 @@
 #main_sidebar div.current_user_controls li{
 	list-style: none;
 }
-#main_sidebar div.current_user_controls li a{
+#main_sidebar div.current_user_controls li a,
+#main_sidebar div.current_user_controls li p{
 	line-height: 1.5em;
 	font-size: 1.3em;
 }
