@@ -40,6 +40,7 @@ $this->set('title_for_layout', __('admin_settings', true));
 <?php foreach($keys as $key): ?>
 					<tr>
 						<td class="field"><?php echo $key['BetaKey']['key']; ?></td>
+						<td class="field"><?php echo $key['BetaKey']['email']; ?></td>
 					</tr>
 <?php endforeach; ?>
 				</table>

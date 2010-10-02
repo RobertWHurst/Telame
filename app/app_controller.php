@@ -49,6 +49,10 @@ class AppController extends Controller {
 	function checkProfile() {
 		if ($this->currentUser['User']['first_login']) {
 			$this->Session->setFlash(__('new_user_welcome', true));
+			if ($this->here == '/' . $this->currentUser['User']['slug'] || $this->here == '/') {
+				$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic'));
+				exit;
+			}
 		}
 	}
 

@@ -17,7 +17,7 @@ msgstr ""
 
 #: /app_controller.php:51
 msgid "new_user_welcome"
-msgstr "Welcome to Telame.  Please use the 'Account Settings' link below to edit your profile data.Enjoy your stay."
+msgstr "Welcome to Telame.  Please edit your profile. Enjoy your stay."
 
 #: /app_controller.php:62
 msgid "email_not_confirmed"
