@@ -5,9 +5,9 @@ $links = array(
 	array(
 		'label' => $who . __('wall', true),
 		'url' => array(
-			'slug' => $user['User']['slug'],
 			'controller' => 'users',
 			'action' => 'profile',
+			$user['User']['slug']
 		),
 		'classes' => 'button'
 	),
@@ -16,7 +16,7 @@ $links = array(
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'albums',
-			'action' => 'albums',
+			'action' => 'albums'
 		),
 		'classes' => 'button'
 	),
@@ -25,7 +25,7 @@ $links = array(
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'events',
-			'action' => 'calendar',
+			'action' => 'calendar'
 		),
 		'classes' => 'button'
 	),
@@ -34,7 +34,7 @@ $links = array(
 		'url' => array(
 			'slug' => $user['User']['slug'],
 			'controller' => 'groups_users',
-			'action' => 'friendList',
+			'action' => 'friendList'
 		),
 		'classes' => 'button'
 	),

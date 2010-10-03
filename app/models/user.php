@@ -220,6 +220,27 @@ class User extends AppModel {
 		return $user['User']['slug'];
 	}
 
+	function getNameFromId($uid, $name_type = 'full') {
+		$this->recursive = -1;
+		$user = $this->find('first', array('conditions' => array('id' => Sanitize::clean(intval($uid))), 'fields' => 'first_name, last_name'));
+		
+		switch($name_type){
+			case 'full':
+				$name = $user['User']['first_name'] . ' ' . $user['User']['last_name'];
+				break;
+			
+			case 'first':
+				$name = $user['User']['first_name'];
+				break;
+				
+			case 'last':
+				$name = $user['User']['last_name'];
+				break;
+		}
+		
+		return $name;
+	}
+
 	function getProfile($slug, $arguments = array()) {
 
 /*	FIXME bug in parseargs

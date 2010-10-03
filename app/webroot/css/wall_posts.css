@@ -3,7 +3,7 @@ div.wall_post_wrap{
 	width:458px;
 }
 div.wall_post_wrap div.action{
-	padding: 10px;
+	padding: 5px 10px;
 	background: #555;
 	position: relative;
 	
@@ -51,6 +51,8 @@ div.wall_post_wrap div.wall_post div.content p,
 div.wall_post_wrap div.action div.content p{
 	font-size: 1.4em;
 	line-height: 1.4em;
+}
+div.wall_post_wrap div.wall_post div.content p{
 	margin-bottom: 15px;
 }
 div.wall_post_wrap div.wall_post div.content ul,

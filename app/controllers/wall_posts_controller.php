@@ -2,7 +2,7 @@
 class WallPostsController extends AppController {
 
 	var $components = array('RequestHandler');
-	var $helpers = array('Markdown', 'Time');
+	var $helpers = array('Html', 'Markdown', 'Time');
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -86,14 +86,23 @@ class WallPostsController extends AppController {
 
 		//commit the data to the db
 		$this->WallPost->add($this->data, array('type' => 'post', 'class' => 'wall_post'));
+		
+		//get the new wall post id for ajax (if ajax)
+		$new_post_id = $this->WallPost->id;
 
-		//TODO
-		//we need to save a notification right here.
+		//if the wall does not belong to the current user
+		if($wallOwnerId != $visitorId){
+		
+			//create an action on the user's page
+			$action['reply_parent_id'] = null;	
+			$action['WallPost']['user_id'] = $visitorId;
+			$action['WallPost']['author_id'] = $visitorId;
+			$action['WallPost']['action_recipient_id'] = $wallOwnerId;
+			$action['WallPost']['post'] = null;
+			$this->WallPost->add($action, array('type' => 'post_action', 'class' => 'action'));
+		}
 
-		// FIXME
 		if($isAjax){
-			//get the new wall post id
-			$new_post_id = $this->WallPost->id;
 
 			//load the view
 			$wallPost = $this->WallPost->getWallPosts(array('id' => $new_post_id, 'single' => true));
