@@ -74,12 +74,12 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 						<td class="field"><?php echo $form->input('dob', array('dateFormat' => 'MDY', 'minYear' => date('Y') - 97, 'maxYear' => date('Y') + 2, 'selected' => strtotime($currentUser['Profile']['dob']), 'label' => false)); ?></td>
 					</tr>
 				</table>
-				<?php echo $form->end(__('update_profile', true)); ?>				
+				<?php echo $form->submit(__('update_profile', true)); ?>				
 			</div>
 		</div>
 		<div id="account_options">
 			<div class="options_group clearfix">
-				<?php echo $form->create('Profile', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic'))); ?>
+				<?php //echo $form->create('Profile', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'basic'))); ?>
 				<h1><?php __('change_your_passowrd'); ?></h1>
 				<table>
 					<tr>
@@ -91,7 +91,9 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 						<td class="field"><?php echo $form->input('user_password_again', array('label' => false, 'type' => 'password')); ?></td>
 					</tr>
 				</table>
-				<?php echo $form->end(__('update_profile', true)); ?>
+<?php 				echo $form->submit(__('save_password', true)); 
+					echo $form->end();
+?>
 			</div>
 			<div class="options_group clearfix">
 				<h1><?php __('delete_account'); ?></h1>

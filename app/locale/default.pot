@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-10-02 18:54-0700\n"
+"POT-Creation-Date: 2010-10-03 10:07-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -111,7 +111,8 @@ msgid "message_thread_deleted"
 msgstr ""
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:130
+#: /controllers/users_controller.php:57;175
+#: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
 #: /views/layouts/simple_header.ctp:8;25
@@ -178,19 +179,23 @@ msgstr ""
 msgid "email_or_hash_failed"
 msgstr ""
 
-#: /controllers/users_controller.php:104
+#: /controllers/users_controller.php:69
+msgid "email_password_incorrect"
+msgstr ""
+
+#: /controllers/users_controller.php:148
 msgid "tos_must_agree"
 msgstr ""
 
-#: /controllers/users_controller.php:116
+#: /controllers/users_controller.php:160
 msgid "validation_error"
 msgstr ""
 
-#: /controllers/users_controller.php:141
+#: /controllers/users_controller.php:186
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:143
+#: /controllers/users_controller.php:188
 msgid "user_create_error"
 msgstr ""
 
@@ -222,19 +227,19 @@ msgstr ""
 msgid "album"
 msgstr ""
 
-#: /views/albums/album.ctp:35
+#: /views/albums/album.ctp:36
 msgid "upload_images"
 msgstr ""
 
-#: /views/albums/album.ctp:39
+#: /views/albums/album.ctp:42
 msgid "album_set_cover"
 msgstr ""
 
-#: /views/albums/album.ctp:40
+#: /views/albums/album.ctp:43
 msgid "delete_image"
 msgstr ""
 
-#: /views/albums/album.ctp:40
+#: /views/albums/album.ctp:43
 msgid "media_delete_confirm"
 msgstr ""
 
@@ -724,7 +729,7 @@ msgstr ""
 msgid "dob"
 msgstr ""
 
-#: /views/settings/basic.ctp:77;94
+#: /views/settings/basic.ctp:77
 msgid "update_profile"
 msgstr ""
 
@@ -737,15 +742,19 @@ msgstr ""
 msgid "password_again"
 msgstr ""
 
-#: /views/settings/basic.ctp:97;99
+#: /views/settings/basic.ctp:94
+msgid "save_password"
+msgstr ""
+
+#: /views/settings/basic.ctp:99;101
 msgid "delete_account"
 msgstr ""
 
-#: /views/settings/basic.ctp:98
+#: /views/settings/basic.ctp:100
 msgid "delete_account_warning"
 msgstr ""
 
-#: /views/settings/basic.ctp:99
+#: /views/settings/basic.ctp:101
 msgid "delete_are_you_sure"
 msgstr ""
 
@@ -770,7 +779,13 @@ msgid "group_permission_title"
 msgstr ""
 
 #: /views/users/confirm.ctp:25
+#: /views/users/password_reset/confirm.ctp:23
+#: /views/users/password_reset/new_password.ctp:24
 msgid "confirm"
+msgstr ""
+
+#: /views/users/login.ctp:29
+msgid "password_forget"
 msgstr ""
 
 #: /views/users/search.ctp:30
@@ -783,5 +798,15 @@ msgstr ""
 
 #: /views/users/signup.ctp:35
 msgid "agree"
+msgstr ""
+
+#: /views/users/password_reset/confirm.ctp:14;18
+#: /views/users/password_reset/email.ctp:14;18
+#: /views/users/password_reset/new_password.ctp:14;18
+msgid "password_reset"
+msgstr ""
+
+#: /views/users/password_reset/email.ctp:22
+msgid "send_reset"
 msgstr ""
 
