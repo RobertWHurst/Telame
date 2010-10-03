@@ -8,11 +8,11 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 
 		$this->Security->blackHoleCallback = '_forceSSL';
-		$this->Security->requireSecure('login', 'signup');
+		$this->Security->requireSecure('login', 'passwordReset', 'signup');
 		if (!in_array($this->action, $this->Security->requireSecure) && env('HTTPS')) {
 		 	$this->_unforceSSL();
 		}
-		$this->Auth->allow(array('confirm', 'signup'));
+		$this->Auth->allow(array('confirm', 'passwordReset', 'signup'));
 
 	}
 
@@ -34,6 +34,70 @@ class UsersController extends AppController {
 		} else {
 			$this->data['User']['email'] = $email;
 			$this->data['User']['hash'] = $hash;
+		}
+	}
+
+	function passwordReset($email = null, $pass = null) {
+		$this->layout = 'simple_header';
+		if (!empty($this->data)) {
+			// 4th step.  save their new password
+			if (isset($this->data['User']['email']) && isset($this->data['User']['user_password'])) {
+				$user = $this->User->find('first', array('conditions' => array('User.email' => $this->data['User']['email'], 'User.temp_password' => $this->data['User']['temp_password'])));
+				if (!$user) {
+					$this->Session->setFlash(__('email_password_incorrect', true));
+					$this->redirect($this->referer());
+					exit;
+				}
+				if (!$this->User->validateSingle('user_password', $this->data['User']['user_password']) || $this->data['User']['user_password'] != $this->data['User']['user_password_again']) {
+					$this->Session->setFlash(__('validation_error', true), 'default', array('class' => 'error'));
+					$this->set(compact('email', 'pass'));
+					$this->render('/users/password_reset/new_password');
+				} else {
+					$this->User->id = $user['User']['id'];
+					$this->User->saveField('password', $this->Auth->password($this->data['User']['user_password']));
+					$this->User->saveField('temp_password', null);
+					$this->redirect('/login');
+					exit;
+				}
+			} else { // 2nd step.  we have their email, generate a new pass, store it, and send them an email
+				$this->User->recursive = -1;
+				$user = $this->User->find('first', array('conditions' => array('User.email' => $this->data['User']['email'])));
+				if ($user) {
+					$newPass = sha1(Configure::read('Security.salt') . $this->data['User']['email'] . microtime());
+					$this->User->id = $user['User']['id'];
+					$this->User->saveField('temp_password', $newPass);
+					$emailSettings = Configure::read('EmailInfo');
+
+					$this->Email->from		= $emailSettings['from'];
+					$this->Email->to		= '<' . $this->data['User']['email'] . '>';
+					$this->Email->subject	= __('site_name', true) . ' password reset.';
+					$this->Email->sendAs	= 'both';
+					$this->Email->template	= 'password_reset';
+					$this->set('user', $user);
+					$this->set('temp_password', $newPass);
+					$this->Email->send();
+				} else {
+					$this->Session->setFlash(__('invalid_email', true));
+				}
+				$this->redirect('/');
+				exit;
+			}
+		// should be 3rd step.  they clicked the link with email and new pass.  time to get a new password
+		} else if (!is_null($email) && !is_null($pass)) {
+			$user = $this->User->find('first', array('conditions' => array('User.email' => $email, 'User.temp_password' => $pass)));
+			if (!$user) { // something is wrong, try again
+				$this->Session->setFlash(__('email_password_incorrect', true));
+				$this->redirect('/password_reset/' . $email);
+				exit;
+			} else {
+				$this->set(compact('email', 'pass'));
+				$this->render('/users/password_reset/new_password');
+			}
+		// email or temp pass wrong, get again
+		} else if (!is_null($email) || !is_null($pass)) {
+			$this->render('/users/password_reset/confirm');
+		} else { // 1st step, get user's email to send new pass to
+			$this->render('/users/password_reset/email');
 		}
 	}
 
@@ -124,8 +188,9 @@ class UsersController extends AppController {
 				if ($uid) {
 					$this->Aacl->createAcl($uid);
 
+					$emailSettings = Configure::read('EmailInfo');
 					// send user email
-					$this->Email->from		= 'Telame.com <admin@telame.com>';
+					$this->Email->from		= $emailSettings['from'];
 					$this->Email->to		= $this->data['User']['slug'] . '<' . $this->data['User']['email'] . '>';
 					$this->Email->subject	= 'Your ' . __('site_name', true) . ' account has been created.';
 					$this->Email->sendAs	= 'both';
