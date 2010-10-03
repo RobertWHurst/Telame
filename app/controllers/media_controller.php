@@ -120,7 +120,7 @@ class MediaController extends AppController {
 								$mid = $this->Media->id;
 					
 								if ($albumCover) {
-									$this->Media->Album->setAlbumCover($this->data['Media']['album'], $this->Media->id);
+									$this->Media->Album->setAlbumCover($this->data['Media']['album'], $this->Media->id, $this->currentUser['User']['id']);
 								}
 
 								$albumSlug = $this->Media->Album->getSlugFromId($this->data['Media']['album']);
