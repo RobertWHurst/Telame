@@ -15,7 +15,7 @@ $(function(){
 		root.postHoverHandler = function(){
 		
 			//on hover event for each post	
-			root.wallPostsWrapper.delegate('div.wallPost', 'hover', function(event){
+			root.wallPostsWrapper.delegate('div.wall_post', 'hover', function(event){
 			
 				//grab the dom element and its components
 				var domElement = $(this);
@@ -44,6 +44,27 @@ $(function(){
   				}
 			});
 		
+			//on hover event for each action	
+			root.wallPostsWrapper.delegate('div.action', 'hover', function(event){
+			
+				//grab the dom element and its components
+				var domElement = $(this);
+				var deleteControl = $('div.deletePost', domElement);
+			
+  				if(event.type == 'mouseover'){
+					
+					//add the hover class to the post and fade in the controls
+					domElement.addClass('hover');
+					deleteControl.show();
+  				}
+  				else{	
+					
+					//remove the hover class from the post and fade out the controls			
+					domElement.removeClass('hover');
+					deleteControl.hide();
+  				}
+			});
+		
 			//on hover event for each post comment
 			root.wallPostsWrapper.delegate('div.comment', 'hover', function(event){
 			
@@ -55,13 +76,13 @@ $(function(){
   				
 					//add the hover class to the comment and fade in the delete button
 					domElement.addClass('hover');
-					deleteControl.fadeIn(100);
+					deleteControl.show();
   				}
   				else{  		
 					
 					//remove the hover class from the comment and fade out the delete button	
 					domElement.removeClass('hover');
-					deleteControl.fadeOut(100);
+					deleteControl.hide();
   				}
 			});
 		}
@@ -113,7 +134,7 @@ $(function(){
 					wallCommentsWrap.hide();
 				}
 				else{
-					$('a.showComments', domElement.parents('div.wallPostWrap')).remove();				
+					$('a.showComments', domElement.parents('div.wall_post_wrap')).remove();				
 				}
 			});
 		
@@ -125,7 +146,7 @@ $(function(){
 			
 				//grab the dom element and its components
 				var domElement = $(this);
-				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wallPostWrap'));
+				var wallCommentsWrap = $('div.commentsWrap', domElement.parents('div.wall_post_wrap'));
   				
   				domElement.remove();
 				wallCommentsWrap.slideDown(300);
@@ -376,7 +397,7 @@ $(function(){
 				//get the button
 				var button = $(this);
 				//get the current element count
-				var offset = $('div.wallPost', '#profile_wall_posts').size();
+				var offset = $('div.wall_post', '#profile_wall_posts').size();
 				//get the ajaxUrl
 				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
 
@@ -415,7 +436,7 @@ $(function(){
 						domElement.children('p.proccess').remove();
 						
 						//animate in the new posts		
-						$('div.wallPostWrap').slideDown(600);
+						$('div.wall_post_wrap').slideDown(600);
 						
 						//show the button again
 						domElement.children().fadeIn(300);	

@@ -9,11 +9,6 @@ class WallPostsController extends AppController {
 	}
 
 	function lists($id = false){
-		echo 'test';
-		exit;
-	}
-
-	function jx_lists($uid = false, $offset = false){
 		if(!$offset || !$uid){
 			echo 'false';
 			exit;
@@ -90,7 +85,7 @@ class WallPostsController extends AppController {
 //		$this->data
 
 		//commit the data to the db
-		$this->WallPost->add($this->data, array('type' => 'post'));
+		$this->WallPost->add($this->data, array('type' => 'post', 'class' => 'wall_post'));
 
 		//TODO
 		//we need to save a notification right here.

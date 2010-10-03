@@ -131,7 +131,7 @@ class MediaController extends AppController {
 								$data['WallPost']['user_id'] = $this->currentUser['User']['id'];
 								$data['WallPost']['model_id'] = $mid;
 
-								$this->WallPost->add($data, array('type' => 'media'));
+								$this->WallPost->add($data, array('type' => 'media', 'class' => 'action'));
 
 								
 								$this->redirect('/album/' . $this->currentUser['User']['slug'] . '/' . $albumSlug);

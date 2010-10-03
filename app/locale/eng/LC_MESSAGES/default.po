@@ -516,7 +516,7 @@ msgstr "added an event"
 
 #: /views/elements/wall_post_types/media.ctp:9
 msgid "added_media"
-msgstr "Media added"
+msgstr "Uploaded the following media"
 
 #: /views/events/add.ctp:16
 msgid "event_title"

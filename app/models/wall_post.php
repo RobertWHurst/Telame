@@ -22,6 +22,7 @@ class WallPost extends AppModel {
 	function add($data, $args = false) {
 		$defaults = array(
 			'type' => 'post',
+			'class' => 'wall_post'
 		);
 		$options = parseArguments($defaults, $args);
 
@@ -31,6 +32,7 @@ class WallPost extends AppModel {
 		$data['WallPost']['post'] = Sanitize::clean($data['WallPost']['post']);
 		$data['WallPost']['posted'] = date("Y-m-d H:i:s");
 		$data['WallPost']['type'] = $options['type'];
+		$data['WallPost']['class'] = $options['class'];
 
 		$this->save($data);
 	}
