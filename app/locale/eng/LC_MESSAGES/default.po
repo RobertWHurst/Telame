@@ -492,7 +492,7 @@ msgstr "Zoom in"
 
 #: /views/elements/settings/navigation.ctp:5
 msgid "basic"
-msgstr "Basic Settings"
+msgstr "Basic"
 
 #: /views/elements/settings/navigation.ctp:14
 msgid "gallery"
