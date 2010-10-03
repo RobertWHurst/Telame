@@ -91,7 +91,7 @@ class WallPostsController extends AppController {
 		$new_post_id = $this->WallPost->id;
 
 		//if the wall does not belong to the current user
-		if($wallOwnerId != $visitorId){
+		if($wallOwnerId != $visitorId && $reply_id == null){
 		
 			//create an action on the user's page
 			$action['reply_parent_id'] = null;	

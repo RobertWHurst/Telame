@@ -37,11 +37,11 @@ msgstr "Album not added"
 
 #: /controllers/albums_controller.php:96
 msgid "album_cover_changed"
-msgstr "The new ablum cover has been set."
+msgstr "Album cover changed"
 
 #: /controllers/albums_controller.php:98
 msgid "album_cover_not_changed"
-msgstr "The album cover could not be updated"
+msgstr "Album cover not changed, please try again"
 
 #: /controllers/events_controller.php:40
 msgid "event_saved"
