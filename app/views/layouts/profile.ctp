@@ -5,8 +5,8 @@
 	<title><?php echo __('site_name', true) . ' | ' . $title_for_layout; ?></title>
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://<?php echo env('SERVER_NAME')?>/rss/">
 <?php
-		echo $asset->scripts_for_layout();
-		echo $html->meta('favicon.ico', Configure::read('StaticDomain') . '/favicon.ico', array('type' => 'icon'));
+	echo $asset->scripts_for_layout();
+	echo $html->meta('favicon.ico', Configure::read('StaticDomain') . '/favicon.ico', array('type' => 'icon'));
 ?>
 </head>
 <?php ob_flush(); ?>

@@ -56,6 +56,7 @@ class Security extends Object {
  * @access public
  * @static
  */
+ // HACK //
 	function inactiveMins() {
 	    $_this =& Security::getInstance();
 	    $timeout = Configure::read('Session.timeout');
