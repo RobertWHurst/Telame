@@ -49,7 +49,7 @@ class WallPost extends AppModel {
 			'id' => false,
 			'uid' => false,
 			'aid' => false,
-			'User' => false,
+			'User' => true,
 			'PostAuthor' => true,
 			'ActionRecipient' => true,
 			'single' => false,
