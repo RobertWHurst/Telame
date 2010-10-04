@@ -1,5 +1,5 @@
 <div id="profile_summary">
-	<div class="controls">		
+	<div class="controls">
 		<?php if(isset($canRequest) && $canRequest) { ?>
 			<p><?php echo $html->link('Add ' . $user['User']['full_name'] . ' as friend', '/f/a/' . $user['User']['id']); ?></p>
 		<?php } ?>
@@ -17,7 +17,11 @@
 		<?php if(!is_null($user['Profile']['rel_status'])): ?>
 			<tr>
 				<th>Relationship Status:</th>
-				<td><?php echo __($user['Profile']['rel_status'], true); ?></td>
+				<td><?php echo __($user['Profile']['rel_status'], true);
+					if (!empty($user['Profile']['SO'])) {
+						echo '<br />' . __('with', true) . ' ' . $html->link($user['Profile']['SO']['full_name'], '/' . $user['Profile']['SO']['slug']);
+					}
+				?></td>
 			</tr>
 		<?php endif; ?>
 		<?php if(!is_null($user['Profile']['sex_interest'])): ?>
@@ -54,9 +58,9 @@
 			<tr>
 				<th>Date of Birth:</th>
 				<td>
-				<?php 
+				<?php
 					$dob = strtotime($user['Profile']['dob']);
-					echo date('M j, Y', $dob); 
+					echo date('M j, Y', $dob);
 					if ($dob == strtotime('today')) {
 						echo ' ' . $html->image('icons/cake.png');
 					}
@@ -64,5 +68,5 @@
 				</td>
 			</tr>
 		<?php endif; ?>
-	</table>	
+	</table>
 </div>

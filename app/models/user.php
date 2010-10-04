@@ -47,7 +47,7 @@ class User extends AppModel {
 	var $hasOne = array(
 		'Profile' => array(
 			'dependent' => true,
-		)
+		),
 	);
 
 	var $validate = array(
@@ -223,21 +223,21 @@ class User extends AppModel {
 	function getNameFromId($uid, $name_type = 'full') {
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('id' => Sanitize::clean(intval($uid))), 'fields' => 'first_name, last_name'));
-		
+
 		switch($name_type){
 			case 'full':
 				$name = $user['User']['first_name'] . ' ' . $user['User']['last_name'];
 				break;
-			
+
 			case 'first':
 				$name = $user['User']['first_name'];
 				break;
-				
+
 			case 'last':
 				$name = $user['User']['last_name'];
 				break;
 		}
-		
+
 		return $name;
 	}
 
@@ -267,6 +267,7 @@ pr($options);
 			'contain' => array(
 				'Profile',
 				'Profile.Country',
+				'Profile.SO',
 //				'Notification' => array(
 //					'conditions' => array(
 //						'new' => true
