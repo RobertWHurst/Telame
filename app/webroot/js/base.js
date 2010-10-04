@@ -269,7 +269,7 @@ $(function($){
 				message.slideUp(600, function(){
 					$(this).remove();
 				});				
-			}, 10000);
+			}, 3000);
 			
 		}
 		
