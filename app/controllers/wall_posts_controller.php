@@ -8,7 +8,7 @@ class WallPostsController extends AppController {
 		parent::beforeFilter();
 	}
 
-	function lists($id = false){
+	function more_posts($uid = false, $offset = false){
 		if(!$offset || !$uid){
 			echo 'false';
 			exit;
@@ -19,7 +19,7 @@ class WallPostsController extends AppController {
 		//set the layout to none (this is ajax);
 		$this->layout = false;
 
-		$this->set('wallPosts', $wallPosts);
+		$this->set(array('wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile($uid)));
 	}
 
 	function add($reply_id = false) {
@@ -112,12 +112,12 @@ class WallPostsController extends AppController {
 			
 			//if this is a comment then load the comment element
 			if($wallPost['WallPost']['reply_parent_id']) {
-				$this->set(array('comment' => $wallPost, 'user' => $user, 'show_post_controls' => true));
+				$this->set(array('comment' => $wallPost, 'user' => $user, 'show_post_controls' => true, 'is_ajax' => true));
 				$this->render('/elements/wall_post_comment');
 			}
 			//if this is a post then load the post element
 			else{
-				$this->set(array('post' => $wallPost, 'user' => $user, 'show_post_controls' => true));
+				$this->set(array('post' => $wallPost, 'user' => $user, 'show_post_controls' => true, 'is_ajax' => true));
 				$this->render('/elements/wall_post');
 			}
 

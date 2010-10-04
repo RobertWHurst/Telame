@@ -141,7 +141,7 @@
 	Router::connect('/rss/*', array('controller' => 'pages', 'action' => 'news'));
 
 	// Wall Posts (Ajax)
-	Router::connect('/jx/w/l/*', array('controller' => 'wall_posts', 'action' => 'jx_lists'));
+	Router::connect('/w/mp/*', array('controller' => 'wall_posts', 'action' => 'more_posts'));
 
 // This must be last
 	// Profile

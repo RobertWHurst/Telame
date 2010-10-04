@@ -9,7 +9,6 @@ $(function(){
 		root.wallPostsWrapper = $('#profile_wall_posts', '#page_body');
 		root.wallPostsComments = $('div.comments', root.wallPostsWrapper);
 		root.commentForms = $('form', root.wallPostsComments);
-		root.morePostsButton = $('div.more a', root.wallPostsWrapper);
 				
 		//post hover handler
 		root.postHoverHandler = function(){
@@ -125,18 +124,6 @@ $(function(){
 		
 		//comments hover handler
 		root.postCommentsHoverHandler = function(){
-		
-			//hide all of the comment wrappers with no comments
-			root.wallPostsComments.each(function(){
-				var domElement = $(this);
-				wallCommentsWrap = domElement.parents('div.commentsWrap');
-				if(domElement.children().size() <= 1){
-					wallCommentsWrap.hide();
-				}
-				else{
-					$('a.showComments', domElement.parents('div.wall_post_wrap')).remove();				
-				}
-			});
 		
 			//on hover event for each post comment
 			root.wallPostsWrapper.delegate('a.showComments', 'click', function(event){
@@ -389,61 +376,72 @@ $(function(){
 		
 		root.morePostsHandler = function(){
 		
-			root.morePostsButton.live('click', function(event){
+			root.wallPostsWrapper.delegate('a.more', 'click', function(event){
 				
 				//prevent the default action
 				event.preventDefault();
 				
 				//get the button
-				var button = $(this);
+				var domElement = $(this);
+				
 				//get the current element count
-				var offset = $('div.wall_post', '#profile_wall_posts').size();
+				var offset = $('div.wall_post_wrap', '#profile_wall_posts').size();
+				
 				//get the ajaxUrl
-				var ajaxUrl = '/jx' + $(button).attr('href') + '/' + offset;
-
-				//get the target post (not the button)
-				domElement = button.parent();
+				var ajaxUrl = $(domElement).attr('href') + '/' + offset;
 				
 				//hide the content
-				domElement.children().hide();
+				domElement.hide();
 				
 				//add a proccess dialog
-				domElement.append('<p class="proccess">Loading more posts...<p>');
+				domElement.parent().append('<p class="proccess">Loading more posts...<p>');
 				
 				//send the ajax request
 				$.post(core.domain + ajaxUrl, function(data){
 					
 					if(data !== 'false'){
+					
+						//mark all existing posts so they don't get animated in
+						$('div.wall_post_wrap').addClass('na');
 						
-						//convert data to a jquery object
-						data = $(data);
+						//append the new page data
+						domElement.parent().before(data);
 						
-						//hide the new posts
-						//data.hide();
-												
-						//remove and reapend the more posts button
-						domElement.remove();
-			
+						//hide the new wallposts
+						$('div.wall_post_wrap').not('div.na').hide();
+						
 						//hide all of the wall post controls
-						//$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls, div.commentsWrap', data).hide();
-						//$('div.baseline_info', data).show();
+						$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls').hide();
+						$('div.baseline_info, div.commentInput label').show();
+								
+						//hide all of the comment wrappers with no comments
+						$('div.comments').each(function(){
+							var domElement = $(this);
+							wallCommentsWrap = domElement.parents('div.commentsWrap');
+							if(domElement.children().size() <= 1){
+								wallCommentsWrap.hide();
+							}
+							else{
+								$('a.showComments', domElement.parents('div.wall_post_wrap')).remove();				
+							}
+						});
 						
-						//append the new page data	
-						root.wallPostsWrapper.append(data);
+						//remove the animation blocker class and animate in the new posts
+						$('div.wall_post_wrap').removeClass('na').slideDown(600);
 						
-						//reappend the more posts button
-						root.wallPostsWrapper.append(domElement);
-						domElement.children('p.proccess').remove();
-						
-						//animate in the new posts		
-						$('div.wall_post_wrap').slideDown(600);
+						//remove the proccess dialogue
+						domElement.siblings('p.proccess').remove();
 						
 						//show the button again
-						domElement.children().fadeIn(300);	
+						domElement.show();
 					}
 					else{		
-						//restore the post
-						domElement.remove();				
+						
+						//remove the proccess dialogue
+						domElement.siblings('p.proccess').remove();
+						
+						//show the button again
+						domElement.show();
 					}
 				});
 			});		
@@ -454,6 +452,18 @@ $(function(){
 			//hide all of the wall post controls
 			$('div.deletePost, div.deleteComment, div.wall_to_wall, div.baseline_controls').hide();
 			$('div.baseline_info, div.commentInput label').show();
+		
+			//hide all of the comment wrappers with no comments
+			$('div.comments').each(function(){
+				var domElement = $(this);
+				wallCommentsWrap = domElement.parents('div.commentsWrap');
+				if(domElement.children().size() <= 1){
+					wallCommentsWrap.hide();
+				}
+				else{
+					$('a.showComments', domElement.parents('div.wall_post_wrap')).remove();				
+				}
+			});
 		
 			//on hover event for each post	
 			root.postHoverHandler();
