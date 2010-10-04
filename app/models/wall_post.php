@@ -72,7 +72,7 @@ class WallPost extends AppModel {
 			$conditions['WallPost.user_id'] = $options['uid'];
 		}
 		if($options['aid']) {
-			$conditions['AND'] = array(
+			$conditions['OR'] = array(
 				'WallPost.author_id' => $options['aid'],
 				'WallPost.user_id' => $options['uid'],
 			);

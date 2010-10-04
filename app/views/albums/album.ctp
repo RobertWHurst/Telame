@@ -23,6 +23,7 @@ $this->set('nav_links', array(
 	array(
 		'label' => __('album', true),
 		'url' => array(
+			'slug' => $user['User']['slug'],
 			'controller' => 'albums',
 			'action' => 'album',
 			$this->params['pass'][0],

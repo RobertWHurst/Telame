@@ -1,6 +1,6 @@
 <div class="comment clearfix">
 <?php
-	if($comment['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']):
+	if($comment['PostAuthor']['id'] == $currentUser['User']['id']):
 ?>
 		<div class="deleteComment">
 <?php 
