@@ -23,7 +23,7 @@
     			echo $this->element('wall_post_types/' . $post['WallPost']['type'], array('author_name' => $author_name, 'post' => $post));
 ?>
     	</div>
-    	<?php if($post['PostAuthor']['id'] == $currentUser['User']['id'] || $user['User']['id'] == $currentUser['User']['id']): ?>
+    	<?php if($post['PostAuthor']['id'] == $currentUser['User']['id']): ?>
     		<div class="deletePost">
 <?php
     			$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
@@ -97,7 +97,7 @@
     				$url = $html->url(array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'add'));
     				echo $form->create('WallPost', array('url' =>  $url, 'id' => 'WallPost_' . $post['WallPost']['id']));
     					echo $form->input('post', array('label' => __('comment', true), 'type' => 'text', 'id' => 'WallPostPost_' . $post['WallPost']['id']));
-    					echo $form->hidden('user_id', array('value' => $user['User']['id'], 'id' => "WallPostComment_{$post['WallPost']['id']}"));
+    					echo $form->hidden('user_id', array('value' => $currentUser['User']['id'], 'id' => "WallPostComment_{$post['WallPost']['id']}"));
     					echo $form->hidden('reply_parent_id', array('value' => $post['WallPost']['id'], 'id' => 'WallPostReplyParentId_' . $post['WallPost']['id'] ));
     				echo $form->end(__('wall_post_submit', true));
 ?>
