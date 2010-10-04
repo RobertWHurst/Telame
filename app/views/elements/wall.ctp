@@ -1,6 +1,6 @@
 <div id="profile_wall">
 <?php
-				echo $this->element('wall_input', array('user' => $user));
+				echo $this->element('wall_input', array('user' => $currentUser));
 ?>
 	<div id="profile_wall_posts">
 <?php
@@ -11,7 +11,7 @@
 			if($this->params['action'] != 'news'): ?>
 				<div class="more">
 <?php 
-					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'more_posts', $user['User']['id']));
+					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'more_posts', $currentUser['User']['id']));
 					echo $html->link(__('older_posts', true), $url, array('class' => 'more'));
 ?>
 				</div>
