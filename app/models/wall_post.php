@@ -54,7 +54,7 @@ class WallPost extends AppModel {
 			'ActionRecipient' => true,
 			'single' => false,
 			'limit' => 20,
-			'offset' => 0,
+			'offset' => 0
 		);
 
 		//parse the options
