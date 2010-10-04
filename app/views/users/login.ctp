@@ -25,5 +25,7 @@ $this->set('title_for_layout', __('login', true));
 	echo $form->input('password', array('label' => __('password', true)));
 	echo $form->input('remember_me', array('type' => 'checkbox', 'label' => __('auto_login', true)));
 	echo $form->end(__('login', true));
+	
+	echo $html->link(__('password_forget', true), array('controller' => 'users', 'action' => 'passwordReset'));
 ?>
 </div>

@@ -41,10 +41,12 @@
 
 // Site pages
 
-	// Signup and Login/logout
+	// Signup, Login/logout and password reset
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/signup/*', array('controller' => 'users', 'action' => 'signup'));
+	Router::connect('/password_reset/*', array('controller' => 'users', 'action' => 'passwordReset'));
+
 	// Confirm email
 	Router::connect('/c/*', array('controller' => 'users', 'action' => 'confirm'));
 

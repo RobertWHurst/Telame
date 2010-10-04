@@ -10,4 +10,4 @@ $url = array(
 		$html->link($post['Media']['title'], $url)
 	);
 	$iUrl = array('slug' => $post['PostAuthor']['slug'], 'controller' => 'media', 'action' => 'single', $post['Media']['id']);
-	echo $htmlImage->image($iUrl);//, array('/url' => $aUrl,));
+	echo $htmlImage->image($iUrl, array('url' => $url));//, array('/url' => $aUrl,));

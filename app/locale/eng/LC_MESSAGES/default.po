@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-10-02 18:54-0700\n"
-"PO-Revision-Date: 2010-10-02 19:01-0800\n"
-"Last-Translator: none <none@none.com>\n"
+"POT-Creation-Date: 2010-10-03 10:07-0700\n"
+"PO-Revision-Date: 2010-10-03 10:08-0800\n"
+"Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,7 +112,8 @@ msgid "message_thread_deleted"
 msgstr "Message deleted"
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:130
+#: /controllers/users_controller.php:57;175
+#: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
 #: /views/layouts/simple_header.ctp:8;25
@@ -179,19 +180,23 @@ msgstr "Your email has been successfully confirmed"
 msgid "email_or_hash_failed"
 msgstr "Either the email or hash supplied is incorrect, please try again"
 
-#: /controllers/users_controller.php:104
+#: /controllers/users_controller.php:69
+msgid "email_password_incorrect"
+msgstr "Your email or password is incorrect"
+
+#: /controllers/users_controller.php:148
 msgid "tos_must_agree"
 msgstr "You must agree with the Terms of Service"
 
-#: /controllers/users_controller.php:116
+#: /controllers/users_controller.php:160
 msgid "validation_error"
 msgstr "One or more of the fields is invalid, please try again"
 
-#: /controllers/users_controller.php:141
+#: /controllers/users_controller.php:186
 msgid "user_saved"
 msgstr "You have been successfully added"
 
-#: /controllers/users_controller.php:143
+#: /controllers/users_controller.php:188
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
@@ -223,19 +228,19 @@ msgstr "Profile pictures"
 msgid "album"
 msgstr "Album"
 
-#: /views/albums/album.ctp:35
+#: /views/albums/album.ctp:36
 msgid "upload_images"
 msgstr "Upload new images"
 
-#: /views/albums/album.ctp:39
+#: /views/albums/album.ctp:42
 msgid "album_set_cover"
 msgstr "Set as album cover"
 
-#: /views/albums/album.ctp:40
+#: /views/albums/album.ctp:43
 msgid "delete_image"
 msgstr "Delete Image"
 
-#: /views/albums/album.ctp:40
+#: /views/albums/album.ctp:43
 msgid "media_delete_confirm"
 msgstr "Are you sure you want to delete this image?"
 
@@ -725,7 +730,7 @@ msgstr "Country"
 msgid "dob"
 msgstr "Date of birth"
 
-#: /views/settings/basic.ctp:77;94
+#: /views/settings/basic.ctp:77
 msgid "update_profile"
 msgstr "Save My Profile"
 
@@ -738,15 +743,19 @@ msgstr "Change your password"
 msgid "password_again"
 msgstr "Password Again"
 
-#: /views/settings/basic.ctp:97;99
+#: /views/settings/basic.ctp:94
+msgid "save_password"
+msgstr "Save My Password"
+
+#: /views/settings/basic.ctp:99;101
 msgid "delete_account"
-msgstr "Delete Account"
+msgstr "Delete My Account"
 
-#: /views/settings/basic.ctp:98
+#: /views/settings/basic.ctp:100
 msgid "delete_account_warning"
-msgstr "Please Note that if you delete your account you data, media, friend ships, wallposts, and anything else associated with your account will be deleted forever. This cannot be undone or reversed in anyway. Only do this if your absolutely sure you understand the consequences. You have been warned."
+msgstr "Please Note that if you delete your account you data, media, friend ships, wallposts, and anything else associated with your account will be deleted immediately and forever. This cannot be undone or reversed in anyway. Only do this if your absolutely sure you understand the consequences. You have been warned."
 
-#: /views/settings/basic.ctp:99
+#: /views/settings/basic.ctp:101
 msgid "delete_are_you_sure"
 msgstr "Are you sure you want to delete this?"
 
@@ -771,8 +780,14 @@ msgid "group_permission_title"
 msgstr "User Permissions"
 
 #: /views/users/confirm.ctp:25
+#: /views/users/password_reset/confirm.ctp:23
+#: /views/users/password_reset/new_password.ctp:24
 msgid "confirm"
 msgstr "Confirm"
+
+#: /views/users/login.ctp:29
+msgid "password_forget"
+msgstr "Forgot your password?"
 
 #: /views/users/search.ctp:30
 msgid "search_title"
@@ -785,6 +800,16 @@ msgstr "Personal Username"
 #: /views/users/signup.ctp:35
 msgid "agree"
 msgstr "Agree"
+
+#: /views/users/password_reset/confirm.ctp:14;18
+#: /views/users/password_reset/email.ctp:14;18
+#: /views/users/password_reset/new_password.ctp:14;18
+msgid "password_reset"
+msgstr "Reset Password"
+
+#: /views/users/password_reset/email.ctp:22
+msgid "send_reset"
+msgstr "Send password reset"
 
 #~ msgid "add_album"
 #~ msgstr "Add new album"
