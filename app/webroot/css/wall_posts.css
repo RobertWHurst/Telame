@@ -27,7 +27,6 @@ div.wall_post_wrap div.wall_post div.avatar{
 }
 div.wall_post_wrap div.wall_post div.content{
 	margin: 0 15px 15px 70px;
-	overflow: hidden;
 }
 div.wall_post_wrap div.wall_post div.content h1{
 	font-size: 2.4em;
