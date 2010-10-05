@@ -88,7 +88,7 @@ class AlbumsController extends AppController {
 			}
 		}
 	}
-	
+
 	// takes album id, and image id, sets that image to the cover
 	function setAlbumCover($aid, $iid) {
 		$uid = $this->currentUser['User']['id'];
@@ -98,5 +98,28 @@ class AlbumsController extends AppController {
 			$this->Session->setFlash(__('album_cover_not_changed', true));
 		}
 		$this->redirect($this->referer());
+	}
+
+	function view($id) {
+		$this->layout = 'profile';
+
+		$media = $this->Album->Media->find('first', array(
+			'conditions' => array(
+				'Media.id' => $id
+			),
+			'contain' => array(
+				'Album',
+			)
+		));
+		$mediaList = $this->Album->Media->find('list', array(
+			'conditions' => array(
+				'Media.album_id' => $media['Media']['album_id']
+			)
+		));
+
+		$mediaList = array_keys($mediaList);
+		$user = $this->Profile->getProfile($this->params['slug']);
+
+		$this->set(compact('media', 'mediaList'));
 	}
 }

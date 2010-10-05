@@ -90,14 +90,16 @@
 	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
 	// Media - Comment
 	Router::connect('/i/c/*', array('controller' => 'media', 'action' => 'comment'));
+	// Media - Large
+	Router::connect('/i/l/*', array('controller' => 'media', 'action' => 'large'));
 	// Media - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
+	// Media - Single
+	Router::connect('/i/s/*', array('controller' => 'media', 'action' => 'single'));
 	// Media - Thumbnail
 	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
 	// Media - Preview
 	Router::connect('/i/v/*', array('controller' => 'media', 'action' => 'preview'));
-	// Media - Single
-	Router::connect('/i/s/*', array('controller' => 'media', 'action' => 'single'));
 	// Media - upload
 	Router::connect('/:slug/media/upload/*', array('controller' => 'media', 'action' => 'upload'), array('routeClass' => 'SlugRoute'));
 	// Media - delete
@@ -120,7 +122,7 @@
 
 	// Notifications
 	Router::connect('/:slug/notifications', array('controller' => 'notifications', 'action' => 'index'), array('routeClass' => 'SlugRoute'));
-	
+
 	// Search
 	Router::connect('/search/:query/:page/*', array('controller' => 'users', 'action' => 'search'), array('page' => '[0-9]+'));
 	Router::connect('/search/:query/*', array('controller' => 'users', 'action' => 'search'));

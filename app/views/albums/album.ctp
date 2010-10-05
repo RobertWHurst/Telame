@@ -46,9 +46,9 @@ $this->set('nav_links', array(
 ?>
 			<div class="wrap_single">
 				<div class="single">
-<?php				//$aUrl = array('controller' => 'albums', 'action' => 'album', $user['User']['slug'], $media['Media']['id']);
+<?php				$aUrl = array('slug' => $user['User']['slug'], 'controller' => 'albums', 'action' => 'view', $media['Media']['id']);
 					$iUrl = array('controller' => 'media', 'action' => 'single', $media['Media']['id']);
-					echo $htmlImage->image($iUrl);//, array('/url' => $aUrl,));
+					echo $htmlImage->image($iUrl, array('url' => $aUrl,));
 ?>
 				</div>
 			</div>

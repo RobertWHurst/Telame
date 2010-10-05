@@ -5,27 +5,32 @@ class MediaController extends AppController {
 
 //---------------------------- Image Retrieval Functions ----------------------------//
 
-	function avatar($id = false){
+	function avatar($id = false) {
 		$this->_resize($id, Configure::read('AvatarSize'), array(
 			'w' => 60,
 			'h' => 60,
-			'zc' => 1
+			'zc' => 1,
+			'iar' => 1,
 		));
 	}
 
-	function comment($id = false){
+	function comment($id = false) {
 		$this->_resize($id, Configure::read('CommentSize'));
 	}
 
-	function thumb($id = false){
-		$this->_resize($id, Configure::read('ThumbSize'));
+	function large($id = false) {
+		$this->_resize($id, Configure::read('LargeSize'));
 	}
 
-	function preview($id = false){
+	function preview($id = false) {
 		$this->_resize($id, Configure::read('PreviewSize'));
 	}
 
-	function single($id = false){
+	function profile($id = false){
+		$this->_resize($id, Configure::read('ProfileSize'));
+	}
+
+	function single($id = false) {
 		$this->_resize($id, Configure::read('SingleSize'), array(
 			'w' => 235,
 			'h' => 235,
@@ -33,10 +38,9 @@ class MediaController extends AppController {
 		));
 	}
 
-	function profile($id = false){
-		$this->_resize($id, Configure::read('ProfileSize'));
+	function thumb($id = false) {
+		$this->_resize($id, Configure::read('ThumbSize'));
 	}
-
 
 //---------------------------- Management Functions ----------------------------//
 

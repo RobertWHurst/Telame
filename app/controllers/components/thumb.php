@@ -80,7 +80,7 @@ class ThumbComponent {
 		$phpThumb->setParameter('config_cache_force_passthru', false);
 		
 		// ignore aspect ratio and allow enlarging		
-		$phpThumb->setParameter('iar', 1);
+//		$phpThumb->setParameter('iar', 1);
 		
 		// image configs
 		$phpThumb->setSourceFilename($source);
