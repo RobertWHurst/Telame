@@ -40,10 +40,10 @@ $this->set('nav_links', array(
 	$prev = ($current == 0 ? $mediaList[$count-1] : $mediaList[$current - 1]);
 	$next = ($current == ($count-1) ? $mediaList[0] : $mediaList[$current + 1]);
 
-
-	echo $html->link(__('image_prev', true), array('slug' => $user['User']['slug'], 'controller' => 'albums', 'action' => 'view', $prev));
-
+	if ($prev != $next) {
+		echo $html->link(__('image_prev', true), array('slug' => $user['User']['slug'], 'controller' => 'albums', 'action' => 'view', $prev));
 	echo $html->link(__('image_next', true), array('slug' => $user['User']['slug'], 'controller' => 'albums', 'action' => 'view', $next));
+	}
 
 	$iUrl = array('controller' => 'media', 'action' => 'large', $media['Media']['id']);
 	echo $htmlImage->image($iUrl);
