@@ -5,7 +5,7 @@ class Country extends AppModel {
 
 	function getList() {
 		$this->recursive = -1;
-		return $this->find('list', array('fields' => array('country_id', 'name')));
+		return $this->find('list', array('fields' => array('country_id', 'name'), 'cache' => 'countryList'));
 	}
 
 }

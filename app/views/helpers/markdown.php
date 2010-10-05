@@ -25,7 +25,7 @@ class MarkdownHelper extends AppHelper {
 		App::Import('Model', 'emoticon');
 		$this->Emoticon = new Emoticon;
 
-		$emoticons = $this->Emoticon->find('all', array('order' => 'code DESC'));
+		$emoticons = $this->Emoticon->find('all', array('order' => 'code DESC', 'cache' => 'emoticons'));
 
 	    foreach($emoticons as $emoticon) {
 	    	// arrays are used in str_ireplace for speed, even though it's a single search

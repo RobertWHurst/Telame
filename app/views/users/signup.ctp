@@ -23,6 +23,8 @@ $this->set('title_for_layout', __('signup', true));
 		<h1 class="heading">Signup For Telame</h1>
 <?php
 		echo $form->create();
+		echo $form->input('first_name', array('label' => __('first_name', true)));
+		echo $form->input('last_name', array('label' => __('last_name', true)));
 		echo $form->input('email');
 		echo $form->input('user_password', array('label' => __('password', true), 'type' => 'password'));
 		echo $form->input('user_password_again', array('label' => __('password_again', true), 'type' => 'password'));

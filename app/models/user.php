@@ -78,13 +78,13 @@ class User extends AppModel {
 			'required' => true,
 			'allowEmpty' => false,
 			'rule' => 'alphanumeric',
-			'on' => 'update',
+			'message' => 'Your first name is required',
 		),
 		'last_name' => array(
 			'required' => true,
 			'allowEmpty' => false,
 			'rule' => 'alphanumeric',
-			'on' => 'update',
+			'message' => 'Your last name is required',
 		),
 		'slug' => array(
 			'unique' => array(
