@@ -1,6 +1,7 @@
 <div id="profile_wall">
 <?php
-				echo $this->element('wall_input', array('user' => $currentUser));
+	$user = (empty($user) ? $currentUser : $user);
+	echo $this->element('wall_input', array('user' => $user));
 ?>
 	<div id="profile_wall_posts">
 <?php
