@@ -6,11 +6,8 @@ class MediaController extends AppController {
 //---------------------------- Image Retrieval Functions ----------------------------//
 
 	function avatar($id = false) {
-		$this->_resize($id, Configure::read('AvatarSize'), array(
-			'w' => 60,
-			'h' => 60,
+		$this->_resize($id, Configure::read('AvatarSize'), 'fill', array(
 			'zc' => 1,
-			'iar' => 1,
 		));
 	}
 
@@ -27,19 +24,17 @@ class MediaController extends AppController {
 	}
 
 	function profile($id = false){
-		$this->_resize($id, Configure::read('ProfileSize'));
+		$this->_resize($id, Configure::read('ProfileSize'), 'fill');
 	}
 
 	function single($id = false) {
-		$this->_resize($id, Configure::read('SingleSize'), array(
-			'w' => 235,
-			'h' => 235,
+		$this->_resize($id, Configure::read('SingleSize'), 'fill', array(
 			'zc' => 1
 		));
 	}
 
 	function thumb($id = false) {
-		$this->_resize($id, Configure::read('ThumbSize'));
+		$this->_resize($id, Configure::read('ThumbSize'), 'fill');
 	}
 
 //---------------------------- Management Functions ----------------------------//
@@ -160,7 +155,7 @@ class MediaController extends AppController {
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($mid, $size, $options = array()) {
+	function _resize($mid, $size, $mode = 'fit', $options = array()) {
 		if (empty($mid)) {
 		//	$this->cakeError('error404');
 		}
@@ -198,7 +193,7 @@ class MediaController extends AppController {
 			$imageWidth = $imageSize[0];
 			$imageHeight = $imageSize[1];
 
-			$this->ScaleTool->setMode('fill');
+			$this->ScaleTool->setMode($mode);
 			$this->ScaleTool->setBox($size['height'], $size['width']);
 			$size = $this->ScaleTool->getNewSize($imageHeight, $imageWidth);
 
@@ -215,7 +210,7 @@ class MediaController extends AppController {
 
 		// check for a cached version first
 		if(!file_exists($baseDir . 'cache' . DS . $cacheFilename)) {
-			// we don't have it, generate it
+		// we don't have it, generate it
 			if(!$this->Thumb->generateThumb($baseDir, $dir, $filename, $size, $options)) {
 				Debugger::log('Can\'t generate thumbnail');
 			}
@@ -225,7 +220,7 @@ class MediaController extends AppController {
 			'id' => $cacheFilename,
 			'name' => $name,
 			'download' => false,
-			'extension' => $extension,
+			'extension' => 'jpg',
 			'path' => $baseDir . 'cache' . DS,
 			'cache' => '5 days',
 		);
