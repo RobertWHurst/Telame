@@ -6,13 +6,23 @@ class MediaController extends AppController {
 //---------------------------- Image Retrieval Functions ----------------------------//
 
 	function avatar($id = false) {
-		$this->_resize($id, Configure::read('AvatarSize'), 'fill', array(
+		$size = Configure::read('AvatarSize');
+		$this->_resize($id, $size, null, array(
+			// specifying 'w' and 'h' overrides the scale tools work..
+			'w' => $size['width'],
+			'h' => $size['height'],
 			'zc' => 1,
 		));
 	}
 
 	function comment($id = false) {
-		$this->_resize($id, Configure::read('CommentSize'));
+		$size = Configure::read('CommentSize');
+		$this->_resize($id, $size, null, array(
+			// specifying 'w' and 'h' overrides the scale tools work..
+			'w' => $size['width'],
+			'h' => $size['height'],
+			'zc' => 1,
+		));
 	}
 
 	function large($id = false) {
@@ -130,7 +140,7 @@ class MediaController extends AppController {
 								$data['WallPost']['user_id'] = $this->currentUser['User']['id'];
 								$data['WallPost']['model_id'] = $mid;
 
-								$this->WallPost->add($data, array('type' => 'media', 'class' => 'action'));
+								$this->WallPost->add($data, array('type' => 'media', 'class' => 'wall_post'));
 
 								
 								$this->redirect('/album/' . $this->currentUser['User']['slug'] . '/' . $albumSlug);
@@ -155,7 +165,7 @@ class MediaController extends AppController {
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($mid, $size, $mode = 'fit', $options = array()) {
+	function _resize($mid, $size, $mode = null, $options = array()) {
 		if (empty($mid)) {
 		//	$this->cakeError('error404');
 		}
@@ -193,9 +203,11 @@ class MediaController extends AppController {
 			$imageWidth = $imageSize[0];
 			$imageHeight = $imageSize[1];
 
-			$this->ScaleTool->setMode($mode);
-			$this->ScaleTool->setBox($size['height'], $size['width']);
-			$size = $this->ScaleTool->getNewSize($imageHeight, $imageWidth);
+			if (!is_null($mode)) {
+				$this->ScaleTool->setMode($mode);
+				$this->ScaleTool->setBox($size['height'], $size['width']);
+				$size = $this->ScaleTool->getNewSize($imageHeight, $imageWidth);
+			}
 
 			$cacheFilename = $filename . '-' . $size['height'] . 'x' . $size['width'] . '.jpg';
 

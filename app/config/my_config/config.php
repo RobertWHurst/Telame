@@ -21,7 +21,7 @@ Configure::write('EmailInfo', array(
 // Image sizes
 Configure::write('AvatarSize', array('height' => 60, 'width' => 60));
 Configure::write('CommentSize', array('height' => 30, 'width' => 30));
-Configure::write('LargeSize', array('height' => 800, 'width' => 800));
+Configure::write('LargeSize', array('height' => 800, 'width' => 600));
 Configure::write('PreviewSize', array('height' => 200, 'width' => 200));
 Configure::write('ProfileSize', array('height' => 300, 'width' => 480));
 Configure::write('SingleSize', array('height' => 235, 'width' => 235));

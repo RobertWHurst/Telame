@@ -51,7 +51,7 @@ class ProfileComponent extends Object {
 
 		if ($canView) {
 			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 10));
-			$wallPosts = $this->User->WallPost->getWallPosts(array('uid' => $user['User']['id']));
+			$wallPosts = $this->User->WallPost->getWallPosts(array('uid' => $user['User']['id'], 'ActionRecipient' => true));
 		} else {
 			$friends = array();
 			$wallPosts = array();

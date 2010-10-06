@@ -42,7 +42,7 @@ class WallPost extends AppModel {
 	}
 
 	//TODO: needs containable.
-	function getWallPosts($arguments = false){
+	function getWallPosts($arguments = false) {
 
 		//set the default options
 		$defaults = array(
@@ -51,7 +51,7 @@ class WallPost extends AppModel {
 			'aid' => false,
 			'User' => true,
 			'PostAuthor' => true,
-			'ActionRecipient' => true,
+			'ActionRecipient' => false,
 			'single' => false,
 			'limit' => 20,
 			'offset' => 0

@@ -47,5 +47,12 @@ $this->set('nav_links', array(
 
 	$iUrl = array('controller' => 'media', 'action' => 'large', $media['Media']['id']);
 	echo $htmlImage->image($iUrl);
+
+	if($comments['Replies']){
+		foreach($comments['Replies'] as $comment)
+			echo $this->element('wall_post_comment', compact('comment'));
+	}
+
+
 ?>
 </div>

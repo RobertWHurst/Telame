@@ -2,6 +2,7 @@
 class AlbumsController extends AppController {
 
 	var $components = array('Profile');
+	var $helpers = array('Markdown', 'Time');
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -117,9 +118,17 @@ class AlbumsController extends AppController {
 			)
 		));
 
+		$parentId = $this->User->WallPost->find('first', array('conditions' => array('WallPost.type' => 'media', 'WallPost.model_id' => $media['Media']['id'])));
+
+		$comments = $this->User->WallPost->getWallPosts(array(
+			'id' => $parentId['WallPost']['id'],
+			'single' => true,
+			'User' => false,
+		));
+
 		$mediaList = array_keys($mediaList);
 		$user = $this->Profile->getProfile($this->params['slug']);
 
-		$this->set(compact('media', 'mediaList'));
+		$this->set(compact('comments', 'media', 'mediaList'));
 	}
 }
