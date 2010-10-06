@@ -2,7 +2,7 @@
     <div class="<?php echo $post['WallPost']['class']; ?> clearfix">
 <?php
     	$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
-    	if($post['WallPost']['type'] == 'post'): 
+    	if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'):
 ?>
     		<div class="avatar">
 <?php
@@ -30,9 +30,9 @@
     			echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
     		</div>
-<?php 
-    	endif;		
-    	if($post['WallPost']['type'] == 'post'):
+<?php
+    	endif;
+    	if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'):
 ?>
     		<div class="baseline">
     			<div class="baseline_controls">
@@ -46,7 +46,7 @@
     					$classes = "like";
     				}
     				echo $html->link($text, array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'like', $post['WallPost']['id']), array('class' => $classes));
-    
+
     				if($post['WallPost']['dislike']){
     					$text = __('dislike', true) . ' (' . $post['WallPost']['dislike'] . ')';
     					$classes = "dislike disliked";
@@ -65,7 +65,7 @@
     				if($post['WallPost']['like'] || $post['WallPost']['dislike']):
     					$like = ' ' . $post['WallPost']['like'];
     					$like .= ' ' .	__n('person_likes_this', 'people_like_this', $post['WallPost']['like'], true);
-    
+
     					$dislike = ' ' . $post['WallPost']['dislike'];
     					$dislike .= ' ' .  __n('person_dislikes_this', 'people_dislike_this', $post['WallPost']['dislike'], true);
 ?>
@@ -81,7 +81,7 @@
     		</div>
     	<?php endif; ?>
     </div>
-    <?php if($post['WallPost']['type'] == 'post'): ?>
+    <?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
     	<div class="commentsWrap">
     		<div class="arrow_up"></div>
     		<div class="comments">

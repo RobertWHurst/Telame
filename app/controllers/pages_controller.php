@@ -71,6 +71,7 @@ class PagesController extends AppController {
 		}
 
 		$friends = $this->GroupsUser->getFriendIds($uid, $selectedFriendList);
+		array_push($friends, $uid);
 
 		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $friends, 'aid' => $friends, 'User' => true));
 
