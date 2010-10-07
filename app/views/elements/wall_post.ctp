@@ -23,7 +23,12 @@
     			echo $this->element('wall_post_types/' . $post['WallPost']['type'], array('author_name' => $author_name, 'post' => $post));
 ?>
     	</div>
-    	<?php if($post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id']): ?>
+<?php
+    	if(
+    		($post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id']) &&
+    		($this->params['action'] != 'news')
+    	):
+?>
     		<div class="deletePost">
 <?php
     			$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
@@ -83,7 +88,80 @@
     	<div class="commentsWrap">
     		<div class="arrow_up"></div>
     		<div class="comments">
+    			<?php if(!empty($post['WallPostLike'])): ?>
+    				<div class="likeness">
+<?php 
+						//set defaults
+						$likes = $dislikes = array();
+						
+    					foreach($post['WallPostLike'] as $like){    					
+    						
+    						if($like['like']){
+    							if($like['User']['id'] == $currentUser['User']['id']){
+    								array_push($likes, array(
+    									'name' => __('you', true),
+    									'slug' => $like['User']['slug']
+    								));
+    							} else {
+    								$likes[] = array(
+    									'name' => $like['User']['full_name'],
+    									'slug' => $like['User']['slug']
+    								);
+    							}
+    						} else {
+    							if($like['User']['id'] == $currentUser['User']['id']){
+    								array_push($dislikes, array(
+    									'name' => __('you', true),
+    									'slug' => $like['User']['slug']
+    								));
+    							} else {
+    								$dislikes[] = array(
+    									'name' => $like['User']['full_name'],
+    									'slug' => $like['User']['slug']
+    								);
+    							}
+    						}
+    					}
+?>
+    					<?php if(!empty($likes)): ?>
+    						<div class="Likes clearfix">
+    							<h3><?php __('liked_by_'); ?></h3>
+    							<ul>
+									<?php foreach($likes as $like):?>
+										<li>
+<?php 
+											echo $html->link($like['name'], array(												
+												'controller' => 'users',
+												'action' => 'profile',
+												$like['slug']
+											));
+?>
+										</li>
+									<?php endforeach; ?>
+    							</ul>
+    						</div>
+    					<?php endif; ?>
+    					<?php if(!empty($dislikes)): ?>
+    						<div class="dislikes clearfix">
+    							<h3><?php __('disliked_by_'); ?></h3>
+    							<ul>
+									<?php foreach($dislikes as $dislike):?>
+										<li>
+<?php 
+											echo $html->link($dislike['name'], array(
+												'controller' => 'users',
+												'action' => 'profile',
+												$dislike['slug']
+											));
+?>
+										</li>
+									<?php endforeach; ?>
+    							</ul>
+    						</div>
+    					<?php endif; ?>
+					</div>
 <?php
+				endif;
     			if($post['Replies']){
     				foreach($post['Replies'] as $comment)
     					echo $this->element('wall_post_comment', compact('comment'));

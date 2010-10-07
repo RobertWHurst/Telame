@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-10-07 05:57-0700\n"
+"POT-Creation-Date: 2010-10-07 07:05-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -384,37 +384,49 @@ msgid "wall_post_label"
 msgstr ""
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:100
+#: /views/elements/wall_post.ctp:178
 msgid "wall_post_submit"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:30
-#: /views/elements/wall_post_comment.ctp:8
+#: /views/elements/wall_post.ctp:35
+#: /views/elements/wall_post_comment.ctp:11
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
 #: /views/settings/groups.ctp:48
 msgid "delete"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:39;43
+#: /views/elements/wall_post.ctp:44;48
 msgid "like"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:49;53
+#: /views/elements/wall_post.ctp:54;58
 msgid "dislike"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:58;97
+#: /views/elements/wall_post.ctp:63;175
 msgid "comment"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:65
+#: /views/elements/wall_post.ctp:102;114
+msgid "you"
+msgstr ""
+
+#: /views/elements/wall_post.ctp:128
+msgid "liked_by_"
+msgstr ""
+
+#: /views/elements/wall_post.ctp:146
+msgid "disliked_by_"
+msgstr ""
+
+#: /views/elements/wall_post.ctp:70
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /views/elements/wall_post.ctp:68
+#: /views/elements/wall_post.ctp:73
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] ""
@@ -662,7 +674,7 @@ msgstr ""
 msgid "home"
 msgstr ""
 
-#: /views/pages/news.ctp:21;24
+#: /views/pages/news.ctp:22;25
 msgid "news_title"
 msgstr ""
 

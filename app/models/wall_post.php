@@ -119,12 +119,12 @@ class WallPost extends AppModel {
 		//create the contain rules
 		if($options['User']) {
 			$contain[] = 'User';
+			$contain[] = 'Replies.User';
 		}
 		if($options['PostAuthor']) {
 			$contain[] = 'PostAuthor';
+			$contain[] = 'Replies.PostAuthor';
 		}
-
-		$contain[] = 'Replies.PostAuthor';
 		$contain[] = 'WallPostLike.User';
 
 		if ($options['single']) {

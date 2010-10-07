@@ -484,7 +484,7 @@ $(function(){
 			root.postCommentSubmitHandler();
 			
 			//on disliking or liking a post
-			root.likenessPostHandeler();
+			//root.likenessPostHandeler();
 			
 			//on click event for delete and wall to wall
 			root.postDeleteHandler();

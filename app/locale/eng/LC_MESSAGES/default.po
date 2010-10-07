@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-10-07 05:57-0700\n"
-"PO-Revision-Date: 2010-10-07 05:57-0800\n"
+"POT-Creation-Date: 2010-10-07 07:05-0700\n"
+"PO-Revision-Date: 2010-10-07 07:06-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -385,37 +385,49 @@ msgid "wall_post_label"
 msgstr "Share something cool."
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:100
+#: /views/elements/wall_post.ctp:178
 msgid "wall_post_submit"
 msgstr "Post"
 
-#: /views/elements/wall_post.ctp:30
-#: /views/elements/wall_post_comment.ctp:8
+#: /views/elements/wall_post.ctp:35
+#: /views/elements/wall_post_comment.ctp:11
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
 #: /views/settings/groups.ctp:48
 msgid "delete"
 msgstr "Delete"
 
-#: /views/elements/wall_post.ctp:39;43
+#: /views/elements/wall_post.ctp:44;48
 msgid "like"
 msgstr "Like"
 
-#: /views/elements/wall_post.ctp:49;53
+#: /views/elements/wall_post.ctp:54;58
 msgid "dislike"
 msgstr "Dislike"
 
-#: /views/elements/wall_post.ctp:58;97
+#: /views/elements/wall_post.ctp:63;175
 msgid "comment"
 msgstr "Comment"
 
-#: /views/elements/wall_post.ctp:65
+#: /views/elements/wall_post.ctp:102;114
+msgid "you"
+msgstr "You"
+
+#: /views/elements/wall_post.ctp:128
+msgid "liked_by_"
+msgstr "Liked by "
+
+#: /views/elements/wall_post.ctp:146
+msgid "disliked_by_"
+msgstr "Disliked by"
+
+#: /views/elements/wall_post.ctp:70
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] "person likes this"
 msgstr[1] "people like this"
 
-#: /views/elements/wall_post.ctp:68
+#: /views/elements/wall_post.ctp:73
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] "person dislikes this"
@@ -663,7 +675,7 @@ msgstr "Confirm"
 msgid "home"
 msgstr "Home"
 
-#: /views/pages/news.ctp:21;24
+#: /views/pages/news.ctp:22;25
 msgid "news_title"
 msgstr "What's New"
 
