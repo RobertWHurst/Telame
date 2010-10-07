@@ -41,7 +41,7 @@ $this->set('title_for_layout', __('search', true));
 		foreach($results as $user):
 		
 		//generate the url array to the user
-		$url = array('controller' => 'user', 'action' => 'profile', $user['User']['id']);
+		$url = array('controller' => 'users', 'action' => 'profile', $user['User']['slug']);
 ?>
  			<div class="user clearfix">
  				<div class="avatar">

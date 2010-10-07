@@ -13,7 +13,8 @@ $js = array(
 	'jquery',
 	'base',
 	'wall',
-	'wall_input'
+	'wall_input',
+	'main_sidebar'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
