@@ -19,7 +19,13 @@
 			<?php endif; ?>
 		<?php else: ?>
 			<p class="no_posts">
-				<?php __('wall_empty'); ?>
+<?php
+				if($this->params['action'] == 'profile'){
+					__('wall_empty');
+				}else{
+					__('empty');
+				}
+?>
 			</p>
 		<?php endif; ?>
 	</div>

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-10-07 03:21-0700\n"
+"POT-Creation-Date: 2010-10-07 05:57-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -333,8 +333,8 @@ msgstr ""
 msgid "about"
 msgstr ""
 
-#: /views/elements/search.ctp:4;5
-#: /views/users/search.ctp:26
+#: /views/elements/search.ctp:8;9
+#: /views/users/search.ctp:27
 msgid "search"
 msgstr ""
 
@@ -367,8 +367,12 @@ msgstr ""
 msgid "older_posts"
 msgstr ""
 
-#: /views/elements/wall.ctp:22
+#: /views/elements/wall.ctp:24
 msgid "wall_empty"
+msgstr ""
+
+#: /views/elements/wall.ctp:26
+msgid "empty"
 msgstr ""
 
 #: /views/elements/wall_input.ctp:15
@@ -380,7 +384,7 @@ msgid "wall_post_label"
 msgstr ""
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:102
+#: /views/elements/wall_post.ctp:100
 msgid "wall_post_submit"
 msgstr ""
 
@@ -392,25 +396,25 @@ msgstr ""
 msgid "delete"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:41;45
+#: /views/elements/wall_post.ctp:39;43
 msgid "like"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:51;55
+#: /views/elements/wall_post.ctp:49;53
 msgid "dislike"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:60;99
+#: /views/elements/wall_post.ctp:58;97
 msgid "comment"
 msgstr ""
 
-#: /views/elements/wall_post.ctp:67
+#: /views/elements/wall_post.ctp:65
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /views/elements/wall_post.ctp:70
+#: /views/elements/wall_post.ctp:68
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] ""
@@ -606,20 +610,20 @@ msgstr ""
 msgid "friend_list"
 msgstr ""
 
-#: /views/helpers/acl.php:25
+#: /views/helpers/acl.php:26
 msgid "permissions_for"
 msgstr ""
 
-#: /views/helpers/acl.php:37
-msgid "can_read"
+#: /views/helpers/acl.php:39
+msgid "this_group_can_view_your"
 msgstr ""
 
-#: /views/helpers/acl.php:37
-msgid "cannot_read"
+#: /views/helpers/acl.php:48
+msgid "no"
 msgstr ""
 
-#: /views/helpers/acl.php:45
-msgid "public"
+#: /views/helpers/acl.php:49
+msgid "yes"
 msgstr ""
 
 #: /views/messages/compose.ctp:18
@@ -693,7 +697,7 @@ msgid "last_name"
 msgstr ""
 
 #: /views/settings/basic.ctp:45
-#: /views/users/search.ctp:76
+#: /views/users/search.ctp:86
 msgid "sex"
 msgstr ""
 
@@ -754,12 +758,12 @@ msgid "city"
 msgstr ""
 
 #: /views/settings/basic.ctp:69
-#: /views/users/search.ctp:90
+#: /views/users/search.ctp:100
 msgid "country"
 msgstr ""
 
 #: /views/settings/basic.ctp:73
-#: /views/users/search.ctp:97
+#: /views/users/search.ctp:107
 msgid "dob"
 msgstr ""
 
@@ -822,27 +826,31 @@ msgstr ""
 msgid "password_forget"
 msgstr ""
 
-#: /views/users/search.ctp:30
+#: /views/users/search.ctp:31
 msgid "search_title"
 msgstr ""
 
-#: /views/users/search.ctp:55
+#: /views/users/search.ctp:58
 msgid "is_you"
 msgstr ""
 
-#: /views/users/search.ctp:59
+#: /views/users/search.ctp:64
+msgid "request_sent"
+msgstr ""
+
+#: /views/users/search.ctp:68
 msgid "add_as_friend"
 msgstr ""
 
-#: /views/users/search.ctp:63
+#: /views/users/search.ctp:74
 msgid "added_to_list_"
 msgstr ""
 
-#: /views/users/search.ctp:64
+#: /views/users/search.ctp:74
 msgid "is_friend"
 msgstr ""
 
-#: /views/users/search.ctp:83
+#: /views/users/search.ctp:93
 msgid "lives_in"
 msgstr ""
 

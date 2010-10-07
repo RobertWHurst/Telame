@@ -71,14 +71,22 @@ class PagesController extends AppController {
 		}
 
 		$friends = $this->GroupsUser->getFriendIds($uid, $selectedFriendList);
-		array_push($friends, $uid);
-
-		$wallPosts = $this->WallPost->getWallPosts(array(
-			'uid' => $friends,
-			'aid' => $friends,
-			'User' => true
-		));
-
+		
+		if(!empty($friends)){
+			
+			$wallPosts = $this->WallPost->getWallPosts(array(
+				'uid' => $friends,
+				'aid' => $friends,
+				'baid' => $uid,
+				'User' => true,
+				'type' => 'post',
+				'limit' => 50
+			));
+			
+		}else{
+			$wallPosts = false;
+		}
+		
 		$birthdays = $this->GroupsUser->getBirthdays($this->currentUser['User']['id']);
 
 		$this->set(compact('birthdays', 'friendLists', 'wallPosts'));

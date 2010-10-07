@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-10-07 03:21-0700\n"
-"PO-Revision-Date: 2010-10-07 03:25-0800\n"
+"POT-Creation-Date: 2010-10-07 05:57-0700\n"
+"PO-Revision-Date: 2010-10-07 05:57-0800\n"
 "Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
@@ -334,8 +334,8 @@ msgstr "Friends"
 msgid "about"
 msgstr "About"
 
-#: /views/elements/search.ctp:4;5
-#: /views/users/search.ctp:26
+#: /views/elements/search.ctp:8;9
+#: /views/users/search.ctp:27
 msgid "search"
 msgstr "Search"
 
@@ -368,9 +368,13 @@ msgstr "with"
 msgid "older_posts"
 msgstr "Older Posts"
 
-#: /views/elements/wall.ctp:22
+#: /views/elements/wall.ctp:24
 msgid "wall_empty"
 msgstr "Sorry, your wall seems a bit empty"
+
+#: /views/elements/wall.ctp:26
+msgid "empty"
+msgstr "Sorry, nothing here..."
 
 #: /views/elements/wall_input.ctp:15
 msgid "wall_post_label_personal"
@@ -381,7 +385,7 @@ msgid "wall_post_label"
 msgstr "Share something cool."
 
 #: /views/elements/wall_input.ctp:20
-#: /views/elements/wall_post.ctp:102
+#: /views/elements/wall_post.ctp:100
 msgid "wall_post_submit"
 msgstr "Post"
 
@@ -393,25 +397,25 @@ msgstr "Post"
 msgid "delete"
 msgstr "Delete"
 
-#: /views/elements/wall_post.ctp:41;45
+#: /views/elements/wall_post.ctp:39;43
 msgid "like"
 msgstr "Like"
 
-#: /views/elements/wall_post.ctp:51;55
+#: /views/elements/wall_post.ctp:49;53
 msgid "dislike"
 msgstr "Dislike"
 
-#: /views/elements/wall_post.ctp:60;99
+#: /views/elements/wall_post.ctp:58;97
 msgid "comment"
 msgstr "Comment"
 
-#: /views/elements/wall_post.ctp:67
+#: /views/elements/wall_post.ctp:65
 msgid "person_likes_this"
 msgid_plural "people_like_this"
 msgstr[0] "person likes this"
 msgstr[1] "people like this"
 
-#: /views/elements/wall_post.ctp:70
+#: /views/elements/wall_post.ctp:68
 msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] "person dislikes this"
@@ -607,21 +611,21 @@ msgstr "Add"
 msgid "friend_list"
 msgstr "Friends"
 
-#: /views/helpers/acl.php:25
+#: /views/helpers/acl.php:26
 msgid "permissions_for"
 msgstr "Permissions for: "
 
-#: /views/helpers/acl.php:37
-msgid "can_read"
-msgstr "can view your"
+#: /views/helpers/acl.php:39
+msgid "this_group_can_view_your"
+msgstr "This group can view your "
 
-#: /views/helpers/acl.php:37
-msgid "cannot_read"
-msgstr "can not view your"
+#: /views/helpers/acl.php:48
+msgid "no"
+msgstr "No"
 
-#: /views/helpers/acl.php:45
-msgid "public"
-msgstr "Can view"
+#: /views/helpers/acl.php:49
+msgid "yes"
+msgstr "Yes"
 
 #: /views/messages/compose.ctp:18
 msgid "message_compose"
@@ -694,7 +698,7 @@ msgid "last_name"
 msgstr "Last name"
 
 #: /views/settings/basic.ctp:45
-#: /views/users/search.ctp:76
+#: /views/users/search.ctp:86
 msgid "sex"
 msgstr "Sex"
 
@@ -755,12 +759,12 @@ msgid "city"
 msgstr "City"
 
 #: /views/settings/basic.ctp:69
-#: /views/users/search.ctp:90
+#: /views/users/search.ctp:100
 msgid "country"
 msgstr "Country"
 
 #: /views/settings/basic.ctp:73
-#: /views/users/search.ctp:97
+#: /views/users/search.ctp:107
 msgid "dob"
 msgstr "Date of birth"
 
@@ -823,27 +827,31 @@ msgstr "Confirm"
 msgid "password_forget"
 msgstr "Forgot your password?"
 
-#: /views/users/search.ctp:30
+#: /views/users/search.ctp:31
 msgid "search_title"
 msgstr "Search"
 
-#: /views/users/search.ctp:55
+#: /views/users/search.ctp:58
 msgid "is_you"
 msgstr "This is you"
 
-#: /views/users/search.ctp:59
+#: /views/users/search.ctp:64
+msgid "request_sent"
+msgstr "Request sent"
+
+#: /views/users/search.ctp:68
 msgid "add_as_friend"
 msgstr "Add as friend"
 
-#: /views/users/search.ctp:63
+#: /views/users/search.ctp:74
 msgid "added_to_list_"
 msgstr "Added to list "
 
-#: /views/users/search.ctp:64
+#: /views/users/search.ctp:74
 msgid "is_friend"
 msgstr "Is friend"
 
-#: /views/users/search.ctp:83
+#: /views/users/search.ctp:93
 msgid "lives_in"
 msgstr "Lives in"
 
@@ -865,6 +873,15 @@ msgstr "Reset Password"
 msgid "send_reset"
 msgstr "Send password reset"
 
+#~ msgid "can_read"
+#~ msgstr "can view your"
+
+#~ msgid "cannot_read"
+#~ msgstr "can not view your"
+
+#~ msgid "public"
+#~ msgstr "Can view"
+
 #~ msgid "add_album"
 #~ msgstr "Add new album"
 
@@ -873,15 +890,6 @@ msgstr "Send password reset"
 
 #~ msgid "password_mismatch"
 #~ msgstr "Your passwords don't match"
-
-#~ msgid "this_group_can_view_your"
-#~ msgstr "This group can view your "
-
-#~ msgid "no"
-#~ msgstr "No"
-
-#~ msgid "yes"
-#~ msgstr "Yes"
 
 #~ msgid "permissions"
 #~ msgstr "Permissions"

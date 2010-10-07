@@ -42,14 +42,39 @@ class WallPost extends AppModel {
 
 		//set the default options
 		$defaults = array(
+			
+			//post id
 			'id' => false,
+			
+			//user id
 			'uid' => false,
+			
+			//author id
 			'aid' => false,
+			
+			//blocked user id
+			'buid' => false,
+			
+			//blocked author id
+			'baid' => false,
+			
+			//include the user data
 			'User' => true,
+			
+			///include the post author data
 			'PostAuthor' => true,
+			
+			//??? don't touch ???
 			'single' => false,
+			
+			//max mumber of posts returned
 			'limit' => 20,
-			'offset' => 0
+			
+			//number of posts to skip
+			'offset' => 0,
+			
+			//filter by post type
+			'type' => false
 		);
 
 		//parse the options
@@ -64,14 +89,31 @@ class WallPost extends AppModel {
 			$conditions['WallPost.id'] = $options['id'];
 		}
 		if($options['uid']) {
-			$conditions['WallPost.user_id'] = $options['uid'];
+			$conditions['OR']['WallPost.user_id'] = $options['uid'];
 		}
 		if($options['aid']) {
+			
+			/* 
+			 * k wtf? doesn't this kind of defeat the purpose of uid? 
+			 *
+			 
 			$conditions['OR'] = array(
 				'WallPost.author_id' => $options['aid'],
 				'WallPost.user_id' => $options['uid'],
 			);
 			unset($conditions['WallPost.user_id']);
+			*/
+			
+			$conditions['OR']['WallPost.author_id'] = $options['aid'];			
+		}
+		if($options['buid']) {
+			$conditions['WallPost.user_id <>'] = $options['buid'];
+		}
+		if($options['baid']) {
+			$conditions['WallPost.author_id <>'] = $options['baid'];
+		}
+		if($options['type']){
+			$conditions['WallPost.type'] = $options['type'];
 		}
 
 		//create the contain rules
