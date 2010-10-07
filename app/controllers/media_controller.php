@@ -26,11 +26,11 @@ class MediaController extends AppController {
 	}
 
 	function large($id = false) {
-		$this->_resize($id, Configure::read('LargeSize'));
+		$this->_resize($id, Configure::read('LargeSize'), 'fit');
 	}
 
 	function preview($id = false) {
-		$this->_resize($id, Configure::read('PreviewSize'));
+		$this->_resize($id, Configure::read('PreviewSize'), 'fill');
 	}
 
 	function profile($id = false){
