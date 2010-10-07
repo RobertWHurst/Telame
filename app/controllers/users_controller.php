@@ -188,7 +188,7 @@ class UsersController extends AppController {
 		}		 
 		 
 		//get all the searchable profiles
-		$this->set('results', $results);
+		$this->set(array('results' => $results, 'search_query' => $this->params['query']));
 	}
 
 	function signup($key = null) {

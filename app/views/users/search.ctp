@@ -11,6 +11,7 @@ $html->css(array(
 $js = array(
 	'jquery',
 	'base',
+	'main_sidebar'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);

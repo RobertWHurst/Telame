@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-10-03 10:07-0700\n"
+"POT-Creation-Date: 2010-10-07 03:21-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -22,23 +22,23 @@ msgstr ""
 msgid "email_not_confirmed"
 msgstr ""
 
-#: /controllers/albums_controller.php:21
+#: /controllers/albums_controller.php:22
 msgid "not_allowed_images"
 msgstr ""
 
-#: /controllers/albums_controller.php:65
+#: /controllers/albums_controller.php:66
 msgid "album_added"
 msgstr ""
 
-#: /controllers/albums_controller.php:74
+#: /controllers/albums_controller.php:75
 msgid "album_not_added"
 msgstr ""
 
-#: /controllers/albums_controller.php:96
+#: /controllers/albums_controller.php:97
 msgid "album_cover_changed"
 msgstr ""
 
-#: /controllers/albums_controller.php:98
+#: /controllers/albums_controller.php:99
 msgid "album_cover_not_changed"
 msgstr ""
 
@@ -86,23 +86,23 @@ msgstr ""
 msgid "not_allowed_friends"
 msgstr ""
 
-#: /controllers/media_controller.php:45
+#: /controllers/media_controller.php:54
 msgid "media_not_deleted_no_id"
 msgstr ""
 
-#: /controllers/media_controller.php:66
+#: /controllers/media_controller.php:75
 msgid "media_deleted"
 msgstr ""
 
-#: /controllers/media_controller.php:68
+#: /controllers/media_controller.php:77
 msgid "media_not_deleted_error"
 msgstr ""
 
-#: /controllers/media_controller.php:71
+#: /controllers/media_controller.php:80
 msgid "media_not_deleted_not_owner"
 msgstr ""
 
-#: /controllers/media_controller.php:148
+#: /controllers/media_controller.php:157
 msgid "media_upload_failed"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgid "message_thread_deleted"
 msgstr ""
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:57;175
+#: /controllers/users_controller.php:73;226
 #: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
@@ -179,23 +179,27 @@ msgstr ""
 msgid "email_or_hash_failed"
 msgstr ""
 
-#: /controllers/users_controller.php:69
+#: /controllers/users_controller.php:47;89
 msgid "email_password_incorrect"
 msgstr ""
 
-#: /controllers/users_controller.php:148
-msgid "tos_must_agree"
-msgstr ""
-
-#: /controllers/users_controller.php:160
+#: /controllers/users_controller.php:52;211
 msgid "validation_error"
 msgstr ""
 
-#: /controllers/users_controller.php:186
+#: /controllers/users_controller.php:80
+msgid "invalid_email"
+msgstr ""
+
+#: /controllers/users_controller.php:199
+msgid "tos_must_agree"
+msgstr ""
+
+#: /controllers/users_controller.php:237
 msgid "user_saved"
 msgstr ""
 
-#: /controllers/users_controller.php:188
+#: /controllers/users_controller.php:239
 msgid "user_create_error"
 msgstr ""
 
@@ -203,15 +207,15 @@ msgstr ""
 msgid "wall_post_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:147
+#: /controllers/wall_posts_controller.php:146
 msgid "wall_post_delete_error"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:174
+#: /controllers/wall_posts_controller.php:173
 msgid "wall_post_delete"
 msgstr ""
 
-#: /controllers/wall_posts_controller.php:184
+#: /controllers/wall_posts_controller.php:183
 msgid "wall_post_bad_hacker"
 msgstr ""
 
@@ -219,27 +223,28 @@ msgstr ""
 msgid "not_allowed_profile"
 msgstr ""
 
-#: /models/user.php:320
+#: /models/user.php:321
 msgid "profile_pictures"
 msgstr ""
 
 #: /views/albums/album.ctp:20;24
+#: /views/albums/view.ctp:20;24
 msgid "album"
 msgstr ""
 
-#: /views/albums/album.ctp:36
+#: /views/albums/album.ctp:37
 msgid "upload_images"
 msgstr ""
 
-#: /views/albums/album.ctp:42
+#: /views/albums/album.ctp:43
 msgid "album_set_cover"
 msgstr ""
 
-#: /views/albums/album.ctp:43
+#: /views/albums/album.ctp:44
 msgid "delete_image"
 msgstr ""
 
-#: /views/albums/album.ctp:43
+#: /views/albums/album.ctp:44
 msgid "media_delete_confirm"
 msgstr ""
 
@@ -258,6 +263,14 @@ msgstr ""
 
 #: /views/albums/new_album.ctp:20
 msgid "new_album"
+msgstr ""
+
+#: /views/albums/view.ctp:44
+msgid "image_prev"
+msgstr ""
+
+#: /views/albums/view.ctp:45
+msgid "image_next"
 msgstr ""
 
 #: /views/elements/current_user_controls.ctp:11
@@ -279,6 +292,18 @@ msgstr ""
 
 #: /views/elements/gallery.ctp:13
 msgid "gallery_options"
+msgstr ""
+
+#: /views/elements/paginator.ctp:3
+msgid "previous"
+msgstr ""
+
+#: /views/elements/paginator.ctp:9
+msgid "next"
+msgstr ""
+
+#: /views/elements/paginator.ctp:13
+msgid "currently_on_page_"
 msgstr ""
 
 #: /views/elements/profile_navigation.ctp:3
@@ -334,11 +359,15 @@ msgstr ""
 msgid "messages"
 msgstr ""
 
-#: /views/elements/wall.ctp:15
+#: /views/elements/summary.ctp:22
+msgid "with"
+msgstr ""
+
+#: /views/elements/wall.ctp:16
 msgid "older_posts"
 msgstr ""
 
-#: /views/elements/wall.ctp:21
+#: /views/elements/wall.ctp:22
 msgid "wall_empty"
 msgstr ""
 
@@ -433,7 +462,7 @@ msgstr ""
 #: /views/elements/pages/login.ctp:5
 #: /views/settings/basic.ctp:86
 #: /views/users/login.ctp:25
-#: /views/users/signup.ctp:27
+#: /views/users/signup.ctp:29
 msgid "password"
 msgstr ""
 
@@ -454,7 +483,7 @@ msgid "features"
 msgstr ""
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:16;37
+#: /views/users/signup.ctp:16;39
 msgid "signup"
 msgstr ""
 
@@ -518,7 +547,7 @@ msgstr ""
 msgid "added_an_event"
 msgstr ""
 
-#: /views/elements/wall_post_types/media.ctp:9
+#: /views/elements/wall_post_types/media.ctp:10
 msgid "added_media"
 msgstr ""
 
@@ -654,14 +683,17 @@ msgid "settings"
 msgstr ""
 
 #: /views/settings/basic.ctp:37
+#: /views/users/signup.ctp:26
 msgid "first_name"
 msgstr ""
 
 #: /views/settings/basic.ctp:41
+#: /views/users/signup.ctp:27
 msgid "last_name"
 msgstr ""
 
 #: /views/settings/basic.ctp:45
+#: /views/users/search.ctp:76
 msgid "sex"
 msgstr ""
 
@@ -722,10 +754,12 @@ msgid "city"
 msgstr ""
 
 #: /views/settings/basic.ctp:69
+#: /views/users/search.ctp:90
 msgid "country"
 msgstr ""
 
 #: /views/settings/basic.ctp:73
+#: /views/users/search.ctp:97
 msgid "dob"
 msgstr ""
 
@@ -738,7 +772,7 @@ msgid "change_your_passowrd"
 msgstr ""
 
 #: /views/settings/basic.ctp:90
-#: /views/users/signup.ctp:28
+#: /views/users/signup.ctp:30
 msgid "password_again"
 msgstr ""
 
@@ -780,7 +814,7 @@ msgstr ""
 
 #: /views/users/confirm.ctp:25
 #: /views/users/password_reset/confirm.ctp:23
-#: /views/users/password_reset/new_password.ctp:24
+#: /views/users/password_reset/new_password.ctp:25
 msgid "confirm"
 msgstr ""
 
@@ -792,11 +826,31 @@ msgstr ""
 msgid "search_title"
 msgstr ""
 
-#: /views/users/signup.ctp:29
+#: /views/users/search.ctp:55
+msgid "is_you"
+msgstr ""
+
+#: /views/users/search.ctp:59
+msgid "add_as_friend"
+msgstr ""
+
+#: /views/users/search.ctp:63
+msgid "added_to_list_"
+msgstr ""
+
+#: /views/users/search.ctp:64
+msgid "is_friend"
+msgstr ""
+
+#: /views/users/search.ctp:83
+msgid "lives_in"
+msgstr ""
+
+#: /views/users/signup.ctp:31
 msgid "personal_username"
 msgstr ""
 
-#: /views/users/signup.ctp:35
+#: /views/users/signup.ctp:37
 msgid "agree"
 msgstr ""
 

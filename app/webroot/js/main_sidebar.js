@@ -36,6 +36,11 @@ $(function(){
 		//input wrap focus handler
 		root.searchFocusHandler = function(){
 		
+			if(root.searchInput.val() === ''){
+				//make the search box label visible
+				root.searchlabel.show();
+			}
+		
 			root.searchInput.focus(function(){
 				
 				//remove the old active class and add the inactive class
@@ -65,9 +70,6 @@ $(function(){
 		
 		//define the constructor
 		root.construct = function(){
-		
-			//make the search box label visible
-			root.searchlabel.show();
 			
 			//on search hover event
 			root.searchHoverHandler();

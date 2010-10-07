@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-10-03 10:07-0700\n"
-"PO-Revision-Date: 2010-10-03 10:08-0800\n"
-"Last-Translator: Eric <efriesen@gmail.com>\n"
+"POT-Creation-Date: 2010-10-07 03:21-0700\n"
+"PO-Revision-Date: 2010-10-07 03:25-0800\n"
+"Last-Translator: none <none@none.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,23 +23,23 @@ msgstr "Welcome to Telame.  Please edit your profile. Enjoy your stay."
 msgid "email_not_confirmed"
 msgstr "That email address is not confirmed"
 
-#: /controllers/albums_controller.php:21
+#: /controllers/albums_controller.php:22
 msgid "not_allowed_images"
 msgstr "Sorry, but you are not allowed to see this person's images."
 
-#: /controllers/albums_controller.php:65
+#: /controllers/albums_controller.php:66
 msgid "album_added"
 msgstr "Album added"
 
-#: /controllers/albums_controller.php:74
+#: /controllers/albums_controller.php:75
 msgid "album_not_added"
 msgstr "Album not added"
 
-#: /controllers/albums_controller.php:96
+#: /controllers/albums_controller.php:97
 msgid "album_cover_changed"
 msgstr "Album cover changed"
 
-#: /controllers/albums_controller.php:98
+#: /controllers/albums_controller.php:99
 msgid "album_cover_not_changed"
 msgstr "Album cover not changed, please try again"
 
@@ -87,23 +87,23 @@ msgstr "Friend successfully added"
 msgid "not_allowed_friends"
 msgstr "Sorry, but you are not allowed to see this person's friends list.  Try adding them as a friend first."
 
-#: /controllers/media_controller.php:45
+#: /controllers/media_controller.php:54
 msgid "media_not_deleted_no_id"
 msgstr "Can't delete that, you didn't supply an ID"
 
-#: /controllers/media_controller.php:66
+#: /controllers/media_controller.php:75
 msgid "media_deleted"
 msgstr "Media deleted"
 
-#: /controllers/media_controller.php:68
+#: /controllers/media_controller.php:77
 msgid "media_not_deleted_error"
 msgstr "We couldn't delete that, there was an error"
 
-#: /controllers/media_controller.php:71
+#: /controllers/media_controller.php:80
 msgid "media_not_deleted_not_owner"
 msgstr "You can't delete that, you don't own it"
 
-#: /controllers/media_controller.php:148
+#: /controllers/media_controller.php:157
 msgid "media_upload_failed"
 msgstr "Sorry, we couldn't upload your media, please try again"
 
@@ -112,7 +112,7 @@ msgid "message_thread_deleted"
 msgstr "Message deleted"
 
 #: /controllers/pages_controller.php:25;32
-#: /controllers/users_controller.php:57;175
+#: /controllers/users_controller.php:73;226
 #: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
@@ -180,23 +180,27 @@ msgstr "Your email has been successfully confirmed"
 msgid "email_or_hash_failed"
 msgstr "Either the email or hash supplied is incorrect, please try again"
 
-#: /controllers/users_controller.php:69
+#: /controllers/users_controller.php:47;89
 msgid "email_password_incorrect"
 msgstr "Your email or password is incorrect"
 
-#: /controllers/users_controller.php:148
-msgid "tos_must_agree"
-msgstr "You must agree with the Terms of Service"
-
-#: /controllers/users_controller.php:160
+#: /controllers/users_controller.php:52;211
 msgid "validation_error"
 msgstr "One or more of the fields is invalid, please try again"
 
-#: /controllers/users_controller.php:186
+#: /controllers/users_controller.php:80
+msgid "invalid_email"
+msgstr "That Email is invalid"
+
+#: /controllers/users_controller.php:199
+msgid "tos_must_agree"
+msgstr "You must agree with the Terms of Service"
+
+#: /controllers/users_controller.php:237
 msgid "user_saved"
 msgstr "You have been successfully added"
 
-#: /controllers/users_controller.php:188
+#: /controllers/users_controller.php:239
 msgid "user_create_error"
 msgstr "Sorry, but we could not add you.  Please try again or email the admins for support."
 
@@ -204,15 +208,15 @@ msgstr "Sorry, but we could not add you.  Please try again or email the admins f
 msgid "wall_post_error"
 msgstr "Sorry, you're not allowed to do that"
 
-#: /controllers/wall_posts_controller.php:147
+#: /controllers/wall_posts_controller.php:146
 msgid "wall_post_delete_error"
 msgstr "We couldn't find that post."
 
-#: /controllers/wall_posts_controller.php:174
+#: /controllers/wall_posts_controller.php:173
 msgid "wall_post_delete"
 msgstr "It's gone"
 
-#: /controllers/wall_posts_controller.php:184
+#: /controllers/wall_posts_controller.php:183
 msgid "wall_post_bad_hacker"
 msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 
@@ -220,27 +224,28 @@ msgstr "HEY YOU.  That's a BAD USER, DON'T DO THAT"
 msgid "not_allowed_profile"
 msgstr "Sorry, but you are not allowed to see this person's profile.  Try adding them as a friend first."
 
-#: /models/user.php:320
+#: /models/user.php:321
 msgid "profile_pictures"
 msgstr "Profile pictures"
 
 #: /views/albums/album.ctp:20;24
+#: /views/albums/view.ctp:20;24
 msgid "album"
 msgstr "Album"
 
-#: /views/albums/album.ctp:36
+#: /views/albums/album.ctp:37
 msgid "upload_images"
 msgstr "Upload new images"
 
-#: /views/albums/album.ctp:42
+#: /views/albums/album.ctp:43
 msgid "album_set_cover"
 msgstr "Set as album cover"
 
-#: /views/albums/album.ctp:43
+#: /views/albums/album.ctp:44
 msgid "delete_image"
 msgstr "Delete Image"
 
-#: /views/albums/album.ctp:43
+#: /views/albums/album.ctp:44
 msgid "media_delete_confirm"
 msgstr "Are you sure you want to delete this image?"
 
@@ -260,6 +265,14 @@ msgstr "Delete album"
 #: /views/albums/new_album.ctp:20
 msgid "new_album"
 msgstr "Create new album"
+
+#: /views/albums/view.ctp:44
+msgid "image_prev"
+msgstr "Previous Image"
+
+#: /views/albums/view.ctp:45
+msgid "image_next"
+msgstr "Next Image"
 
 #: /views/elements/current_user_controls.ctp:11
 msgid "hello"
@@ -281,6 +294,18 @@ msgstr "Logout"
 #: /views/elements/gallery.ctp:13
 msgid "gallery_options"
 msgstr "Gallery options"
+
+#: /views/elements/paginator.ctp:3
+msgid "previous"
+msgstr "Previous"
+
+#: /views/elements/paginator.ctp:9
+msgid "next"
+msgstr "next"
+
+#: /views/elements/paginator.ctp:13
+msgid "currently_on_page_"
+msgstr "Currently on page "
 
 #: /views/elements/profile_navigation.ctp:3
 msgid "your"
@@ -335,11 +360,15 @@ msgstr "News Feed"
 msgid "messages"
 msgstr "Messages"
 
-#: /views/elements/wall.ctp:15
+#: /views/elements/summary.ctp:22
+msgid "with"
+msgstr "with"
+
+#: /views/elements/wall.ctp:16
 msgid "older_posts"
 msgstr "Older Posts"
 
-#: /views/elements/wall.ctp:21
+#: /views/elements/wall.ctp:22
 msgid "wall_empty"
 msgstr "Sorry, your wall seems a bit empty"
 
@@ -434,7 +463,7 @@ msgstr "Email"
 #: /views/elements/pages/login.ctp:5
 #: /views/settings/basic.ctp:86
 #: /views/users/login.ctp:25
-#: /views/users/signup.ctp:27
+#: /views/users/signup.ctp:29
 msgid "password"
 msgstr "Password"
 
@@ -455,7 +484,7 @@ msgid "features"
 msgstr "Features"
 
 #: /views/elements/pages/navigation.ctp:6
-#: /views/users/signup.ctp:16;37
+#: /views/users/signup.ctp:16;39
 msgid "signup"
 msgstr "Signup"
 
@@ -519,7 +548,7 @@ msgstr "Beta Keys Admin"
 msgid "added_an_event"
 msgstr "added an event"
 
-#: /views/elements/wall_post_types/media.ctp:9
+#: /views/elements/wall_post_types/media.ctp:10
 msgid "added_media"
 msgstr "Uploaded the following media"
 
@@ -655,14 +684,17 @@ msgid "settings"
 msgstr "Account Settings"
 
 #: /views/settings/basic.ctp:37
+#: /views/users/signup.ctp:26
 msgid "first_name"
 msgstr "First name"
 
 #: /views/settings/basic.ctp:41
+#: /views/users/signup.ctp:27
 msgid "last_name"
 msgstr "Last name"
 
 #: /views/settings/basic.ctp:45
+#: /views/users/search.ctp:76
 msgid "sex"
 msgstr "Sex"
 
@@ -723,10 +755,12 @@ msgid "city"
 msgstr "City"
 
 #: /views/settings/basic.ctp:69
+#: /views/users/search.ctp:90
 msgid "country"
 msgstr "Country"
 
 #: /views/settings/basic.ctp:73
+#: /views/users/search.ctp:97
 msgid "dob"
 msgstr "Date of birth"
 
@@ -739,7 +773,7 @@ msgid "change_your_passowrd"
 msgstr "Change your password"
 
 #: /views/settings/basic.ctp:90
-#: /views/users/signup.ctp:28
+#: /views/users/signup.ctp:30
 msgid "password_again"
 msgstr "Password Again"
 
@@ -781,7 +815,7 @@ msgstr "User Permissions"
 
 #: /views/users/confirm.ctp:25
 #: /views/users/password_reset/confirm.ctp:23
-#: /views/users/password_reset/new_password.ctp:24
+#: /views/users/password_reset/new_password.ctp:25
 msgid "confirm"
 msgstr "Confirm"
 
@@ -793,11 +827,31 @@ msgstr "Forgot your password?"
 msgid "search_title"
 msgstr "Search"
 
-#: /views/users/signup.ctp:29
+#: /views/users/search.ctp:55
+msgid "is_you"
+msgstr "This is you"
+
+#: /views/users/search.ctp:59
+msgid "add_as_friend"
+msgstr "Add as friend"
+
+#: /views/users/search.ctp:63
+msgid "added_to_list_"
+msgstr "Added to list "
+
+#: /views/users/search.ctp:64
+msgid "is_friend"
+msgstr "Is friend"
+
+#: /views/users/search.ctp:83
+msgid "lives_in"
+msgstr "Lives in"
+
+#: /views/users/signup.ctp:31
 msgid "personal_username"
 msgstr "Personal Username"
 
-#: /views/users/signup.ctp:35
+#: /views/users/signup.ctp:37
 msgid "agree"
 msgstr "Agree"
 
@@ -819,9 +873,6 @@ msgstr "Send password reset"
 
 #~ msgid "password_mismatch"
 #~ msgstr "Your passwords don't match"
-
-#~ msgid "invalid_key"
-#~ msgstr "That key is invalid"
 
 #~ msgid "this_group_can_view_your"
 #~ msgstr "This group can view your "
