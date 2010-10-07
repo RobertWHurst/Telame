@@ -12,7 +12,7 @@ div.wall_post_wrap div.wall_post{
 }
 div.wall_post_wrap div.action{
 	padding: 5px 10px;
-	background: #555;	
+	background: #444;	
 }
 div.wall_post_wrap div.wall_post{
 	padding: 10px;
@@ -137,7 +137,7 @@ div.wall_post_wrap div.comments{
 div.wall_post_wrap div.comments div.comment,
 div.wall_post_wrap div.comments div.likeness{	
 	padding: 5px;
-	background: #555;
+	background: #454545;
 	width: 338px;
 	position: relative;
 	border-bottom: 1px solid #595959;
