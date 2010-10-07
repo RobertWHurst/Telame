@@ -51,22 +51,31 @@ $this->set('title_for_layout', __('search', true));
 ?>
 				</div>
  				<div class="controls">
- 					<?php if($currentUser['User']['id'] == $user['User']['id']): ?>
- 						<div class="add_friend">
- 							<p><?php echo __('is_you'); ?>.</p>
- 						</div>
-					<?php elseif($user['Friend']['not_added']): ?>
- 						<div class="add_friend">
- 							<?php echo $html->link(__('add_as_friend', true), array('controller' => 'group_users', 'action' => 'addFriend', $user['User']['id'])); ?>
- 						</div>
- 					<?php elseif($user['Friend']['list']): ?>
- 						<div class="add_friend">
- 							<p title="<?php echo __('added_to_list_', true) . $user['Friend']['list']; ?>">
- 								<?php echo __('is_friend'); ?>.
- 							</p>
+ 					<div class="add_friend">
+ 						
+ 						<?php if($currentUser['User']['id'] == $user['User']['id']): ?>
  							
- 						</div>
- 					<?php endif; ?>
+ 							<p><?php echo __('is_you'); ?>.</p>
+ 							
+						<?php elseif($user['Friend']['not_added']): ?>
+							
+							<?php if($user['Friend']['request_sent']): ?>
+							
+								<p><?php echo __('request_sent'); ?>.</p>
+							
+							<?php else: ?>
+ 							
+ 								<?php echo $html->link(__('add_as_friend', true), array('controller' => 'group_users', 'action' => 'addFriend', $user['User']['id'])); ?>
+ 							
+ 							<?php endif; ?>
+ 						
+ 						<?php elseif($user['Friend']['list']): ?>
+ 							
+ 							<p title="<?php echo __('added_to_list_', true) . $user['Friend']['list']; ?>"><?php echo __('is_friend'); ?>.</p>
+ 						
+ 						<?php endif; ?>
+ 						
+ 					</div>
  				</div>
  				<div class="name"><?php echo $html->link($user['User']['full_name'], $url); ?></div>
  				<div class="summary">

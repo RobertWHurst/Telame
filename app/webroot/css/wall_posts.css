@@ -43,12 +43,9 @@ div.wall_post_wrap div.wall_post div.content h3{
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wall_post_wrap div.wall_post div.content p,
-div.wall_post_wrap div.action div.content p{
+div.wall_post_wrap div.content p{
 	font-size: 1.4em;
 	line-height: 1.4em;
-}
-div.wall_post_wrap div.wall_post div.content p{
 	margin-bottom: 15px;
 }
 div.wall_post_wrap div.wall_post div.content ul,
@@ -91,16 +88,16 @@ div.wall_post_wrap div.wall_to_wall:hover,
 div.wall_post_wrap div.delete:hover{
 	background: #444;
 }
-div.wall_post_wrap div.wall_post div.baseline{
+div.wall_post_wrap div.baseline{
 	position: absolute;
 	bottom:10px;
 	margin-left: 70px;
 	width:368px;
 }
-div.wall_post_wrap div.wall_post div.baseline div.time{
+div.wall_post_wrap div.baseline div.time{
 	float: right;
 }
-div.wall_post_wrap div.wall_post div.baseline div.time p{
+div.wall_post_wrap div.baseline div.time p{
 	color: #888;
 	font-size: 1.1em;
 	font-weight: bold;

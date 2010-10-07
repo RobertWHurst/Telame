@@ -30,11 +30,9 @@
     			echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
     		</div>
-<?php
-    	endif;
-    	if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'):
-?>
-    		<div class="baseline">
+		<?php endif; ?>
+    	<div class="baseline">
+    		<?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
     			<div class="baseline_controls">
 <?php
     				if($post['WallPost']['like']){
@@ -73,13 +71,13 @@
     					<p><?php echo ($post['WallPost']['dislike'])? $dislike : '' ; ?></p>
     				<?php endif; ?>
     	    	</div>
-    			<div class="time">
-    				<p>
-    					<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
-    				</p>
-    			</div>
+    		<?php endif; ?>
+    		<div class="time">
+    			<p>
+    				<?php echo $time->timeAgoInWords($post['WallPost']['posted']); ?>
+    			</p>
     		</div>
-    	<?php endif; ?>
+    	</div>
     </div>
     <?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
     	<div class="commentsWrap">
