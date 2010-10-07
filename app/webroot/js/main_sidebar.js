@@ -6,86 +6,74 @@ $(function(){
 		var root = this;
 		
 		//save the dom elements
-		root.searchInput = $('#searchQuery', '#main_sidebar');
-		root.searchInputLabel = $('div.search label', '#main_sidebar');
-		root.searchInputWrap = $('div.search', '#main_sidebar');
-		root.activeModules = $('div.active', '#main_sidebar');
-		
-		//the animation speed
-		root.speed = 300;
+		root.mainSidebar = $('#main_sidebar');
+		root.searchInputWrapper = $('div.search', '#main_sidebar');
+		root.searchInput = $('input:text', '#main_sidebar');
+		root.searchlabel = $('label', root.searchInputWrapper);
 		
 		//input wrap hover handler
-		root.hoverHandler = function(action){
+		root.searchHoverHandler = function(action){
 			
-			//check the state
-			if(action === 'in'){
+			//on hover
+			root.searchInputWrapper.hover(function(event){
 				
 				//remove the old active class and add the inactive class
-				root.searchInputWrap.addClass('active').addClass('hover');
+				root.searchInputWrapper.addClass('active').addClass('hover');
 				
-			}
-			else if(action === 'out'){
+			},
+			function(){
 				
 				//remove the old active class and add the inactive class
-				root.searchInputWrap.removeClass('hover');			
-				if(root.searchInputWrap.hasClass('focus') === false){			
-					root.searchInputWrap.removeClass('active');
-				}	
+				root.searchInputWrapper.removeClass('hover');			
+				if(root.searchInputWrapper.hasClass('focus') === false){			
+					root.searchInputWrapper.removeClass('active');
+				}
 				
-			}
-				
+			});
+			
 		}
 		
-		//input focus handler
-		root.focusHandler = function(action){
-			
-			//check the state
-			if(action === 'in'){
+		//input wrap focus handler
+		root.searchFocusHandler = function(){
+		
+			root.searchInput.focus(function(){
 				
 				//remove the old active class and add the inactive class
-				root.searchInputWrap.addClass('active').addClass('focus');
+				root.searchInputWrapper.addClass('active').addClass('focus');
 				
 				//hide the label
-				root.searchInputLabel.hide();
+				root.searchlabel.hide();
 				
-			}
-			else if(action === 'out'){
+			});
+			
+			root.searchInput.blur(function(){
 				
 				//remove the old active class and add the inactive class
-				root.searchInputWrap.removeClass('focus');			
-				if(root.searchInputWrap.hasClass('hover') === false){			
-					root.searchInputWrap.removeClass('active');
-				}	
-								
-				//if the inupt or textarea is empty then hide the label
-				if(root.searchInput.val() === ''){
-					root.searchInputLabel.show();
+				root.searchInputWrapper.removeClass('focus');			
+				if(root.searchInputWrapper.hasClass('hover') === false){			
+					root.searchInputWrapper.removeClass('active');
 				}
-			}
 				
-		}
+				//if the input is empty then show the label
+				if(root.searchInput.val() === ''){
+					root.searchlabel.show();
+				}
+				
+			});
+				
+		};
 		
 		//define the constructor
 		root.construct = function(){
+		
+			//make the search box label visible
+			root.searchlabel.show();
 			
-			//on hover event
-			root.searchInputWrap.hover(function(){
-				root.hoverHandler('in');
-			},
-			function(){
-				root.hoverHandler('out');
-			});
+			//on search hover event
+			root.searchHoverHandler();
 			
-			//on focus event
-			root.searchInput.focus(function(){
-				root.focusHandler('in');
-			});
-			root.searchInput.blur(function(){
-				root.focusHandler('out');
-			});
-			
-			//the active state proccess
-			loop.newProccess('activeSidebarModules', root.activeStateProccess, 1);
+			//on search focus event
+			root.searchFocusHandler();
 			
 		}
 		
