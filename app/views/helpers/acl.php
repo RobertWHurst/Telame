@@ -19,7 +19,8 @@ class AclHelper extends AppHelper {
 	}
 	
 	function displayAcoTree($acoTree, $parent = null) {
-		foreach($acoTree as $aco): ?>
+		foreach($acoTree as $aco):
+?>
 			<div class="aco-object">
 				<h1>
 <?php				echo __('permissions_for', true);
@@ -27,31 +28,38 @@ class AclHelper extends AppHelper {
 					echo __($aco['Aco']['alias'], true);
 ?>
 				</h1>
-<?php 			foreach($aco['Groups'] as $group):
-					$canRead = $group['Group']['canRead'];
+				<table>
+<?php 			
+					foreach($aco['Groups'] as $group):
+						$canRead = $group['Group']['canRead'];
 ?>
-					<div class="aco-group clearfix <?php echo ($canRead) ? 'on' : 'off'; ?>">
-						<div class="decription">
-							<p>
-<?php							echo '<strong>' . $group['Group']['title'] . '</strong> ';
-								echo $canRead ? __('can_read', true) . ' ' . __($aco['Aco']['alias'] ,true) : __('cannot_read', true) . ' ' . __($aco['Aco']['alias'], true); 
+						<div class="aco-group clearfix <?php echo ($canRead) ? 'on' : 'off'; ?>">
+							<tr>
+								<td>
+									<?php echo $this->Form->label(__('this_group_can_view_your', true) . ' "' . __($aco['Aco']['alias'], true) . '"'); ?>
+								</td>
+								<td>
+<?php							
+									echo $this->Form->input((!is_null($parent) ? $parent . '.' : '') . $aco['Aco']['alias'] . '.Group_' . $group['Group']['id'],
+										array(
+											'type' => 'radio',
+											'default' => $canRead,
+											'options' => array(
+												__('no', true),
+												__('yes', true)
+											),
+											'legend' => false
+										)
+									);
 ?>
-							</p>
+								</td>
+							</tr>
 						</div>
-						<div class="switch">
-<?php						echo $this->Form->input((!is_null($parent) ? $parent . '.' : '') . $aco['Aco']['alias'] . '.Group_' . $group['Group']['id'], array(
-								'type' => 'checkbox',
-								'checked' => ($canRead ? 'checked' : ''),
-								'label' => __('public', true)
-								//'id' => "Aco_{$group['Group']['id']}"
-							));
-?>
-						</div>
-					</div>
-<?php 			endforeach;
-?>
+					<?php endforeach; ?>
+				</table>
 			</div>
-<?php	if (isset($aco['Children'])) {
+<?php
+		if (isset($aco['Children'])) {
 			$this->displayAcoTree($aco['Children'], $aco['Aco']['alias']);
 		}
 		endforeach;
