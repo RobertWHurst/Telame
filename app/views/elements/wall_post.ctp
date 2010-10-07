@@ -98,7 +98,7 @@
     						
     						if($like['like']){
     							if($like['User']['id'] == $currentUser['User']['id']){
-    								array_push($likes, array(
+    								array_unshift($likes, array(
     									'name' => __('you', true),
     									'slug' => $like['User']['slug']
     								));
@@ -110,7 +110,7 @@
     							}
     						} else {
     							if($like['User']['id'] == $currentUser['User']['id']){
-    								array_push($dislikes, array(
+    								array_unshift($dislikes, array(
     									'name' => __('you', true),
     									'slug' => $like['User']['slug']
     								));
