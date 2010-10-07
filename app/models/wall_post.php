@@ -8,10 +8,6 @@ class WallPost extends AppModel {
 		'PostAuthor' => array(
 			'className' => 'User',
 			'foreignKey' => 'author_id'
-		),
-		'ActionRecipient' => array(
-			'className' => 'User',
-			'foreignKey' => 'action_recipient_id'			
 		)
 	);
 	var $hasMany = array(
@@ -51,7 +47,6 @@ class WallPost extends AppModel {
 			'aid' => false,
 			'User' => true,
 			'PostAuthor' => true,
-			'ActionRecipient' => false,
 			'single' => false,
 			'limit' => 20,
 			'offset' => 0
@@ -85,9 +80,6 @@ class WallPost extends AppModel {
 		}
 		if($options['PostAuthor']) {
 			$contain[] = 'PostAuthor';
-		}
-		if($options['ActionRecipient']) {
-			$contain[] = 'ActionRecipient';
 		}
 
 		$contain[] = 'Replies.PostAuthor';

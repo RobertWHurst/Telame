@@ -96,8 +96,7 @@ class WallPostsController extends AppController {
 			//create an action on the user's page
 			$action['reply_parent_id'] = null;	
 			$action['WallPost']['user_id'] = $visitorId;
-			$action['WallPost']['author_id'] = $visitorId;
-			$action['WallPost']['action_recipient_id'] = $wallOwnerId;
+			$action['WallPost']['author_id'] = $wallOwnerId;
 			$action['WallPost']['post'] = null;
 			$this->WallPost->add($action, array('type' => 'post_action', 'class' => 'action'));
 		}

@@ -76,8 +76,7 @@ class PagesController extends AppController {
 		$wallPosts = $this->WallPost->getWallPosts(array(
 			'uid' => $friends,
 			'aid' => $friends,
-			'User' => true,
-			'ActionRecipient' => true,
+			'User' => true
 		));
 
 		$birthdays = $this->GroupsUser->getBirthdays($this->currentUser['User']['id']);
