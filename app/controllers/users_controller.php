@@ -107,10 +107,6 @@ class UsersController extends AppController {
 		$this->Profile->getProfile($slug);
 	}
 
-	function updateGalleryPos($uid, $mid, $posData){
-		krumo($posData);
-	}
-
 	function search(){
 		$this->layout = 'tall_header_w_sidebar';
 
@@ -132,6 +128,10 @@ class UsersController extends AppController {
 			// Do the (magical) redirect
 			$this->redirect($params);
 		}
+		
+		if(!isset($this->params['query'])){
+			$this->redirect($this->referer());
+		}
 
 		// Clean the params, just to be safe
 		$search = Sanitize::clean($this->params['query']);
@@ -147,6 +147,9 @@ class UsersController extends AppController {
 				)
 			),
 			'contain' => array(
+				'Profile' => array(
+					'Country'
+				)
 			),
 			'limit' => 2,
 			'order' => array(
@@ -155,7 +158,35 @@ class UsersController extends AppController {
 			)
 		);
 
-		 $results = $this->paginate('User');
+		$results = $this->paginate('User');
+		 
+		//make some changes to the data
+		foreach($results as $key => $user){
+		
+			//set defaults
+			$results[$key]['Friend'] = array(
+				'not_added' => false,
+				'list' => false,
+				'request_sent' => false
+			);
+			
+			//caculate if a user is a friend of the current user
+			$results[$key]['Friend']['not_added'] = !$this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
+			
+			//if the user has been added
+			if(!$results[$key]['Friend']['not_added']){
+				
+				//findout what list the user is part of
+				$groups = $this->User->GroupsUser->listGroups($this->currentUser['User']['id'], $user['User']['id']);
+				$results[$key]['Friend']['list'] = $this->User->Group->getGroupTitleById($groups['GroupsUser']['id']);
+				
+			} else {
+			
+				//findout if a friend request has been made
+				$results[$key]['Friend']['request_sent'] = $this->User->GroupsUser->requestSent($this->currentUser['User']['id'], $user['User']['id']);
+			}
+		}		 
+		 
 		//get all the searchable profiles
 		$this->set('results', $results);
 	}

@@ -33,5 +33,10 @@ class Group extends AppModel {
 			'order' => 'lower(title)',
 		));
 	}
+	
+	function getGroupTitleById($id){
+		$results = $this->findById($id);
+		return $results['Group']['title'];
+	}
 
 }
