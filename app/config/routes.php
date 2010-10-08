@@ -55,9 +55,10 @@
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 // Admin stuff
+	Router::connect('/admin/bkdelete/*', array('controller' => 'settings', 'action' => 'deletekey', 'admin' => true));
 	Router::connect('/admin/generatekeys', array('controller' => 'settings', 'action' => 'generatekeys', 'admin' => true));
+	Router::connect('/admin/sendinvite', array('controller' => 'settings', 'action' => 'inviteemail', 'admin' => true));
 	Router::connect('/admin', array('controller' => 'settings', 'action' => 'betakeys', 'admin' => true));
-
 
 // User info
 	// Calendar

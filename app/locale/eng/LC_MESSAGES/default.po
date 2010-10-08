@@ -4,9 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Telame\n"
-"POT-Creation-Date: 2010-10-07 07:05-0700\n"
-"PO-Revision-Date: 2010-10-07 07:06-0800\n"
-"Last-Translator: none <none@none.com>\n"
+"POT-Creation-Date: 2010-10-08 08:55-0700\n"
+"PO-Revision-Date: 2010-10-08 08:56-0800\n"
+"Last-Translator: Eric <efriesen@gmail.com>\n"
 "Language-Team: Telame <info@telame.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,7 +112,9 @@ msgid "message_thread_deleted"
 msgstr "Message deleted"
 
 #: /controllers/pages_controller.php:25;32
+#: /controllers/settings_controller.php:282
 #: /controllers/users_controller.php:73;226
+#: /views/elements/email/html/invite.ctp:1;4;6
 #: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
@@ -136,41 +138,57 @@ msgstr "Sorry, but we could not add you.  Please try again or email the admins f
 msgid "profile_updated"
 msgstr "Profile updated"
 
-#: /controllers/settings_controller.php:73;75
+#: /controllers/settings_controller.php:74;76
 msgid "profile_settings_saved"
 msgstr "Profile saved"
 
-#: /controllers/settings_controller.php:85
+#: /controllers/settings_controller.php:86
 msgid "account_deleted"
 msgstr "Account deleted.  Thanks for trying Telame"
 
-#: /controllers/settings_controller.php:169
+#: /controllers/settings_controller.php:170
 msgid "permissions_saved"
 msgstr "Permissions saved"
 
-#: /controllers/settings_controller.php:171
+#: /controllers/settings_controller.php:172
 msgid "permissions_not_saved"
 msgstr "Permissions not saved"
 
-#: /controllers/settings_controller.php:182
+#: /controllers/settings_controller.php:183
 msgid "group_added"
 msgstr "Group added"
 
-#: /controllers/settings_controller.php:185
+#: /controllers/settings_controller.php:186
 msgid "group_not_added"
 msgstr "There was an error adding your group, please try again"
 
-#: /controllers/settings_controller.php:195
+#: /controllers/settings_controller.php:196
 msgid "group_not_allowed_delete"
 msgstr "Sorry, but you are not allowed to delete that group"
 
-#: /controllers/settings_controller.php:198
+#: /controllers/settings_controller.php:199
 msgid "group_deleted"
 msgstr "Group deleted"
 
-#: /controllers/settings_controller.php:201
+#: /controllers/settings_controller.php:202
 msgid "group_not_deleted"
 msgstr "Group not deleted"
+
+#: /controllers/settings_controller.php:243
+msgid "no_id_specified"
+msgstr "No ID specified"
+
+#: /controllers/settings_controller.php:250
+msgid "beta_key_deleted"
+msgstr "Betakey deleted"
+
+#: /controllers/settings_controller.php:271
+msgid "page_error"
+msgstr "Error"
+
+#: /controllers/settings_controller.php:289
+msgid "beta_key_sent"
+msgstr "Beta key sent"
 
 #: /controllers/users_controller.php:27
 msgid "email_confirmed"
@@ -393,6 +411,7 @@ msgstr "Post"
 #: /views/elements/wall_post_comment.ctp:11
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
+#: /views/settings/admin_betakeys.ctp:51
 #: /views/settings/groups.ctp:48
 msgid "delete"
 msgstr "Delete"
@@ -432,6 +451,10 @@ msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] "person dislikes this"
 msgstr[1] "people dislike this"
+
+#: /views/elements/email/html/invite.ctp:6
+msgid "signup_for_"
+msgstr "Signup for"
 
 #: /views/elements/media/upload.ctp:15
 #: /views/media/upload.ctp:20
@@ -684,10 +707,18 @@ msgid "admin_settings"
 msgstr "Admin Settings"
 
 #: /views/settings/admin_betakeys.ctp:33
+msgid "email_address"
+msgstr "Email address"
+
+#: /views/settings/admin_betakeys.ctp:34
+msgid "send"
+msgstr "Send"
+
+#: /views/settings/admin_betakeys.ctp:40
 msgid "keys_how_many"
 msgstr "How many keys would you like to generate?"
 
-#: /views/settings/admin_betakeys.ctp:34
+#: /views/settings/admin_betakeys.ctp:41
 msgid "keys_generate"
 msgstr "Make 'em"
 
@@ -956,9 +987,3 @@ msgstr "Send password reset"
 #~ msgid_plural "minutes"
 #~ msgstr[0] "minute"
 #~ msgstr[1] "minutes"
-
-#~ msgid "second"
-
-#~ msgid_plural "seconds"
-#~ msgstr[0] "second"
-#~ msgstr[1] "seconds"

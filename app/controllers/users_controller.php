@@ -191,7 +191,7 @@ class UsersController extends AppController {
 		$this->set(array('results' => $results, 'search_query' => $this->params['query']));
 	}
 
-	function signup($key = null) {
+	function signup($email = null, $key = null) {
 		$this->layout = 'simple_header';
 		// data has been posted
 		if (!empty($this->data)) {
@@ -245,6 +245,7 @@ class UsersController extends AppController {
 		} else { // end if (!empty$this->data)
 			// add the beta key to the default $this->data array
 			$this->data['User']['beta_key'] = $key;
+			$this->data['User']['email'] = $email;
 		}
 		unset($this->data['User']['password']);
 		unset($this->data['User']['passwd']);

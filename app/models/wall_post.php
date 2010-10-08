@@ -42,37 +42,26 @@ class WallPost extends AppModel {
 
 		//set the default options
 		$defaults = array(
-			
 			//post id
 			'id' => false,
-			
 			//user id
 			'uid' => false,
-			
 			//author id
 			'aid' => false,
-			
 			//blocked user id
 			'buid' => false,
-			
 			//blocked author id
 			'baid' => false,
-			
 			//include the user data
 			'User' => true,
-			
 			///include the post author data
 			'PostAuthor' => true,
-			
 			//??? don't touch ???
 			'single' => false,
-			
 			//max mumber of posts returned
 			'limit' => 20,
-			
 			//number of posts to skip
 			'offset' => 0,
-			
 			//filter by post type
 			'type' => false
 		);
@@ -92,19 +81,19 @@ class WallPost extends AppModel {
 			$conditions['OR']['WallPost.user_id'] = $options['uid'];
 		}
 		if($options['aid']) {
-			
-			/* 
-			 * k wtf? doesn't this kind of defeat the purpose of uid? 
+
+			/*
+			 * k wtf? doesn't this kind of defeat the purpose of uid?
 			 *
-			 
+
 			$conditions['OR'] = array(
 				'WallPost.author_id' => $options['aid'],
 				'WallPost.user_id' => $options['uid'],
 			);
 			unset($conditions['WallPost.user_id']);
 			*/
-			
-			$conditions['OR']['WallPost.author_id'] = $options['aid'];			
+
+			$conditions['OR']['WallPost.author_id'] = $options['aid'];
 		}
 		if($options['buid']) {
 			$conditions['WallPost.user_id <>'] = $options['buid'];
@@ -158,9 +147,9 @@ class WallPost extends AppModel {
 				$this->$model = new $model;
 				$this->$model->recursive = -1;
 				$data = $this->$model->findById($wallPosts[$i]['WallPost']['model_id']);
-				
+
 				$wallPosts[$i][$model] = $data[$model];
-				
+
 			}
 		}
 

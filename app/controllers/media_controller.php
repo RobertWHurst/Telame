@@ -30,7 +30,7 @@ class MediaController extends AppController {
 	}
 
 	function preview($id = false) {
-		$this->_resize($id, Configure::read('PreviewSize'), 'fill');
+		$this->_resize($id, Configure::read('PreviewSize'), 'fit');
 	}
 
 	function profile($id = false){
