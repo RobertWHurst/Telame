@@ -8,7 +8,9 @@ Configure::write('BlacklistUsernames', array(
 	'Tom Zalgo Aldis',
 ));
 
-// Specify custome config information here
+Configure::write('PageLimit', 25);
+
+// Specify custom config information here
 Configure::write('SiteName', 'Telame');
 Configure::write('StaticDomain', 'http://s.telame.com');
 

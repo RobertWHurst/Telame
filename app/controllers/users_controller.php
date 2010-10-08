@@ -128,7 +128,7 @@ class UsersController extends AppController {
 			// Do the (magical) redirect
 			$this->redirect($params);
 		}
-		
+
 		if(!isset($this->params['query'])){
 			$this->redirect($this->referer());
 		}
@@ -151,7 +151,7 @@ class UsersController extends AppController {
 					'Country'
 				)
 			),
-			'limit' => 2,
+			'limit' => Configure::read('PageLimit'),
 			'order' => array(
 				'User.first_name',
 				'User.last_name',
@@ -159,34 +159,30 @@ class UsersController extends AppController {
 		);
 
 		$results = $this->paginate('User');
-		 
+
 		//make some changes to the data
-		foreach($results as $key => $user){
-		
+		foreach($results as $key => $user) {
 			//set defaults
 			$results[$key]['Friend'] = array(
-				'not_added' => false,
+				'is_friend' => false,
 				'list' => false,
 				'request_sent' => false
 			);
-			
+
 			//caculate if a user is a friend of the current user
-			$results[$key]['Friend']['not_added'] = !$this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
-			
+			$results[$key]['Friend']['is_friend'] = $this->User->GroupsUser->isFriend($this->currentUser['User']['id'], $user['User']['id']);
+
 			//if the user has been added
-			if(!$results[$key]['Friend']['not_added']){
-				
+			if($results[$key]['Friend']['is_friend']) {
 				//findout what list the user is part of
 				$groups = $this->User->GroupsUser->listGroups($this->currentUser['User']['id'], $user['User']['id']);
-				$results[$key]['Friend']['list'] = $this->User->Group->getGroupTitleById($groups['GroupsUser']['id']);
-				
+				$results[$key]['Friend']['list'] = $this->User->Group->getGroupTitleById($groups['GroupsUser']['group_id']);
 			} else {
-			
 				//findout if a friend request has been made
 				$results[$key]['Friend']['request_sent'] = $this->User->GroupsUser->requestSent($this->currentUser['User']['id'], $user['User']['id']);
 			}
-		}		 
-		 
+		}
+
 		//get all the searchable profiles
 		$this->set(array('results' => $results, 'search_query' => $this->params['query']));
 	}
