@@ -1,6 +1,7 @@
 <?php
-class SettingsController extends AppController{
+class SettingsController extends AppController {
 
+	var $components = array('Email');
 	var $helpers = array('Acl');
 	var $uses = array();
 
@@ -92,18 +93,18 @@ class SettingsController extends AppController{
 
 		//if the request is not ajax display the gallery options.
 		if($this->RequestHandler->isAjax()) {
-			
+
 			$this->loadModel('User');
-	
+
 			$data = compact('id', 'top', 'left', 'height', 'width');
-			
+
 			$this->layout = false;
-	
+
 			if(!empty($data)){
-	
+
 				//fix the id
 				echo $data['id'] = (int) str_replace('image-', '', $data['id']);
-	
+
 				//create the serial data
 				$serialData = serialize(array($data['id'] => array(
 					'x' => $data['left'],
@@ -111,25 +112,25 @@ class SettingsController extends AppController{
 					'h' => $data['height'],
 					'w' => $data['width']
 				)));
-	
+
 				$this->User->Profile->save(array(
 					'id' => $this->currentUser['Profile']['id'],
 					'user_id' => $this->currentUser['User']['id'],
 					'gallery_pos_data' => $serialData
 				));
-	
+
 				exit();
 			}
 			else{
 				//$this->render('element/settings/gallery_controls');
 			}
-			
+
 		}
 		else{
-			
+
 			//get the gallery pos data
 			$galleryPosData = unserialize($this->currentUser['Profile']['gallery_pos_data']);
-		
+
 			$this->set(compact('galleryPosData'));
 		}
 	}
@@ -231,10 +232,25 @@ class SettingsController extends AppController{
 			exit;
 		}
 		$this->loadModel('BetaKey');
-		
+
 		$keys = $this->BetaKey->find('all');
 
 		$this->set(compact('keys'));
+	}
+
+	function admin_deletekey($id) {
+		if (empty($id)) {
+			$this->Session->setFlash(__('no_id_specified', true));
+			$this->redirect($this->referer());
+			exit;
+		}
+
+		$this->loadModel('BetaKey');
+		if ($this->BetaKey->delete($id)) {
+			$this->Session->setFlash(__('beta_key_deleted', true));
+		}
+		$this->redirect($this->referer());
+		exit;
 	}
 
 	function admin_generatekeys() {
@@ -246,7 +262,33 @@ class SettingsController extends AppController{
 				$this->BetaKey->save(array('BetaKey' => array('key' => $key)));
 			}
 		}
-		$this->redirect($this->referer());	
+		$this->redirect($this->referer());
+		exit;
+	}
+
+	function admin_inviteemail() {
+		if (empty($this->data)) {
+			$this->Session->setFlash(__('page_error', true));
+			$this->redirect($this->referer());
+		}
+
+		$this->loadModel('BetaKey');
+		$key = $this->BetaKey->useBetaKey($this->data['Email']['address']);
+
+		$emailSettings = Configure::read('EmailInfo');
+
+		$this->Email->from		= $emailSettings['from'];
+		$this->Email->to		= '<' . $this->data['Email']['address'] . '>';
+		$this->Email->subject	= __('site_name', true) . ' invitation.';
+		$this->Email->sendAs	= 'both';
+		$this->Email->template	= 'invite';
+		$this->set('email', $this->data['Email']['address']);
+		$this->set('key', $key);
+		$this->Email->send();
+
+		$this->Session->setFlash(__('beta_key_sent', true));
+		$this->redirect($this->referer());
+		exit;
 	}
 
 }

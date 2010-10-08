@@ -3932,7 +3932,6 @@ exit;
 
 	function DebugMessage($message, $file='', $line='') {
 		$this->debugmessages[] = $message.($file ? ' in file "'.(basename($file) ? basename($file) : $file).'"' : '').($line ? ' on line '.$line : '');
-		debugger::log($this->debugmessages);
 		return true;
 	}
 

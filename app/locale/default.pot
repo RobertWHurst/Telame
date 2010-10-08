@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2010-10-07 07:05-0700\n"
+"POT-Creation-Date: 2010-10-08 08:55-0700\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -111,7 +111,9 @@ msgid "message_thread_deleted"
 msgstr ""
 
 #: /controllers/pages_controller.php:25;32
+#: /controllers/settings_controller.php:282
 #: /controllers/users_controller.php:73;226
+#: /views/elements/email/html/invite.ctp:1;4;6
 #: /views/elements/email/html/password_reset.ctp:1
 #: /views/elements/email/html/signup.ctp:1
 #: /views/layouts/profile.ctp:5;21
@@ -135,40 +137,56 @@ msgstr ""
 msgid "profile_updated"
 msgstr ""
 
-#: /controllers/settings_controller.php:73;75
+#: /controllers/settings_controller.php:74;76
 msgid "profile_settings_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:85
+#: /controllers/settings_controller.php:86
 msgid "account_deleted"
 msgstr ""
 
-#: /controllers/settings_controller.php:169
+#: /controllers/settings_controller.php:170
 msgid "permissions_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:171
+#: /controllers/settings_controller.php:172
 msgid "permissions_not_saved"
 msgstr ""
 
-#: /controllers/settings_controller.php:182
+#: /controllers/settings_controller.php:183
 msgid "group_added"
 msgstr ""
 
-#: /controllers/settings_controller.php:185
+#: /controllers/settings_controller.php:186
 msgid "group_not_added"
 msgstr ""
 
-#: /controllers/settings_controller.php:195
+#: /controllers/settings_controller.php:196
 msgid "group_not_allowed_delete"
 msgstr ""
 
-#: /controllers/settings_controller.php:198
+#: /controllers/settings_controller.php:199
 msgid "group_deleted"
 msgstr ""
 
-#: /controllers/settings_controller.php:201
+#: /controllers/settings_controller.php:202
 msgid "group_not_deleted"
+msgstr ""
+
+#: /controllers/settings_controller.php:243
+msgid "no_id_specified"
+msgstr ""
+
+#: /controllers/settings_controller.php:250
+msgid "beta_key_deleted"
+msgstr ""
+
+#: /controllers/settings_controller.php:271
+msgid "page_error"
+msgstr ""
+
+#: /controllers/settings_controller.php:289
+msgid "beta_key_sent"
 msgstr ""
 
 #: /controllers/users_controller.php:27
@@ -392,6 +410,7 @@ msgstr ""
 #: /views/elements/wall_post_comment.ctp:11
 #: /views/elements/messages/inbox_summary.ctp:32
 #: /views/elements/messages/sent_summary.ctp:31
+#: /views/settings/admin_betakeys.ctp:51
 #: /views/settings/groups.ctp:48
 msgid "delete"
 msgstr ""
@@ -431,6 +450,10 @@ msgid "person_dislikes_this"
 msgid_plural "people_dislike_this"
 msgstr[0] ""
 msgstr[1] ""
+
+#: /views/elements/email/html/invite.ctp:6
+msgid "signup_for_"
+msgstr ""
 
 #: /views/elements/media/upload.ctp:15
 #: /views/media/upload.ctp:20
@@ -683,10 +706,18 @@ msgid "admin_settings"
 msgstr ""
 
 #: /views/settings/admin_betakeys.ctp:33
-msgid "keys_how_many"
+msgid "email_address"
 msgstr ""
 
 #: /views/settings/admin_betakeys.ctp:34
+msgid "send"
+msgstr ""
+
+#: /views/settings/admin_betakeys.ctp:40
+msgid "keys_how_many"
+msgstr ""
+
+#: /views/settings/admin_betakeys.ctp:41
 msgid "keys_generate"
 msgstr ""
 

@@ -27,20 +27,29 @@ $this->set('title_for_layout', __('admin_settings', true));
 <div id="page_body" class="clearfix">
 	<div id="basic">
 		<div id="admin_settings">
-		<div class="options_group clearfix">
-			<h1>Generate New Keys</h1>
-<?php		echo $form->create('BetaKey', array('url' => array('admin' => true, 'controller' => 'settings', 'action' => 'generatekeys')));
-			echo $form->input('howmany', array('label' => __('keys_how_many', true)));
-			echo $form->end(__('keys_generate', true));
+			<div class="options_group clearfix">
+				<h1>Send email invite</h1>
+<?php			echo $form->create('Email', array('url' => array('admin' => true, 'controller' => 'settings', 'action' => 'inviteemail')));
+				echo $form->input('address', array('label' => __('email_address', true)));
+				echo $form->end(__('send', true));
 ?>
-		</div>
+			</div>
+			<div class="options_group clearfix">
+				<h1>Generate New Keys</h1>
+<?php			echo $form->create('BetaKey', array('url' => array('admin' => true, 'controller' => 'settings', 'action' => 'generatekeys')));
+				echo $form->input('howmany', array('label' => __('keys_how_many', true)));
+				echo $form->end(__('keys_generate', true));
+?>
+			</div>
 			<div class="options_group clearfix">
 				<h1>Beta Keys</h1>
+				<p><?php echo count($keys); ?> available for use</p>
 				<table>
 <?php foreach($keys as $key): ?>
 					<tr>
 						<td class="field"><?php echo $key['BetaKey']['key']; ?></td>
 						<td class="field"><?php echo $key['BetaKey']['email']; ?></td>
+						<td class="field"><?php echo $html->link(__('delete', true), '/admin/bkdelete/' . $key['BetaKey']['id']); ?></td>
 					</tr>
 <?php endforeach; ?>
 				</table>
