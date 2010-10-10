@@ -1,9 +1,13 @@
 #Signup{
-	background: url(../../img/modal.png) no-repeat;
+	background: url(../../img/basic_grad.png) top center no-repeat #333;
 	width: 440px;
 	padding: 20px;
 	margin: auto;
-	border-bottom: 1px solid #000;
+	border: 1px solid #787878;
+		
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
 }
 #Signup h1.heading{
 	text-align: center;
@@ -32,7 +36,7 @@
 	font-weight: bold;
 	-moz-border-radius: 2px;
 	padding: 6px;
-	margin: 40px 0;
+	margin: 10px 0;
 }
 #Signup input:hover[type="text"],
 #Signup input:hover[type="password"],
