@@ -49,6 +49,7 @@
 			<?php echo $this->element('sql_dump'); ?>
 		</div>
 	<?php endif; ?>
+	<?php echo $this->element('analytics'); ?>
 	<div id="modal_screen"></div>
 </body>
 </html>

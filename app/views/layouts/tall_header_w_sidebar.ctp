@@ -45,13 +45,7 @@
 			<?php echo $this->element('sql_dump'); ?>
 		</div>
 	<?php endif; ?>
-	<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
-	<script type="text/javascript">
-		try{
-			reinvigorate.track("h8664-j06plyeuf7");
-		}
-		catch(err){}
-	</script>
+	<?php echo $this->element('analytics'); ?>
 	<div id="modal_screen"></div>
 </body>
 </html>

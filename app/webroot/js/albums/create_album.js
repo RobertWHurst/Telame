@@ -172,7 +172,7 @@ $(function(){
 
 				//turn the input into a posting dialog
 				inner.children().hide();
-				inner.append('<p class="proccess">Adding New Album...</p>');
+				inner.append('<p class="process">Adding New Album...</p>');
 
 			});
 		};

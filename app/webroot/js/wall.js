@@ -304,11 +304,11 @@ $(function(){
 					
 				//turn the input into a posting dialog
 				inputWrapper.children().hide();
-				inputWrapper.append('<p class="proccess">Posting...</p>');
+				inputWrapper.append('<p class="process">Posting...</p>');
 				
 				$.post(core.domain + ajaxUrl, formData, function(data){
 				
-					flash.setMessage('info', 'Your comment was posted.');
+					flash.setMessage('info new_post', 'Your comment was posted.');
 					
 					if(data !== 'false'){
 					
@@ -340,7 +340,7 @@ $(function(){
 					}
 						
 					//remove the progress dialog and show the input box again
-					inputWrapper.children('p.proccess').remove();
+					inputWrapper.children('p.process').remove();
 					inputWrapper.children().show();
 					
 				});
@@ -393,8 +393,8 @@ $(function(){
 				//hide the content
 				domElement.hide();
 				
-				//add a proccess dialog
-				domElement.parent().append('<p class="proccess">Loading more posts...<p>');
+				//add a process dialog
+				domElement.parent().append('<p class="process">Loading more posts...<p>');
 				
 				//send the ajax request
 				$.post(core.domain + ajaxUrl, function(data){
@@ -429,16 +429,16 @@ $(function(){
 						//remove the animation blocker class and animate in the new posts
 						$('div.wall_post_wrap').removeClass('na').slideDown(600);
 						
-						//remove the proccess dialogue
-						domElement.siblings('p.proccess').remove();
+						//remove the process dialogue
+						domElement.siblings('p.process').remove();
 						
 						//show the button again
 						domElement.show();
 					}
 					else{		
 						
-						//remove the proccess dialogue
-						domElement.siblings('p.proccess').remove();
+						//remove the process dialogue
+						domElement.siblings('p.process').remove();
 						
 						//show the button again
 						domElement.show();

@@ -25,7 +25,7 @@ class WallPostsController extends AppController {
 	function add($reply_id = false) {
 		$isAjax = $this->RequestHandler->isAjax();
 
-		//make sure there is form data to proccess, if not there is not use in continuing
+		//make sure there is form data to process, if not there is not use in continuing
 		if(empty($this->data)) {
 			if ($isAjax) {
 				echo 'false';

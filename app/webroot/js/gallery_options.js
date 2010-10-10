@@ -291,7 +291,7 @@ $(function(){
 				root.slider.mousedown(function(event){
 					event.preventDefault();
 					root.slideHandle.addClass('active');
-					loop.newProccess('slide_handle_drag', dragSliderHandle, 1);
+					loop.newProcess('slide_handle_drag', dragSliderHandle, 1);
 				});
 				
 				//when stating a drag
@@ -307,12 +307,12 @@ $(function(){
 					clickPositionDragX = event.pageX - dragOffsetX;
       				clickPositionDragY = event.pageY - dragOffsetY;
       				
-					loop.newProccess('image_handle_drag', dragImageHandle, 1);
+					loop.newProcess('image_handle_drag', dragImageHandle, 1);
 				});
 				$(window).mouseup(function(){
 				
-					loop.killProccess('image_handle_drag');
-					loop.killProccess('slide_handle_drag');
+					loop.killProcess('image_handle_drag');
+					loop.killProcess('slide_handle_drag');
 					
 					root.dragHandle.removeClass('active');
 					root.slideHandle.removeClass('active');

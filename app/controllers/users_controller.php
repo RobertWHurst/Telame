@@ -24,7 +24,7 @@ class UsersController extends AppController {
 				$hash = $this->data['User']['hash'];
 			}
 			if ($this->User->confirm($email, $hash)) {
-				$this->Session->setFlash(__('email_confirmed', true), 'default', array('class' => 'info'));
+				$this->Session->setFlash(__('email_confirmed', true), 'default', array('class' => 'info new_user'));
 				$this->redirect('/login');
 			} else {
 				$this->Session->setFlash(__('email_or_hash_failed', true), 'default', array('class' => 'error'));

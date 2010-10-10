@@ -131,13 +131,13 @@ $(function(){
 					
 				//turn the input into a posting dialog
 				inner.children().hide();
-				inner.append('<p class="proccess">Posting...</p>');
+				inner.append('<p class="process">Posting...</p>');
 				
 				$.post(core.domain + ajaxUrl, formData, function(data){
 					
 					if(data !== 'false'){
 					
-						flash.setMessage('info', 'Your wall post was posted.');
+						flash.setMessage('info new_post', 'Your wall post was posted.');
 						
 						//convert the data into a jquery object
 						var data = $(data);
@@ -170,7 +170,7 @@ $(function(){
 					}
 						
 					//remove the progress dialog and show the input box again
-					inner.children('p.proccess').remove();
+					inner.children('p.process').remove();
 					inner.children().show();
 					
 				});

@@ -35,7 +35,7 @@ $(function($){
 			//parse agruments
 			var options = core.parseAguments(defaults, agruments);
 
-			//start a proccess to fit the screen to the document
+			//start a process to fit the screen to the document
 			var fitProc = function(){
 
 				var documentElement = $(document);
@@ -44,7 +44,7 @@ $(function($){
 				s.modalScreen.width(documentElement.width());
 
 			};
-			loop.newProccess('modaleScreenPos', fitProc, 1);
+			loop.newProcess('modaleScreenPos', fitProc, 1);
 
 			//show modal screen
 			switch(options.animation){
@@ -82,8 +82,8 @@ $(function($){
 
 				}
 
-				//end the positioning proccess
-				loop.killProccess('modaleScreenPos');
+				//end the positioning process
+				loop.killProcess('modaleScreenPos');
 
 				//execute the callback
 				callback(event);
@@ -174,24 +174,24 @@ $(function($){
 		//LOOP
 		'loop': function(){
 			
-			//proccess Array
+			//process Array
 			this.stack = {};
 			
 			//save this
 			_loop = this;
 			
-			//add a new proccess
-			this.newProccess = function(key, callback, interval){
+			//add a new process
+			this.newProcess = function(key, callback, interval){
 				//make sure that the callback is real and the interval is numeric
 				if($.isFunction(callback) === false || typeof interval !== 'number'){
 					return false;
 				}
 				
-				//add the proccess to the loop stack			
+				//add the process to the loop stack			
 				_loop.stack[key] = {'callback': callback, 'interval': interval, 'i': 0};
 			}
 			
-			this.killProccess = function(key){
+			this.killProcess = function(key){
 				delete _loop.stack[key];
 			}
 			
@@ -209,21 +209,21 @@ $(function($){
 					for(stackKey in _loop.stack){
 						
 						//take the process out of the stack
-						var proccess = _loop.stack[stackKey];
+						var process = _loop.stack[stackKey];
 						
-						if(proccess.i === 0){
-							//if the proccess internal iderator is at zero run the proccess
+						if(process.i === 0){
+							//if the process internal iderator is at zero run the process
 							//and reset the internal iderator back to the use set interval
-							proccess.callback();
-							proccess.i = proccess.interval;
+							process.callback();
+							process.i = process.interval;
 						}
 						else{
 							//remove one from the internal iderator
-							proccess.i -= 1;
+							process.i -= 1;
 						}
 						
 						//put the process back in the stack
-						_loop.stack[stackKey] = proccess;
+						_loop.stack[stackKey] = process;
 						
 					}
 				}

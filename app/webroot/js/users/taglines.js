@@ -48,5 +48,5 @@ $(function($){
 	}
 	
 	//add the tagline animation to the loop
-	loop.newProccess('taglines', taglines, 400);
+	loop.newProcess('taglines', taglines, 400);
 });

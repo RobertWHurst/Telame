@@ -33,12 +33,6 @@
 	<div id="wrap_content">
 		<?php echo $content_for_layout; ?>
 	</div>
-	<script type="text/javascript" src="http://include.reinvigorate.net/re_.js"></script>
-	<script type="text/javascript">
-		try{
-			reinvigorate.track("h8664-j06plyeuf7");
-		}
-		catch(err){}
-	</script>
+	<?php echo $this->element('analytics'); ?>
 </body>
 </html>
