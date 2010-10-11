@@ -34,7 +34,6 @@ $this->Paginator->options(array(
 		<?php echo $this->element('paginator'); ?>
 	</div>
 	<div id="search_results">
-		<?php krumo($friends); ?>
 <?php
 		foreach($friends as $friend) {
 
