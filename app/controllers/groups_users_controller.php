@@ -61,7 +61,7 @@ class GroupsUsersController extends AppController {
 
 	function friendList() {
 		//set the layout
-		$this->layout = 'profile';
+		$this->layout = 'tall_header_w_sidebar';
 		$user = $this->Profile->getProfile($this->params['slug']);
 
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'friends')) {

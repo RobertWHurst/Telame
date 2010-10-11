@@ -2,20 +2,16 @@
 //INCLUDES
 $html->css(array(
 	'base',
-	'gallery',
-	'summary',
 	'tall_header',
 	'main_sidebar',
-	'users/wall',
-	'users/wall_sidebar'
+	'wall_posts',
+	'user_list',
+	'users/search'
 ), null, array('inline' => false));
 $js = array(
 	'jquery',
 	'base',
-	'profile',
-	'main_sidebar',
-	'users/wall_input',
-	'users/wall'
+	'main_sidebar'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
@@ -29,15 +25,61 @@ $this->Paginator->options(array(
 		'slug' => $this->params['slug'],
 	)
 ));
-
-echo $this->Paginator->numbers();
-echo '<br />';
-echo $this->Paginator->counter();
-
-pr($friends);
-
-foreach($friends as $friend) {
-//	echo $friend['Friend']['Profile']['full_name'];
-}
-
 ?>
+<div id="page_head">
+	<h1 class="page_title"><?php echo __('friend_list_title', true); ?></h1>
+</div>
+<div id="page_body" class="clearfix">
+	<div class="page_controls clearfix">
+		<?php echo $this->element('paginator'); ?>
+	</div>
+	<div id="search_results">
+		<?php krumo($friends); ?>
+<?php
+		foreach($friends as $friend) {
+
+			//generate the url array to the user
+			$url = array('controller' => 'users', 'action' => 'profile', $friend['Friend']['slug']);
+?>
+			<div class="user clearfix">
+				<div class="avatar">
+<?php				$image_url = array('controller' => 'media', 'action' => 'avatar', $friend['Friend']['avatar_id']);
+					echo $html->image($image_url, array_merge(array('url' => $url), Configure::read('AvatarSize')));
+?>
+				</div>
+				<div class="controls">
+					[controls]
+				</div>
+				<div class="name"><?php echo $html->link($friend['Friend']['full_name'], $url); ?></div>
+
+				<div class="summary">
+					<?php if(!is_null($friend['Friend']['Profile']['sex'])): ?>
+						<div class="item sex">
+							<p><?php __('sex'); ?>: <?php echo __($friend['Friend']['Profile']['sex'], true); ?></p>
+						</div>
+					<?php endif; ?>
+
+					<?php if(!is_null($friend['Friend']['Profile']['city'])): ?>
+					<div class="item city">
+						<p><?php __('lives_in'); ?>: <?php echo $friend['Friend']['Profile']['city']; ?></p>
+					</div>
+					<?php endif; ?>
+
+					<?php if(!is_null($friend['Friend']['Profile']['dob'])): ?>
+					<div class="item dob">
+						<p><?php __('dob'); ?>:
+<?php						$dob = strtotime($friend['Friend']['Profile']['dob']);
+							echo date('M j, Y', $dob);
+?>
+						</p>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		<?php } ?>
+	</div>
+
+	<div class="page_controls clearfix">
+		<?php echo $this->element('paginator'); ?>
+	</div>
+</div>
