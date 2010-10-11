@@ -1,8 +1,10 @@
 <div id="profile_summary">
-	<div class="controls">
-		<?php if(isset($canRequest) && $canRequest) { ?>
-			<p><?php echo $html->link('Add ' . $user['User']['full_name'] . ' as friend', '/f/a/' . $user['User']['id']); ?></p>
-		<?php } ?>
+	<div id="profile_controls">
+		<div class="add_friend button">
+			<?php if(isset($canRequest) && $canRequest) { ?>
+				<?php echo $html->link(__('send_friend_request', true), array('controller' => 'groups_users', 'action' => 'addFriend') . $user['User']['id']); ?>
+			<?php } ?>
+		</div>
 	</div>
 	<h1 class="name">
 		<?php echo $user['User']['full_name']; ?>
