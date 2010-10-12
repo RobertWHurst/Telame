@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	private $components = array('RequestHandler');
+	public $components = array('RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	function beforeFilter() {

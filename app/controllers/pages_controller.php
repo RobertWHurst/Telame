@@ -1,6 +1,6 @@
 <?php
 class PagesController extends AppController {
-	private $uses = array();
+	public $uses = array();
 	public $helpers = array('Text', 'Time', 'Markdown');
 
 	public function beforeFilter() {

@@ -1,7 +1,7 @@
 <?php
 class AlbumsController extends AppController {
 
-	private $components = array('Profile');
+	public $components = array('Profile');
 	public $helpers = array('Markdown', 'Time');
 
 	public function beforeFilter() {

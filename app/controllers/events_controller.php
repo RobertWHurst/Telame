@@ -1,7 +1,7 @@
 <?php
 class EventsController extends AppController {
 
-	private $components = array('Profile');
+	public $components = array('Profile');
 
 	public function add($allday=null, $day=null, $month=null, $year=null, $hour=null, $min=null) {
 		if (empty($this->data)) {
@@ -12,7 +12,7 @@ class EventsController extends AppController {
 			}
 
 			//Create a time string to display in view. The time string
-			//is either	 'Fri 26 / Mar, 09 : 00 ‰ÛÓ 10 : 00' or
+			//is either	 'Fri 26 / Mar, 09 : 00 ï¿½ï¿½ï¿½ 10 : 00' or
 			//'All day event: (Fri 26 / Mar)'
 			if ($allday == 'true') {
 				$event['Event']['allday'] = 1;

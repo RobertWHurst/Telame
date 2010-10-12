@@ -1,7 +1,7 @@
 <?php
 class GroupsUsersController extends AppController {
 
-	private $components = array('Profile');
+	public $components = array('Profile');
 
 	/**
 	 * \brief addFriend optionally takes a user id and adds them to your friends list.
