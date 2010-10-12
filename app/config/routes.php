@@ -109,6 +109,7 @@
 	Router::connect('/:slug/media/delete/*', array('controller' => 'media', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
 
 	// Messaging
+	Router::connect('/:slug/messages/ac/*', array('controller' => 'messages', 'action' => 'autocomplete'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/thread/*', array('controller' => 'messages', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/sent', array('controller' => 'messages', 'action' => 'sent'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/compose', array('controller' => 'messages', 'action' => 'compose'), array('routeClass' => 'SlugRoute'));

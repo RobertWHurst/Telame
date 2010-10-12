@@ -2,89 +2,162 @@
 class MessagesController extends AppController {
 
 	public $helpers = array('Markdown', 'Time');
-	
+
+
 	public function beforeFilter(){
 		parent::beforeFilter();
-		    	
+
 		//set the layout
 		$this->layout = 'tall_header_w_sidebar';
 	}
-	
-	//THE INBOX
-	public function inbox(){
-		
-		//get the inbox from the db
-		$messages = $this->Message->getReceived($this->currentUser['User']['id']);
-		
-		$this->set(compact('messages'));
-	}
-	
-	//THE VIEWER
-	public function view($id = null){
-		
-		//get the inbox from the db
-		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
-		
-		//mark the messages as read
-    	$this->Message->updateAll(
-    		array(
-    			'Message.read' => '\'' . date("Y-m-d H:i:s") . '\''
-    		),
-    		array(
-    			'OR' => array(
-    				'Message.id' => $id,
-    				'Message.parent_id' => $id
-    			),
-    			'Message.read' => null,
-    			'Message.user_id' => $this->currentUser['User']['id']
-    		)
-    	);
-			
-		$this->Message->updateCount($this->currentUser['User']['id']);
-		if(!$messages){
-			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
-			exit;
+
+	public function autocomplete($string) {
+		$users = $this->Message->User->search($string, $this->currentUser['User']['id'], true);
+
+		//Create the json array
+		$rows = array();
+		foreach($users as $key => $val) {
+			//Create an event entry
+			$rows[] = array(
+				'id' => $users[$key]['User']['id'],
+				'full_name' => $users[$key]['User']['full_name'],
+				'slug' => $users[$key]['User']['slug'],
+			);
 		}
-			
-		
-		$this->set(compact('messages'));
+
+		// Return as a json array
+		Configure::write('debug', 0);
+		$this->autoRender = false;
+		$this->autoLayout = false;
+		$this->header('Content-Type: application/json');
+		echo json_encode($rows);
 	}
-	
-	//THE SENT MESSAGES
-	public function sent(){
-		
-		//get the inbox from the db
-		$messages = $this->Message->getSent($this->currentUser['User']['id']);
-		
-		$this->set(compact('messages'));
-	}
-	
+
+
 	//THE COMPOSER
 	public function compose($slug = false){
 		$uid = array();
-		
+
 		//get the target user id if there is one
 		if($slug){
 			//if an array of slugs are given
 			if(is_array($slug)){
-				foreach($slug as $_slug)					
+				foreach($slug as $_slug)
 					$uids[] = $this->User->getIdFromSlug($_slug);
 			}
 			else
 				$uids[] = $this->User->getIdFromSlug($slug);
 		}
-		
+
 	}
-	
+
+	//DELETE A MESSAGE (donest actually delete anything, just hides it. intill the other owner deletes it to)(only accepts threads)
+	public function delete_message($mid) {
+		$isAjax = $this->RequestHandler->isAjax();
+
+		$uid = $this->currentUser['User']['id'];
+
+		//findout how the current user is assocsiated with the message
+		$userIs = $this->Message->userIs($mid, $uid);
+
+		//get the parent message id so we can take out all messages at once
+		$mpid = $this->Message->getParent($mid);
+
+		if($userIs == 'user') {
+		//mark the messages as deleted
+			$this->Message->updateAll(
+				array(
+					'Message.deleted_by_user' => 'true'
+				),
+				array(
+					'OR' => array(
+						'Message.id' => $mpid,
+						'Message.parent_id' => $mpid
+					),
+					'Message.user_id' => $uid
+				)
+			);
+
+			//delete message thread that have been deleted by both the user and the author
+			$this->Message->deleteAll(array(
+				'OR' => array(
+					'Message.user_id' => $this->currentUser['User']['id'],
+					'Message.author_id' => $this->currentUser['User']['id']
+				),
+				'Message.parent_id' => -1,
+				'Message.deleted_by_user' => true,
+				'Message.deleted_by_author' => true
+			));
+
+			if($isAjax) {
+				echo 'true';
+				exit;
+			}
+			else
+				$this->Session->setFlash(__('message_thread_deleted', true), 'default', array('class' => 'info'));
+		}
+		elseif($userIs == 'author') {
+			$this->Message->updateAll(
+				array(
+					'Message.deleted_by_author' => 'true'
+				),
+				array(
+					'OR' => array(
+						'AND' => array(
+							'Message.id' => $mpid,
+							'Message.parent_id' =>  -1
+						),
+						'Message.parent_id' => $mpid
+					),
+					'Message.author_id' => $uid
+				)
+			);
+
+			//delete message thread that have been deleted by both the user and the author
+			$this->Message->deleteAll(array(
+				'OR' => array(
+					'Message.user_id' => $this->currentUser['User']['id'],
+					'Message.author_id' => $this->currentUser['User']['id']
+				),
+				'Message.parent_id' => -1,
+				'Message.deleted_by_user' => true,
+				'Message.deleted_by_author' => true
+			));
+
+			if($isAjax){
+				echo 'true';
+				exit;
+			}
+			else
+				$this->Session->setFlash(__('message_thread_deleted', true), 'default', array('class' => 'info'));
+		}
+
+		if($isAjax){
+			echo 'false';
+		}
+		else
+			$this->redirect($this->referer());
+		exit;
+	}
+
+	//THE INBOX
+	public function inbox() {
+
+		//get the inbox from the db
+		$messages = $this->Message->getReceived($this->currentUser['User']['id']);
+
+		$this->set(compact('messages'));
+	}
+
 	//SEND A MESSAGE
 	public function send_message(){
-	
+
 		//if there is no data then redirect
 		if(empty($this->data)) {
 			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
 			exit;
 		}
-		
+
 		//save the user id and poster id
 		$this->Message->set('user_id', $this->data['Message']['user_id']);
 		$this->Message->set('author_id', $this->data['Message']['author_id']);
@@ -100,97 +173,47 @@ class MessagesController extends AppController {
 
 		//commit the data to the db
 		$this->Message->save();
-		
+
 		$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
 	}
-	
-	//DELETE A MESSAGE (donest actually delete anything, just hides it. intill the other owner deletes it to)(only accepts threads)
-	public function delete_message($mid){
-	
-		$isAjax = $this->RequestHandler->isAjax();
-		
-		$uid = $this->currentUser['User']['id'];
-		
-		//findout how the current user is assocsiated with the message
-		$userIs = $this->Message->userIs($mid, $uid);
-		
-		//get the parent message id so we can take out all messages at once
-		$mpid = $this->Message->getParent($mid);
-				
-		if($userIs == 'user'){
-		//mark the messages as deleted
-    		$this->Message->updateAll(
-    			array(
-    				'Message.deleted_by_user' => 'true'
-    			),
-    			array(
-    				'OR' => array(
-    					'Message.id' => $mpid,
-    					'Message.parent_id' => $mpid
-    				),
-    				'Message.user_id' => $uid
-    			)
-    		);    		
-    		
-			//delete message thread that have been deleted by both the user and the author
-    		$this->Message->deleteAll(array(
-    			'OR' => array(
-    				'Message.user_id' => $this->currentUser['User']['id'],
-    				'Message.author_id' => $this->currentUser['User']['id']
-    			),
-    			'Message.parent_id' => -1,
-    			'Message.deleted_by_user' => true,
-    			'Message.deleted_by_author' => true
-    		));
-    		
-    		if($isAjax){
-    			echo 'true';
-    			exit;
-    		}
-    		else
-    			$this->Session->setFlash(__('message_thread_deleted', true), 'default', array('class' => 'info'));
-    	}
-    	elseif($userIs == 'author'){
-    		$this->Message->updateAll(
-    			array(
-    				'Message.deleted_by_author' => 'true'
-    			),
-    			array(
-    				'OR' => array(
-    					'AND' => array(
-    						'Message.id' => $mpid,
-    						'Message.parent_id' =>  -1				
-    					),
-    					'Message.parent_id' => $mpid
-    				),
-    				'Message.author_id' => $uid
-    			)
-    		);
-    		
-			//delete message thread that have been deleted by both the user and the author
-    		$this->Message->deleteAll(array(
-    			'OR' => array(
-    				'Message.user_id' => $this->currentUser['User']['id'],
-    				'Message.author_id' => $this->currentUser['User']['id']
-    			),
-    			'Message.parent_id' => -1,
-    			'Message.deleted_by_user' => true,
-    			'Message.deleted_by_author' => true
-    		));
-    		
-    		if($isAjax){
-    			echo 'true';
-    			exit;
-    		}
-    		else    		
-    			$this->Session->setFlash(__('message_thread_deleted', true), 'default', array('class' => 'info'));
-    	}
-    	
-    	if($isAjax){
-    		echo 'false';
-    	}
-    	else
-    		$this->redirect($this->referer());
-    	exit;
+
+	//THE SENT MESSAGES
+	public function sent(){
+
+		//get the inbox from the db
+		$messages = $this->Message->getSent($this->currentUser['User']['id']);
+
+		$this->set(compact('messages'));
+	}
+
+	//THE VIEWER
+	public function view($id = null){
+
+		//get the inbox from the db
+		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
+
+		//mark the messages as read
+		$this->Message->updateAll(
+			array(
+				'Message.read' => '\'' . date("Y-m-d H:i:s") . '\''
+			),
+			array(
+				'OR' => array(
+					'Message.id' => $id,
+					'Message.parent_id' => $id
+				),
+				'Message.read' => null,
+				'Message.user_id' => $this->currentUser['User']['id']
+			)
+		);
+
+		$this->Message->updateCount($this->currentUser['User']['id']);
+		if(!$messages){
+			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
+			exit;
+		}
+
+
+		$this->set(compact('messages'));
 	}
 }
