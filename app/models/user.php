@@ -3,18 +3,18 @@ App::import('Sanitize');
 class User extends AppModel {
 
 	// Connect to the ACL table
-	var $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'Media' => array(
 			'ClassName' => 'Media',
 			'foreignKey' => 'avatar_id',
 		),
 	);
 
-	var $hasAndBelongsToMany = array('Group');
+	public $hasAndBelongsToMany = array('Group');
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'Album' => array(
 			'dependent'=> true,
 		),
@@ -44,13 +44,13 @@ class User extends AppModel {
 		)
 	);
 
-	var $hasOne = array(
+	public $hasOne = array(
 		'Profile' => array(
 			'dependent' => true,
 		),
 	);
 
-	var $validate = array(
+	public $validate = array(
 		'beta_key' => array(
 			'usedKey' => array(
 				'rule' => 'checkBetaKeyUsed',
@@ -118,7 +118,7 @@ class User extends AppModel {
 		),
 	);
 
-	function __construct($id = false, $table = null, $ds = null) {
+	public function __construct($id = false, $table = null, $ds = null) {
 		parent::__construct($id, $table, $ds);
 		$this->virtualFields['full_name'] = sprintf('initcap(%s.first_name) || \' \' || initcap(%s.last_name)', $this->alias, $this->alias);
 	}
@@ -126,7 +126,7 @@ class User extends AppModel {
 
 // -------------------- Callback functions
 
-	function beforeFind($queryData) {
+	public function beforeFind($queryData) {
 		if (isset($queryData['conditions']['User.email'])) {
 			$queryData['conditions']['User.email'] = strtolower($queryData['conditions']['User.email']);
 		}
@@ -135,31 +135,31 @@ class User extends AppModel {
 
 // -------------------- Callback functions used by the validator
 
-	function checkBetaKey($key) {
+	public function checkBetaKey($key) {
 			App::Import('Model', 'BetaKey');
 			$this->BetaKey = new BetaKey;
 			// find the key they've given
 			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'])));
 	}
 
-	function checkBetaKeyUsed($key) {
+	public function checkBetaKeyUsed($key) {
 			App::Import('Model', 'BetaKey');
 			$this->BetaKey = new BetaKey;
 			// find the key they've given
 			return $this->BetaKey->find('first', array('conditions' => array('key' => $this->data['User']['beta_key'], 'email' => $this->data['User']['email'])));
 	}
 
-	function checkBlacklist($slug, $email) {
+	public function checkBlacklist($slug, $email) {
 		//$slug will have value: array('slug' => 'username')
 		return !in_array($slug['slug'], Configure::read('BlacklistUsernames'));
 	}
 
-	function checkUnique($array, $value) {
+	public function checkUnique($array, $value) {
 		$what = strtolower($value);
 		return !$this->find('first', array('conditions' => array('lower(User.' . $what . ')' => strtolower($array[$what]))));
 	}
 
-	function identicalFieldValues($field=array(), $compare_field=null) {
+	public function identicalFieldValues($field=array(), $compare_field=null) {
 		foreach( $field as $key => $value){
 			$v1 = $value;
 			$v2 = $this->data[$this->name][$compare_field];
@@ -172,13 +172,13 @@ class User extends AppModel {
 		return true;
 	}
 // -------------------- ACL functions
-	function parentNode() {
+	public function parentNode() {
 		return null;
 	}
 
 // --------------------- Custom functions
 
-	function confirm($email, $hash) {
+	public function confirm($email, $hash) {
 		$user = $this->find('first', array('conditions' => array('email' => $email, 'hash' => $hash)));
 		if (!$user) {
 			return false;
@@ -194,7 +194,7 @@ class User extends AppModel {
 // files
 // groups
 
-	function deleteAccount($uid) {
+	public function deleteAccount($uid) {
 		$uid = intval($uid);
 		$this->id = $uid;
 		$this->recursive = -1;
@@ -208,19 +208,19 @@ class User extends AppModel {
 		$this->delete($uid, true);
 	}
 
-	function getIdFromSlug($slug) {
+	public function getIdFromSlug($slug) {
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))), 'fields' => 'id'));
 		return $user['User']['id'];
 	}
 
-	function getSlugFromId($uid) {
+	public function getSlugFromId($uid) {
 		$this->recursive = -1;
 		$user = $this->find('first', array('conditions' => array('id' => Sanitize::clean(intval($uid))), 'fields' => 'slug'));
 		return $user['User']['slug'];
 	}
 
-	function getProfile($slug, $arguments = array()) {
+	public function getProfile($slug, $arguments = array()) {
 
 /*	FIXME bug in parseargs
 		$defaults = array(
@@ -257,7 +257,7 @@ pr($options);
 		return $user;
 	}
 
-	function signup($data) {
+	public function signup($data) {
 		$error = array();
 		// create a new user
 		$this->create();
@@ -314,7 +314,7 @@ pr($options);
 	}
 
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
-	function makeUserDir($id) {
+	public function makeUserDir($id) {
 		$baseDir = USER_DIR;
 		$home = rand(0, 31500);
 		$sub = rand(0, 31500);
@@ -328,7 +328,7 @@ pr($options);
 	}
 
 
- 	function removeUserDir($dir){
+ 	public function removeUserDir($dir){
 		if(is_file($dir)) {
 			return @unlink($dir);
 		} elseif(is_dir($dir)) {
@@ -340,7 +340,7 @@ pr($options);
 		}
 	}
 
-	function search($search, $uid = null, $isFriend = false) {
+	public function search($search, $uid = null, $isFriend = false) {
 		// Clean the params, just to be safe
 		$search = Sanitize::clean($search);
 		$this->User->recursive = -1;

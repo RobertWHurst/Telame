@@ -1,6 +1,6 @@
 <?php
 class WallPost extends AppModel {
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id'
@@ -10,7 +10,7 @@ class WallPost extends AppModel {
 			'foreignKey' => 'author_id'
 		)
 	);
-	var $hasMany = array(
+	public $hasMany = array(
 		'Replies' => array(
 			'className' => 'WallPost',
 			'foreignKey' => 'reply_parent_id',
@@ -19,7 +19,7 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
-	function add($data, $args = false) {
+	public function add($data, $args = false) {
 		$defaults = array(
 			'type' => 'post',
 			'class' => 'wall_post'
@@ -38,7 +38,7 @@ class WallPost extends AppModel {
 	}
 
 	//TODO: needs containable.
-	function getWallPosts($arguments = false) {
+	public function getWallPosts($arguments = false) {
 
 		//set the default options
 		$defaults = array(
@@ -156,7 +156,7 @@ class WallPost extends AppModel {
 		return $wallPosts;
 	}
 
-	function remove($id) {
+	public function remove($id) {
 		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
 		$this->delete($id);
 	}

@@ -1,18 +1,18 @@
 <?php
 class Album extends AppModel {
-	var $name = 'Album';
-	var $belongsTo = array(
+	public $name = 'Album';
+	public $belongsTo = array(
 		'Cover' => array(
 			'className' => 'Media',
 			'foreignKey' => 'cover_id',
 		),
 		'User'
 	);
-	var $hasMany = array('Media');
+	public $hasMany = array('Media');
 
 // -------------------- Custom functions
 
-	function getAlbums($uid) {
+	public function getAlbums($uid) {
 		$this->recursive = 0;
 		return $this->find('all', array(
 			'conditions' => array(
@@ -22,7 +22,7 @@ class Album extends AppModel {
 		));
 	}
 
-	function getAlbumList($uid) {
+	public function getAlbumList($uid) {
 		$this->recursive = -1;
 		return $this->find('list', array(
 			'conditions' => array(
@@ -32,27 +32,27 @@ class Album extends AppModel {
 		));
 	}
 
-	function getAlbumId($uid, $slug) {
+	public function getAlbumId($uid, $slug) {
 		$album = $this->find('first', array('conditions' => array('Album.user_id' => Sanitize::clean(intval($uid)), 'Album.slug' => Sanitize::clean($slug)), 'fields' => 'Album.id'));
 		return $album['Album']['id'];
 	}
 
-	function getAlbumInfo($aid) {
+	public function getAlbumInfo($aid) {
 		return $this->find('first', array('conditions' => array('Album.id' => Sanitize::clean(intval($aid)))));
 	}
 
-	function getMedia($aid) {
+	public function getMedia($aid) {
 		$this->Media->recursive = -1;
 		return $this->Media->find('all', array('conditions' => array('album_id' => Sanitize::clean(intval($aid)))));
 	}
 
-	function getSlugFromId($aid) {
+	public function getSlugFromId($aid) {
 		$this->recursive = -1;
 		$album = $this->find('first', array('conditions' => array('Album.id' => Sanitize::clean(intval($aid))), 'fields' => array('slug')));
 		return $album['Album']['slug'];
 	}
 
-	function isAlbumOwner($uid, $aid) {
+	public function isAlbumOwner($uid, $aid) {
 		$this->recursive = -1;
 		$album = $this->find('first', array('conditions' => array('Album.user_id' => $uid, 'Album.id' => $aid)));
 		if ($album) {
@@ -63,7 +63,7 @@ class Album extends AppModel {
 	}
 
 	// Takes album_id, and image_id, sets that image to that album's cover
-	function setAlbumCover($aid, $iid, $uid) {
+	public function setAlbumCover($aid, $iid, $uid) {
 		$album = $this->find('first', array('conditions' => array('Album.id' => $aid, 'Album.user_id' => $uid)));
 		if ($album) {
 			$this->id = intval($aid);
