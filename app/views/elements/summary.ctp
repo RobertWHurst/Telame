@@ -2,7 +2,7 @@
 	<div id="profile_controls">
 		<div class="add_friend button">
 			<?php if(isset($canRequest) && $canRequest) { ?>
-				<?php echo $html->link(__('send_friend_request', true), array('controller' => 'groups_users', 'action' => 'addFriend') . $user['User']['id']); ?>
+				<?php echo $html->link(__('send_friend_request', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'addFriend', $user['User']['id'])); ?>
 			<?php } ?>
 		</div>
 	</div>

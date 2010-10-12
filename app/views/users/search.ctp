@@ -54,7 +54,7 @@ $this->set('title_for_layout', __('search', true));
 							if($user['Friend']['request_sent']) {
 								echo '<p>' . __('request_sent', true) . '</p>';
 							} else {
-								echo $html->link(__('add_as_friend', true), array('controller' => 'group_users', 'action' => 'addFriend', $user['User']['id']));
+								echo $html->link(__('add_as_friend', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'addFriend', $user['User']['id']));
 							}
 						} elseif($user['Friend']['list']) {
 							echo '<p title="' . __('added_to_list_', true) . $user['Friend']['list'] . '">' . __('is_friend', true) . '</p>';

@@ -25,7 +25,7 @@ $this->set('title_for_layout', __('add_friend', true));
 <div id="page_body" class="clearfix">
 	<div id="add_friend">
 <?php
-		echo $form->create('GroupsUser', array('url' => array('controller' => 'groups_users', 'action' => 'addFriend', $friend['User']['id'])));
+		echo $form->create('GroupsUser', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'addFriend', $friend['User']['id'])));
 		echo $form->input('group_id', array('options' => $friendLists));
 		echo $form->hidden('friend_id', array('value' => $friend['User']['id']));
 		echo $form->hidden('confirm', array('value' => ($confirm ? true : false)));

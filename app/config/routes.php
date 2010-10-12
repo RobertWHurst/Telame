@@ -74,7 +74,7 @@
 	Router::connect('/:slug/delete/*', array('controller' => 'settings', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
 
 	// Friend - add
-	Router::connect('/f/a/*', array('controller' => 'groups_users', 'action' => 'addFriend'));
+	Router::connect('/:slug/f/a/*', array('controller' => 'groups_users', 'action' => 'addFriend'), array('routeClass' => 'SlugRoute'));
 	// Friend list
 	Router::connect('/:slug/friends/:page/*', array('controller' => 'groups_users', 'action' => 'friendList'), array('routeClass' => 'SlugRoute'));
 	// 'Hack' for pagination.  keeps the links clean; /slug/friends/2

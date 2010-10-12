@@ -54,7 +54,7 @@ class GroupsUsersController extends AppController {
 				));
 				
 			$slug = $this->GroupsUser->User->getSlugFromId($fid);
-			$user = $this->Profile->getProfile($slug);
+			$friend = $this->GroupsUser->User->getProfile($fid);
 			$this->set(compact('confirm', 'cid', 'friend', 'friendLists'));
 		}
 	}
