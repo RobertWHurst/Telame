@@ -1,9 +1,9 @@
 <?php
 class SettingsController extends AppController {
 
-	private $components = array('Email');
+	public $components = array('Email');
 	public $helpers = array('Acl');
-	private $uses = array();
+	public $uses = array();
 
 	function beforeFilter(){
 		parent::beforeFilter();
