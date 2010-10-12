@@ -1,7 +1,7 @@
 <?php
 class MessagesController extends AppController {
 
-	private $helpers = array('Markdown', 'Time');
+	public $helpers = array('Markdown', 'Time');
 	
 	public function beforeFilter(){
 		parent::beforeFilter();

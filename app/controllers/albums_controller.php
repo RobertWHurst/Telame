@@ -2,7 +2,7 @@
 class AlbumsController extends AppController {
 
 	private $components = array('Profile');
-	private $helpers = array('Markdown', 'Time');
+	public $helpers = array('Markdown', 'Time');
 
 	public function beforeFilter() {
 		parent::beforeFilter();

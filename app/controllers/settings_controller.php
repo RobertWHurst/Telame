@@ -2,7 +2,7 @@
 class SettingsController extends AppController {
 
 	private $components = array('Email');
-	private $helpers = array('Acl');
+	public $helpers = array('Acl');
 	private $uses = array();
 
 	function beforeFilter(){

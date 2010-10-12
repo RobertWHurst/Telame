@@ -1,7 +1,7 @@
 <?php
 class PagesController extends AppController {
 	private $uses = array();
-	private $helpers = array('Text', 'Time', 'Markdown');
+	public $helpers = array('Text', 'Time', 'Markdown');
 
 	public function beforeFilter() {
 		parent::beforeFilter();

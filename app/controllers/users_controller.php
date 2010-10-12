@@ -2,7 +2,7 @@
 class UsersController extends AppController {
 
 	private $components = array('Email', 'Profile');
-	private $helpers = array('Markdown', 'Paginator', 'Time');
+	public $helpers = array('Markdown', 'Paginator', 'Time');
 
 	function beforeFilter(){
 		parent::beforeFilter();

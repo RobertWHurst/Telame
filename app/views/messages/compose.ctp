@@ -10,7 +10,8 @@ $html->css(array(
 $js = array(
 	'jquery',
 	'base', 
-	'main_sidebar'
+	'main_sidebar',
+	'messages/compose'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
@@ -26,14 +27,34 @@ $this->set('title_for_layout', __('message_compose', true));
 </div>
 <div id="page_body" class="clearfix">
 	<div id="composer">
+		<div id="create_message_wrap">
+		<div class="create_message">
+	
+			<!-- borders -->
+			<div class="box top"><div class="box top right"></div><div class="box top left"></div></div>
+			<div class="box bottom"><div class="box bottom right"></div><div class="box bottom left"></div></div>
+			<div class="box right"></div><div class="box left"></div>
+			<!-- end of borders -->
+	
+			<div class="box inner">
 <?php
-		echo $form->create('Message', array('url' =>  array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'send_message')));
-		echo $form->hidden('author_id', array('value' => $currentUser['User']['id']));
-		echo $form->hidden('parent_id', array('value' => -1));
-		echo $form->input('user_id', array('type' => 'text', 'label' => 'user_id'));
-		echo $form->input('subject', array('type' => 'text', 'label' => __('message_subject', true)));
-		echo $form->textarea('content');
-		echo $form->end('Post Reply');
+				echo $form->create('Message', array('url' =>  array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'send_message')));
+				
+					//the hidden ids
+					echo $form->hidden('author_id', array('value' => $currentUser['User']['id']));
+					echo $form->hidden('parent_id', array('value' => -1));
 ?>
+					<div class="recipients">
+						<?php echo $form->input('user_slugs', array('type' => 'text', 'label' => __('recipients', true))); ?>
+					</div>
+					<div class="subject">
+						<?php echo $form->input('subject', array('type' => 'text', 'label' => __('message_subject', true))); ?>
+					</div>
+					<div class="descriptTextarea">
+						<?php echo $form->textarea('content'); ?>
+					</div>
+				<?php echo $form->end(__('send_message', true)); ?>
+			</div>
+		</div>
 	</div>
 </div>
