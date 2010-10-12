@@ -342,7 +342,7 @@ pr($options);
 
 	public function search($search, $uid = null, $isFriend = false) {
 		// Clean the params, just to be safe
-		$search = Sanitize::clean($search);
+		$search = Sanitize::clean(str_replace('_', ' ' ,$search));
 		$this->User->recursive = -1;
 
 		$conditions = array('searchable' => true,
