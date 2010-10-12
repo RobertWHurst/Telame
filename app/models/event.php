@@ -1,9 +1,9 @@
 <?php
 class Event extends AppModel {
 
-	var $belongsTo = array('User');
+	public $belongsTo = array('User');
 
-	function add($uid, $data) {
+	public function add($uid, $data) {
 			//Create and save the new event in the table.
 			//Event type is set to editable - because this is a user event.
 			$this->create();
@@ -19,7 +19,7 @@ class Event extends AppModel {
 			}
 	}
 
-	function getEvents($start, $end, $uid) {
+	public function getEvents($start, $end, $uid) {
 		$this->recursive = -1;
 		// Get the events corresponding to the time range
 		$conditions = array(
@@ -46,7 +46,7 @@ class Event extends AppModel {
 		return $events;
 	}
 
-	function isOwner($eid, $uid) {
+	public function isOwner($eid, $uid) {
 		$event = $this->findById($eid);
 		if ($event['Event']['user_id'] == $uid) {
 			return true;
@@ -55,7 +55,7 @@ class Event extends AppModel {
 		}
 	}
 
-	function removeBirthday($uid) {
+	public function removeBirthday($uid) {
 		$this->recursive = -1;
 		$bday = $this->find('first', array(
 			'conditions' => array(

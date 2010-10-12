@@ -2,16 +2,16 @@
 class Group extends AppModel {
 
 	// Connect to the ACL table
-	var $actsAs = array('Acl' => array('type' => 'requester'));
+	public $actsAs = array('Acl' => array('type' => 'requester'));
 
-	var $hasAndBelongsToMany = array('User');
+	public $hasAndBelongsToMany = array('User');
 
 // -------------------- ACL functions
-	function parentNode() {
+	public function parentNode() {
 		return null;
 	}
 
-	function getFriendLists($arguments = false) {
+	public function getFriendLists($arguments = false) {
 		$defaults = array(
 			'uid' => false,
 			'type' => 'all',
@@ -34,7 +34,7 @@ class Group extends AppModel {
 		));
 	}
 	
-	function getGroupTitleById($id){
+	public function getGroupTitleById($id){
 		$results = $this->findById($id);
 		return $results['Group']['title'];
 	}

@@ -1,6 +1,6 @@
 <?php
 class Message extends AppModel {
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -20,7 +20,7 @@ class Message extends AppModel {
 		)
 	);
 
-	var $hasMany = array(
+	public $hasMany = array(
 		'ChildMessage' => array(
 			'className' => 'Message',
 			'foreignKey' => 'parent_id',
@@ -29,7 +29,7 @@ class Message extends AppModel {
 	);
 
 	//NOTE: this is dirty but it works for now...
-	function _remove_duplicate_threads($messages){
+	public function _remove_duplicate_threads($messages){
 
 		foreach($messages as $message){
 			//get the parent id
@@ -46,7 +46,7 @@ class Message extends AppModel {
 		return array_values($_messages);
 	}
 
-	function getMessageThread($uid, $pid){
+	public function getMessageThread($uid, $pid){
 		$pid = Sanitize::clean(intval($pid));
 
 		$this->recursive = 2;
@@ -97,7 +97,7 @@ class Message extends AppModel {
 		return $child_messages;
 	}
 
-	function getReceived($uid){
+	public function getReceived($uid){
 		$uid = Sanitize::clean(intval($uid));
 
 		$this->recursive = 2;
@@ -128,7 +128,7 @@ class Message extends AppModel {
 		return $this->_remove_duplicate_threads($received);
 	}
 
-	function getSent($uid){
+	public function getSent($uid){
 
 		$this->recursive = 2;
 		$this->Behaviors->attach('Containable');
@@ -160,7 +160,7 @@ class Message extends AppModel {
 	}
 
 	//returns the relation of a user id to a given message
-	function userIs($mid, $uid){
+	public function userIs($mid, $uid){
 		$this->recursive = 1;
 		$this->Behaviors->attach('Containable');
 		$message = $this->find('first', array(
@@ -182,7 +182,7 @@ class Message extends AppModel {
 			return false;
 	}
 
-	function getParent($mid){
+	public function getParent($mid){
 		$this->recursive = 1;
 		$this->Behaviors->attach('Containable');
 		$message = $this->find('first', array(
@@ -201,7 +201,7 @@ class Message extends AppModel {
 			return false;
 	}
 
-	function updateCount($uid) {
+	public function updateCount($uid) {
 		$count = $this->find('count', array('conditions' => array('Message.user_id' => $uid, 'Message.read' => null)));
 		$this->User->id = $uid;
 		$this->User->saveField('message_count', $count);

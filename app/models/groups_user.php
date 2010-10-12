@@ -1,7 +1,7 @@
 <?php
 class GroupsUser extends AppModel {
 
-	var $belongsTo = array(
+	public $belongsTo = array(
 		'User',
 		'Friend' => array(
 			'className' => 'User',
@@ -9,7 +9,7 @@ class GroupsUser extends AppModel {
 		)
 	);
 
-	function getFriends($arguments = false){
+	public function getFriends($arguments = false){
 
 		$defaults = array(
 			'friendList' => false,
@@ -54,7 +54,7 @@ class GroupsUser extends AppModel {
 		return $friends;
 	}
 
-	function getBirthdays($uid) {
+	public function getBirthdays($uid) {
 		$friendIds = $this->getFriendIds($uid);
 		return $this->User->Profile->find('all', array(
 			'conditions' => array(
@@ -67,7 +67,7 @@ class GroupsUser extends AppModel {
 	/* returns all your friend ids in list form
 	 * Friend_id and User_id seem backwards, but we want to do a test based on which users are friends with you, they have confirmed so
 	 */
-	function getFriendIds($uid, $gid = false) {
+	public function getFriendIds($uid, $gid = false) {
 		$this->recursive = -1;
 		$fids = $this->find('list', array(
 			'conditions' => array(
@@ -81,7 +81,7 @@ class GroupsUser extends AppModel {
 		return $fids;
 	}
 
-	function isFriend($uid, $fid) {
+	public function isFriend($uid, $fid) {
 		// checking against self
 		if ($uid == $fid) {
 			return true;
@@ -100,7 +100,7 @@ class GroupsUser extends AppModel {
 	}
 
 	// takes User_ID and Friend_ID and returns what group the friend is in
-	function listGroups($uid, $fid) {
+	public function listGroups($uid, $fid) {
 		$groups = $this->find('first', array(
 			'conditions' => array(
 				'user_id' => $uid,
@@ -112,7 +112,7 @@ class GroupsUser extends AppModel {
 		return $groups;
 	}
 
-	function requestSent($uid, $fid) {
+	public function requestSent($uid, $fid) {
 		if ($this->find('first', array('conditions' => array('user_id' => $uid, 'friend_id' => $fid)))) {
 			return true;
 		} else {

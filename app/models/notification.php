@@ -1,7 +1,7 @@
 <?php
 class Notification extends AppModel {
-	var $name = 'Notification';
-	var $belongsTo = array(
+	public $name = 'Notification';
+	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
@@ -9,7 +9,7 @@ class Notification extends AppModel {
 			'counterScope' => array('Notification.new' => true)
 	));
 
-	function addNotification($uid, $type, $title, $content, $mid) {
+	public function addNotification($uid, $type, $title, $content, $mid) {
 		$notifications = array(
 			'groups_user',
 			'pm',
@@ -33,7 +33,7 @@ class Notification extends AppModel {
 		return true;
 	}
 
-	function getAllNotifications($uid) {
+	public function getAllNotifications($uid) {
 		$this->recursive = -1;
 		$note = $this->find('all', array(
 				'conditions' => array(
@@ -66,7 +66,7 @@ class Notification extends AppModel {
 		return $note;
 	}
 
-	function markRead($nid, $uid) {
+	public function markRead($nid, $uid) {
 		$this->recursive = -1;
 		$note = $this->findById($nid);
 		if ($note['Notification']['user_id'] != $uid) {
@@ -78,7 +78,7 @@ class Notification extends AppModel {
 		}
 	}
 
-	function updateCount($uid) {
+	public function updateCount($uid) {
 		$count = $this->find('count', array('conditions' => array('Notification.user_id' => $uid, 'Notification.read' => null)));
 		$this->User->id = $uid;
 		$this->User->saveField('notification_count', $count);

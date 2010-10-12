@@ -1,9 +1,9 @@
 <?php
 class WallPostLike extends AppModel {
 
-	var $belongsTo = array('User', 'WallPost');
+	public $belongsTo = array('User', 'WallPost');
 
-	function doLike($wpid, $uid, $like) {
+	public function doLike($wpid, $uid, $like) {
 		$wpid = intval($wpid);
 		$uid = intval($uid);
 		// check if the user has alread voted by searching for their user id on the wall post they're trying to vote for
