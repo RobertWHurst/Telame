@@ -93,6 +93,8 @@
 	Router::connect('/i/c/*', array('controller' => 'media', 'action' => 'comment'));
 	// Media - Large
 	Router::connect('/i/l/*', array('controller' => 'media', 'action' => 'large'));
+	// Media - News
+	Router::connect('/i/n/*', array('controller' => 'media', 'action' => 'news'));
 	// Media - Profile
 	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
 	// Media - Single
