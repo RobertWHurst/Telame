@@ -1,11 +1,11 @@
 <?php
 class MediaController extends AppController {
 
-	var $components = array('Thumb', 'ScaleTool');
+	public $components = array('Thumb', 'ScaleTool');
 
 //---------------------------- Image Retrieval Functions ----------------------------//
 
-	function avatar($id = false) {
+	public function avatar($id = false) {
 		$size = Configure::read('AvatarSize');
 		$this->_resize($id, $size, null, array(
 			// specifying 'w' and 'h' overrides the scale tools work..
@@ -15,7 +15,7 @@ class MediaController extends AppController {
 		));
 	}
 
-	function comment($id = false) {
+	public function comment($id = false) {
 		$size = Configure::read('CommentSize');
 		$this->_resize($id, $size, null, array(
 			// specifying 'w' and 'h' overrides the scale tools work..
@@ -25,11 +25,11 @@ class MediaController extends AppController {
 		));
 	}
 
-	function large($id = false) {
+	public function large($id = false) {
 		$this->_resize($id, Configure::read('LargeSize'), 'fit');
 	}
 
-	function preview($id = false) {
+	public function preview($id = false) {
 		$this->_resize($id, Configure::read('PreviewSize'), 'fit');
 	}
 
@@ -37,19 +37,19 @@ class MediaController extends AppController {
 		$this->_resize($id, Configure::read('ProfileSize'), 'fill');
 	}
 
-	function single($id = false) {
+	public function single($id = false) {
 		$this->_resize($id, Configure::read('SingleSize'), 'fill', array(
 			'zc' => 1
 		));
 	}
 
-	function thumb($id = false) {
+	public function thumb($id = false) {
 		$this->_resize($id, Configure::read('ThumbSize'), 'fill');
 	}
 
 //---------------------------- Management Functions ----------------------------//
 
-	function delete($id = null) {
+	public function delete($id = null) {
 		if (is_null($id)) {
 			$this->Session->setFlash(__('media_not_deleted_no_id', true));
 			$this->redirect($this->referer());
@@ -83,7 +83,7 @@ class MediaController extends AppController {
 		exit;
 	}
 
-	function upload($aid = false) {
+	public function upload($aid = false) {
 		if (empty($this->data)) {
 			$this->layout = 'profile';
 			$user = $this->Media->User->getProfile($this->currentUser['User']['slug']);
@@ -165,7 +165,7 @@ class MediaController extends AppController {
 //---------------------------- Private Functions ----------------------------//
 
 	// this function fetches the user's avatar
-	function _resize($mid, $size, $mode = null, $options = array()) {
+	private function _resize($mid, $size, $mode = null, $options = array()) {
 		if (empty($mid)) {
 		//	$this->cakeError('error404');
 		}

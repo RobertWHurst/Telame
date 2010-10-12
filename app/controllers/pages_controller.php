@@ -1,9 +1,9 @@
 <?php
 class PagesController extends AppController {
-	var $uses = array();
-	var $helpers = array('Text', 'Time', 'Markdown');
+	public $uses = array();
+	public $helpers = array('Text', 'Time', 'Markdown');
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 		// Allows access to certain pages
 		if ($this->RequestHandler->isRss()) {
@@ -13,26 +13,26 @@ class PagesController extends AppController {
 		}
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 		parent::beforeRender();
 
 	}
 
-	function features() {
+	public function features() {
 		//set the css and layout
 		$this->layout = 'simple_header';
 
 		$this->set('title_for_layout', __('site_name', true));
 	}
 
-	function home() {
+	public function home() {
 		//set the css and layout
 		$this->layout = 'simple_header';
 
 		$this->set('title_for_layout', __('site_name', true));
 	}
 
-	function news($selectedFriendList = null, $uid = null, $hash = null) {
+	public function news($selectedFriendList = null, $uid = null, $hash = null) {
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
@@ -98,7 +98,7 @@ class PagesController extends AppController {
  * @param mixed What page to display
  * @access public
  */
-	function display() {
+	public function display() {
 		$path = func_get_args();
 
 		$count = count($path);

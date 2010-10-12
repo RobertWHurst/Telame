@@ -1,9 +1,9 @@
 <?php
 class MessagesController extends AppController {
 
-	var $helpers = array('Markdown', 'Time');
+	public $helpers = array('Markdown', 'Time');
 	
-	function beforeFilter(){
+	public function beforeFilter(){
 		parent::beforeFilter();
 		    	
 		//set the layout
@@ -11,7 +11,7 @@ class MessagesController extends AppController {
 	}
 	
 	//THE INBOX
-	function inbox(){
+	public function inbox(){
 		
 		//get the inbox from the db
 		$messages = $this->Message->getReceived($this->currentUser['User']['id']);
@@ -20,7 +20,7 @@ class MessagesController extends AppController {
 	}
 	
 	//THE VIEWER
-	function view($id = null){
+	public function view($id = null){
 		
 		//get the inbox from the db
 		$messages = $this->Message->getMessageThread($this->currentUser['User']['id'], $id);
@@ -51,7 +51,7 @@ class MessagesController extends AppController {
 	}
 	
 	//THE SENT MESSAGES
-	function sent(){
+	public function sent(){
 		
 		//get the inbox from the db
 		$messages = $this->Message->getSent($this->currentUser['User']['id']);
@@ -60,7 +60,7 @@ class MessagesController extends AppController {
 	}
 	
 	//THE COMPOSER
-	function compose($slug = false){
+	public function compose($slug = false){
 		$uid = array();
 		
 		//get the target user id if there is one
@@ -77,7 +77,7 @@ class MessagesController extends AppController {
 	}
 	
 	//SEND A MESSAGE
-	function send_message(){
+	public function send_message(){
 	
 		//if there is no data then redirect
 		if(empty($this->data)) {
@@ -105,7 +105,7 @@ class MessagesController extends AppController {
 	}
 	
 	//DELETE A MESSAGE (donest actually delete anything, just hides it. intill the other owner deletes it to)(only accepts threads)
-	function delete_message($mid){
+	public function delete_message($mid){
 	
 		$isAjax = $this->RequestHandler->isAjax();
 		
@@ -192,36 +192,5 @@ class MessagesController extends AppController {
     	else
     		$this->redirect($this->referer());
     	exit;
-	}
-	
-	//JX DELETE MESSAGES
-	function jx_delete_message(){
-	
-		
-		print_r($this->data);
-		
-	}
-	
-	//UNMARK A MESSAGE
-	function mark_message_unread(){
-		
-	}
-	
-	//JX UNMARK A MESSAGES
-	function jx_mark_message_unread(){
-		
-		print_r($this->data);
-		
-	}
-	
-	function manage_messages(){
-	}
-	
-	//QUERY FOR POSSIBLE RECIPIENTS
-	function jx_recipient(){
-		
-		echo 'true';
-		
-		exit;		
 	}
 }

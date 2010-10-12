@@ -1,12 +1,12 @@
 <?php
 class ProfilesController extends AppController {
 	
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow('add');
 	}
 
-	function add($email, $hash) {
+	public function add($email, $hash) {
 		// basic check for valid hash
 		if (!$hash || strlen($hash) != 40 || !$email) {
 			$this->redirect('/');
@@ -37,7 +37,7 @@ class ProfilesController extends AppController {
 	}
 
 
-	function edit($slug = false) {
+	public function edit($slug = false) {
 		// If the user is not an admin, and they're trying to edit somebody else's profile, redirect them to their own
 		if (/*!$admin ||*/ strtolower($slug) != strtolower($this->currentUser['User']['slug'])) {
 			$this->redirect('/e/' . $this->currentUser['User']['slug']);

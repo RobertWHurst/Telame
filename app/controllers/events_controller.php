@@ -1,9 +1,9 @@
 <?php
 class EventsController extends AppController {
 
-	var $components = array('Profile');
+	public $components = array('Profile');
 
-	function add($allday=null, $day=null, $month=null, $year=null, $hour=null, $min=null) {
+	public function add($allday=null, $day=null, $month=null, $year=null, $hour=null, $min=null) {
 		if (empty($this->data)) {
 			//Set default duration: 1hr and format to a leading zero.
 			$hourPlus = intval($hour)+1;
@@ -63,7 +63,7 @@ class EventsController extends AppController {
 		}
 	}
 
-	function calendar($year=null, $month=null, $day=null) {
+	public function calendar($year=null, $month=null, $day=null) {
 		$user = $this->Profile->getProfile($this->params['slug']);
 		if($this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'calendar')) {
 			$this->layout = 'tall_header_w_sidebar';
@@ -85,7 +85,7 @@ class EventsController extends AppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (empty($this->data)) {
 			if (is_null($id)) {
 				//fail gracefully in case of error
@@ -117,7 +117,7 @@ class EventsController extends AppController {
 		}
 	}
 
-	function delete($id) {
+	public function delete($id) {
 		$this->data = $this->Event->read(null, $id);
 		if ($this->Event->isOwner($id, $this->currentUser['User']['id'])) {
 			if ($this->Event->delete($id)) {
@@ -135,7 +135,7 @@ class EventsController extends AppController {
 			substr($this->data['Event']['start'], 5, 2), substr($this->data['Event']['start'], 8, 2)));
 	}
 
-	function feed() {
+	public function feed() {
 		$user = $this->Profile->getProfile($this->params['slug']);
 		
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'calendar')) {
@@ -172,7 +172,7 @@ class EventsController extends AppController {
 		echo json_encode($rows);
 	}
 
-	function move($id = null, $dayDelta, $minDelta, $allDay) {
+	public function move($id = null, $dayDelta, $minDelta, $allDay) {
 		if ($id != null) {
 			$this->Event->recursive = -1;
 			$ev = $this->Event->findById($id);  //1 - locate the event in the DB
@@ -191,7 +191,7 @@ class EventsController extends AppController {
 		}
 	}
 
-	function resize($id = null, $dayDelta, $minDelta) {
+	public function resize($id = null, $dayDelta, $minDelta) {
 		if ($id != null) {
 			$ev = $this->Event->findById($id);
 			$ev['Event']['end'] = date('Y-m-d H:i:s', strtotime('' . $dayDelta . ' days ' . $minDelta . ' minutes', strtotime($ev['Event']['end'])));

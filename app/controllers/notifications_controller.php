@@ -1,11 +1,11 @@
 <?php
 class NotificationsController extends AppController {
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function beforeRender(){
+	public function beforeRender(){
 		parent::beforeRender();
 
 		//set the layout
@@ -13,13 +13,13 @@ class NotificationsController extends AppController {
 	}
 
 
-	function index() {
+	public function index() {
 		$notifications = $this->Notification->getAllNotifications($this->currentUser['User']['id']);
 
 		$this->set(compact('notifications'));
 	}
 
-	function markRead($id) {
+	public function markRead($id) {
 		if (!$id) {
 			$this->redirect('/');
 			exit;

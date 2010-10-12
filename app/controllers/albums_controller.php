@@ -1,18 +1,18 @@
 <?php
 class AlbumsController extends AppController {
 
-	var $components = array('Profile');
-	var $helpers = array('Markdown', 'Time');
+	public $components = array('Profile');
+	public $helpers = array('Markdown', 'Time');
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 		parent::beforeRender();
 	}
 
-	function albums() {
+	public function albums() {
 		//layout
 		$this->layout = 'profile';
 
@@ -30,7 +30,7 @@ class AlbumsController extends AppController {
 		$this->set(compact('albums', 'user'));
 	}
 
-	function album($albumSlug = false){
+	public function album($albumSlug = false){
 		//layout
 		$this->layout = 'profile';
 
@@ -51,7 +51,7 @@ class AlbumsController extends AppController {
 		$this->set(compact('aid', 'album', 'user'));
 	}
 
-	function newAlbum() {
+	public function newAlbum() {
 
 		$isAjax = $this->RequestHandler->isAjax();
 
@@ -91,7 +91,7 @@ class AlbumsController extends AppController {
 	}
 
 	// takes album id, and image id, sets that image to the cover
-	function setAlbumCover($aid, $iid) {
+	public function setAlbumCover($aid, $iid) {
 		$uid = $this->currentUser['User']['id'];
 		if ($this->Album->setAlbumCover($aid, $iid, $uid)) {
 			$this->Session->setFlash(__('album_cover_changed', true));
@@ -101,7 +101,7 @@ class AlbumsController extends AppController {
 		$this->redirect($this->referer());
 	}
 
-	function view($id) {
+	public function view($id) {
 		$this->layout = 'profile';
 
 		$media = $this->Album->Media->find('first', array(

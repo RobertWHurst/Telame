@@ -1,7 +1,7 @@
 <?php
 class GroupsUsersController extends AppController {
 
-	var $components = array('Profile');
+	public $components = array('Profile');
 
 	/**
 	 * \brief addFriend optionally takes a user id and adds them to your friends list.
@@ -9,7 +9,7 @@ class GroupsUsersController extends AppController {
 	 * If a user id is specified, and post data is empty, a page is loaded asking which list you want to add the user to.  
 	 * Once there is post data there should be the frind ID, and the list ID, then add them to the DB
 	 */
-	function addFriend($fid = null, $confirm = null, $cid = null) {
+	public function addFriend($fid = null, $confirm = null, $cid = null) {
 		$this->layout = 'tall_header_w_sidebar';
 
 		if (!$this->GroupsUser->isFriend($this->currentUser['User']['id'], $fid)) {
@@ -59,7 +59,7 @@ class GroupsUsersController extends AppController {
 		}
 	}
 
-	function friendList() {
+	public function friendList() {
 		//set the layout
 		$this->layout = 'tall_header_w_sidebar';
 		$user = $this->Profile->getProfile($this->params['slug']);
@@ -85,6 +85,8 @@ class GroupsUsersController extends AppController {
 		}
 		$this->set(compact('friends', 'user'));
 	}
+
+	
 
 }
 
