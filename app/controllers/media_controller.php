@@ -29,11 +29,19 @@ class MediaController extends AppController {
 		$this->_resize($id, Configure::read('LargeSize'), 'fit');
 	}
 
+	public function news($id = false) {
+		$size = Configure::read('NewsSize');
+		$this->_resize($id, $size, null, array(
+			// specifying 'w' and 'h' overrides the scale tools work..
+			'w' => $size['width'],
+		));
+	}
+
 	public function preview($id = false) {
 		$this->_resize($id, Configure::read('PreviewSize'), 'fit');
 	}
 
-	function profile($id = false){
+	public function profile($id = false){
 		$this->_resize($id, Configure::read('ProfileSize'), 'fill');
 	}
 

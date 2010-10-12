@@ -5,7 +5,7 @@ $url = array(
 	'action' => 'view',
 	$post['Media']['id'],
 );
-	$iUrl = array('slug' => $post['PostAuthor']['slug'], 'controller' => 'media', 'action' => 'preview', $post['Media']['id']);
+	$iUrl = array('slug' => $post['PostAuthor']['slug'], 'controller' => 'media', 'action' => 'news', $post['Media']['id']);
 	echo $markdown->parse(
 		$author_name . __('added_media', true) . "\r\n" .
 		$html->link($post['Media']['title'], $url) . '<br />' .
