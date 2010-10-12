@@ -339,5 +339,40 @@ pr($options);
 			return @rmdir($dir);
 		}
 	}
+
+	function search($search, $uid = null, $isFriend = false) {
+		// Clean the params, just to be safe
+		$search = Sanitize::clean($search);
+		$this->User->recursive = -1;
+
+		$conditions = array('searchable' => true,
+			'OR' => array(
+				'User.first_name ILIKE' => '%' . $search . '%',
+				'User.last_name ILIKE' => '%' . $search . '%',
+				'User.slug ILIKE' => '%' . $search . '%',
+				'User.email ILIKE' => '%' . $search . '%',
+			),
+		);
+
+		if (!is_null($uid) && $isFriend) {
+			$friends = $this->GroupsUser->getFriendIds($uid);
+			$conditions['User.id'] = $friends;
+		}
+
+		$users = $this->find('all', array(
+			'conditions' => $conditions,
+			'contain' => array(
+				'Profile' => array(
+					'Country'
+				)
+			),
+			'limit' => Configure::read('PageLimit'),
+			'order' => array(
+				'User.first_name',
+				'User.last_name',
+			)
+		));
+		return $users;
+	}
 }
 
