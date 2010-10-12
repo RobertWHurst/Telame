@@ -1,7 +1,7 @@
 <?php
 class MediaController extends AppController {
 
-	public $components = array('Thumb', 'ScaleTool');
+	private $components = array('Thumb', 'ScaleTool');
 
 //---------------------------- Image Retrieval Functions ----------------------------//
 

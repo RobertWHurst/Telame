@@ -1,7 +1,7 @@
 <?php
 class EventsController extends AppController {
 
-	public $components = array('Profile');
+	private $components = array('Profile');
 
 	public function add($allday=null, $day=null, $month=null, $year=null, $hour=null, $min=null) {
 		if (empty($this->data)) {
