@@ -42,7 +42,7 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 					echo $html->link($group['Group']['title'], $gurl, array('class' => 'button'));
 ?>
 					<div class="delete">
-<?php					$durl = array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'deleteGroup', $group['Group']['id']);
+<?php					$durl = array('slug' => $currentUser['User']['slug'], 'controller' => 'groups', 'action' => 'deleteGroup', $group['Group']['id']);
 						if ($group['Group']['user_id'] == $currentUser['User']['id']) {
 							echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $durl));
 						}
@@ -52,7 +52,7 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 				</div>
 			<?php endforeach; ?>
 			<div id="add_new_group">
-<?php			echo $form->create('Group', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'addGroup')));
+<?php			echo $form->create('Group', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'groups', 'action' => 'addGroup')));
 				echo $form->input('title');
 				echo $form->end(__('save', true));
 ?>
