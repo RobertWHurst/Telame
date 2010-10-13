@@ -12,6 +12,9 @@ class MarkdownHelper extends AppHelper {
 		// match links and format
 		$text = preg_replace('/[\s]((?:(?:(?:http[s]*|[s]*ftp|git|svn):\/\/)|(?:mailto))[^\s]+)/', ' <a href="$1" rel="" target="_blank">$1</a> ', $text);
 
+		// add '<>' around email addresses, markdown will then convert
+		$text = preg_replace('/(\\S+@\\S+\\.\\w+)/', ' <$1> ', $text);
+
 		// add emoticons
 		$text = $this->emoticons($text);
 
