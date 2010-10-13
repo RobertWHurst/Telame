@@ -43,7 +43,9 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 ?>
 					<div class="delete">
 <?php					$durl = array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'deleteGroup', $group['Group']['id']);
-						echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $durl));
+						if ($group['Group']['user_id'] == $currentUser['User']['id']) {
+							echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $durl));
+						}
 ?>
 					</div>
 					<p>[stats in link to list of friends...]</p>
