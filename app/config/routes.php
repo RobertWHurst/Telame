@@ -116,7 +116,7 @@
 	Router::connect('/:slug/messages/d/*', array('controller' => 'messages', 'action' => 'delete_message'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages', array('controller' => 'messages', 'action' => 'inbox'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/m/a', array('controller' => 'messages', 'action' => 'autocomplete'));
+	Router::connect('/m/a/*', array('controller' => 'messages', 'action' => 'autocomplete'));
 
 	// New user adding
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
