@@ -21,9 +21,6 @@ class User extends AppModel {
 		'Event' => array(
 			'dependent' => true,
 		),
-		'Group' => array(
-			'dependent' => true,
-		),
 		'GroupsUser' => array(
 			'dependent' => true,
 		),

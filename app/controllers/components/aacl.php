@@ -164,7 +164,7 @@ class AaclComponent extends Object {
 		foreach ($groups as $group) {
 			$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => 'Group', 'foreign_key' => $group['Group']['id'])));
 			// i think this is automatically deleted
-//			$this->Acl->Aro->delete($aro['Aro']['id']);
+			$this->Acl->Aro->delete($aro['Aro']['id']);
 
 			$arosAcos = $this->controller->ArosAco->find('all', array('conditions' => array('aro_id' => $aro['Aro']['id'])));
 			foreach ($arosAcos as $arosAco) {

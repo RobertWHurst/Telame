@@ -79,6 +79,7 @@ class SettingsController extends AppController {
 		}
 	}
 
+	// Delete user account
 	function delete() {
 		$this->loadModel('User');
 		$uid = $this->currentUser['User']['id'];
@@ -90,6 +91,10 @@ class SettingsController extends AppController {
 		$this->User->deleteAccount($uid);
 		// acl info
 		$this->Aacl->deleteAcoTree($uid, $groups);
+
+		foreach ($groups as $group) {
+			$this->User->Group->delete($group['Group']['id']);
+		}
 
 		$this->Session->setFlash(__('account_deleted', true));
 		$this->AuthExtension->logout();
