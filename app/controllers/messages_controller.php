@@ -22,6 +22,7 @@ class MessagesController extends AppController {
 				'id' => $users[$key]['User']['id'],
 				'full_name' => $users[$key]['User']['full_name'],
 				'slug' => $users[$key]['User']['slug'],
+				'email' => $users[$key]['User']['email'],
 			);
 		}
 
