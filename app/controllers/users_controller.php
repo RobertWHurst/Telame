@@ -133,8 +133,30 @@ class UsersController extends AppController {
 			$this->redirect($this->referer());
 		}
 
-		$this->paginate = $this->User->search($this->params['query']);
-
+		// I tried moving this to the user model, but it didn't work.  maybe later to reduce code duplication
+		$search = Sanitize::clean($this->params['query']);
+		$this->User->recursive = -1;
+		$this->paginate = array(
+			'conditions' => array(
+				'searchable' => true,
+				'OR' => array(
+					'User.first_name ILIKE' => '%' . $search . '%',
+					'User.last_name ILIKE' => '%' . $search . '%',
+					'User.slug ILIKE' => '%' . $search . '%',
+					'User.email ILIKE' => '%' . $search . '%',
+				)
+			),
+			'contain' => array(
+				'Profile' => array(
+					'Country'
+				)
+			),
+			'limit' => Configure::read('PageLimit'),
+			'order' => array(
+				'User.first_name',
+				'User.last_name',
+			)
+		);
 		$results = $this->paginate('User');
 
 		//make some changes to the data

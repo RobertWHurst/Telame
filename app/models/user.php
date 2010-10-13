@@ -257,62 +257,6 @@ pr($options);
 		return $user;
 	}
 
-	public function signup($data) {
-		$error = array();
-		// create a new user
-		$this->create();
-		// fill array with data we need in the db
-		$data['User']['added'] = date('Y-m-d');
-		$data['User']['accessed'] = date('Y-m-d');
-		$data['User']['level'] = '1';
-		$data['User']['invisible'] = false;
-		$data['User']['slug'] = $data['User']['slug'];
-		$data['User']['type'] = '1';
-		$data['User']['searchable'] = true;
-		$data['User']['avatar_id'] = '-1';
-		$data['User']['first_login'] = true;
-
-		// save the user
-		if (!$this->save(Sanitize::clean($data))) {
-			// don't continue anything if this failed
-			return false;
-		}
-
-		// no longer needed, scrap it
-		unset($data);
-
-		// make their home directory structure
-		$dir = $this->makeUserDir($this->id);
-		if ($dir != false) {
-			$this->saveField('home_dir', $dir['home']);
-			$this->saveField('sub_dir', $dir['sub']);
-		} else {
-			$error['User']['user_dir'] = 'Could not create user directory';
-		}
-
-		$this->Profile->create();
-		$profile['Profile']['user_id'] = $this->id;
-		$profile['Profile']['dob'] = '1900-01-01';
-		$this->Profile->save($profile);
-
-		$this->Album->create();
-		$data['Album']['title'] = 'Profile Pictures';
-		$data['Album']['description'] = __('profile_pictures', true);
-		$data['Album']['user_id'] = $this->id;
-		$data['Album']['slug'] = 'profile_pictures';
-
-		if (!$this->Album->save($data)) {
-			$error['User']['album_error'] = 'Could not create album';
-		}
-
-		if (count($error)) {
-			debugger::log($error['User']);
-			return false;
-		} else {
-			return $this->id;
-		}
-	}
-
 	// takes a user id and makes them a random directory, returns the dir in an array, or false if it doesn't work
 	public function makeUserDir($id) {
 		$baseDir = USER_DIR;
@@ -375,5 +319,62 @@ pr($options);
 		));
 		return $users;
 	}
+
+	public function signup($data) {
+		$error = array();
+		// create a new user
+		$this->create();
+		// fill array with data we need in the db
+		$data['User']['added'] = date('Y-m-d');
+		$data['User']['accessed'] = date('Y-m-d');
+		$data['User']['level'] = '1';
+		$data['User']['invisible'] = false;
+		$data['User']['slug'] = $data['User']['slug'];
+		$data['User']['type'] = '1';
+		$data['User']['searchable'] = true;
+		$data['User']['avatar_id'] = '-1';
+		$data['User']['first_login'] = true;
+
+		// save the user
+		if (!$this->save(Sanitize::clean($data))) {
+			// don't continue anything if this failed
+			return false;
+		}
+
+		// no longer needed, scrap it
+		unset($data);
+
+		// make their home directory structure
+		$dir = $this->makeUserDir($this->id);
+		if ($dir != false) {
+			$this->saveField('home_dir', $dir['home']);
+			$this->saveField('sub_dir', $dir['sub']);
+		} else {
+			$error['User']['user_dir'] = 'Could not create user directory';
+		}
+
+		$this->Profile->create();
+		$profile['Profile']['user_id'] = $this->id;
+		$profile['Profile']['dob'] = '1900-01-01';
+		$this->Profile->save($profile);
+
+		$this->Album->create();
+		$data['Album']['title'] = 'Profile Pictures';
+		$data['Album']['description'] = __('profile_pictures', true);
+		$data['Album']['user_id'] = $this->id;
+		$data['Album']['slug'] = 'profile_pictures';
+
+		if (!$this->Album->save($data)) {
+			$error['User']['album_error'] = 'Could not create album';
+		}
+
+		if (count($error)) {
+			debugger::log($error['User']);
+			return false;
+		} else {
+			return $this->id;
+		}
+	}
+
 }
 
