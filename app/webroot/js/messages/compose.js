@@ -17,15 +17,25 @@ $(function(){
 		root.formatUi = function(){
 			
 			root.messageComposerRecipientInput
-				.css({
-					'background': 'transparent',
-					'border': 'none'
-				})
+				.hide()
 				.wrap('<div class="fake_input">')
 				.before('<input id="full_name_input" type="text" />'),
 			
 			//bind to the new fake input
-			root.fullNameInput = $('#full_name_input'),
+			root.fullNameInput = $('#full_name_input');
+			root.fakeInput = $('div.fake_input');
+			
+			root.fullNameInput
+				.css({
+					'background': 'transparent',
+					'border': 'none',
+					'padding': '2px'
+				}),
+				
+			//make sure that when the fake input is clicked focus is given to the real input
+			root.fakeInput.click(function(){
+				root.fullNameInput.focus();
+			});
 			
 			//execute the input handler
 			root.inputValueHandler();
@@ -39,9 +49,37 @@ $(function(){
 			root.hintlist = $('#hintList');
 			
 			//set the timer
-			var timer = proccessing = string = i = the_slugs = false;
+			var timer = processing = string = i = the_slugs = '';
+				
+			root.fakeInput.delegate('div.user_name', 'click', function(){
 			
-			root.fullNameInput.keyup(function(event){
+				var domElement = $(this);
+				root.inputValueHandler.removeUser(domElement.attr('id'));
+				domElement.remove();
+				
+			});
+			
+			root.fullNameInput.keydown(function(event){
+			
+				//check to see if the enter key was pressed
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13'){
+				
+					//prevent the enter key
+					event.preventDefault();
+					
+					if(root.hintlist.length > 0){
+						$('div.row', root.hintlist).first().click();
+					}
+					
+					return true;
+				}
+			
+				//make sure to cancel any previous timers
+				if(processing == true){
+					clearTimeout(timer);
+					processing = false;
+				}
 				
 				//define the function that requests hint data
 				var requestHint = function(){
@@ -77,10 +115,10 @@ $(function(){
 						return false;
 					}
 					
-					if(typeof root.selectedUsers[userData.slug] === 'undefined'){
+					if(typeof root.selectedUsers[userData.slug] == 'undefined'){
 					
 						//build the row
-						root.hintlist.append('<div id="' + userData.slug + '" class="row"><div class="user_name">' + userData.full_name + '</div><div class="email">' + userData.email + '</div></div>');
+						root.hintlist.append('<div class="row"><div id="' + userData.slug + '" class="user_name">' + userData.full_name + '</div><div class="email">' + userData.email + '</div></div>');
 						
 						//grab the rows
 						$('div.row', '#hintList').click(function(){
@@ -88,43 +126,63 @@ $(function(){
 							//save the dom element
 							var domElement = $(this);
 							
-							addUser(domElement.attr('id'));
+							//grab the slug
+							var slug = domElement.children('div.user_name').attr('id');
+						
+							//create a new user block in the fake input
+							root.fullNameInput.before(domElement.children('div.user_name'));
+							
+							//add the user slug to the data array
+							root.inputValueHandler.addUser(slug);
+							
+							//remove the hint row
+							domElement.remove();
+							
+							root.fullNameInput.focus();
 							
 						});
 					}
 				}
 				
-				var addUser = function(slug){
+				root.inputValueHandler.addUser = function(slug){
 						
 						//add the user slug to the selected array
 						root.selectedUsers[slug] = slug;
 						
-						updateSlugsInput();
+						root.inputValueHandler.updateSlugsInput();
 				}
 				
-				var removeUser = function(slug){
+				root.inputValueHandler.removeUser = function(slug){
 						
 						//add the user slug to the selected array
-						root.selectedUsers.splice(slug);
+						delete root.selectedUsers[slug];
 						
-						updateSlugsInput();
+						root.inputValueHandler.updateSlugsInput();
 					
 				}
 				
-				var updateSlugsInput = function(){
-					//clear the input.val('');
+				root.inputValueHandler.updateSlugsInput = function(){
+				
+					//clear the input;
+					root.fullNameInput.val('');
+					
+					//clear the slugs input
+					the_slugs = '';
 					
 					//add the slugs to the hidden slug input
 					i = 1;
 					for(k in root.selectedUsers){
-						the_slugs += root.selectedUsers[k];
-						
-						if(i !== root.selectedUsers.length){
-							the_slugs += ', ';
+					
+						if(root.selectedUsers.hasOwnProperty(k)){
+							the_slugs += root.selectedUsers[k];
+							
+							if(i < core.sizeOf(root.selectedUsers)){
+								the_slugs += ', ';
+							}
+							
+							//adv the iderator
+							i += 1;
 						}
-						
-						//adv the iderator
-						i += 1;
 					}
 					root.messageComposerRecipientInput.val(the_slugs);
 				}
@@ -136,7 +194,8 @@ $(function(){
 				root.hintlist.empty();
 				
 				//get the hints
-				requestHint();
+				processing = true;
+				timer = setTimeout(requestHint, 150);
 				
 			});
 			

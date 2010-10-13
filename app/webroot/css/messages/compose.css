@@ -1,0 +1,50 @@
+#composer{
+	width: 478px;
+	
+}
+#create_message_wrap{
+	padding:10px;
+	
+}
+#create_message_wrap div.create_message{
+}
+#create_message_wrap div.create_message div.recipients{
+	position: relative;	
+}
+#create_message_wrap div.create_message div.recipients label{
+	display: none;
+}
+#create_message_wrap div.create_message div.recipients div.fake_input{
+	background: #fff;
+	border: 1px solid #ccc;
+	cursor: text;
+}
+#create_message_wrap div.create_message div.recipients div.fake_input div.user_name{
+	float:left;
+	padding:3px;
+	margin:1px;
+	font-size: 16px;
+	background: #333;
+	cursor: pointer;
+}
+#hintList{
+	position: absolute;
+	z-index: 3;
+	top:28px;
+	width: 100%;
+	background: #454545;
+	border-bottom: 1px solid #595959;
+}
+#hintList div.row{
+	font-size: 1.6em;
+	color: #d3ef91;
+	cursor: pointer;
+	text-decoration: underline;
+	padding: 5px;
+}
+#hintList div.row:hover{
+	color: #c1ef52;
+}
+#composer_sidebar{
+	width: 289px;	
+}

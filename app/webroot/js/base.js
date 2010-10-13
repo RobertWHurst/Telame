@@ -10,12 +10,37 @@ function changeImg() {
 }
 
 
+//OJBECT MODUES
 $(function($){
 
 	core = {
 
 		//save the current domain
 		'domain': 'http://' + window.location.hostname,
+		
+		//count the number of items in an object
+		'sizeOf': function(object){
+			
+			if(typeof object == 'object'){
+			
+				var size = 0;
+			
+				for(k in object){
+				
+					if(object.hasOwnProperty(k)){
+						size += 1;
+					}
+				
+				}
+				
+				return size;
+				
+				
+			} else {
+				return false;
+			}
+			
+		},
 
 		//shows a modal screen with a callback for on click of the screen itself
 		'showModalScreen': function(modal, callback, agruments){
