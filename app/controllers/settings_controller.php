@@ -79,10 +79,23 @@ class SettingsController extends AppController {
 		}
 	}
 
+	// Delete user account
 	function delete() {
 		$this->loadModel('User');
-		$this->User->deleteAccount($this->currentUser['User']['id']);
-		$this->Aacl->deleteAcoTree($this->currentUser['User']['id']);
+		$uid = $this->currentUser['User']['id'];
+
+		// find groups so we can delete the aro's associtated with them
+		$groups = $this->User->Group->find('all', array('conditions' => array('Group.user_id' => $uid)));
+
+		// user info, file structure, and automatic db info
+		$this->User->deleteAccount($uid);
+		// acl info
+		$this->Aacl->deleteAcoTree($uid, $groups);
+
+		foreach ($groups as $group) {
+			$this->User->Group->delete($group['Group']['id']);
+		}
+
 		$this->Session->setFlash(__('account_deleted', true));
 		$this->AuthExtension->logout();
 		$this->Auth->logout();
@@ -175,54 +188,6 @@ class SettingsController extends AppController {
 			exit;
 		}
 	}
-
-	function create_group($id){
-		$this->Group->create();
-		$this->data['Group']['user_id'] = $this->currentUser['User']['id'];
-		if($this->Group->save($this->data)){
-			$this->Session->setFlash(__('group_added', true));
-		}
-		else{
-			$this->Session->setFlash(__('group_not_added', true));
-		}
-		$this->redirect($this->here);
-	}
-
-	function delete_group($id){
-		$group = $this->Group->findById($id);
-		// get the group
-		// ensure the person is the groups owner
-		if($group['Group']['user_id'] != $this->currentUser['User']['id']){
-			$this->Session->setFlash(__('group_not_allowed_delete', true));
-		}
-		elseif($this->Group->delete($id)){
-			$this->Session->setFlash(__('group_deleted', true));
-		}
-		else{
-			$this->Session->setFlash(__('group_not_deleted', true));
-		}
-		$this->redirect($this->referer());
-	}
-
-	function profile() {
-
-		//get the user id
-		$id = $this->currentUser['User']['id'];
-
-		if(empty($this->data)){
-			//save the users new settings
-
-			//TODO: ACL STUFF HERE
-
-		}
-
-		//get the users current settings
-
-		//TODO: ACL STUFF HERE
-	}
-
-
-
 
 // ----------------------- ADMIN SETTINGS ----------------------- //
 
