@@ -80,6 +80,10 @@
 	// 'Hack' for pagination.  keeps the links clean; /slug/friends/2
 	Router::connect('/:slug/friends/*', array('controller' => 'groups_users', 'action' => 'friendList'), array('routeClass' => 'SlugRoute'));
 
+	// Groups
+	Router::connect('/:slug/group/add/*', array('controller' => 'groups_users', 'action' => 'addGroup'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/group/delete/*', array('controller' => 'groups_users', 'action' => 'deleteGroup'), array('routeClass' => 'SlugRoute'));
+
 	// Media
 	Router::connect('/:slug/albums/new/*', array('controller' => 'albums', 'action' => 'newAlbum'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/album/setCover/*', array('controller' => 'albums', 'action' => 'setAlbumCover'), array('routeClass' => 'SlugRoute'));

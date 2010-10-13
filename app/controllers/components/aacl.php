@@ -154,8 +154,23 @@ class AaclComponent extends Object {
 		return true;
 	}
 
-	function deleteAcoTree($uid) {
-		$this->Acl->Aco->delete('User::' . $uid);
+	function deleteAcoTree($uid, $groups) {
+		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
+		$this->Acl->Aco->delete($aco['Aco']['id']);
+
+		$this->controller->loadModel('ArosAco');
+
+		
+		foreach ($groups as $group) {
+			$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => 'Group', 'foreign_key' => $group['Group']['id'])));
+			// i think this is automatically deleted
+//			$this->Acl->Aro->delete($aro['Aro']['id']);
+
+			$arosAcos = $this->controller->ArosAco->find('all', array('conditions' => array('aro_id' => $aro['Aro']['id'])));
+			foreach ($arosAcos as $arosAco) {
+				$this->controller->ArosAco->delete($arosAco['ArosAco']['id']);
+			}
+		}
 	}
 }
 

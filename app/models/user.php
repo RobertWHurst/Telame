@@ -21,6 +21,9 @@ class User extends AppModel {
 		'Event' => array(
 			'dependent' => true,
 		),
+		'Group' => array(
+			'dependent' => true,
+		),
 		'GroupsUser' => array(
 			'dependent' => true,
 		),
@@ -329,6 +332,7 @@ pr($options);
 
 
  	public function removeUserDir($dir){
+		$scan = array();
 		if(is_file($dir)) {
 			return @unlink($dir);
 		} elseif(is_dir($dir)) {

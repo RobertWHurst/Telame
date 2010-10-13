@@ -38,13 +38,11 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 					$classes = 'group';
 ?>
 				<div class="<?php echo $classes; ?>">
-<?php
-					$gurl = array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
+<?php				$gurl = array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
 					echo $html->link($group['Group']['title'], $gurl, array('class' => 'button'));
 ?>
 					<div class="delete">
-<?php
-						$durl = array('controller' => 'settings', 'action' => 'delete_group', $group['Group']['id']);
+<?php					$durl = array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'deleteGroup', $group['Group']['id']);
 						echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $durl));
 ?>
 					</div>
@@ -52,7 +50,10 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 				</div>
 			<?php endforeach; ?>
 			<div id="add_new_group">
-				[new group input]
+<?php			echo $form->create('Group', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'groups_users', 'action' => 'addGroup')));
+				echo $form->input('title');
+				echo $form->end(__('save', true));
+?>
 			</div>
 		</div>
 		<div class="group_permissions">
