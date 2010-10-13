@@ -26,11 +26,11 @@ $(function(){
         root.inputValueHandler = function(){
 			
 			//REMOVE THIS
-			$('body').append('<div id="temp">');
+			root.messageComposerRecipientInputWrap.append('<div id="hintList">');
+			root.hintlist = $('#hintList');
 			
 			//set the timer
-			var timer;
-			var proccessing = false;
+			var timer = proccessing = string = i = false;
 			
 			root.messageComposerRecipientInput.keyup(function(event){
         		
@@ -41,9 +41,37 @@ $(function(){
 				
 				//define the function that requests hint data
 				var requestHint = function(){
-					$.get(core.domain + '/m/a/' + domElement.val(), function(data){
-						console.log(data);
+					
+					//set the string
+					string = domElement.val().replace(' ', '_');
+									
+					$.get(core.domain + '/m/a/' + string, function(data){
+						
+						//clear the list
+						root.hintlist.empty();
+						
+						if(data.length > 0){
+							
+							for(i in data){
+								
+								//create the row
+								addrow(data[i]);
+								
+							}
+						}
 					});
+				}
+				
+				//define function to create a hint row
+				var addrow = function(userData){
+					
+					if(typeof userData !== 'object'){
+						return false;
+					}
+					
+					//build the row
+					root.hintlist.append('<div class="row"><div class="user_name">' + userData.full_name + '</div><div class="email">' + userData.email + '</div></div>');
+					
 				}
 				
 				// save the dom element
@@ -55,7 +83,7 @@ $(function(){
 				}
 				
 				//set a timeout so requests are only made when the user stops typing
-				timer = setTimeout(requestHint, 1000);
+				timer = setTimeout(requestHint, 500);
 				proccessing = true;
 				
 			});
