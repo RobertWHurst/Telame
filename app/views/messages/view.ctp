@@ -27,6 +27,7 @@ $this->set('title_for_layout', __('message_view', true));
 			array(
 				'label' => __('message_thread_title', true),
 				'url' => array(
+					'slug' => $currentUser['User']['slug'],
 					'controller' => 'messages',
 					'action' => 'view',
 					$this->params['pass'][0]

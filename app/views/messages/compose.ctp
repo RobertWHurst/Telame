@@ -30,7 +30,7 @@ $this->set('title_for_layout', __('message_compose', true));
 		<div id="create_message_wrap">
 		<div class="create_message">
 <?php
-			echo $form->create('Message', array('url' =>  array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'send_message')));
+			echo $form->create('Message', array('url' =>  array('controller' => 'messages', 'action' => 'send_message')));
 				
 			//the hidden ids
 			echo $form->hidden('author_id', array('value' => $currentUser['User']['id']));

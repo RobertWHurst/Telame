@@ -155,27 +155,42 @@ class MessagesController extends AppController {
 
 		//if there is no data then redirect
 		if(empty($this->data)) {
-			$this->redirect(array('controller' => 'messages', 'action' => 'inbox'));
+			$this->Session->setFlash(__('message_not_sent', true), 'default', array('class' => 'error'));
+			$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'inbox'));
 			exit;
 		}
-
-		//save the user id and poster id
-		$this->Message->set('user_id', $this->data['Message']['user_id']);
-		$this->Message->set('author_id', $this->data['Message']['author_id']);
-		$this->Message->set('parent_id', $this->data['Message']['parent_id']);
-
-		//save the post content and time
-		$this->Message->set('content', $this->data['Message']['content']);
-		$this->Message->set('created', date("Y-m-d H:i:s"));
-		$this->Message->set('read', null);
-		$this->Message->set('deleted_by_user', false);
-		$this->Message->set('deleted_by_author', false);
-		$this->Message->set('subject', $this->data['Message']['subject']);
-
-		//commit the data to the db
-		$this->Message->save();
-
-		$this->redirect(array('controller' => 'messages', 'action' => 'view', $this->data['Message']['parent_id']));
+		
+		//get each of the slugs user_slugs
+		$user_slugs = explode(', ', $this->data['Message']['user_slugs']);
+		
+		if(is_array($user_slugs)){
+			foreach($user_slugs as $slug){
+			
+				$this->Message->create();
+			
+				//get the user id via the slug
+				$uid = $this->Message->User->getIdFromSlug($slug);
+	
+				//save the user id and poster id
+				$this->Message->set('user_id', $uid);
+				$this->Message->set('author_id', $this->data['Message']['author_id']);
+				$this->Message->set('parent_id', $this->data['Message']['parent_id']);
+			
+				//save the post content and time
+				$this->Message->set('content', $this->data['Message']['content']);
+				$this->Message->set('created', date("Y-m-d H:i:s"));
+				$this->Message->set('read', null);
+				$this->Message->set('deleted_by_user', false);
+				$this->Message->set('deleted_by_author', false);
+				$this->Message->set('subject', $this->data['Message']['subject']);
+			
+				//commit the data to the db
+				$this->Message->save();
+			}
+		}
+		$this->Session->setFlash(__('message_sent', true), 'default', array('class' => 'info'));
+		
+		$this->redirect(array('slug' => $this->currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'inbox'));
 	}
 
 	//THE SENT MESSAGES

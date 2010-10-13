@@ -20,7 +20,7 @@ else{
 
 }
 //save the message url array
-$mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
+$mUrl = array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'view', $tid);
 ?>
 <div class="<?php echo $classes; ?>">
 	<div class="status">
@@ -33,9 +33,8 @@ $mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
 ?>
 	</div>
 	<div class="reply">
-<?php 
-		$url = array('controller' => 'messages', 'action' => 'view', $tid);
-		echo $html->image('icons/email_go.png', array('title' => __('reply',true), 'url' => $url));
+<?php
+		echo $html->image('icons/email_go.png', array('title' => __('reply',true), 'url' => $mUrl));
 ?>
 	</div>
 	<div class="avatar">

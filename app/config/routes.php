@@ -116,10 +116,9 @@
 	Router::connect('/:slug/messages/thread/*', array('controller' => 'messages', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/sent', array('controller' => 'messages', 'action' => 'sent'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/compose', array('controller' => 'messages', 'action' => 'compose'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/:slug/messages/s', array('controller' => 'messages', 'action' => 'send_message'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/:slug/messages/d/*', array('controller' => 'messages', 'action' => 'delete_message'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/:slug/messages/mu/*', array('controller' => 'messages', 'action' => 'mark_message_unread'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages', array('controller' => 'messages', 'action' => 'inbox'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/m/s', array('controller' => 'messages', 'action' => 'send_message'));
+	Router::connect('/m/d/*', array('controller' => 'messages', 'action' => 'delete_message'));
 	Router::connect('/m/a/*', array('controller' => 'messages', 'action' => 'autocomplete'));
 
 	// New user adding

@@ -19,7 +19,7 @@ else{
 
 }
 //save the message url array
-$mUrl = array('controller' => 'messages', 'action' => 'view', $tid);
+$mUrl = array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'view', $tid);
 ?>
 <div class="<?php echo $classes; ?>">
 	<div class="status">
