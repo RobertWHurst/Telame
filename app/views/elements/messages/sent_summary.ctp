@@ -40,9 +40,7 @@ $mUrl = array('slug' => $currentUser['User']['slug'], 'controller' => 'messages'
 	</div>
 	<div class="message_content">
 		<h1 class="subject"><?php echo __('message_subject', true) . ' ' . $html->link($tSubject, $mUrl); ?></h1>
-		<p>
-			<?php echo __('message_to', true) . ' ' . $html->link($message['User']['full_name'], $iUrl); ?> - <?php echo $message['Message']['content']; ?>
-		</p>
+		<?php echo $markdown->parse(__('message_to', true) . ' ' . $html->link($message['User']['full_name'], $iUrl) . ' - ' . $message['Message']['content']); ?>
 	</div>
 	<div class="time"><p><?php echo $time->timeAgoInWords($message['Message']['created']); ?></p></div>
 </div>
