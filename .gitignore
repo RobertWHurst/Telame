@@ -1,4 +1,3 @@
 app/webroot/Transmit.zip
-app/config/core.php
 app/config/database.php
 app/users/*
