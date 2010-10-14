@@ -11,4 +11,3 @@ class AppError extends ErrorHandler {
 	}
 
 }//AppError
-?>
