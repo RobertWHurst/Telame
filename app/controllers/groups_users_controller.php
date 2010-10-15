@@ -72,7 +72,7 @@ class GroupsUsersController extends AppController {
 				'contain' => array(
 					'Friend.Profile',
 				),
-				'limit' => 1,
+				'limit' => Configure::read('PageLimit'),
 				'order' => array(
 					'Friend.first_name',
 					'Friend.last_name',

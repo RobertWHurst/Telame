@@ -47,7 +47,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('sex_interest', true)); ?></td>
-						<td class="field"><?php echo $form->input('sex_interest', array('options' => array('men' => __('men', true), 'women' => __('women', true), 'bisexual' => __('bisexual', true)), 'default' => $currentUser['Profile']['sex_interest'], 'label' => false)); ?></td>
+						<td class="field"><?php echo $form->input('sex_interest', array('options' => array('' => '', 'men' => __('men', true), 'women' => __('women', true), 'bisexual' => __('bisexual', true)), 'default' => $currentUser['Profile']['sex_interest'], 'label' => false)); ?></td>
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('political', true)); ?></td>
@@ -59,7 +59,7 @@ $this->set('title_for_layout', __('site_name', true) . ' | ' . $currentUser['Use
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('rel_status', true)); ?></td>
-						<td class="field"><?php echo $form->input('rel_status', array('options' => array('single' => __('single', true), 'in_a_relationship' => __('in_a_relationship', true), 'married' => __('married', true), 'its_complicated' => __('its_complicated', true)), 'default' => $currentUser['Profile']['rel_status'], 'label' => false)); ?></td>
+						<td class="field"><?php echo $form->input('rel_status', array('options' => array('' => '', 'single' => __('single', true), 'in_a_relationship' => __('in_a_relationship', true), 'married' => __('married', true), 'its_complicated' => __('its_complicated', true)), 'default' => $currentUser['Profile']['rel_status'], 'label' => false)); ?></td>
 					</tr>
 					<tr>
 						<td><?php echo $form->label(__('city', true)); ?></td>
