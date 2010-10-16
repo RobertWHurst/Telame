@@ -76,7 +76,10 @@ class MediaController extends AppController {
 
 		if ($media) {
 			if ($this->Media->delete($id)) {
-				@unlink(USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . 'images' . DS . $media['Media']['filename']);
+				$type = explode('/', $this->data['Media']['file']['type']);
+				$type = $type[0];
+
+				@unlink(USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $type . DS . $media['Media']['filename']);
 				$this->loadModel('WallPost');
 				$wp = $this->WallPost->find('first', array('conditions' => array('WallPost.user_id' => $media['User']['id'], 'WallPost.type' => 'media', 'WallPost.model_id' => $media['Media']['id'])));
 				$this->WallPost->delete($wp['WallPost']['id']);
@@ -107,8 +110,11 @@ class MediaController extends AppController {
 				if ($this->Media->Album->isAlbumOwner($this->currentUser['User']['id'], $this->data['Media']['album'])) {
 					// file type is allowed
 					if (in_array($this->data['Media']['file']['type'], Configure::read('AllowedFileTypes'))) {
+						$type = explode('/', $this->data['Media']['file']['type']);
+						$type = $type[0];
+					
 						// Full path to store user's images
-						$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . 'images' . DS;
+						$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . $type . DS;
 
 						// user's directory is writable
 						if(is_writable($baseDir)) {
@@ -197,7 +203,10 @@ class MediaController extends AppController {
 
 		if ($media) {
 			// to user's home directory
-			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . 'images' . DS;
+			$type = explode($media['Media']['type']);
+			$type = $type[0];
+
+			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . $type . DS;
 			// profile or gallery, etc...
 			$dir = $media['Media']['path'] . DS;
 			// filename
