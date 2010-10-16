@@ -38,6 +38,11 @@ class AppController extends Controller {
 			$this->loadModel('User');
 			// The currently logged in user's infomration
 			$this->currentUser = $this->getCurrentUser();
+			
+			// send people not admin's to 
+			if (env('SERVER_NAME') != 'www.telame.com' && $this->currentUser['User']['level'] > 0) {
+				$this->redirect('http://www.telame.com');
+			}
 			// ensure the user has a profile
 			$this->checkProfile();
 		}
