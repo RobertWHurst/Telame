@@ -13,7 +13,7 @@
     	<?php endif; ?>
     	<div class="content">
 <?php
-    			if(isset($show_user_and_author) && $post['PostAuthor']['id'] != $post['User']['id']){
+    			if($post['PostAuthor']['id'] != $post['User']['id']){
     				$aUrl = array('controller' => 'users', 'action' => 'profile', $post['User']['slug']);
     				$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . '</strong> to <strong>' . $html->link($post['User']['full_name'], $aUrl) . "</strong>:\r\n\r\n ";
     			}

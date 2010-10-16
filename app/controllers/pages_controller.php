@@ -75,7 +75,7 @@ class PagesController extends AppController {
 
 		if(!empty($friends)) {
 			$wallPosts = $this->WallPost->getWallPosts(array(
-				'uid' => $friends,
+//				'uid' => $friends,
 				'aid' => $friends,
 //				'baid' => $uid,
 				'User' => true,
