@@ -203,7 +203,7 @@ class MediaController extends AppController {
 
 		if ($media) {
 			// to user's home directory
-			$type = explode($media['Media']['type']);
+			$type = explode('/', $media['Media']['type']);
 			$type = $type[0];
 
 			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . $type . DS;
