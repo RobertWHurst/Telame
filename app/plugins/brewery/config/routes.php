@@ -8,6 +8,7 @@ if (in_array('brewery', $urlParts)) {
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout', 'plugin' => null));
 
 	Router::connect('/add', array('plugin' => 'brewery', 'controller' => 'brewery_projects', 'action' => 'add'));	
+	Router::connect('/edit/*', array('plugin' => 'brewery', 'controller' => 'brewery_projects', 'action' => 'edit'));	
 
 	// Must be last, it's a catchall
 	Router::connect('/*', array('plugin' => 'brewery', 'controller' => 'brewery_projects', 'action' => 'index'));	
