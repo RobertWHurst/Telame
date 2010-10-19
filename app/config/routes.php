@@ -21,14 +21,12 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
 	// enable rss extensions
 	Router::parseExtensions('rss');
 
 	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
 	App::import('Lib', 'routes/HomeRoute');
 	App::import('Lib', 'routes/SlugRoute');
-	App::import('Lib', 'routes/Brewery');
 
 	Router::connectNamed(array('page'));
 	Router::connectNamed(array('query'));
@@ -158,4 +156,4 @@
 
 // This must be last
 	// Profile
-//	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/*', array('controller' => 'users', 'action' => 'profile'), array('routeClass' => 'SlugRoute'));

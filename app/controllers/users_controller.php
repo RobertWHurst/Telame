@@ -188,7 +188,6 @@ class UsersController extends AppController {
 
 	function signup($email = null, $key = null) {
 		$this->layout = 'simple_header';
-		$this->logout();
 		// data has been posted
 		if (!empty($this->data)) {
 			if (!$this->data['User']['agree']) {
@@ -260,7 +259,7 @@ class UsersController extends AppController {
 		$this->AuthExtension->logout();
 		$this->Auth->logout();
 
-		$this->redirect($this->referer());
+		$this->redirect('/');
 	}
 
 }
