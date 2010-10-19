@@ -28,12 +28,14 @@
 	padding: 3px;
 }
 #login div.checkbox{
-	padding: 1.3em 0;
+	padding: 0.5em 0;
+	margin-top: 10px;
 }
 #login a.pass_reset{
 	float: right;
 	font-size: 1.3em;
 	line-height: 26px;
+	margin-top: 10px;
 }
 #login input[type="checkbox"]{
 	float: left;
@@ -46,9 +48,14 @@
 	font-weight: bold;
 	-moz-border-radius: 2px;
 	padding: 3px;
+	margin-top: 10px;
 }
 #login input[type="submit"]:hover{
 	background-color: #d3ef91;
+}
+#login h1.heading{
+	font-size:1.8em;
+	padding-bottom: 20px;
 }
 #authMessage{
 	font-size: 1.6em;

@@ -2,11 +2,12 @@
 //INCLUDES
 $html->css(array(
 	'base',
-	'simple_header',
+	'tall_header',
+	'users/login'
 ), null, array('inline' => false));
 $js = array(
 	'jquery',
-	'base',
+	'base'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
