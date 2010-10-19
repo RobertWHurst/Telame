@@ -327,6 +327,7 @@ pr($options);
 		// fill array with data we need in the db
 		$data['User']['added'] = date('Y-m-d');
 		$data['User']['accessed'] = date('Y-m-d');
+		$data['User']['email'] = strtolower($data['User']['email']);
 		$data['User']['level'] = '1';
 		$data['User']['invisible'] = false;
 		$data['User']['slug'] = $data['User']['slug'];
