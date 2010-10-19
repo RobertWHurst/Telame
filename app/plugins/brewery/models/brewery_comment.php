@@ -11,9 +11,7 @@ class BreweryComment extends BreweryAppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Project' => array(
-			'className' => 'Brewery.BreweryProject',
-			'foreignKey' => 'project_id',
+		'BreweryProject' => array(
 		)
 	);
 }

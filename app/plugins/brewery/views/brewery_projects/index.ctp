@@ -1,16 +1,4 @@
 <?php
-//INCLUDES
-$html->css(array(
-	'base',
-	'tall_header',
-), null, array('inline' => false));
-$js = array(
-	'jquery',
-	'base',
-);
-foreach ($js as $j) {
-	$javascript->link($j, false);
-}
 $this->set('title_for_layout', __('brewery_comments', true));
 
 ?>
@@ -22,6 +10,8 @@ $this->set('title_for_layout', __('brewery_comments', true));
 </div>
 <div id="page_body" class="clearfix">
 	<div id="comments">
-<?php	pr($comments); ?>
-	</div>
+<?php	foreach ($projects as $project) {
+			pr($project);
+		}
+?>	</div>
 </div>

@@ -13,8 +13,6 @@ class BreweryProject extends BreweryAppModel {
 	);
 	
 	var $hasMany = array(
-		'BreweryComment' => array(
-			'className' => 'Brewery.BreweryComment',
-		)
+		'BreweryComment',
 	);
 }

@@ -4,15 +4,27 @@ class BreweryProjectsController extends BreweryAppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 	}
-	
+
 	function beforeRender() {
 		parent::beforeRender();
-		
-		$this->layout = 'tall_header';
+
+	}
+
+	function add() {
+		if (!empty($this->data)) {
+			$this->data['BreweryProject']['user_id'] = $this->currentUser['User']['id'];
+			if ($this->BreweryProject->save($this->data)) {
+				$this->Session->setFlash(__('project_added_successfully', true));
+			} else {
+				$this->Session->setFlash(__('project_adding_failed', true));
+			}
+			$this->redirect(array('controller' => 'brewery_projects', 'action' => 'index'));
+		}
 	}
 
 	function index() {
-		$comments = $this->BreweryProject->BreweryComment->find('all');
-		$this->set(compact('comments'));
+		$projects = $this->BreweryProject->find('all');
+		$this->set(compact('projects'));
 	}
+
 }

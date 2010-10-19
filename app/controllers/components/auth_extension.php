@@ -78,7 +78,7 @@ class AuthExtensionComponent extends Object {
 		App::import('Model', 'User');
 	 	$User = new User();
 	 	$User->recursive = -1;
-		$u = $User->findByEmail($cookie['email']);
+		$u = $User->findByEmail(strtolower($cookie['email']));
 		if (!$u) {
 			$this->logout();
 			return;
