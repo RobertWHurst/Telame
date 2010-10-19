@@ -36,8 +36,7 @@ if (empty($_SESSION)) {
 	ini_set('session.use_cookies', 1);
 	ini_set('session.name', Configure::read('Session.cookie'));
 	ini_set('session.cookie_lifetime', Configure::read('Session.timeout') * 60);
-	$this->path = '/';
-	ini_set('session.cookie_path', $this->path);
+	ini_set('session.cookie_path', '/');
 	ini_set('session.auto_start', Configure::read('Session.start'));
 	ini_set('session.referer_check', null);
 }

@@ -70,6 +70,7 @@ class AppController extends Controller {
 			$this->Session->destroy();
 			$this->Session->setFlash(__('email_not_confirmed', true), 'default', array('class' => 'error'));
 			$this->redirect('/c/' . $currentUser['User']['email']);
+			exit;
 		}
 		$this->set('currentUser', $currentUser);
 		return $currentUser;
