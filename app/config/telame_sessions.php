@@ -28,20 +28,18 @@ ClassRegistry::init($settings);
  * Setup any custom ini settings needed.
  */
 if (empty($_SESSION)) {
-	if ($iniSet) {
-		ini_set('session.use_trans_sid', 0);
-		ini_set('url_rewriter.tags', '');
-		ini_set('session.save_handler', 'user');
-		ini_set('session.serialize_handler', 'php');
-		ini_set('session.use_cookies', 1);
-		ini_set('session.name', Configure::read('Session.cookie'));
-		ini_set('session.cookie_lifetime', Configure::read('Session.timeout') * 60);
-		$this->path = '/';
-		ini_set('session.cookie_path', $this->path);
-		ini_set('session.cookie_domain', env('HTTP_BASE'));
-		ini_set('session.auto_start', Configure::read('Session.start'));
-		ini_set('session.referer_check', null);
-	}
+	ini_set('session.cookie_domain', env('HTTP_BASE'));
+	ini_set('session.use_trans_sid', 0);
+	ini_set('url_rewriter.tags', '');
+	ini_set('session.save_handler', 'user');
+	ini_set('session.serialize_handler', 'php');
+	ini_set('session.use_cookies', 1);
+	ini_set('session.name', Configure::read('Session.cookie'));
+	ini_set('session.cookie_lifetime', Configure::read('Session.timeout') * 60);
+	$this->path = '/';
+	ini_set('session.cookie_path', $this->path);
+	ini_set('session.auto_start', Configure::read('Session.start'));
+	ini_set('session.referer_check', null);
 }
 
 /**

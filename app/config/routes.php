@@ -14,19 +14,24 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.app.config
- * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @copyright	  Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link		  http://cakephp.org CakePHP(tm) Project
+ * @package		  cake
+ * @subpackage	  cake.app.config
+ * @since		  CakePHP(tm) v 0.2.9
+ * @license		  MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+	foreach(App::objects('plugin') as $plugin) { 
+		App::import('Plugin', Inflector::classify("{$plugin}_routes"), array('file' => Inflector::underscore($plugin) . DS . 'config' . DS . 'routes.php'));
+	}
+
 	// enable rss extensions
 	Router::parseExtensions('rss');
 
 	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
 	App::import('Lib', 'routes/HomeRoute');
 	App::import('Lib', 'routes/SlugRoute');
+//	App::import('Lib', 'routes/Brewery');
 
 	Router::connectNamed(array('page'));
 	Router::connectNamed(array('query'));
@@ -77,7 +82,7 @@
 	Router::connect('/:slug/f/a/*', array('controller' => 'groups_users', 'action' => 'addFriend'), array('routeClass' => 'SlugRoute'));
 	// Friend list
 	Router::connect('/:slug/friends/:page/*', array('controller' => 'groups_users', 'action' => 'friendList'), array('routeClass' => 'SlugRoute'));
-	// 'Hack' for pagination.  keeps the links clean; /slug/friends/2
+	// 'Hack' for pagination.	keeps the links clean; /slug/friends/2
 	Router::connect('/:slug/friends/*', array('controller' => 'groups_users', 'action' => 'friendList'), array('routeClass' => 'SlugRoute'));
 
 	// Groups
