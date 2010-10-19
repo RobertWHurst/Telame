@@ -38,7 +38,7 @@ class UsersController extends AppController {
 	}
 
 	function passwordReset($email = null, $pass = null) {
-		$this->layout = 'simple_header';
+		$this->layout = 'tall_header';
 		if (!empty($this->data)) {
 			// 4th step.  save their new password
 			if (isset($this->data['User']['email']) && isset($this->data['User']['user_password'])) {
