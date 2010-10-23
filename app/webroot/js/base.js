@@ -9,9 +9,7 @@ function changeImg() {
 $(function($){
 
 	$("a").click(function(event) {
-		var hostname = window.location.hostname.split('/');
-		var target = event.target;
-		document.cookie = 'CakeCookie[here]' + "=" + event.target + ";path=/";
+		document.cookie = 'CakeCookie[here]=' + event.target + "; path=/";
 	});
 
 	core = {

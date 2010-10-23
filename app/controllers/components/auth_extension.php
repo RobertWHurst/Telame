@@ -125,8 +125,7 @@ class AuthExtensionComponent extends Object {
 				$cookie['time'] = time();
 				$cookie['hash'] = Security::hash($cookie['email'] . $cookie['hash1'] . $cookie['time']);
 
-				$this->controller->Cookie->path = '/'; 
-				$this->controller->Cookie->domain = env('HTTP_BASE');
+				$this->controller->Cookie->path = '/';
 				$this->controller->Cookie->write(AuthExtensionComponent::cookie_name, $cookie, true, AuthExtensionComponent::cookie_expire_string);
 				unset($this->controller->data['User']['remember_me']);
 				$u = null;

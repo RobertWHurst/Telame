@@ -16,6 +16,9 @@ class AppController extends Controller {
 //	var $persistModel = true;
 
 	function beforeFilter() {
+		$this->Cookie->path = '/';
+		$this->Cookie->domain = env('HTTP_BASE');
+
 		// must be here for auto login to work
 		$this->Auth->autoRedirect = false;
 		$this->Auth->fields = array('username' => 'email', 'password' => 'password');
@@ -38,8 +41,8 @@ class AppController extends Controller {
 			$this->loadModel('User');
 			// The currently logged in user's infomration
 			$this->currentUser = $this->getCurrentUser();
-			
-			// send people not admin's to 
+
+			// send people not admin's to
 			if (env('SERVER_NAME') != 'www.telame.com' && $this->currentUser['User']['level'] > 0) {
 				$this->redirect('http://www.telame.com');
 			}
@@ -63,7 +66,7 @@ class AppController extends Controller {
 
 	function getCurrentUser() {
 		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
-		
+
 		if(!is_null($currentUser['User']['hash'])) {
 			$this->AuthExtension->logout();
 			$this->Auth->logout();
