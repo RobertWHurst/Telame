@@ -39,7 +39,7 @@ class WallPost extends AppModel {
 
 	//TODO: needs containable.
 	public function getWallPosts($arguments = false) {
-
+		$conditions = array();
 		//set the default options
 		$defaults = array(
 			//post id

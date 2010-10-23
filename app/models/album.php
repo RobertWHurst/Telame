@@ -41,6 +41,7 @@ class Album extends AppModel {
 		return $this->find('first', array('conditions' => array('Album.id' => Sanitize::clean(intval($aid)))));
 	}
 
+	// Takes an album ID and returns all the media inside that album
 	public function getMedia($aid) {
 		$this->Media->recursive = -1;
 		return $this->Media->find('all', array('conditions' => array('album_id' => Sanitize::clean(intval($aid)))));
@@ -60,6 +61,11 @@ class Album extends AppModel {
 		} else {
 			return false;
 		}
+	}
+
+	public function isPublic($aid) {
+		$album = $this->find('first', array('conditions' => array('Album.id' => $aid), 'fields' => 'Album.public'));
+		return $album['Album']['public'];
 	}
 
 	// Takes album_id, and image_id, sets that image to that album's cover

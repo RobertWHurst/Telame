@@ -56,12 +56,24 @@ class GroupsUser extends AppModel {
 
 	public function getBirthdays($uid) {
 		$friendIds = $this->getFriendIds($uid);
-		return $this->User->Profile->find('all', array(
+		$users = $this->User->Profile->find('all', array(
 			'conditions' => array(
-				'Profile.dob LIKE' => '%' . date('-m-d', strtotime('now')),
+				//'Profile.dob LIKE' => '%' . date('-m-d', strtotime('now')),
 				'User.id' => $friendIds,
+			),
+			'contain' => array(
+				'User',
 			)
 		));
+		$count = count($users);
+		for ($i=0; $i<$count; $i++) {
+			$bday = date('-m-d', strtotime($users[$i]['Profile']['dob']));
+			$today = date('-m-d');
+			if ($bday != $today) {
+				unset($users[$i]);
+			}
+		}
+		return $users;
 	}
 
 	/* returns all your friend ids in list form

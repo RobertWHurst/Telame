@@ -1,6 +1,7 @@
 <?php
 class AlbumsController extends AppController {
 
+	// Profile component is needed on any page that uses the 'profile' layout
 	public $components = array('Profile');
 	public $helpers = array('Markdown', 'Time');
 
@@ -16,43 +17,58 @@ class AlbumsController extends AppController {
 		//layout
 		$this->layout = 'profile';
 
+		// get the user profile
 		$user = $this->Profile->getProfile($this->params['slug']);
 
+		// check permissions for who is requesting this album
 		if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
 			$this->Session->setFlash(__('not_allowed_images', true), 'default', array('class' => 'warning'));
 			$this->redirect($this->referer());
 			exit;
 		}
 
-		// get all albums
+		// get all albums for the user id
 		$albums = $this->Album->getAlbums($user['User']['id']);
 
 		$this->set(compact('albums', 'user'));
 	}
 
-	public function album($albumSlug = false){
+	public function album($albumSlug = false) {
 		//layout
 		$this->layout = 'profile';
 
-		$user = $this->Profile->getProfile($this->params['slug']);
-
-		if (!is_numeric($albumSlug)) {
-			$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
-		} else {
-			$aid = intval($albumSlug);
-		}
-		if (!$aid) {
+		// if no slug passed, redirect back out of here
+		if (!$albumSlug) {
+			$this->Session->setFlash(__('no_album_specified', true));
             $this->redirect($this->referer(array('action' => 'index')));
             exit;
 		}
 
+		// use the slug passed in the URL, this should corelate with the album being sought after.  this should return the user's profile
+		$user = $this->Profile->getProfile($this->params['slug']);
+
+		// if the album slug is infact a slug, get the album id from it
+//		if (!is_numeric($albumSlug)) {
+			$aid = $this->Album->getAlbumId($user['User']['id'], $albumSlug);
+//		} else {
+//			$aid = intval($albumSlug);
+//		}
+
+		if (!$this->Album->isPublic($aid)) {
+			if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
+				$this->Session->setFlash(__('not_allowed_images', true), 'default', array('class' => 'warning'));
+				$this->redirect($this->referer());
+				exit;
+			}
+		}
+
+		// get the album and media from the id we found
 		$album = $this->Album->getMedia($aid);
 
 		$this->set(compact('aid', 'album', 'user'));
 	}
 
 	public function newAlbum() {
-
 		$isAjax = $this->RequestHandler->isAjax();
 
 		if($isAjax)
@@ -69,12 +85,11 @@ class AlbumsController extends AppController {
 					echo 'true';
 					exit;
 				}
-			}
-			else{
-				if(!$isAjax){
+			} else {
+				if(!$isAjax) {
 					$this->Session->setFlash(__('album_not_added', true), 'default', array('class' => 'info'));
 					$this->redirect('/albums');
-				}else{
+				} else {
 					echo 'false';
 					exit;
 				}
@@ -83,7 +98,7 @@ class AlbumsController extends AppController {
 			$user = $this->currentUser;
 			$this->set(compact('user'));
 
-			if($isAjax){
+			if($isAjax) {
 				$this->layout = false;
 				$this->render('/elements/albums/create');
 			}
