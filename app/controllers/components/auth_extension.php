@@ -51,6 +51,8 @@ class AuthExtensionComponent extends Object {
 			// already authenticated
 			return;
 		}
+		$controller->Cookie->path = '/';
+		$controller->Cookie->domain = env('HTTP_BASE');
 		$cookie = $controller->Cookie->read(AuthExtensionComponent::cookie_name);
 		if (!$cookie) {
 			return;
@@ -97,6 +99,8 @@ class AuthExtensionComponent extends Object {
 				$controller->Session->delete('Message.auth');
 
 				// Read the cooke, if it's empty, redirect home
+				$this->controller->Cookie->path = '/';
+				$this->controller->Cookie->domain = env('HTTP_BASE');
 				$ref = $this->controller->Cookie->read('here');
 				if (empty($ref) || stristr($ref, 'login') !== false) {
 					$this->controller->redirect('http://' . env('SERVER_NAME'));
@@ -126,6 +130,7 @@ class AuthExtensionComponent extends Object {
 				$cookie['hash'] = Security::hash($cookie['email'] . $cookie['hash1'] . $cookie['time']);
 
 				$this->controller->Cookie->path = '/';
+				$this->controller->Cookie->domain = env('HTTP_BASE');
 				$this->controller->Cookie->write(AuthExtensionComponent::cookie_name, $cookie, true, AuthExtensionComponent::cookie_expire_string);
 				unset($this->controller->data['User']['remember_me']);
 				$u = null;
@@ -139,6 +144,8 @@ class AuthExtensionComponent extends Object {
 	}
 
 	function logout() {
+		$this->controller->Cookie->path = '/';
+		$this->controller->Cookie->domain = env('HTTP_BASE');
 		$this->controller->Cookie->destroy(AuthExtensionComponent::cookie_name);
 	}
 }
