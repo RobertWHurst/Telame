@@ -32,8 +32,8 @@ class Event extends AppModel {
 					),
 					'AND' => array(
 						'Event.start BETWEEN ? AND ?' => array(
-							'0000-' . date('m-d H:i:s', $start),
-							'9999-' . date('m-d H:i:s', $end),
+							'-infinity',
+							'infinity',
 						),
 						'Event.recurring' => true,
 					)
