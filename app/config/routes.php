@@ -21,7 +21,7 @@
  * @since		  CakePHP(tm) v 0.2.9
  * @license		  MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-	foreach(App::objects('plugin') as $plugin) { 
+	foreach(App::objects('plugin') as $plugin) {
 		App::import('Plugin', Inflector::classify("{$plugin}_routes"), array('file' => Inflector::underscore($plugin) . DS . 'config' . DS . 'routes.php'));
 	}
 
@@ -31,7 +31,6 @@
 	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
 	App::import('Lib', 'routes/HomeRoute');
 	App::import('Lib', 'routes/SlugRoute');
-//	App::import('Lib', 'routes/Brewery');
 
 	Router::connectNamed(array('page'));
 	Router::connectNamed(array('query'));

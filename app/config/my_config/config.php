@@ -12,7 +12,7 @@ Configure::write('PageLimit', 25);
 
 // Specify custom config information here
 Configure::write('SiteName', 'Telame');
-Configure::write('StaticDomain', 'http://s.telame.com');
+Configure::write('StaticDomain', 'http://node49.com:81');
 
 // Email stuff
 Configure::write('EmailInfo', array(
