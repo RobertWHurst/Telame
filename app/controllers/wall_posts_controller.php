@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	public $components = array('OauthConsumer', 'RequestHandler');
+	public $components = array('RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	function beforeFilter() {
@@ -125,13 +125,13 @@ class WallPostsController extends AppController {
 
 		} else {
 			//redirect the visitor to the wall they posted on
-			$this->redirect($this->referer());
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $wallOwnerSlug));
+			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
 			exit;
 		}
 	}
 
-	function delete($id = false) {
+	public function delete($id = false) {
 		$isAjax = $this->RequestHandler->isAjax();
 		$uid = $this->currentUser['User']['id'];
 
@@ -191,7 +191,7 @@ class WallPostsController extends AppController {
 		}
 	}
 
-	function dislike($id) {
+	public function dislike($id) {
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
@@ -205,7 +205,7 @@ class WallPostsController extends AppController {
 		exit;
 	}
 
-	function like($id) {
+	public function like($id) {
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
