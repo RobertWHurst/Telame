@@ -1,16 +1,16 @@
 <?php
 class BreweryProjectsController extends BreweryAppController {
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 		parent::beforeRender();
 
 	}
 
-	function add() {
+	public function add() {
 		if (!empty($this->data)) {
 			$this->data['BreweryProject']['user_id'] = $this->currentUser['User']['id'];
 			if ($this->BreweryProject->save($this->data)) {
@@ -23,7 +23,7 @@ class BreweryProjectsController extends BreweryAppController {
 		}
 	}
 
-	function edit($id = null) {
+	public function edit($id = null) {
 		if (!empty($this->data)) {
 			$this->data['BreweryProject']['user_id'] = $this->currentUser['User']['id'];
 			if ($this->BreweryProject->save($this->data)) {
@@ -39,9 +39,40 @@ class BreweryProjectsController extends BreweryAppController {
 		}
 	}
 
-	function index() {
+	public function dislike($id) {
+		$isAjax = $this->RequestHandler->isAjax();
+
+		$this->BreweryProject->BreweryVote->doVote($id, $this->currentUser['User']['id'], false);
+
+		//if not an ajax call redirect from the referer
+		if($isAjax) {
+			echo 'true';
+			return;
+		} else {
+			$this->redirect($this->referer());
+		 	exit;
+		}
+	}
+
+	public function index() {
 		$projects = $this->BreweryProject->find('all', array('order' => 'BreweryProject.id ASC'));
 		$this->set(compact('projects'));
 	}
+
+	public function like($id) {
+		$isAjax = $this->RequestHandler->isAjax();
+
+		$this->BreweryProject->BreweryVote->doVote($id, $this->currentUser['User']['id'], true);
+
+		//if not an ajax call redirect from the referer
+		if($isAjax) {
+			echo 'true';
+			return;
+		} else {
+			$this->redirect($this->referer());
+		 	exit;
+		}
+	}
+	
 
 }

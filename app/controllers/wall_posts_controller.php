@@ -4,11 +4,11 @@ class WallPostsController extends AppController {
 	public $components = array('RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function more_posts($uid = false, $offset = false){
+	public function more_posts($uid = false, $offset = false){
 		if(!$offset || !$uid){
 			echo 'false';
 			exit;
@@ -22,7 +22,7 @@ class WallPostsController extends AppController {
 		$this->set(array('wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile($uid)));
 	}
 
-	function add($reply_id = false) {
+	public function add($reply_id = false) {
 		$isAjax = $this->RequestHandler->isAjax();
 
 		//make sure there is form data to process, if not there is not use in continuing
@@ -129,7 +129,7 @@ class WallPostsController extends AppController {
 		}
 	}
 
-	function delete($id = false) {
+	public function delete($id = false) {
 		$isAjax = $this->RequestHandler->isAjax();
 		$uid = $this->currentUser['User']['id'];
 
@@ -187,32 +187,34 @@ class WallPostsController extends AppController {
 		}
 	}
 
-	function dislike($id) {
+	public function dislike($id) {
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
 
 		//if not an ajax call redirect from the referer
-    	if($isAjax){
-    		echo 'true';
-    	}
-    	else
-    		$this->redirect($this->referer());
-    	exit;
+		if($isAjax) {
+			echo 'true';
+			return;
+		} else {
+			$this->redirect($this->referer());
+			exit;
+		}
 	}
 
-	function like($id) {
+	public function like($id) {
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
 
 		//if not an ajax call redirect from the referer
-    	if($isAjax){
-    		echo 'true';
-    	}
-    	else
-    		$this->redirect($this->referer());
-    	exit;
+		if($isAjax) {
+			echo 'true';
+			return;
+		} else {
+			$this->redirect($this->referer());
+			exit;
+		}
 	}
 }
 ?>
