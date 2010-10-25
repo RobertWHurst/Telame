@@ -1,5 +1,7 @@
 <?php
 class LinkRenderHelper extends AppHelper {
+	// you can set this to the full path to the wkhtmltoimage program if you like.
+	// if you leave it null, or set it to something that we can't execute, we will try and locate it with 'which wkhtmltoimage' below
 	var $wkhtmltoimage = null;
 
 	public function link($link, $user) {
@@ -20,13 +22,18 @@ class LinkRenderHelper extends AppHelper {
 	}
 
 	private function findWkFile() {
+		// check if the var is null, or not executable
 		if (is_null($this->wkhtmltoimage) || !is_executable($this->wkhtmltoimage)) {
+			// output of exec stored here
 			$output = array();
+			// find wkhtmltoimage
 			exec('which wkhtmltoimage', $output);
-			$this->wkhtmltoimage = $output[0];
-			if (!is_executable($this->wkhtmltoimage)) {
+			// make sure it's executable
+			if (!is_executable($output[0])) {
 				return false;
 			}
+			// set the global var
+			$this->wkhtmltoimage = $output[0];
 		}
 		
 		return true;

@@ -37,12 +37,14 @@ class WallPostsController extends AppController {
 		}
 
 		//get the relpy id if any
-		if(isset($this->data['WallPost']['reply_parent_id']))
+		if(isset($this->data['WallPost']['reply_parent_id'])) {
 			$reply_id = $this->data['WallPost']['reply_parent_id'];
+		}
 
 		//save the user id and the visitor id
 		$wallOwnerId = $this->data['WallPost']['user_id'];
 
+		// set vars we might need below
 		$wallOwnerSlug = $this->WallPost->User->getSlugFromId($wallOwnerId);
 		$visitorId = $this->currentUser['User']['id'];
 
@@ -66,17 +68,8 @@ class WallPostsController extends AppController {
 					exit;
 				}
 			}
-		} else {
-			//IF THE POSTER IS THE THE WALL OWNER
-
-			//the visitor is the user
-			$wallOwnerId = $visitorId;
 		}
 
-
-		if($reply_id){
-			$this->data['reply_parent_id'] = $reply_id;
-		}
 		//save the user id and poster id
 		$this->data['WallPost']['user_id'] = $wallOwnerId;
 		$this->data['WallPost']['author_id'] = $visitorId;
@@ -90,8 +83,8 @@ class WallPostsController extends AppController {
 		//get the new wall post id for ajax (if ajax)
 		$new_post_id = $this->WallPost->id;
 
-		//if the wall does not belong to the current user
-		if($wallOwnerId != $visitorId && $reply_id == null){
+		//if the wall does not belong to the current user and it's not a reply
+		if($wallOwnerId != $visitorId && $reply_id == null) {
 		
 			//create an action on the user's page
 			$action['reply_parent_id'] = null;	
@@ -101,7 +94,7 @@ class WallPostsController extends AppController {
 			$this->WallPost->add($action, array('type' => 'post_action', 'class' => 'action'));
 		}
 
-		if($isAjax){
+		if($isAjax) {
 
 			//load the view
 			$wallPost = $this->WallPost->getWallPosts(array('id' => $new_post_id, 'single' => true));
@@ -115,16 +108,15 @@ class WallPostsController extends AppController {
 				$this->render('/elements/wall_post_comment');
 			}
 			//if this is a post then load the post element
-			else{
+			else {
 				$this->set(array('post' => $wallPost, 'user' => $user, 'show_post_controls' => true, 'is_ajax' => true));
 				$this->render('/elements/wall_post');
 			}
 
-		}
-		else{
+		} else {
 			//redirect the visitor to the wall they posted on
-			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
+			$this->redirect($this->referer());
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $wallOwnerSlug));
 			exit;
 		}
 	}
@@ -144,7 +136,8 @@ class WallPostsController extends AppController {
 				exit;
 			} else {
 				$this->Session->setFlash(__('wall_post_delete_error', true), 'default', array('class' => 'error'));
-				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
+				$this->redirect($this->referer());
+//				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
 		}
@@ -181,7 +174,8 @@ class WallPostsController extends AppController {
 			} else {
 				//set the flash message and redirect them, the metaling sods! :<
 				$this->Session->setFlash(__('wall_post_bad_hacker', true), 'default', array('class' => 'warning'));
-				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
+				$this->redirect($this->referer());
+//				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
 		}
