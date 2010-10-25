@@ -8,7 +8,13 @@ class Album extends AppModel {
 		),
 		'User'
 	);
-	public $hasMany = array('Media');
+	public $hasMany = array(
+		'Media' => array(
+			'className' => 'Media',
+			'conditions' => array('Media.model' => 'album'),
+			'foreignKey' => 'model_id',
+		)
+	);
 
 // -------------------- Custom functions
 
@@ -44,7 +50,7 @@ class Album extends AppModel {
 	// Takes an album ID and returns all the media inside that album
 	public function getMedia($aid) {
 		$this->Media->recursive = -1;
-		return $this->Media->find('all', array('conditions' => array('album_id' => Sanitize::clean(intval($aid)))));
+		return $this->Media->find('all', array('conditions' => array('Media.model' => 'album' , 'Media.model_id' => Sanitize::clean(intval($aid)))));
 	}
 
 	public function getSlugFromId($aid) {
