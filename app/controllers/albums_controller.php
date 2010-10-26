@@ -129,7 +129,8 @@ class AlbumsController extends AppController {
 		));
 		$mediaList = $this->Album->Media->find('list', array(
 			'conditions' => array(
-				'Media.album_id' => $media['Media']['album_id']
+				'Media.model' => 'album',
+				'Media.model_id' => $media['Media']['model_id']
 			)
 		));
 

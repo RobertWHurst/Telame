@@ -78,6 +78,7 @@ class ThumbComponent {
 		
 		// phpThumb configs
 		$phpThumb->setParameter('config_cache_force_passthru', true);
+		$phpThumb->setParameter('config_allow_src_above_docroot', true);
 		
 		// ignore aspect ratio and allow enlarging		
 //		$phpThumb->setParameter('iar', 1);

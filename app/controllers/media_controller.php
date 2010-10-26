@@ -132,7 +132,8 @@ class MediaController extends AppController {
 								$this->Media->create();
 								$data['Media']['user_id'] = $this->currentUser['User']['id'];
 								$data['Media']['filename'] = $filename;
-								$data['Media']['album_id'] = $this->data['Media']['album'];
+								$data['Media']['model'] = 'album';
+								$data['Media']['model_id'] = $this->data['Media']['album'];
 								$data['Media']['path'] = null;
 								$data['Media']['size'] = $this->data['Media']['file']['size'];
 								$data['Media']['created'] = date('Y-m-d H:i:s');
@@ -202,18 +203,16 @@ class MediaController extends AppController {
 		}
 
 		if ($media) {
-			// to user's home directory
 			$type = explode('/', $media['Media']['type']);
 			$type = $type[0];
 
 			$baseDir = USER_DIR . $media['User']['home_dir'] . DS . $media['User']['sub_dir'] . DS . $media['User']['id'] . DS . $type . DS;
-			// profile or gallery, etc...
-			$dir = $media['Media']['path'] . DS;
+
 			// filename
 			$extension = explode('.', $media['Media']['filename']);
 			$extension = $extension[count($extension)-1];
 			$filename = trim($media['Media']['filename']);
-			// cached version of filename
+
 			$name = $media['User']['slug'];
 
 			$imageSize = getimagesize($baseDir . $dir . $filename);
