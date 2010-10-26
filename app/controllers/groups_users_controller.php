@@ -6,16 +6,18 @@ class GroupsUsersController extends AppController {
 	/**
 	 * \brief addFriend optionally takes a user id and adds them to your friends list.
 	 *
-	 * If a user id is specified, and post data is empty, a page is loaded asking which list you want to add the user to.  
+	 * If a user id is specified, and post data is empty, a page is loaded asking which list you want to add the user to.
 	 * Once there is post data there should be the frind ID, and the list ID, then add them to the DB
 	 */
 	public function addFriend($fid = null, $confirm = null, $cid = null) {
 		$this->layout = 'tall_header_w_sidebar';
 
-		if (!$this->GroupsUser->isFriend($this->currentUser['User']['id'], $fid)) {
-			if ($this->GroupsUser->requestSent($this->currentUser['User']['id'], $fid)) {
-				$this->Session->setFlash(__('friend_request_already_sent', true));
-				$this->redirect($this->referer());
+		if (!is_null($fid)) {
+			if (!$this->GroupsUser->isFriend($this->currentUser['User']['id'], $fid)) {
+				if ($this->GroupsUser->requestSent($this->currentUser['User']['id'], $fid)) {
+					$this->Session->setFlash(__('friend_request_already_sent', true));
+					$this->redirect($this->referer());
+				}
 			}
 		}
 
@@ -45,16 +47,16 @@ class GroupsUsersController extends AppController {
 				$this->Session->setFlash(__('friend_added_successfully', true));
 			}
 			$slug = $this->GroupsUser->User->getSlugFromId($uid);
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['slug']));
 		// Display the adding page
 		} else {
 			$friendLists = $this->GroupsUser->User->Group->getFriendLists(array(
 				'uid' => $this->currentUser['User']['id'],
 				'type' => 'list',
 				));
-				
+
 			$slug = $this->GroupsUser->User->getSlugFromId($fid);
-			$friend = $this->GroupsUser->User->getProfile($fid);
+			$friend = $this->Profile->getProfile($slug, true);
 			$this->set(compact('confirm', 'cid', 'friend', 'friendLists'));
 		}
 	}
@@ -86,7 +88,7 @@ class GroupsUsersController extends AppController {
 		$this->set(compact('friends', 'user'));
 	}
 
-	
+
 
 }
 

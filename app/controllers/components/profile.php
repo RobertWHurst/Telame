@@ -9,7 +9,7 @@ class ProfileComponent extends Object {
 	}
 
 
-	function getProfile($slug) {
+	function getProfile($slug, $bypassAcl = false) {
 		$this->User = Classregistry::init('User');
 
 		$canView = false;
@@ -22,13 +22,13 @@ class ProfileComponent extends Object {
 			$user = $this->User->getProfile($slug);
 		}
 
-		if(!$user){
+		if(!$user) {
 			$this->controller->redirect(array('controller' => 'users', 'action' => 'profile', $this->controller->currentUser['User']['slug']));
 			exit;
 		}
 
 		// check if the requested user is yourself
-		if ($this->controller->currentUser['User']['id'] != $user['User']['id']) {
+		if ($this->controller->currentUser['User']['id'] != $user['User']['id'] && !$bypassAcl) {
 
 			// Do permission check
 			if($this->Aacl->checkPermissions($user['User']['id'], $this->controller->currentUser['User']['id'], 'profile')) {
