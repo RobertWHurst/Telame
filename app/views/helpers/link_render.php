@@ -4,15 +4,25 @@ class LinkRenderHelper extends AppHelper {
 	// if you leave it null, or set it to something that we can't execute, we will try and locate it with 'which wkhtmltoimage' below
 	var $wkhtmltoimage = null;
 
-	public function link($link, $user) {
+	public function link($link, $user, $options = array()) {
 		// make sure we have $this->wkhtmltoimage set properly
 		if (!$this->findWkFile()) {
 			return;
 		}
+
+		$options = array_merge(array(
+			'width' => 1024,
+			'heigh' => 682,
+		), $options);
+
 		// generate a random filename
 		$filename = rand() . '.jpg';
 		// wkhtmltoimage www.example.com /filename.jpg
-		exec($this->wkhtmltoimage . ' ' . $link . ' ' . DS . 'tmp' . DS . $filename);
+		exec($this->wkhtmltoimage .
+			' --crop-w ' . $options['width'] .
+			' --crop-h ' . $options['height'] .
+			$link . ' ' .
+			DS . 'tmp' . DS . $filename);
 
 		// set to the current user's directory
 		$baseDir = USER_DIR . $user['User']['home_dir'] . DS . $user['User']['sub_dir'] . DS . $user['User']['id'] . DS . 'image' . DS;
@@ -35,7 +45,7 @@ class LinkRenderHelper extends AppHelper {
 			// set the global var
 			$this->wkhtmltoimage = $output[0];
 		}
-		
+
 		return true;
 	}
 
