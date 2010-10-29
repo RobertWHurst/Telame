@@ -36,7 +36,16 @@ $links = array(
 			'action' => 'friends'
 		),
 		'classes' => 'button'
-	)
+	),
+	array(
+		'label' => __('services', true),
+		'url' => array(
+			'slug' => $currentUser['User']['slug'], 
+			'controller' => 'services',
+			'action' => 'index'
+		),
+		'classes' => 'button'
+	),
 );
 
 //allow the view to add the the links

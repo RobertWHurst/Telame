@@ -160,5 +160,4 @@ class WallPost extends AppModel {
 		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
 		$this->delete($id);
 	}
-
 }

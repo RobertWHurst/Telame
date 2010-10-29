@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	public $components = array('RequestHandler');
+	public $components = array('OauthConsumer', 'RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	function beforeFilter() {
@@ -23,6 +23,16 @@ class WallPostsController extends AppController {
 	}
 
 	function add($reply_id = false) {
+
+		$accessToken = $this->WallPost->User->Oauth->getAccessToken('Twitter', $this->currentUser['User']['id']);
+		if ($accessToken) {
+			App::import('Helper', 'Text');
+			$text = new TextHelper();
+			$this->OauthConsumer->begin('Twitter');
+
+			$this->OauthConsumer->post($accessToken->key, $accessToken->secret, 'http://twitter.com/statuses/update.json', array('status' => $text->truncate($this->data['WallPost']['post'], 140)));
+		}
+
 		$isAjax = $this->RequestHandler->isAjax();
 
 		//make sure there is form data to process, if not there is not use in continuing
@@ -187,12 +197,12 @@ class WallPostsController extends AppController {
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
 
 		//if not an ajax call redirect from the referer
-    	if($isAjax){
-    		echo 'true';
-    	}
-    	else
-    		$this->redirect($this->referer());
-    	exit;
+		if($isAjax){
+			echo 'true';
+		}
+		else
+			$this->redirect($this->referer());
+		exit;
 	}
 
 	function like($id) {
@@ -201,12 +211,12 @@ class WallPostsController extends AppController {
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
 
 		//if not an ajax call redirect from the referer
-    	if($isAjax){
-    		echo 'true';
-    	}
-    	else
-    		$this->redirect($this->referer());
-    	exit;
+		if($isAjax){
+			echo 'true';
+		}
+		else
+			$this->redirect($this->referer());
+		exit;
 	}
 }
 ?>

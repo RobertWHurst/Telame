@@ -64,6 +64,12 @@
 	Router::connect('/admin/sendinvite', array('controller' => 'settings', 'action' => 'inviteemail', 'admin' => true));
 	Router::connect('/admin', array('controller' => 'settings', 'action' => 'betakeys', 'admin' => true));
 
+// External sources
+	// Oauth
+	Router::connect('/services/oauth/*', array('controller' => 'oauths', 'action' => 'oauth'));
+	Router::connect('/services/oauth_callback/*', array('controller' => 'oauths', 'action' => 'oauth_callback'));
+
+
 // User info
 	// Calendar
 	Router::connect('/:slug/calendar/add/*', array('controller' => 'events', 'action' => 'add'), array('routeClass' => 'SlugRoute'));
@@ -144,6 +150,8 @@
 	Router::connect('/:slug/settings/friends', array('controller' => 'settings', 'action' => 'friends'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/settings/groups/*', array('controller' => 'settings', 'action' => 'groups'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/settings/gallery', array('controller' => 'settings', 'action' => 'gallery'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/settings/services', array('controller' => 'services', 'action' => 'index'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/settings/contacts', array('controller' => 'services', 'action' => 'contacts'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/settings/ug/*', array('controller' => 'settings', 'action' => 'gallery'));
 
 	// Wall Posts
