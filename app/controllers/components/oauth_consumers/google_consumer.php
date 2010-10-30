@@ -1,5 +1,6 @@
 <?php
-
+// http://google.com/a
+// admin@telame.com 
 class GoogleConsumer extends AbstractConsumer {
 	// These are sored in order used in the OAuth sequence
 	public $requestToken = null;

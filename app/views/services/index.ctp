@@ -58,5 +58,15 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 			}
 ?>
 		</p>
+		<h1>Yahoo</h1>
+		<p>
+<?php		if(in_array('Yahoo', $connectedServices)) {
+				echo 'Yahoo ' . __('already_connected', true);
+				echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', 'yahoo'));		
+			} else {
+				echo $html->link(__('connect_to_', true) . ' Yahoo', array('controller' => 'oauths', 'action' => 'oauth', 'yahoo'));
+			}
+?>
+		</p>
 	</div>
 </div>

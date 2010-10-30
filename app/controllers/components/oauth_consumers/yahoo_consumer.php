@@ -1,6 +1,6 @@
 <?php
-// ericfri
-class TwitterConsumer extends AbstractConsumer {
+// telame@ymail.com
+class YahooConsumer extends AbstractConsumer {
 	// These are sored in order used in the OAuth sequence
 	public $requestToken = null;
 	public $authorizeToken = null;
@@ -8,13 +8,13 @@ class TwitterConsumer extends AbstractConsumer {
 
 	public function __construct() {
 		$this->requestToken = array(
-			'url' => 'http://twitter.com/oauth/request_token',
+			'url' => 'https://api.login.yahoo.com/oauth/v2/get_request_token', 
 			'params' => array()
 		);
 
-		$this->authorizeToken = 'http://twitter.com/oauth/authorize?oauth_token=';
+		$this->authorizeToken = 'https://api.login.yahoo.com/oauth/v2/request_auth';
 
-		$this->accessToken = 'http://twitter.com/oauth/access_token';
+		$this->accessToken = 'https://api.login.yahoo.com/oauth/v2/get_token';
 
 		// key, secret
 		parent::__construct('key', 'secret');
