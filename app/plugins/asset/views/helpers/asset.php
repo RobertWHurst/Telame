@@ -166,7 +166,7 @@ class AssetHelper extends Helper {
 			}
 		}
 		
-		if(!empty($holding)) {
+		if( ! empty($holding) ) {
 			$this->assets[$slot] = array('type' => $prev, 'assets' => $holding);
 		}
 	}

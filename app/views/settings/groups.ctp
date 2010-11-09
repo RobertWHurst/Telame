@@ -6,13 +6,15 @@ $html->css(array(
 	'summary',
 	'tall_header',
 	'main_sidebar',
-	'settings/settings'
+	'settings/settings',
+	'slider'
 ), null, array('inline' => false));
 $js = array(
 	'jquery',
 	'base',
 	'main_sidebar',
-	'settings/settings'
+	'settings/settings',
+	'telasource.slider'
 );
 foreach ($js as $j) {
 	$javascript->link($j, false);
@@ -27,6 +29,35 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 	<?php echo $this->element('settings/navigation'); ?>
 </div>
 <div id="page_body" class="clearfix">
+	----------
+<form action="" method="post">
+	<div id="slider_test">
+		<div id="slider">
+
+			<label for="slider-allow">Allow</label>
+			<input id="slider-allow" type="radio" name="slider" value="allow">
+
+			<label for="slider-block">Block</label>
+			<input id="slider-block" type="radio" name="slider" value="block" checked>
+
+			<label for="slider-inherit">Default</label>
+			<input id="slider-inherit" type="radio" name="slider" value="inherit">
+
+		</div>
+
+
+		<div id="slid">
+
+			<label for="slid-allow">Allow</label>
+			<input id="slid-allow" type="radio" name="slid" value="allow">
+
+			<label for="slid-block">Block</label>
+			<input id="slid-block" type="radio" name="slid" value="block" checked>
+
+		</div>
+	</div>
+</form>
+	----------
 	<div id="group_permissions">
 		<div class="groups_list clearfix">
 			<h1><?php echo __('groups', true); ?></h1>
