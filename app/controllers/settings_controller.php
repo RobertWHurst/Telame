@@ -2,7 +2,6 @@
 class SettingsController extends AppController {
 
 	public $components = array('Email');
-	public $helpers = array('Acl');
 	public $uses = array();
 
 	public function beforeFilter(){
@@ -21,7 +20,7 @@ class SettingsController extends AppController {
 		parent::beforefilter();
 
 		//set the layout
-		$this->layout = 'tall_header_w_sidebar';
+		$this->layout = 'new_tall_header_w_sidebar';
 	}
 
 	public function basic() {

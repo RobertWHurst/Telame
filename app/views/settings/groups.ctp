@@ -1,24 +1,19 @@
 <?php
 //INCLUDES
-$html->css(array(
-	'base',
-	'gallery',
-	'summary',
-	'tall_header',
-	'main_sidebar',
-	'settings/settings',
-	'slider'
-), null, array('inline' => false));
-$js = array(
-	'jquery',
-	'base',
-	'main_sidebar',
-	'settings/settings',
-	'telasource.slider'
-);
-foreach ($js as $j) {
-	$javascript->link($j, false);
-}
+$hrl->css(array(
+	array(
+		'key' => 'settings',
+		'url' => 'settings/settings',
+	),
+	array(
+		'key' => 'slider',
+		'url' => 'slider'
+	)
+));
+$hrl->js(array(
+	array( 'key' => 'settings', 'url' => 'settings/settings', 'requires' => array( 'base', 'jquery' ) ),
+	array( 'key' => 'telasource.slider', 'url' => 'telasource.slider', 'requires' => array( 'jquery' ) )
+));
 //page title
 $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
 ?>
