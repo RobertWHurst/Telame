@@ -14,21 +14,26 @@
 	echo $html->meta('author', 'Robert Hurst and Eric Friesen');
 
 	$hrl->css(array(
-		array( 'key' => 'base', 'url' => 'base' ),
-		array( 'key' => 'tall_header', 'url' => 'tall_header' ),
-		array( 'key' => 'main_sidebar', 'url' => 'main_sidebar' ),
+		array( 'key' => 'base', 'url' => 'common/base' ),
+		array( 'key' => 'tall_header', 'url' => 'common/tall_header' ),
+		array( 'key' => 'main_sidebar', 'url' => 'common/main_sidebar' ),
 	));
 	$hrl->js(array(
-		array( 'key' => 'jquery', 'url' => 'jquery' ),
-		array( 'key' => 'base', 'url' => 'base', 'requires' => 'jquery' ),
-		array( 'key' => 'main_sidebar', 'url' => 'main_sidebar', 'requires' => array( 'base', 'jquery' ) )
+		array( 'key' => 'jquery', 'url' => 'common/jquery' ),
+		array( 'key' => 'base', 'url' => 'common/base', 'requires' => 'jquery' ),
+		array( 'key' => 'main_sidebar', 'url' => 'common/main_sidebar', 'requires' => array( 'base', 'jquery' ) )
 	));
 
-	//$hrl->merge = false;
-
-	$hrl->css();
-	$hrl->js();
+	$hrl->merge = false;
 ?>
+    <!-- CSS -->
+	<?php $hrl->css(); ?>
+    <!-- END OF CSS -->
+
+    <!-- SCRIPT -->
+	<?php $hrl->js(); ?>
+    <!-- END OF SCRIPT -->
+    
 </head>
 <?php ob_flush(); ?>
 <body>
@@ -64,7 +69,9 @@
 	<div id="modal_screen"></div>
 <?php
 
-	$hrl->print_log( true );
+	if ( Configure::read('debug') > 0 ){
+		$hrl->print_log();
+	}
 ?>
 </body>
 </html>

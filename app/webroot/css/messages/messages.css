@@ -1,7 +1,8 @@
-#messages{
+#messages {
 	padding: 10px;
 }
-#controls{
+
+#controls {
 	display: none;
 	float: right;
 }

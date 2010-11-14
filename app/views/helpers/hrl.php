@@ -256,15 +256,23 @@ class HrlHelper extends AppHelper {
 				$base_path = '';
 			}
 
-			//dump the file to the buffer
-			$Fpointer = @fopen( $base_path . $file['url'] . '.' . $type, 'r' );
+			if( isset( $file['source'] ) ){
 
-			if( $Fpointer && filesize( $base_path . $file['url'] . '.' . $type ) > 0 ){
-				$Fstring = fread( $Fpointer, filesize( $base_path . $file['url'] . '.' . $type ) );
-				fclose( $Fpointer );
+				$Fstring = $file['source'] . "\n";
+
 			} else {
-				$this->log .= "| ! | ERROR: File '{$file['key']}' is corrupt or missing.\n";
-				$Fstring = '';
+
+				//dump the file to the buffer
+				$Fpointer = @fopen( $base_path . $file['url'] . '.' . $type, 'r' );
+
+				if( $Fpointer && filesize( $base_path . $file['url'] . '.' . $type ) > 0 ){
+					$Fstring = fread( $Fpointer, filesize( $base_path . $file['url'] . '.' . $type ) );
+					fclose( $Fpointer );
+				} else {
+					$this->log .= "| ! | ERROR: File '{$file['key']}' is corrupt or missing.\n";
+					$Fstring = '';
+				}
+
 			}
 
 			$this->buffer[$type] .= $Fstring . "\n";
@@ -280,13 +288,19 @@ class HrlHelper extends AppHelper {
 	private function queue( $type, $files ){
 
 		//make sure the files array contains one or more arrays with a key of url
-		if( is_array( $files ) && is_array( $first = reset( $files ) ) && isset( $first['url'] ) ) {
+		if( is_array( $files ) && is_array( $first = reset( $files ) ) && ( isset( $first['url'] ) || isset( $first['source'] ) ) ) {
 
 			foreach( $files as $file ) {
 
 				//parse the file against the default values
 				$file = $this->parse_args($this->default_file_vals[$type], $file, true);
 
+
+                //FIXME: This allows for an easy transition to the new webroot structure
+                //       remove it once the move is complete
+                $file['url'] = 'new/' . $file['url'];
+
+                
 				if( $file['key'] === '' ){
 					$try_key = 0;
 					while( $file['key'] === '' ){
@@ -405,10 +419,18 @@ class HrlHelper extends AppHelper {
 						} else {
 							switch( $type ){
 								case 'css':
-									$output .= $this->Html->css( $file['url'], null, array( 'media' => $file['media'], 'inline' => true ) ) . "\n";
-								break;
+									if( isset( $file['source'] ) ){
+										$output .= '<style>' . $file['source'] . "</style>\n";
+									} else {
+										$output .= $this->Html->css( $file['url'], null, array( 'media' => $file['media'], 'inline' => true ) ) . "\n";
+									}
+									break;
 								case 'js':
-									$output .= $this->Html->script( $file['url'], array( 'inline' => true ) ) . "\n";
+									if( isset( $file['source'] ) ){
+										$output .= '<script>' . $file['source'] . "</script>\n";
+									} else {
+										$output .= $this->Html->script( $file['url'], array( 'inline' => true ) ) . "\n";
+									}
 								break;
 							}
 						}
@@ -430,6 +452,15 @@ class HrlHelper extends AppHelper {
 
 			//get the merged file
 			$bFile = $this->merge( $type );
+
+			switch( $type ){
+				case 'css':
+					$output .= $this->Html->css( '/c' . $type . '/' . $bFile['url'], null, array( 'media' => 'all', 'inline' => true ) ) . "\n";
+				break;
+				case 'js':
+					$output .= $this->Html->script( '/c' . $type . '/' . $bFile['url'], array( 'inline' => true ) ) . "\n";
+				break;
+			}
 
 			switch( $type ){
 				case 'css':

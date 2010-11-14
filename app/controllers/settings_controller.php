@@ -1,8 +1,9 @@
 <?php
 class SettingsController extends AppController {
 
-	public $components = array('Email');
+	public $components = array( 'Email' );
 	public $uses = array();
+	public $helpers = array( 'AclView' );
 
 	public function beforeFilter(){
 		parent::beforeFilter();
@@ -153,7 +154,7 @@ class SettingsController extends AppController {
 		$this->set(compact('friends'));
 	}
 
-	public function groups($gid = null) {
+	public function groups() {
 		if(empty($this->data)) {
 			$this->loadModel('Group');
 
@@ -163,16 +164,10 @@ class SettingsController extends AppController {
 			//get the current user and note their id.
 			$uid = $this->currentUser['User']['id'];
 
-			//create an empty permissions var
-			$permissions = $currentGroup = false;
-
-			if ($gid) {
-				//get the current user's acl data.
-				$this->Group->recursive = -1;
-				// find needs to be of type all or else the aacl won't know the format
-				$group = $this->Group->find('all', array('conditions' => array('Group.id' => Sanitize::clean(intval($gid)))));
-				$permissions = $this->Aacl->getAcoTree($uid, $group);
-			}
+			//get the current user's acl data.
+			$this->Group->recursive = -1;
+			// find needs to be of type all or else the aacl won't know the format
+			$permissions = $this->Aacl->getAcoTree($uid);
 
 			//set the view data
 			$this->set(compact('groups', 'currentGroup', 'permissions'));

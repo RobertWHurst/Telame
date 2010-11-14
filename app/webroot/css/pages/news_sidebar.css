@@ -1,42 +1,50 @@
-#news_sidebar{
+#news_sidebar {
 	width: 289px;
 	float: left;
 }
-#news_sidebar div.news_filters{
+
+#news_sidebar div.news_filters {
 	background: #333;
-	margin:20px;
-	padding:10px;
+	margin: 20px;
+	padding: 10px;
 
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-#news_sidebar div.news_filters h1{
+
+#news_sidebar div.news_filters h1 {
 	font-size: 2em;
 	margin-bottom: 10px;
 	text-align: center;
 }
-#news_sidebar div.news_filters ul{
+
+#news_sidebar div.news_filters ul {
 	list-style: none;
 	margin-left: -41px;
 }
-#news_sidebar div.news_filters li a{
+
+#news_sidebar div.news_filters li a {
 	font-size: 1.6em;
 	text-decoration: none;
 	line-height: 20px;
 	display: block;
 	padding: 10px 20px 10px 60px;
 }
+
 #news_sidebar div.news_filters li:hover a,
-#news_sidebar div.news_filters li.current a{
+#news_sidebar div.news_filters li.current a {
 	background: url(../../img/sidebar_filters.png);
 }
-#news_sidebar div.news_filters li.current a{
+
+#news_sidebar div.news_filters li.current a {
 	color: #c1ef52;
 }
-#news_sidebar div.news_filters li.current:hover a{
+
+#news_sidebar div.news_filters li.current:hover a {
 	background-position: 0 0;
 }
-#news_sidebar div.news_filters li:hover a{
+
+#news_sidebar div.news_filters li:hover a {
 	background-position: 0 -40px;
 }

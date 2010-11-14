@@ -1,25 +1,27 @@
 (function($){
-	
+
 	var complexSliders = {};
 	var buttonTypes,
 		aniSpeed,
 		markup,
 		methods = {
-		
-		/* 
+
+
+
+		/*
 		 * -- CREATES THE SWITCH ON LOAD --
 		 */
 		'init': function( args ) {
 			// DEFAULT OPTIONS FOR ON LOAD
 			var options = {
-				
+
 				'parent': null,
 				'speed': 200,
 				'disabled': false,
 				'callback': function(){}
-				
+
 			};
-			
+
 			// merge the options with the args
 			$.fn.extend( options, args );
 
@@ -75,24 +77,24 @@
 							'<div id="' + de.attr( 'id' ) + '-slide-block" class="target-block"></div>' +
 						'</div>';
 					}
-					
+
 					//hide the original radio inputs
 					//de.children().hide();
 
 					//add the new markup and class
 					de.addClass( 'TS_slider' ).append( markup );
-					
+
 					//create a record for this switch
 					complexSliders[de.attr( 'id' )] = {
 						'value': null,
 						'parent': null
 					};
-					
+
 					//loop through the radio inputs and find the one that is active
 					de.children( 'input:radio' ).each(function() {
-						
+
 						if( $( this ).attr( 'checked' ) ) {
-							
+
 							complexSliders[de.attr( 'id' )].value = $( this ).val();
 
 							switch( $( this ).val() ){
@@ -456,96 +458,96 @@
 
 					}
 				}
-				
+
 			} else {
-				
+
 				return complexSliders[de.attr( 'id' )].value;
-				
+
 			}
-			
+
 		},
-		/* 
+		/*
 		 * ---------------------------------------------
 		 */
-		
-		
-		
-		/* 
+
+
+
+		/*
 		 * DISABLES THE SWITCH
 		 */
 		'disable': function() {
-			
+
 			//save the element
 			de = $( this );
-				
+
 			de.addClass( 'disabled' ).children( 'input:radio' ).each(function() {
-						
+
 				$( this ).attr( 'disabled', 'disabled' );
-						
+
 			});
-			
+
 		},
-		
-		
-		
-		/* 
+
+
+
+		/*
 		 * ENABLES THE SWITCH
 		 */
 		'enable': function() {
-			
+
 			//save the element
 			de = $( this );
-					
+
 			//set all of the radio inputs to disabled
 			de.removeClass( 'disabled' ).children( 'input:radio' ).each(function() {
-						
+
 				$( this ).removeAttr( 'disabled' );
-						
+
 			});
-			
+
 		},
-		/* 
+		/*
 		 * -------------------
 		 */
-		
-		
-		
-		/* 
+
+
+
+		/*
 		 * SETS A NEW PARENT OR RETURNS THE CURRENT PARENT ID
 		 */
 		'parent': function( parent ) {
-			
+
 			var de = $( this );
-			
+
 			if( parent ) {
-					
+
 				//select the parent
 				if( typeof parent !== 'object' ) {
 					parent = $( parent );
 				}
-				
+
 				//make sure the parent is not the current switch
 				if( parent.attr('id') !== de.attr('id') ){
-					
+
 					//prevent loop relationships
 					if( parent.complexSlider('parent') !== de) {
-					
+
 						complexSliders[de.attr('id')].parent = parent;
-					
+
 					} else {
-						
+
 						$.error( 'Complex slider "' + de.attr('id') + '" cannot be the parent of "' + parent.attr('id') + '"' );
-						
+
 					}
-					
+
 				} else {
-							
+
 					$.error( 'Complex slider "' + de.attr('id') + '" cannot be its own parent.' );
-					
+
 				}
-					
+
 			} else {
-				
+
 				if( complexSliders[de.attr('id')].parent ) {
 					return complexSliders[de.attr('id')].parent;
 				} else {
@@ -554,23 +556,23 @@
 			}
 		}
 	};
-	
-	
-	
+
+
+
 	$.fn.complexSlider = function( method ){
-		
+
 		if( methods[method] ) {
-			
+
 			return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
-			
+
 		} else if( typeof method === 'object' || ! method ) {
-			
+
 			return methods.init.apply( this, arguments );
-			
+
 		} else {
 			$.error( 'Method "' + method + '" does not exist on jQuery.complexSlider' );
 		}
 	}
-	
-	
+
+
 })( jQuery );

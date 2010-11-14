@@ -1,28 +1,32 @@
-#profile_wall{
+#profile_wall {
 	width: 478px;
 	float: left;
 	border-right: 1px solid #787878;
 }
-#profile_wall p.no_posts{
+
+#profile_wall p.no_posts {
 	font-size: 1.6em;
 	text-align: center;
 	margin: 60px 0;
 }
-#profile_wall_input{
+
+#profile_wall_input {
 	position: relative;
 	background: #9b9b9b;
 	z-index: 1;
 	margin: 15px;
 }
-#profile_wall_input p.process{
-	font-size:16px;
-	text-align:center;
+
+#profile_wall_input p.process {
+	font-size: 16px;
+	text-align: center;
 	font-weight: bold;
 	color: #fff;
 	line-height: 28px;
-	
+
 }
-#profile_wall_input label{
+
+#profile_wall_input label {
 	position: absolute;
 	top: 9px;
 	left: 11px;
@@ -31,22 +35,26 @@
 	cursor: text;
 	display: none;
 }
+
 #profile_wall_input input[type="text"],
-#profile_wall_input textarea{
+#profile_wall_input textarea {
 	font-size: 16px;
 	padding: 3px 50px 3px 3px;
 	width: 385px;
 	border: 1px solid #949494;
 	background: #dedede;
 }
-#profile_wall_input input[type="text"]{
+
+#profile_wall_input input[type="text"] {
 	height: 20px;
 }
-#profile_wall_input textarea{
+
+#profile_wall_input textarea {
 	font-family: Helvetica, Arial, sans-serif;
 	resize: none;
 }
-#profile_wall_input input[type="submit"]{
+
+#profile_wall_input input[type="submit"] {
 	position: absolute;
 	top: 7px;
 	right: 7px;
@@ -55,42 +63,50 @@
 	width: 50px;
 	cursor: pointer;
 }
+
 #profile_wall_input.active input[type="text"],
-#profile_wall_input.active textarea{
+#profile_wall_input.active textarea {
 	border: 1px solid #669b00;
 	background: #fff;
 }
+
 #profile_wall_input.active label,
-#profile_wall_input.active input[type="submit"]{
+#profile_wall_input.active input[type="submit"] {
 	color: #669b00;
 }
-#profile_wall_input.focus input[type="submit"]{
+
+#profile_wall_input.focus input[type="submit"] {
 	font-weight: bold;
 	text-decoration: underline;
 }
-#profile_wall_input.focus input:hover[type="submit"]{
+
+#profile_wall_input.focus input:hover[type="submit"] {
 	color: #86cf00;
 }
+
 #profile_wall_input div.box.top,
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.top.right,
 #profile_wall_input div.box.bottom,
 #profile_wall_input div.box.bottom.left,
-#profile_wall_input div.box.bottom.right{
+#profile_wall_input div.box.bottom.right {
 	height: 10px;
 }
+
 #profile_wall_input div.box.top,
-#profile_wall_input div.box.bottom{
+#profile_wall_input div.box.bottom {
 	position: absolute;
 	width: 100%;
 	background: url(../img/users/wall_input_h.png);
 	z-index: 2;
 }
-#profile_wall_input div.box.top{
+
+#profile_wall_input div.box.top {
 	top: -10px;
 	background-position: 0 0;
 }
-#profile_wall_input div.box.bottom{
+
+#profile_wall_input div.box.bottom {
 	bottom: -10px;
 	background-position: 0 -10px;
 }
@@ -100,101 +116,124 @@
 #profile_wall_input div.box.bottom.left,
 #profile_wall_input div.box.bottom.right,
 #profile_wall_input div.box.left,
-#profile_wall_input div.box.right{
-	width:10px;
+#profile_wall_input div.box.right {
+	width: 10px;
 	position: absolute;
 }
+
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.top.right,
 #profile_wall_input div.box.bottom.left,
-#profile_wall_input div.box.bottom.right{
+#profile_wall_input div.box.bottom.right {
 	z-index: 3;
-	top:0;
+	top: 0;
 	background: url(../img/users/wall_input_r.png);
 }
+
 #profile_wall_input div.box.top.left,
 #profile_wall_input div.box.bottom.left,
-#profile_wall_input div.box.left{
+#profile_wall_input div.box.left {
 	left: -10px;
 }
+
 #profile_wall_input div.box.top.right,
 #profile_wall_input div.box.bottom.right,
-#profile_wall_input div.box.right{
+#profile_wall_input div.box.right {
 	right: -10px;
 }
-#profile_wall_input div.box.top.left{
+
+#profile_wall_input div.box.top.left {
 	background-position: 0 0;
 }
-#profile_wall_input div.box.top.right{
+
+#profile_wall_input div.box.top.right {
 	background-position: -10px 0;
 }
-#profile_wall_input div.box.bottom.left{
+
+#profile_wall_input div.box.bottom.left {
 	background-position: 0 -10px;
 }
-#profile_wall_input div.box.bottom.right{
+
+#profile_wall_input div.box.bottom.right {
 	background-position: -10px -10px;
 }
+
 #profile_wall_input div.box.left,
-#profile_wall_input div.box.right{
+#profile_wall_input div.box.right {
 	background: url(../img/users/wall_input_v.png);
 	height: 100%;
 	z-index: 2;
 }
-#profile_wall_input div.box.left{
+
+#profile_wall_input div.box.left {
 	background-position: 0 0;
 }
-#profile_wall_input div.box.right{
+
+#profile_wall_input div.box.right {
 	background-position: -10px 0;
 }
-#profile_wall_input div.box.inner{
+
+#profile_wall_input div.box.inner {
 	position: relative;
 	z-index: 3;
-	padding:4px;
+	padding: 4px;
 }
 
-#profile_wall_input.focus{
+#profile_wall_input.focus {
 	background: #d3ef91;
 }
-#profile_wall_input.focus div.box.top{
+
+#profile_wall_input.focus div.box.top {
 	background-position: 0 -20px;
 }
-#profile_wall_input.focus div.box.bottom{
+
+#profile_wall_input.focus div.box.bottom {
 	background-position: 0 -30px;
 }
-#profile_wall_input.focus div.box.top.left{
+
+#profile_wall_input.focus div.box.top.left {
 	background-position: -20px 0;
 }
-#profile_wall_input.focus div.box.top.right{
+
+#profile_wall_input.focus div.box.top.right {
 	background-position: -30px 0;
 }
-#profile_wall_input.focus div.box.bottom.left{
+
+#profile_wall_input.focus div.box.bottom.left {
 	background-position: -20px -10px;
 }
-#profile_wall_input.focus div.box.bottom.right{
+
+#profile_wall_input.focus div.box.bottom.right {
 	background-position: -30px -10px;
 }
-#profile_wall_input.focus div.box.left{
+
+#profile_wall_input.focus div.box.left {
 	background-position: -20px 0;
 }
-#profile_wall_input.focus div.box.right{
+
+#profile_wall_input.focus div.box.right {
 	background-position: -30px 0;
 }
-#profile_wall_posts{
+
+#profile_wall_posts {
 	padding: 0 10px;
 }
-#profile_wall_posts p.process{
+
+#profile_wall_posts p.process {
 	text-align: center;
 	font-size: 1.6em;
 }
-#profile_wall_posts div.more{
+
+#profile_wall_posts div.more {
 	padding: 10px;
 	background: #444;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-#profile_wall_posts div.more a{
+
+#profile_wall_posts div.more a {
 	font-size: 1.6em;
 	text-align: center;
 	display: block;

@@ -1,16 +1,18 @@
-#news_feed{
+#news_feed {
 	min-height: 600px;
 	float: left;
 }
-#page_head a.rss_link{
-	top:26px;
-	right:20px;
+
+#page_head a.rss_link {
+	top: 26px;
+	right: 20px;
 	position: absolute;
 	text-indent: -9999px;
 	background: url(../../img/icons/rss_big.png) no-repeat;
 	height: 32px;
 	width: 32px;
 }
-#page_head a.rss_link:hover{
+
+#page_head a.rss_link:hover {
 	background: url(../../img/icons/rss_big_add.png) no-repeat;
 }
