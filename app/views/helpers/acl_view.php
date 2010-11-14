@@ -29,7 +29,7 @@ class AclViewHelper extends AppHelper {
 		<div class="permissions_table_wrapper">
 			<div class="permissions_table">
 				<?php $this->renderGroupList( $groups ); ?>
-				<div class="cell_scroll_area_wrapper" style="height: <?php echo 42 + ( 43 * count( $groups ) ); ?>px;">
+				<div class="cell_scroll_area_wrapper" style="height: <?php echo 42 + ( 53 * count( $groups ) ); ?>px;">
 					<div class="cell_scroll_area" style="width: <?php echo 151 * count( $acos ); ?>px;">
 <?php
 						foreach( $acos as $aco ){
