@@ -2,8 +2,7 @@
 
 class AclViewHelper extends AppHelper {
 
-    public $helpers = array( 'Hrl' );
-	
+    public $helpers = array( 'Form', 'Hrl' );
 	
 	/**
 	 * Renders the markup for a permissions table
@@ -30,7 +29,7 @@ class AclViewHelper extends AppHelper {
 		<div class="permissions_table_wrapper">
 			<div class="permissions_table">
 				<?php $this->renderGroupList( $groups ); ?>
-				<div class="cell_scroll_area_wrapper" style="height: <?php echo 44 + ( 43 * count( $groups ) ); ?>px;">
+				<div class="cell_scroll_area_wrapper" style="height: <?php echo 42 + ( 43 * count( $groups ) ); ?>px;">
 					<div class="cell_scroll_area" style="width: <?php echo 151 * count( $acos ); ?>px;">
 <?php
 						foreach( $acos as $aco ){
@@ -100,18 +99,23 @@ class AclViewHelper extends AppHelper {
 							//render the group info
 ?>
 							<div class="cell group_<?php echo $group['Group']['id']; ?> aco_<?php echo $aco['Aco']['id']; ?>">
+
 								<div id="<?php echo $sid; ?>" class="slider">
-
-									<label for="slider-allow-<?php echo $sid; ?>">Allow</label>
-									<input id="slider-allow-<?php echo $sid; ?>" class="allow" type="radio" name="<?php echo $sid; ?>" value="1" <?php echo ( $group['Group']['canRead'] == 1 ) ? 'checked="checked"' : '' ; ?> />
-
-									<label for="slider-block-<?php echo $sid; ?>">Block</label>
-									<input id="slider-block-<?php echo $sid; ?>" class="block" type="radio" name="<?php echo $sid; ?>" value="-1" <?php echo (  $group['Group']['canRead'] == 0 ) ? 'checked="checked"' : '' ; ?> />
-
-									<?php if( false ){ //will be if the setting has a parent ?>
-										<label for="slider-inherit-<?php echo $sid; ?>">Default</label>
-										<input id="slider-inherit-<?php echo $group['Group']['id']; ?>" class="inherit" type="radio" name="<?php echo $sid; ?>" value="0" <?php echo (  $group['Group']['canRead'] == 2 ) ? 'checked="checked"' : '' ; ?> />
-									<?php } ?>
+<?php
+									echo $this->Form->input(
+										(!is_null($parent_id) ? $parent_id . '.' : '') . $aco['Aco']['alias'] . '.Group_' . $group['Group']['id'],
+										array(
+											'type' => 'radio',
+											'default' => $group['Group']['canRead'],
+											'options' => array(
+												'0' => __('block', true),
+												'1' => __('allow', true),
+												'2' => __('inherit', true)
+											),
+											'legend' => false
+										)
+									);
+?>
 								</div>
 							</div>
 <?php

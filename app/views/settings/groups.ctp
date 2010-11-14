@@ -20,5 +20,8 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 	<?php echo $this->element('settings/navigation'); ?>
 </div>
 <div id="page_body" class="clearfix">
-	<?php echo $aclView->renderTable( $permissions ); ?>
+	<?php krumo( $permissions ); ?>
+	<?php echo $form->create('Acl', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups'))); ?>
+		<?php echo $aclView->renderTable( $permissions ); ?>
+	<?php echo $form->end( __('save_permissions', true) ); ?>
 </div>

@@ -1,6 +1,6 @@
 $(function(){
 
-	var speed = 400;
+	var speed = 200;
 	
 	var methods = {
 		'initCol': function( col ){
@@ -35,18 +35,43 @@ $(function(){
 	var permTbl = $( 'div.permissions_table' );
 	var acoCols = $( 'div.aco_column', permTbl );
 	var acoCells = $( 'div.cell', permTbl );
-
+	
 	//show the groups column
-	setTimeout(function(){
-		$( 'div.groups_column' ).fadeIn( speed );
-	}, speed);
+	$( 'div.groups_column' ).fadeIn( speed );
+
+	//add classes for each radio input
+	acoCells.each(function(){
+
+		//find the radio inputs
+		$( this ).find( 'input:radio' ).each(function(){
+			var value = $( this ).val();
+
+			switch( value ){
+				case '0':
+					$( this ).addClass( 'block' );
+				break;
+				case '1':
+					$( this ).addClass( 'allow' );
+				break;
+				case '2':
+					$( this ).addClass( 'inherit' );
+				break;
+			}
+		});
+
+	});
 
 	//process each column
+	var i = 0;
 	acoCols.each(function(){
 
 		//get the current column
 		var col = $(this);
-		methods.initCol( col );
+		
+		setTimeout(function(){
+			methods.initCol( col );
+		}, i * 200);
 
+		i += 1;
 	});
 });

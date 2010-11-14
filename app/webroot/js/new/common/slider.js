@@ -34,7 +34,7 @@
 				var de = $( this );
 
 				//remove the parent if only two inputs are present
-				if( de.children( 'input:radio' ).length == 2 ){
+				if( de.find( 'input:radio' ).length == 2 ){
 					options.parent = false;
 				}
 
@@ -79,7 +79,7 @@
 					}
 
 					//hide the original radio inputs
-					//de.children().hide();
+					de.children().hide();
 
 					//add the new markup and class
 					de.addClass( 'TS_slider' ).append( markup );
@@ -91,7 +91,7 @@
 					};
 
 					//loop through the radio inputs and find the one that is active
-					de.children( 'input:radio' ).each(function() {
+					de.find( 'input:radio' ).each(function() {
 
 						if( $( this ).attr( 'checked' ) ) {
 
@@ -345,20 +345,20 @@
 		'validate': function( de ) {
 
 			//make sure the dom element has at least two radio inputs
-			if( de.children( 'input:radio' ).length > 1 ) {
+			if( de.find( 'input:radio' ).length > 1 ) {
 
 				//grab the name of the current input to create a name var to compare to
-				var lastName = de.children( 'input:radio' ).eq( 0 ).attr( 'name' );
+				var lastName = de.find( 'input:radio' ).eq( 0 ).attr( 'name' );
 				var requiredClasses;
 
-				if( de.children( 'input:radio' ).length === 3 ){
+				if( de.find( 'input:radio' ).length === 3 ){
 					//set the required ids
 					requiredClasses = {
 						'allow': false,
 						'inherit': false,
 						'block': false
 					};
-				} else if( de.children( 'input:radio' ).length == 2 ){
+				} else if( de.find( 'input:radio' ).length == 2 ){
 					//set the required ids
 					requiredClasses = {
 						'allow': false,
@@ -367,7 +367,7 @@
 				}
 
 				//for each of the radio inputs compare the name of the input to the last
-				de.children( 'input:radio' ).each(function() {
+				de.find( 'input:radio' ).each(function() {
 
 					var key;
 					for( key in requiredClasses ){
@@ -423,7 +423,7 @@
 				if( ! de.hasClass( 'disabled' ) ){
 
 					//loop through the rdio inputs and find the one that matches the given value
-					de.children( 'input:radio' ).each(function() {
+					de.find( 'input:radio' ).each(function() {
 
 						if( $( this ).val() === newValue ) {
 							//set the new value
@@ -480,7 +480,7 @@
 			//save the element
 			de = $( this );
 
-			de.addClass( 'disabled' ).children( 'input:radio' ).each(function() {
+			de.addClass( 'disabled' ).find( 'input:radio' ).each(function() {
 
 				$( this ).attr( 'disabled', 'disabled' );
 
@@ -499,7 +499,7 @@
 			de = $( this );
 
 			//set all of the radio inputs to disabled
-			de.removeClass( 'disabled' ).children( 'input:radio' ).each(function() {
+			de.removeClass( 'disabled' ).find( 'input:radio' ).each(function() {
 
 				$( this ).removeAttr( 'disabled' );
 

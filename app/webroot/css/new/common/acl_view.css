@@ -26,7 +26,12 @@
 .permissions_table .cell_scroll_area_wrapper {
 	overflow: hidden;
 	position: relative;
-	border-right: 1px solid #aaa;
+	border: 1px solid #aaa;
+}
+.permissions_table .cell_scroll_area {
+	position: absolute;
+	top: -1px;
+	left: -1px;
 }
 .permissions_table .aco_column {
 	float: left;
