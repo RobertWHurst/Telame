@@ -46,7 +46,6 @@ $(function(){
 
 		//get the current column
 		var col = $(this);
-
 		methods.initCol( col );
 
 	});
