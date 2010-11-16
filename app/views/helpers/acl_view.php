@@ -79,7 +79,6 @@ class AclViewHelper extends AppHelper {
 				<h3><?php echo $aco['Aco']['alias']; ?></h3>
 			</div>
 <?php
-//			pr($aco); die();
 			if(isset( $aco['Groups'] ) && $gids != null){
 
 				//id a single id is given put it into an array
@@ -89,6 +88,7 @@ class AclViewHelper extends AppHelper {
 
 				//loop through the group id(s) requested
 				foreach( $gids as $gid ){
+
 					//findout if the aco shares the group id requested
 					foreach( $aco['Groups'] as $group ){
 						if( $gid == $group['Group']['id'] ){

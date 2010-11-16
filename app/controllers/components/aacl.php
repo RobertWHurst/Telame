@@ -40,12 +40,15 @@ class AaclComponent extends Object {
 	// We take the User ID, their groups, and optionally a parent to start
 	// With the info we build an array of ACO's and their children and what groups can do what with them
 	function getAcoTree($uid, $groups = null, $parent = null) {
+		if (!isset($this->controller->ArosAco)) {
+			$this->controller->loadModel('ArosAco');
+		}
 		// If the parent is null, we need they UID, this is the starting point
 		if (is_null($parent)) {
 			// Find the user's lowest level ACO, and only get the ID, it's all we need
-			$parent = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid), 'fields' => 'id'));
+			$parent = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
 		} else {
-			$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $parent['Aco']['id']), 'fields' => 'id'));
+			$parent = $this->Acl->Aco->find('first', array('conditions' => array('id' => $parent['Aco']['id'])));
 		}
 
 		if (is_null($groups)) {
@@ -61,38 +64,26 @@ class AaclComponent extends Object {
 		foreach ($children as $key => $child) {
 			$i = 0;
 
-			// get the aco info for the current user
-			$this->Acl->Aco->recurisve = -1;
-			$tempAco = $this->Acl->Aco->find('first', array(
-				'conditions' => array(
-					'alias' => 'User::' . $this->controller->currentUser['User']['id']
-				)
-			));
-
-			// find the children that belong with the current user
-			$this->Acl->Aco->recurisve = -1;
-			$aco = $this->Acl->Aco->find('first', array(
-				'conditions' => array(
-					'alias' => $child['Aco']['alias'],
-					'lft > ' => $tempAco['Aco']['lft'],
-					'rght <' => $tempAco['Aco']['rght'],
-				)
-			));
-
-			unset($tempAco);
-
 			// also the groups (this could potentially be a LOT of looping, may need tweaking)
 			foreach ($groups as $group) {
-
+				$this->Acl->Aro->recursive = -1;
+				$aro = $this->Acl->Aro->find('first', array(
+					'conditions' => array(
+						'model' => 'Group',
+						'foreign_key' => $group['Group']['id'],
+					)
+				));
 				// loop throug the groups pulled from the db
-				foreach ($aco['Aro'] as $aro) {
-					// if the current groups is the same and the group we've looped through
-					if ($group['Group']['id'] == $aro['foreign_key']['id']) {
-						// set the permission
-						$children[$key]['Groups'][$i] = $group;
-						$children[$key]['Groups'][$i++]['Group']['canRead'] = $aro['Permission']['_read'];
-					}
-				}
+				$arosAco = $this->controller->ArosAco->find('first', array(
+					'conditions' => array(
+						'aco_id' => $child['Aco']['id'],
+						'aro_id' => $aro['Aro']['id'],
+					)
+				));
+
+				// set the permission
+				$children[$key]['Groups'][$i] = $group;
+				$children[$key]['Groups'][$i++]['Group']['canRead'] = ($arosAco['ArosAco']['_read'] == -1 ? 0 : $arosAco['ArosAco']['_read']);
 			}
 			// check if this child has kids
 			if ($this->hasChildren($child)) {
@@ -100,7 +91,6 @@ class AaclComponent extends Object {
 				$children[$key]['Children'] = $this->getAcoTree($uid, $groups, $child);
 			}
 		}
-
 		// return once we've check it all
 		return $children;
 	}
@@ -127,12 +117,39 @@ class AaclComponent extends Object {
 
 				if (!is_array($perm)) {
 					$gid = explode('_', $group);
+
+					$this->Acl->Aco->recurisve = -1;
+					$tempAco = $this->Acl->Aco->find('first', array(
+						'conditions' => array(
+							'alias' => 'User::' . $this->controller->currentUser['User']['id']
+						)
+					));
+
+					// find the children that belong with the current user
+					$this->Acl->Aco->recurisve = -1;
+					$aco = $this->Acl->Aco->find('first', array(
+						'conditions' => array(
+							'alias' => $child['Aco']['alias'],
+							'lft > ' => $tempAco['Aco']['lft'],
+							'rght <' => $tempAco['Aco']['rght'],
+						)
+					));
+
+					unset($tempAco);
+
+					$arosAco = $this->Acl->ArosAco->find('first', array('conditions' => array(
+						'aro_id' => $aco['Aro']['id'],
+						'aco_id' => $aco['Aco']['id'],
+					)));
+					$this->Acl->ArosAco->id = $arosAco['ArosAco']['id'];
+					$this->Acl->ArosAco->set('_read', $perm);
+
 					// can read
-					if ($perm) {
-						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
-					} else {
-						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
-					}
+//					if ($perm) {
+//						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
+//					} else {
+//						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
+//					}
 				} else {
 					$perm = array($group => $perm);
 					// first is array of data, second is parent name
