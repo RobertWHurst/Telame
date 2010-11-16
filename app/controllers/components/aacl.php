@@ -106,6 +106,9 @@ class AaclComponent extends Object {
 	}
 
 	function saveAco($data, $parent = null) {
+		if (!isset($this->controller->ArosAco)) {
+			$this->controller->loadModel('ArosAco');
+		}
 		// we can't use the security tokens here, so remove them
 		if (is_null($parent)) {
 			unset($data['_Token']);
@@ -117,39 +120,43 @@ class AaclComponent extends Object {
 
 				if (!is_array($perm)) {
 					$gid = explode('_', $group);
+					$gid = $gid[1];
 
-					$this->Acl->Aco->recurisve = -1;
-					$tempAco = $this->Acl->Aco->find('first', array(
+					$this->Acl->Aro->recursive = -1;
+					$aro = $this->Acl->Aro->find('first', array(
+						'conditions' => array(
+							'model' => 'Group',
+							'foreign_key' => $gid,
+						)
+					));
+
+					$this->Acl->Aco->recursive = -1;
+					$aco = $this->Acl->Aco->find('first', array(
 						'conditions' => array(
 							'alias' => 'User::' . $this->controller->currentUser['User']['id']
 						)
 					));
 
-					// find the children that belong with the current user
-					$this->Acl->Aco->recurisve = -1;
 					$aco = $this->Acl->Aco->find('first', array(
 						'conditions' => array(
-							'alias' => $child['Aco']['alias'],
-							'lft > ' => $tempAco['Aco']['lft'],
-							'rght <' => $tempAco['Aco']['rght'],
+							'lft >' => $aco['Aco']['lft'],
+							'rght <' => $aco['Aco']['rght'],
+							'alias' => $alias,
 						)
 					));
 
-					unset($tempAco);
-
-					$arosAco = $this->Acl->ArosAco->find('first', array('conditions' => array(
-						'aro_id' => $aco['Aro']['id'],
+					$arosAco = $this->controller->ArosAco->find('first', array('conditions' => array(
+						'aro_id' => $aro['Aro']['id'],
 						'aco_id' => $aco['Aco']['id'],
 					)));
-					$this->Acl->ArosAco->id = $arosAco['ArosAco']['id'];
-					$this->Acl->ArosAco->set('_read', $perm);
 
-					// can read
-//					if ($perm) {
-//						$this->Acl->allow(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
-//					} else {
-//						$this->Acl->deny(array('model' => 'Group', 'foreign_key' => $gid[1]), 'User::' . $uid . $parent . '/' . $alias, 'read');
-//					}
+					$arosAco['ArosAco']['_read'] = $perm;
+					$arosAco['ArosAco']['aro_id'] = $aro['Aro']['id'];
+					$arosAco['ArosAco']['aco_id'] = $aco['Aco']['id'];
+
+					$this->controller->ArosAco->id = $arosAco['ArosAco']['id'];
+					$this->controller->ArosAco->save($arosAco);
+
 				} else {
 					$perm = array($group => $perm);
 					// first is array of data, second is parent name
