@@ -53,23 +53,47 @@ class AaclComponent extends Object {
 			$this->Group = new Group();
 			$groups = $this->Group->getFriendLists(array('uid' => $uid));
 		}
-		
+
 		// Find all the direct children, only direct
 		$children = $this->Acl->Aco->children($parent['Aco']['id'], true);
 
 		// now loop through all the kids
 		foreach ($children as $key => $child) {
 			$i = 0;
+
+			// get the aco info for the current user
+			$this->Acl->Aco->recurisve = -1;
+			$tempAco = $this->Acl->Aco->find('first', array(
+				'conditions' => array(
+					'alias' => 'User::' . $this->controller->currentUser['User']['id']
+				)
+			));
+
+			// find the children that belong with the current user
+			$this->Acl->Aco->recurisve = -1;
+			$aco = $this->Acl->Aco->find('first', array(
+				'conditions' => array(
+					'alias' => $child['Aco']['alias'],
+					'lft > ' => $tempAco['Aco']['lft'],
+					'rght <' => $tempAco['Aco']['rght'],
+				)
+			));
+
+			unset($tempAco);
+
 			// also the groups (this could potentially be a LOT of looping, may need tweaking)
 			foreach ($groups as $group) {
-				// Check if the group is allowed to read the current ACO, and store the result in the $child[$key]['Groups']['id'] array
-				// Use the @ to suppress error messages.
-				// FIXME: Remove the @, this will only work if/when all the groups are stored in the db for the user's acos
-				$result = @$this->Acl->check(array('model' => 'Group', 'foreign_key' => $group['Group']['id']),  $child['Aco']['alias'], 'read');
-				$children[$key]['Groups'][$i] = $group;
-				$children[$key]['Groups'][$i++]['Group']['canRead'] = ($result ? 1 : 0);
-			}
 
+				// loop throug the groups pulled from the db
+				foreach ($aco['Aro'] as $aro) {
+					// if the current groups is the same and the group we've looped through
+					if ($group['Group']['id'] == $aro['foreign_key']['id']) {
+						// set the permission
+						$children[$key]['Groups'][$i] = $group;
+						$children[$key]['Groups'][$i++]['Group']['canRead'] = $aro['Permission']['_read'];
+					}
+				}
+			}
 			// check if this child has kids
 			if ($this->hasChildren($child)) {
 				// Yes? well then get the grandkids, and if required great grandkids, etc
@@ -160,7 +184,7 @@ class AaclComponent extends Object {
 
 		$this->controller->loadModel('ArosAco');
 
-		
+
 		foreach ($groups as $group) {
 			$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => 'Group', 'foreign_key' => $group['Group']['id'])));
 			// i think this is automatically deleted

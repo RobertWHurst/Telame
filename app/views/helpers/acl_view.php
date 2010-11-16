@@ -3,20 +3,20 @@
 class AclViewHelper extends AppHelper {
 
     public $helpers = array( 'Form', 'Hrl' );
-	
+
 	/**
 	 * Renders the markup for a permissions table
 	 */
 	public function renderTable( $acos ){
-		
+
 		//return nothing if the acos array is empty
 		if( ! is_array( $acos ) ){
 			return;
 		}
-		
+
 		//create an empty array for group IDs
 		$groups = $gids = array();
-		
+
 		//figure out the group data and store it
 		foreach($acos as $aco){
 			foreach( $aco['Groups'] as $group ){
@@ -24,7 +24,7 @@ class AclViewHelper extends AppHelper {
 				$groups[$group['Group']['id']] = $group;
 			}
 		}
-		
+
 ?>
 		<div class="permissions_table_wrapper">
 			<div class="permissions_table">
@@ -42,13 +42,13 @@ class AclViewHelper extends AppHelper {
 		</div>
 <?php
 	}
-	
-	
+
+
 	/**
 	 * renders a column for the group list (labels)
 	 */
 	public function renderGroupList( $groups ){
-				
+
 		//return nothing if the groups array is empty
 		if( !is_array( $groups ) ) {
 			return;
@@ -62,10 +62,10 @@ class AclViewHelper extends AppHelper {
 			<?php } ?>
 		</div>
 <?php
-	
+
 	}
-	
-	
+
+
 	/**
 	 * renders an aco and its children. a depth can be set
 	 */
@@ -79,16 +79,16 @@ class AclViewHelper extends AppHelper {
 				<h3><?php echo $aco['Aco']['alias']; ?></h3>
 			</div>
 <?php
+//			pr($aco); die();
 			if(isset( $aco['Groups'] ) && $gids != null){
-				
+
 				//id a single id is given put it into an array
 				if( ! is_array( $gids ) ){
 					$gids = array( $gids );
 				};
-				
-				//loop through the group id(s) requested				
+
+				//loop through the group id(s) requested
 				foreach( $gids as $gid ){
-					
 					//findout if the aco shares the group id requested
 					foreach( $aco['Groups'] as $group ){
 						if( $gid == $group['Group']['id'] ){
@@ -126,36 +126,36 @@ class AclViewHelper extends AppHelper {
 			}
 ?>
 		</div>
-<?php 
-		
+<?php
+
 		//if the aco has children aco(s)
 		if( isset( $aco['Children'] ) ){
 			foreach( $aco['Children'] as $child_aco ){
-				
+
 				//iterate the level
 				$level += 1;
-		
-		
+
+
 				// | 		  !!!KEY!!!  		|
 				// | 							|
 				// | 0 = till the end			|
 				// | 1 = break					|
 				// | # = break after # cycles	|
-				
-				
+
+
 				//if the depth is above 1 or is 0.
 				if( $depth > 1 || $depth == 0 ){
 					$this->renderColumn( $child_aco, $gids, $depth, $aco['Aco']['id'], $level );
 				}
-				
+
 				//break if depth is 1;
 				else{
 					break;
 				}
-				
+
 				//iterate the depth
 				$depth -= 1;
 			}
 		}
-	}	
+	}
 }
