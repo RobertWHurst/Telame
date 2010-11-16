@@ -165,7 +165,7 @@
 		 */
 		'alignTargets': function( de ){
 
-			var key, left, marginLeft, targetOffset;
+			var key, left, targetOffset, slide, target;
 
 			//set up the targets
 			for(key in buttonTypes) {
@@ -174,9 +174,13 @@
 				} else {
 					targetOffset = 0;
 				}
-				left = $( 'div.ss', de ).find( 'div.' + buttonTypes[key] ).position().left;
-				marginLeft = parseInt( $( 'div.ss', de ).find( 'div.' + buttonTypes[key] ).css( 'margin-left' ) ) + targetOffset;
-				$( 'div.st', de ).find( 'div.target-' + buttonTypes[key] ).css( 'margin-left', marginLeft ).css( 'left', left );
+
+				//find the slide
+				slide = $( 'div.ss', de ).find( 'div.' + buttonTypes[key] );
+				target = $( 'div.st', de ).find( 'div.target-' + buttonTypes[key] );
+
+				target.css( 'margin-left', ( parseInt( slide.css( 'margin-left' ) ) || 0 ) + targetOffset );
+				target.css( 'left', ( parseInt( slide.css( 'left' ) ) || 0 ) );
 			}
 		},
 
