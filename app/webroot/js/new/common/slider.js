@@ -441,19 +441,19 @@
 
 					switch( newValue ){
 
-						case $('input:radio.allow', de).val():
+						case $( 'input:radio.allow', de ).val():
 							$( de, 'div.ss').find( 'div.inherit' ).stop().animate( { 'left': '68px' }, aniSpeed );
 							$( de, 'div.st').find( 'div.target-inherit' ).stop().animate( { 'left': '68px' }, aniSpeed );
 							$( de, 'div.ss').find( 'div.block' ).stop().animate( {'left': '68px' }, aniSpeed );
 							$( de, 'div.st').find( 'div.target-block' ).stop().animate( {'left': '68px' }, aniSpeed );
 						break;
-						case $('input:radio.inherit', de).val():
+						case $( 'input:radio.inherit', de ).val():
 							$( de, 'div.ss').find( 'div.inherit' ).stop().animate( {'left': 0 }, aniSpeed );
 							$( de, 'div.st').find( 'div.target-inherit' ).stop().animate( {'left': 0 }, aniSpeed );
 							$( de, 'div.ss').find( 'div.block' ).stop().animate( {'left': '68px' }, aniSpeed );
 							$( de, 'div.st').find( 'div.target-block' ).stop().animate( {'left': '68px' }, aniSpeed );
 						break;
-						case $('input:radio.block', de).val():
+						case $( 'input:radio.block', de ).val():
 							$( de, 'div.ss').find( 'div.inherit' ).stop().animate({'left': 0 }, aniSpeed );
 							$( de, 'div.st').find( 'div.target-inherit' ).stop().animate({'left': 0 }, aniSpeed );
 							$( de, 'div.ss').find( 'div.block' ).stop().animate( {'left': 0 }, aniSpeed );
