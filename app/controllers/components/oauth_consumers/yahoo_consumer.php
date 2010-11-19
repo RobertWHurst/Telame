@@ -3,7 +3,7 @@
 class YahooConsumer extends AbstractConsumer {
 	// These are sored in order used in the OAuth sequence
 	public $requestToken = null;
-	public $authorizeToken = null;
+	public $authorizeUrl = null;
 	public $accessToken = null;
 
 	public function __construct() {
@@ -12,7 +12,7 @@ class YahooConsumer extends AbstractConsumer {
 			'params' => array()
 		);
 
-		$this->authorizeToken = 'https://api.login.yahoo.com/oauth/v2/request_auth';
+		$this->authorizeUrl = 'https://api.login.yahoo.com/oauth/v2/request_auth?oauth_token=';
 
 		$this->accessToken = 'https://api.login.yahoo.com/oauth/v2/get_token';
 

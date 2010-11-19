@@ -25,6 +25,8 @@ class ServicesController extends AppController {
 	public function contacts() {
 		App::import('Xml');
 		$this->loadModel('Oauth');
+
+		// Google contacts
 		$this->OauthConsumer->begin('Google');
 		$accessToken = $this->Oauth->getAccessToken('Google', $this->currentUser['User']['id']);
 
@@ -39,6 +41,27 @@ class ServicesController extends AppController {
 		// Or you can convert simply by calling toArray();
 		$contacts = $xml->toArray();
 		
+
+		$this->OauthConsumer->begin('Yahoo');
+		$accessToken = $this->Oauth->getAccessToken('Yahoo', $this->currentUser['User']['id']);
+
+		$guid = $this->OauthConsumer->get(
+			$accessToken->key,
+			$accessToken->secret,
+			'http://social.yahooapis.com/v1/me/guid'
+		);
+
+		$yahooContacts = $this->OauthConsumer->get(
+			$accessToken->key,
+			$accessToken->secret,
+			'http://social.yahooapis.com/v1/user/' . $guid . '/contacts?count=max'
+		);
+
+pr($yahooContacts);
+//http://social.yahooapis.com/v1/user//?format=json
+//http://social.yahooapis.com/v1/me/guid
+
+
 		$this->set(compact('contacts'));
 	}
 

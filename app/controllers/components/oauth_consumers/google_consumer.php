@@ -4,7 +4,7 @@
 class GoogleConsumer extends AbstractConsumer {
 	// These are sored in order used in the OAuth sequence
 	public $requestToken = null;
-	public $authorizeToken = null;
+	public $authorizeUrl = null;
 	public $accessToken = null;
 
 	public function __construct() {
@@ -14,7 +14,7 @@ class GoogleConsumer extends AbstractConsumer {
 			'params' => array('scope' => $scope)
 		);
 
-		$this->authorizeToken = 'https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=';
+		$this->authorizeUrl = 'https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=';
 
 		$this->accessToken = 'https://www.google.com/accounts/OAuthGetAccessToken';
 

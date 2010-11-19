@@ -24,7 +24,7 @@ class OauthsController extends AppController {
 		// store the request token in the session vars
 		$this->Session->write($service . '_request_token', serialize($requestToken));
 		// send the user to the service page, so they can authorize us
-		$this->redirect($consumerClass->authorizeToken . $requestToken->key);
+		$this->redirect($consumerClass->authorizeUrl . $requestToken->key);
 	}
 
 	// after we've been authorized, we are sent back here

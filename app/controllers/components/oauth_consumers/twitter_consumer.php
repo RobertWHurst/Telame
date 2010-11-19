@@ -3,7 +3,7 @@
 class TwitterConsumer extends AbstractConsumer {
 	// These are sored in order used in the OAuth sequence
 	public $requestToken = null;
-	public $authorizeToken = null;
+	public $authorizeUrl = null;
 	public $accessToken = null;
 
 	public function __construct() {
@@ -12,7 +12,7 @@ class TwitterConsumer extends AbstractConsumer {
 			'params' => array()
 		);
 
-		$this->authorizeToken = 'http://twitter.com/oauth/authorize?oauth_token=';
+		$this->authorizeUrl = 'http://twitter.com/oauth/authorize?oauth_token=';
 
 		$this->accessToken = 'http://twitter.com/oauth/access_token';
 
