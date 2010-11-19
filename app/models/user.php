@@ -28,11 +28,14 @@ class User extends AppModel {
 			'dependent' => true,
 		),
 		'Message' => array(
-			'order' => 	'Message.created ASC',
+			'order' => 'Message.created ASC',
 			'dependent' => true
 		),
 		'Notification' => array(
-			'dependent'=> true,
+			'dependent' => true,
+		),
+		'Oauth' => array(
+			'dependent' => true,
 		),
 		'WallPost' => array(
 			'order' => 	'WallPost.id DESC',

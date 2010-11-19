@@ -1,22 +1,15 @@
 <?php
 //INCLUDES
-$html->css(array(
-	'base',
-	'gallery',
-	'summary',
-	'tall_header',
-	'main_sidebar',
-	'settings/settings'
-), null, array('inline' => false));
-$js = array(
-	'jquery',
-	'base',
-	'main_sidebar',
-	'settings/settings'
-);
-foreach ($js as $j) {
-	$javascript->link($j, false);
-}
+$hrl->css(array(
+	array( 'key' => 'settings', 'url' => 'settings/common/settings' ),
+	array( 'key' => 'slider', 'url' => 'common/slider' ),
+	array( 'key' => 'acl_view', 'url' => 'common/acl_view' )
+));
+$hrl->js(array(
+	array( 'key' => 'settings', 'url' => 'settings/common/settings', 'requires' => array( 'base', 'jquery' ) ),
+	array( 'key' => 'slider', 'url' => 'common/slider', 'requires' => 'jquery' ),
+	array( 'key' => 'acl_view', 'url' => 'common/acl_view', 'requires' => array( 'base', 'jquery', 'slider' ) )
+));
 //page title
 $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('settings', true));
 ?>
@@ -27,45 +20,7 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 	<?php echo $this->element('settings/navigation'); ?>
 </div>
 <div id="page_body" class="clearfix">
-	<div id="group_permissions">
-		<div class="groups_list clearfix">
-			<h1><?php echo __('groups', true); ?></h1>
-<?php
-			foreach($groups as $group):
-				if($group['Group']['id'] == $currentGroup['Group']['id'])
-					$classes = 'group current';
-				else
-					$classes = 'group';
-?>
-				<div class="<?php echo $classes; ?>">
-<?php				$gurl = array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups', $group['Group']['id']);
-					echo $html->link($group['Group']['title'], $gurl, array('class' => 'button'));
-?>
-					<div class="delete">
-<?php					$durl = array('slug' => $currentUser['User']['slug'], 'controller' => 'groups', 'action' => 'deleteGroup', $group['Group']['id']);
-						if ($group['Group']['user_id'] == $currentUser['User']['id']) {
-							echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $durl));
-						}
-?>
-					</div>
-					<p>[stats in link to list of friends...]</p>
-				</div>
-			<?php endforeach; ?>
-			<div id="add_new_group">
-<?php			echo $form->create('Group', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'groups', 'action' => 'addGroup')));
-				echo $form->input('title');
-				echo $form->end(__('save', true));
-?>
-			</div>
-		</div>
-		<div class="group_permissions">
-			<?php if(is_array($permissions)):
-				echo $this->Form->create('Acl', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups')));
-				$this->Acl->displayAcoTree($permissions);
-				echo $this->Form->end(__('save', true));
-			else: ?>
-				<p class="empty"><?php __('select_group_for_permissions'); ?></p>
-			<?php endif; ?>
-		</div>
-	</div>
+	<?php echo $form->create('Acl', array('url' => array('slug' => $currentUser['User']['slug'], 'controller' => 'settings', 'action' => 'groups'))); ?>
+		<?php echo $aclView->renderTable( $permissions ); ?>
+	<?php echo $form->end( __('save_permissions', true) ); ?>
 </div>

@@ -1,5 +1,5 @@
-$(function(){
-	var createAlbumLogic = function(){
+$(function() {
+	var createAlbumLogic = function() {
 
 		//save this as root
 		var root = this;
@@ -9,9 +9,9 @@ $(function(){
 		root.createLink = $('a.create_album', root.controls);
 
 		//create link handler
-		root.createLinkClickHandler = function(){
+		root.createLinkClickHandler = function() {
 
-			root.createLink.click(function(event){
+			root.createLink.click(function(event) {
 
 				//stop the browser from following the link
 				event.preventDefault();
@@ -21,7 +21,7 @@ $(function(){
 
 				//get the modal
 				var ajaxUrl = domElement.attr('href');
-				$.get(core.domain + ajaxUrl, function(data){
+				$.get(core.domain + ajaxUrl, function(data) {
 
 					$('body').append(data);
 					//bind new selectors
@@ -48,7 +48,7 @@ $(function(){
 				});
 
 				//pull up the modal screen
-				core.showModalScreen(null, function(event){
+				core.showModalScreen(null, function(event) {
 
 					//on click of the screen hide the create form
 					root.createWrap.fadeOut(300);
@@ -59,53 +59,53 @@ $(function(){
 		};
 
 		//input hover handler
-		root.inputHoverHandler = function(){
+		root.inputHoverHandler = function() {
 
 			//input
-			root.titleInput.hover(function(){
+			root.titleInput.hover(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.addClass('active').addClass('hover');
 				root.titleInputWrap.addClass('active').addClass('hover');
 
 			},
-			function(){
+			                     function() {
 
-				//remove the old active class and add the inactive class
-				root.create.removeClass('hover');
-				root.titleInputWrap.removeClass('hover');
-				if(root.titleInputWrap.hasClass('focus') === false){
-					root.create.removeClass('active');
-					root.titleInputWrap.removeClass('active');
-				}
+				                     //remove the old active class and add the inactive class
+				                     root.create.removeClass('hover');
+				                     root.titleInputWrap.removeClass('hover');
+				                     if (root.titleInputWrap.hasClass('focus') === false) {
+					                     root.create.removeClass('active');
+					                     root.titleInputWrap.removeClass('active');
+				                     }
 
-			});
+			                     });
 
 			//textarea
-			root.descriptTextarea.hover(function(){
+			root.descriptTextarea.hover(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.addClass('active').addClass('hover');
 				root.descriptTextareaWrap.addClass('active').addClass('hover');
 
 			},
-			function(){
+			                           function() {
 
-				//remove the old active class and add the inactive class
-				root.create.removeClass('hover');
-				root.descriptTextareaWrap.removeClass('hover');
-				if(root.descriptTextareaWrap.hasClass('focus') === false){
-					root.create.removeClass('active');
-					root.descriptTextareaWrap.removeClass('active');
-				}
+				                           //remove the old active class and add the inactive class
+				                           root.create.removeClass('hover');
+				                           root.descriptTextareaWrap.removeClass('hover');
+				                           if (root.descriptTextareaWrap.hasClass('focus') === false) {
+					                           root.create.removeClass('active');
+					                           root.descriptTextareaWrap.removeClass('active');
+				                           }
 
-			});
+			                           });
 		};
 
 		//input focus handler
-		root.inputFocusHandler = function(){
+		root.inputFocusHandler = function() {
 			//input
-			root.titleInput.focus(function(){
+			root.titleInput.focus(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.addClass('active').addClass('focus');
@@ -116,25 +116,25 @@ $(function(){
 				root.titleLabel.hide();
 
 			});
-			root.titleInput.blur(function(){
+			root.titleInput.blur(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.removeClass('focus');
 				root.titleInputWrap.removeClass('focus');
 				root.descriptTextareaWrap.removeClass('focus');
-				if(root.titleInputWrap.hasClass('hover') === false){
+				if (root.titleInputWrap.hasClass('hover') === false) {
 					root.descriptTextareaWrap.removeClass('active');
 					root.titleInputWrap.removeClass('active');
 					root.create.removeClass('active');
 				}
-				if($(this).val() === ''){
+				if ($(this).val() === '') {
 					//show the label
 					root.titleLabel.show();
 				}
 			});
 
 			//textarea
-			root.descriptTextarea.focus(function(){
+			root.descriptTextarea.focus(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.addClass('active').addClass('focus');
@@ -145,18 +145,18 @@ $(function(){
 				root.descriptLabel.hide();
 
 			});
-			root.descriptTextarea.blur(function(){
+			root.descriptTextarea.blur(function() {
 
 				//remove the old active class and add the inactive class
 				root.create.removeClass('focus');
 				root.titleInputWrap.removeClass('focus');
 				root.descriptTextareaWrap.removeClass('focus');
-				if(root.titleInputWrap.hasClass('hover') === false){
+				if (root.titleInputWrap.hasClass('hover') === false) {
 					root.descriptTextareaWrap.removeClass('active');
 					root.titleInputWrap.removeClass('active');
 					root.create.removeClass('active');
 				}
-				if($(this).val() === ''){
+				if ($(this).val() === '') {
 					//hide the label
 					root.descriptLabel.show();
 				}
@@ -165,10 +165,10 @@ $(function(){
 
 		};
 
-		root.submitHandler = function(){
+		root.submitHandler = function() {
 
 			//on submit
-			root.createForm.submit(function(){
+			root.createForm.submit(function() {
 
 				//turn the input into a posting dialog
 				inner.children().hide();
@@ -178,7 +178,7 @@ $(function(){
 		};
 
 		//create construct
-		root.construct = function(){
+		root.construct = function() {
 			$('a.js').show();
 
 			root.createLinkClickHandler();

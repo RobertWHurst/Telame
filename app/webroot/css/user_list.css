@@ -1,23 +1,27 @@
-div.user{
+div.user {
 	padding: 10px;
 	background: #333;
 	margin-bottom: 10px;
-	
+
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.avatar{
-	float:left;
-	margin-right:10px;
+
+div.avatar {
+	float: left;
+	margin-right: 10px;
 }
-div.user div.name{
+
+div.user div.name {
 	font-size: 2.4em;
 }
-div.user div.summary{
+
+div.user div.summary {
 	height: 30px;
 }
-div.user div.summary div.item{
+
+div.user div.summary div.item {
 	height: 30px;
 	float: left;
 	line-height: 30px;
@@ -25,11 +29,13 @@ div.user div.summary div.item{
 	padding: 10px 20px 0 0;
 	color: #ccc;
 }
-div.user div.controls{
+
+div.user div.controls {
 	float: right;
 }
+
 div.user div.controls div.add_friend a,
-div.user div.controls div.add_friend p{
+div.user div.controls div.add_friend p {
 	font-size: 1.6em;
 	-moz-border-radius: 2px;
 	padding: 3px;
@@ -38,17 +44,20 @@ div.user div.controls div.add_friend p{
 	text-align: center;
 	text-decoration: none;
 }
-div.user div.controls div.add_friend a{	
+
+div.user div.controls div.add_friend a {
 	color: #d3ef91;
 	background-color: #656565;
 	border: 1px solid #d3ef91;
 }
-div.user div.controls div.add_friend a:hover{
+
+div.user div.controls div.add_friend a:hover {
 	color: #c1ef52;
 	background-color: #8f977c;
 	border-color: #c1ef52;
 }
-div.user div.controls div.add_friend p{	
+
+div.user div.controls div.add_friend p {
 	font-size: 1.6em;
 	color: #d3d3d3;
 	background-color: #656565;

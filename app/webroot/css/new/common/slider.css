@@ -1,0 +1,102 @@
+div.TS_slider{
+	width: 125px;
+	height:32px;
+	position: relative;
+	overflow: hidden;
+}
+div.TS_slider div.sb,
+div.TS_slider div.ss,
+div.TS_slider div.st,
+div.TS_slider div.si{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+div.TS_slider div.sb{
+	background: url('/img/common/slider.png') 0 0;
+	z-index: 1000;
+}
+div.TS_slider div.ss div,
+div.TS_slider div.st div{
+	line-height: 32px;
+	text-align: center;
+	position: absolute;
+	z-index: 1001;
+	width: 125px;
+	height: 32px;
+	top: 0;
+}
+div.TS_slider div.ss div p{
+	margin: 0;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #252525;
+	width: 60px;
+	padding-left: 16px;
+}
+div.TS_slider div.ss div.allow{
+	background: url('/img/common/slider.png') 0 -128px;
+	z-index: 997;
+	left: 0;
+	width: 125px;
+}
+div.TS_slider div.ss div.hover.allow,
+div.TS_slider div.ss div.current.allow{
+	background: url('/img/common/slider.png') -125px -128px;
+}
+div.TS_slider.disabled div.ss div.allow{
+	background: url('/img/common/slider.png') -250px -128px;
+}
+div.TS_slider div.ss div.allow p{
+	margin: 0;
+	padding-left: 1px;
+}
+div.TS_slider div.ss div.inherit{
+	left: 0;
+	margin-left: 8px;
+}
+div.TS_slider div.ss div.block{
+	left: 0;
+	margin-left: 16px;
+}
+div.TS_slider div.ss div.inherit{
+	z-index: 998;
+}
+div.TS_slider div.ss div.inherit,
+div.TS_slider div.ss div.inherit.ib{
+	background: url('/img/common/slider.png') 0 -63px;
+}
+div.TS_slider div.ss div.hover.inherit,
+div.TS_slider div.ss div.current.inherit,
+div.TS_slider div.ss div.hover.inherit.ib,
+div.TS_slider div.ss div.current.inherit.ib{
+	background: url('/img/common/slider.png') -125px -63px;
+}
+div.TS_slider.disabled div.ss div.inherit,
+div.TS_slider.disabled div.ss div.inherit.ib{
+	background: url('/img/common/slider.png') -250px -63px;
+}
+div.TS_slider div.ss div.inherit.ia{
+	background: url('/img/common/slider.png') 0 -63px;
+}
+div.TS_slider div.ss div.hover.inherit.ia,
+div.TS_slider div.ss div.current.inherit.ia{
+	background: url('/img/common/slider.png') -125px -63px;
+}
+div.TS_slider.disabled div.ss div.inherit.ia{
+	background: url('/img/common/slider.png') -250px -63px;
+}
+div.TS_slider div.ss div.block{
+	background: url('/img/common/slider.png') 0 -32px;
+	z-index: 999;
+}
+div.TS_slider div.ss div.hover.block,
+div.TS_slider div.ss div.current.block{
+	background: url('/img/common/slider.png') -125px -32px;
+}
+div.TS_slider.disabled div.ss div.block{
+	background: url('/img/common/slider.png') -250px -256px;
+}

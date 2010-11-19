@@ -1,39 +1,46 @@
-#profile_summary{
+#profile_summary {
 	float: left;
 	width: 290px;
 	height: 300px;
 	position: relative;
 }
-#profile_summary h1.name{
+
+#profile_summary h1.name {
 	text-align: left;
 	font-size: 2.4em;
 	line-height: 3.0em;
 	margin: 0 20px;
 }
-#profile_summary table{
+
+#profile_summary table {
 	margin: 0 20px;
 }
+
 #profile_summary table th,
-#profile_summary table td{
+#profile_summary table td {
 	vertical-align: baseline;
 	text-align: left;
 	font-size: 1.1em;
 	line-height: 1.1em;
 	padding: 0.4em 0;
 }
-#profile_summary table th{
+
+#profile_summary table th {
 	padding-right: 5px;
 }
-#profile_summary table td{
+
+#profile_summary table td {
 	color: #eee;
 	padding-left: 5px;
 }
-#profile_controls{
+
+#profile_controls {
 	position: absolute;
 	bottom: 10px;
 	padding: 0 10px;
 }
-#profile_controls div.button a{
+
+#profile_controls div.button a {
 	font-size: 1.2em;
 	background: #555;
 	padding: 5px 10px;

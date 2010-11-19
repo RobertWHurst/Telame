@@ -1,5 +1,5 @@
 /* SELECTOR STYLES */
-#backgroundHead{
+#backgroundHead {
 	width: 100%;
 	height: 300px;
 	background: #400c5d url(../img/header.png) no-repeat top center;
@@ -7,7 +7,8 @@
 	position: relative;
 	z-index: 0;
 }
-#backgroundHeadGlow{
+
+#backgroundHeadGlow {
 	width: 100%;
 	height: 300px;
 	background: #400c5d url(../img/header_glow.png) no-repeat top center;
@@ -15,61 +16,73 @@
 	z-index: 1;
 	display: none;
 }
-#backgroundBase{
+
+#backgroundBase {
 	width: 100%;
 	border-top: 1px solid #333;
 }
-#wrap_content{
+
+#wrap_content {
 	position: relative;
 	margin-top: -242px;
 	z-index: 2;
 }
-#content{
+
+#content {
 	width: 980px;
 	margin: auto;
 }
-#page{
+
+#page {
 	float: left;
-	width:770px;
+	width: 770px;
 	position: relative;
 }
-#page_head{
+
+#page_head {
 	background: url(../../img/page_head.png) no-repeat top right;
 	position: relative;
 }
-#page_head h1.page_title{
+
+#page_head h1.page_title {
 	font-size: 3.6em;
 	line-height: 2.4em;
 	font-weight: normal;
 	padding: 0 20px;
 }
-#page_body{
-	background: #5c5c5c;	
+
+#page_body {
+	background: #5c5c5c;
 	border: 1px solid #787878;
 	border-top: 1px solid #aaa;
 	min-height: 600px;
 }
-#page_navigation{
+
+#page_navigation {
 	background: #2a2a2a;
 	border-top: 1px solid #000;
 	border-left: 1px solid #5c5c5c;
 	border-right: 1px solid #5c5c5c;
 }
-#page_navigation ul{
+
+#page_navigation ul {
 	list-style: none;
 	padding: 0 10px;
 }
-#page_navigation li{
+
+#page_navigation li {
 	float: left;
 }
-#page_navigation a.button{
+
+#page_navigation a.button {
 	display: block;
 	padding: 6px 10px 10px 10px;
 	margin-top: 4px;
 	font-size: 1.3em;
 	font-weight: bold;
 }
-#page_navigation a.button.current{
+
+#page_navigation a.button.current {
 	background: #484848;
 	border: 1px solid #5c5c5c;
 	border-bottom: none;
@@ -79,7 +92,7 @@
 	border-radius: 5px 5px 0 0;
 }
 
-div.page_controls{
+div.page_controls {
 	padding: 5px 10px;
 	background: #333;
 	margin: 20px;
@@ -88,10 +101,12 @@ div.page_controls{
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.page_controls p, 
-div.page_controls div.page_next_prev{
+
+div.page_controls p,
+div.page_controls div.page_next_prev {
 	font-size: 1.6em;
 }
-div.page_controls div.page_next_prev{
-	float:right;
+
+div.page_controls div.page_next_prev {
+	float: right;
 }

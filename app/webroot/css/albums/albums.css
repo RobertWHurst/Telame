@@ -1,76 +1,87 @@
-#albums{
+#albums {
 	padding: 10px;
 }
+
 #albums div.album,
-#albums div.media{
+#albums div.media {
 	padding: 10px;
 	float: left;
 }
-#albums div.wrap_thumb{
+
+#albums div.wrap_thumb {
 	height: 167px;
 	width: 167px;
 	overflow: hidden;
 	position: relative;
 	background: #252525;
 }
-#albums div.wrap_single{
+
+#albums div.wrap_single {
 	height: 235px;
 	width: 235px;
 	overflow: hidden;
 	position: relative;
 }
-#albums div.thumb{
+
+#albums div.thumb {
 	top: 0;
 	left: 0;
 	position: absolute;
 }
-#albums div.single{
+
+#albums div.single {
 	top: 0;
 	left: 0;
 	position: absolute;
 }
-#albums div.image{
+
+#albums div.image {
 	top: 0;
 	left: 0;
 	position: absolute;
 	display: none;
 }
-#albums div.label{
+
+#albums div.label {
 	background: #343434;
 
 	-moz-border-radius: 0 0 5px 5px;
 	-webkit-border-radius: 0 0 5px 5px;
 	border-radius: 0 0 5px 5px;
 }
-#albums div.label a{
+
+#albums div.label a {
 	text-align: center;
 	display: block;
 	font-size: 1.3em;
 	font-weight: bold;
 	line-height: 30px;
 	width: 147px;
-	padding:0 10px;
+	padding: 0 10px;
 	overflow: hidden;
 	height: 30px;
 }
-#create_album_wrap{
-	width:100%;
+
+#create_album_wrap {
+	width: 100%;
 	position: absolute;
-	top:400px;
+	top: 400px;
 	left: 0;
 	z-index: 5;
 	display: none;
 }
-#create_album_wrap div.create_album{
+
+#create_album_wrap div.create_album {
 	position: relative;
-	width:448px;
+	width: 448px;
 	background: #9b9b9b;
 	z-index: 1;
 	margin: 0 auto;
 }
-#create_album_wrap div.create_album p.process{
-	font-size:16px;
-	text-align:center;
+
+#create_album_wrap div.create_album p.process {
+	font-size: 16px;
+	text-align: center;
 	font-weight: bold;
 	color: #fff;
 	line-height: 28px;
@@ -78,10 +89,11 @@
 }
 
 #create_album_wrap div.create_album div.input,
-#create_album_wrap div.create_album div.textarea{
+#create_album_wrap div.create_album div.textarea {
 	position: relative;
 }
-#create_album_wrap div.create_album label{
+
+#create_album_wrap div.create_album label {
 	position: absolute;
 	top: 4px;
 	left: 11px;
@@ -90,22 +102,26 @@
 	cursor: text;
 	display: none;
 }
+
 #create_album_wrap div.create_album input[type="text"],
-#create_album_wrap div.create_album textarea{
+#create_album_wrap div.create_album textarea {
 	font-size: 16px;
 	padding: 3px 50px 3px 3px;
 	width: 385px;
 	border: 1px solid #949494;
 	background: #dedede;
 }
-#create_album_wrap div.create_album input[type="text"]{
+
+#create_album_wrap div.create_album input[type="text"] {
 	height: 20px;
 }
-#create_album_wrap div.create_album textarea{
+
+#create_album_wrap div.create_album textarea {
 	font-family: Helvetica, Arial, sans-serif;
 	resize: none;
 }
-#create_album_wrap div.create_album input[type="submit"]{
+
+#create_album_wrap div.create_album input[type="submit"] {
 	position: absolute;
 	top: 7px;
 	right: 7px;
@@ -114,50 +130,60 @@
 	width: 110px;
 	cursor: pointer;
 }
+
 #create_album_wrap div.create_album div.titleInput.active input[type="text"],
-#create_album_wrap div.create_album div.titleInput.active textarea{
+#create_album_wrap div.create_album div.titleInput.active textarea {
 	border: 1px solid #669b00;
 	background: #fff;
 }
+
 #create_album_wrap div.create_album div.titleInput.active label,
-#create_album_wrap div.create_album.active input[type="submit"]{
+#create_album_wrap div.create_album.active input[type="submit"] {
 	color: #669b00;
 }
-#create_album_wrap div.create_album.focus input[type="submit"]{
+
+#create_album_wrap div.create_album.focus input[type="submit"] {
 	font-weight: bold;
 	text-decoration: underline;
 }
-#create_album_wrap div.create_album.focus input:hover[type="submit"]{
+
+#create_album_wrap div.create_album.focus input:hover[type="submit"] {
 	color: #86cf00;
 }
+
 #create_album_wrap div.create_album div.descriptTextarea.active input[type="text"],
-#create_album_wrap div.create_album div.descriptTextarea.active textarea{
+#create_album_wrap div.create_album div.descriptTextarea.active textarea {
 	border: 1px solid #669b00;
 	background: #fff;
 }
-#create_album_wrap div.create_album div.descriptTextarea.active label{
+
+#create_album_wrap div.create_album div.descriptTextarea.active label {
 	color: #669b00;
 }
+
 #create_album_wrap div.create_album div.box.top,
 #create_album_wrap div.create_album div.box.top.left,
 #create_album_wrap div.create_album div.box.top.right,
 #create_album_wrap div.create_album div.box.bottom,
 #create_album_wrap div.create_album div.box.bottom.left,
-#create_album_wrap div.create_album div.box.bottom.right{
+#create_album_wrap div.create_album div.box.bottom.right {
 	height: 10px;
 }
+
 #create_album_wrap div.create_album div.box.top,
-#create_album_wrap div.create_album div.box.bottom{
+#create_album_wrap div.create_album div.box.bottom {
 	position: absolute;
 	width: 100%;
 	background: url(../../img/users/wall_input_h.png);
 	z-index: 2;
 }
-#create_album_wrap div.create_album div.box.top{
+
+#create_album_wrap div.create_album div.box.top {
 	top: -10px;
 	background-position: 0 0;
 }
-#create_album_wrap div.create_album div.box.bottom{
+
+#create_album_wrap div.create_album div.box.bottom {
 	bottom: -10px;
 	background-position: 0 -10px;
 }
@@ -167,86 +193,106 @@
 #create_album_wrap div.create_album div.box.bottom.left,
 #create_album_wrap div.create_album div.box.bottom.right,
 #create_album_wrap div.create_album div.box.left,
-#create_album_wrap div.create_album div.box.right{
-	width:10px;
+#create_album_wrap div.create_album div.box.right {
+	width: 10px;
 	position: absolute;
 }
+
 #create_album_wrap div.create_album div.box.top.left,
 #create_album_wrap div.create_album div.box.top.right,
 #create_album_wrap div.create_album div.box.bottom.left,
-#create_album_wrap div.create_album div.box.bottom.right{
+#create_album_wrap div.create_album div.box.bottom.right {
 	z-index: 3;
-	top:0;
+	top: 0;
 	background: url(../../img/users/wall_input_r.png);
 }
+
 #create_album_wrap div.create_album div.box.top.left,
 #create_album_wrap div.create_album div.box.bottom.left,
-#create_album_wrap div.create_album div.box.left{
+#create_album_wrap div.create_album div.box.left {
 	left: -10px;
 }
+
 #create_album_wrap div.create_album div.box.top.right,
 #create_album_wrap div.create_album div.box.bottom.right,
-#create_album_wrap div.create_album div.box.right{
+#create_album_wrap div.create_album div.box.right {
 	right: -10px;
 }
-#create_album_wrap div.create_album div.box.top.left{
+
+#create_album_wrap div.create_album div.box.top.left {
 	background-position: 0 0;
 }
-#create_album_wrap div.create_album div.box.top.right{
+
+#create_album_wrap div.create_album div.box.top.right {
 	background-position: -10px 0;
 }
-#create_album_wrap div.create_album div.box.bottom.left{
+
+#create_album_wrap div.create_album div.box.bottom.left {
 	background-position: 0 -10px;
 }
-#create_album_wrap div.create_album div.box.bottom.right{
+
+#create_album_wrap div.create_album div.box.bottom.right {
 	background-position: -10px -10px;
 }
+
 #create_album_wrap div.create_album div.box.left,
-#create_album_wrap div.create_album div.box.right{
+#create_album_wrap div.create_album div.box.right {
 	background: url(../../img/users/wall_input_v.png);
 	height: 100%;
 	z-index: 2;
 }
-#create_album_wrap div.create_album div.box.left{
+
+#create_album_wrap div.create_album div.box.left {
 	background-position: 0 0;
 }
-#create_album_wrap div.create_album div.box.right{
+
+#create_album_wrap div.create_album div.box.right {
 	background-position: -10px 0;
 }
-#create_album_wrap div.create_album div.box.inner{
+
+#create_album_wrap div.create_album div.box.inner {
 	position: relative;
 	z-index: 3;
-	padding:4px;
+	padding: 4px;
 }
 
-#create_album_wrap div.create_album.focus{
+#create_album_wrap div.create_album.focus {
 	background: #d3ef91;
 }
-#create_album_wrap div.create_album.focus div.box.top{
+
+#create_album_wrap div.create_album.focus div.box.top {
 	background-position: 0 -20px;
 }
-#create_album_wrap div.create_album.focus div.box.bottom{
+
+#create_album_wrap div.create_album.focus div.box.bottom {
 	background-position: 0 -30px;
 }
-#create_album_wrap div.create_album.focus div.box.top.left{
+
+#create_album_wrap div.create_album.focus div.box.top.left {
 	background-position: -20px 0;
 }
-#create_album_wrap div.create_album.focus div.box.top.right{
+
+#create_album_wrap div.create_album.focus div.box.top.right {
 	background-position: -30px 0;
 }
-#create_album_wrap div.create_album.focus div.box.bottom.left{
+
+#create_album_wrap div.create_album.focus div.box.bottom.left {
 	background-position: -20px -10px;
 }
-#create_album_wrap div.create_album.focus div.box.bottom.right{
+
+#create_album_wrap div.create_album.focus div.box.bottom.right {
 	background-position: -30px -10px;
 }
-#create_album_wrap div.create_album.focus div.box.left{
+
+#create_album_wrap div.create_album.focus div.box.left {
 	background-position: -20px 0;
 }
-#create_album_wrap div.create_album.focus div.box.right{
+
+#create_album_wrap div.create_album.focus div.box.right {
 	background-position: -30px 0;
 }
-#album_controls{
+
+#album_controls {
 	padding: 0 5px;
 	background: #333;
 	margin: 0 20px;
@@ -255,7 +301,8 @@
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-#album_controls a{
+
+#album_controls a {
 	float: left;
 	padding: 5px;
 	font-size: 1.3em;

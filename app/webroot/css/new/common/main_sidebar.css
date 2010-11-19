@@ -1,0 +1,106 @@
+#wrap_main_sidebar {
+	float: left;
+	width: 210px;
+}
+
+#logo {
+	margin: 40px 0;
+	text-align: center;
+}
+
+#main_sidebar {
+	width: 100%;
+	padding-top: 10px;
+	background: url(../../../img/sidebar_head.png) no-repeat top left;
+	border-bottom: #787878 solid 1px;
+}
+
+#main_sidebar div.avatar {
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	float: left;
+	background: #000;
+}
+
+#main_sidebar div.current_user_controls {
+	padding: 10px 20px;
+}
+
+#main_sidebar div.current_user_controls ul {
+	float: left;
+}
+
+#main_sidebar div.current_user_controls li {
+	list-style: none;
+}
+
+#main_sidebar div.current_user_controls li a,
+#main_sidebar div.current_user_controls li p {
+	line-height: 1.5em;
+	font-size: 1.3em;
+}
+
+#main_sidebar div.search {
+	padding: 10px 20px 20px 20px;
+	position: relative;
+}
+
+#main_sidebar div.search div.input label {
+	font-size: 16px;
+	position: absolute;
+	left: 26px;
+	top: 16px;
+	color: #949494;
+	cursor: text;
+	display: none;
+}
+
+#main_sidebar div.search div.input input[type="text"] {
+	font-size: 16px;
+	padding: 3px;
+	width: 162px;
+	background: #dedede;
+}
+
+#main_sidebar div.search div.submit input[type="submit"] {
+	text-indent: -9999px;
+	height: 16px;
+	width: 16px;
+	position: absolute;
+	right: 26px;
+	top: 16px;
+	background-image: url(../../../img/icons/magnifier.png);
+	cursor: pointer;
+}
+
+#main_sidebar div.search.active div.input label,
+#main_sidebar div.search.active div.submit input[type="submit"] {
+	color: #669b00;
+}
+
+#main_sidebar div.search.active div.input input[type="text"] {
+	border-color: #669b00;
+	background: #fff;
+}
+
+#modules div.module div.link a {
+	display: block;
+	font-size: 1.5em;
+	text-decoration: none;
+	line-height: 16px;
+	padding: 10px 20px;
+	background: #343434;
+	border-left: 1px solid #787878;
+	/*border-top: 1px solid #aaa;
+	border-bottom: 1px solid #333;*/
+}
+
+#modules div.module div.link a:hover {
+	background: #5c5c5c;
+}
+
+#modules div.module div.link a img {
+	vertical-align: -3px;
+	margin-right: 4px;
+}

@@ -1,141 +1,169 @@
-div.wall_post_wrap{
+div.wall_post_wrap {
 	margin-bottom: 10px;
-	width:458px;
+	width: 458px;
 }
+
 div.wall_post_wrap div.action,
-div.wall_post_wrap div.wall_post{
+div.wall_post_wrap div.wall_post {
 	position: relative;
-	
+
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
-div.wall_post_wrap div.action{
+
+div.wall_post_wrap div.action {
 	padding: 5px 10px;
-	background: #444;	
+	background: #444;
 }
-div.wall_post_wrap div.wall_post{
+
+div.wall_post_wrap div.wall_post {
 	padding: 10px;
 	background: #333;
 }
-div.wall_post_wrap div.wall_post div.avatar{
+
+div.wall_post_wrap div.wall_post div.avatar {
 	float: left;
 	margin-right: 10px;
 }
-div.wall_post_wrap div.wall_post div.content{
+
+div.wall_post_wrap div.wall_post div.content {
 	margin: 0 15px 15px 70px;
 }
-div.wall_post_wrap div.wall_post div.content h1{
+
+div.wall_post_wrap div.wall_post div.content h1 {
 	font-size: 2.4em;
 	line-height: 2.4em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wall_post_wrap div.wall_post div.content h2{
+
+div.wall_post_wrap div.wall_post div.content h2 {
 	font-size: 1.8em;
 	line-height: 1.8em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wall_post_wrap div.wall_post div.content h3{
+
+div.wall_post_wrap div.wall_post div.content h3 {
 	font-size: 1.6em;
 	line-height: 1.6em;
 	text-decoration: underline;
 	font-weight: bold;
 }
-div.wall_post_wrap div.content p{
+
+div.wall_post_wrap div.content p {
 	font-size: 1.4em;
 	line-height: 1.4em;
 	margin-bottom: 15px;
 }
+
 div.wall_post_wrap div.wall_post div.content ul,
-div.wall_post_wrap div.wall_post div.content ol{
+div.wall_post_wrap div.wall_post div.content ol {
 	margin-bottom: 15px;
 }
-div.wall_post_wrap div.wall_post div.content ul{
+
+div.wall_post_wrap div.wall_post div.content ul {
 	list-style: disc inside none;
 }
-div.wall_post_wrap div.wall_post div.content ol{
+
+div.wall_post_wrap div.wall_post div.content ol {
 	list-style: decimal inside none;
 }
-div.wall_post_wrap div.wall_post div.content li{
+
+div.wall_post_wrap div.wall_post div.content li {
 	font-size: 1.4em;
 	line-height: 1.4em;
 	font-weight: bold;
 }
-div.wall_post_wrap div.wall_post div.content pre{
+
+div.wall_post_wrap div.wall_post div.content pre {
 	padding: 2px 4px;
 	margin-bottom: 15px;
 	background: #000;
 }
-div.wall_post_wrap div.wall_post div.content code{
+
+div.wall_post_wrap div.wall_post div.content code {
 	font-size: 14px;
 	line-height: 16px;
 	background: #000;
 	color: #fff;
 }
-div.wall_post_wrap div.deletePost{
+
+div.wall_post_wrap div.deletePost {
 	position: absolute;
-	top:10px;
+	top: 10px;
 	right: 10px;
 }
-div.wall_post_wrap div.wall_to_wall{
+
+div.wall_post_wrap div.wall_to_wall {
 	position: absolute;
-	top:30px;
+	top: 30px;
 	right: 10px;
 }
+
 div.wall_post_wrap div.wall_to_wall:hover,
-div.wall_post_wrap div.delete:hover{
+div.wall_post_wrap div.delete:hover {
 	background: #444;
 }
-div.wall_post_wrap div.baseline{
+
+div.wall_post_wrap div.baseline {
 	position: absolute;
-	bottom:10px;
+	bottom: 10px;
 	margin-left: 70px;
-	width:368px;
+	width: 368px;
 }
-div.wall_post_wrap div.baseline div.time{
+
+div.wall_post_wrap div.baseline div.time {
 	float: right;
 }
-div.wall_post_wrap div.baseline div.time p{
+
+div.wall_post_wrap div.baseline div.time p {
 	color: #888;
 	font-size: 1.1em;
 	font-weight: bold;
 }
-div.wall_post_wrap div.wall_post div.baseline div.baseline_info{
+
+div.wall_post_wrap div.wall_post div.baseline div.baseline_info {
 	display: none;
 	float: left;
 }
-div.wall_post_wrap div.wall_post div.baseline div.baseline_info p{
+
+div.wall_post_wrap div.wall_post div.baseline div.baseline_info p {
 	font-size: 1.1em;
 	font-weight: bold;
 	margin-right: 1em;
 	float: left;
 	color: #888;
 }
-div.wall_post_wrap div.wall_post div.baseline div.baseline_controls{
+
+div.wall_post_wrap div.wall_post div.baseline div.baseline_controls {
 	float: left;
 }
-div.wall_post_wrap div.wall_post div.baseline div.baseline_controls a{
+
+div.wall_post_wrap div.wall_post div.baseline div.baseline_controls a {
 	font-size: 1.1em;
 	font-weight: bold;
 	margin-right: 1em;
 }
-div.wall_post_wrap div.commentsWrap{
-	width:358px;
+
+div.wall_post_wrap div.commentsWrap {
+	width: 358px;
 	margin: 0 15px 0 75px;
 }
-div.wall_post_wrap div.comments{	
+
+div.wall_post_wrap div.comments {
 	padding: 5px;
 	background: #444;
 	position: relative;
-	
+
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+
 div.wall_post_wrap div.comments div.comment,
-div.wall_post_wrap div.comments div.likeness{	
+div.wall_post_wrap div.comments div.likeness {
 	padding: 5px;
 	background: #454545;
 	width: 338px;
@@ -143,89 +171,107 @@ div.wall_post_wrap div.comments div.likeness{
 	border-bottom: 1px solid #595959;
 	min-height: 16px;
 }
-div.wall_post_wrap div.comments  div.comment div.avatar{
+
+div.wall_post_wrap div.comments  div.comment div.avatar {
 	float: left;
-	margin-right: 5px;	
+	margin-right: 5px;
 }
-div.wall_post_wrap div.comments div.comment div.content{
+
+div.wall_post_wrap div.comments div.comment div.content {
 	margin: 0 15px 15px 35px;
 	overflow: hidden;
 }
-div.wall_post_wrap div.comments div.comment div.content p{
+
+div.wall_post_wrap div.comments div.comment div.content p {
 	font-size: 1.2em;
 	line-height: 1.2em;
 }
-div.wall_post_wrap div.comments div.comment div.deleteComment{
+
+div.wall_post_wrap div.comments div.comment div.deleteComment {
 	position: absolute;
-	top:5px;
-	right:5px;
+	top: 5px;
+	right: 5px;
 }
-div.wall_post_wrap div.comments div.comment div.time{
+
+div.wall_post_wrap div.comments div.comment div.time {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
 }
-div.wall_post_wrap div.comments div.comment div.time p{
+
+div.wall_post_wrap div.comments div.comment div.time p {
 	color: #888;
 	font-size: 1.0em;
 }
+
 div.wall_post_wrap div.comments div.likeness h3,
-div.wall_post_wrap div.comments div.likeness li{
+div.wall_post_wrap div.comments div.likeness li {
 	float: left;
 	font-size: 1.2em;
 	line-height: 1.2em;
 }
-div.wall_post_wrap div.comments div.likeness li{
+
+div.wall_post_wrap div.comments div.likeness li {
 	list-style: none;
 	padding-left: 5px;
 }
-div.wall_post_wrap div.comments div.commentInput{
+
+div.wall_post_wrap div.comments div.commentInput {
 	position: relative;
 }
-div.wall_post_wrap div.comments div.commentInput label{
+
+div.wall_post_wrap div.comments div.commentInput label {
 	position: absolute;
-	top:5px;
-	left:5px;
+	top: 5px;
+	left: 5px;
 	font-size: 12px;
 	color: #949494;
 	display: none;
 }
+
 div.wall_post_wrap div.comments div.commentInput input[type="text"],
-div.wall_post_wrap div.comments div.commentInput textarea{
+div.wall_post_wrap div.comments div.commentInput textarea {
 	width: 293px;
 	font-size: 12px;
 	padding: 3px 50px 3px 3px;
 	background: #dedede;
 }
-div.wall_post_wrap div.comments div.commentInput input[type="text"]{
+
+div.wall_post_wrap div.comments div.commentInput input[type="text"] {
 	height: 18px;
 }
-div.wall_post_wrap div.comments div.commentInput textarea{
+
+div.wall_post_wrap div.comments div.commentInput textarea {
 	font-family: Helvetica, Arial, sans-serif;
 	resize: none;
 }
-div.wall_post_wrap div.comments div.commentInput input[type="submit"]{
+
+div.wall_post_wrap div.comments div.commentInput input[type="submit"] {
 	position: absolute;
-	top:5px;
-	right:0;
+	top: 5px;
+	right: 0;
 	width: 50px;
 	font-size: 12px;
 	color: #949494;
 	cursor: pointer;
 }
+
 div.wall_post_wrap div.comments div.commentInput.active input[type="text"],
-div.wall_post_wrap div.comments div.commentInput.active textarea{
+div.wall_post_wrap div.comments div.commentInput.active textarea {
 	border: 1px solid #669b00;
 	background: #fff;
 }
+
 div.wall_post_wrap div.comments div.commentInput.active label,
-div.wall_post_wrap div.comments div.commentInput.active input[type="submit"]{
+div.wall_post_wrap div.comments div.commentInput.active input[type="submit"] {
 	color: #669b00;
 }
-div.wall_post_wrap div.comments div.commentInput.focus input[type="submit"]{
+
+div.wall_post_wrap div.comments div.commentInput.focus input[type="submit"] {
 	font-weight: bold;
 	text-decoration: underline;
 }
-div.wall_post_wrap div.comments div.commentInput.focus input:hover[type="submit"]{
+
+div.wall_post_wrap div.comments div.commentInput.focus input:hover[type="submit"] {
 	color: #86cf00;
 }

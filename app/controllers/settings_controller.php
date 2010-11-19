@@ -2,10 +2,10 @@
 class SettingsController extends AppController {
 
 	public $components = array('Email');
-	public $helpers = array('Acl');
 	public $uses = array();
+	public $helpers = array('AclView');
 
-	function beforeFilter(){
+	public function beforeFilter(){
 		parent::beforeFilter();
 
 		$this->Security->blackHoleCallback = '_forceSSL';
@@ -17,14 +17,14 @@ class SettingsController extends AppController {
 
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 		parent::beforefilter();
 
 		//set the layout
-		$this->layout = 'tall_header_w_sidebar';
+		$this->layout = 'new_tall_header_w_sidebar';
 	}
 
-	function basic() {
+	public function basic() {
 		$this->loadModel('User');
 		// Default page
 		if (empty($this->data)) {
@@ -80,7 +80,7 @@ class SettingsController extends AppController {
 	}
 
 	// Delete user account
-	function delete() {
+	public function delete() {
 		$this->loadModel('User');
 		$uid = $this->currentUser['User']['id'];
 
@@ -102,7 +102,7 @@ class SettingsController extends AppController {
 		$this->redirect('/');
 	}
 
-	function gallery($id = null, $top = null, $left = null, $height = null, $width = null){
+	public function gallery($id = null, $top = null, $left = null, $height = null, $width = null){
 
 		//if the request is not ajax display the gallery options.
 		if($this->RequestHandler->isAjax()) {
@@ -148,13 +148,13 @@ class SettingsController extends AppController {
 		}
 	}
 
-	function friends(){
+	public function friends(){
 		$this->loadModel('GroupsUser');
 		$friends = $this->GroupsUser->getFriends(array('uid' => $this->currentUser['User']['id']));
 		$this->set(compact('friends'));
 	}
 
-	function groups($gid = null) {
+	public function groups() {
 		if(empty($this->data)) {
 			$this->loadModel('Group');
 
@@ -164,16 +164,10 @@ class SettingsController extends AppController {
 			//get the current user and note their id.
 			$uid = $this->currentUser['User']['id'];
 
-			//create an empty permissions var
-			$permissions = $currentGroup = false;
-
-			if ($gid) {
-				//get the current user's acl data.
-				$this->Group->recursive = -1;
-				// find needs to be of type all or else the aacl won't know the format
-				$group = $this->Group->find('all', array('conditions' => array('Group.id' => Sanitize::clean(intval($gid)))));
-				$permissions = $this->Aacl->getAcoTree($uid, $group);
-			}
+			//get the current user's acl data.
+			$this->Group->recursive = -1;
+			// find needs to be of type all or else the aacl won't know the format
+			$permissions = $this->Aacl->getAcoTree($uid);
 
 			//set the view data
 			$this->set(compact('groups', 'currentGroup', 'permissions'));
@@ -191,7 +185,7 @@ class SettingsController extends AppController {
 
 // ----------------------- ADMIN SETTINGS ----------------------- //
 
-	function admin_betaKeys() {
+	public function admin_betaKeys() {
 		if ($this->currentUser['User']['level'] > 0) {
 			$this->redirect('/');
 			exit;
@@ -203,7 +197,7 @@ class SettingsController extends AppController {
 		$this->set(compact('keys'));
 	}
 
-	function admin_deletekey($id) {
+	public function admin_deletekey($id) {
 		if (empty($id)) {
 			$this->Session->setFlash(__('no_id_specified', true));
 			$this->redirect($this->referer());
@@ -218,7 +212,7 @@ class SettingsController extends AppController {
 		exit;
 	}
 
-	function admin_generatekeys() {
+	public function admin_generatekeys() {
 		if (!empty($this->data)) {
 			$this->loadModel('BetaKey');
 			for ($i=0; $i<$this->data['BetaKey']['howmany']; $i++) {
@@ -231,7 +225,7 @@ class SettingsController extends AppController {
 		exit;
 	}
 
-	function admin_inviteemail() {
+	public function admin_inviteemail() {
 		if (empty($this->data)) {
 			$this->Session->setFlash(__('page_error', true));
 			$this->redirect($this->referer());

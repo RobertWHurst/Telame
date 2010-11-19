@@ -1,0 +1,64 @@
+.permissions_table {
+	position: relative;
+	margin: 20px;
+	padding-left: 143px;
+}
+
+.permissions_table .groups_column {
+	position: absolute;
+	top: 43px;
+	left: 0;
+	width: 142px;
+	border: 1px solid #aaa;
+	border-right: none;
+	border-bottom: none;
+	background: #555;
+	display: none;
+}
+
+.permissions_table .groups_column .group {
+	font-size: 1.3em;
+	line-height: 32px;
+	font-weight: bold;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+}
+.permissions_table .cell_scroll_area_wrapper {
+	overflow: hidden;
+	position: relative;
+	border: 1px solid #aaa;
+}
+.permissions_table .cell_scroll_area {
+	background: #333;
+	position: absolute;
+	top: -1px;
+	left: -1px;
+}
+.permissions_table .aco_column {
+	float: left;
+	width: 146px;
+	background: #555;
+	display: none;
+	border-right: 1px solid #aaa;
+}
+.permissions_table .aco_column .heading{
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+.permissions_table .aco_column .heading h3{
+	font-size: 1.3em;
+	line-height: 32px;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+.permissions_table .aco_column .heading a{
+	float: right;
+	display: block;
+	height: 42px;
+	width: 42px;
+}
+.permissions_table .aco_column .cell{
+	height: 32px;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+}

@@ -1,0 +1,27 @@
+              ~ TELAME WEBROOT STRUCTURE GUIDE ~
+                          14/11/2010 -
+-----------------------------------------------------------------
+
+                 webroot
+                  / | \         [c] = Controller Name (Hyphenated)
+                 /  |  \        [a] = Action Name (Hyphenated)
+                /   |   \       [v] = View Name (Hyphenated)
+               /    |    \      (#) = Resources for a view(s)
+              /     |     \
+             /      |      \
+          css      js       img
+           |        |        |
+     >>>  new      new       |\  <<< TEMPORARY (see FIXME in hrl)
+         / |       / \       | \
+        /  |      /   \      |  \
+       /   |   common [c]    |   \
+      /    |     |    / |    |    \
+     /     |    (#)  /  |    |     \
+  common  [c]       /   |  common  [c]
+    |    / |       /    |    |    / |
+   (#)  /  |   common  [v]  (#)  /  |
+       /   |     |      |       /   |
+      /    |    (#)    (#)     /    |
+  common  [v]              common  [v]
+    |      |                 |      |
+   (#)    (#)               (#)    (#)

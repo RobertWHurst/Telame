@@ -1,21 +1,25 @@
-#wrap_header{
+#wrap_header {
 	width: 100%;
 	background: #400c5d url('../img/pages/header.png') no-repeat top center;
 	border-bottom: 1px solid #110019;
 }
-#header{
+
+#header {
 	width: 940px;
 	height: 40px;
 	margin: auto;
 	padding: 30px 0;
 }
-#header div.headerRight{
+
+#header div.headerRight {
 	float: right;
 }
-#navigation{
+
+#navigation {
 	float: right;
 }
-#navigation a{
+
+#navigation a {
 	float: left;
 	font-size: 1.6em;
 	font-weight: bold;
@@ -24,30 +28,37 @@
 	color: #fff;
 	margin-left: 30px;
 }
-#navigation a:hover{
+
+#navigation a:hover {
 	color: #dfd0e7;
 }
-#navigation a:active{
+
+#navigation a:active {
 	color: #bc9cce;
 }
-#logo{
+
+#logo {
 	float: left;
 }
-#wrap_content{
+
+#wrap_content {
 	border-top: 1px solid #333;
 }
-#content{
+
+#content {
 	background: url('../img/pages/content.png') no-repeat top center;
 	margin: 0 auto 0 auto;
 	width: 980px;
 }
-#taglines{
+
+#taglines {
 	width: 980px;
 	height: 200px;
 	position: relative;
 	overflow: hidden;
 }
-#taglines div.fadeout{
+
+#taglines div.fadeout {
 	top: 0;
 	right: 0;
 	width: 100%;
@@ -56,14 +67,16 @@
 	position: absolute;
 	z-index: 1;
 }
-#taglines div.stage{
+
+#taglines div.stage {
 	position: absolute;
-	top:  0;
-	left:  0;
+	top: 0;
+	left: 0;
 	width: 980px;
 	z-index: 0;
 }
-#taglines p.tagline{
+
+#taglines p.tagline {
 	font-size: 3.6em;
 	text-align: center;
 	line-height: 200px;
@@ -71,37 +84,46 @@
 	float: left;
 	width: 980px;
 }
-#copyright{
+
+#copyright {
 	text-align: center;
 	padding: 25px 0;
 }
-#copyright p{
+
+#copyright p {
 	color: #565656;
 	font-size: 1.3em;
 }
-#copyright a{	
+
+#copyright a {
 	color: #787878;
 }
-#copyright a:hover{	
+
+#copyright a:hover {
 	color: #fff;
 }
-#features{
+
+#features {
 	margin-bottom: 40px;
 }
-#features div.feature{
+
+#features div.feature {
 	text-align: center;
 }
-#features div.feature h1{
+
+#features div.feature h1 {
 	font-size: 2.4em;
 	line-height: 1.2em;
 	margin-top: 1.2em;
 }
-#features div.feature img{
+
+#features div.feature img {
 	border: 5px solid #333;
 	width: 600px;
 	margin: 15px;
 }
-#features div.feature p{
+
+#features div.feature p {
 	display: block;
 	width: 600px;
 	margin: 0 auto;
@@ -109,15 +131,17 @@
 	line-height: 1.2em;
 }
 
-#noSignup{
+#noSignup {
 	text-align: center;
 	padding: 50px 0 100px 0;
 }
-#noSignup h1{
+
+#noSignup h1 {
 	font-size: 3.6em;
 	line-height: 3.6em;
 }
-#noSignup p{
+
+#noSignup p {
 	font-size: 1.6em;
 	line-height: 1.6em;
 }

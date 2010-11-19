@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	public $components = array('RequestHandler');
+	public $components = array('OauthConsumer', 'RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	public function beforeFilter() {
@@ -23,6 +23,15 @@ class WallPostsController extends AppController {
 	}
 
 	public function add($reply_id = false) {
+		$accessToken = $this->WallPost->User->Oauth->getAccessToken('Twitter', $this->currentUser['User']['id']);
+		if ($accessToken) {
+			App::import('Helper', 'Text');
+			$text = new TextHelper();
+			$this->OauthConsumer->begin('Twitter');
+
+			$this->OauthConsumer->post($accessToken->key, $accessToken->secret, 'http://twitter.com/statuses/update.json', array('status' => $text->truncate($this->data['WallPost']['post'], 140)));
+		}
+
 		$isAjax = $this->RequestHandler->isAjax();
 
 		//make sure there is form data to process, if not there is not use in continuing
