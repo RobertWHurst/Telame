@@ -14,27 +14,132 @@ class AaclComponent extends Object {
 		if ($uid == $fid) {
 			return true;
 		}
-		// what ACO we're checking
-		$aco = 'User::' . $uid . '/' . $what;
-		// First check the user for over ridden perms, they come first
-		if (!@$this->Acl->check(array('model' => 'User', 'foreign_key' => $fid), $aco, 'read')) {
-			// Ok, so nothing special, import the GroupsUser model
-			App::Import('Model', 'GroupsUser');
-			$this->GroupsUser = new GroupsUser();
 
-			// Now, get all the user's groups
-			$groups = $this->GroupsUser->listGroups($uid, $fid);
-			// if the user isn't in a group (should only happen if they're not friends) then return false
+		// load the arosaco model if not already
+		if (!isset($this->controller->ArosAco)) {
+			$this->controller->loadModel('ArosAco');
+		}
+
+		// find the root for the user who we're trying to look at
+		$this->Acl->Aco->recursive = -1;
+		$rootAco = $this->Acl->Aco->find('first', array(
+			'conditions' => array(
+				'alias' => 'User::' . $uid,
+			)
+		));
+
+		// if 'what' is numeric then it is an id of what we should check
+		// get the aco of what we want
+		if (!is_numeric($what)) {
+			$this->Acl->Aco->recursive = -1;
+			$aco = $this->Acl->Aco->find('first', array(
+				'conditions' => array(
+					'lft >' => $rootAco['Aco']['lft'],
+					'rght <' => $rootAco['Aco']['rght'],
+					'alias' => $what,
+				)
+			));
+		} else {
+			$this->Acl->Aco->recursive = -1;
+			$aco = $this->Acl->Aco->find('first', array(
+				'conditions' => array(
+					'lft >' => $rootAco['Aco']['lft'],
+					'rght <' => $rootAco['Aco']['rght'],
+					'id' => $what,
+				)
+			));
+		}
+
+		// that aco doesn't exist, return false
+		if (!$aco) {
+			return false;
+		}
+
+		// find the aro of the user who wants to see the object
+		$this->Acl->Aro->recursive = -1;
+		$userAro = $this->Acl->Aro->find('first', array(
+			'conditions' => array(
+				'model' => 'User',
+				'foreign_key' => $fid,
+			)
+		));
+
+		// get specific permissions for that user
+		$this->controller->ArosAco->recursive = -1;
+		$arosAco = $this->controller->ArosAco->find('first', array(
+			'conditions' => array(
+				'aro_id' => $userAro['Aro']['id'],
+				'aco_id' => $aco['Aco']['id'],
+			)
+		));
+
+		// nothing specific, try the group perms
+		if (!$arosAco) {
+			// if we don't have GroupsUser available, load it
+			if (!isset($this->controller->GroupsUser)) {
+				$this->controller->loadModel('GroupsUser');
+			}
+
+			// find the group the friend is in for the user
+			$groups = $this->controller->GroupsUser->listGroups($uid, $fid);
+
+			// no group, deny
 			if (!isset($groups['GroupsUser']['group_id'])) {
 				return false;
 			}
-			// All looks good, get checkin
-			if (!@$this->Acl->check(array('model' => 'Group', 'foreign_key' => $groups['GroupsUser']['group_id']), $aco, 'read')) {
+
+			// find the group aro
+			$this->Acl->Aro->recursive = -1;
+			$groupsAro = $this->Acl->Aro->find('first', array(
+				'conditions' => array(
+					'model' => 'Group',
+					'foreign_key' => $groups['GroupsUser']['group_id'],
+				)
+			));
+
+			// no group aro (should never happen) deny access
+			if (!$groupsAro) {
+				return false;
+			}
+
+			// find the perms for the group
+			$this->controller->ArosAco->recursive = -1;
+			$arosAco = $this->controller->ArosAco->find('first', array(
+				'conditions' => array(
+					'aro_id' => $groupsAro['Aro']['id'],
+					'aco_id' => $aco['Aco']['id'],
+				)
+			));
+
+			// no perms set, deny
+			if (!$arosAco) {
 				return false;
 			}
 		}
-		// I guess this might be considered a "flaw" because it defaults to true, but the other checks *should* always return true/false
-		return true;
+
+		// do we block, allow, or inherit
+		switch ($arosAco['ArosAco']['_read']) {
+			// block
+			case 0: {
+				return false;
+				break;
+			}
+			// allow)
+			case 1: {
+				return true;
+				break;
+			}
+			// inherit
+			case 2: {
+				// we pass the aco's (what we want to look at) parent id, then next time we already know the parent
+				// return the value between calls, it will return all the way back down
+				return $this->checkPermissions($uid, $fid, $aco['Aco']['parent_id']);
+			}
+			// something else, deny
+			default: {
+				return false;
+			}
+		}
 	}
 
 	// We take the User ID, their groups, and optionally a parent to start
