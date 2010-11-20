@@ -3,7 +3,7 @@
 $urlParts = explode('.', env('HTTP_HOST')); 
 
 // send brewery.telame.com to brewery plugin
-if (in_array('brewery', $urlParts)) {
+if (in_array('brew1', $urlParts) || in_array('brew2', $urlParts) || in_array('brewery', $urlParts)) {
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login', 'plugin' => null));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout', 'plugin' => null));
 
