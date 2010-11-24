@@ -97,12 +97,12 @@ html {
 
 body {
 	color: #efefef;
+	font-feature-settings: "liga=1";
 	font-family: Helvetica, Arial, sans-serif;
 }
 
 /* DEFAULT HEADING STYLES */
 h1, h2, h3, h4, h5, h6 {
-/* h1 - h6 rules */
 }
 
 h1 {
@@ -138,16 +138,17 @@ h1.pageHeading {
 /* DEFAULT ANCHOR STYLES */
 a {
 	color: #d3ef91;
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 a:hover {
 	color: #c1ef52;
+	text-decoration: none;
 }
 
 /* DEFAULT PARAGRAPH RELATED STYLES */
 p {
-/* p - rules */
+	/* p - rules */
 }
 
 strong {

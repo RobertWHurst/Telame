@@ -462,15 +462,6 @@ class HrlHelper extends AppHelper {
 				break;
 			}
 
-			switch( $type ){
-				case 'css':
-					$output .= $this->Html->css( '/c' . $type . '/' . $bFile['url'], null, array( 'media' => 'all', 'inline' => true ) ) . "\n";
-				break;
-				case 'js':
-					$output .= $this->Html->script( '/c' . $type . '/' . $bFile['url'], array( 'inline' => true ) ) . "\n";
-				break;
-			}
-
 		}
 
 		$this->log .= "----------------------------------------------------------------------------------------------------\n\n";

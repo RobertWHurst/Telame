@@ -4,8 +4,8 @@
 
                  webroot
                   / | \         [c] = Controller Name (Hyphenated)
-                 /  |  \        [a] = Action Name (Hyphenated)
-                /   |   \       [v] = View Name (Hyphenated)
+                 /  |  \        [v] = View Name (Hyphenated)
+                /   |   \
                /    |    \      (#) = Resources for a view(s)
               /     |     \
              /      |      \
