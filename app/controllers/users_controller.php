@@ -102,9 +102,8 @@ class UsersController extends AppController {
 	}
 
 	public function profile($slug) {
-		//set the layout
-		$this->layout = 'profile';
-
+		// set the layout
+		$this->layout = 'new_profile';
 		$user = $this->Profile->getProfile($slug);
 
 		if ($user) {

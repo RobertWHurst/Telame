@@ -1,9 +1,13 @@
-<div id="profile_wall">
+<?php
+$hrl->css(array( 'key' => 'wall', 'url' => 'common/wall' ));
+$hrl->js(array( 'key' => 'wall', 'url' => 'common/wall', 'requires' => 'jQuery' ));
+?>
+<div id="wall">
 <?php
 	$user = (empty($user) ? $currentUser : $user);
 	echo $this->element('wall_input', array('user' => $user));
 ?>
-	<div id="profile_wall_posts">
+	<div id="wall_posts">
 <?php
 		//if there are posts on the wall then loop through them
 		if (!empty($wallPosts) && is_array($wallPosts)):
@@ -12,7 +16,7 @@
 				echo $this->element('wall_post', array('post' => $post, 'show_user_and_author' => $show_user_and_author, 'show_post_controls' => true));
 		}
 			if($this->params['action'] != 'news'): ?>
-				<div class="more">
+				<div id="more_posts">
 <?php 
 					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'more_posts', $currentUser['User']['id']));
 					echo $html->link(__('older_posts', true), $url, array('class' => 'more'));

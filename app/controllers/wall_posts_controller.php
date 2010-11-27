@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	public $components = array('OauthConsumer', 'RequestHandler');
+	public $components = array('RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	public function beforeFilter() {
@@ -27,7 +27,7 @@ class WallPostsController extends AppController {
 				echo 'false';
 				exit;
 			} else {
-				$this->redirect(array('controller' => 'users', 'action' => 'profile', $currentUser['User']['Slug']));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['Slug']));
 				exit;
 			}
 		}
@@ -111,8 +111,8 @@ class WallPostsController extends AppController {
 
 		} else {
 			//redirect the visitor to the wall they posted on
-			$this->redirect($this->referer());
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $wallOwnerSlug));
+			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
+			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
 			exit;
 		}
 	}

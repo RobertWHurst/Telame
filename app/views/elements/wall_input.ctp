@@ -1,4 +1,8 @@
-<div id="profile_wall_input">
+<?php
+$hrl->css(array( 'key' => 'wallInput', 'url' => 'common/wall_input' ));
+$hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' => array( 'jQuery', 'wallPost' )));
+?>
+<div id="wall_input">
 
 	<!-- borders -->
 	<div class="box top"><div class="box top right"></div><div class="box top left"></div></div>

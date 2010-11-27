@@ -1,3 +1,6 @@
+<?php
+	$hrl->js(array( 'key' => 'wallComment', 'url' => 'common/wall_comment', 'requires' => 'jQuery' ));
+?>
 <div class="comment clearfix">
 <?php
 	if(
@@ -5,7 +8,7 @@
     	($this->params['action'] != 'news')
     ):
 ?>
-		<div class="deleteComment">
+		<div class="delete_comment">
 <?php 
 			$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $comment['id']);
 			echo $htmlImage->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));

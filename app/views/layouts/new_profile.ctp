@@ -17,11 +17,13 @@
 		array( 'key' => 'base', 'url' => 'common/base' ),
 		array( 'key' => 'tallHeader', 'url' => 'common/tall_header' ),
 		array( 'key' => 'mainSidebar', 'url' => 'common/main_sidebar' ),
+		array( 'key' => 'profileGallery', 'url' => 'users/common/profile_gallery' ),
+		array( 'key' => 'profileSummary', 'url' => 'users/common/profile_summary' )
 	));
 	$hrl->js(array(
 		array( 'key' => 'jQuery', 'url' => 'common/jquery' ),
-		array( 'key' => 'base', 'url' => 'common/base', 'requires' => 'jquery' ),
-		array( 'key' => 'mainSidebar', 'url' => 'common/main_sidebar', 'requires' => array( 'base', 'jquery' ) )
+		array( 'key' => 'base', 'url' => 'common/base', 'requires' => 'jQuery' ),
+		array( 'key' => 'mainSidebar', 'url' => 'common/main_sidebar', 'requires' => array( 'base', 'jQuery' ) )
 	));
 
 	$hrl->merge = false;
@@ -33,15 +35,13 @@
     <!-- SCRIPT -->
 	<?php $hrl->js(); ?>
     <!-- END OF SCRIPT -->
-    
+
 </head>
 <?php ob_flush(); ?>
 <body>
-	<header>
-		<?php echo $this->element('flash'); ?>
-		<div id="backgroundHead"></div>
-		<div id="backgroundBase"></div>
-	</header>
+	<?php echo $this->element('flash'); ?>
+	<div id="backgroundHead"></div>
+	<div id="backgroundBase"></div>
 	<div id="wrap_content">
 		<div id="content" class="clearfix">
 			<div id="wrap_main_sidebar">
@@ -51,13 +51,25 @@
 				<?php echo $this->element('main_sidebar'); ?>
 			</div>
 			<div id="page">
-				<?php echo $content_for_layout; ?>
+				<div id="page_head" class="clearfix">
+<?php
+					//render the profile gallery
+					echo $this->element('gallery');
+
+					//render the profile summary
+					echo $this->element('summary');
+?>
+				</div>
+				<div id="page_navigation" class="clearfix">
+					<?php echo $this->element('profile_navigation'); ?>
+				</div>
+				<div id="page_body" class="clearfix">
+					<?php echo $content_for_layout; ?>
+				</div>
 			</div>
 		</div>
 		<footer>
-			<footer>
 			<?php echo $this->element('copyright'); ?>
-		</footer>
 		</footer>
 	</div>
 	<?php if(Configure::read('debug') > 0): ?>
