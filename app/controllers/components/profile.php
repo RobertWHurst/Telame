@@ -46,23 +46,19 @@ class ProfileComponent extends Object {
 		} else {
 			// These are defaults for viewing your own profile
 			$canView = true;
-			$isFriend = true;
-		}
-
-		if ($canView) {
-			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 10));
-			$wallPosts = $this->User->WallPost->getWallPosts(array('uid' => $user['User']['id']));
-		} else {
-			$friends = array();
-			$wallPosts = array();
 		}
 
 		//get gallery position data
 		$galleryPosData = unserialize($user['Profile']['gallery_pos_data']);
 
 		//pass the profile data to the view
-		$this->controller->set(compact('canRequest', 'friends', 'user', 'wallPosts', 'galleryPosData'));
-		return $user;
+		$this->controller->set(compact('canRequest', 'galleryPosData', 'user'));
+
+		if ($canView) {
+			return $user;
+		} else {
+			return false;
+		}
 	}
 
 }

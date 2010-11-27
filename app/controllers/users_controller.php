@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	public $components = array('Email', 'Profile');
 	public $helpers = array('LinkRender', 'Markdown', 'Paginator', 'Time');
 
-	function beforeFilter(){
+	public function beforeFilter(){
 		parent::beforeFilter();
 
 		$this->Security->blackHoleCallback = '_forceSSL';
@@ -16,7 +16,7 @@ class UsersController extends AppController {
 
 	}
 
-	function confirm($email = null, $hash = null) {
+	public function confirm($email = null, $hash = null) {
 		$this->layout = 'tall_header';
 		if (!is_null($email) && !is_null($hash) || !empty($this->data)) {
 			if (!empty($this->data)) {
@@ -37,7 +37,7 @@ class UsersController extends AppController {
 		}
 	}
 
-	function passwordReset($email = null, $pass = null) {
+	public function passwordReset($email = null, $pass = null) {
 		$this->layout = 'tall_header';
 		if (!empty($this->data)) {
 			// 4th step.  save their new password
@@ -101,13 +101,28 @@ class UsersController extends AppController {
 		}
 	}
 
-	function profile($slug) {
-		//set the layout
+	public function profile($slug) {
+		// set the layout
 		$this->layout = 'new_profile';
-		$this->Profile->getProfile($slug);
+		$user = $this->Profile->getProfile($slug);
+
+		if ($user) {
+			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 10));
+
+//			$friendIds = Set::extract('/Friend/id', $friends);
+			$wallPosts = $this->User->WallPost->getWallPosts($this->currentUser['User']['id'], array(
+				'uid' => $user['User']['id'], 
+//				'aid' => $friendIds
+			));
+		} else {
+			$friends = array();
+			$wallPosts = array();
+		}
+
+		$this->set(compact('friends', 'wallPosts'));
 	}
 
-	function search(){
+	public function search(){
 		$this->layout = 'tall_header_w_sidebar';
 
 		// this is for a technique called Post/Redirect/Get
@@ -186,7 +201,7 @@ class UsersController extends AppController {
 		$this->set(array('results' => $results, 'search_query' => $this->params['query']));
 	}
 
-	function signup($email = null, $key = null) {
+	public function signup($email = null, $key = null) {
 		$this->layout = 'simple_header';
 		// data has been posted
 		if (!empty($this->data)) {
@@ -249,13 +264,13 @@ class UsersController extends AppController {
 
 //----------------- Important functions we don't need to see often ------------------//
 
-	function login(){
+	public function login(){
 		$this->layout = 'tall_header';
 		$this->AuthExtension->checkRememberMe();
 	}
 
 	/** delegate /users/logout request to Auth->logout method */
-	function logout(){
+	public function logout(){
 		$this->AuthExtension->logout();
 		$this->Auth->logout();
 

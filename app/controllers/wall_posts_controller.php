@@ -4,25 +4,11 @@ class WallPostsController extends AppController {
 	public $components = array('RequestHandler');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function more_posts($uid = false, $offset = false){
-		if(!$offset || !$uid){
-			echo 'false';
-			exit;
-		}
-
-		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $uid, 'limit' => 10, 'offset' => $offset));
-
-		//set the layout to none (this is ajax);
-		$this->layout = false;
-
-		$this->set(array('wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile($uid)));
-	}
-
-	function add($reply_id = false) {
+	public function add($reply_id = false) {
 
 		$accessToken = $this->WallPost->User->Oauth->getAccessToken('Twitter', $this->currentUser['User']['id']);
 		if ($accessToken) {
@@ -107,7 +93,7 @@ class WallPostsController extends AppController {
 		if($isAjax) {
 
 			//load the view
-			$wallPost = $this->WallPost->getWallPosts(array('id' => $new_post_id, 'single' => true));
+			$wallPost = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array('id' => $new_post_id, 'single' => true));
 			
 			//set the layout to none (this is ajax);
 			$this->layout = false;
@@ -164,11 +150,8 @@ class WallPostsController extends AppController {
 		));
 		// will return false if we don't find a post matching the conditions
 		if ($wallPost) {
-			// delete all replies first
-			$this->WallPost->deleteAll(array('WallPost.reply_parent_id' => $wallPost['WallPost']['id']));
-
 			//if everything checks out then delete the post and exit
-			$this->WallPost->delete($id);
+			$this->WallPost->remove($id);
 			if($isAjax){
 				echo 'true';
 				exit;
@@ -218,5 +201,20 @@ class WallPostsController extends AppController {
 			$this->redirect($this->referer());
 		exit;
 	}
+
+	public function more_posts($uid = false, $offset = false){
+		if(!$offset || !$uid){
+			echo 'false';
+			exit;
+		}
+
+		$wallPosts = $this->WallPost->getWallPosts(array('uid' => $uid, 'limit' => 10, 'offset' => $offset));
+
+		//set the layout to none (this is ajax);
+		$this->layout = false;
+
+		$this->set(array('wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile($uid)));
+	}
+
 }
 ?>

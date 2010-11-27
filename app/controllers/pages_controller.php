@@ -74,10 +74,8 @@ class PagesController extends AppController {
 		array_push($friends, $uid);
 
 		if(!empty($friends)) {
-			$wallPosts = $this->WallPost->getWallPosts(array(
-//				'uid' => $friends,
+			$wallPosts = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array(
 				'aid' => $friends,
-//				'baid' => $uid,
 				'User' => true,
 				'type' => array('post', 'media'),
 				'limit' => 50

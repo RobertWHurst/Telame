@@ -50,6 +50,7 @@ Configure::write('UserAcls', array(
 		'videos'
 	),
 	'profile',
+	'wallposts',
 ));
 
 Configure::write('UserInfo', array(
