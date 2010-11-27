@@ -23,8 +23,6 @@ $(function(){
 		//grab the total number of posts
 		var postCount = $( 'div.post', '#wall_posts' ).length;
 
-		console.log( postCount );
-
 		//show the 'more posts' button if the server has more posts
 		$.post( core.domain + moreButtonUrl + '/' + postCount + '/', {}, function( response ){
 
@@ -56,7 +54,7 @@ $(function(){
 					moreButton.unbind( 'click' );
 
 					//hide the more button
-					moreButton.fadeOut( speed );
+					moreButton.slideUp( speed );
 
 					//self execute
 					init();
