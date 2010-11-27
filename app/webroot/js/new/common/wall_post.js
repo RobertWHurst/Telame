@@ -21,7 +21,6 @@ $(function() {
 
 		//get the comments
 			comments = $( 'div.comment', commentsContainter );
-			console.log( comments.length );
 
 		if( comments.length === 0 ){
 			commentsContainter.hide();

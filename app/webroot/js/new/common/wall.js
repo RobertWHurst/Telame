@@ -9,9 +9,6 @@ $(function(){
 	//grab its url too
 		moreButtonUrl = $( 'a', moreButton ).attr( 'href' ),
 
-	//grab the total number of posts
-		postCount = $( 'div.post', wallPostContainer ).length,
-
 	//define a speed for animation
 		speed = 300;
 
@@ -19,37 +16,58 @@ $(function(){
 
 	//INIT
 
-	//show the 'more posts' button if the server has more posts
-	$.post( core.domain + moreButtonUrl + '/' + postCount + '/', {}, function( response ){
+	//define the init function
 
-		//if the server passed us data then save it and reveal the button
-		if( $( response ).hasClass( 'post' ) ){
-			moreButton.show();
-		}
+	(function init(){
 
-		//CLICK
+		//grab the total number of posts
+		var postCount = $( 'div.post', '#wall_posts' ).length;
 
-		//setup a click event to dump the data on
-		moreButton.click(function( e ){
+		console.log( postCount );
 
-			//stop the browser from following the link via http
-			e.preventDefault();
+		//show the 'more posts' button if the server has more posts
+		$.post( core.domain + moreButtonUrl + '/' + postCount + '/', {}, function( response ){
 
-			//dump the new posts into the wall
-			$( response ).each(function(){
+			//if the server passed us data then save it and reveal the button
+			if( $( response ).is( 'div' ) ){
+				moreButton.show();
 
-				if( $( this ).hasClass( 'post' ) ){
-					
-					//add the post
-					wall.addPost( this, true );
+				//CLICK
 
-				}
+				//setup a click event to dump the data on
+				moreButton.click(function( e ){
 
-			});
+					//stop the browser from following the link via http
+					e.preventDefault();
+
+					//dump the new posts into the wall
+					$( response ).each(function(){
+
+						if( $( this ).hasClass( 'post' ) ){
+
+							//add the post
+							wall.addPost( this, true );
+
+						}
+
+					});
+
+					//unbind the click event
+					moreButton.unbind( 'click' );
+
+					//hide the more button
+					moreButton.fadeOut( speed );
+
+					//self execute
+					init();
+
+				});
+				
+			}
 
 		});
 
-	});
+	})();
 
 
 
