@@ -19,6 +19,113 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
+	private $aid = false;
+	private $currentUserId = false;
+
+// -------------------- Callback functions
+	function afterSave() {
+		$rootPerms = array();
+
+		App::import('Component', 'Acl');
+		$this->Acl = new AclComponent();
+
+		// find the root user
+		$this->Acl->Aco->recursive = -1;
+		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $this->data['WallPost']['author_id'])));
+
+		// find the wallpost sub
+		$this->Acl->Aco->recursive = 1;
+		$aco = $this->Acl->Aco->find('first', array(
+			'conditions' => array(
+				'alias' => 'wallposts',
+				'lft >' => $aco['Aco']['lft'],
+				'rght <' => $aco['Aco']['rght'],
+			)
+		));
+
+		foreach ($aco['Aro'] as $perm) {
+			$permission = ($perm['Permission']['_read'] ? 1 : 0);
+			$rootPerms[$perm['foreign_key']] = $permission;
+		}
+
+		$acoData = array(
+			'parent_id' => $aco['Aco']['id'],
+			'alias' => 'WallPost::' . $this->id,
+			'model' => 'WallPost',
+			'foreign_key' => $this->id,
+		);
+
+		$this->Acl->Aco->create($acoData);
+		$this->Acl->Aco->save();
+	}
+
+	function beforeFind($data) {
+		if (!$this->aid) {
+			return $data;
+		}
+		App::import('Component', 'Acl');
+		$this->Acl = new AclComponent();
+
+		App::import('Model', 'GroupsUser');
+		$this->GroupsUser = new GroupsUser();
+
+		// make it an array if it's not already
+		if ($this->aid && !is_array($this->aid)) {
+			$this->aid = array($this->aid);
+		}
+
+		// remove ourself from the author id array
+		$key = array_search($this->currentUserId, $this->aid);
+		if($key !== false) {
+			unset($this->aid[$key]);
+		}
+
+		foreach ($this->aid as $aid) {
+			$group = $this->GroupsUser->listGroups($this->currentUserId, $aid);
+
+			$aro = $this->Acl->Aro->find('first', array(
+				'conditions' => array(
+					'model' => 'User',
+					'foreign_key' => $aid,
+				)
+			));
+
+			// find the root author user
+			$this->Acl->Aco->recursive = -1;
+			$rootUserAco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $aid)));
+
+			// wallpost aco id
+			$this->Acl->Aco->recursive = 1;
+			$rootWpAco = $this->Acl->Aco->find('first', array(
+				'conditions' => array(
+					'alias' => 'wallposts',
+					'lft >' => $rootUserAco['Aco']['lft'],
+					'rght <' => $rootUserAco['Aco']['rght'],
+				)
+			));
+
+			// if left is one less than right, they have no specific permissions
+			if ($rootWpAco['Aco']['lft'] != ($rootWpAco['Aco']['rght'] + 1)) {
+				$this->Acl->Aco->recursive = 1;
+				$wallPostsAcos = $this->Acl->Aco->find('all', array(
+					'conditions' => array(
+						'lft >' => $rootWpAco['Aco']['lft'],
+						'rght <' => $rootWpAco['Aco']['rght'],
+					)
+				));
+			}
+
+			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group['GroupsUser']['group_id'] . ']/Permission/_read', $rootWpAco);
+
+			if(empty($rootPermissions) || !$rootPermissions[0]) {
+				$key = array_search($aid, $data['conditions']['OR']['WallPost.author_id']);
+				unset($data['conditions']['OR']['WallPost.author_id'][$key]);
+			}
+		}
+		return $data;
+	}
+
+// -------------------- Other functions
 	public function add($data, $args = false) {
 		$defaults = array(
 			'type' => 'post',
@@ -38,7 +145,9 @@ class WallPost extends AppModel {
 	}
 
 	//TODO: needs containable.
-	public function getWallPosts($arguments = false) {
+	public function getWallPosts($currentUserId, $arguments = false) {
+		$this->currentUserId = $currentUserId;
+
 		$conditions = array();
 		//set the default options
 		$defaults = array(
@@ -94,6 +203,7 @@ class WallPost extends AppModel {
 			*/
 
 			$conditions['OR']['WallPost.author_id'] = $options['aid'];
+			$this->aid = $options['aid'];
 		}
 		if($options['buid']) {
 			$conditions['WallPost.user_id <>'] = $options['buid'];
@@ -157,6 +267,14 @@ class WallPost extends AppModel {
 	}
 
 	public function remove($id) {
+		App::import('Component', 'Acl');
+		$this->Acl = new AclComponent();
+
+		// find the root user
+		$this->Acl->Aco->recursive = -1;
+		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'WallPost::' . $id)));
+
+		$this->Acl->Aco->delete($aco['Aco']['id']);
 		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
 		$this->delete($id);
 	}

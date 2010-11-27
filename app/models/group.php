@@ -11,6 +11,8 @@ class Group extends AppModel {
 		return null;
 	}
 
+
+// -------------------- Other functions
 	public function getFriendLists($arguments = false) {
 		$defaults = array(
 			'uid' => false,
