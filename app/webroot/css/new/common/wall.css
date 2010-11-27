@@ -1,0 +1,36 @@
+#wall {
+	width: 478px;
+	float: left;
+	border-right: 1px solid #787878;
+}
+
+#wall p.no_posts {
+	font-size: 1.6em;
+	text-align: center;
+	margin: 60px 0;
+}
+
+#wall_posts {
+	padding: 0 10px;
+}
+
+#wall_posts p.process {
+	text-align: center;
+	font-size: 1.6em;
+}
+
+#more_posts {
+	display: none;
+	padding: 10px;
+	background: #444;
+	margin-bottom: 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#more_posts a {
+	font-size: 1.6em;
+	text-align: center;
+	display: block;
+}

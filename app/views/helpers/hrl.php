@@ -111,81 +111,6 @@ class HrlHelper extends AppHelper {
 		'js' => array( 'Files' => array() )
 	);
 
-
-	private function allfiles($directory, $recursive = true) {
-		 $result = array();
-		 $handle =  opendir($directory);
-		 while ($datei = readdir($handle))
-		 {
-			  if (($datei != '.') && ($datei != '..'))
-			  {
-				   $file = $directory.$datei;
-				   if (is_dir($file)) {
-						if ($recursive) {
-							 $result = array_merge($result, $this->allfiles($file.'/'));
-						}
-				   } else {
-						$result[] = $file;
-				   }
-			  }
-		 }
-		 closedir($handle);
-		 return $result;
-	}
-
-	private function dirmtime($directory, $recursive = true) {
-		 $allFiles = $this->allfiles($directory, $recursive);
-		 $highestKnown = 0;
-		 foreach ($allFiles as $val) {
-			  $currentValue = filemtime($val);
-			  if ($currentValue > $highestKnown) $highestKnown = $currentValue;
-		 }
-		 return $highestKnown;
-	}
-
-	private function generate_file_name( $type ) {
-		return sha1( $this->signature[$type] );
-	}
-
-	private function parse_args($defaults, $arguments, $keep_unset = false) {
-
-		if( ! is_array( $defaults ) || ! is_array( $arguments ) ){
-			return $defaults; //just return the defaults (something goofed)
-		}
-
-		//copy the defaults
-		$results = $defaults;
-		foreach($arguments as $key => $argument){
-
-			//if the argument is invalid continue the loop
-			if( ! $keep_unset && ! isset( $defaults[$key] ) )
-				continue; //the option is invalid
-
-			//if the argument is actually an array of argument
-			if(is_array($argument)){
-				//if keep_unset is true and the default is not an array add the array
-				if($keep_unset && !is_array($defaults[$key])){
-					$results[$key] = $argument;
-					continue; //advance the loop
-				}
-
-				//if the argument is an array then make sure it is valid
-				if(!is_array($defaults[$key]))
-					continue; //the option is not an array
-
-				//set the suboptions
-				$subdefaults = $defaults[$key];
-				$results[$key] = $this->parse_args($subdefaults, $argument, $keep_unset);
-			} else {
-
-				//just set it
-				$results[$key] = $argument;
-			}
-		}
-
-		return $results;
-	}
-
 	private function merge( $type, $file = null ){
 
 		//if the merge is being dumped to a file
@@ -295,12 +220,6 @@ class HrlHelper extends AppHelper {
 				//parse the file against the default values
 				$file = $this->parse_args($this->default_file_vals[$type], $file, true);
 
-
-                //FIXME: This allows for an easy transition to the new webroot structure
-                //       remove it once the move is complete
-                $file['url'] = 'new/' . $file['url'];
-
-                
 				if( $file['key'] === '' ){
 					$try_key = 0;
 					while( $file['key'] === '' ){
@@ -311,6 +230,10 @@ class HrlHelper extends AppHelper {
 						}
 					}
 				}
+
+				//FIXME: This allows for an easy transition to the new webroot structure
+                //       remove it once the move is complete
+                $file['url'] = 'new/' . $file['url'];
 
 				//make sure the file has the required values
 				if( is_array( $file ) && is_string( $file['url'] ) && $file['url'] ) {
@@ -467,6 +390,80 @@ class HrlHelper extends AppHelper {
 		$this->log .= "----------------------------------------------------------------------------------------------------\n\n";
 
 		return $output;
+	}
+
+	private function generate_file_name( $type ) {
+		return sha1( $this->signature[$type] );
+	}
+
+	private function parse_args($defaults, $arguments, $keep_unset = false) {
+
+		if( ! is_array( $defaults ) || ! is_array( $arguments ) ){
+			return $defaults; //just return the defaults (something goofed)
+		}
+
+		//copy the defaults
+		$results = $defaults;
+		foreach($arguments as $key => $argument){
+
+			//if the argument is invalid continue the loop
+			if( ! $keep_unset && ! isset( $defaults[$key] ) )
+				continue; //the option is invalid
+
+			//if the argument is actually an array of argument
+			if(is_array($argument)){
+				//if keep_unset is true and the default is not an array add the array
+				if($keep_unset && !is_array($defaults[$key])){
+					$results[$key] = $argument;
+					continue; //advance the loop
+				}
+
+				//if the argument is an array then make sure it is valid
+				if(!is_array($defaults[$key]))
+					continue; //the option is not an array
+
+				//set the suboptions
+				$subdefaults = $defaults[$key];
+				$results[$key] = $this->parse_args($subdefaults, $argument, $keep_unset);
+			} else {
+
+				//just set it
+				$results[$key] = $argument;
+			}
+		}
+
+		return $results;
+	}
+
+	private function allfiles($directory, $recursive = true) {
+		 $result = array();
+		 $handle =  opendir($directory);
+		 while ($datei = readdir($handle))
+		 {
+			  if (($datei != '.') && ($datei != '..'))
+			  {
+				   $file = $directory.$datei;
+				   if (is_dir($file)) {
+						if ($recursive) {
+							 $result = array_merge($result, $this->allfiles($file.'/'));
+						}
+				   } else {
+						$result[] = $file;
+				   }
+			  }
+		 }
+		 closedir($handle);
+		 return $result;
+	}
+
+	private function dirmtime($directory, $recursive = true) {
+		 $allFiles = $this->allfiles($directory, $recursive);
+		 $highestKnown = 0;
+		 foreach ($allFiles as $val) {
+			  $currentValue = filemtime($val);
+			  if ($currentValue > $highestKnown) $highestKnown = $currentValue;
+		 }
+		 return $highestKnown;
 	}
 
 }

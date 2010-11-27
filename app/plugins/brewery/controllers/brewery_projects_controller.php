@@ -57,6 +57,8 @@ class BreweryProjectsController extends BreweryAppController {
 	public function index() {
 		$projects = $this->BreweryProject->find('all', array('order' => 'BreweryProject.id ASC'));
 		$this->set(compact('projects'));
+
+	    $this->layout = 'new_tall_header_w_sidebar';
 	}
 
 	public function like($id) {

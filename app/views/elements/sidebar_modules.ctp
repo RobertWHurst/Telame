@@ -12,15 +12,7 @@
 
 	/* DELETE THE BELOW BEFORE RELEASE!!! */
 ?>
-	<div id="module_profile" class="module">
-		<div class="link">
-<?php
-		$link_content = $this->HtmlImage->Image('icons/user.png', array('static' => true, 'alt' => '')) . __('profile', true);
-		echo $html->link($link_content, array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug']), array('escape' => false));
-?>
-		</div>
-	</div>
-	<div id="module_notifications" class="module">
+	<!-- Commented out until styled properly -- <div id="module_notifications" class="module">
 <?php
 		$noteCount = ($currentUser['User']['notification_count'] ? ' (' . $currentUser['User']['notification_count'] . ')' : '');
 		if ($noteCount) {
@@ -37,12 +29,20 @@
 		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'notifications', 'action' => 'index'), array('escape' => false));
 ?>
 		</div>
-	</div>
+	</div> -->
 	<div id="module_newsfeed" class="module">
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/newspaper.png', array('static' => true, 'alt' => '')) . __('news_feed', true);
 		echo $html->link($link_content, array('controller' => 'pages', 'action' => 'news'), array('escape' => false));
+?>
+		</div>
+	</div>
+	<div id="module_profile" class="module">
+		<div class="link">
+<?php
+		$link_content = $this->HtmlImage->Image('icons/user.png', array('static' => true, 'alt' => '')) . __('profile', true);
+		echo $html->link($link_content, array('controller' => 'users', 'action' => 'profile', $currentUser['User']['slug']), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -78,6 +78,14 @@
 <?php
 		$link_content = $this->HtmlImage->Image('icons/date.png', array('static' => true, 'alt' => '')) . __('calendar', true);
 		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'events', 'action' => 'calendar'), array('escape' => false));
+?>
+		</div>
+	</div>
+	<div id="module_brewery" class="module">
+		<div class="link">
+<?php
+		$link_content = $this->HtmlImage->Image('icons/date.png', array('static' => true, 'alt' => '')) . __('brewery', true);
+		echo $html->link($link_content, 'http://brewery.telame.com', array('escape' => false));
 ?>
 		</div>
 	</div>

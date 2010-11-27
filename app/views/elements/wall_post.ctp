@@ -1,5 +1,12 @@
-<div class="wall_post_wrap">
-	<div class="<?php echo $post['WallPost']['class']; ?> clearfix">
+<?php
+	$hrl->css(array( 'key' => 'wallPost', 'url' => 'common/wall_post' ));
+	$hrl->js(array(
+		array( 'key' => 'wallPost', 'url' => 'common/wall_post', 'requires' => 'jQuery' ),
+		array( 'key' => 'wallCommentInput', 'url' => 'common/wall_comments_input', 'requires' => array( 'jQuery', 'wallComment' ))
+	));
+?>
+<div id="post_<?php echo $post['WallPost']['class'] . '_' . $post['WallPost']['id']; ?>" class="post">
+	<div class="inner_post <?php echo $post['WallPost']['class']; ?> clearfix">
 <?php
 		$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
 		if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'):
@@ -26,7 +33,7 @@
 		if(($post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id']) &&
 			($this->params['action'] != 'news')):
 ?>
-			<div class="deletePost">
+			<div class="delete_post">
 <?php
 				$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
@@ -164,7 +171,7 @@
 						echo $this->element('wall_post_comment', compact('comment'));
 				}
 ?>
-				<div class="commentInput">
+				<div class="comment_input">
 <?php
 					//create the form
 					$url = $html->url(array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'add'));

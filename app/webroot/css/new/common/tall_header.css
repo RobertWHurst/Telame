@@ -2,7 +2,7 @@
 #backgroundHead {
 	width: 100%;
 	height: 300px;
-	background: #400c5d url('/img/common/header.png') no-repeat top center;
+	background: #400c5d url(/img/common/header.png) no-repeat top center;
 	border-bottom: 1px solid #110019;
 	position: relative;
 	z-index: 0;
@@ -31,7 +31,7 @@
 }
 
 #page_head {
-	background: url('/img/common/page_head.png') no-repeat top right;
+	background: url(/img/common/page_head.png) no-repeat top right;
 	position: relative;
 }
 

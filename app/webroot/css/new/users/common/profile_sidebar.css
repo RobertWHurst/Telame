@@ -1,0 +1,39 @@
+#wall_sidebar {
+	width: 289px;
+	float: left;
+}
+
+#wall_sidebar div.friends h1 {
+	font-size: 2.4em;
+	line-height: 3em;
+	padding: 0 20px;
+}
+
+#wall_sidebar div.thumbs {
+	padding: 0 10px;
+}
+
+#wall_sidebar div.thumb {
+
+}
+
+#wall_sidebar div.thumb a {
+	text-align: center;
+	font-size: 1.1em;
+	display: block;
+	float: left;
+	width: 76px;
+	font-weight: bold;
+}
+
+#wall_sidebar div.avatar {
+	width: 60px;
+	height: 60px;
+	background: #000;
+	margin: 0 8px 8px 8px;
+}
+
+#wall_sidebar div.avatar img {
+	width: 60px;
+	height: 60px;
+}

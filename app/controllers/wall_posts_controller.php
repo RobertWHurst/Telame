@@ -41,7 +41,7 @@ class WallPostsController extends AppController {
 				echo 'false';
 				exit;
 			} else {
-				$this->redirect(array('controller' => 'users', 'action' => 'profile', $currentUser['User']['Slug']));
+				$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['Slug']));
 				exit;
 			}
 		}

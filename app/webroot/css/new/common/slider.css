@@ -15,7 +15,7 @@ div.TS_slider div.si{
 	left: 0;
 }
 div.TS_slider div.sb{
-	background: url('/img/common/slider.png') 0 0;
+	background: url(/img/common/slider.png) 0 0;
 	z-index: 1000;
 }
 div.TS_slider div.ss div,
@@ -38,17 +38,17 @@ div.TS_slider div.ss div p{
 	padding-left: 16px;
 }
 div.TS_slider div.ss div.allow{
-	background: url('/img/common/slider.png') 0 -128px;
+	background: url(/img/common/slider.png) 0 -128px;
 	z-index: 997;
 	left: 0;
 	width: 125px;
 }
 div.TS_slider div.ss div.hover.allow,
 div.TS_slider div.ss div.current.allow{
-	background: url('/img/common/slider.png') -125px -128px;
+	background: url(/img/common/slider.png) -125px -128px;
 }
 div.TS_slider.disabled div.ss div.allow{
-	background: url('/img/common/slider.png') -250px -128px;
+	background: url(/img/common/slider.png) -250px -128px;
 }
 div.TS_slider div.ss div.allow p{
 	margin: 0;
@@ -67,36 +67,36 @@ div.TS_slider div.ss div.inherit{
 }
 div.TS_slider div.ss div.inherit,
 div.TS_slider div.ss div.inherit.ib{
-	background: url('/img/common/slider.png') 0 -63px;
+	background: url(/img/common/slider.png) 0 -63px;
 }
 div.TS_slider div.ss div.hover.inherit,
 div.TS_slider div.ss div.current.inherit,
 div.TS_slider div.ss div.hover.inherit.ib,
 div.TS_slider div.ss div.current.inherit.ib{
-	background: url('/img/common/slider.png') -125px -63px;
+	background: url(/img/common/slider.png) -125px -63px;
 }
 div.TS_slider.disabled div.ss div.inherit,
 div.TS_slider.disabled div.ss div.inherit.ib{
-	background: url('/img/common/slider.png') -250px -63px;
+	background: url(/img/common/slider.png) -250px -63px;
 }
 div.TS_slider div.ss div.inherit.ia{
-	background: url('/img/common/slider.png') 0 -63px;
+	background: url(/img/common/slider.png) 0 -63px;
 }
 div.TS_slider div.ss div.hover.inherit.ia,
 div.TS_slider div.ss div.current.inherit.ia{
-	background: url('/img/common/slider.png') -125px -63px;
+	background: url(/img/common/slider.png) -125px -63px;
 }
 div.TS_slider.disabled div.ss div.inherit.ia{
-	background: url('/img/common/slider.png') -250px -63px;
+	background: url(/img/common/slider.png) -250px -63px;
 }
 div.TS_slider div.ss div.block{
-	background: url('/img/common/slider.png') 0 -32px;
+	background: url(/img/common/slider.png) 0 -32px;
 	z-index: 999;
 }
 div.TS_slider div.ss div.hover.block,
 div.TS_slider div.ss div.current.block{
-	background: url('/img/common/slider.png') -125px -32px;
+	background: url(/img/common/slider.png) -125px -32px;
 }
 div.TS_slider.disabled div.ss div.block{
-	background: url('/img/common/slider.png') -250px -256px;
+	background: url(/img/common/slider.png) -250px -256px;
 }
