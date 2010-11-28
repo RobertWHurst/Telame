@@ -228,7 +228,7 @@ class WallPost extends AppModel {
 			'contain' => $contain,
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
-			'order' => 'WallPost.posted DESC'
+			'order' => 'posted DESC'
 		));
 
 		// This needs fixing

@@ -49,7 +49,7 @@ class PagesController extends AppController {
 			}
 		} else {
 			//set the layout
-			$this->layout = 'tall_header_w_sidebar';
+			$this->layout = 'new_tall_header_w_sidebar';
 			$uid = $this->currentUser['User']['id'];
 		}
 

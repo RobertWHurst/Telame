@@ -1,24 +1,9 @@
 <?php
 //INCLUDES
-$html->css(array(
-	'base',
-	'tall_header',
-	'main_sidebar',
-	'wall_posts',
-	'pages/news_feed',
-	'pages/news_sidebar',
-	'wall'
-), null, array('inline' => false));
-$js = array(
-	'jquery',
-	'base',
-	'wall',
-	'wall_input',
-	'main_sidebar'
-);
-foreach ($js as $j) {
-	$javascript->link($j, false);
-}
+$hrl->css(array(
+	array( 'key' => 'newsFeed', 'url' => 'pages/news_feed' ),
+	array( 'key' => 'newsSidebar', 'url' => 'pages/news_sidebar' )
+));
 $this->set('title_for_layout', __('news_title', true));
 ?>
 <div id="page_head">
