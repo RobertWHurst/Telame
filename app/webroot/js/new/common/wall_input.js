@@ -25,7 +25,7 @@ $(function() {
 	inputDiv.delegate( 'input:text, textarea', 'mouseenter', function(){
 
 		//show the green highlight by adding the active and hover class
-		inputDiv.addClass( 'hover' ).addClass( 'active' );
+		inputDiv.addClass( 'hover' );
 
 
 	});
@@ -36,11 +36,6 @@ $(function() {
 		//remove the hover class
 		inputDiv.removeClass( 'hover' );
 
-		//if the input is out of focus remove the active class as well
-		if( ! inputDiv.hasClass( 'focus' ) ){
-			inputDiv.removeClass( 'active' );
-		}
-
 	});
 
 	//FOCUS
@@ -49,7 +44,7 @@ $(function() {
 	inputDiv.delegate( 'input:text, textarea', 'focus', function(){
 
 		//show the green highlight by adding the active and hover class
-		inputDiv.addClass( 'focus' ).addClass( 'active' );
+		inputDiv.addClass( 'focus' );
 
 		//clear the default text
 		if( input.val() === defaultText ){
@@ -78,11 +73,6 @@ $(function() {
 
 		//remove the hover class
 		inputDiv.removeClass( 'focus' );
-
-		//if the input is out of focus remove the active class as well
-		if( ! inputDiv.hasClass( 'hover' ) ){
-			inputDiv.removeClass( 'active' );
-		}
 
 		//the textarea must be empty before it will turn back into an input
 		if( input.is( 'textarea' ) && input.val() === '' ){

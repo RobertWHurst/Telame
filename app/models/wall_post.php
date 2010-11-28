@@ -186,6 +186,7 @@ class WallPost extends AppModel {
 		//parse the options
 		$options = parseArguments($defaults, $arguments, true);
 
+	    //pr( $options );
 		// create conditions
 		// get only get parents in the top level, not replies.
 		if($options['single'] == false) {
