@@ -25,6 +25,18 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 	echo $this->Form->end(__('wall_post_submit', true));
 ?>
 	<div class="controls">
-		[acl scope], [share scope]
+		<div class="label"><h3>Scope: </h3></div>
+		<div class="acl_scope">
+			<?php echo $html->image( '/img/icons/lock.png' ); ?>
+		</div>
+		<div class="share_scope">
+			<?php echo $html->image( '/img/icons/note_go.png' ); ?>
+		</div>
+		<div class="acl_scope_menu">
+			[eric's acl scope here]
+		</div>
+		<div class="share_scope_menu">
+			[eric's sharing scope here]
+		</div>
 	</div>
 </div>

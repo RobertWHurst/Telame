@@ -29,17 +29,14 @@
 				echo $this->element('wall_post_types/' . $post['WallPost']['type'], array('author_name' => $author_name, 'post' => $post));
 ?>
 		</div>
-<?php
-		if(($post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id']) &&
-			($this->params['action'] != 'news')):
-?>
+		<?php if( $post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id'] ){ ?>
 			<div class="delete_post">
 <?php
 				$url = array('slug' => $currentUser['User']['slug'], 'controller' => 'wall_posts', 'action' => 'delete', $post['WallPost']['id']);
 				echo $html->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 			</div>
-		<?php endif; ?>
+		<?php } ?>
 		<div class="baseline">
 			<?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
 				<div class="baseline_controls">
