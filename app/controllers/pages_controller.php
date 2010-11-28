@@ -32,13 +32,13 @@ class PagesController extends AppController {
 		$this->set('title_for_layout', __('site_name', true));
 	}
 
-	public function news($selectedFriendList = null, $uid = null, $hash = null) {
+	public function news( $selectedFriendList = null, $uid = null, $hash = null ) {
 		$this->loadModel('Group');
 		$this->loadModel('GroupsUser');
 		$this->loadModel('WallPost');
 		$uid = intval($uid);
 
-		if ($this->RequestHandler->isRss()) {
+		if ( $this->RequestHandler->isRss() ) {
 			Configure::write('debug', 0);
 			// this just checks that the hash is valid for the specified user
 			$this->WallPost->User->recursive = -1;
@@ -53,7 +53,7 @@ class PagesController extends AppController {
 			$uid = $this->currentUser['User']['id'];
 		}
 
-		$friendLists = $this->Group->getFriendLists(array('uid' => $uid));
+		$friendLists = $this->Group->getFriendLists( array( 'uid' => $uid ) );
 
 		$psudeoLists = array(
 			'all' => array('Group' => array('title' => 'Everyone', 'id' => 0))
@@ -87,6 +87,38 @@ class PagesController extends AppController {
 		$birthdays = $this->GroupsUser->getBirthdays($this->currentUser['User']['id']);
 
 		$this->set(compact('birthdays', 'friendLists', 'wallPosts'));
+	}
+
+	public function more_news( $selectedFriendList = null, $uid = false, $offset = false){
+
+		//jettison the request if its not via ajax
+		if( ! $this->RequestHandler->isAjax() ){
+			$this->redirect( $this->referer() );
+		}
+
+		if( ! $offset || ! $uid ){
+			echo 'false';
+			exit;
+		}
+
+		$friends = $this->GroupsUser->getFriendIds($uid, $selectedFriendList);
+		array_push($friends, $uid);
+
+		if(!empty($friends)) {
+			$wallPosts = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array(
+				'aid' => $friends,
+				'User' => true,
+				'type' => array('post', 'media'),
+				'limit' => 10
+			));
+		} else {
+			$wallPosts = false;
+		}
+
+		//set the layout to none (this is ajax);
+		$this->layout = false;
+
+		$this->set( array( 'wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile( $uid ) ) );
 	}
 
 

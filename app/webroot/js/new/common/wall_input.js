@@ -9,8 +9,19 @@ $(function() {
 	//grab the form
 		form = $( 'form', inputDiv ),
 
+	//grab the acl and share buttons
+		aclButton = $( 'div.acl_scope', inputDiv ),
+		shareButton = $( 'div.share_scope', inputDiv ),
+
+	//grab the acl and share menus
+		aclMenu = $( 'div.acl_scope_menu', inputDiv ),
+		shareMenu = $( 'div.share_scope_menu', inputDiv ),
+
 	//grab the default text
-		defaultText = $( 'label', inputDiv ).html();
+		defaultText = $( 'label', inputDiv ).html(),
+
+	//set an animation speed
+		speed = 300;
 
 
 
@@ -24,8 +35,12 @@ $(function() {
 	//setup a mouseenter event
 	inputDiv.delegate( 'input:text, textarea', 'mouseenter', function(){
 
-		//show the green highlight by adding the active and hover class
-		inputDiv.addClass( 'hover' );
+		if( ! inputDiv.hasClass( 'focus' ) ){
+
+			//show the green highlight by adding the active and hover class
+			inputDiv.addClass( 'hover' );
+
+		}
 
 
 	});
@@ -44,7 +59,7 @@ $(function() {
 	inputDiv.delegate( 'input:text, textarea', 'focus', function(){
 
 		//show the green highlight by adding the active and hover class
-		inputDiv.addClass( 'focus' );
+		inputDiv.addClass( 'focus' ).removeClass( 'hover' );
 
 		//clear the default text
 		if( input.val() === defaultText ){
@@ -139,6 +154,62 @@ $(function() {
 			}
 
 		});
+
+	});
+
+	//ACL SCOPE
+
+	//setup a click event for the acl scope and its menu
+	aclButton.click(function(){
+
+		//apply the active class
+		aclButton.addClass( 'focus' );
+
+		//display the drip down
+		aclMenu.slideDown( speed, function(){
+			aclMenu.addClass( 'open' );
+		});
+
+	});
+	$( document ).click( function( e ){
+
+		if(
+			aclMenu.hasClass( 'open' ) &&
+			! $(e.target).closest( 'div.acl_scope_menu' ).length
+		){
+			aclMenu.slideUp( speed, function(){
+				aclMenu.removeClass( 'open' );
+			});
+			aclButton.removeClass( 'focus' );
+		}
+
+	});
+
+	//SHARE SCOPE
+
+	//setup a click event for the acl scope and its menu
+	shareButton.click(function(){
+
+		//apply the active class
+		shareButton.addClass( 'focus' );
+
+		//display the drip down
+		shareMenu.slideDown( speed, function(){
+			shareMenu.addClass( 'open' );
+		});
+
+	});
+	$( document ).click( function( e ){
+
+		if(
+			shareMenu.hasClass( 'open' ) &&
+			! $(e.target).closest( 'div.share_scope_menu' ).length
+		){
+			shareMenu.slideUp( speed, function(){
+				shareMenu.removeClass( 'open' );
+			});
+			shareButton.removeClass( 'focus' );
+		}
 
 	});
 
