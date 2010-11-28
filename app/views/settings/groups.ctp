@@ -6,9 +6,9 @@ $hrl->css(array(
 	array( 'key' => 'acl_view', 'url' => 'common/acl_view' )
 ));
 $hrl->js(array(
-	array( 'key' => 'settings', 'url' => 'settings/common/settings', 'requires' => array( 'base', 'jquery' ) ),
-	array( 'key' => 'slider', 'url' => 'common/slider', 'requires' => 'jquery' ),
-	array( 'key' => 'acl_view', 'url' => 'common/acl_view', 'requires' => array( 'base', 'jquery', 'slider' ) )
+	array( 'key' => 'settings', 'url' => 'settings/common/settings', 'requires' => array( 'base', 'jQuery' ) ),
+	array( 'key' => 'slider', 'url' => 'common/slider', 'requires' => 'jQuery' ),
+	array( 'key' => 'acl_view', 'url' => 'common/acl_view', 'requires' => array( 'base', 'jQuery', 'slider' ) )
 ));
 //page title
 $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('settings', true));

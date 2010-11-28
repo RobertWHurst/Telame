@@ -20,8 +20,8 @@
 	));
 	$hrl->js(array(
 		array( 'key' => 'jQuery', 'url' => 'common/jquery' ),
-		array( 'key' => 'base', 'url' => 'common/base', 'requires' => 'jquery' ),
-		array( 'key' => 'mainSidebar', 'url' => 'common/main_sidebar', 'requires' => array( 'base', 'jquery' ) )
+		array( 'key' => 'base', 'url' => 'common/base', 'requires' => 'jQuery' ),
+		array( 'key' => 'mainSidebar', 'url' => 'common/main_sidebar', 'requires' => array( 'base', 'jQuery' ) )
 	));
 
 	$hrl->merge = false;

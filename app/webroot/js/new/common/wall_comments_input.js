@@ -117,7 +117,7 @@ $(function() {
 	//SUBMIT
 
 	//setup an event for submitting the form
-	wallPostContainer.delegate( 'div.comment form', 'submit', function( e ){
+	wallPostContainer.delegate( 'div.commentsWrap form', 'submit', function( e ){
 		var form = $( this ),
 			commentsDivId = form.parents( 'div.post' ).attr( 'id' ),
 			input = $( 'input:text', form );

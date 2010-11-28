@@ -14,7 +14,8 @@ class WallPost extends AppModel {
 		'Replies' => array(
 			'className' => 'WallPost',
 			'foreignKey' => 'reply_parent_id',
-			'dependent' => true
+			'dependent' => true,
+			'order' => 'posted ASC'
 		),
 		'WallPostLike'
 	);
@@ -190,18 +191,6 @@ class WallPost extends AppModel {
 			$conditions['OR']['WallPost.user_id'] = $options['uid'];
 		}
 		if($options['aid']) {
-
-			/*
-			 * k wtf? doesn't this kind of defeat the purpose of uid?
-			 *
-
-			$conditions['OR'] = array(
-				'WallPost.author_id' => $options['aid'],
-				'WallPost.user_id' => $options['uid'],
-			);
-			unset($conditions['WallPost.user_id']);
-			*/
-
 			$conditions['OR']['WallPost.author_id'] = $options['aid'];
 			$this->aid = $options['aid'];
 		}
@@ -239,7 +228,7 @@ class WallPost extends AppModel {
 			'contain' => $contain,
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
-			'order' => 'WallPost.id DESC'
+			'order' => 'WallPost.posted DESC'
 		));
 
 		// This needs fixing
