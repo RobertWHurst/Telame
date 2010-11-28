@@ -71,7 +71,7 @@ class WallPost extends AppModel {
 		$this->GroupsUser = new GroupsUser();
 
 		// make it an array if it's not already
-		if ($this->aid && !is_array($this->aid)) {
+		if (!is_array($this->aid)) {
 			$this->aid = array($this->aid);
 		}
 
@@ -84,6 +84,8 @@ class WallPost extends AppModel {
 		foreach ($this->aid as $aid) {
 			$group = $this->GroupsUser->listGroups($this->currentUserId, $aid);
 
+			// get the user
+			$this->Acl->Aro->recursive = -1;
 			$aro = $this->Acl->Aro->find('first', array(
 				'conditions' => array(
 					'model' => 'User',
@@ -106,6 +108,7 @@ class WallPost extends AppModel {
 			));
 
 			// if left is one less than right, they have no specific permissions
+			// FIXME: this needs finishing
 			if ($rootWpAco['Aco']['lft'] != ($rootWpAco['Aco']['rght'] + 1)) {
 				$this->Acl->Aco->recursive = 1;
 				$wallPostsAcos = $this->Acl->Aco->find('all', array(
@@ -116,13 +119,17 @@ class WallPost extends AppModel {
 				));
 			}
 
+			// permissions the user has set for all wall posts
 			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group['GroupsUser']['group_id'] . ']/Permission/_read', $rootWpAco);
 
+			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
 			if(empty($rootPermissions) || !$rootPermissions[0]) {
+				// find the key of the author and remove them from the list
 				$key = array_search($aid, $data['conditions']['OR']['WallPost.author_id']);
 				unset($data['conditions']['OR']['WallPost.author_id'][$key]);
 			}
 		}
+		// return the modified array for the query
 		return $data;
 	}
 
@@ -228,7 +235,7 @@ class WallPost extends AppModel {
 			'contain' => $contain,
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
-			'order' => 'posted DESC'
+			'order' => 'WallPost.posted DESC'
 		));
 
 		// This needs fixing
