@@ -54,6 +54,7 @@ class AppController extends Controller {
 	function beforeRender() {
 	}
 
+	// check if the user has a profile, if not redirect them to the settings
 	function checkProfile() {
 		if ($this->currentUser['User']['first_login']) {
 			$this->Session->setFlash(__('new_user_welcome', true));
@@ -64,6 +65,7 @@ class AppController extends Controller {
 		}
 	}
 
+	// user info available eveywhere
 	function getCurrentUser() {
 		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
 

@@ -12,11 +12,11 @@ class WallPostsController extends AppController {
 
 		$accessToken = $this->WallPost->User->Oauth->getAccessToken('Twitter', $this->currentUser['User']['id']);
 		if ($accessToken) {
-			App::import('Helper', 'Text');
-			$text = new TextHelper();
-			$this->OauthConsumer->begin('Twitter');
-
-			$this->OauthConsumer->post($accessToken->key, $accessToken->secret, 'http://twitter.com/statuses/update.json', array('status' => $text->truncate($this->data['WallPost']['post'], 140)));
+//			App::import('Helper', 'Text');
+//			$text = new TextHelper();
+//			$this->OauthConsumer->begin('Twitter');
+//
+//			$this->OauthConsumer->post($accessToken->key, $accessToken->secret, 'http://twitter.com/statuses/update.json', array('status' => $text->truncate($this->data['WallPost']['post'], 140)));
 		}
 
 		$isAjax = $this->RequestHandler->isAjax();
@@ -69,9 +69,6 @@ class WallPostsController extends AppController {
 		//save the user id and poster id
 		$this->data['WallPost']['user_id'] = $wallOwnerId;
 		$this->data['WallPost']['author_id'] = $visitorId;
-
-		// add which groups can view this
-//		$this->data
 
 		//commit the data to the db
 		$this->WallPost->add($this->data, array('type' => 'post', 'class' => 'wall_post'));

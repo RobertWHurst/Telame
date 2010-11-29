@@ -67,11 +67,10 @@ pr($yahooContacts);
 
 	public function index() {
 		$this->loadModel('Oauth');
-		$services = $this->Oauth->find('all', array('conditions' => array('user_id' => $this->currentUser['User']['id'])));
 
 		$connectedServices = array();
-		foreach ($services as $service) {
-			$connectedServices[] = $service['Oauth']['service'];
+		foreach ($this->currentUser['Oauth'] as $service) {
+			$connectedServices[] = $service['service'];
 		}
 		$this->set(compact('connectedServices'));
 	}

@@ -56,6 +56,7 @@ class GroupsUser extends AppModel {
 
 	public function getBirthdays($uid) {
 		$friendIds = $this->getFriendIds($uid);
+		$this->User->Profile->recursive = -1;
 		$users = $this->User->Profile->find('all', array(
 			'conditions' => array(
 				//'Profile.dob LIKE' => '%' . date('-m-d', strtotime('now')),
@@ -113,12 +114,11 @@ class GroupsUser extends AppModel {
 
 	// takes User_ID and Friend_ID and returns what group the friend is in
 	public function listGroups($uid, $fid) {
+		$this->recursive = -1;
 		$groups = $this->find('first', array(
 			'conditions' => array(
-				'user_id' => $uid,
-				'friend_id' => $fid,
-			),
-			'contain' => array(
+				'GroupsUser.user_id' => $uid,
+				'GroupsUser.friend_id' => $fid,
 			)
 		));
 		return $groups;

@@ -78,7 +78,7 @@ class PagesController extends AppController {
 				'aid' => $friends,
 				'User' => true,
 				'type' => array('post', 'media'),
-				'limit' => 50
+				'limit' => 25
 			));
 		} else {
 			$wallPosts = false;
