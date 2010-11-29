@@ -1,10 +1,7 @@
 $(function(){
 
-	//grab the wall post container
-	var wallPostContainer = $( '#wall_posts' ),
-
 	//grab the 'more posts' button
-		moreButton = $( '#more_posts' ),
+	var moreButton = $( '#more_posts' ),
 
 	//grab its url too
 		moreButtonUrl = $( 'a', moreButton ).attr( 'href' ),
@@ -12,7 +9,7 @@ $(function(){
 	//define a speed for animation
 		speed = 300;
 
-
+	
 
 	//INIT
 
@@ -49,7 +46,7 @@ $(function(){
 						if( $( this ).hasClass( 'post' ) ){
 
 							//add the post
-							wall.addPost( this, true );
+							wallInput.addPost( this, true );
 
 						}
 
@@ -71,54 +68,5 @@ $(function(){
 		});
 
 	})();
-
-
-
-	//WALL
-	wall = {
-
-		//define a function for adding posts
-		'addPost': function( data, appendData ){
-
-			if( ! appendData ){
-
-				//prepend the post
-				wallPostContainer.prepend( data );
-
-			} else {
-
-				//add the post before the 'more posts' button
-				$( '#more_posts' ).before( data );
-
-			}
-
-			//grab the new post
-			var wallPost = $( '#' + $( data ).attr( 'id' ) );
-
-			//clear any values the browser may throw into the comment input
-			$( 'input:text', wallPost ).val( '' );
-
-			//hide the comments container
-			$( 'div.commentsWrap', wallPost ).hide();
-
-			//hide the wall post and slide it in
-			wallPost.hide().slideDown( speed );
-
-		},
-
-		//define a function for adding posts
-		'addComment': function( parentId, data ){
-
-			//grab the comments container
-			var commentsContainer = $( '#' + parentId ),
-			
-			//grab the comment input
-				commentInput = $( 'div.comment_input', commentsContainer );
-
-			//append the comment before the input
-			commentInput.before( data );
-
-		}
-	}
 
 });

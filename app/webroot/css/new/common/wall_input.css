@@ -20,6 +20,7 @@
 	color: #000;
 	border: 1px solid #aaa;
 	width: 438px;
+	max-height: 250px;
 	resize: none;
 	font-family: helvetica, Arial, sans-serif;
 	font-size: 1.6em;

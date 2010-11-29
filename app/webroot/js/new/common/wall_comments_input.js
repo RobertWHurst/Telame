@@ -145,7 +145,7 @@ $(function() {
 					flash.setMessage( 'info', 'Your post was made successfully' );
 
 					//send the data to the wall script
-					wall.addComment( commentsDivId, response );
+					addComment( commentsDivId, response );
 			}
 
 			else {
@@ -164,5 +164,21 @@ $(function() {
 		});
 
 	});
+
+
+	//ADD COMMENT
+
+	//define a function for adding posts
+	function addComment( parentId, data ){
+
+			//grab the comments container
+			var commentsContainer = $( '#' + parentId ),
+
+			//grab the comment input
+				commentInput = $( 'div.comment_input', commentsContainer );
+
+			//append the comment before the input
+			commentInput.before( data );
+	}
 
 });

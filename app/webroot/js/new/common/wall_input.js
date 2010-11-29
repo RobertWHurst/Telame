@@ -147,8 +147,9 @@ $(function() {
 			return true;
 		}
 
-		//clear the input and re trigger the blur event to make sure everything is reset
-		input.val( '' ).blur();
+		//clear the input and click the root node to make sure the input is reset
+		input.val( '' );
+		$( document ).click();
 
 		//send the data to the server
 		$.post( core.domain + action, data, function( response ){
@@ -160,7 +161,7 @@ $(function() {
 					flash.setMessage( 'info', 'Your post was made successfully' );
 
 					//send the data to the wall script
-					wall.addPost( response );
+					addPost( response );
 			}
 
 			else {
@@ -235,5 +236,57 @@ $(function() {
 		}
 
 	});
+
+
+	//ADD POST
+
+	//define a function for injecting posts
+	function addPost( data, appendData ){
+
+		//grab the wall post container
+		var wallPostContainer = $( '#wall_posts' );
+
+		//make sure that the container is actually on the page
+		if( ! wallPostContainer.length ){
+			return true;
+		}
+
+		if( ! appendData ){
+
+			//prepend the post
+			wallPostContainer.prepend( data );
+
+		} else {
+
+			//add the post before the 'more posts' button
+			$( '#more_posts' ).before( data );
+
+		}
+
+		//grab the new post
+		var wallPost = $( '#' + $( data ).attr( 'id' ) );
+
+		//clear any values the browser may throw into the comment input
+		$( 'input:text', wallPost ).val( '' );
+
+		//hide the comments container
+		$( 'div.commentsWrap', wallPost ).hide();
+
+		//hide the wall post and slide it in
+		wallPost.hide();
+
+		wallPosts.clean();
+
+		wallPost.slideDown( speed );
+
+	}
+
+
+	//API OBJECT
+	wallInput = {
+		'addPost': function( data, appendData ){
+			addPost( data, appendData )
+		}
+	}
 
 });
