@@ -67,7 +67,7 @@ class AppController extends Controller {
 
 	// user info available eveywhere
 	function getCurrentUser() {
-		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'));
+		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'), array('Oauth'));
 
 		if(!is_null($currentUser['User']['hash'])) {
 			$this->AuthExtension->logout();

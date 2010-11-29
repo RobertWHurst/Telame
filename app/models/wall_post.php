@@ -24,9 +24,11 @@ class WallPost extends AppModel {
 	private $currentUserId = false;
 
 // -------------------- Callback functions
+	// we use this to save the acl permissions after post is saved
 	function afterSave() {
 		$rootPerms = array();
 
+		// we need the acl component to do the checking
 		App::import('Component', 'Acl');
 		$this->Acl = new AclComponent();
 
@@ -44,6 +46,9 @@ class WallPost extends AppModel {
 			)
 		));
 
+		// for each aro (group) we get the permission and set it in rootPerms for saving
+
+	// WHAT DOES THIS DO?!?!?!
 		foreach ($aco['Aro'] as $perm) {
 			$permission = ($perm['Permission']['_read'] ? 1 : 0);
 			$rootPerms[$perm['foreign_key']] = $permission;
@@ -60,15 +65,14 @@ class WallPost extends AppModel {
 		$this->Acl->Aco->save();
 	}
 
+	// we use this to alter the query for who can or can't view the posts
+	// CAKEPHP caveat. containable is called before 'beforeFind', so any db calls here won't be contained 
 	function beforeFind($data) {
 		if (!$this->aid) {
 			return $data;
 		}
 		App::import('Component', 'Acl');
 		$this->Acl = new AclComponent();
-
-		App::import('Model', 'GroupsUser');
-		$this->GroupsUser = new GroupsUser();
 
 		// make it an array if it's not already
 		if (!is_array($this->aid)) {
@@ -80,9 +84,11 @@ class WallPost extends AppModel {
 		if($key !== false) {
 			unset($this->aid[$key]);
 		}
-
 		foreach ($this->aid as $aid) {
-			$group = $this->GroupsUser->listGroups($this->currentUserId, $aid);
+			// This is query for a reason.  If I use the built in queries, the contain methods are not used.  
+			// So it will return EVERYTHING related to the user.
+			$group = $this->query('SELECT group_id FROM groups_users WHERE user_id = ' . $this->currentUserId . ' AND friend_id = ' . $aid);
+//			$group = $this->User->GroupsUser->listGroups($this->currentUserId, $aid);
 
 			// get the user
 			$this->Acl->Aro->recursive = -1;
@@ -120,7 +126,7 @@ class WallPost extends AppModel {
 			}
 
 			// permissions the user has set for all wall posts
-			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group['GroupsUser']['group_id'] . ']/Permission/_read', $rootWpAco);
+			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group . ']/Permission/_read', $rootWpAco);
 
 			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
 			if(empty($rootPermissions) || !$rootPermissions[0]) {
@@ -186,7 +192,6 @@ class WallPost extends AppModel {
 		//parse the options
 		$options = parseArguments($defaults, $arguments, true);
 
-	    //pr( $options );
 		// create conditions
 		// get only get parents in the top level, not replies.
 		if($options['single'] == false) {
@@ -259,7 +264,6 @@ class WallPost extends AppModel {
 
 			}
 		}
-
 		return $wallPosts;
 	}
 

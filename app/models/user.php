@@ -225,37 +225,24 @@ class User extends AppModel {
 
 	public function getProfile($slug, $arguments = array()) {
 
-/*	FIXME bug in parseargs
-		$defaults = array(
-			'contain' => array(
-				'Profile',
-				'Profile.Country',
-				'Notification' => array(
-					'conditions' => array(
-						'new' => true
-					)
-				)
-			));
-
-		$options = parseArguments($defaults, $arguments);
-pr($options);
-*/
-
-
-		//get the profile
-		$this->recursive = 2;
-		$user = $this->find('first', array(
-			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
-			'contain' => array(
-				'Profile',
-				'Profile.Country',
-				'Profile.SO',
+		$default = array(
+			'Profile',
+			'Profile.Country',
+			'Profile.SO',
 //				'Notification' => array(
 //					'conditions' => array(
 //						'new' => true
 //					)
 //				)
-			)
+		);
+
+		$contain = array_merge($default, $arguments);
+
+		//get the profile
+		$this->recursive = 2;
+		$user = $this->find('first', array(
+			'conditions' => array('lower(slug)' => Sanitize::clean(strtolower($slug))),
+			'contain' => $contain
 		));
 		return $user;
 	}
