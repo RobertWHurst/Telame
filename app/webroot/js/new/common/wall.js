@@ -20,6 +20,11 @@ $(function(){
 
 	(function init(){
 
+		//make sure the page has a more button
+		if( ! $( '#more_posts' ).length ){
+			return false;
+		}
+
 		//grab the total number of posts
 		var postCount = $( 'div.post', '#wall_posts' ).length;
 
