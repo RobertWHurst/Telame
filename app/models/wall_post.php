@@ -182,7 +182,7 @@ class WallPost extends AppModel {
 			//??? don't touch ???
 			'single' => false,
 			//max mumber of posts returned
-			'limit' => 20,
+			'limit' => 10,
 			//number of posts to skip
 			'offset' => 0,
 			//filter by post type

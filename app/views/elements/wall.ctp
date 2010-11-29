@@ -18,7 +18,7 @@ $hrl->js(array( 'key' => 'wall', 'url' => 'common/wall', 'requires' => 'jQuery' 
 			if($this->params['action'] != 'news'): ?>
 				<div id="more_posts">
 <?php 
-					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'more_posts', $currentUser['User']['id']));
+					$url = $html->url(array('controller' => 'wall_posts', 'action' => 'more_posts', $user['User']['id']));
 					echo $html->link(__('older_posts', true), $url, array('class' => 'more'));
 ?>
 				</div>

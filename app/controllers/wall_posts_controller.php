@@ -199,11 +199,14 @@ class WallPostsController extends AppController {
 		exit;
 	}
 
-	public function more_posts($uid = false, $offset = false){
+	public function more_posts( $uid = false, $offset = false ){
+
+
 
 		//jettison the request if its not via ajax
 		if( ! $this->RequestHandler->isAjax() ){
-			$this->redirect( $this->referer() );
+			//$this->redirect( $this->referer() );
+			echo $uid;
 		}
 
 		if( ! $offset || ! $uid ){
@@ -216,7 +219,7 @@ class WallPostsController extends AppController {
 		//set the layout to none (this is ajax);
 		$this->layout = false;
 
-		$this->set( array( 'wallPosts' => $wallPosts, 'user' => $this->WallPost->User->getProfile( $uid ) ) );
+		$this->set( array( 'wallPosts' => $wallPosts ) );
 	}
 
 }

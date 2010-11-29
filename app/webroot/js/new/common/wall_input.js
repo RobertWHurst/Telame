@@ -3,6 +3,10 @@ $(function() {
 	//grab the wall input div
 	var inputDiv = $( '#wall_input' ),
 
+	//grab the controls div and submit div
+		controlsDiv = $( 'div.controls', inputDiv ),
+		submitDiv = $( 'div.submit', inputDiv ),
+
 	//grab the wall input
 		input = $( 'input:text', inputDiv ),
 
@@ -29,6 +33,12 @@ $(function() {
 
 	//fill the input with the default text from the label
 	input.val( defaultText );
+
+	//gather the baseline controls
+	var baseCont = controlsDiv.add( submitDiv );
+
+	//hide the controls
+	baseCont.hide();
 
 	//HOVER
 
@@ -66,6 +76,9 @@ $(function() {
 			input.val( '' );
 		}
 
+		//display the base line controls
+		baseCont.show();
+
 		if( input.is( 'input:text' ) ){
 
 			//make the input a textarea after saving its attributes
@@ -83,14 +96,17 @@ $(function() {
 
 	});
 
-	//setup a blur event
-	inputDiv.delegate( 'input:text, textarea', 'blur', function(){
-
-		//remove the hover class
-		inputDiv.removeClass( 'focus' );
+	//setup a click event to simulate blur
+	$( document ).click( function( e ){
 
 		//the textarea must be empty before it will turn back into an input
-		if( input.is( 'textarea' ) && input.val() === '' ){
+		if( input.is( 'textarea' ) && input.val() === '' && ! $( e.target ).closest( '#wall_input' ).length ){
+
+			//remove the hover class
+			inputDiv.removeClass( 'focus' );
+
+			//hide the base line controls
+			baseCont.hide();
 
 			//make the input a textarea after saving its attributes
 			var inputId = input.attr( 'id' ),
@@ -124,8 +140,16 @@ $(function() {
 		//grab the action from the form
 			action = form.attr( 'action' );
 
-		//clear the input and re trigger the blur event to make sure everything is reset
-		input.val( '' ).blur();
+		//make sure the input is not empty
+		if( ! value ){
+			alert( 'no val' );
+			flash.setMessage( 'warning', 'You haven\'t typed anything yet.' );
+			return true;
+		}
+
+		//clear the input and click the root node to make sure the input is reset
+		input.val( '' );
+		$( document ).click();
 
 		//send the data to the server
 		$.post( core.domain + action, data, function( response ){
@@ -137,7 +161,7 @@ $(function() {
 					flash.setMessage( 'info', 'Your post was made successfully' );
 
 					//send the data to the wall script
-					wall.addPost( response );
+					addPost( response );
 			}
 
 			else {
@@ -212,5 +236,57 @@ $(function() {
 		}
 
 	});
+
+
+	//ADD POST
+
+	//define a function for injecting posts
+	function addPost( data, appendData ){
+
+		//grab the wall post container
+		var wallPostContainer = $( '#wall_posts' );
+
+		//make sure that the container is actually on the page
+		if( ! wallPostContainer.length ){
+			return true;
+		}
+
+		if( ! appendData ){
+
+			//prepend the post
+			wallPostContainer.prepend( data );
+
+		} else {
+
+			//add the post before the 'more posts' button
+			$( '#more_posts' ).before( data );
+
+		}
+
+		//grab the new post
+		var wallPost = $( '#' + $( data ).attr( 'id' ) );
+
+		//clear any values the browser may throw into the comment input
+		$( 'input:text', wallPost ).val( '' );
+
+		//hide the comments container
+		$( 'div.commentsWrap', wallPost ).hide();
+
+		//hide the wall post and slide it in
+		wallPost.hide();
+
+		wallPosts.clean();
+
+		wallPost.slideDown( speed );
+
+	}
+
+
+	//API OBJECT
+	wallInput = {
+		'addPost': function( data, appendData ){
+			addPost( data, appendData )
+		}
+	}
 
 });

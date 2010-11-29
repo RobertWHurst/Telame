@@ -4,30 +4,93 @@ $(function() {
 	var wallPostContainer = $( '#wall_posts' ),
 
 	//set a speed for animation
-		speed = 300;
+		speed = 300,
+
+	//set a cut off height for posts
+		cutoff = 200;
 
 
 
 	//INIT
 
-	//hide post controls
-	$( 'div.delete_post, div.baseline_controls', wallPostContainer ).hide();
+	function init(){
+		//hide post controls
+		$( 'div.delete_post, div.baseline_controls', wallPostContainer ).hide();
 
-	//hide the comment box if there are no comments
-	$( 'div.commentsWrap', wallPostContainer ).each(function(){
+		//hide the comment box if there are no comments
+		$( 'div.commentsWrap', wallPostContainer ).each(function(){
 
-		//get the comments container
-		var commentsContainter = $( this ),
+			//get the comments container
+			var commentsContainter = $( this ),
 
-		//get the comments
-			comments = $( 'div.comment', commentsContainter );
+			//get the comments
+				comments = $( 'div.comment', commentsContainter );
 
-		if( comments.length === 0 ){
-			commentsContainter.hide();
+			if( comments.length === 0 ){
+				commentsContainter.hide();
+			}
+
+		});
+
+		//truncate long posts
+
+		//grab the content divs
+		var contentDivs = $( 'div.post div.content', wallPostContainer );
+
+		//loop through each content div
+		contentDivs.each(function(){
+
+			//grab the current content div
+			var contentDiv = $( this ),
+
+			//grab height of the div
+				height = contentDiv.height(),
+
+			//calculate the difference in height and cutoff
+				difference = height - cutoff;
+
+			//if the height exceeds 250px and it has not be truncated already then truncate it
+			if( ! contentDiv.hasClass( 'truncated' ) && height > cutoff && difference > 50 ){
+				contentDiv.height( 250 ).addClass( 'truncated' );
+
+				//add a read more link
+				contentDiv.append( '<a href="#" class="expand">Read More...</a>' );
+
+				//grab the link
+				var expLink = $( 'a.expand', contentDiv );
+
+				//position the expLink
+				contentDiv.css( 'position', 'relative' );
+				expLink.css({
+					'position': 'absolute',
+					'bottom': 0,
+					'left': 0
+				});
+
+				//setup a click event for the read more link
+				expLink.one( 'click', function(){
+
+					//animate the div back to full height
+					contentDiv.animate({ 'height': height }, speed ).css( 'height', 'auto' );
+
+					//remove the expand link
+					expLink.remove();
+				});
+
+			}
+		});
+
+	}
+
+	//make an api for other scripts to clean posts
+	wallPosts = {
+		'clean': function(){
+			init();
 		}
+	};
 
-	});
-
+	//execute the init
+	init();
 
 	//HOVER
 
@@ -89,6 +152,8 @@ $(function() {
 	});
 
 	//COMMENT
+
+	//setup an event handler for the show comments button
 	wallPostContainer.delegate( 'a.showComments', 'click', function( e ){
 		e.preventDefault();
 
@@ -104,6 +169,13 @@ $(function() {
 		});
 
 	});
+
+
+
+	//TRUNCATION
+
+	//
+
 
 
 });

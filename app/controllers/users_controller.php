@@ -107,7 +107,7 @@ class UsersController extends AppController {
 		$user = $this->Profile->getProfile($slug);
 
 		if ($user) {
-			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 10));
+			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 12 ));
 
 //			$friendIds = Set::extract('/Friend/id', $friends);
 			$wallPosts = $this->User->WallPost->getWallPosts($this->currentUser['User']['id'], array(

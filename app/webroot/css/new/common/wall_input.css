@@ -20,6 +20,7 @@
 	color: #000;
 	border: 1px solid #aaa;
 	width: 438px;
+	max-height: 250px;
 	resize: none;
 	font-family: helvetica, Arial, sans-serif;
 	font-size: 1.6em;
@@ -35,9 +36,9 @@
 }
 
 #wall_input div.submit input[type="submit"] {
-	background: #d3ef91;
-	border: 1px solid #669b00;
-	color: #000;
+	background: #333;
+	border: 1px solid #444;
+	color: #444;
 	padding: 3px 6px;
 	font-size: 16px;
 	height: 28px;
@@ -46,12 +47,6 @@
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-}
-
-#wall_input div.submit input[type="submit"]:hover {
-	background: #c1ef52;
-	border: 1px solid #669b00;
-	color: #000;
 }
 
 #wall_input div.controls {
@@ -66,39 +61,53 @@
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-
-#wall_input div.controls div.label,
+#wall_input div.controls img{
+	display: none;
+}
+#wall_input div.controls div.label{
+	float: left;
+	padding: 5px;
+}
+#wall_input div.controls div.label h3{
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: normal;
+	color: #444;
+	width: 40px;
+}
 #wall_input div.controls div.acl_scope,
 #wall_input div.controls div.share_scope{
 	float: left;
-	margin: 2px;
+	padding: 3px;
+}
+#wall_input div.controls div.acl_scope img,
+#wall_input div.controls div.share_scope img{
 	padding: 2px;
 	z-index: 3;
 	position: relative;
 }
 
-#wall_input div.controls div.label h3{
-	font-size: 13px;
-	line-height: 16px;
-	font-weight: normal;
-	color: #fff;
-	width: 40px;
-}
-
-#wall_input div.controls div.acl_scope:hover,
-#wall_input div.controls div.share_scope:hover{
-	margin: 1px;
+#wall_input div.controls div.acl_scope:hover img,
+#wall_input div.controls div.share_scope:hover img{
 	border: 1px solid #aaa;
+	padding: 1px;
 	background: #ddd;
+
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
-#wall_input div.controls div.acl_scope.focus,
-#wall_input div.controls div.share_scope.focus{
-	margin: 1px;
-	padding-bottom: 3px;
+#wall_input div.controls div.acl_scope.focus img,
+#wall_input div.controls div.share_scope.focus img{
+	padding: 1px 1px 5px 1px;
 	border: 1px solid #aaa;
 	border-bottom: none;
 	background: #ddd;
+
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
 }
 
 #wall_input div.controls div.acl_scope_menu,
@@ -106,7 +115,7 @@
 	/* display: none; */
 	z-index: 2;
 	position: absolute;
-	top: 24px;
+	top: 25px;
 	background: #ddd;
 	border: 1px solid #aaa;
 	padding: 10px;
@@ -115,10 +124,10 @@
 }
 
 #wall_input div.controls div.acl_scope_menu{
-	left: 49px;
+	left: 53px;
 }
 #wall_input div.controls div.share_scope_menu{
-	left: 73px;
+	left: 79px;
 }
 
 /* HOVER */
@@ -129,8 +138,24 @@
 }
 
 /* FOCUS */
+#wall_input.focus div.controls img{
+	display: block;
+}
 #wall_input.focus div.input input[type="text"],
 #wall_input.focus div.input textarea {
 	colour: #000;
 	border: 1px solid #669b00;
+}
+
+#wall_input.focus div.submit input[type="submit"] {
+	background: #d3ef91;
+	border: 1px solid #669b00;
+}
+
+#wall_input.focus div.submit input[type="submit"]:hover {
+	background: #c1ef52;
+	border: 1px solid #669b00;
+}
+#wall_input.focus div.controls div.label h3{
+	color: #fff;
 }

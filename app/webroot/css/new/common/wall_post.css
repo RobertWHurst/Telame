@@ -29,6 +29,18 @@ div.post div.wall_post div.avatar {
 
 div.post div.wall_post div.content {
 	margin: 0 15px 15px 70px;
+	width: 353px;
+	overflow: hidden;
+}
+
+div.post div.wall_post div.content a.expand {
+	/* needs to be a gradient */
+	background: #333;
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 1.1em;
+	font-weight: bold;
 }
 
 div.post div.wall_post div.content h1 {
