@@ -22,7 +22,6 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 		echo $this->Form->input('post', array('label' => $label, 'type' => 'text'));
 		echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
 	
-	echo $this->Form->end(__('wall_post_submit', true));
 ?>
 	<div class="controls">
 		<div class="label"><h3>Scope: </h3></div>
@@ -36,7 +35,13 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 			[eric's acl scope here]
 		</div>
 		<div class="share_scope_menu">
-			[eric's sharing scope here]
+<?php		foreach ($currentUser['Oauth'] as $oauth) {
+				if($oauth['type'] == 'write') {
+					echo $oauth['service'] . ' ' . $this->Form->input('Oauth.' . $oauth['service'], array('type' => 'checkbox'));
+				}
+			} 
+?>
 		</div>
 	</div>
+<?php echo $this->Form->end(__('wall_post_submit', true)); ?>
 </div>

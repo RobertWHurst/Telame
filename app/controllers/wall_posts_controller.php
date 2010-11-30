@@ -1,7 +1,7 @@
 <?php
 class WallPostsController extends AppController {
 
-	public $components = array('RequestHandler');
+	public $components = array('RequestHandler', 'OauthConsumer');
 	public $helpers = array('Html', 'Markdown', 'Time');
 
 	public function beforeFilter() {
@@ -9,14 +9,26 @@ class WallPostsController extends AppController {
 	}
 
 	public function add($reply_id = false) {
+		foreach ($this->data['Oauth'] as $service => $state) {
 
-		$accessToken = $this->WallPost->User->Oauth->getAccessToken('Twitter', $this->currentUser['User']['id']);
-		if ($accessToken) {
-//			App::import('Helper', 'Text');
-//			$text = new TextHelper();
-//			$this->OauthConsumer->begin('Twitter');
-//
-//			$this->OauthConsumer->post($accessToken->key, $accessToken->secret, 'http://twitter.com/statuses/update.json', array('status' => $text->truncate($this->data['WallPost']['post'], 140)));
+			if ($state) {
+				$accessToken = $this->WallPost->User->Oauth->getAccessToken($service, $this->currentUser);
+				if ($accessToken) {
+					App::import('Helper', 'Text');
+					$text = new TextHelper();
+					$this->OauthConsumer->begin($service);
+
+					$this->OauthConsumer->post(
+						$accessToken->key,
+						$accessToken->secret,
+						'http://api.twitter.com/1/statuses/update.json',
+//						'http://twitter.com/statuses/update.json',
+						array(
+							'status' => $text->truncate($this->data['WallPost']['post'], 140)
+						)
+					);
+				}
+			}
 		}
 
 		$isAjax = $this->RequestHandler->isAjax();
@@ -72,15 +84,15 @@ class WallPostsController extends AppController {
 
 		//commit the data to the db
 		$this->WallPost->add($this->data, array('type' => 'post', 'class' => 'wall_post'));
-		
+
 		//get the new wall post id for ajax (if ajax)
 		$new_post_id = $this->WallPost->id;
 
 		//if the wall does not belong to the current user and it's not a reply
 		if($wallOwnerId != $visitorId && $reply_id == null) {
-		
+
 			//create an action on the user's page
-			$action['reply_parent_id'] = null;	
+			$action['reply_parent_id'] = null;
 			$action['WallPost']['user_id'] = $visitorId;
 			$action['WallPost']['author_id'] = $wallOwnerId;
 			$action['WallPost']['post'] = null;
@@ -91,10 +103,10 @@ class WallPostsController extends AppController {
 
 			//load the view
 			$wallPost = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array('id' => $new_post_id, 'single' => true));
-			
+
 			//set the layout to none (this is ajax);
 			$this->layout = false;
-			
+
 			//if this is a comment then load the comment element
 			if($wallPost['WallPost']['reply_parent_id']) {
 				$this->set(array('comment' => $wallPost, 'user' => $user, 'show_post_controls' => true, 'is_ajax' => true));

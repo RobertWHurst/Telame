@@ -27,17 +27,23 @@ class Oauth extends AppModel {
 
 	}
 
-	public function getAccessToken($serviceName, $uid) {
-		$service = $this->find('first', array(
-			'conditions' => array(
-				'user_id' => $uid, 
-				'service' => ucfirst(strtolower($serviceName)),
-			)
-		));
-		if ($service) {
-			return unserialize($service['Oauth']['object']);
+	public function getAccessToken($serviceName, $user) {
+		$serviceName = ucfirst(strtolower($serviceName));
+		if (is_array($user)) {
+			$token = Set::extract('/Oauth[service=' . $serviceName . ']/object', $user);
+			return unserialize($token[0]);
 		} else {
-			return false;
+			$service = $this->find('first', array(
+				'conditions' => array(
+					'user_id' => $user,
+					'service' => $serviceName,
+				)
+			));
+			if ($service) {
+				return unserialize($service['Oauth']['object']);
+			} else {
+				return false;
+			}
 		}
 	}
 
