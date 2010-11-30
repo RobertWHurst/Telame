@@ -10,24 +10,25 @@ class WallPostsController extends AppController {
 
 	public function add($reply_id = false) {
 		foreach ($this->data['Oauth'] as $service => $state) {
-
 			if ($state) {
 				$accessToken = $this->WallPost->User->Oauth->getAccessToken($service, $this->currentUser);
 				if ($accessToken) {
 					App::import('Helper', 'Text');
 					$text = new TextHelper();
-					$this->OauthConsumer->begin($service);
 
-					$this->OauthConsumer->post(
+					$this->OauthConsumer->begin($service);
+					$consumer = $this->OauthConsumer->getConsumerClass();
+
+					$consumer->post($accessToken, $this->OauthConsumer, $this->data['WallPost']['post']);
+	/*				$this->OauthConsumer->post(
 						$accessToken->key,
 						$accessToken->secret,
 						'http://api.twitter.com/1/statuses/update.json',
-//						'http://twitter.com/statuses/update.json',
 						array(
 							'status' => $text->truncate($this->data['WallPost']['post'], 140)
 						)
 					);
-				}
+	*/			}
 			}
 		}
 

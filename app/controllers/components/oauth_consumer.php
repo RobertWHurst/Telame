@@ -124,7 +124,6 @@ class OauthConsumerComponent extends Object {
 	}
 
 	private function createRequest($httpMethod, $url, $token, array $parameters) {
-//		$consumer = $this->createConsumer($consumerName);
 		$request = OAuthRequest::from_consumer_and_token($this->consumer, $token, $httpMethod, $url, $parameters);
 		$request->sign_request(new OAuthSignatureMethod_HMAC_SHA1(), $this->consumer, $token);
 

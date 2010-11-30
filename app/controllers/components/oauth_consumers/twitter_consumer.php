@@ -19,4 +19,15 @@ class TwitterConsumer extends AbstractConsumer {
 		// key, secret
 		parent::__construct('key', 'secret');
 	}
+
+	public function post(&$accessToken, &$oauthConsumer, $post) {
+		$oauthConsumer->post(
+			$accessToken->key,
+			$accessToken->secret,
+			'http://api.twitter.com/1/statuses/update.json',
+			array(
+				'status' => $post//$text->truncate($this->data['WallPost']['post'], 140)
+			)
+		);
+	}
 }

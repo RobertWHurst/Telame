@@ -21,7 +21,7 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 
 		echo $this->Form->input('post', array('label' => $label, 'type' => 'text'));
 		echo $this->Form->hidden('user_id', array('value' => $user['User']['id']));
-	
+
 ?>
 	<div class="controls">
 		<div class="label"><h3>Scope: </h3></div>
@@ -39,7 +39,7 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 				if($oauth['type'] == 'write') {
 					echo $oauth['service'] . ' ' . $this->Form->input('Oauth.' . $oauth['service'], array('type' => 'checkbox'));
 				}
-			} 
+			}
 ?>
 		</div>
 	</div>
