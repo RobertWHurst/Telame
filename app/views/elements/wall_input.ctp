@@ -1,6 +1,6 @@
 <?php
 $hrl->css(array( 'key' => 'wallInput', 'url' => 'common/wall_input' ));
-$hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' => array( 'jQuery', 'wallPost' )));
+$hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' => array( 'jQuery' )));
 ?>
 <div id="wall_input" class="clearfix">
 <?php
