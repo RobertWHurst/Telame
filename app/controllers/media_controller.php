@@ -116,6 +116,10 @@ class MediaController extends AppController {
 						// Full path to store user's images
 						$baseDir = USER_DIR . $this->currentUser['User']['home_dir'] . DS . $this->currentUser['User']['sub_dir'] . DS . $this->currentUser['User']['id'] . DS . $type . DS;
 
+						if(!is_dir($baseDir)) {
+							mkdir($baseDir, 0777, true);
+						}
+
 						// user's directory is writable
 						if(is_writable($baseDir)) {
 							$extension = explode('.', $this->data['Media']['file']['name']);
@@ -125,6 +129,7 @@ class MediaController extends AppController {
 							// file does not exist already, otherwise we need to rename it something else
 							if (!file_exists($baseDir . $filename)) {
 								rename($this->data['Media']['file']['tmp_name'], $baseDir . $filename);
+								chmod($baseDir . $filename, 0644);
 
 								// save the album cover image
 								$albumCover = !$this->Media->inAlbum($this->data['Media']['album']);

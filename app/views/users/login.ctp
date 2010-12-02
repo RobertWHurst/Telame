@@ -27,6 +27,7 @@ $this->set('title_for_layout', __('login', true));
 	
 	//this is above the form submit because it has to float right parallel to the submit button
 	echo $html->link(__('password_forget', true), array('controller' => 'users', 'action' => 'passwordReset'), array('class' => 'pass_reset'));
+	echo $html->link(__('signup', true), array('controller' => 'users', 'action' => 'signup'), array('class' => 'pass_reset'));
 	
 	echo $form->end(__('login', true));
 ?>

@@ -231,8 +231,8 @@ msgid "tos_must_agree"
 msgstr "You must agree with the Terms of Service"
 
 #: /controllers/users_controller.php:232
-msgid "user_saved"
-msgstr "You have been successfully added"
+msgid "account_created"
+msgstr "Your account has been created.  Please check your email for instructions."
 
 #: /controllers/users_controller.php:234
 msgid "user_create_error"
@@ -816,7 +816,7 @@ msgstr "Female"
 
 #: /views/settings/basic.ctp:49
 msgid "sex_interest"
-msgstr "Sexual Orientation"
+msgstr "Sexual Interest"
 
 #: /views/settings/basic.ctp:50
 msgid "men"

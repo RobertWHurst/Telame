@@ -28,43 +28,16 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 </div>
 <div id="page_body" class="clearfix">
 	<div id="services">
-		<h1>Facebook</h1>
-		<p>
-<?php		if(in_array('Facebook', $connectedServices)) {
-				echo 'Facebook ' . __('already_connected', true);
-				echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', 'facebook'));		
-			} else {
-				echo $html->link(__('connect_to_', true) . ' Facebook', array('controller' => 'oauths', 'action' => 'oauth', 'facebook'));
-			}
-?>
-		</p>
-		<h1>Google</h1>
-		<p>
-<?php		if(in_array('Google', $connectedServices)) {
-				echo 'Google ' . __('already_connected', true);
-				echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', 'google'));		
-			} else {
-				echo $html->link(__('connect_to_', true) . ' Google', array('controller' => 'oauths', 'action' => 'oauth', 'google'));
-			}
-?>
-		</p>
-		<h1>Twitter</h1>
-		<p>
-<?php		if(in_array('Twitter', $connectedServices)) {
-				echo 'Twitter ' . __('already_connected', true);
-				echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', 'twitter'));		
-			} else {
-				echo $html->link(__('connect_to_', true) . ' Twitter', array('controller' => 'oauths', 'action' => 'oauth', 'twitter'));
-			}
-?>
-		</p>
-		<h1>Yahoo</h1>
-		<p>
-<?php		if(in_array('Yahoo', $connectedServices)) {
-				echo 'Yahoo ' . __('already_connected', true);
-				echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', 'yahoo'));		
-			} else {
-				echo $html->link(__('connect_to_', true) . ' Yahoo', array('controller' => 'oauths', 'action' => 'oauth', 'yahoo'));
+<?php	foreach ($consumers as $consumer) { ?>
+			<h1><?php echo $consumer['Oauth']['name']; ?></h1>
+			<p>
+<?php			if(in_array($consumer['Oauth']['name'], $connectedServices)) {
+					echo $consumer['Oauth']['name'] . ' ' . __('already_connected', true);
+					echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name']));
+					echo $html->link(__('delete', true), array('controller' => 'oauths', 'action' => 'delete', $consumer['Oauth']['name']));
+				} else {
+					echo $html->link(__('connect_to_', true) . ' ' . $consumer['Oauth']['name'], array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name']));
+				}
 			}
 ?>
 		</p>

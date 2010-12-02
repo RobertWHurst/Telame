@@ -244,7 +244,7 @@ class UsersController extends AppController {
 					$this->BetaKey->delete($key['BetaKey']['id']);
 
 					// tell the user it's all good
-					$this->Session->setFlash(__('user_saved', true), 'default', array('class' => 'info'));
+					$this->Session->setFlash(__('account_created', true), 'default', array('class' => 'info'));
 				} else {
 					$this->Session->setFlash(__('user_create_error'), 'default', array('class' => 'error'));
 				}

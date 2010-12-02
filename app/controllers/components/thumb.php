@@ -51,12 +51,6 @@ class ThumbComponent {
 			return false;
 		}
 
-		// verify that our file is one of the valid mime types
-//		if(!in_array($this->file['type'],$this->allowed_mime_types)){
-//			$this->addError('Invalid File type: '.$this->file['type']);
-//			return false;
-//		}
-
 		// verify that the filesystem is writable, if not add an error to the object
 		// dont fail if not and let phpThumb try anyway
 		$cacheDir = $baseDir . 'cache' . DS;
@@ -77,7 +71,7 @@ class ThumbComponent {
 		$phpThumb = new phpThumb();
 		
 		// phpThumb configs
-		$phpThumb->setParameter('config_cache_force_passthru', true);
+		$phpThumb->setParameter('config_cache_force_passthru', false);
 		$phpThumb->setParameter('config_allow_src_above_docroot', true);
 		
 		// ignore aspect ratio and allow enlarging		

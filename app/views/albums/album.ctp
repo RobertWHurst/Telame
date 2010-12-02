@@ -33,7 +33,7 @@ $this->set('nav_links', array(
 )); ?>
 <div id="albums" class="clearfix">
 <?php
-	if ($user == $currentUser) {
+	if ($user['User']['id'] == $currentUser['User']['id']) {
 		echo $html->link(__('upload_images', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'media', 'action' => 'upload', $aid));
 	}
 	foreach($album as $media): ?>
