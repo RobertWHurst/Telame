@@ -31,7 +31,7 @@
 }
 
 #wall_input div.submit {
-	float: right;
+	float: left;
 	margin: 0 5px 5px 5px;
 }
 
@@ -51,9 +51,10 @@
 
 #wall_input div.controls {
 	position: relative;
-	margin: 0 5px 5px 5px;
+    float: left;
+	margin: 0 0 5px 5px;
 	height: 26px;
-	width: 394px;
+	width: 393px;
 	border: 1px solid #444;
 	/* display: none; */
 
