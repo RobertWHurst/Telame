@@ -9,26 +9,21 @@ class WallPostsController extends AppController {
 	}
 
 	public function add($reply_id = false) {
+		// only loop around consumers that the user has checked
 		foreach ($this->data['Oauth'] as $service => $state) {
 			if ($state) {
+				// we pass the current user array (which includes our oauth stuff) to the function, it will then find what we need and return
 				$accessToken = $this->WallPost->User->Oauth->getAccessToken($service, $this->currentUser);
+				// if we find an access token (we should)
 				if ($accessToken) {
-					App::import('Helper', 'Text');
-					$text = new TextHelper();
-
+					// start the oauth process, we need to initiaze the consumer we're trying to use
 					$this->OauthConsumer->begin($service);
+					// get the class
 					$consumer = $this->OauthConsumer->getConsumerClass();
 
+					// post to that class, passing in the access token, the parent oauthconsumer, and the post
 					$consumer->post($accessToken, $this->OauthConsumer, $this->data['WallPost']['post']);
-	/*				$this->OauthConsumer->post(
-						$accessToken->key,
-						$accessToken->secret,
-						'http://api.twitter.com/1/statuses/update.json',
-						array(
-							'status' => $text->truncate($this->data['WallPost']['post'], 140)
-						)
-					);
-	*/			}
+				}
 			}
 		}
 

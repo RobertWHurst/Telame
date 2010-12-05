@@ -28,12 +28,13 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 </div>
 <div id="page_body" class="clearfix">
 	<div id="services">
-<?php	foreach($contacts['Feed']['Entry'] as $contact) {
-			if (isset($contact['Email']['address'])) {
-				echo $contact['Email']['address'];
+<?php
+		foreach($contacts as $contact) {
+			foreach ($contact['Contact']['email'] as $email) {
+				echo $email . ' ' . $contact['Contact']['fullName'];
 				echo '<br />';
 			}
-		} 
+		}
 ?>
 	</div>
 </div>

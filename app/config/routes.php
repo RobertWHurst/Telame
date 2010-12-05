@@ -66,6 +66,7 @@
 
 // External sources
 	// Oauth
+	Router::connect('/services/oauth/disconnect/*', array('controller' => 'services', 'action' => 'disconnect'));
 	Router::connect('/services/oauth/*', array('controller' => 'oauths', 'action' => 'oauth'));
 	Router::connect('/services/oauth_callback/*', array('controller' => 'oauths', 'action' => 'oauth_callback'));
 
@@ -151,7 +152,7 @@
 	Router::connect('/:slug/settings/groups/*', array('controller' => 'settings', 'action' => 'groups'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/settings/gallery', array('controller' => 'settings', 'action' => 'gallery'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/settings/services', array('controller' => 'services', 'action' => 'index'), array('routeClass' => 'SlugRoute'));
-	Router::connect('/:slug/settings/contacts', array('controller' => 'services', 'action' => 'contacts'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:slug/settings/contacts/*', array('controller' => 'services', 'action' => 'contacts'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/settings/ug/*', array('controller' => 'settings', 'action' => 'gallery'));
 
 	// Wall Posts

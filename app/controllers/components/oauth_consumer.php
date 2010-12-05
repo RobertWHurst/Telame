@@ -112,7 +112,7 @@ class OauthConsumerComponent extends Object {
 		App::import('File', 'abstractConsumer', array('file' => $CONSUMERS_PATH.'abstract_consumer.php'));
 
 		$fileName = Inflector::underscore($consumerName) . '_consumer.php';
-		$className = $consumerName . 'Consumer';
+		$className = Inflector::classify($consumerName) . 'Consumer';
 
 		if (App::import('File', $fileName, array('file' => $CONSUMERS_PATH.$fileName))) {
 			$consumerClass = new $className();

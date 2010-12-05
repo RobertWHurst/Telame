@@ -28,15 +28,36 @@ $this->set('title_for_layout', $currentUser['User']['full_name'] . '\'s ' . __('
 </div>
 <div id="page_body" class="clearfix">
 	<div id="services">
-<?php	foreach ($consumers as $consumer) { ?>
+		<h1>Read</h1>
+<?php	foreach ($read as $consumer) {
+			$url = array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name'], 'read'); ?>
 			<h1><?php echo $consumer['Oauth']['name']; ?></h1>
 			<p>
 <?php			if(in_array($consumer['Oauth']['name'], $connectedServices)) {
 					echo $consumer['Oauth']['name'] . ' ' . __('already_connected', true);
-					echo $html->link(__('try_again', true), array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name']));
-					echo $html->link(__('delete', true), array('controller' => 'oauths', 'action' => 'delete', $consumer['Oauth']['name']));
+					echo $html->link(__('try_again', true), $url);
+					echo $html->link(__('disconnect', true), array('controller' => 'services', 'action' => 'disconnect', $consumer['Oauth']['name']));
+					echo $html->link(__('scan', true), array('slug' => $currentUser['User']['slug'], 'controller' => 'services', 'action' => 'contacts', $consumer['Oauth']['name']));
+					echo __('oauth_expires', true) . ' ' . $consumer['Oauth']['expires'] . ' ' . __('minutes', true);
 				} else {
-					echo $html->link(__('connect_to_', true) . ' ' . $consumer['Oauth']['name'], array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name']));
+					echo $html->link(__('connect_to_', true) . ' ' . $consumer['Oauth']['name'], $url);
+					echo __('oauth_expires', true) . ' ' . $consumer['Oauth']['expires'] . ' ' . __('minutes', true);
+				}
+			}
+?>
+		<h1>Write</h1>
+<?php	foreach ($write as $consumer) {
+			$url = array('controller' => 'oauths', 'action' => 'oauth', $consumer['Oauth']['name'], 'write'); ?>
+			<h1><?php echo $consumer['Oauth']['name']; ?></h1>
+			<p>
+<?php			if(in_array($consumer['Oauth']['name'], $connectedServices)) {
+					echo $consumer['Oauth']['name'] . ' ' . __('already_connected', true);
+					echo $html->link(__('try_again', true), $url);
+					echo $html->link(__('disconnect', true), array('controller' => 'services', 'action' => 'disconnect', $consumer['Oauth']['name']));
+					echo __('oauth_expires', true) . ' ' . $consumer['Oauth']['expires'] . ' ' . __('minutes', true);
+				} else {
+					echo $html->link(__('connect_to_', true) . ' ' . $consumer['Oauth']['name'], $url);
+					echo __('oauth_expires', true) . ' ' . $consumer['Oauth']['expires'] . ' ' . __('minutes', true);
 				}
 			}
 ?>

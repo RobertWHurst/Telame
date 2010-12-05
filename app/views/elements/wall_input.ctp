@@ -36,7 +36,7 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 		</div>
 		<div class="share_scope_menu">
 <?php		foreach ($currentUser['Oauth'] as $oauth) {
-				if($oauth['type'] == 'write') {
+				if($oauth['method'] == 'write') {
 					echo $oauth['service'] . ' ' . $this->Form->input('Oauth.' . $oauth['service'], array('type' => 'checkbox'));
 				}
 			}

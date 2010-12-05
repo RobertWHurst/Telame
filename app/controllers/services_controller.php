@@ -22,57 +22,81 @@ class ServicesController extends AppController {
 		$this->layout = 'tall_header_w_sidebar';
 	}
 
-	public function contacts() {
+	public function contacts($service = null) {
 		App::import('Xml');
 		$this->loadModel('Oauth');
 
 		// Google contacts
-		$this->OauthConsumer->begin('Google');
-		$accessToken = $this->Oauth->getAccessToken('Google', $this->currentUser['User']['id']);
+		$this->OauthConsumer->begin($service);
+		$accessToken = $this->Oauth->getAccessToken($service, $this->currentUser);
 
-		$contacts = $this->OauthConsumer->get(
-			$accessToken->key,
-			$accessToken->secret,
-			'https://www.google.com/m8/feeds/contacts/default/full?max-results=100'
-		);
-		$xml = new Xml($contacts);
-		// This converts the Xml document object to a formatted array
-		$contacts = Set::reverse($xml);
-		// Or you can convert simply by calling toArray();
-		$contacts = $xml->toArray();
-		
+		// get out consumer class
+		$consumer = $this->OauthConsumer->getConsumerClass();
 
-		$this->OauthConsumer->begin('Yahoo');
-		$accessToken = $this->Oauth->getAccessToken('Yahoo', $this->currentUser['User']['id']);
-
-		$guid = $this->OauthConsumer->get(
-			$accessToken->key,
-			$accessToken->secret,
-			'http://social.yahooapis.com/v1/me/guid'
-		);
-
-		$yahooContacts = $this->OauthConsumer->get(
-			$accessToken->key,
-			$accessToken->secret,
-			'http://social.yahooapis.com/v1/user/' . $guid . '/contacts?count=max'
-		);
-
-pr($yahooContacts);
-//http://social.yahooapis.com/v1/user//?format=json
-//http://social.yahooapis.com/v1/me/guid
-
+		// send the request
+		$contacts = $consumer->get($accessToken, $this->OauthConsumer);
 
 		$this->set(compact('contacts'));
+	}
+
+	public function disconnect($consumer) {
+		$this->loadModel('Oauth');
+
+		$this->Oauth->disconnect($this->currentUser['User']['id'], $consumer);
+
+		$this->redirect($this->referer());
 	}
 
 	public function index() {
 		$this->loadModel('Oauth');
 
+		// read all the oauth consumers and add them to the array of available connections
+		$read = $write = array();
+		// base dir for consumer files
+		$consumerDir = ROOT . DS . APP_DIR . DS . 'controllers' . DS . 'components' . DS . 'oauth_consumers';
+		// open the dir
+		if ($handle = opendir($consumerDir)) {
+			// import the abstract consumer, it's needed by the other consumer files
+			App::Import('File', 'abstractConsumer', array('file' => $consumerDir . DS . 'abstract_consumer.php'));
+
+			// loop over every file in the dir
+			while (false !== ($file = readdir($handle))) {
+				// make sure it's what we want
+				if ($file != "." && $file != ".." && $file != 'abstract_consumer.php') {
+					// grab the name of the service it's for
+					$consumerName = explode('_consumer', $file);
+					$consumerName = ucfirst($consumerName[0]);
+
+					// generate the class name for the consumer
+					$name = Inflector::classify(str_replace('.php' , '', $file));
+
+					// import the consumer file
+					App::Import('File', $name, array('file' => $consumerDir . DS . $file));
+					// make it
+					$consumer = new $name;
+
+					// check if this consumer has expired, if it has it will be removed and have to be reconnected
+					$this->Oauth->checkExpires($this->currentUser['User']['id'], $consumerName);
+
+					// check if we're using post, if yes, we're writing
+					if (method_exists($consumer, 'post')) {
+						$write[] = array('Oauth' => array('name' => $consumerName, 'expires' => $consumer->expires));
+					}
+					// check if we're using get, if yes, we're reading
+					if (method_exists($consumer, 'get')) {
+						$read[] = array('Oauth' => array('name' => $consumerName, 'expires' => $consumer->expires));
+					}
+					unset($consumer);
+				}
+			}
+			closedir($handle);
+		}
+
 		$connectedServices = array();
 		foreach ($this->currentUser['Oauth'] as $service) {
 			$connectedServices[] = $service['service'];
 		}
-		$this->set(compact('connectedServices'));
+		$this->set(compact('connectedServices', 'read', 'write'));
 	}
 
 }
