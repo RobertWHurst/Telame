@@ -24,24 +24,26 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 
 ?>
 	<div class="controls">
-		<div class="label"><h3>Scope: </h3></div>
-		<div class="acl_scope">
-			<?php echo $html->image( '/img/icons/lock.png' ); ?>
-		</div>
-		<div class="share_scope">
-			<?php echo $html->image( '/img/icons/note_go.png' ); ?>
-		</div>
-		<div class="acl_scope_menu">
-			[eric's acl scope here]
-		</div>
-		<div class="share_scope_menu">
-<?php		foreach ($currentUser['Oauth'] as $oauth) {
-				if($oauth['method'] == 'write') {
-					echo $oauth['service'] . ' ' . $this->Form->input('Oauth.' . $oauth['service'], array('type' => 'checkbox'));
+		<?php if( $user['User']['id'] == $currentUser['User']['id'] ){ ?>
+			<div class="label"><h3>Scope: </h3></div>
+			<div class="acl_scope">
+				<?php echo $html->image( '/img/icons/lock.png' ); ?>
+			</div>
+			<div class="share_scope">
+				<?php echo $html->image( '/img/icons/note_go.png' ); ?>
+			</div>
+			<div class="acl_scope_menu">
+				[eric's acl scope here]
+			</div>
+			<div class="share_scope_menu">
+	<?php		foreach ($currentUser['Oauth'] as $oauth) {
+					if($oauth['method'] == 'write') {
+						echo $oauth['service'] . ' ' . $this->Form->input('Oauth.' . $oauth['service'], array('type' => 'checkbox'));
+					}
 				}
-			}
-?>
-		</div>
+	?>
+			</div>
+		<?php } ?>
 	</div>
 <?php echo $this->Form->end(__('wall_post_submit', true)); ?>
 </div>
