@@ -313,8 +313,8 @@
 					}
 					$('input:radio[value="' + value + '"]', Obj).click();
 				}
-				updateSwitch(Obj);
 			}
+			updateSwitch(Obj);
 		});
 	}
 
