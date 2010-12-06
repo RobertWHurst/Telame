@@ -43,11 +43,11 @@ $(function(){
 					//re try in 1/2 a second.
 					var sldrParnt = parent.find( 'div.' + cellGrpCls + ' div.TS_slider' );
 					if( sldrParnt ){
-						$( id ).complexSlider({ 'parent': sldrParnt });
+						//$( id ).complexSlider({ 'parent': sldrParnt });
 					}
 
 				} else {
-					$( id ).complexSlider();
+					//$( id ).complexSlider();
 
 				}
 
