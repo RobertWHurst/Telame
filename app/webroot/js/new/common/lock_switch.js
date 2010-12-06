@@ -67,10 +67,11 @@
 				buildMarkup(Obj);
 
 				//update the state
-				updateSlide(Obj, true);
+				updateSwitch(Obj, true);
 
-				//bind a hover event
-				mouseEvent(Obj);
+				//bind events
+				SlideEvents(Obj);
+				ToggleEvents(Obj);
 
 			});
 
@@ -138,7 +139,7 @@
 	}
 
 
-	function updateSlide(Objs, instant) {
+	function updateSwitch(Objs, instant) {
 
 		Objs.each(function(){
 			var Obj = $(this);
@@ -146,11 +147,7 @@
 			var slideState,ToggleState,options;
 			options = getOptions(Obj);
 			slideState = getSlideState(Obj);
-			if( ! slideState.match('inherit-')){
-				ToggleState = getSlideState(getTopParent(Obj, true));
-			} else {
-				ToggleState = 'inherit-' + getSlideState(getTopParent(Obj, true));
-			}
+			ToggleState = getToggleState(Obj);
 
 			//align the slide to the correct state
 			if (!instant) {
@@ -161,6 +158,20 @@
 				$('div.toggle', Obj).css({ 'left': ToggleOffsets[ToggleState] }, options.speed);
 			}
 		});
+	}
+
+
+	function getToggleState(Obj){
+			//get the current value
+			var slideState,options;
+			options = getOptions(Obj);
+			slideState = getSlideState(Obj);
+
+			if( ! slideState.match('inherit-')){
+				return getSlideState(getTopParent(Obj, true));
+			} else {
+				return 'inherit-' + getSlideState(getTopParent(Obj, true));
+			}
 	}
 
 
@@ -244,7 +255,7 @@
 	}
 
 
-	function mouseEvent(Obj) {
+	function SlideEvents(Obj) {
 
 		var parents,targets,state,value;
 		parents = getAllParents(Obj);
@@ -280,32 +291,53 @@
 			$(this).removeClass('hover');
 
 			//reset the slide pos
-			updateSlide(Obj);
+			updateSwitch(Obj);
 		});
 
 		targets.click(function(){
 
 			if( $(this)[0] == $( 'div.slideTarget', getTopParent(Obj))[0]){
+				var state;
 				state = getSlideState(Obj);
-				switch(state){
-					case 'allow':
-						state = 'block';
-						break;
-					case 'block':
+				if( ! state.match('inherit-')){
+					if( state == 'block'){
 						state = 'allow';
-						break;
-				}
-				for( var index in states ){
-					if( states[index] === state ){
-						value = index;
-						break;
+					}else{
+						state = 'block';
 					}
+					for( var index in states ){
+						if( states[index] === state ){
+							value = index;
+							break;
+						}
+					}
+					$('input:radio[value="' + value + '"]', Obj).click();
 				}
-				$('input:radio[value="' + value + '"]', Obj).click();
+				updateSwitch(Obj);
 			}
-			updateSlide(Obj);
 		});
+	}
 
+
+	function ToggleEvents(Obj){
+
+		var state, value;
+		$( 'div.toggleTarget', Obj).click(function(){
+			console.log('click');
+			if( ! getSlideState(Obj).match('inherit-')){
+				state = 'inherit';
+			} else {
+				state = getSlideState(getTopParent(Obj));
+			}
+			for( var index in states ){
+				if( states[index] === state ){
+					value = index;
+					break;
+				}
+			}
+			$('input:radio[value="' + value + '"]', Obj).click();
+			updateSwitch(Obj);
+		});
 
 	}
 
