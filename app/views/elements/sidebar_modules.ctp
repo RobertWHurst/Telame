@@ -12,7 +12,7 @@
 
 	/* DELETE THE BELOW BEFORE RELEASE!!! */
 ?>
-	<!-- Commented out until styled properly -- <div id="module_notifications" class="module">
+	<div id="module_notifications" class="module">
 <?php
 		$noteCount = ($currentUser['User']['notification_count'] ? ' (' . $currentUser['User']['notification_count'] . ')' : '');
 		if ($noteCount) {
@@ -29,12 +29,12 @@
 		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'notifications', 'action' => 'index'), array('escape' => false));
 ?>
 		</div>
-	</div> -->
+	</div>
 	<div id="module_newsfeed" class="module">
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/newspaper.png', array('static' => true, 'alt' => '')) . __('news_feed', true);
-		echo $html->link($link_content, array('controller' => 'pages', 'action' => 'news'), array('escape' => false));
+		echo $html->link($link_content, array('plugin' => null, 'controller' => 'pages', 'action' => 'news'), array('escape' => false));
 ?>
 		</div>
 	</div>
@@ -53,7 +53,7 @@
 		<div class="<?php echo ($msgCount)? 'link active' : 'link'; ?>">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/email.png', array('static' => true, 'alt' => '')) . __('messages', true) . $msgCount;
-		echo $html->link($link_content, array('slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
+		echo $html->link($link_content, array('plugin' => null, 'domain' => 'root', 'slug' => $currentUser['User']['slug'], 'controller' => 'messages', 'action' => 'inbox'), array('escape' => false));
 ?>
 		</div>
 	</div>

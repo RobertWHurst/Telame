@@ -21,20 +21,26 @@
  * @since		  CakePHP(tm) v 0.2.9
  * @license		  MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-	foreach(App::objects('plugin') as $plugin) {
-		App::import('Plugin', Inflector::classify("{$plugin}_routes"), array('file' => Inflector::underscore($plugin) . DS . 'config' . DS . 'routes.php'));
-	}
 
 	// enable rss extensions
 	Router::parseExtensions('rss');
 
-	// Use Cake's new router class.  Import the 'HomeRoute' lib and let's use it
+	// Use Cake's new router class.  Import the helper libs and use them
 	App::import('Lib', 'routes/HomeRoute');
 	App::import('Lib', 'routes/SlugRoute');
 
 	Router::connectNamed(array('page'));
 	Router::connectNamed(array('query'));
+	Router::connectNamed(array('root'));
 	Router::connectNamed(array('slug'));
+
+	foreach(App::objects('plugin') as $plugin) {
+		App::import('Plugin', Inflector::classify("{$plugin}_routes"), array('file' => Inflector::underscore($plugin) . DS . 'config' . DS . 'routes.php'));
+	}
+
+	// FIXES ACO table
+//	Router::connect('/fix', array('controller' => 'users', 'action' => 'fix'));
+
 
 // Home page
 
@@ -103,28 +109,28 @@
 	Router::connect('/:slug/albums/*', array('controller' => 'albums', 'action' => 'albums'), array('routeClass' => 'SlugRoute'));
 
 	// Media - Avatar
-	Router::connect('/i/a/*', array('controller' => 'media', 'action' => 'avatar'));
+	Router::connect('/img/avatar/*', array('controller' => 'media', 'action' => 'avatar'));
 	// Media - Comment
-	Router::connect('/i/c/*', array('controller' => 'media', 'action' => 'comment'));
+	Router::connect('/img/comment/*', array('controller' => 'media', 'action' => 'comment'));
 	// Media - Large
-	Router::connect('/i/l/*', array('controller' => 'media', 'action' => 'large'));
+	Router::connect('/img/large/*', array('controller' => 'media', 'action' => 'large'));
 	// Media - News
-	Router::connect('/i/n/*', array('controller' => 'media', 'action' => 'news'));
-	// Media - Profile
-	Router::connect('/i/p/*', array('controller' => 'media', 'action' => 'profile'));
-	// Media - Single
-	Router::connect('/i/s/*', array('controller' => 'media', 'action' => 'single'));
-	// Media - Thumbnail
-	Router::connect('/i/t/*', array('controller' => 'media', 'action' => 'thumb'));
+	Router::connect('/img/news/*', array('controller' => 'media', 'action' => 'news'));
 	// Media - Preview
-	Router::connect('/i/v/*', array('controller' => 'media', 'action' => 'preview'));
+	Router::connect('/img/preview/*', array('controller' => 'media', 'action' => 'preview'));
+	// Media - Profile
+	Router::connect('/img/profile/*', array('controller' => 'media', 'action' => 'profile'));
+	// Media - Single
+	Router::connect('/img/single/*', array('controller' => 'media', 'action' => 'single'));
+	// Media - Thumbnail
+	Router::connect('/img/thumb/*', array('controller' => 'media', 'action' => 'thumb'));
 	// Media - upload
 	Router::connect('/:slug/media/upload/*', array('controller' => 'media', 'action' => 'upload'), array('routeClass' => 'SlugRoute'));
 	// Media - delete
 	Router::connect('/:slug/media/delete/*', array('controller' => 'media', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
 
 	// Messaging
-	Router::connect('/:slug/messages/thread/*', array('controller' => 'messages', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/:root/:slug/messages/thread/*', array('controller' => 'messages', 'action' => 'view'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/sent', array('controller' => 'messages', 'action' => 'sent'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages/compose', array('controller' => 'messages', 'action' => 'compose'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/messages', array('controller' => 'messages', 'action' => 'inbox'), array('routeClass' => 'SlugRoute'));

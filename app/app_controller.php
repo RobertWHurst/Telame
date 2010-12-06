@@ -10,12 +10,12 @@ class AppController extends Controller {
 	var $helpers = array('Form', 'Html', 'Hrl', 'Session', 'Asset.asset', 'HtmlImage');
 
 	// Current user's info stored here
-	var $currentUser;
+	public $currentUser;
 
 	// Not for use when developing
 //	var $persistModel = true;
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		$this->Cookie->path = '/';
 		$this->Cookie->domain = env('HTTP_BASE');
 
@@ -51,11 +51,11 @@ class AppController extends Controller {
 		}
 	}
 
-	function beforeRender() {
+	public function beforeRender() {
 	}
 
 	// check if the user has a profile, if not redirect them to the settings
-	function checkProfile() {
+	public function checkProfile() {
 		if ($this->currentUser['User']['first_login']) {
 			$this->Session->setFlash(__('new_user_welcome', true));
 			if ($this->here == '/' . $this->currentUser['User']['slug'] || $this->here == '/') {
@@ -66,7 +66,7 @@ class AppController extends Controller {
 	}
 
 	// user info available eveywhere
-	function getCurrentUser() {
+	public function getCurrentUser() {
 		$currentUser = $this->User->getProfile($this->Session->read('Auth.User.slug'), array('Oauth'));
 
 		if(!is_null($currentUser['User']['hash'])) {
@@ -81,11 +81,11 @@ class AppController extends Controller {
 		return $currentUser;
 	}
 
-	function _forceSSL() {
+	public function _forceSSL() {
 		$this->redirect('https://' . env('SERVER_NAME') . $this->here);
 	}
 
-	function _unforceSSL() {
+	public function _unforceSSL() {
 		$this->redirect('http://' . env('SERVER_NAME') . $this->here);
 	}
 

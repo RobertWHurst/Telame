@@ -15,6 +15,8 @@ class BreweryAppController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 
+		$this->currentUser = parent::getCurrentUser();
+
 	}
 
 	function beforeRender() {
