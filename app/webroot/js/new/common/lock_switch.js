@@ -145,11 +145,11 @@
 			//get the current value
 			var slideState,ToggleState,options;
 			options = getOptions(Obj);
-			slideState = getState(Obj);
+			slideState = getSlideState(Obj);
 			if( ! slideState.match('inherit-')){
-				ToggleState = getState(getTopParent(Obj, true));
+				ToggleState = getSlideState(getTopParent(Obj, true));
 			} else {
-				ToggleState = 'inherit-' + getState(getTopParent(Obj, true));
+				ToggleState = 'inherit-' + getSlideState(getTopParent(Obj, true));
 			}
 
 			//align the slide to the correct state
@@ -164,8 +164,8 @@
 	}
 
 
-	function getState(Obj, noPrefix) {
-
+	function getSlideState(Obj, noPrefix) {
+		
 		//get the current radio
 		var currentRadioInput, curState;
 		currentRadioInput = $('input:radio:checked', Obj);
@@ -184,14 +184,16 @@
 			var parent;
 			parent = getOptions(Obj).parent;
 
-			curState = getState(parent, true);
+			curState = getSlideState(parent, true);
 
 			if (! noPrefix) {
 				curState = 'inherit-' + curState;
 			}
 
 		}
-
+		if(!curState){
+			curState = 'block';
+		}
 		return curState;
 	}
 
@@ -228,7 +230,8 @@
 		options = getOptions(Obj);
 
 		if( ! ignoreOverRides ){
-			overRiden = getState( Obj ).match('inherit-');
+
+			overRiden = getSlideState( Obj ).match('inherit-');
 		} else {
 			overRiden = true;
 		}
@@ -253,7 +256,7 @@
 			if( $(this)[0] == $( 'div.slideTarget', getTopParent(Obj))[0]){
 				options = getOptions(Obj);
 				slide = $('div.slide', Obj);
-				slideState = getState(Obj);
+				slideState = getSlideState(Obj);
 				slidePos = SlideOffsets[slideState];
 
 				//add the hover
@@ -283,7 +286,7 @@
 		targets.click(function(){
 
 			if( $(this)[0] == $( 'div.slideTarget', getTopParent(Obj))[0]){
-				state = getState(Obj);
+				state = getSlideState(Obj);
 				switch(state){
 					case 'allow':
 						state = 'block';

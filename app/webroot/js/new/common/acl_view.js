@@ -34,6 +34,8 @@ $(function(){
 
 				if( parent ){
 
+					col.addClass('containsChildren');
+
 					//get the current group
 					var cell = slider.parent( 'div.cell' );
 					var cellGrpCls = methods.getCelGrpCls( cell );
@@ -41,14 +43,13 @@ $(function(){
 					//find the parent slide in the parent col
 					//and make sure its been created. if not
 					//re try in 1/2 a second.
-					var sldrParnt = parent.find( 'div.' + cellGrpCls + ' div.TS_slider' );
+					var sldrParnt = parent.find( 'div.' + cellGrpCls + ' div.TS_LockSwitch' ).parent();
 					if( sldrParnt ){
-						//$( id ).complexSlider({ 'parent': sldrParnt });
+						$( id ).lockSwitch({ 'parent': sldrParnt });
 					}
 
 				} else {
-					//$( id ).complexSlider();
-
+					$( id ).lockSwitch();
 				}
 
 			});
@@ -112,17 +113,11 @@ $(function(){
 	});
 
 	//process each column
-	var i = 0;
 	acoCols.each(function(){
 
 		//get the current column
 		var col = $(this);
-		
-		setTimeout(function(){
-			methods.initCol( col );
-		}, i * speed);
-
-		i += 1;
+		methods.initCol( col );
 
 		//bind the link to show column children
 		col.find('div.heading a').click(function(){

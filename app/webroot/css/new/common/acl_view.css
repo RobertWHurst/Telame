@@ -36,10 +36,13 @@
 }
 .permissions_table .aco_column {
 	float: left;
-	width: 146px;
+	width: 112px;
 	background: #555;
 	display: none;
 	border-right: 1px solid #aaa;
+}
+.permissions_table .aco_column.containsChildren{
+	width: 142px;
 }
 .permissions_table .aco_column .heading{
 	border-top: 1px solid #aaa;
@@ -61,4 +64,5 @@
 	height: 32px;
 	padding: 10px;
 	border-bottom: 1px solid #aaa;
+	background: #333;
 }
