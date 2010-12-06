@@ -25,12 +25,12 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 ?>
 	<div class="controls">
 		<?php if( $user['User']['id'] == $currentUser['User']['id'] ){ ?>
-			<div class="label"><h3>Scope: </h3></div>
-			<div class="acl_scope">
-				<?php echo $html->image( '/img/icons/lock.png' ); ?>
+			<div class="label"><h3>Share: </h3></div>
+			<div class="icon acl_scope">
+				<?php echo $html->image( '/img/icons/lock.png', array( 'title' => 'Permissions' ) ); ?>
 			</div>
-			<div class="share_scope">
-				<?php echo $html->image( '/img/icons/note_go.png' ); ?>
+			<div class="icon share_scope">
+				<?php echo $html->image( '/img/icons/note_go.png', array( 'title' => 'Sharing' ) ); ?>
 			</div>
 			<div class="acl_scope_menu">
 				[eric's acl scope here]
@@ -44,6 +44,13 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 	?>
 			</div>
 		<?php } ?>
+		<div class="label"><h3>Attach: </h3></div>
+		<div class="icon add_image">
+			<?php echo $html->image( '/img/icons/image_add.png', array( 'title' => 'Attach Images' ) ); ?>
+		</div>
+		<div class="icon add_video">
+			<?php echo $html->image( '/img/icons/film_add.png', array( 'title' => 'Attach Videos' ) ); ?>
+		</div>
 	</div>
 <?php echo $this->Form->end(__('wall_post_submit', true)); ?>
 </div>

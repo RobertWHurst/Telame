@@ -76,20 +76,17 @@
 	color: #444;
 	width: 40px;
 }
-#wall_input div.controls div.acl_scope,
-#wall_input div.controls div.share_scope{
+#wall_input div.controls div.icon{
 	float: left;
 	padding: 3px;
 }
-#wall_input div.controls div.acl_scope img,
-#wall_input div.controls div.share_scope img{
+#wall_input div.controls div.icon img{
 	padding: 2px;
 	z-index: 3;
 	position: relative;
 }
 
-#wall_input div.controls div.acl_scope:hover img,
-#wall_input div.controls div.share_scope:hover img{
+#wall_input div.controls div.icon:hover img{
 	border: 1px solid #aaa;
 	padding: 1px;
 	background: #ddd;
@@ -99,8 +96,7 @@
 	border-radius: 3px;
 }
 
-#wall_input div.controls div.acl_scope.focus img,
-#wall_input div.controls div.share_scope.focus img{
+#wall_input div.controls div.icon.focus img{
 	padding: 1px 1px 5px 1px;
 	border: 1px solid #aaa;
 	border-bottom: none;

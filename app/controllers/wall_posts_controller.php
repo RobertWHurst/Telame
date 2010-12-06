@@ -8,6 +8,20 @@ class WallPostsController extends AppController {
 		parent::beforeFilter();
 	}
 
+
+	public function view_post($id){
+
+		//set the layout
+		$this->layout = 'new_tall_header_w_sidebar';
+
+		//grab the matching wallpost
+		$post = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array(
+			'id' => $id
+		));
+	    $this->set( 'post', $post[0] );
+	}
+
+
 	public function add($reply_id = false) {
 		// only loop around consumers that the user has checked
 		foreach ($this->data['Oauth'] as $service => $state) {
