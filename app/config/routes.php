@@ -167,6 +167,8 @@
 	Router::connect('/:slug/w/d/*', array('controller' => 'wall_posts', 'action' => 'delete'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/w/like/*', array('controller' => 'wall_posts', 'action' => 'like'), array('routeClass' => 'SlugRoute'));
 	Router::connect('/:slug/w/dislike/*', array('controller' => 'wall_posts', 'action' => 'dislike'), array('routeClass' => 'SlugRoute'));
+	Router::connect('/post/*', array('controller' => 'wall_posts', 'action' => 'view_post'));
+
 	// Wall Posts (Rss)
 	Router::connect('/rss/*', array('controller' => 'pages', 'action' => 'news'));
 
