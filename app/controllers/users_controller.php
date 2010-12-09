@@ -1,7 +1,7 @@
 <?php
 class UsersController extends AppController {
 
-	public $components = array('Email', 'Profile');
+	public $components = array('Email', 'Profile', 'WallPosts');
 	public $helpers = array('LinkRender', 'Markdown', 'Paginator', 'Time');
 
 	public function beforeFilter(){
@@ -14,6 +14,14 @@ class UsersController extends AppController {
 		}
 		$this->Auth->allow(array('confirm', 'passwordReset', 'signup'));
 
+	}
+
+	// used to fix aco tree function
+	// umcomment this, plus the router, and the aco.php model file
+	public function fix() {
+//		$this->loadModel('Aco');
+//		$this->Aco->recover();
+//		die('here');
 	}
 
 	public function confirm($email = null, $hash = null) {
@@ -108,18 +116,18 @@ class UsersController extends AppController {
 
 		if ($user) {
 			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 12 ));
+			$groups = $this->User->Group->getFriendLists(array('uid' => $this->currentUser['User']['id'], 'type' => 'list'));
 
-//			$friendIds = Set::extract('/Friend/id', $friends);
-			$wallPosts = $this->User->WallPost->getWallPosts($this->currentUser['User']['id'], array(
-				'uid' => $user['User']['id'], 
-//				'aid' => $friendIds
+			$this->WallPosts->getWallPosts(array(
+				'uid' => $user['User']['id'],
 			));
+
 		} else {
 			$friends = array();
 			$wallPosts = array();
 		}
 
-		$this->set(compact('friends', 'wallPosts'));
+		$this->set(compact('friends', 'groups'));
 	}
 
 	public function search(){

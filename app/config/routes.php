@@ -45,7 +45,7 @@
 // Home page
 
  	// If the first one returns true (the user is logged in) then rediret to news
-	Router::connect('/', array('controller' => 'pages', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
+	Router::connect('/', array('controller' => 'news', 'action' => 'news'), array('routeClass' => 'HomeRoute'));
 	// False, redirect to signup page
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
 
@@ -142,7 +142,7 @@
 	Router::connect('/p/a/*', array('controller' => 'profiles', 'action' => 'add'));
 
 	// News filters
-	Router::connect('/news/*', array('controller' => 'pages', 'action' => 'news'));
+	Router::connect('/news/*', array('controller' => 'news', 'action' => 'news'));
 
 	// Notifications
 	Router::connect('/:slug/notifications', array('controller' => 'notifications', 'action' => 'index'), array('routeClass' => 'SlugRoute'));
@@ -170,7 +170,7 @@
 	Router::connect('/post/*', array('controller' => 'wall_posts', 'action' => 'view_post'));
 
 	// Wall Posts (Rss)
-	Router::connect('/rss/*', array('controller' => 'pages', 'action' => 'news'));
+	Router::connect('/rss/*', array('controller' => 'news', 'action' => 'news'));
 
 	// Wall Posts (Ajax)
 	Router::connect('/w/mp/*', array('controller' => 'wall_posts', 'action' => 'more_posts'));

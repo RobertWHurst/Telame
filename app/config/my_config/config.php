@@ -10,6 +10,7 @@ Configure::write('BlacklistUsernames', array(
 ));
 
 Configure::write('PageLimit', 25);
+Configure::write('WallPost.Limit', 5);
 
 // Specify custom config information here
 Configure::write('SiteName', 'Telame');
@@ -50,7 +51,7 @@ Configure::write('UserAcls', array(
 		'videos'
 	),
 	'profile',
-	'wallposts',
+	'WallPost',
 ));
 
 Configure::write('UserInfo', array(

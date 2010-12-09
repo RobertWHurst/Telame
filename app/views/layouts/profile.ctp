@@ -18,7 +18,7 @@
 		<div id="content" class="clearfix">
 			<div id="wrap_main_sidebar">
 				<div id="logo">
-					<?php echo $htmlImage->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'pages', 'action' => 'news'), 'static' => true)); ?>
+					<?php echo $htmlImage->image('logo.png', array('title' => __('site_name', true),'url' => array('controller' => 'news', 'action' => 'news'), 'static' => true)); ?>
 				</div>
 				<?php echo $this->element('main_sidebar'); ?>
 			</div>

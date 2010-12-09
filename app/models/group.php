@@ -23,10 +23,12 @@ class Group extends AppModel {
 
 		$options = parseArguments($defaults, $arguments);
 		
+		// add -1 to the user_id array. -1 is everybody
 		$conditions = array(
 			'user_id' => array($options['uid'], '-1')
 		);
 		
+		// return the info requested
 		$this->recursive = -1;
 		return $this->find($options['type'], array(
 			'limit' => $options['limit'],

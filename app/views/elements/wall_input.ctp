@@ -33,9 +33,7 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 				<?php echo $html->image( '/img/icons/note_go.png', array( 'title' => 'Sharing' ) ); ?>
 			</div>
 			<div class="acl_scope_menu">
-<?php		foreach ($groups as $group) {
-//				echo $group['Group']['title'] . ' ' . $this->Form->input('Group.' . $group['Group']['id'], array('type' => 'checkbox'));
-			}
+<?php			echo $this->Form->input('Group', array('type' => 'select', 'multiple' => 'checkbox', 'options' => $groups));
 ?>
 			</div>
 			<div class="share_scope_menu">

@@ -2,11 +2,11 @@
 class GroupsUser extends AppModel {
 
 	public $belongsTo = array(
-		'User',
 		'Friend' => array(
 			'className' => 'User',
 			'foreignKey' => 'friend_id',
-		)
+		),
+		'User',
 	);
 
 	public function getFriends($arguments = false){
@@ -77,21 +77,36 @@ class GroupsUser extends AppModel {
 		return $users;
 	}
 
-	/* returns all your friend ids in list form
-	 * Friend_id and User_id seem backwards, but we want to do a test based on which users are friends with you, they have confirmed so
-	 */
+	/*  returns all your friend ids in list form
+	 *  if gid is set it will only return friends in that group
+	 */ 
 	public function getFriendIds($uid, $gid = false) {
+		// get our list of 'friends'
 		$this->recursive = -1;
 		$fids = $this->find('list', array(
 			'conditions' => array(
-				'friend_id' => $uid,
+				'user_id' => $uid,
 				($gid) ? array('group_id' => $gid) : '',
 			), 
 			'fields' => array(
-				'user_id'
+				'friend_id'
 			)
 		));
-		return $fids;
+
+		// get a list of where we are the friend
+		$this->recursive = -1;
+		$uids = $this->find('list', array(
+			'conditions' => array(
+				'friend_id' => $uid,
+				'user_id' => $fids, // only look at people that we have put on our list
+			),
+			'fields' => array(
+				'user_id',
+			),
+		));
+
+		// compare the two arrays and only return what's common. otherwise there isn't a two way friendship
+		return array_intersect($fids, $uids);
 	}
 
 	public function isFriend($uid, $fid) {

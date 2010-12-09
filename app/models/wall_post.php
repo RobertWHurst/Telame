@@ -1,5 +1,7 @@
 <?php
 class WallPost extends AppModel {
+	public $actsAs = array('Aacl');
+
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
@@ -20,129 +22,15 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
-	private $aid = false;
-	private $currentUserId = false;
+	public $aid = false;
+	public $currentUserId = false;
 
 // -------------------- Callback functions
-	// we use this to save the acl permissions after post is saved
-	function afterSave() {
-		$rootPerms = array();
 
-		// we need the acl component to do the checking
-		App::import('Component', 'Acl');
-		$this->Acl = new AclComponent();
-
-		// find the root user
-		$this->Acl->Aco->recursive = -1;
-		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $this->data['WallPost']['author_id'])));
-
-		// find the wallpost sub
-		$this->Acl->Aco->recursive = 1;
-		$aco = $this->Acl->Aco->find('first', array(
-			'conditions' => array(
-				'alias' => 'wallposts',
-				'lft >' => $aco['Aco']['lft'],
-				'rght <' => $aco['Aco']['rght'],
-			)
-		));
-
-		// for each aro (group) we get the permission and set it in rootPerms for saving
-
-	// WHAT DOES THIS DO?!?!?!
-		foreach ($aco['Aro'] as $perm) {
-			$permission = ($perm['Permission']['_read'] ? 1 : 0);
-			$rootPerms[$perm['foreign_key']] = $permission;
-		}
-
-		$acoData = array(
-			'parent_id' => $aco['Aco']['id'],
-			'alias' => 'WallPost::' . $this->id,
-			'model' => 'WallPost',
-			'foreign_key' => $this->id,
-		);
-
-		$this->Acl->Aco->create($acoData);
-		$this->Acl->Aco->save();
-	}
-
-	// we use this to alter the query for who can or can't view the posts
-	// CAKEPHP caveat. containable is called before 'beforeFind', so any db calls here won't be contained 
-	function beforeFind($data) {
-		if (!$this->aid) {
-			return $data;
-		}
-		App::import('Component', 'Acl');
-		$this->Acl = new AclComponent();
-
-		// make it an array if it's not already
-		if (!is_array($this->aid)) {
-			$this->aid = array($this->aid);
-		}
-
-		// remove ourself from the author id array
-		$key = array_search($this->currentUserId, $this->aid);
-		if($key !== false) {
-			unset($this->aid[$key]);
-		}
-		foreach ($this->aid as $aid) {
-			// This is query for a reason.  If I use the built in queries, the contain methods are not used.  
-			// So it will return EVERYTHING related to the user.
-			$group = $this->query('SELECT group_id FROM groups_users WHERE user_id = ' . $this->currentUserId . ' AND friend_id = ' . $aid);
-//			$group = $this->User->GroupsUser->listGroups($this->currentUserId, $aid);
-
-			// get the user
-			$this->Acl->Aro->recursive = -1;
-			$aro = $this->Acl->Aro->find('first', array(
-				'conditions' => array(
-					'model' => 'User',
-					'foreign_key' => $aid,
-				)
-			));
-
-			// find the root author user
-			$this->Acl->Aco->recursive = -1;
-			$rootUserAco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $aid)));
-
-			// wallpost aco id
-			$this->Acl->Aco->recursive = 1;
-			$rootWpAco = $this->Acl->Aco->find('first', array(
-				'conditions' => array(
-					'alias' => 'wallposts',
-					'lft >' => $rootUserAco['Aco']['lft'],
-					'rght <' => $rootUserAco['Aco']['rght'],
-				)
-			));
-
-			// if left is one less than right, they have no specific permissions
-			// FIXME: this needs finishing
-			if ($rootWpAco['Aco']['lft'] != ($rootWpAco['Aco']['rght'] + 1)) {
-				$this->Acl->Aco->recursive = 1;
-				$wallPostsAcos = $this->Acl->Aco->find('all', array(
-					'conditions' => array(
-						'lft >' => $rootWpAco['Aco']['lft'],
-						'rght <' => $rootWpAco['Aco']['rght'],
-					)
-				));
-			}
-
-			// permissions the user has set for all wall posts
-			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group . ']/Permission/_read', $rootWpAco);
-
-			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
-			if(empty($rootPermissions) || !$rootPermissions[0]) {
-				// find the key of the author and remove them from the list
-				$key = array_search($aid, $data['conditions']['OR']['WallPost.author_id']);
-				unset($data['conditions']['OR']['WallPost.author_id'][$key]);
-			}
-		}
-		// return the modified array for the query
-		return $data;
-	}
 
 // -------------------- Other functions
 	public function add($data, $args = false) {
 		$defaults = array(
-			'type' => 'post',
 			'class' => 'wall_post'
 		);
 		$options = parseArguments($defaults, $args);
@@ -152,8 +40,6 @@ class WallPost extends AppModel {
 		//save the post content and time
 		$data['WallPost']['post'] = Sanitize::clean($data['WallPost']['post']);
 		$data['WallPost']['posted'] = date("Y-m-d H:i:s");
-		$data['WallPost']['type'] = $options['type'];
-		$data['WallPost']['class'] = $options['class'];
 
 		$this->save($data);
 	}
@@ -163,80 +49,46 @@ class WallPost extends AppModel {
 		$this->currentUserId = $currentUserId;
 
 		$conditions = array();
+
 		//set the default options
 		$defaults = array(
-			//post id
-			'id' => false,
-			//user id
-			'uid' => false,
-			//author id
-			'aid' => false,
-			//blocked user id
-			'buid' => false,
-			//blocked author id
-			'baid' => false,
-			//include the user data
-			'User' => true,
-			///include the post author data
-			'PostAuthor' => true,
-			//??? don't touch ???
-			'single' => false,
-			//max mumber of posts returned
-			'limit' => 10,
-			//number of posts to skip
-			'offset' => 0,
-			//filter by post type
-			'type' => false
+			'all_friends' => false,	// show all friends
+			'id' => false,			//post id
+			'limit' => Configure::read('WallPost.Limit'),	//max mumber of posts returned
+			'offset' => 0,			//number of posts to skip
+			'uid' => false,			//user id
 		);
 
 		//parse the options
 		$options = parseArguments($defaults, $arguments, true);
 
 		// create conditions
-		// get only get parents in the top level, not replies.
-		if($options['single'] == false) {
-			$conditions['reply_parent_id'] = null;
-		}
 		if($options['id']) {
 			$conditions['WallPost.id'] = $options['id'];
+			$postType = 'first';
 		}
+		// UID is for only showing posts on a certain wall
 		if($options['uid']) {
-			$conditions['OR']['WallPost.user_id'] = $options['uid'];
+			$conditions['WallPost.user_id'] = $options['uid'];
 		}
-		if($options['aid']) {
-			$conditions['OR']['WallPost.author_id'] = $options['aid'];
-			$this->aid = $options['aid'];
-		}
-		if($options['buid']) {
-			$conditions['WallPost.user_id <>'] = $options['buid'];
-		}
-		if($options['baid']) {
-			$conditions['WallPost.author_id <>'] = $options['baid'];
-		}
-		if($options['type']){
-			$conditions['WallPost.type'] = $options['type'];
+		// mainly used for news feed.  make sure the author and user are both your friends
+		if($options['all_friends']) {
+			$conditions['AND']['WallPost.author_id'] = $options['all_friends'];
+			$conditions['AND']['WallPost.user_id'] = $options['all_friends'];
+			$conditions['reply_parent_id'] = null;
+			$this->aid = $options['all_friends'];
 		}
 
 		//create the contain rules
-		if($options['User']) {
-			$contain[] = 'User';
-			$contain[] = 'Replies.User';
-		}
-		if($options['PostAuthor']) {
-			$contain[] = 'PostAuthor';
-			$contain[] = 'Replies.PostAuthor';
-		}
-		$contain[] = 'WallPostLike.User';
+		$contain[] = 'User';				// Owner - who's wall this is posted on
+		$contain[] = 'PostAuthor';			// Who made the post
+		$contain[] = 'Replies.PostAuthor';	// The author of any replies
+		$contain[] = 'WallPostLike.User';	// The user(s) of who liked/disliked this post
 
-		if ($options['single']) {
-			$type = 'first';
-			$options['limit'] = 1;
-		} else {
-			$type = 'all';
-		}
-
+		// grab as much as you can, it will however be contained
 		$this->recursive = 2;
-		$wallPosts = $this->find($type, array(
+		// check if we have set $postType, if it is set, use it, otherwise just use 'all'
+		$wallPosts = $this->find((isset($postType) ? $postType : 'all'), array(
 			'conditions' => $conditions,
 			'contain' => $contain,
 			'limit' => $options['limit'],
@@ -244,26 +96,13 @@ class WallPost extends AppModel {
 			'order' => 'WallPost.posted DESC'
 		));
 
-		// This needs fixing
-		// FIXME
-		if ($options['single']) {
+		// this transforms the data array.  the data structure of a find all vs find first is different
+		if ($options['id']) {
 			foreach ($wallPosts['WallPost'] as $key => $val) {
 				$wallPosts[$key] = $val;
 			}
 		}
-		$count = count($wallPosts);
-		for ($i=0; $i<$count; $i++) {
-			if (isset($wallPosts[$i]) && !is_null($wallPosts[$i]['WallPost']['model_id'])) {
-				$model = Inflector::classify($wallPosts[$i]['WallPost']['type']);
-				App::Import('Model', $model);
-				$this->$model = new $model;
-				$this->$model->recursive = -1;
-				$data = $this->$model->findById($wallPosts[$i]['WallPost']['model_id']);
-
-				$wallPosts[$i][$model] = $data[$model];
-
-			}
-		}
+	
 		return $wallPosts;
 	}
 

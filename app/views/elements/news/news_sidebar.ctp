@@ -3,7 +3,13 @@
 		<h1><?php __('filter_title'); ?></h1>
 		<ul>
 			<?php foreach($friendLists as $filter): ?>
-				<li class="<?php echo ($filter['selected'])? 'filter current' : 'filter'; ?>"><?php echo $html->link($filter['Group']['title'], array('controller' => 'pages', 'action' => 'news', $filter['Group']['id'])); ?></li>
+				<li class="filter <?php echo ($filter['Group']['id'] == $selectedFriendList) ? ' current' : ''; ?>">
+					<?php echo $html->link($filter['Group']['title'], array(
+						'controller' => 'news', 
+						'action' => 'news', 
+						$filter['Group']['id']
+					)); ?>
+				</li>
 			<?php endforeach; ?>
 		</ul>
 	</div>

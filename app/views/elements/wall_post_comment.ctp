@@ -4,7 +4,7 @@
 <div class="comment clearfix">
 <?php
 	if(
-    	($comment['PostAuthor']['id'] == $currentUser['User']['id'] || $comment['User']['id'] == $currentUser['User']['id']) &&
+    	($comment['PostAuthor']['id'] == $currentUser['User']['id']) &&
     	($this->params['action'] != 'news')
     ):
 ?>

@@ -5,11 +5,11 @@
 		array( 'key' => 'wallCommentInput', 'url' => 'common/wall_comments_input', 'requires' => array( 'jQuery', 'wallComment' ))
 	));
 ?>
-<div id="post_<?php echo $post['WallPost']['class'] . '_' . $post['WallPost']['id']; ?>" class="post">
-	<div class="inner_post <?php echo $post['WallPost']['class']; ?> clearfix">
+<div id="post_<?php echo 'wall_post' . '_' . $post['WallPost']['id']; ?>" class="post">
+	<div class="inner_post wall_post clearfix">
 <?php
 		$url = array('controller' => 'users', 'action' => 'profile', $post['PostAuthor']['slug']);
-		if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'):
+		if(true):
 ?>
 			<div class="avatar">
 <?php
@@ -26,7 +26,7 @@
 				} else {
 					$author_name = '<strong>' . $html->link($post['PostAuthor']['full_name'], $url) . '</strong>';
 				}
-				echo $this->element('wall_post_types/' . $post['WallPost']['type'], array('author_name' => $author_name, 'post' => $post));
+				echo $this->element('wall_post_types/post', array('author_name' => $author_name, 'post' => $post));
 ?>
 		</div>
 		<?php if( $post['PostAuthor']['id'] == $currentUser['User']['id'] || $post['User']['id'] == $currentUser['User']['id'] ){ ?>
@@ -38,7 +38,7 @@
 			</div>
 		<?php } ?>
 		<div class="baseline">
-			<?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
+			<?php if(true): ?>
 				<div class="baseline_controls">
 <?php
 					if($post['WallPost']['like']){
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 	</div>
-	<?php if($post['WallPost']['type'] == 'post' || $post['WallPost']['type'] == 'media'): ?>
+	<?php if(true): ?>
 		<div class="commentsWrap">
 			<div class="arrow_up"></div>
 			<div class="comments">

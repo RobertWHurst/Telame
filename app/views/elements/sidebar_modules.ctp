@@ -34,7 +34,7 @@
 		<div class="link">
 <?php
 		$link_content = $this->HtmlImage->Image('icons/newspaper.png', array('static' => true, 'alt' => '')) . __('news_feed', true);
-		echo $html->link($link_content, array('plugin' => null, 'controller' => 'pages', 'action' => 'news'), array('escape' => false));
+		echo $html->link($link_content, array('plugin' => null, 'controller' => 'news', 'action' => 'news'), array('escape' => false));
 ?>
 		</div>
 	</div>

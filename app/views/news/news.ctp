@@ -1,8 +1,8 @@
 <?php
 //INCLUDES
 $hrl->css(array(
-	array( 'key' => 'newsFeed', 'url' => 'pages/news_feed' ),
-	array( 'key' => 'newsSidebar', 'url' => 'pages/news_sidebar' )
+	array( 'key' => 'newsFeed', 'url' => 'news/news_feed' ),
+	array( 'key' => 'newsSidebar', 'url' => 'news/news_sidebar' )
 ));
 $this->set('title_for_layout', __('news_title', true));
 ?>
@@ -21,5 +21,5 @@ $this->set('title_for_layout', __('news_title', true));
 		echo $this->element('wall', array('wallPosts' => $wallPosts, 'show_user_and_author' => true));
 ?>
 	</div>
-	<?php echo $this->element('pages/news_sidebar', array('friendLists' => $friendLists)); ?>
+	<?php echo $this->element('news/news_sidebar', array('friendLists' => $friendLists)); ?>
 </div>

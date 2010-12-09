@@ -207,6 +207,9 @@ class User extends AppModel {
 		$this->removeUserDir($userDir);
 		// TODO; finish removing the rest of the user info
 
+		// records belonging to the user are deleted, but records that are somebody eles's pointing to you arent
+		$this->GroupsUser->deleteAll(array('friend_id' => $uid), false);
+
 		// Remove the user and all dependent data
 		$this->delete($uid, true);
 	}

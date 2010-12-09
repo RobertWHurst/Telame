@@ -8,21 +8,22 @@ class WallPostsController extends AppController {
 		parent::beforeFilter();
 	}
 
+	public function add() {
+		// Basic sanity check first.  Do we have any data?
+		$isAjax = $this->RequestHandler->isAjax();
 
-	public function view_post($id){
+		//make sure there is form data to process, if not there is not use in continuing
+		if(empty($this->data)) {
+			if ($isAjax) {
+				echo 'false';
+				exit;
+			} else {
+				$this->redirect($this->referer());
+				exit;
+			}
+		}
 
-		//set the layout
-		$this->layout = 'new_tall_header_w_sidebar';
-
-		//grab the matching wallpost
-		$post = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array(
-			'id' => $id
-		));
-	    $this->set( 'post', $post[0] );
-	}
-
-
-	public function add($reply_id = false) {
+		// Do oauth stuff
 		if (isset($this->data['Oauth'])) {
 			// only loop around consumers that the user has checked
 			foreach ($this->data['Oauth'] as $service => $state) {
@@ -43,24 +44,6 @@ class WallPostsController extends AppController {
 			}
 		}
 
-		$isAjax = $this->RequestHandler->isAjax();
-
-		//make sure there is form data to process, if not there is not use in continuing
-		if(empty($this->data)) {
-			if ($isAjax) {
-				echo 'false';
-				exit;
-			} else {
-				$this->redirect(array('controller' => 'users', 'action' => 'profile', $this->currentUser['User']['Slug']));
-				exit;
-			}
-		}
-
-		//get the relpy id if any
-		if(isset($this->data['WallPost']['reply_parent_id'])) {
-			$reply_id = $this->data['WallPost']['reply_parent_id'];
-		}
-
 		//save the user id and the visitor id
 		$wallOwnerId = $this->data['WallPost']['user_id'];
 
@@ -73,48 +56,28 @@ class WallPostsController extends AppController {
 
 		//findout if the current user is posting to there own wall. (will skip some un needed logic)
 		if ($wallOwnerId != $visitorId) {
-
-			//IF THE POSTER IS NOT THE THE WALL OWNER
-
 			//if the poster is not friends with the user then return false
 			if (!$this->WallPost->User->GroupsUser->isFriend($visitorId, $wallOwnerId)) {
 				if($isAjax) {
 					echo 'false';
 					exit;
 				} else {
-					$visitorSlug = $this->WallPost->User->getSlugFromId($visitorId);
 					$this->Session->setFlash(__('wall_post_error', true), 'default', array('class' => 'error'));
-					$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitorSlug));
+					$this->redirect($this->referer());
 					exit;
 				}
 			}
 		}
 
-		//save the user id and poster id
-		$this->data['WallPost']['user_id'] = $wallOwnerId;
+		// save the visitor as the author
 		$this->data['WallPost']['author_id'] = $visitorId;
 
 		//commit the data to the db
-		$this->WallPost->add($this->data, array('type' => 'post', 'class' => 'wall_post'));
-
-		//get the new wall post id for ajax (if ajax)
-		$new_post_id = $this->WallPost->id;
-
-		//if the wall does not belong to the current user and it's not a reply
-		if($wallOwnerId != $visitorId && $reply_id == null) {
-
-			//create an action on the user's page
-			$action['reply_parent_id'] = null;
-			$action['WallPost']['user_id'] = $visitorId;
-			$action['WallPost']['author_id'] = $wallOwnerId;
-			$action['WallPost']['post'] = null;
-			$this->WallPost->add($action, array('type' => 'post_action', 'class' => 'action'));
-		}
+		$this->WallPost->add($this->data);
 
 		if($isAjax) {
-
 			//load the view
-			$wallPost = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array('id' => $new_post_id, 'single' => true));
+			$wallPost = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array('id' => $this->WallPost->id));
 
 			//set the layout to none (this is ajax);
 			$this->layout = false;
@@ -132,8 +95,7 @@ class WallPostsController extends AppController {
 
 		} else {
 			//redirect the visitor to the wall they posted on
-			$slug = $this->WallPost->User->getSlugFromId($wallOwnerId);
-			$this->redirect(array('controller' => 'users', 'action' => 'profile', $slug));
+			$this->redirect($this->referer());
 			exit;
 		}
 	}
@@ -223,9 +185,7 @@ class WallPostsController extends AppController {
 		exit;
 	}
 
-	public function more_posts( $uid = false, $offset = false ){
-
-
+	public function more_posts($uid = false, $offset = false) {
 
 		//jettison the request if its not via ajax
 		if( ! $this->RequestHandler->isAjax() ){
@@ -238,12 +198,27 @@ class WallPostsController extends AppController {
 			exit;
 		}
 
-		$wallPosts = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array( 'uid' => $uid, 'limit' => 10, 'offset' => $offset ) );
+		$wallPosts = $this->WallPost->getWallPosts($this->currentUser['User']['id'], array(
+			'uid' => $uid,
+			'offset' => $offset
+		));
 
 		//set the layout to none (this is ajax);
 		$this->layout = false;
 
 		$this->set( array( 'wallPosts' => $wallPosts ) );
+	}
+
+	public function view_post($id){
+
+		//set the layout
+		$this->layout = 'new_tall_header_w_sidebar';
+
+		//grab the matching wallpost
+		$post = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array(
+			'id' => $id
+		));
+	    $this->set(compact('post'));
 	}
 
 }
