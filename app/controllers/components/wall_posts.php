@@ -8,7 +8,7 @@ class WallPostsComponent extends Object {
 
 	function getWallPosts($args = false) {
 		$this->controller->loadModel('WallPost');
-	
+
 		$defaults = array(
 			'all_friends' => false,
 			'rss_hash' => false,
@@ -64,7 +64,7 @@ class WallPostsComponent extends Object {
 			}
 		}
 	}
-	
+
 	private function getFriends($user_id, $selectedFriendList) {
 		// only load these if they are not already
 		if (!isset($this->controller->Group)) {

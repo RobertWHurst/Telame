@@ -47,6 +47,11 @@ class Album extends AppModel {
 		return $this->find('first', array('conditions' => array('Album.id' => Sanitize::clean(intval($aid)))));
 	}
 
+	public function getProfileGallery($uid){
+		/* FIXME: Eric should do this, I don't want to f**k up anything in here */
+		/* Needs to return the profile album media for the given user */
+	}
+
 	// Takes an album ID and returns all the media inside that album
 	public function getMedia($aid) {
 		$this->Media->recursive = -1;

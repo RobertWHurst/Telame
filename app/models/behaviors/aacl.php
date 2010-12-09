@@ -42,7 +42,7 @@ class AaclBehavior extends ModelBehavior {
 			// if the key exists in the passed data (then they have checked the box) then set perm to yes
 			if (array_key_exists($key, $model->data[$model->alias]['Group'])) {
 				$passedPerms[$key] = '1';
-			} // otherwise say no 
+			} // otherwise say no
 			else {
 				$passedPerms[$key] = '0';
 			}
@@ -151,5 +151,5 @@ return $data;
 		}
 		return $data;
 	}
-	
+
 }

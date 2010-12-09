@@ -122,6 +122,34 @@ class UsersController extends AppController {
 				'uid' => $user['User']['id'],
 			));
 
+
+		     /*-----------------------------------------------------------------------------
+
+		     THIS IS A TERRIBLE HACK THAT USES WAY TO MANY QUERIES
+		     ALL OF THIS CODE BELOW NEEDS TO BE MOVED INTO THE ALBUMS
+		     MODEL. I'll LET ERIC DO THIS BECAUSE I DON't WANT TO
+		     F**K IT UP.
+		     */
+
+			//get the gallery album
+			$aid = $this->User->Album->getAlbumId($user['User']['id'], 'profile_pictures');
+			if (!$this->User->Album->isPublic($aid)) {
+				if(!$this->Aacl->checkPermissions($user['User']['id'], $this->currentUser['User']['id'], 'media/images')) {
+					$this->Session->setFlash(__('not_allowed_images', true), 'default', array('class' => 'warning'));
+					$this->redirect($this->referer());
+					exit;
+				}
+			}
+
+			// get the album and media from the id we found
+			$gallery_album = $this->User->Album->getMedia($aid);
+
+		    /*
+		     END OF HIDEOUS HACK
+		     ---------------------------------------------------------------
+		     */
+
+
 		} else {
 			$friends = array();
 			$wallPosts = array();
