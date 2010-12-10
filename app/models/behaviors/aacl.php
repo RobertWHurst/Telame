@@ -141,6 +141,8 @@ class AaclBehavior extends ModelBehavior {
 					));
 					if (!$aroAco['ArosAco']['_read']) {
 						$data['conditions']['NOT']['WallPost.id'][] = $aco['Aco']['foreign_key'];
+					} else {
+						$data['conditions']['AND']['OR']['WallPost.id'][] = $aco['Aco']['foreign_key'];
 					}
 				}
 			}
@@ -152,11 +154,10 @@ class AaclBehavior extends ModelBehavior {
 			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
 			if(empty($rootPermissions) || !$rootPermissions[0]) {
 				// find the key of the author and remove them from the list
-				$key = array_search($fid, $data['conditions']['AND'][$model->alias . '.author_id']);
-				unset($data['conditions']['AND'][$model->alias . '.author_id'][$key]);
+				$key = array_search($fid, $data['conditions']['AND']['OR'][$model->alias . '.author_id']);
+				unset($data['conditions']['AND']['OR'][$model->alias . '.author_id'][$key]);
 			}
 		}
-
 		return $data;
 	}
 

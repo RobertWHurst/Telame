@@ -78,7 +78,7 @@ class WallPost extends AppModel {
 		}
 		// mainly used for news feed.  make sure the author and user are both your friends
 		if($options['all_friends']) {
-			$conditions['AND']['WallPost.author_id'] = $options['all_friends'];
+			$conditions['AND']['OR']['WallPost.author_id'] = $options['all_friends'];
 			$conditions['AND']['WallPost.user_id'] = $options['all_friends'];
 			$conditions['reply_parent_id'] = null;
 			$this->friends = $options['all_friends'];
