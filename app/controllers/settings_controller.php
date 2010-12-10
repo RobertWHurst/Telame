@@ -102,6 +102,12 @@ class SettingsController extends AppController {
 		$this->redirect('/');
 	}
 
+	public function friends(){
+		$this->loadModel('GroupsUser');
+		$friends = $this->GroupsUser->getFriends(array('uid' => $this->currentUser['User']['id']));
+		$this->set(compact('friends'));
+	}
+
 	public function gallery($id = null, $top = null, $left = null, $height = null, $width = null){
 
 		//if the request is not ajax display the gallery options.
@@ -146,12 +152,6 @@ class SettingsController extends AppController {
 
 			$this->set(compact('galleryPosData'));
 		}
-	}
-
-	public function friends(){
-		$this->loadModel('GroupsUser');
-		$friends = $this->GroupsUser->getFriends(array('uid' => $this->currentUser['User']['id']));
-		$this->set(compact('friends'));
 	}
 
 	public function groups() {

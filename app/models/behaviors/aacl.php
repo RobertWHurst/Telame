@@ -4,6 +4,7 @@ class AaclBehavior extends ModelBehavior {
 	function setup(&$model, $config = array()) {
 		$model->Aco = ClassRegistry::init('Aco');
 		$model->Aro = ClassRegistry::init('Aro');
+		$model->ArosAco = ClassRegistry::init('ArosAco');
 	}
 
 	function afterSave(&$model) {
@@ -54,20 +55,21 @@ class AaclBehavior extends ModelBehavior {
 				'foreign_key' => $model->id,
 			);
 			$model->Aco->create($acoData);
-//			$model->Aco->save();
+			$model->Aco->save();
 
-			$i = 0;
 			foreach ($passedPerms as $key => $val) {
 				$aroAco['ArosAco'] = array(
-					$i++ => array(
-						'aro_id' => $key,
-						'aco_id' => $model->Aco->id,
-						'_read' => $val,
-					)
+					'aro_id' => $key,
+					'aco_id' => $model->Aco->id,
+					'_create' => 0,
+					'_read' => $val,
+					'_update' => 0,
+					'_delete' => 0,
 				);
+				$model->ArosAco->create();
+				$model->ArosAco->save($aroAco);
 			}
 		}
-pr($aroAco);
 
 	}
 
@@ -120,16 +122,29 @@ pr($aroAco);
 
 
 			// if left is one less than right, they have no specific permissions
-			// FIXME: this needs finishing
+			// This block does specific permissions
 			if ($rootAco['Aco']['lft'] != ($rootAco['Aco']['rght'] + 1)) {
-				$model->Aco->recursive = 1;
-				$Acos = $model->Aco->find('all', array(
+				$model->Aco->recursive = -1;
+				$acos = $model->Aco->find('all', array(
 					'conditions' => array(
 						'lft >' => $rootAco['Aco']['lft'],
 						'rght <' => $rootAco['Aco']['rght'],
 					)
 				));
+				foreach ($acos as $aco) {
+					$aroAco = $model->ArosAco->find('first', array(
+						'conditions' => array(
+							'aro_id' => $group[0][0]['group_id'],
+							'aco_id' => $aco['Aco']['id'] 
+						),
+						'fields' => '_read',
+					));
+					if (!$aroAco['ArosAco']['_read']) {
+						$data['conditions']['NOT']['WallPost.id'][] = $aco['Aco']['foreign_key'];
+					}
+				}
 			}
+			
 
 			// permissions the user has set for all wall posts
 			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group[0][0]['group_id'] . ']/Permission/_read', $rootAco);
