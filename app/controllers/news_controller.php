@@ -27,10 +27,13 @@ class NewsController extends AppController {
 			'rss_hash' => $hash,
 		));
 
+		$groups = $this->User->Group->getFriendLists(array('uid' => $this->currentUser['User']['id'], 'type' => 'list'));
+
 		// find any friends who have a birthday today
 		$this->loadModel('GroupsUser');
 		$birthdays = $this->GroupsUser->getBirthdays($this->currentUser['User']['id']);
-		$this->set(compact('birthdays'));
+
+		$this->set(compact('birthdays', 'groups'));
 	}
 
 	public function more_news($selectedFriendList = null, $uid = false, $offset = false) {

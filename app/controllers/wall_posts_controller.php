@@ -158,6 +158,8 @@ class WallPostsController extends AppController {
 	}
 
 	public function dislike($id) {
+		// Disable the Aacl for this
+		$this->WallPost->Behaviors->disable('Aacl');
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
@@ -172,6 +174,8 @@ class WallPostsController extends AppController {
 	}
 
 	public function like($id) {
+		// Disable the Aacl for this
+		$this->WallPost->Behaviors->disable('Aacl');
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);

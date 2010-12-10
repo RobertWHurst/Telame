@@ -2,23 +2,20 @@
 class AaclBehavior extends ModelBehavior {
 
 	function setup(&$model, $config = array()) {
+		$model->Aco = ClassRegistry::init('Aco');
+		$model->Aro = ClassRegistry::init('Aro');
 	}
 
 	function afterSave(&$model) {
-	return;
 		$rootPerms = array();
 
-		// we need the acl component to do the checking
-		App::import('Component', 'Acl');
-		$model->Acl = new AclComponent();
-
 		// find the root user
-		$model->Acl->Aco->recursive = -1;
-		$aco = $model->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $model->data[$model->alias]['author_id'])));
+		$model->Aco->recursive = -1;
+		$aco = $model->Aco->find('first', array('conditions' => array('alias' => 'User::' . $model->data[$model->alias]['author_id'])));
 
 		// find the sub
-		$model->Acl->Aco->recursive = 1;
-		$aco = $model->Acl->Aco->find('first', array(
+		$model->Aco->recursive = 1;
+		$aco = $model->Aco->find('first', array(
 			'conditions' => array(
 				'alias' => $model->alias,
 				'lft >' => $aco['Aco']['lft'],
@@ -56,20 +53,21 @@ class AaclBehavior extends ModelBehavior {
 				'model' => $model->alias,
 				'foreign_key' => $model->id,
 			);
-			$model->Acl->Aco->create($acoData);
-			$model->Acl->Aco->save();
+			$model->Aco->create($acoData);
+//			$model->Aco->save();
 
-			foreach ($passedPerm as $key => $val) {
-//				$aroAco = array(
-//					'ArosAco' => array(
-//						'aro_id' => $key,
-//						'aco_id' => $model->Acl->Aco->id;
-//						'_read' => $val;
-//					)
-//				);
+			$i = 0;
+			foreach ($passedPerms as $key => $val) {
+				$aroAco['ArosAco'] = array(
+					$i++ => array(
+						'aro_id' => $key,
+						'aco_id' => $model->Aco->id,
+						'_read' => $val,
+					)
+				);
 			}
 		}
-
+pr($aroAco);
 
 	}
 
@@ -77,48 +75,42 @@ class AaclBehavior extends ModelBehavior {
 	}
 
 	function beforeFind(&$model, $data) {
-		if (!$model->aid) {
+		if (!$model->friends) {
 			return $data;
 		}
 
-// FIXME
-return $data;
-
-		App::import('Component', 'Acl');
-		$model->Acl = new AclComponent();
-
 		// make it an array if it's not already
-		if (!is_array($model->aid)) {
-			$model->aid = array($model->aid);
+		if (!is_array($model->friends)) {
+			$model->friends = array($model->friends);
 		}
 
 		// remove ourself from the author id array
-		$key = array_search($model->currentUserId, $model->aid);
+		$key = array_search($model->currentUserId, $model->friends);
 		if($key !== false) {
-			unset($model->aid[$key]);
+			unset($model->friends[$key]);
 		}
 
-		foreach ($model->aid as $aid) {
+		foreach ($model->friends as $fid) {
 			// This is query for a reason.  If I use the built in queries, the contain methods are not used.
 			// So it will return EVERYTHING related to the user.
-			$group = $model->query('SELECT group_id FROM groups_users WHERE user_id = ' . $model->currentUserId . ' AND friend_id = ' . $aid);
+			$group = $model->query('SELECT group_id FROM groups_users WHERE user_id = ' . $model->currentUserId . ' AND friend_id = ' . $fid . ' LIMIT 1');
 
 			// get the user
-			$model->Acl->Aro->recursive = -1;
-			$aro = $model->Acl->Aro->find('first', array(
+			$model->Aro->recursive = -1;
+			$aro = $model->Aro->find('first', array(
 				'conditions' => array(
 					'model' => 'User',
-					'foreign_key' => $aid,
+					'foreign_key' => $fid,
 				)
 			));
 
 			// find the root author user
-			$model->Acl->Aco->recursive = -1;
-			$rootUserAco = $model->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $aid)));
+			$model->Aco->recursive = -1;
+			$rootUserAco = $model->Aco->find('first', array('conditions' => array('alias' => 'User::' . $fid)));
 
 			// model aco id
-			$model->Acl->Aco->recursive = 1;
-			$rootAco = $model->Acl->Aco->find('first', array(
+			$model->Aco->recursive = 1;
+			$rootAco = $model->Aco->find('first', array(
 				'conditions' => array(
 					'alias' => $model->alias,
 					'lft >' => $rootUserAco['Aco']['lft'],
@@ -130,8 +122,8 @@ return $data;
 			// if left is one less than right, they have no specific permissions
 			// FIXME: this needs finishing
 			if ($rootAco['Aco']['lft'] != ($rootAco['Aco']['rght'] + 1)) {
-				$model->Acl->Aco->recursive = 1;
-				$Acos = $model->Acl->Aco->find('all', array(
+				$model->Aco->recursive = 1;
+				$Acos = $model->Aco->find('all', array(
 					'conditions' => array(
 						'lft >' => $rootAco['Aco']['lft'],
 						'rght <' => $rootAco['Aco']['rght'],
@@ -145,10 +137,11 @@ return $data;
 			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
 			if(empty($rootPermissions) || !$rootPermissions[0]) {
 				// find the key of the author and remove them from the list
-				$key = array_search($aid, $data['conditions']['OR'][$model->alias . '.author_id']);
-				unset($data['conditions']['OR'][$model->alias . '.author_id'][$key]);
+				$key = array_search($fid, $data['conditions']['AND'][$model->alias . '.author_id']);
+				unset($data['conditions']['AND'][$model->alias . '.author_id'][$key]);
 			}
 		}
+
 		return $data;
 	}
 

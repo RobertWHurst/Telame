@@ -39,7 +39,7 @@
 	}
 
 	// FIXES ACO table
-//	Router::connect('/fix', array('controller' => 'users', 'action' => 'fix'));
+	Router::connect('/fix', array('controller' => 'users', 'action' => 'fix'));
 
 
 // Home page

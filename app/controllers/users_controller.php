@@ -19,9 +19,9 @@ class UsersController extends AppController {
 	// used to fix aco tree function
 	// umcomment this, plus the router, and the aco.php model file
 	public function fix() {
-//		$this->loadModel('Aco');
-//		$this->Aco->recover();
-//		die('here');
+		$this->loadModel('Aco');
+		$this->Aco->recover();
+		die('here');
 	}
 
 	public function confirm($email = null, $hash = null) {

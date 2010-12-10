@@ -22,7 +22,7 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
-	public $aid = false;
+	public $friends = false;
 	public $currentUserId = false;
 
 // -------------------- Callback functions
@@ -34,6 +34,11 @@ class WallPost extends AppModel {
 			'class' => 'wall_post'
 		);
 		$options = parseArguments($defaults, $args);
+
+		// we don't need the aacl for replies, so disable it
+		if (isset($data['WallPost']['reply_parent_id'])) {
+			$this->Behaviors->disable('Aacl');
+		}
 
 		$this->create();
 
@@ -76,7 +81,7 @@ class WallPost extends AppModel {
 			$conditions['AND']['WallPost.author_id'] = $options['all_friends'];
 			$conditions['AND']['WallPost.user_id'] = $options['all_friends'];
 			$conditions['reply_parent_id'] = null;
-			$this->aid = $options['all_friends'];
+			$this->friends = $options['all_friends'];
 		}
 
 		//create the contain rules
