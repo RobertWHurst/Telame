@@ -73,6 +73,7 @@ class WallPost extends AppModel {
 		// UID is for only showing posts on a certain wall
 		if($options['uid']) {
 			$conditions['WallPost.user_id'] = $options['uid'];
+			$conditions['reply_parent_id'] = null;
 		}
 		// mainly used for news feed.  make sure the author and user are both your friends
 		if($options['all_friends']) {
