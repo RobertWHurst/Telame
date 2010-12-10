@@ -74,6 +74,15 @@ class AaclBehavior extends ModelBehavior {
 	}
 
 	function afterDelete(&$model) {
+		// find the root user
+		$model->Aco->recursive = -1;
+		$aco = $model->Aco->find('first', array('conditions' => array('alias' => $model->alias . '::' . $model->id)));
+pr($model);
+echo $model->id;
+pr($aco);
+
+//		$this->Aco->delete($aco['Aco']['id']);
+
 	}
 
 	function beforeFind(&$model, $data) {
@@ -140,15 +149,15 @@ class AaclBehavior extends ModelBehavior {
 						'fields' => '_read',
 					));
 					if (!$aroAco['ArosAco']['_read']) {
-						$data['conditions']['NOT']['WallPost.id'][] = $aco['Aco']['foreign_key'];
+						$data['conditions']['NOT'][$model->alias . '.id'][] = $aco['Aco']['foreign_key'];
 					} else {
-						$data['conditions']['AND']['OR']['WallPost.id'][] = $aco['Aco']['foreign_key'];
+						$data['conditions']['AND']['OR'][$model->alias . '.id'][] = $aco['Aco']['foreign_key'];
 					}
 				}
 			}
 			
 
-			// permissions the user has set for all wall posts
+			// permissions the user has set for all items
 			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group[0][0]['group_id'] . ']/Permission/_read', $rootAco);
 
 			// if there is no root permissions, or the permission[0] is false (ie, the user is not allowed to view)
@@ -158,6 +167,7 @@ class AaclBehavior extends ModelBehavior {
 				unset($data['conditions']['AND']['OR'][$model->alias . '.author_id'][$key]);
 			}
 		}
+
 		return $data;
 	}
 

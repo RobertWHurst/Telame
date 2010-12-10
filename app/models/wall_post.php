@@ -1,7 +1,5 @@
 <?php
 class WallPost extends AppModel {
-	public $actsAs = array('Aacl');
-
 	public $belongsTo = array(
 		'User' => array(
 			'className' => 'User',
@@ -22,8 +20,9 @@ class WallPost extends AppModel {
 		'WallPostLike'
 	);
 
-	public $friends = false;
 	public $currentUserId = false;
+	public $friends = false;
+	public $id;
 
 // -------------------- Callback functions
 
@@ -49,7 +48,6 @@ class WallPost extends AppModel {
 		$this->save($data);
 	}
 
-	//TODO: needs containable.
 	public function getWallPosts($currentUserId, $arguments = false) {
 		$this->currentUserId = $currentUserId;
 
@@ -112,15 +110,15 @@ class WallPost extends AppModel {
 	}
 
 	public function remove($id) {
-		App::import('Component', 'Acl');
-		$this->Acl = new AclComponent();
-
-		// find the root user
-		$this->Acl->Aco->recursive = -1;
-		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'WallPost::' . $id)));
-
-		$this->Acl->Aco->delete($aco['Aco']['id']);
-		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
-		$this->delete($id);
+		// If the Aacl behavior is not attached
+		if (!$this->Behaviors->attached('Aacl')) {
+			// Get the list of all behaviors the model has attached
+			$this->Behaviors->attach('Aacl');
+		}
+		echo 'id';
+		echo $id;
+		$this->id = $id;
+//		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
+//		$this->delete($id);
 	}
 }

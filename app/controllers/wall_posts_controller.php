@@ -9,7 +9,13 @@ class WallPostsController extends AppController {
 	}
 
 	public function add() {
-		// Basic sanity check first.  Do we have any data?
+		// If the Aacl behavior is not attached
+		if (!$this->WallPost->Behaviors->attached('Aacl')) {
+			// Get the list of all behaviors the model has attached
+			$this->WallPost->Behaviors->attach('Aacl');
+		}
+
+		// Basic sanity check first.	Do we have any data?
 		$isAjax = $this->RequestHandler->isAjax();
 
 		//make sure there is form data to process, if not there is not use in continuing
@@ -151,7 +157,6 @@ class WallPostsController extends AppController {
 				//set the flash message and redirect them, the metaling sods! :<
 				$this->Session->setFlash(__('wall_post_bad_hacker', true), 'default', array('class' => 'warning'));
 				$this->redirect($this->referer());
-//				$this->redirect(array('controller' => 'users', 'action' => 'profile', $visitor_slug));
 				exit;
 			}
 		}
@@ -159,7 +164,6 @@ class WallPostsController extends AppController {
 
 	public function dislike($id) {
 		// Disable the Aacl for this
-		$this->WallPost->Behaviors->disable('Aacl');
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], false);
@@ -175,7 +179,6 @@ class WallPostsController extends AppController {
 
 	public function like($id) {
 		// Disable the Aacl for this
-		$this->WallPost->Behaviors->disable('Aacl');
 		$isAjax = $this->RequestHandler->isAjax();
 
 		$this->WallPost->WallPostLike->doLike($id, $this->currentUser['User']['id'], true);
@@ -183,9 +186,9 @@ class WallPostsController extends AppController {
 		//if not an ajax call redirect from the referer
 		if($isAjax){
 			echo 'true';
-		}
-		else
+		} else {
 			$this->redirect($this->referer());
+		}
 		exit;
 	}
 
@@ -222,7 +225,7 @@ class WallPostsController extends AppController {
 		$post = $this->WallPost->getWallPosts( $this->currentUser['User']['id'], array(
 			'id' => $id
 		));
-	    $this->set(compact('post'));
+		 $this->set(compact('post'));
 	}
 
 }

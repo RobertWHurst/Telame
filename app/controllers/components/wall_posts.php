@@ -28,6 +28,12 @@ class WallPostsComponent extends Object {
 			$friends = $this->getFriends($user_id, $options['selectedFriendList']);
 		}
 
+		// If the Aacl behavior is not attached
+		if (!$this->controller->WallPost->Behaviors->attached('Aacl')) {
+			// Get the list of all behaviors the model has attached
+			$this->controller->WallPost->Behaviors->attach('Aacl');
+		}
+
 		// get all the posts of all your friends
 		$wallPosts = $this->controller->WallPost->getWallPosts($this->controller->currentUser['User']['id'], array(
 			'all_friends' => $options['all_friends'] ? $friends : false,
