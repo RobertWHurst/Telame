@@ -17,7 +17,9 @@ class WallPost extends AppModel {
 			'dependent' => true,
 			'order' => 'posted ASC'
 		),
-		'WallPostLike'
+		'WallPostLike' => array(
+			'dependent' => true,
+		)
 	);
 
 	public $currentUserId = false;
@@ -116,10 +118,9 @@ class WallPost extends AppModel {
 			// Get the list of all behaviors the model has attached
 			$this->Behaviors->attach('Aacl');
 		}
-		echo 'id';
-		echo $id;
+
 		$this->id = $id;
-//		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
-//		$this->delete($id);
+		$this->deleteAll(array('WallPost.reply_parent_id' => $id));
+		$this->delete($id);
 	}
 }

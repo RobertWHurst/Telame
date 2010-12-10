@@ -74,15 +74,12 @@ class AaclBehavior extends ModelBehavior {
 	}
 
 	function afterDelete(&$model) {
-		// find the root user
 		$model->Aco->recursive = -1;
 		$aco = $model->Aco->find('first', array('conditions' => array('alias' => $model->alias . '::' . $model->id)));
-pr($model);
-echo $model->id;
-pr($aco);
-
-//		$this->Aco->delete($aco['Aco']['id']);
-
+		if ($aco) {
+			$model->ArosAco->deleteAll(array('aco_id' => $aco['Aco']['id']));
+			$model->Aco->delete($aco['Aco']['id']);
+		}
 	}
 
 	function beforeFind(&$model, $data) {
