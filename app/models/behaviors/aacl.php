@@ -73,6 +73,7 @@ class AaclBehavior extends ModelBehavior {
 
 	}
 
+	// Clean up the DB after a delete
 	function afterDelete(&$model) {
 		$model->Aco->recursive = -1;
 		$aco = $model->Aco->find('first', array('conditions' => array('alias' => $model->alias . '::' . $model->id)));
@@ -141,7 +142,7 @@ class AaclBehavior extends ModelBehavior {
 					$aroAco = $model->ArosAco->find('first', array(
 						'conditions' => array(
 							'aro_id' => $group[0][0]['group_id'],
-							'aco_id' => $aco['Aco']['id'] 
+							'aco_id' => $aco['Aco']['id']
 						),
 						'fields' => '_read',
 					));
@@ -152,7 +153,7 @@ class AaclBehavior extends ModelBehavior {
 					}
 				}
 			}
-			
+
 
 			// permissions the user has set for all items
 			$rootPermissions = Set::extract('/Aro[foreign_key=' . $group[0][0]['group_id'] . ']/Permission/_read', $rootAco);

@@ -115,6 +115,7 @@ class UsersController extends AppController {
 		$user = $this->Profile->getProfile($slug);
 
 		if ($user) {
+			$allowedGroups = $this->Aacl->getAllowedGroups('WallPost');
 			$friends = $this->User->GroupsUser->getFriends(array('uid' => $user['User']['id'], 'random' => true, 'limit' => 12 ));
 			$groups = $this->User->Group->getFriendLists(array('uid' => $this->currentUser['User']['id'], 'type' => 'list'));
 
@@ -155,7 +156,7 @@ class UsersController extends AppController {
 			$wallPosts = array();
 		}
 
-		$this->set(compact('friends', 'groups'));
+		$this->set(compact('allowedGroups', 'friends', 'groups'));
 	}
 
 	public function search(){

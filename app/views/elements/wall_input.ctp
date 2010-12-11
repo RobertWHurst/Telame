@@ -33,7 +33,12 @@ $hrl->js(array( 'key' => 'wallInput', 'url' => 'common/wall_input', 'requires' =
 				<?php echo $html->image( '/img/icons/note_go.png', array( 'title' => 'Sharing' ) ); ?>
 			</div>
 			<div class="acl_scope_menu">
-<?php			echo $this->Form->input('Group', array('type' => 'select', 'multiple' => 'checkbox', 'options' => $groups));
+<?php			echo $this->Form->input('Group', array(
+					'type' => 'select',
+					'multiple' => 'checkbox',
+					'options' => $groups,
+					'selected' => $allowedGroups,
+				));
 ?>
 			</div>
 			<div class="share_scope_menu">

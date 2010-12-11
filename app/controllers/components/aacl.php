@@ -3,14 +3,14 @@
 class AaclComponent extends Object {
 	var $components = array('Acl');
 
-	function initialize(&$controller) {
+	public function initialize(&$controller) {
 		$this->controller = $controller;
 	}
 
 	// $uid is who owns what's being looked at
 	// $fid is who is trying to view it
 	// $what is 'profile' or 'media' etc
-	function checkPermissions($uid, $fid, $what) {
+	public function checkPermissions($uid, $fid, $what) {
 		if ($uid == $fid) {
 			return true;
 		}
@@ -142,9 +142,63 @@ class AaclComponent extends Object {
 		}
 	}
 
+	public function createAcl($uid = null, $root = null, $acls = null) {
+		// the user_id is already in the aco table
+		if (is_null($root) && $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)))) {
+			return false;
+		}
+
+		if (is_null($acls)) {
+			$node = $this->Acl->Aco->node('Users');
+			$parentId = Set::extract($node, "0.Aco.id");
+
+			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
+			$this->Acl->Aco->save();
+
+			$node = $this->Acl->Aco->node('User::' . $uid);
+			$parentId = Set::extract($node, "0.Aco.id");
+
+			$acls = Configure::read('UserAcls');
+		} else {
+			$node = $this->Acl->Aco->node($root);
+			$parentId = Set::extract($node, '0.Aco.id');
+		}
+
+		foreach ($acls as $key => $val) {
+			if (is_array($val)) {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $key));
+				$this->Acl->Aco->save();
+				$this->createAcl($uid, $key, $val);
+			} else {
+				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $val));
+				$this->Acl->Aco->save();
+			}
+		}
+		return true;
+	}
+
+	public function deleteAcoTree($uid, $groups) {
+		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
+		$this->Acl->Aco->delete($aco['Aco']['id']);
+
+		$this->controller->loadModel('ArosAco');
+
+
+		foreach ($groups as $group) {
+			$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => 'Group', 'foreign_key' => $group['Group']['id'])));
+			// i think this is automatically deleted
+			$this->Acl->Aro->delete($aro['Aro']['id']);
+
+			$arosAcos = $this->controller->ArosAco->find('all', array('conditions' => array('aro_id' => $aro['Aro']['id'])));
+			foreach ($arosAcos as $arosAco) {
+				$this->controller->ArosAco->delete($arosAco['ArosAco']['id']);
+			}
+		}
+	}
+
 	// We take the User ID, their groups, and optionally a parent to start
 	// With the info we build an array of ACO's and their children and what groups can do what with them
-	function getAcoTree($uid, $groups = null, $parent = null) {
+	public function getAcoTree($uid, $groups = null, $parent = null) {
 		if (!isset($this->controller->ArosAco)) {
 			$this->controller->loadModel('ArosAco');
 		}
@@ -200,8 +254,36 @@ class AaclComponent extends Object {
 		return $children;
 	}
 
+	public function getAllowedGroups($what) {
+		// find the root for the user who we're trying to look at
+		$this->Acl->Aco->recursive = -1;
+		$rootAco = $this->Acl->Aco->find('first', array(
+			'conditions' => array(
+				'alias' => 'User::' . $this->controller->currentUser['User']['id'],
+			)
+		));
+
+		$this->Acl->Aco->recursive = 2;
+		$aco = $this->Acl->Aco->find('first', array(
+			'conditions' => array(
+				'alias' => $what,
+				'lft >' => $rootAco['Aco']['lft'],
+				'rght <' => $rootAco['Aco']['rght'],
+			)));
+
+		$defaultPermissions = array();
+
+		foreach ($aco['Aro'] as $aro) {
+			if ($aro['Permission']['_read']) {
+				$defaultPermissions[] = $aro['foreign_key'];
+			}
+		}
+
+		return $defaultPermissions;
+	}
+
 	// takes an ACO parent and checks if it's got kids or not
-	function hasChildren($parent) {
+	public function hasChildren($parent) {
 		// If the left and right are x and x+1, then there is no kids
 		if ($parent['Aco']['rght'] == $parent['Aco']['lft'] +1 ) {
 			return false;
@@ -210,7 +292,7 @@ class AaclComponent extends Object {
 		}
 	}
 
-	function saveAco($data, $parent = null) {
+	public function saveAco($data, $parent = null) {
 		if (!isset($this->controller->ArosAco)) {
 			$this->controller->loadModel('ArosAco');
 		}
@@ -270,60 +352,6 @@ class AaclComponent extends Object {
 			}
 		}
 		return true;
-	}
-
-	function createAcl($uid = null, $root = null, $acls = null) {
-		// the user_id is already in the aco table
-		if (is_null($root) && $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)))) {
-			return false;
-		}
-
-		if (is_null($acls)) {
-			$node = $this->Acl->Aco->node('Users');
-			$parentId = Set::extract($node, "0.Aco.id");
-
-			$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => 'User::' . $uid));
-			$this->Acl->Aco->save();
-
-			$node = $this->Acl->Aco->node('User::' . $uid);
-			$parentId = Set::extract($node, "0.Aco.id");
-
-			$acls = Configure::read('UserAcls');
-		} else {
-			$node = $this->Acl->Aco->node($root);
-			$parentId = Set::extract($node, '0.Aco.id');
-		}
-
-		foreach ($acls as $key => $val) {
-			if (is_array($val)) {
-				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $key));
-				$this->Acl->Aco->save();
-				$this->createAcl($uid, $key, $val);
-			} else {
-				$this->Acl->Aco->create(array('parent_id' => $parentId, 'alias' => $val));
-				$this->Acl->Aco->save();
-			}
-		}
-		return true;
-	}
-
-	function deleteAcoTree($uid, $groups) {
-		$aco = $this->Acl->Aco->find('first', array('conditions' => array('alias' => 'User::' . $uid)));
-		$this->Acl->Aco->delete($aco['Aco']['id']);
-
-		$this->controller->loadModel('ArosAco');
-
-
-		foreach ($groups as $group) {
-			$aro = $this->Acl->Aro->find('first', array('conditions' => array('model' => 'Group', 'foreign_key' => $group['Group']['id'])));
-			// i think this is automatically deleted
-			$this->Acl->Aro->delete($aro['Aro']['id']);
-
-			$arosAcos = $this->controller->ArosAco->find('all', array('conditions' => array('aro_id' => $aro['Aro']['id'])));
-			foreach ($arosAcos as $arosAco) {
-				$this->controller->ArosAco->delete($arosAco['ArosAco']['id']);
-			}
-		}
 	}
 }
 
