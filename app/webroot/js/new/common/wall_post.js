@@ -17,16 +17,19 @@ $(function() {
 		//hide post controls
 		$( 'div.delete_post, div.baseline_controls', wallPostContainer ).hide();
 
-		//hide the comment box if there are no comments
+		//hide the comment box if there are no comments, likes, or dislikes
 		$( 'div.commentsWrap', wallPostContainer ).each(function(){
 
 			//get the comments container
 			var commentsContainter = $( this ),
 
 			//get the comments
-				comments = $( 'div.comment', commentsContainter );
+				comments = $( 'div.comment', commentsContainter ),
 
-			if( comments.length === 0 ){
+			//get the likes container
+				likeness = $( 'div.likeness', commentsContainter );
+
+			if( comments.length === 0 && likeness.length === 0 ){
 				commentsContainter.hide();
 			}
 
@@ -68,7 +71,10 @@ $(function() {
 				});
 
 				//setup a click event for the read more link
-				expLink.one( 'click', function(){
+				expLink.one( 'click', function( e ){
+
+					//prevent the hash link from scrolling the page
+					e.preventDefault();
 
 					//animate the div back to full height
 					contentDiv.animate({ 'height': height }, speed ).css( 'height', 'auto' );
@@ -79,7 +85,6 @@ $(function() {
 
 			}
 		});
-
 	}
 
 	//make an api for other scripts to clean posts
@@ -171,11 +176,47 @@ $(function() {
 	});
 
 
+	//LIKE AND DISLIKE
 
-	//TRUNCATION
+	//bind a click event to the like button
+	wallPostContainer.delegate( 'a.like, a.dislike', 'click', function( e ) {
 
-	//
+		//prevent a redirect
+		e.preventDefault();
 
+		//grab the link
+		var link = $(this),
 
+		//get the href from the link
+			url = link.attr('href');
+
+		if( link.hasClass('like') ){
+			//update the like button
+			if ( ! link.hasClass('liked')) {
+				link.html('Unlike').addClass('liked');
+			} else {
+				link.html('Like').removeClass('liked');
+			}
+		}
+
+		if( link.hasClass('dislike') ){
+			//update the dislike button
+			if ( ! link.hasClass('disliked')) {
+				link.html('Undislike').addClass('disliked');
+			} else {
+				link.html('Dislike').removeClass('disliked');
+			}
+		}
+
+		//ask the server to update its data
+		$.get(core.domain + url, {}, function(data) {
+			if (data !== 'false') {
+				flash.setMessage('warning', 'Fixme: The action didn\'t pass me any ajax data. For now refresh to see the update');
+			} else {
+				flash.setMessage('error', 'Something went wrong. Try again');
+			}
+		});
+
+	});
 
 });

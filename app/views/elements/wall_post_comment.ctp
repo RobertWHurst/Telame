@@ -4,9 +4,9 @@
 <div class="comment clearfix">
 <?php
 	if(
-    	($comment['PostAuthor']['id'] == $currentUser['User']['id']) &&
-    	($this->params['action'] != 'news')
-    ):
+		( $comment['PostAuthor']['id'] == $currentUser['User']['id'] ) ||
+		( $comment['user_id'] == $currentUser['User']['id'] )
+	){
 ?>
 		<div class="delete_comment">
 <?php 
@@ -14,7 +14,7 @@
 			echo $htmlImage->image('icons/delete.png', array('title' => __('delete',true), 'url' => $url));
 ?>
 		</div>
-	<?php endif; ?>
+	<?php } ?>
 	<div class="avatar">
 <?php
 		$image_url = array('controller' => 'media', 'action' => 'comment', $comment['PostAuthor']['avatar_id']);
