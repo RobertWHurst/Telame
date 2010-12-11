@@ -11,6 +11,7 @@ $this->set('title_for_layout', __('news_title', true));
 	<?php if(!empty($user['User']['rss_hash'])) {
 		echo $html->link(
 			'Get your news via RSS',
+			// 0 is for the friends list; 0 selects all.
 			'/rss/0/' . $currentUser['User']['id'] . '/' . $user['User']['rss_hash'] . '.rss',
 			array('title' => 'Get your news via RSS', 'class' => 'rss_link'));
 		} ?>
