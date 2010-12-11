@@ -2,7 +2,7 @@
 	$hrl->css(array( 'key' => 'wallPost', 'url' => 'common/wall_post' ));
 	$hrl->js(array(
 		array( 'key' => 'wallPost', 'url' => 'common/wall_post', 'requires' => 'jQuery' ),
-		array( 'key' => 'wallCommentInput', 'url' => 'common/wall_comments_input', 'requires' => array( 'jQuery', 'wallComment' ))
+		array( 'key' => 'wallCommentInput', 'url' => 'common/wall_comments_input', 'requires' => array( 'jQuery' ))
 	));
 ?>
 <div id="post_<?php echo 'wall_post' . '_' . $post['WallPost']['id']; ?>" class="post">

@@ -4,8 +4,6 @@ $(function() {
 	var wallPostContainer = $( '#wall_posts' ),
 		commentInputDivs = $( 'div.comment_input', wallPostContainer );
 
-
-
 	//INIT
 
 	commentInputDivs.each(function(){
