@@ -85,9 +85,9 @@ class AaclBehavior extends ModelBehavior {
 
 	function beforeFind(&$model, $data) {
 		if (!$model->friends) {
-			return $data;
+			// If we don't have an array of friends, extract the user_id from the conditions
+			$model->friends = array($data['conditions'][$model->alias . '.user_id']);
 		}
-
 		// make it an array if it's not already
 		if (!is_array($model->friends)) {
 			$model->friends = array($model->friends);

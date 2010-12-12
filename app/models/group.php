@@ -34,7 +34,7 @@ class Group extends AppModel {
 			'limit' => $options['limit'],
 			'offset' => $options['offset'],
 			'conditions' => $conditions,
-			'order' => 'lower(title)',
+			'order' => 'lower(title) ASC',
 		));
 	}
 	
